@@ -24,10 +24,13 @@ export default function TermsOfServicePage() {
       
       <div className="legal-content">
         <p>
-          Welcome to <strong>HalalScan</strong> (&quot;AllHalal&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;). By downloading, installing, or using our mobile application, you agree to be bound by these Terms of Service (&quot;Terms&quot;).
+          Welcome to <strong>HalalScan</strong> (&quot;AllHalal&quot;, &quot;the App&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;). By downloading, installing, accessing, or using our mobile application in any way, you unconditionally agree to be legally bound by these Terms of Service (&quot;Terms&quot;), including all disclaimers, limitations of liability, and waivers contained herein.
         </p>
         <p>
-          <strong>If you do not agree to these Terms, do not use the App.</strong>
+          <strong>IF YOU DO NOT AGREE TO THESE TERMS IN THEIR ENTIRETY, YOU MUST IMMEDIATELY CEASE ALL USE OF THE APP AND UNINSTALL IT FROM YOUR DEVICE.</strong>
+        </p>
+        <p>
+          <strong>IMPORTANT:</strong> These Terms contain provisions that limit our liability and require you to resolve disputes through binding arbitration on an individual basis and not as part of any class or representative action.
         </p>
         
         <h2>1. Acceptance of Terms</h2>
@@ -210,34 +213,54 @@ export default function TermsOfServicePage() {
         <h2>10. Limitation of Liability</h2>
         
         <p>
-          <strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</strong>
+          <strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW:</strong>
         </p>
         
-        <p>We (and our affiliates, partners, and service providers) shall not be liable for:</p>
+        <p>
+          IN NO EVENT SHALL WE (INCLUDING OUR OFFICERS, DIRECTORS, EMPLOYEES, AFFILIATES, AGENTS, CONTRACTORS, LICENSORS, SERVICE PROVIDERS, OR SUPPLIERS) BE LIABLE TO YOU OR ANY THIRD PARTY FOR:
+        </p>
         
         <ul>
-          <li><strong>Indirect, incidental, consequential, or punitive damages</strong> arising from your use of the App.</li>
-          <li><strong>Religious, dietary, health, or financial harm</strong> resulting from reliance on App information.</li>
-          <li><strong>Data loss, business interruption, or lost profits.</strong></li>
-          <li><strong>Third-party actions</strong> (e.g., Firebase, Google, Apple).</li>
+          <li><strong>ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES</strong> whatsoever, including but not limited to damages for loss of profits, goodwill, use, data, or other intangible losses.</li>
+          <li><strong>ANY RELIGIOUS, SPIRITUAL, MORAL, DIETARY, HEALTH, MEDICAL, FINANCIAL, REPUTATIONAL, OR EMOTIONAL HARM</strong> resulting from your use of or reliance on the App or its content.</li>
+          <li><strong>ANY DAMAGES ARISING FROM</strong>: (a) incorrect, incomplete, outdated, or misleading information; (b) errors, bugs, viruses, or technical malfunctions; (c) unauthorized access to your data; (d) interruption or termination of service; (e) third-party conduct or content; (f) your failure to verify product information independently.</li>
+          <li><strong>ANY CLAIMS RELATED TO</strong>: halal/haram classifications, boycott information, prayer time calculations, Qibla direction, ingredient analysis, E-number classifications, allergen warnings, or any religious rulings.</li>
+          <li><strong>DATA LOSS, BUSINESS INTERRUPTION, LOST PROFITS, LOST SAVINGS,</strong> or any other commercial damages or losses.</li>
+          <li><strong>ACTIONS OF THIRD PARTIES</strong> including but not limited to Firebase, Google, Apple, Open Food Facts, or any data providers.</li>
         </ul>
         
         <p>
-          <strong>TOTAL LIABILITY SHALL NOT EXCEED $50 USD OR THE AMOUNT YOU PAID FOR THE APP (WHICHEVER IS GREATER).</strong>
+          <strong>OUR TOTAL AGGREGATE LIABILITY TO YOU FOR ANY AND ALL CLAIMS ARISING OUT OF OR RELATING TO THESE TERMS OR THE APP SHALL NOT EXCEED THE GREATER OF: (A) FIFTY UNITED STATES DOLLARS ($50.00 USD); OR (B) THE AMOUNT YOU ACTUALLY PAID TO US, IF ANY, IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO LIABILITY.</strong>
+        </p>
+        
+        <p>
+          <strong>THESE LIMITATIONS APPLY EVEN IF:</strong> (1) we have been advised of the possibility of such damages; (2) any remedy fails of its essential purpose; or (3) the damages were foreseeable.
+        </p>
+        
+        <p>
+          <strong>SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES.</strong> In such jurisdictions, our liability is limited to the maximum extent permitted by law.
         </p>
         
         <h2>11. Indemnification</h2>
         
         <p>
-          You agree to <strong>indemnify, defend, and hold harmless</strong> AllHalal, its officers, employees, and partners from any claims, damages, or expenses (including legal fees) arising from:
+          <strong>YOU AGREE TO INDEMNIFY, DEFEND, AND HOLD COMPLETELY HARMLESS</strong> AllHalal, HalalScan, and all of our officers, directors, employees, affiliates, agents, contractors, licensors, service providers, suppliers, successors, and assigns (collectively, the &quot;Indemnified Parties&quot;) from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys&apos; fees and court costs) arising from or relating to:
         </p>
         
         <ul>
-          <li>Your violation of these Terms.</li>
-          <li>Your misuse of the App.</li>
-          <li>Your submission of inaccurate or unlawful content.</li>
-          <li>Infringement of third-party rights.</li>
+          <li><strong>Your use or misuse of the App</strong> in any manner whatsoever.</li>
+          <li><strong>Your violation of these Terms</strong> or any applicable laws or regulations.</li>
+          <li><strong>Your violation of any rights of another party</strong>, including but not limited to intellectual property rights, privacy rights, or publicity rights.</li>
+          <li><strong>Your submission of any content</strong> through the App, including product information, reviews, corrections, or reports.</li>
+          <li><strong>Any claims related to</strong>: (a) incorrect halal/haram classifications; (b) religious harm or spiritual consequences; (c) dietary violations; (d) allergic reactions; (e) health consequences; (f) financial losses; (g) reputational damage; (h) emotional distress.</li>
+          <li><strong>Your reliance on any information</strong> provided by the App, including halal classifications, boycott data, prayer times, Qibla direction, ingredient analysis, or religious guidance.</li>
+          <li><strong>Any negligence or willful misconduct</strong> on your part.</li>
+          <li><strong>Third-party claims</strong> arising from your actions or omissions while using the App.</li>
         </ul>
+        
+        <p>
+          This indemnification obligation survives the termination of these Terms and your use of the App. You agree to cooperate fully in the defense of any claim. We reserve the right, at our own expense, to assume the exclusive defense and control of any matter subject to indemnification by you.
+        </p>
         
         <h2>12. Changes to Terms</h2>
         
@@ -280,18 +303,29 @@ export default function TermsOfServicePage() {
           If any provision of these Terms is found invalid or unenforceable, the remaining provisions shall continue in full force and effect.
         </p>
         
-        <h2>15. Contact Information</h2>
+        <h2>15. Force Majeure</h2>
+        
+        <p>
+          We shall not be liable for any failure or delay in performance under these Terms due to circumstances beyond our reasonable control, including but not limited to: acts of God, war, terrorism, riots, embargoes, acts of civil or military authorities, fire, floods, accidents, pandemics, strikes, or shortages of transportation facilities, fuel, energy, labor, or materials.
+        </p>
+        
+        <h2>16. No Professional Advice</h2>
+        
+        <p>
+          <strong>THE APP DOES NOT PROVIDE RELIGIOUS, MEDICAL, LEGAL, DIETARY, OR PROFESSIONAL ADVICE OF ANY KIND.</strong> All information is provided for informational and educational purposes only. You should consult qualified professionals (Islamic scholars, certified nutritionists, medical doctors, or legal advisors) before making any decisions based on information from the App.
+        </p>
+        
+        <h2>17. Contact Information</h2>
         
         <p>
           For questions about these Terms, contact:
         </p>
         
         <p>
-          📧 <strong>Email:</strong> <a href="mailto:info@gezellix.com">info@gezellix.com</a><br />
-          <strong>Business Address:</strong> gezellix.com
+          📧 <strong>Email:</strong> <a href="mailto:app@allhalal.info">app@allhalal.info</a>
         </p>
         
-        <h2>16. Acknowledgment</h2>
+        <h2>18. Acknowledgment and Acceptance</h2>
         
         <p>
           By using HalalScan, you acknowledge that:

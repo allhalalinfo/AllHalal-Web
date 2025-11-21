@@ -23,14 +23,27 @@ export default function DisclaimerPage() {
       </header>
       
       <div className="legal-content">
-        <h2>Important Notice</h2>
+        <h2>⚠️ CRITICAL LEGAL NOTICE ⚠️</h2>
         
         <p>
-          <strong>HalalScan</strong> (&quot;AllHalal&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a mobile application designed to assist users in making informed decisions about food products, cosmetics, and consumer brands. However, <strong>we are not a religious authority, Islamic scholar, or halal certification body.</strong>
+          <strong>READ THIS DISCLAIMER CAREFULLY BEFORE USING THE APP.</strong>
         </p>
         
         <p>
-          <strong>By using this App, you acknowledge and agree to the following disclaimers:</strong>
+          <strong>HalalScan</strong> (&quot;AllHalal&quot;, &quot;the App&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a mobile application that provides <strong>INFORMATIONAL CONTENT ONLY</strong>. We are <strong>NOT</strong>:
+        </p>
+        
+        <ul>
+          <li>A religious authority or Islamic scholarly institution</li>
+          <li>A halal certification body or accreditation organization</li>
+          <li>A medical, dietary, or nutritional advisory service</li>
+          <li>A legal, financial, or professional consulting firm</li>
+          <li>Responsible for verifying the accuracy of product formulations</li>
+          <li>Liable for any consequences arising from your use of the App</li>
+        </ul>
+        
+        <p>
+          <strong>BY USING THIS APP, YOU EXPRESSLY ACKNOWLEDGE, UNDERSTAND, AND AGREE TO ALL DISCLAIMERS, LIMITATIONS, AND WARNINGS CONTAINED IN THIS DOCUMENT. IF YOU DO NOT AGREE, CEASE ALL USE IMMEDIATELY.</strong>
         </p>
         
         <h2>1. Not a Religious Authority</h2>
@@ -121,20 +134,29 @@ export default function DisclaimerPage() {
           We provide information to assist your decision-making, but <strong>the final determination is yours</strong>.
         </p>
         
-        <h3>3.2 No Liability for Religious Harm</h3>
+        <h3>3.2 Complete Waiver of Liability for Religious Consequences</h3>
         
         <p>
-          <strong>We are not liable for:</strong>
+          <strong>TO THE FULLEST EXTENT PERMITTED BY LAW, WE EXPRESSLY DISCLAIM ALL LIABILITY FOR:</strong>
         </p>
         
         <ul>
-          <li>Religious, spiritual, or moral harm arising from reliance on App information.</li>
-          <li>Inadvertent consumption of haram or mushbooh (doubtful) ingredients.</li>
-          <li>Differences in religious interpretation or madhhab rulings.</li>
+          <li><strong>Religious, spiritual, or moral harm</strong> of any kind arising from your use of or reliance on App information.</li>
+          <li><strong>Inadvertent consumption</strong> of haram, mushbooh (doubtful), or makruh (disliked) ingredients or products.</li>
+          <li><strong>Differences in religious interpretation</strong> between Islamic schools of thought (Hanafi, Shafi&apos;i, Maliki, Hanbali, Ja&apos;fari, or any other).</li>
+          <li><strong>Violations of dietary restrictions</strong>, religious vows, or personal commitments.</li>
+          <li><strong>Consequences in this life or the hereafter</strong> related to your consumption choices.</li>
+          <li><strong>Emotional distress, guilt, or anxiety</strong> resulting from discovering past consumption of questionable products.</li>
+          <li><strong>Conflicts with local fatwas or rulings</strong> issued by Islamic authorities in your region.</li>
+          <li><strong>Religious liability (dhulm) or accountability (hisaab)</strong> before Allah (SWT) for any actions based on App information.</li>
         </ul>
         
         <p>
-          <strong>Use the App as a supplementary tool, not a sole authority.</strong>
+          <strong>YOU BEAR SOLE AND EXCLUSIVE RESPONSIBILITY FOR ALL RELIGIOUS DECISIONS.</strong> Use the App only as one of many tools in your decision-making process. Always consult qualified Islamic scholars and verify product information independently.
+        </p>
+        
+        <p>
+          <strong>WE MAKE NO REPRESENTATIONS OR WARRANTIES THAT APP INFORMATION COMPLIES WITH ISLAMIC LAW (SHARIAH) OR SATISFIES YOUR RELIGIOUS OBLIGATIONS.</strong>
         </p>
         
         <h2>4. Boycott Information</h2>
@@ -378,18 +400,42 @@ export default function DisclaimerPage() {
           The latest version is always available at <strong>Settings → Legal → Disclaimer</strong>.
         </p>
         
-        <h2>12. Contact Information</h2>
+        <h2>12. Assumption of Risk</h2>
+        
+        <p>
+          <strong>YOU EXPRESSLY ASSUME ALL RISKS ASSOCIATED WITH USING THE APP.</strong> These risks include, but are not limited to:
+        </p>
+        
+        <ul>
+          <li>Incorrect or outdated product information</li>
+          <li>Religious non-compliance or dietary violations</li>
+          <li>Allergic reactions or health consequences</li>
+          <li>Financial losses from purchasing unsuitable products</li>
+          <li>Emotional or psychological distress</li>
+          <li>Technical errors, bugs, or data corruption</li>
+          <li>Unauthorized access to your device or data</li>
+          <li>Reliance on user-generated content</li>
+        </ul>
+        
+        <p>
+          <strong>BY USING THE APP, YOU VOLUNTARILY ASSUME THESE RISKS AND WAIVE ANY RIGHT TO HOLD US LIABLE.</strong>
+        </p>
+        
+        <h2>13. Contact Information</h2>
         
         <p>
           For questions, corrections, or concerns:
         </p>
         
         <p>
-          📧 <strong>Email:</strong> <a href="mailto:info@gezellix.com">info@gezellix.com</a><br />
-          <strong>Business Address:</strong> gezellix.com
+          📧 <strong>Email:</strong> <a href="mailto:app@allhalal.info">app@allhalal.info</a>
         </p>
         
-        <h2>13. Acknowledgment</h2>
+        <p>
+          <strong>Please note:</strong> Contacting us does not create any legal relationship, obligation, or liability on our part. We reserve the right to respond or not respond to inquiries at our sole discretion.
+        </p>
+        
+        <h2>14. Final Acknowledgment and Binding Agreement</h2>
         
         <p>
           By using HalalScan, you acknowledge that:
