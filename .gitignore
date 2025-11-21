@@ -37,9 +37,17 @@ dist/
 build/
 out/
 
-# Dependencies (if adding package management in future)
+# Dependencies
 node_modules/
 bower_components/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# TypeScript
+*.tsbuildinfo
 
 # Environment Variables (if adding backend)
 .env
