@@ -1,14 +1,25 @@
 'use client';
 
 import { useEffect } from 'react';
+import Header from '@/components/Header';
 import '../styles/normalize.css';
 import '../styles/premium.css';
 
 export default function Home() {
   useEffect(() => {
-    // Counter animation - плавная, медленная
+    // Counter animation - ТОЛЬКО на десктопе
     const counter = document.querySelector('[data-target]') as HTMLElement;
     if (counter) {
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // На мобильной - статично показываем число без анимации
+        const target = parseInt(counter.getAttribute('data-target') || '0');
+        counter.textContent = target.toLocaleString() + '+';
+        return;
+      }
+      
+      // На десктопе - плавная анимация
       const target = parseInt(counter.getAttribute('data-target') || '0');
       const duration = 8000; // 8 секунд
       const startTime = performance.now();
@@ -42,23 +53,7 @@ export default function Home() {
 
   return (
     <>
-      
-      {/* Header */}
-      <header className="header">
-        <div className="container-wide">
-          <div className="header-content-new">
-            <a href="/" className="logo">ALLHALAL</a>
-            <nav className="nav-new">
-              <a href="#features">Features</a>
-              <span className="nav-divider"></span>
-              <a href="/legal">Legal</a>
-              <span className="nav-divider"></span>
-              <a href="/contact">Contact</a>
-            </nav>
-            <a href="https://apps.apple.com/app/allhalal" className="btn-download-new">Download iOS</a>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="hero-new">
@@ -74,7 +69,7 @@ export default function Home() {
             
             <div className="hero-number-block">
               <div className="number-line">
-                <span className="hero-number-new" data-target="2000000">0</span>
+                <span className="hero-number-new" data-target="2000000">2,000,000+</span>
                 <span className="number-label">products</span>
               </div>
               <div className="number-tagline">Verified. Accurate. Trusted globally.</div>

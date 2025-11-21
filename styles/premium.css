@@ -1874,3 +1874,254 @@ section {
   }
 }
 
+/* ===============================================
+   MOBILE MENU (HAMBURGER)
+   =============================================== */
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 24px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  background: rgba(26, 62, 69, 0.95);
+  border: 1px solid rgba(217, 176, 140, 0.3);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu-download {
+  background: var(--accent);
+  color: var(--surface);
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.mobile-menu-download:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.mobile-menu a:not(.mobile-menu-download) {
+  color: var(--white);
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu a:not(.mobile-menu-download):hover {
+  background: rgba(217, 176, 140, 0.1);
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .mobile-menu-overlay {
+    display: block;
+  }
+  
+  .btn-download-new {
+    display: none;
+  }
+  
+  .nav-new {
+    display: none;
+  }
+}
+
+/* ===============================================
+   MOBILE-SPECIFIC IMPROVEMENTS
+   =============================================== */
+
+@media (max-width: 768px) {
+  /* 1. Счётчик продуктов - золотистый цвет */
+  .hero-number-new {
+    color: #D9B08C !important; /* Золотистый как "Halal Scanner" */
+    font-size: 2.75rem !important;
+    font-weight: 400 !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  
+  .number-label {
+    color: #D9B08C !important;
+    font-size: 1.25rem !important;
+    font-weight: 500 !important;
+  }
+  
+  /* 2. Уменьшить gap между кнопками на 40-50% */
+  .hero-actions-new {
+    gap: var(--space-4) !important; /* Было var(--space-8), теперь в 2 раза меньше */
+    margin-top: var(--space-6) !important;
+    margin-bottom: var(--space-8) !important;
+  }
+  
+  /* 3. Уменьшить расстояние до следующей секции */
+  .hero-new {
+    padding-bottom: var(--space-12) !important; /* Уменьшено с var(--space-20) */
+  }
+  
+  /* 4. Карточки features - уменьшить внутренний padding */
+  .feature-card {
+    padding: 24px 20px !important; /* Было 40px 32px */
+    min-height: auto !important;
+  }
+  
+  .feature-title {
+    font-size: 1.125rem !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .feature-description {
+    font-size: 0.9375rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* 5. Карточки мазхабов - сделать активными и яркими */
+  .madhhab-item {
+    background: rgba(26, 62, 69, 0.8) !important; /* Ярче чем обычно */
+    border: 1px solid rgba(217, 176, 140, 0.4) !important; /* Золотистая рамка */
+    padding: 28px 24px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important; /* Добавить тень */
+  }
+  
+  .madhhab-name {
+    color: var(--white) !important;
+    font-size: 1.25rem !important;
+    font-weight: 500 !important;
+  }
+  
+  .madhhab-info {
+    color: #B8D4CF !important; /* Ярче */
+    font-size: 0.9375rem !important;
+  }
+  
+  .madhhab-watermark {
+    opacity: 0.15 !important; /* Чуть заметнее */
+  }
+  
+  /* 6. Hero cards - улучшить читаемость */
+  .hero-card {
+    padding: 20px 16px !important;
+    background: rgba(26, 62, 69, 0.7) !important;
+    border: 1px solid rgba(217, 176, 140, 0.3) !important;
+  }
+  
+  .card-label {
+    color: #B8D4CF !important;
+    font-size: 0.8125rem !important;
+  }
+  
+  .card-value {
+    color: var(--white) !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+  }
+  
+  /* 7. Общие отступы секций */
+  .features {
+    padding: var(--space-16) 0 !important;
+  }
+  
+  .madhhab {
+    padding: var(--space-16) 0 !important;
+  }
+  
+  .languages {
+    padding: var(--space-16) 0 !important;
+  }
+  
+  /* 8. Заголовки секций */
+  .section-title {
+    font-size: clamp(2rem, 7vw, 3rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: var(--space-6) !important;
+  }
+  
+  .section-description {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    max-width: 100% !important;
+  }
+}
+
