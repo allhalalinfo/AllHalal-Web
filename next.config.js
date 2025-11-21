@@ -3,12 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [],
+    remotePatterns: [],
   },
-  experimental: {
-    serverActions: {
-      enabled: true,
-    },
-  },
+  // Trailing slash configuration
+  trailingSlash: false,
+  // Output configuration for Vercel
+  output: 'standalone',
 };
 
 module.exports = nextConfig;
