@@ -11,7 +11,7 @@ export default function DisclaimerPage() {
   return (
     <div className="legal-document">
       <nav className="legal-nav">
-        <Link href="/">← Back to AllHalal</Link>
+        <Link href="/legal">← Back to Legal</Link>
       </nav>
       
       <header className="legal-header">
