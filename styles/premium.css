@@ -1697,6 +1697,31 @@ section {
    LEGAL PAGE STYLES
    =============================================== */
 
+.legal-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  max-width: 1200px;
+  margin: 60px auto 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+@media (max-width: 968px) {
+  .legal-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 640px) {
+  .legal-cards-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin: 40px auto 0 auto;
+  }
+}
+
 .legal-card {
   background: rgba(26, 62, 69, 0.6); /* Slightly more transparent than feature cards */
   border: 1px solid rgba(17, 100, 102, 0.35);

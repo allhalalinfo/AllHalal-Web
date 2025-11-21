@@ -33,12 +33,7 @@ export default function LegalPage() {
             </p>
           </div>
           
-          <div className="features-grid" style={{
-            gridTemplateColumns: 'repeat(3, 1fr)', 
-            maxWidth: '1100px', 
-            margin: '60px auto 0 auto', 
-            gap: 'var(--space-8)'
-          }}>
+          <div className="legal-cards-grid">
             {/* Privacy Policy */}
             <a href="/legal/privacy-policy" className="legal-card">
               <div className="legal-card-icon">
