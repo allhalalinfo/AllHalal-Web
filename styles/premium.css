@@ -1923,28 +1923,34 @@ section {
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.90);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  z-index: 9999;
   display: none;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 100px 20px 20px;
-  animation: fadeIn 0.3s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  display: block;
+  opacity: 1;
 }
 
 .mobile-menu {
+  position: absolute;
+  top: 90px;
+  right: 20px;
   background: rgba(26, 62, 69, 0.98);
-  border: 1px solid rgba(217, 176, 140, 0.4);
+  border: 1px solid rgba(217, 176, 140, 0.5);
   border-radius: 16px;
   padding: 24px;
-  width: 100%;
-  max-width: 280px;
+  width: calc(100vw - 40px);
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation: slideDown 0.3s ease;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes fadeIn {
@@ -2014,39 +2020,65 @@ section {
    =============================================== */
 
 @media (max-width: 768px) {
-  /* ПУНКТ 1: Фиксация ширины страницы */
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-    position: relative;
-  }
-  
-  .container, .container-wide {
-    max-width: 100%;
-    width: 100%;
-    padding: 0 20px !important;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  
-  /* ПУНКТ 8: Шапка на всю ширину без боковых полос */
-  .header {
+  /* КРИТИЧЕСКОЕ: Фиксация ширины страницы */
+  html {
     width: 100vw;
-    left: 0;
-    right: 0;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  body {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    position: relative;
     margin: 0;
     padding: 0;
   }
   
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  .container, .container-wide {
+    max-width: 100vw;
+    width: 100%;
+    padding: 0 20px !important;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  /* Шапка на всю ширину */
+  .header {
+    width: 100vw;
+    max-width: 100vw;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
   .header-content-new {
     width: 100%;
+    max-width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
   }
   
-  /* ПУНКТ 3: Исправление мобильного меню */
-  .mobile-menu-overlay[style*="display: block"] {
-    display: flex !important;
+  /* ИСПРАВЛЕНИЕ МОБИЛЬНОГО МЕНЮ */
+  .mobile-menu-overlay.active {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  .mobile-menu {
+    width: calc(100vw - 40px) !important;
+    max-width: 300px !important;
   }
   
   /* ПУНКТ 4: Счётчик - золотистый, "products" - обычный цвет */
@@ -2064,25 +2096,19 @@ section {
     font-weight: 400 !important;
   }
   
-  /* ПУНКТ 5: Уменьшить разрывы ЕЩЁ на 30-40% + добавить исламский разделитель */
+  /* Уменьшенные разрывы БЕЗ разделителей */
   .hero-actions-new {
-    gap: var(--space-3) !important; /* Было var(--space-4), теперь ещё меньше */
+    gap: var(--space-3) !important;
     margin-top: var(--space-4) !important;
     margin-bottom: var(--space-4) !important;
   }
   
   .hero-new {
-    padding-bottom: var(--space-8) !important; /* Ещё меньше */
+    padding-bottom: var(--space-8) !important;
   }
   
-  /* Исламский разделитель между секциями */
-  .features::before {
-    content: '◈';
-    display: block;
-    text-align: center;
-    color: rgba(217, 176, 140, 0.5);
-    font-size: 1.5rem;
-    margin-bottom: var(--space-8);
+  .features {
+    padding-top: var(--space-12) !important;
   }
   
   /* ПУНКТ 6: Мазхабы ВСЕГДА активны - БЕЗ эффектов dim/selected */
@@ -2227,21 +2253,68 @@ section {
 }
 
 /* ===============================================
-   LANDSCAPE ORIENTATION (ПУНКТ 2)
+   LANDSCAPE ORIENTATION - ПОЛНОСТЬЮ ПЕРЕДЕЛАН
    =============================================== */
 
-@media (max-width: 768px) and (orientation: landscape) {
-  /* Уменьшить вертикальные отступы в landscape */
+@media (max-width: 926px) and (orientation: landscape) {
+  /* КРИТИЧЕСКОЕ: Фиксация ширины в landscape */
+  html, body {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    height: auto;
+  }
+  
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  /* Шапка на всю ширину в landscape */
+  .header {
+    width: 100vw;
+    max-width: 100vw;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .header-content-new {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  
+  .container, .container-wide {
+    max-width: 100vw;
+    width: 100%;
+    padding: 0 20px !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  /* Hero секция - компактная для landscape */
   .hero-new {
-    padding: var(--space-12) 0 var(--space-6) !important;
+    padding: 80px 0 var(--space-8) !important;
     min-height: auto !important;
   }
   
   .hero-title-new {
-    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    font-size: clamp(1.5rem, 4vw, 2rem) !important;
     gap: var(--space-2) !important;
+    margin-bottom: var(--space-4) !important;
   }
   
+  .title-light,
+  .title-strong,
+  .title-secondary {
+    font-size: clamp(1.5rem, 4vw, 2rem) !important;
+  }
+  
+  /* Счётчик в landscape */
   .hero-number-new {
     font-size: 2rem !important;
   }
@@ -2250,59 +2323,131 @@ section {
     font-size: 1rem !important;
   }
   
+  .number-tagline,
+  .number-subline {
+    font-size: 0.875rem !important;
+  }
+  
+  /* Кнопки в ряд, НЕ растягивать */
   .hero-actions-new {
     flex-direction: row !important;
     gap: var(--space-3) !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
   }
   
   .btn-primary-large,
   .btn-secondary-large {
     width: auto !important;
-    min-width: 160px;
-    padding: 12px 24px !important;
+    min-width: 140px !important;
+    max-width: 180px !important;
+    padding: 10px 20px !important;
+    font-size: 0.875rem !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
   }
   
+  /* Карточки hero - 5 колонок, НЕ разъезжаются */
   .hero-cards-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: var(--space-3) !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: var(--space-2) !important;
+    width: 100% !important;
   }
   
   .hero-card {
-    padding: 12px 10px !important;
+    padding: 10px 8px !important;
+    min-height: auto !important;
   }
   
   .card-label {
-    font-size: 0.75rem !important;
+    font-size: 0.6875rem !important;
+    margin-bottom: 4px !important;
   }
   
   .card-value {
-    font-size: 0.8125rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
   }
   
+  /* Секции - уменьшенные отступы */
   .features,
   .madhhab,
   .languages {
-    padding: var(--space-12) 0 !important;
+    padding: var(--space-10) 0 !important;
   }
   
+  /* Feature карточки - 2 колонки в landscape */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-4) !important;
+  }
+  
+  .feature-card {
+    padding: 16px 14px !important;
+  }
+  
+  .feature-title {
+    font-size: 1rem !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .feature-description {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Мазхабы - 2 колонки */
+  .madhhab-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-4) !important;
+  }
+  
+  .madhhab-item {
+    padding: 20px 16px !important;
+  }
+  
+  .madhhab-name {
+    font-size: 1.125rem !important;
+  }
+  
+  .madhhab-info {
+    font-size: 0.875rem !important;
+  }
+  
+  /* Заголовки секций */
   .section-title {
-    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    font-size: clamp(1.5rem, 4vw, 2rem) !important;
     margin-bottom: var(--space-4) !important;
+  }
+  
+  .section-description {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
   }
   
   /* Меню в landscape */
   .mobile-menu {
-    max-width: 240px;
-    padding: 16px;
+    max-width: 240px !important;
+    padding: 16px !important;
   }
   
-  .mobile-menu a {
-    padding: 10px 12px !important;
-    font-size: 1rem !important;
+  .mobile-menu a:not(.mobile-menu-download) {
+    padding: 8px 12px !important;
+    font-size: 0.9375rem !important;
   }
   
   .mobile-menu-download {
-    padding: 12px 20px !important;
+    padding: 10px 16px !important;
+    font-size: 0.9375rem !important;
+  }
+  
+  /* Разделители в landscape */
+  .islamic-divider {
+    margin: var(--space-4) 0 !important;
+  }
+  
+  .hero-number-block {
+    margin: var(--space-4) 0 !important;
   }
 }
 

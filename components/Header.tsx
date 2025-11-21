@@ -9,16 +9,25 @@ export default function Header() {
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
     
     return () => {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [isMenuOpen]);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(prev => !prev);
+  };
 
   return (
     <>
@@ -41,8 +50,9 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button 
               className="mobile-menu-toggle"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={toggleMenu}
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
               type="button"
             >
               <span className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
@@ -56,20 +66,21 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        className="mobile-menu-overlay" 
-        style={{ display: isMenuOpen ? 'block' : 'none' }}
-        onClick={closeMenu}
-      >
-        <nav className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-          <a href="https://apps.apple.com/app/allhalal" className="mobile-menu-download">
-            Download iOS
-          </a>
-          <a href="/#features" onClick={closeMenu}>Features</a>
-          <a href="/legal" onClick={closeMenu}>Legal</a>
-          <a href="/contact" onClick={closeMenu}>Contact</a>
-        </nav>
-      </div>
+      {isMenuOpen && (
+        <div 
+          className="mobile-menu-overlay active"
+          onClick={closeMenu}
+        >
+          <nav className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+            <a href="https://apps.apple.com/app/allhalal" className="mobile-menu-download">
+              Download iOS
+            </a>
+            <a href="/#features" onClick={closeMenu}>Features</a>
+            <a href="/legal" onClick={closeMenu}>Legal</a>
+            <a href="/contact" onClick={closeMenu}>Contact</a>
+          </nav>
+        </div>
+      )}
     </>
   );
 }
