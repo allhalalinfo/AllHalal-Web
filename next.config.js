@@ -7,8 +7,7 @@ const nextConfig = {
   },
   // Trailing slash configuration
   trailingSlash: false,
-  // Optimize for production
-  swcMinify: true,
+  // Security headers
   poweredByHeader: false,
 };
 
