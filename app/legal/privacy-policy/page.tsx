@@ -87,79 +87,78 @@ export default function PrivacyPolicyPage() {
               <td>User UID</td>
             </tr>
             <tr>
-              <td>Open Food Facts API</td>
-              <td>Product database</td>
-              <td>Barcode queries (no personal data)</td>
+              <td>Google Sign-In / Apple Sign-In</td>
+              <td>Password-free login</td>
+              <td>Public profile info</td>
             </tr>
           </tbody>
         </table>
         
-        <h2>4. Data Retention</h2>
+        <p>
+          All Firebase services comply with <strong>GDPR</strong>, <strong>CCPA</strong>, and <strong>ISO/IEC 27001</strong>.
+        </p>
+        
+        <h2>4. Cookies & Analytics</h2>
+        
+        <p>
+          We do not use cookies in the traditional sense.
+        </p>
+        
+        <p>
+          Firebase may collect anonymized technical identifiers for performance monitoring and crash reports.
+        </p>
+        
+        <h2>5. Data Security</h2>
         
         <ul>
-          <li><strong>User Account Data:</strong> Retained until account deletion.</li>
-          <li><strong>Analytics Data:</strong> Retained for 14 months (Firebase default).</li>
-          <li><strong>Location Data:</strong> Not stored on servers; processed locally on device.</li>
+          <li>All communication is protected by <strong>HTTPS/TLS 1.2+</strong>.</li>
+          <li>Data is encrypted at rest and in transit.</li>
+          <li>Access is restricted to authorized Firebase services.</li>
         </ul>
         
-        <h2>5. Your Rights (GDPR / CCPA)</h2>
+        <h2>6. Data Retention & Deletion</h2>
+        
+        <p>
+          Data is retained only as long as necessary for providing app features.
+        </p>
+        
+        <p>
+          Users may delete their accounts and related data via <strong>Account → Delete Account</strong> or by contacting <a href="mailto:info@gezellix.com">info@gezellix.com</a>.
+        </p>
+        
+        <h2>7. User Rights</h2>
         
         <p>You have the right to:</p>
         
         <ul>
-          <li><strong>Access</strong> your personal data.</li>
-          <li><strong>Rectify</strong> inaccurate information.</li>
-          <li><strong>Delete</strong> your account and associated data.</li>
-          <li><strong>Opt-out</strong> of analytics tracking.</li>
-          <li><strong>Data portability:</strong> request a copy of your data.</li>
+          <li>request a copy of your data;</li>
+          <li>request correction or deletion;</li>
+          <li>withdraw consent at any time;</li>
+          <li>file a complaint with your local data-protection authority.</li>
         </ul>
         
-        <p>
-          To exercise these rights, contact us at: <a href="mailto:contact@allhalal.info">contact@allhalal.info</a>
-        </p>
-        
-        <h2>6. Data Security</h2>
-        
-        <p>We implement industry-standard security measures:</p>
-        
-        <ul>
-          <li><strong>Encryption:</strong> Data transmitted via HTTPS/TLS.</li>
-          <li><strong>Firebase Security Rules:</strong> Restrict unauthorized access to Firestore and Storage.</li>
-          <li><strong>Regular Audits:</strong> Ongoing security assessments and updates.</li>
-        </ul>
+        <h2>8. Policy Updates</h2>
         
         <p>
-          <strong>No system is 100% secure.</strong> We cannot guarantee absolute security, but we take all reasonable precautions.
-        </p>
-        
-        <h2>7. Children&apos;s Privacy</h2>
-        
-        <p>
-          HalalScan is not intended for children under 13 years old (or equivalent minimum age in your jurisdiction). We do not knowingly collect data from children.
-        </p>
-        
-        <h2>8. International Data Transfers</h2>
-        
-        <p>
-          Data is processed via Firebase servers, which may be located outside your country. Firebase complies with GDPR and CCPA standards.
-        </p>
-        
-        <h2>9. Changes to This Policy</h2>
-        
-        <p>
-          We may update this Privacy Policy from time to time. Changes will be posted in the App with a new &quot;Last Updated&quot; date.
-        </p>
-        
-        <h2>10. Contact Us</h2>
-        
-        <p>
-          For privacy-related inquiries or data requests:
+          We may update this Privacy Policy periodically.
         </p>
         
         <p>
-          <strong>Email:</strong> <a href="mailto:contact@allhalal.info">contact@allhalal.info</a><br />
-          <strong>Developer:</strong> Adelya Nurusheva<br />
-          <strong>App Store:</strong> <a href="https://apps.apple.com/app/allhalal" target="_blank" rel="noopener noreferrer">AllHalal on App Store</a>
+          Any major changes will be communicated through the app.
+        </p>
+        
+        <p>
+          The latest version will always be available under <strong>Legal / Privacy Policy</strong>.
+        </p>
+        
+        <h2>9. Contact</h2>
+        
+        <p>
+          For privacy inquiries, please contact:
+        </p>
+        
+        <p>
+          📧 <strong>Email:</strong> <a href="mailto:app@allhalal.info">app@allhalal.info</a>
         </p>
         
         <hr />

@@ -88,79 +88,322 @@ export default function DisclaimerPage() {
         <h3>2.2 Dynamic Product Formulations</h3>
         
         <p>
-          Manufacturers frequently change product formulations without updating packaging or public databases. A product classified as &quot;halal&quot; today may contain different ingredients tomorrow.
+          <strong>Manufacturers may change product ingredients without notice.</strong>
         </p>
         
         <p>
-          <strong>Always check the physical product label before consumption.</strong>
+          Even if a product was previously classified as halal, <strong>the formula may have been updated</strong>. Always check the product label before consumption.
         </p>
         
-        <h2>3. Limitation of Liability</h2>
+        <h3>2.3 Regional Variations</h3>
         
         <p>
-          <strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, HALALSCAN IS NOT LIABLE FOR:</strong>
+          Products with the same name may have <strong>different formulations in different countries</strong>.
         </p>
         
-        <ul>
-          <li><strong>Incorrect classifications:</strong> We do not guarantee that all product classifications are accurate or complete.</li>
-          <li><strong>Health consequences:</strong> Allergic reactions, adverse health effects, or dietary violations resulting from product consumption.</li>
-          <li><strong>Religious consequences:</strong> Unintentional consumption of haram ingredients due to reliance on the App.</li>
-          <li><strong>Boycott information:</strong> We do not verify the accuracy of boycott campaigns or corporate affiliations.</li>
-          <li><strong>Third-party data:</strong> Errors in databases like Open Food Facts or user-submitted content.</li>
-        </ul>
-        
         <p>
-          <strong>USE THIS APP AT YOUR OWN RISK.</strong>
+          Example: A product classified as halal in Europe may contain haram ingredients in the United States.
         </p>
         
-        <h2>4. User Responsibility</h2>
-        
         <p>
-          <strong>It is YOUR responsibility to:</strong>
+          <strong>Always verify the product in your local market.</strong>
         </p>
         
-        <ul>
-          <li>Verify product ingredients by reading the physical label.</li>
-          <li>Consult with qualified Islamic scholars for religious guidance.</li>
-          <li>Check for allergens and health-related warnings.</li>
-          <li>Research halal certification standards in your region.</li>
-          <li>Use the App as a supplementary tool, not a sole decision-maker.</li>
-        </ul>
+        <h2>3. Limitation of Liability for Religious Decisions</h2>
         
-        <h2>5. No Medical or Legal Advice</h2>
+        <h3>3.1 Personal Responsibility</h3>
         
         <p>
-          HalalScan does not provide medical, legal, or professional advice. The App is not a substitute for:
+          <strong>You are solely responsible for determining whether a product is suitable for consumption according to your religious beliefs.</strong>
+        </p>
+        
+        <p>
+          We provide information to assist your decision-making, but <strong>the final determination is yours</strong>.
+        </p>
+        
+        <h3>3.2 No Liability for Religious Harm</h3>
+        
+        <p>
+          <strong>We are not liable for:</strong>
         </p>
         
         <ul>
-          <li>Professional dietary or nutritional counseling.</li>
-          <li>Allergy testing or medical diagnosis.</li>
-          <li>Legal consultation regarding food regulations or consumer rights.</li>
+          <li>Religious, spiritual, or moral harm arising from reliance on App information.</li>
+          <li>Inadvertent consumption of haram or mushbooh (doubtful) ingredients.</li>
+          <li>Differences in religious interpretation or madhhab rulings.</li>
         </ul>
         
-        <h2>6. Third-Party Content</h2>
-        
         <p>
-          The App may contain links to third-party websites, databases, or content. We do not endorse, verify, or assume responsibility for any third-party information.
+          <strong>Use the App as a supplementary tool, not a sole authority.</strong>
         </p>
         
-        <h2>7. Changes to This Disclaimer</h2>
+        <h2>4. Boycott Information</h2>
+        
+        <h3>4.1 Public Source Data</h3>
+        
+        <p>Boycott information is compiled from:</p>
+        
+        <ul>
+          <li>Publicly available lists published by advocacy organizations.</li>
+          <li>User reports and community contributions.</li>
+          <li>News articles and investigative reports.</li>
+        </ul>
         
         <p>
-          We reserve the right to update this Disclaimer at any time. Changes will be posted in the App with a new &quot;Last Updated&quot; date.
+          <strong>We do not independently verify ownership structures or brand affiliations.</strong>
         </p>
         
-        <h2>8. Contact Us</h2>
+        <h3>4.2 No Endorsement of Boycotts</h3>
         
         <p>
-          If you have questions about this Disclaimer:
+          <strong>We do not endorse, promote, or advocate for any boycott campaigns.</strong>
         </p>
         
         <p>
-          <strong>Email:</strong> <a href="mailto:contact@allhalal.info">contact@allhalal.info</a><br />
-          <strong>Developer:</strong> Adelya Nurusheva<br />
-          <strong>App Store:</strong> <a href="https://apps.apple.com/app/allhalal" target="_blank" rel="noopener noreferrer">AllHalal on App Store</a>
+          The feature is provided for <strong>informational purposes only</strong> to help users make informed purchasing decisions.
+        </p>
+        
+        <h3>4.3 Brand Ownership Changes</h3>
+        
+        <p>
+          <strong>Company ownership structures change frequently.</strong> A brand listed as boycotted may have been acquired by a different parent company since our last update.
+        </p>
+        
+        <p>
+          <strong>Always verify current ownership through independent research if accuracy is critical.</strong>
+        </p>
+        
+        <h2>5. E-Numbers and Food Additives</h2>
+        
+        <h3>5.1 Complex Classification</h3>
+        
+        <p>
+          Many E-numbers (food additives) can be derived from:
+        </p>
+        
+        <ul>
+          <li><strong>Plant sources</strong> (halal).</li>
+          <li><strong>Animal sources</strong> (haram if from pork or non-halal slaughtered animals).</li>
+          <li><strong>Synthetic/chemical sources</strong> (generally halal).</li>
+        </ul>
+        
+        <p>
+          <strong>The source of an E-number often cannot be determined from the product label alone.</strong>
+        </p>
+        
+        <p>
+          We classify E-numbers based on:
+        </p>
+        
+        <ul>
+          <li>Most common production methods.</li>
+          <li>General scholarly consensus (e.g., European Council for Fatwa and Research).</li>
+        </ul>
+        
+        <p>
+          <strong>If an ingredient is critical to your dietary restrictions, contact the manufacturer directly.</strong>
+        </p>
+        
+        <h2>6. Prayer Times & Qibla Direction</h2>
+        
+        <h3>6.1 Calculated Estimates</h3>
+        
+        <p>
+          Prayer times are <strong>calculated</strong> based on:
+        </p>
+        
+        <ul>
+          <li>Your device&apos;s GPS location.</li>
+          <li>Selected calculation method (e.g., Muslim World League, ISNA, Umm al-Qura).</li>
+          <li>Juristic method for Asr time (Standard vs. Hanafi).</li>
+        </ul>
+        
+        <p>
+          <strong>These are estimates, not authoritative prayer schedules.</strong>
+        </p>
+        
+        <h3>6.2 Local Adjustments</h3>
+        
+        <p>
+          <strong>Always verify with:</strong>
+        </p>
+        
+        <ul>
+          <li>Your local mosque&apos;s timetable.</li>
+          <li>Islamic centers in your area.</li>
+          <li>Regional authorities (e.g., Diyanet in Turkey, UOIF in France).</li>
+        </ul>
+        
+        <p>
+          <strong>Atmospheric conditions, altitude, and local tradition may require adjustments.</strong>
+        </p>
+        
+        <h3>6.3 Qibla Accuracy</h3>
+        
+        <p>
+          Qibla direction depends on:
+        </p>
+        
+        <ul>
+          <li>Device compass accuracy.</li>
+          <li>GPS precision.</li>
+          <li>Magnetic field interference (e.g., metal structures, electronic devices).</li>
+        </ul>
+        
+        <p>
+          <strong>Calibrate your device compass before use. For precise Qibla, use a surveyed mosque as reference.</strong>
+        </p>
+        
+        <h2>7. No Medical or Health Advice</h2>
+        
+        <h3>7.1 Allergen Information</h3>
+        
+        <p>
+          While we display allergen information (e.g., gluten, dairy, nuts), <strong>this is not medical advice</strong>.
+        </p>
+        
+        <p>
+          <strong>If you have severe allergies or dietary restrictions:</strong>
+        </p>
+        
+        <ul>
+          <li>Always read the product label.</li>
+          <li>Contact the manufacturer to verify ingredient sourcing.</li>
+          <li>Consult with a medical professional.</li>
+        </ul>
+        
+        <h3>7.2 Nutritional Information</h3>
+        
+        <p>
+          Nutri-Score and nutritional data are provided for informational purposes.
+        </p>
+        
+        <p>
+          <strong>This is not dietary, medical, or health advice.</strong> Consult a licensed nutritionist or doctor for personalized guidance.
+        </p>
+        
+        <h2>8. Third-Party Services</h2>
+        
+        <p>
+          The App integrates with:
+        </p>
+        
+        <ul>
+          <li><strong>Firebase Authentication</strong> (Google LLC) — for user accounts.</li>
+          <li><strong>Firebase Analytics</strong> (Google LLC) — for usage statistics.</li>
+          <li><strong>Open Food Facts</strong> — for product data.</li>
+        </ul>
+        
+        <p>
+          <strong>We are not responsible for:</strong>
+        </p>
+        
+        <ul>
+          <li>Accuracy or availability of third-party services.</li>
+          <li>Data breaches or security incidents at third-party providers.</li>
+          <li>Changes to third-party terms or APIs.</li>
+        </ul>
+        
+        <p>
+          Refer to our <strong><Link href="/legal/privacy-policy">Privacy Policy</Link></strong> for details on data sharing.
+        </p>
+        
+        <h2>9. User-Generated Content</h2>
+        
+        <h3>9.1 Community Contributions</h3>
+        
+        <p>
+          Users may submit product information, corrections, and reviews.
+        </p>
+        
+        <p>
+          <strong>We do not guarantee the accuracy of user-generated content.</strong>
+        </p>
+        
+        <p>
+          All submissions are subject to moderation, but we cannot verify every detail.
+        </p>
+        
+        <h3>9.2 Report Inaccuracies</h3>
+        
+        <p>
+          If you find incorrect information, please report it via:
+        </p>
+        
+        <p>
+          📧 <a href="mailto:info@gezellix.com">info@gezellix.com</a>
+        </p>
+        
+        <p>
+          We will investigate and update our database as appropriate.
+        </p>
+        
+        <h2>10. No Warranty</h2>
+        
+        <p>
+          <strong>THE APP IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTY OF ANY KIND.</strong>
+        </p>
+        
+        <p>
+          We do not warrant that:
+        </p>
+        
+        <ul>
+          <li>The App will be error-free or uninterrupted.</li>
+          <li>Data will be accurate, complete, or up-to-date.</li>
+          <li>The App will meet your specific religious or dietary requirements.</li>
+        </ul>
+        
+        <p>
+          <strong>USE AT YOUR OWN RISK AND DISCRETION.</strong>
+        </p>
+        
+        <h2>11. Changes to This Disclaimer</h2>
+        
+        <p>
+          We may update this Disclaimer periodically to reflect:
+        </p>
+        
+        <ul>
+          <li>Changes in data sources or methodology.</li>
+          <li>New features or functionality.</li>
+          <li>Legal or regulatory requirements.</li>
+        </ul>
+        
+        <p>
+          <strong>Material changes will be communicated via in-app notification.</strong>
+        </p>
+        
+        <p>
+          The latest version is always available at <strong>Settings → Legal → Disclaimer</strong>.
+        </p>
+        
+        <h2>12. Contact Information</h2>
+        
+        <p>
+          For questions, corrections, or concerns:
+        </p>
+        
+        <p>
+          📧 <strong>Email:</strong> <a href="mailto:info@gezellix.com">info@gezellix.com</a><br />
+          <strong>Business Address:</strong> gezellix.com
+        </p>
+        
+        <h2>13. Acknowledgment</h2>
+        
+        <p>
+          By using HalalScan, you acknowledge that:
+        </p>
+        
+        <p>
+          ✅ You have read and understood this Disclaimer.<br />
+          ✅ You will not rely solely on the App for religious or dietary decisions.<br />
+          ✅ You will verify critical information through authoritative sources.<br />
+          ✅ You accept the limitations and risks associated with using the App.
+        </p>
+        
+        <p>
+          <strong>JazakAllahu Khairan (May Allah reward you) for using HalalScan responsibly!</strong>
         </p>
         
         <hr />
@@ -172,4 +415,3 @@ export default function DisclaimerPage() {
     </div>
   );
 }
-

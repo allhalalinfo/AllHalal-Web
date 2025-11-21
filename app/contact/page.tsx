@@ -28,11 +28,11 @@ export default function ContactPage() {
           </h1>
           <p className="section-description" style={{fontSize: '1.25rem'}}>
             Email: <a 
-              href="mailto:contact@allhalal.info" 
+              href="mailto:app@allhalal.info" 
               className="text-highlight" 
               style={{color: 'var(--white)', textDecoration: 'none'}}
             >
-              contact@allhalal.info
+              app@allhalal.info
             </a>
           </p>
         </div>

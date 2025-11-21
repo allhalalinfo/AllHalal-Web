@@ -86,66 +86,224 @@ export default function TermsOfServicePage() {
           <strong>You are solely responsible for verifying product suitability before consumption.</strong>
         </p>
         
-        <h2>5. Intellectual Property</h2>
+        <h3>4.2 Boycott Information</h3>
+        
+        <ul>
+          <li>Boycott data is compiled from publicly available sources and user reports.</li>
+          <li>Brand ownership structures change frequently; we update our database regularly but cannot guarantee real-time accuracy.</li>
+          <li><strong>We do not endorse or promote boycotts.</strong> The feature is provided for informational purposes.</li>
+        </ul>
+        
+        <h3>4.3 Prayer Times & Qibla</h3>
+        
+        <ul>
+          <li>Prayer times are calculated based on your device location and selected calculation method.</li>
+          <li>Accuracy depends on GPS precision and local atmospheric conditions.</li>
+          <li><strong>Always verify with local mosques or Islamic centers for authoritative prayer schedules.</strong></li>
+        </ul>
+        
+        <h2>5. User-Generated Content</h2>
+        
+        <h3>5.1 Product Submissions</h3>
+        
+        <p>When you submit product information through the &quot;Add Product&quot; feature:</p>
+        
+        <ul>
+          <li>You grant us a <strong>non-exclusive, worldwide, royalty-free license</strong> to use, display, and distribute the information.</li>
+          <li>You represent that the information is accurate to the best of your knowledge.</li>
+          <li>We reserve the right to <strong>review, edit, or reject</strong> submissions without explanation.</li>
+        </ul>
+        
+        <h3>5.2 Content Moderation</h3>
+        
+        <p>We reserve the right to remove any user-generated content that:</p>
+        
+        <ul>
+          <li>Violates these Terms or applicable laws.</li>
+          <li>Contains hate speech, harassment, or offensive material.</li>
+          <li>Infringes on intellectual property rights.</li>
+          <li>Is spam, advertising, or commercial solicitation.</li>
+        </ul>
+        
+        <h2>6. Intellectual Property</h2>
+        
+        <h3>6.1 Ownership</h3>
         
         <p>
-          All content, design, logos, and trademarks in the App are owned by HalalScan or licensed to us. You may not copy, reproduce, or distribute any App content without our written permission.
+          All content, features, and functionality of the App (including text, graphics, logos, code, and databases) are owned by <strong>AllHalal</strong> or licensed to us.
         </p>
         
-        <h2>6. Limitation of Liability</h2>
+        <p>
+          You are granted a <strong>limited, non-exclusive, non-transferable license</strong> to use the App for personal, non-commercial purposes.
+        </p>
+        
+        <h3>6.2 Third-Party Data</h3>
+        
+        <p>
+          Some product data is sourced from <strong>Open Food Facts</strong> (licensed under ODbL) and other public databases. We comply with all applicable attribution requirements.
+        </p>
+        
+        <h2>7. Privacy & Data Protection</h2>
+        
+        <p>
+          Your use of the App is governed by our <strong><Link href="/legal/privacy-policy">Privacy Policy</Link></strong>, which explains:
+        </p>
+        
+        <ul>
+          <li>What data we collect (location, camera access, email, analytics).</li>
+          <li>How we use and protect your data.</li>
+          <li>Your rights under GDPR, CCPA, and other data protection laws.</li>
+        </ul>
+        
+        <p>
+          <strong>By using the App, you consent to our data practices as described in the Privacy Policy.</strong>
+        </p>
+        
+        <h2>8. Account & Authentication</h2>
+        
+        <h3>8.1 Account Creation</h3>
+        
+        <p>You may create an account using:</p>
+        
+        <ul>
+          <li><strong>Google Sign-In</strong> (Google LLC)</li>
+          <li><strong>Apple Sign-In</strong> (Apple Inc.)</li>
+          <li><strong>Email/Password</strong> (Firebase Authentication)</li>
+          <li><strong>Guest Mode</strong> (anonymous, local-only storage)</li>
+        </ul>
+        
+        <p>
+          You are responsible for maintaining the confidentiality of your login credentials.
+        </p>
+        
+        <h3>8.2 Account Termination</h3>
+        
+        <p>
+          You may delete your account at any time via <strong>Settings → Account → Delete Account</strong>.
+        </p>
+        
+        <p>We may suspend or terminate your account if:</p>
+        
+        <ul>
+          <li>You violate these Terms.</li>
+          <li>We detect fraudulent or abusive activity.</li>
+          <li>Required by law or regulatory authority.</li>
+        </ul>
+        
+        <h2>9. Disclaimer of Warranties</h2>
+        
+        <p>
+          <strong>THE APP IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY KIND.</strong>
+        </p>
+        
+        <p>We disclaim all warranties, express or implied, including:</p>
+        
+        <ul>
+          <li><strong>Merchantability:</strong> Fitness for a particular purpose.</li>
+          <li><strong>Accuracy:</strong> Completeness or reliability of information.</li>
+          <li><strong>Availability:</strong> Uninterrupted or error-free operation.</li>
+          <li><strong>Security:</strong> Freedom from viruses, malware, or unauthorized access.</li>
+        </ul>
+        
+        <p><strong>USE AT YOUR OWN RISK.</strong></p>
+        
+        <h2>10. Limitation of Liability</h2>
         
         <p>
           <strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</strong>
         </p>
         
-        <ul>
-          <li>The App is provided &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; without warranties of any kind.</li>
-          <li>We are not liable for any damages arising from your use of the App, including but not limited to: incorrect product classifications, allergic reactions, religious non-compliance, or data loss.</li>
-          <li>We do not guarantee uninterrupted or error-free operation of the App.</li>
-        </ul>
-        
-        <h2>7. Indemnification</h2>
-        
-        <p>
-          You agree to indemnify and hold harmless HalalScan, its developers, and affiliates from any claims, damages, or expenses arising from your misuse of the App or violation of these Terms.
-        </p>
-        
-        <h2>8. Termination</h2>
-        
-        <p>We reserve the right to:</p>
+        <p>We (and our affiliates, partners, and service providers) shall not be liable for:</p>
         
         <ul>
-          <li>Suspend or terminate your account at any time for violation of these Terms.</li>
-          <li>Discontinue the App or any feature without notice.</li>
+          <li><strong>Indirect, incidental, consequential, or punitive damages</strong> arising from your use of the App.</li>
+          <li><strong>Religious, dietary, health, or financial harm</strong> resulting from reliance on App information.</li>
+          <li><strong>Data loss, business interruption, or lost profits.</strong></li>
+          <li><strong>Third-party actions</strong> (e.g., Firebase, Google, Apple).</li>
         </ul>
         
         <p>
-          You may delete your account at any time via the App settings.
+          <strong>TOTAL LIABILITY SHALL NOT EXCEED $50 USD OR THE AMOUNT YOU PAID FOR THE APP (WHICHEVER IS GREATER).</strong>
         </p>
         
-        <h2>9. Changes to Terms</h2>
+        <h2>11. Indemnification</h2>
         
         <p>
-          We may update these Terms from time to time. Continued use of the App after changes are posted constitutes acceptance of the new Terms.
+          You agree to <strong>indemnify, defend, and hold harmless</strong> AllHalal, its officers, employees, and partners from any claims, damages, or expenses (including legal fees) arising from:
         </p>
         
-        <h2>10. Governing Law</h2>
+        <ul>
+          <li>Your violation of these Terms.</li>
+          <li>Your misuse of the App.</li>
+          <li>Your submission of inaccurate or unlawful content.</li>
+          <li>Infringement of third-party rights.</li>
+        </ul>
+        
+        <h2>12. Changes to Terms</h2>
         
         <p>
-          These Terms are governed by the laws of the European Union and the jurisdiction where the App is operated, without regard to conflict of law principles.
+          We may update these Terms at any time. Material changes will be communicated via:
         </p>
         
-        <h2>11. Contact Us</h2>
+        <ul>
+          <li>In-app notification.</li>
+          <li>Email (if you have an account).</li>
+          <li>Updated &quot;Last Modified&quot; date above.</li>
+        </ul>
         
         <p>
-          For questions about these Terms:
+          <strong>Continued use of the App after changes constitutes acceptance of the new Terms.</strong>
+        </p>
+        
+        <h2>13. Governing Law & Dispute Resolution</h2>
+        
+        <p>
+          These Terms are governed by the laws of the European Union and applicable local jurisdictions.
         </p>
         
         <p>
-          <strong>Email:</strong> <a href="mailto:contact@allhalal.info">contact@allhalal.info</a><br />
-          <strong>Developer:</strong> Adelya Nurusheva<br />
-          <strong>App Store:</strong> <a href="https://apps.apple.com/app/allhalal" target="_blank" rel="noopener noreferrer">AllHalal on App Store</a>
+          <strong>Disputes shall be resolved through:</strong>
         </p>
+        
+        <ol>
+          <li><strong>Informal Negotiation:</strong> Contact us at <a href="mailto:info@gezellix.com">info@gezellix.com</a> within 30 days.</li>
+          <li><strong>Binding Arbitration:</strong> If negotiation fails, disputes will be resolved via arbitration.</li>
+        </ol>
+        
+        <p>
+          <strong>YOU WAIVE THE RIGHT TO PARTICIPATE IN CLASS-ACTION LAWSUITS.</strong>
+        </p>
+        
+        <h2>14. Severability</h2>
+        
+        <p>
+          If any provision of these Terms is found invalid or unenforceable, the remaining provisions shall continue in full force and effect.
+        </p>
+        
+        <h2>15. Contact Information</h2>
+        
+        <p>
+          For questions about these Terms, contact:
+        </p>
+        
+        <p>
+          📧 <strong>Email:</strong> <a href="mailto:info@gezellix.com">info@gezellix.com</a><br />
+          <strong>Business Address:</strong> gezellix.com
+        </p>
+        
+        <h2>16. Acknowledgment</h2>
+        
+        <p>
+          By using HalalScan, you acknowledge that:
+        </p>
+        
+        <ul>
+          <li>You have read and understood these Terms.</li>
+          <li>You agree to be bound by them.</li>
+          <li>The App is a tool for informational purposes and does not replace professional religious guidance.</li>
+        </ul>
+        
+        <p><strong>Thank you for using HalalScan!</strong></p>
         
         <hr />
         
@@ -154,4 +312,3 @@ export default function TermsOfServicePage() {
     </div>
   );
 }
-
