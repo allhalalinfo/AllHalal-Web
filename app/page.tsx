@@ -1,29 +1,310 @@
+'use client';
+
+import { useEffect } from 'react';
+import '../styles/normalize.css';
+import '../styles/premium.css';
+
 export default function Home() {
+  useEffect(() => {
+    // Counter animation
+    const counter = document.querySelector('[data-target]') as HTMLElement;
+    if (counter) {
+      const target = parseInt(counter.getAttribute('data-target') || '0');
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      let current = 0;
+
+      const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+          counter.textContent = Math.floor(current).toLocaleString();
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target.toLocaleString();
+        }
+      };
+      updateCounter();
+    }
+  }, []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold text-green-600 mb-6">
-            AllHalal
-          </h1>
-          <p className="text-2xl text-gray-700 mb-8">
-            Discover Authentic Halal Restaurants
-          </p>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Your trusted platform for finding halal-certified restaurants around the world.
-          </p>
-          
-          <div className="mt-12 flex justify-center gap-4">
-            <button className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-lg transition duration-200">
-              Get Started
-            </button>
-            <button className="border-2 border-green-600 text-green-600 hover:bg-green-50 font-semibold px-8 py-3 rounded-lg transition duration-200">
-              Learn More
-            </button>
+    <>
+      
+      {/* Header */}
+      <header className="header">
+        <div className="container-wide">
+          <div className="header-content-new">
+            <a href="/" className="logo">ALLHALAL</a>
+            <nav className="nav-new">
+              <a href="#features">Features</a>
+              <span className="nav-divider"></span>
+              <a href="/legal">Legal</a>
+              <span className="nav-divider"></span>
+              <a href="/contact">Contact</a>
+            </nav>
+            <a href="https://apps.apple.com/app/allhalal" className="btn-download-new">Download iOS</a>
           </div>
         </div>
-      </div>
-    </main>
+      </header>
+
+      {/* Hero */}
+      <section className="hero-new">
+        <div className="container">
+          <div className="hero-content-new">
+            <div className="hero-tag">World&apos;s #1 Halal Verification Platform</div>
+            
+            <h1 className="hero-title-new">
+              <span className="title-light">The Most Advanced</span>
+              <span className="title-strong">Halal Scanner</span>
+              <span className="title-secondary">in the World</span>
+            </h1>
+            
+            <div className="hero-number-block">
+              <div className="number-line">
+                <span className="hero-number-new" data-target="2000000">0</span>
+                <span className="number-label">products</span>
+              </div>
+              <div className="number-tagline">Verified. Accurate. Trusted globally.</div>
+              <div className="number-subline">Real-time halal verification powered by global datasets</div>
+            </div>
+            
+            <div className="islamic-divider">
+              <span className="divider-line"></span>
+              <span className="divider-ornament">◈</span>
+              <span className="divider-line"></span>
+            </div>
+            
+            <div className="hero-cards-grid">
+              <div className="hero-card">
+                <div className="card-label">Coverage</div>
+                <div className="card-value">Food & Cosmetics</div>
+              </div>
+              
+              <div className="hero-card">
+                <div className="card-label">Classification</div>
+                <div className="card-value">Halal - Haram - Mashbooh</div>
+              </div>
+              
+              <div className="hero-card">
+                <div className="card-label">Islamic Schools</div>
+                <div className="card-value">4 Madhhabs</div>
+              </div>
+              
+              <div className="hero-card">
+                <div className="card-label">Languages</div>
+                <div className="card-value">9 Languages</div>
+              </div>
+              
+              <div className="hero-card">
+                <div className="card-label">Database</div>
+                <div className="card-value">Daily Updates</div>
+              </div>
+            </div>
+            
+            <div className="islamic-divider">
+              <span className="divider-line"></span>
+              <span className="divider-ornament">◈</span>
+              <span className="divider-line"></span>
+            </div>
+            
+            <div className="hero-actions-new">
+              <a href="https://apps.apple.com/app/allhalal" className="btn-primary-large">
+                <span>Download for iOS</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M5 10l5 5 5-5M10 3v12"/>
+                </svg>
+              </a>
+              <a href="#features" className="btn-secondary-large">
+                <span>Explore Features</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M5 10h10M10 5l5 5-5 5"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="features">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">The Ultimate Halal<br/>Intelligence Platform</h2>
+          </div>
+          
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="8" y="12" width="16" height="12" rx="1"/>
+                  <path d="M10 15h2M14 15h2M18 15h2M10 19h2M14 19h2M18 19h2"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Barcode Scanner</h3>
+              <p className="feature-description">Scan any product worldwide - results in under 2 seconds. Instant halal verification.</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M4 16h24M16 4v24M8 8l16 16M24 8L8 24"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Ingredient Analyzer</h3>
+              <p className="feature-description">Deep halal analysis of every ingredient, E-number and additive - powered by scholars.</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="16" cy="12" r="4"/>
+                  <path d="M16 20v8M12 24h8"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Cosmetics Checker</h3>
+              <p className="feature-description">Complete halal verification for makeup, skincare and personal care. Effortless and accurate.</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M22 14.79A8 8 0 1110.21 3 6 6 0 0022 14.79z"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Prayer Times</h3>
+              <p className="feature-description">Accurate prayer times based on your exact location. Never miss Salah.</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="16" cy="16" r="12"/>
+                  <path d="M16 8v8l4 4"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Qibla Compass</h3>
+              <p className="feature-description">Find the Qibla instantly - anywhere in the world.</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="6" y="8" width="20" height="18" rx="2"/>
+                  <path d="M20 4v4M12 4v4M6 14h20"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Islamic Calendar</h3>
+              <p className="feature-description">Sunnah of the Day, Islamic events and essential global dates.</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M16 4L20 12L28 12L22 18L24 28L16 22L8 28L10 18L4 12L12 12L16 4Z"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Madhhab Settings</h3>
+              <p className="feature-description">Personalized rulings based on your Islamic school of thought.</p>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M16 28a12 12 0 100-24 12 12 0 000 24zM16 10v6l4 2"/>
+                </svg>
+              </div>
+              <h3 className="feature-title">Full Breakdown</h3>
+              <p className="feature-description">Complete halal/haram analysis with clear explanations and authentic sources.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Languages */}
+      <section id="languages" className="languages">
+        <div className="container">
+          <div className="languages-header">
+            <h2 className="languages-title">Use AllHalal in the language you feel at home with.</h2>
+          </div>
+          
+          <div className="languages-carousel-wrapper">
+            <div className="languages-carousel">
+              <div className="language-pill">English</div>
+              <div className="language-pill">Français</div>
+              <div className="language-pill">Deutsch</div>
+              <div className="language-pill">Español</div>
+              <div className="language-pill">Italiano</div>
+              <div className="language-pill">Nederlands</div>
+              <div className="language-pill">Русский</div>
+              <div className="language-pill">العربية</div>
+              <div className="language-pill">اردو</div>
+              <div className="language-pill">English</div>
+              <div className="language-pill">Français</div>
+              <div className="language-pill">Deutsch</div>
+              <div className="language-pill">Español</div>
+              <div className="language-pill">Italiano</div>
+              <div className="language-pill">Nederlands</div>
+              <div className="language-pill">Русский</div>
+              <div className="language-pill">العربية</div>
+              <div className="language-pill">اردو</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Madhhab */}
+      <section className="madhhab">
+        <div className="container">
+          <div className="madhhab-content">
+            <div className="section-header-centered">
+              <div className="section-label">Authentic Jurisprudence</div>
+              <h2 className="section-title">Your Practice. Your Madhhab.</h2>
+              <p className="section-description">We respect the diversity of Islamic scholarship. Select your School of Thought to receive rulings perfectly aligned with your practice.</p>
+            </div>
+            
+            <div className="madhhab-list">
+              <div className="madhhab-item">
+                <div className="madhhab-content-layer">
+                  <div className="madhhab-name">Hanafi</div>
+                  <div className="madhhab-info">The most widely followed school</div>
+                </div>
+                <div className="madhhab-watermark">حنفي</div>
+              </div>
+              <div className="madhhab-item">
+                <div className="madhhab-content-layer">
+                  <div className="madhhab-name">Shafi&apos;i</div>
+                  <div className="madhhab-info">Prevalent in Southeast Asia</div>
+                </div>
+                <div className="madhhab-watermark">شافعي</div>
+              </div>
+              <div className="madhhab-item">
+                <div className="madhhab-content-layer">
+                  <div className="madhhab-name">Maliki</div>
+                  <div className="madhhab-info">Dominant in North and West Africa</div>
+                </div>
+                <div className="madhhab-watermark">مالكي</div>
+              </div>
+              <div className="madhhab-item">
+                <div className="madhhab-content-layer">
+                  <div className="madhhab-name">Hanbali</div>
+                  <div className="madhhab-info">Followed in the Arabian Peninsula</div>
+                </div>
+                <div className="madhhab-watermark">حنبلي</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-bottom-simple" style={{borderTop: 'none', paddingTop: 0}}>
+            <p>&copy; 2025 AllHalal. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
 

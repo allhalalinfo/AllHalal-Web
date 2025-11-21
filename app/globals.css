@@ -1,26 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Global styles - minimal, rely on premium.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-:root {
-  --primary: #22c55e;
-  --primary-dark: #16a34a;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   padding: 0;
-}
-
-@layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
-  }
-}
-
-@layer components {
-  .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
 }
 
