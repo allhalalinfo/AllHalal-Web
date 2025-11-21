@@ -7,8 +7,9 @@ const nextConfig = {
   },
   // Trailing slash configuration
   trailingSlash: false,
-  // Output configuration for Vercel
-  output: 'standalone',
+  // Optimize for production
+  swcMinify: true,
+  poweredByHeader: false,
 };
 
 module.exports = nextConfig;

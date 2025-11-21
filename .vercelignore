@@ -1,0 +1,24 @@
+# Vercel Ignore File
+
+# Legacy HTML files (not used in Next.js app)
+*.html
+!public/**/*.html
+
+# Legacy assets (keeping in repo for reference but not deploying)
+assets/
+
+# Development files
+node_modules
+.git
+.vscode
+.idea
+
+# Test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation
+README.md
+
