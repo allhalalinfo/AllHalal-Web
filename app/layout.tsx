@@ -24,6 +24,12 @@ export const metadata: Metadata = {
   title: "AllHalal - The Most Advanced Halal Scanner in the World",
   description: "AllHalal - The most advanced halal scanner. 2,000,000+ verified products. Expert classification. Trusted globally.",
   keywords: ["halal scanner", "halal verification", "islamic app", "halal food", "halal cosmetics"],
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({

@@ -1,9 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Блокировать scroll когда меню открыто
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <>
@@ -28,6 +43,7 @@ export default function Header() {
               className="mobile-menu-toggle"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
+              type="button"
             >
               <span className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
                 <span></span>
@@ -40,18 +56,20 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="mobile-menu-overlay" onClick={() => setIsMenuOpen(false)}>
-          <nav className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-            <a href="https://apps.apple.com/app/allhalal" className="mobile-menu-download">
-              Download iOS
-            </a>
-            <a href="/#features" onClick={() => setIsMenuOpen(false)}>Features</a>
-            <a href="/legal" onClick={() => setIsMenuOpen(false)}>Legal</a>
-            <a href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
-          </nav>
-        </div>
-      )}
+      <div 
+        className="mobile-menu-overlay" 
+        style={{ display: isMenuOpen ? 'block' : 'none' }}
+        onClick={closeMenu}
+      >
+        <nav className="mobile-menu" onClick={(e) => e.stopPropagation()}>
+          <a href="https://apps.apple.com/app/allhalal" className="mobile-menu-download">
+            Download iOS
+          </a>
+          <a href="/#features" onClick={closeMenu}>Features</a>
+          <a href="/legal" onClick={closeMenu}>Legal</a>
+          <a href="/contact" onClick={closeMenu}>Contact</a>
+        </nav>
+      </div>
     </>
   );
 }
