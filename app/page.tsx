@@ -6,24 +6,37 @@ import '../styles/premium.css';
 
 export default function Home() {
   useEffect(() => {
-    // Counter animation
+    // Counter animation - плавная, медленная
     const counter = document.querySelector('[data-target]') as HTMLElement;
     if (counter) {
       const target = parseInt(counter.getAttribute('data-target') || '0');
-      const duration = 2000;
-      const increment = target / (duration / 16);
-      let current = 0;
+      const duration = 8000; // 8 секунд
+      const startTime = performance.now();
+      
+      // Easing function для плавного замедления
+      const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
 
-      const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-          counter.textContent = Math.floor(current).toLocaleString();
+      const updateCounter = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Применяем плавное замедление
+        const easedProgress = easeOutQuint(progress);
+        const current = Math.floor(target * easedProgress);
+        
+        counter.textContent = current.toLocaleString() + '+';
+        
+        if (progress < 1) {
           requestAnimationFrame(updateCounter);
         } else {
-          counter.textContent = target.toLocaleString();
+          counter.textContent = target.toLocaleString() + '+';
         }
       };
-      updateCounter();
+      
+      // Небольшая задержка перед началом
+      setTimeout(() => {
+        requestAnimationFrame(updateCounter);
+      }, 500);
     }
   }, []);
 
