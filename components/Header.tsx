@@ -45,7 +45,7 @@ export default function Header() {
               <a href="/contact">Contact</a>
             </nav>
             
-            <a href="https://apps.apple.com/app/allhalal" className="btn-download-new">Download iOS</a>
+            <a href="/coming-soon" className="btn-download-new">Download iOS</a>
             
             {/* Mobile Menu Button */}
             <button 
@@ -72,9 +72,9 @@ export default function Header() {
           onClick={closeMenu}
         >
           <nav className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-            <a href="https://apps.apple.com/app/allhalal" className="mobile-menu-download">
-              Download iOS
-            </a>
+          <a href="/coming-soon" className="mobile-menu-download">
+            Download iOS
+          </a>
             <a href="/#features" onClick={closeMenu}>Features</a>
             <a href="/legal" onClick={closeMenu}>Legal</a>
             <a href="/contact" onClick={closeMenu}>Contact</a>

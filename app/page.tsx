@@ -116,7 +116,7 @@ export default function Home() {
             </div>
             
             <div className="hero-actions-new">
-              <a href="https://apps.apple.com/app/allhalal" className="btn-primary-large">
+              <a href="/coming-soon" className="btn-primary-large">
                 <span>Download for iOS</span>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M5 10l5 5 5-5M10 3v12"/>
