@@ -309,6 +309,7 @@ export default function Home() {
         <div className="container">
           <div className="footer-bottom-simple" style={{borderTop: 'none', paddingTop: 0}}>
             <p>&copy; 2025 AllHalal. All rights reserved.</p>
+            <p style={{fontSize: '0.875rem', opacity: 0.6, marginTop: '8px'}}>Legal documents updated: December 6, 2025</p>
           </div>
         </div>
       </footer>

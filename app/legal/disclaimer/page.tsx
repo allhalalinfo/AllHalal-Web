@@ -18,7 +18,7 @@ export default function DisclaimerPage() {
         <h1>Disclaimer</h1>
         <div className="legal-meta">
           <p><strong>Effective Date:</strong> November 8, 2025</p>
-          <p><strong>Last Updated:</strong> November 8, 2025</p>
+          <p><strong>Last Updated:</strong> December 6, 2025</p>
         </div>
       </header>
       
@@ -353,7 +353,7 @@ export default function DisclaimerPage() {
         </p>
         
         <p>
-          📧 <a href="mailto:info@gezellix.com">info@gezellix.com</a>
+          📧 <a href="mailto:app@allhalal.info">app@allhalal.info</a>
         </p>
         
         <p>

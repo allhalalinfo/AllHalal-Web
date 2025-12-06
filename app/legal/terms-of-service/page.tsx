@@ -18,7 +18,7 @@ export default function TermsOfServicePage() {
         <h1>Terms of Service</h1>
         <div className="legal-meta">
           <p><strong>Effective Date:</strong> November 8, 2025</p>
-          <p><strong>Last Updated:</strong> November 8, 2025</p>
+          <p><strong>Last Updated:</strong> December 6, 2025</p>
         </div>
       </header>
       
@@ -289,7 +289,7 @@ export default function TermsOfServicePage() {
         </p>
         
         <ol>
-          <li><strong>Informal Negotiation:</strong> Contact us at <a href="mailto:info@gezellix.com">info@gezellix.com</a> within 30 days.</li>
+          <li><strong>Informal Negotiation:</strong> Contact us at <a href="mailto:app@allhalal.info">app@allhalal.info</a> within 30 days.</li>
           <li><strong>Binding Arbitration:</strong> If negotiation fails, disputes will be resolved via arbitration.</li>
         </ol>
         
