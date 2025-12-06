@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Header from '@/components/Header';
 import '../styles/normalize.css';
 import '../styles/premium.css';
+import '../styles/app-showcase.css';
 
 export default function Home() {
   useEffect(() => {
@@ -298,6 +299,183 @@ export default function Home() {
                   <div className="madhhab-info">Followed in the Arabian Peninsula</div>
                 </div>
                 <div className="madhhab-watermark">حنبلي</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* App Showcase */}
+      <section className="app-showcase">
+        {/* Animated Background */}
+        <div className="showcase-bg">
+          <div className="showcase-gradient showcase-gradient-1"></div>
+          <div className="showcase-gradient showcase-gradient-2"></div>
+          <div className="showcase-gradient showcase-gradient-3"></div>
+        </div>
+        
+        {/* Grid Overlay */}
+        <div className="showcase-grid"></div>
+        
+        {/* Particles */}
+        <div className="showcase-particles">
+          {[...Array(15)].map((_, i) => (
+            <div 
+              key={i} 
+              className="showcase-particle" 
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 10}s`,
+                animationDuration: `${10 + Math.random() * 10}s`
+              }}
+            ></div>
+          ))}
+        </div>
+        
+        <div className="container showcase-content">
+          {/* Hero Section */}
+          <div className="showcase-hero">
+            <div className="showcase-hero-text">
+              <span className="showcase-label">📱 Mobile Experience</span>
+              <h2 className="showcase-title">
+                Your Complete Halal Companion
+              </h2>
+              <p className="showcase-description">
+                Scan any product instantly. Get accurate halal verification. Make confident decisions. Everything you need in one beautiful app.
+              </p>
+              <a href="/coming-soon" className="showcase-cta">
+                Download App
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 10h10M10 5l5 5-5 5"/>
+                </svg>
+              </a>
+            </div>
+            
+            <div className="showcase-hero-image">
+              <div className="showcase-phone-frame">
+                <img 
+                  src="/app-screens/hero-woman.jpg" 
+                  alt="AllHalal App - Scan any product instantly"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="800" viewBox="0 0 500 800"%3E%3Crect fill="%230D2E33" width="500" height="800"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3EScan Any Product%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+                <div className="showcase-badge">
+                  <span className="showcase-badge-number">2M+</span>
+                  <span className="showcase-badge-text">Products</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Features Grid */}
+          <div className="showcase-features">
+            <div className="showcase-feature">
+              <div className="showcase-feature-icon">
+                <img 
+                  src="/app-screens/ingredient-scan.jpg" 
+                  alt="AI Ingredient Scan"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E🔍%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              </div>
+              <h3 className="showcase-feature-title">AI Ingredient Scan</h3>
+              <p className="showcase-feature-description">
+                Automatically extracts and analyzes every ingredient with advanced AI technology.
+              </p>
+            </div>
+            
+            <div className="showcase-feature">
+              <div className="showcase-feature-icon">
+                <img 
+                  src="/app-screens/madhhab.jpg" 
+                  alt="Fiqh-Based Rulings"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E📖%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              </div>
+              <h3 className="showcase-feature-title">Fiqh-Based Rulings</h3>
+              <p className="showcase-feature-description">
+                Choose your madhhab for personalized rulings aligned with your Islamic practice.
+              </p>
+            </div>
+            
+            <div className="showcase-feature">
+              <div className="showcase-feature-icon">
+                <img 
+                  src="/app-screens/prayer-times.jpg" 
+                  alt="Prayer Times & Qibla"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E🕌%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              </div>
+              <h3 className="showcase-feature-title">Prayer Times & Qibla</h3>
+              <p className="showcase-feature-description">
+                Accurate prayer times, Qibla direction, and Islamic calendar - everything in one app.
+              </p>
+            </div>
+            
+            <div className="showcase-feature">
+              <div className="showcase-feature-icon">
+                <img 
+                  src="/app-screens/cosmetics.jpg" 
+                  alt="Halal Cosmetics"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E✨%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              </div>
+              <h3 className="showcase-feature-title">Halal Cosmetics</h3>
+              <p className="showcase-feature-description">
+                Verify cosmetics, skincare, and beauty products - a feature you won&apos;t find anywhere else.
+              </p>
+            </div>
+          </div>
+          
+          {/* Carousel */}
+          <div className="showcase-carousel">
+            <h3 className="carousel-title">Experience the Future of Halal Verification</h3>
+            <div className="carousel-track">
+              <div className="carousel-item">
+                <div className="carousel-phone">
+                  <img 
+                    src="/app-screens/product-verified.jpg" 
+                    alt="2 Million Products Verified"
+                    onError={(e) => {
+                      e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3E2M+ Products%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                </div>
+                <p className="carousel-caption">Over 2 Million Products Verified</p>
+              </div>
+              
+              <div className="carousel-item">
+                <div className="carousel-phone">
+                  <img 
+                    src="/app-screens/statistics.jpg" 
+                    alt="Track Your Halal Journey"
+                    onError={(e) => {
+                      e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3EHistory %26 Stats%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                </div>
+                <p className="carousel-caption">Track Your Halal Journey</p>
+              </div>
+              
+              <div className="carousel-item">
+                <div className="carousel-phone">
+                  <img 
+                    src="/app-screens/smartwatch.jpg" 
+                    alt="Smartwatch Integration"
+                    onError={(e) => {
+                      e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3ESmartwatch%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                </div>
+                <p className="carousel-caption">Smartwatch Integration</p>
               </div>
             </div>
           </div>
