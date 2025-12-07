@@ -74,10 +74,19 @@ body {
   font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.6;
-  color: #3d3a35;
+  color: #2a3a35;
   background: 
-    radial-gradient(circle at 50% 50%, rgba(17, 100, 102, 0.15) 0%, transparent 60%),
-    linear-gradient(180deg, #f5f2eb 0%, #ece9e0 100%);
+    /* Floating orbs effect */
+    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(0, 110, 83, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 35% at 85% 30%, rgba(17, 100, 102, 0.15) 0%, transparent 45%),
+    radial-gradient(ellipse 45% 30% at 50% 80%, rgba(0, 110, 83, 0.12) 0%, transparent 40%),
+    radial-gradient(ellipse 70% 50% at 30% 60%, rgba(215, 218, 94, 0.08) 0%, transparent 50%),
+    /* Base mint gradient */
+    linear-gradient(180deg, 
+      #d4e8e4 0%,      /* Мягкий мятный */
+      #c8dfd9 30%,     /* Средний мятный */
+      #bdd6cf 60%,     /* Насыщенный мятный */
+      #b5d0c8 100%);   /* Глубокий мятный */
   background-attachment: fixed;
   overflow-x: hidden;
   min-height: 100vh;
