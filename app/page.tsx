@@ -354,7 +354,7 @@ export default function Home() {
             <div className="showcase-hero-image">
               <div className="showcase-phone-frame">
                 <img 
-                  src="/app-screens/hero-woman.jpg" 
+                  src="/app-screens/hero-woman.png" 
                   alt="AllHalal App - Scan any product instantly"
                   onError={(e) => {
                     e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="800" viewBox="0 0 500 800"%3E%3Crect fill="%230D2E33" width="500" height="800"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3EScan Any Product%3C/text%3E%3C/svg%3E';
@@ -373,7 +373,7 @@ export default function Home() {
             <div className="showcase-feature">
               <div className="showcase-feature-icon">
                 <img 
-                  src="/app-screens/ingredient-scan.jpg" 
+                  src="/app-screens/ingredient-scan.png" 
                   alt="AI Ingredient Scan"
                   onError={(e) => {
                     e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E🔍%3C/text%3E%3C/svg%3E';
@@ -389,7 +389,7 @@ export default function Home() {
             <div className="showcase-feature">
               <div className="showcase-feature-icon">
                 <img 
-                  src="/app-screens/madhhab.jpg" 
+                  src="/app-screens/madhhab.png" 
                   alt="Fiqh-Based Rulings"
                   onError={(e) => {
                     e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E📖%3C/text%3E%3C/svg%3E';
@@ -405,7 +405,7 @@ export default function Home() {
             <div className="showcase-feature">
               <div className="showcase-feature-icon">
                 <img 
-                  src="/app-screens/prayer-times.jpg" 
+                  src="/app-screens/prayer-times.png" 
                   alt="Prayer Times & Qibla"
                   onError={(e) => {
                     e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E🕌%3C/text%3E%3C/svg%3E';
@@ -421,7 +421,7 @@ export default function Home() {
             <div className="showcase-feature">
               <div className="showcase-feature-icon">
                 <img 
-                  src="/app-screens/cosmetics.jpg" 
+                  src="/app-screens/cosmetics.png" 
                   alt="Halal Cosmetics"
                   onError={(e) => {
                     e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E✨%3C/text%3E%3C/svg%3E';
@@ -442,7 +442,7 @@ export default function Home() {
               <div className="carousel-item">
                 <div className="carousel-phone">
                   <img 
-                    src="/app-screens/product-verified.jpg" 
+                    src="/app-screens/product-verified.png" 
                     alt="2 Million Products Verified"
                     onError={(e) => {
                       e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3E2M+ Products%3C/text%3E%3C/svg%3E';
@@ -455,7 +455,7 @@ export default function Home() {
               <div className="carousel-item">
                 <div className="carousel-phone">
                   <img 
-                    src="/app-screens/statistics.jpg" 
+                    src="/app-screens/statistics.png" 
                     alt="Track Your Halal Journey"
                     onError={(e) => {
                       e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3EHistory %26 Stats%3C/text%3E%3C/svg%3E';
@@ -468,7 +468,7 @@ export default function Home() {
               <div className="carousel-item">
                 <div className="carousel-phone">
                   <img 
-                    src="/app-screens/smartwatch.jpg" 
+                    src="/app-screens/smartwatch.png" 
                     alt="Smartwatch Integration"
                     onError={(e) => {
                       e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3ESmartwatch%3C/text%3E%3C/svg%3E';
