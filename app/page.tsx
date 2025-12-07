@@ -87,12 +87,11 @@ export default function Home() {
                       <stop offset="100%" stopColor="#073921"/>
                     </linearGradient>
                   </defs>
-                  <rect width="200" height="60" rx="12" fill="url(#appStoreBg)"/>
-                  <rect width="200" height="60" rx="12" fill="none" stroke="#d7da5e" strokeWidth="1.5" opacity="0.6"/>
-                  <text x="100" y="22" fontSize="11" fill="#e5dab5" textAnchor="middle" opacity="0.9" fontFamily="Inter">Download on the</text>
-                  <text x="100" y="42" fontSize="20" fill="#d7da5e" textAnchor="middle" fontWeight="600" fontFamily="Inter">App Store</text>
-                  <path d="M32 15L35 21H29L32 15Z" fill="#d7da5e"/>
-                  <circle cx="32" cy="30" r="4" fill="#d7da5e"/>
+                  <rect width="200" height="60" rx="14" fill="url(#appStoreBg)"/>
+                  <text x="100" y="22" fontSize="11" fill="#ffffff" textAnchor="middle" opacity="0.85" fontFamily="Inter">Download on the</text>
+                  <text x="100" y="42" fontSize="20" fill="#ffffff" textAnchor="middle" fontWeight="600" fontFamily="Inter">App Store</text>
+                  <path d="M32 15L35 21H29L32 15Z" fill="#ffffff"/>
+                  <circle cx="32" cy="30" r="4" fill="#ffffff"/>
                 </svg>
               </a>
             </div>

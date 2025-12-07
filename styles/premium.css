@@ -10,22 +10,22 @@
   --ahl-accent-yellow: #d7da5e;
   --ahl-accent-beige: #e5dab5;
   
-  /* Colors - Premium Deep Background */
-  --background: #041f12;
-  --background-gradient: #052b18;
-  --surface: #073921;
-  --white: #e5dab5;
-  --cream: #e5dab5;
-  --gray-100: #e5dab5;
-  --gray-200: #d7da5e;
-  --gray-300: #B8D4CF;
-  --gray-400: #8FB5AF;
-  --gray-500: #006E53;
-  --gray-600: #073921;
-  --gray-700: #052B18;
-  --gray-800: #021810;
-  --accent: #d7da5e;
-  --accent-hover: #e5e488;
+  /* Colors - Light Premium with Green Accents */
+  --background: #faf8f3;
+  --background-gradient: #f5f2eb;
+  --surface: #ffffff;
+  --white: #073921;
+  --cream: #f5f2eb;
+  --gray-100: #f5f2eb;
+  --gray-200: #e5dab5;
+  --gray-300: #d4cbb8;
+  --gray-400: #a8a090;
+  --gray-500: #6b655a;
+  --gray-600: #3d3a35;
+  --gray-700: #2a2825;
+  --gray-800: #1a1918;
+  --accent: #006E53;
+  --accent-hover: #008f6c;
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
@@ -74,9 +74,15 @@ body {
   font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.6;
-  color: var(--gray-300);
-  background: var(--background);
+  color: #3d3a35;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 110, 83, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(215, 218, 94, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse 50% 30% at 50% 90%, rgba(0, 110, 83, 0.06) 0%, transparent 40%),
+    linear-gradient(180deg, #faf8f3 0%, #f5f2eb 50%, #e8e4dc 100%);
+  background-attachment: fixed;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 ::selection {
@@ -147,9 +153,9 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(4, 31, 18, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(215, 218, 94, 0.15);
+  background: rgba(250, 248, 243, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 110, 83, 0.1);
   z-index: 1000;
 }
 
@@ -461,9 +467,9 @@ button.btn-primary-large {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #006E53;
   padding: var(--space-2) var(--space-6);
-  border: 1px solid rgba(217, 176, 140, 0.4);
+  border: 1px solid rgba(0, 110, 83, 0.3);
   border-radius: 2px;
   margin-bottom: var(--space-8);
 }
@@ -484,14 +490,14 @@ button.btn-primary-large {
 .title-light {
   font-size: 0.65em;
   font-weight: 300;
-  color: #D1E8E2;
+  color: #3d3a35;
   letter-spacing: 0.02em;
 }
 
 .title-strong {
   font-size: 1em;
   font-weight: 600;
-  color: #FFC89A;
+  color: #006E53;
   letter-spacing: -0.03em;
 }
 
@@ -521,7 +527,7 @@ button.btn-primary-large {
   font-family: var(--font-serif);
   font-size: 4rem;
   font-weight: 300;
-  color: #D1E8E2;
+  color: #006E53;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   opacity: 0;
@@ -531,20 +537,20 @@ button.btn-primary-large {
 .number-label {
   font-size: 1.5rem;
   font-weight: 500;
-  color: #A8B9B4;
+  color: #6b655a;
 }
 
 .number-tagline {
   font-size: 1.125rem;
   font-weight: 500;
-  color: #C5D7D0;
+  color: #3d3a35;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .number-subline {
   font-size: 0.9375rem;
-  color: #A8B9B4;
+  color: #6b655a;
   font-style: italic;
 }
 
@@ -610,8 +616,8 @@ button.btn-primary-large {
 .feature-card,
 .madhhab-item,
 .trust-item {
-  background: rgba(26, 62, 69, 0.88);
-  border: 1px solid rgba(17, 100, 102, 0.35);
+  background: linear-gradient(165deg, #006E53 0%, #073921 50%, #005a44 100%);
+  border: 1px solid rgba(0, 110, 83, 0.2);
   padding: 24px 20px 16px 20px;
   display: flex;
   flex-direction: column;
@@ -619,9 +625,12 @@ button.btn-primary-large {
   justify-content: flex-start;
   text-align: center;
   gap: 8px;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 14px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px;
+  box-shadow: 
+    0 4px 6px rgba(0, 110, 83, 0.08),
+    0 12px 24px rgba(0, 110, 83, 0.12),
+    0 24px 48px rgba(0, 0, 0, 0.08);
   min-height: auto;
   width: 100%;
   max-width: 100%;
@@ -635,14 +644,13 @@ button.btn-primary-large {
 .feature-card:hover,
 .madhhab-item:hover,
 .trust-item:hover {
-  background: linear-gradient(165deg, rgba(0, 125, 95, 0.98) 0%, rgba(10, 70, 45, 0.98) 50%, rgba(0, 105, 82, 0.98) 100%);
-  border-color: rgba(215, 218, 94, 0.7);
+  background: linear-gradient(165deg, #008f6c 0%, #0a5535 50%, #007a5a 100%);
+  border-color: rgba(0, 143, 108, 0.5);
   box-shadow: 
-    0 14px 40px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(215, 218, 94, 0.5),
-    0 0 20px rgba(215, 218, 94, 0.2),
-    inset 0 1px 0 rgba(229, 218, 181, 0.15);
-  transform: translateY(-5px);
+    0 8px 16px rgba(0, 110, 83, 0.15),
+    0 20px 40px rgba(0, 110, 83, 0.2),
+    0 32px 64px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px) scale(1.02);
 }
 
 /* GLOBAL TITLE STYLE - Beige for ALL card titles */
@@ -1127,9 +1135,10 @@ section {
 
 /* Hover effect - subtle, doesn't override center highlight */
 .language-pill:hover {
-  background: linear-gradient(135deg, rgba(0, 125, 95, 0.98) 0%, rgba(10, 70, 45, 0.98) 100%);
-  border-color: rgba(215, 218, 94, 0.7);
-  box-shadow: 0 0 35px rgba(215, 218, 94, 0.3);
+  background: linear-gradient(135deg, #008f6c 0%, #0a5535 100%);
+  border-color: rgba(0, 143, 108, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 110, 83, 0.25);
+  transform: translateY(-2px);
 }
 
 .language-pill:hover::after {
@@ -1241,14 +1250,12 @@ section {
 .madhhab-list .madhhab-item:hover {
   opacity: 1;
   filter: none;
-  transform: scale(1.02);
-  border-color: rgba(215, 218, 94, 0.7);
-  background: linear-gradient(165deg, rgba(0, 125, 95, 0.98) 0%, rgba(10, 70, 45, 0.98) 50%, rgba(0, 105, 82, 0.98) 100%);
+  transform: scale(1.02) translateY(-4px);
+  border-color: rgba(0, 143, 108, 0.5);
+  background: linear-gradient(165deg, #008f6c 0%, #0a5535 50%, #007a5a 100%);
   box-shadow: 
-    0 14px 40px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(215, 218, 94, 0.5),
-    0 0 20px rgba(215, 218, 94, 0.2),
-    inset 0 1px 0 rgba(229, 218, 181, 0.15);
+    0 8px 16px rgba(0, 110, 83, 0.15),
+    0 20px 40px rgba(0, 110, 83, 0.2);
   z-index: 10;
 }
 
@@ -1427,8 +1434,8 @@ section {
 
 .footer {
   padding: var(--space-12) 0 var(--space-8); /* Compact padding */
-  border-top: 1px solid rgba(215, 218, 94, 0.15);
-  background: transparent;
+  border-top: 1px solid rgba(0, 110, 83, 0.1);
+  background: rgba(250, 248, 243, 0.5);
 }
 
 .footer-main-simple {
