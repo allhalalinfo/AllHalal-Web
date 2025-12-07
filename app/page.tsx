@@ -79,13 +79,20 @@ export default function Home() {
             
             {/* App Store Button */}
             <div className="hero-app-store">
-              <a href="/coming-soon" className="app-store-badge">
-                <svg width="135" height="40" viewBox="0 0 135 40" fill="none">
-                  <rect width="135" height="40" rx="8" fill="black"/>
-                  <text x="68" y="12" fontSize="8" fill="white" textAnchor="middle" opacity="0.8">Download on the</text>
-                  <text x="68" y="28" fontSize="15" fill="white" textAnchor="middle" fontWeight="600">App Store</text>
-                  <path d="M22 10L24 14H20L22 10Z" fill="white"/>
-                  <circle cx="22" cy="20" r="3" fill="white"/>
+              <a href="/coming-soon" className="app-store-badge-premium">
+                <svg width="200" height="60" viewBox="0 0 200 60" fill="none">
+                  <defs>
+                    <linearGradient id="appStoreBg" x1="0" y1="0" x2="200" y2="60">
+                      <stop offset="0%" stopColor="#006E53"/>
+                      <stop offset="100%" stopColor="#073921"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="200" height="60" rx="12" fill="url(#appStoreBg)"/>
+                  <rect width="200" height="60" rx="12" fill="none" stroke="#d7da5e" strokeWidth="1.5" opacity="0.6"/>
+                  <text x="100" y="22" fontSize="11" fill="#e5dab5" textAnchor="middle" opacity="0.9" fontFamily="Inter">Download on the</text>
+                  <text x="100" y="42" fontSize="20" fill="#d7da5e" textAnchor="middle" fontWeight="600" fontFamily="Inter">App Store</text>
+                  <path d="M32 15L35 21H29L32 15Z" fill="#d7da5e"/>
+                  <circle cx="32" cy="30" r="4" fill="#d7da5e"/>
                 </svg>
               </a>
             </div>
@@ -97,7 +104,6 @@ export default function Home() {
       <section className="app-carousel-premium">
         <div className="container">
           <div className="carousel-header">
-            <span className="carousel-label">📱 Mobile Experience</span>
             <h2 className="carousel-title">Everything in One Beautiful App</h2>
           </div>
         </div>

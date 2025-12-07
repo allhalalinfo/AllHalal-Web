@@ -4,22 +4,28 @@
    =============================================== */
 
 :root {
+  /* Brand Colors - AllHalal App Palette */
+  --ahl-green-dark: #006E53;
+  --ahl-green-main: #073921;
+  --ahl-accent-yellow: #d7da5e;
+  --ahl-accent-beige: #e5dab5;
+  
   /* Colors - Sleek and Futuristic */
-  --background: #0D2E33;
-  --background-gradient: #2C3531;
-  --surface: #2C3531;
-  --white: #D1E8E2;
-  --cream: #D1E8E2;
-  --gray-100: #D1E8E2;
-  --gray-200: #B8D4CF;
-  --gray-300: #8FB5AF;
-  --gray-400: #6B8F8A;
-  --gray-500: #4A6A67;
-  --gray-600: #2C3531;
-  --gray-700: #1F2926;
-  --gray-800: #0D1412;
-  --accent: #D9B08C;
-  --accent-hover: #FFC89A;
+  --background: #073921;
+  --background-gradient: #006E53;
+  --surface: #006E53;
+  --white: #e5dab5;
+  --cream: #e5dab5;
+  --gray-100: #e5dab5;
+  --gray-200: #d7da5e;
+  --gray-300: #B8D4CF;
+  --gray-400: #8FB5AF;
+  --gray-500: #006E53;
+  --gray-600: #073921;
+  --gray-700: #052B18;
+  --gray-800: #021810;
+  --accent: #d7da5e;
+  --accent-hover: #e5e488;
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
@@ -544,27 +550,27 @@ button.btn-primary-large {
 
 /* App Store Button */
 .hero-app-store {
-  margin-top: var(--space-10);
+  margin-top: var(--space-8);
   display: flex;
   justify-content: center;
 }
 
-.app-store-badge {
+.app-store-badge-premium {
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
-.app-store-badge:hover {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.5));
+.app-store-badge-premium:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: drop-shadow(0 16px 32px rgba(215, 218, 94, 0.3));
 }
 
-.app-store-badge svg {
+.app-store-badge-premium svg {
   display: block;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
 }
 
 /* Feature Cards Grid - 5 in a row */
@@ -629,12 +635,13 @@ button.btn-primary-large {
 .feature-card:hover,
 .madhhab-item:hover,
 .trust-item:hover {
-  background: linear-gradient(165deg, rgba(10, 85, 64, 0.98) 0%, rgba(18, 110, 82, 0.98) 50%, rgba(12, 95, 72, 0.98) 100%);
-  border-color: rgba(217, 179, 140, 0.6);
+  background: linear-gradient(165deg, rgba(0, 125, 95, 0.98) 0%, rgba(10, 70, 45, 0.98) 50%, rgba(0, 105, 82, 0.98) 100%);
+  border-color: rgba(215, 218, 94, 0.7);
   box-shadow: 
-    0 14px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(217, 179, 140, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 14px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(215, 218, 94, 0.5),
+    0 0 20px rgba(215, 218, 94, 0.2),
+    inset 0 1px 0 rgba(229, 218, 181, 0.15);
   transform: translateY(-5px);
 }
 
@@ -1120,9 +1127,9 @@ section {
 
 /* Hover effect - subtle, doesn't override center highlight */
 .language-pill:hover {
-  background: linear-gradient(135deg, rgba(10, 85, 64, 0.98) 0%, rgba(18, 110, 82, 0.98) 100%);
-  border-color: rgba(217, 179, 140, 0.6);
-  box-shadow: 0 0 35px rgba(217, 176, 140, 0.4);
+  background: linear-gradient(135deg, rgba(0, 125, 95, 0.98) 0%, rgba(10, 70, 45, 0.98) 100%);
+  border-color: rgba(215, 218, 94, 0.7);
+  box-shadow: 0 0 35px rgba(215, 218, 94, 0.3);
 }
 
 .language-pill:hover::after {
@@ -1235,12 +1242,13 @@ section {
   opacity: 1;
   filter: none;
   transform: scale(1.02);
-  border-color: rgba(217, 179, 140, 0.6);
-  background: linear-gradient(165deg, rgba(10, 85, 64, 0.98) 0%, rgba(18, 110, 82, 0.98) 50%, rgba(12, 95, 72, 0.98) 100%);
+  border-color: rgba(215, 218, 94, 0.7);
+  background: linear-gradient(165deg, rgba(0, 125, 95, 0.98) 0%, rgba(10, 70, 45, 0.98) 50%, rgba(0, 105, 82, 0.98) 100%);
   box-shadow: 
-    0 14px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(217, 179, 140, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 14px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(215, 218, 94, 0.5),
+    0 0 20px rgba(215, 218, 94, 0.2),
+    inset 0 1px 0 rgba(229, 218, 181, 0.15);
   z-index: 10;
 }
 
