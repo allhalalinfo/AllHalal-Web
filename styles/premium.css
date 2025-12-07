@@ -604,10 +604,12 @@ button.btn-primary-large {
 .feature-card:hover,
 .madhhab-item:hover,
 .trust-item:hover {
-  background: rgba(26, 62, 69, 0.92);
-  border-color: rgba(17, 100, 102, 0.55);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(12, 70, 53, 0.96) 0%, rgba(18, 95, 72, 0.96) 100%);
+  border-color: rgba(217, 179, 140, 0.5);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(217, 179, 140, 0.3);
+  transform: translateY(-4px);
 }
 
 /* GLOBAL TITLE STYLE - Beige for ALL card titles */
@@ -1092,8 +1094,9 @@ section {
 
 /* Hover effect - subtle, doesn't override center highlight */
 .language-pill:hover {
-  border-color: #E8C5A0;
-  box-shadow: 0 0 25px rgba(217, 176, 140, 0.25);
+  background: linear-gradient(135deg, rgba(12, 70, 53, 0.95) 0%, rgba(18, 95, 72, 0.95) 100%);
+  border-color: rgba(217, 179, 140, 0.5);
+  box-shadow: 0 0 30px rgba(217, 176, 140, 0.35);
 }
 
 .language-pill:hover::after {
@@ -1206,9 +1209,11 @@ section {
   opacity: 1;
   filter: none;
   transform: scale(1.02);
-  border-color: var(--accent);
-  background: rgba(26, 62, 69, 0.95);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(217, 179, 140, 0.5);
+  background: linear-gradient(180deg, rgba(12, 70, 53, 0.96) 0%, rgba(18, 95, 72, 0.96) 100%);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(217, 179, 140, 0.3);
   z-index: 10;
 }
 

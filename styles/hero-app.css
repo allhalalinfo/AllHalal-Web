@@ -1,0 +1,197 @@
+/* ===============================================
+   HERO APP - НОВЫЙ МИНИМАЛИСТИЧНЫЙ ДИЗАЙН
+   =============================================== */
+
+.hero-app {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-24) 0;
+}
+
+.hero-app-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* App Logo */
+.app-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  animation: logoFadeIn 1s ease-out;
+}
+
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-logo-icon {
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.app-logo-icon svg {
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
+}
+
+.app-name {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 400;
+  color: #D9B08C;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* УТП */
+.hero-utp {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.3;
+  color: #FFFFFF;
+  margin-bottom: var(--space-6);
+  animation: utpFadeIn 1.2s ease-out 0.2s both;
+}
+
+@keyframes utpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #B8D4CF;
+  margin-bottom: var(--space-10);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: subtitleFadeIn 1.4s ease-out 0.4s both;
+}
+
+@keyframes subtitleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* App Store Button */
+.app-store-button {
+  display: inline-block;
+  transition: all 0.3s ease;
+  animation: buttonFadeIn 1.6s ease-out 0.6s both;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@keyframes buttonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-store-button:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.5));
+}
+
+.app-store-button svg {
+  display: block;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-app {
+    min-height: 70vh;
+    padding: var(--space-16) 0;
+  }
+  
+  .app-logo-icon svg {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .app-name {
+    font-size: 1.5rem;
+  }
+  
+  .hero-utp {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .app-store-button svg {
+    width: 110px;
+    height: 36px;
+  }
+}
+
+/* Landscape */
+@media (max-width: 926px) and (orientation: landscape) {
+  .hero-app {
+    min-height: auto;
+    padding: var(--space-12) 0;
+  }
+  
+  .app-logo {
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+  
+  .app-logo-icon svg {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .hero-utp {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    margin-bottom: var(--space-4);
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9375rem;
+    margin-bottom: var(--space-6);
+  }
+}
+

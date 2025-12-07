@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Header from '@/components/Header';
 import '../styles/normalize.css';
 import '../styles/premium.css';
+import '../styles/hero-app.css';
 import '../styles/app-showcase.css';
 
 export default function Home() {
@@ -57,25 +58,46 @@ export default function Home() {
       <Header />
 
       {/* Hero */}
-      <section className="hero-new">
+      <section className="hero-app">
         <div className="container">
-          <div className="hero-content-new">
-            <div className="hero-tag">World&apos;s #1 Halal Verification Platform</div>
-            
-            <h1 className="hero-title-new">
-              <span className="title-light">The Most Advanced</span>
-              <span className="title-strong">Halal Scanner</span>
-              <span className="title-secondary">in the World</span>
-            </h1>
-            
-            <div className="hero-number-block">
-              <div className="number-line">
-                <span className="hero-number-new" data-target="2000000">2,000,000+</span>
-                <span className="number-label">products</span>
+          <div className="hero-app-content">
+            {/* App Logo */}
+            <div className="app-logo">
+              <div className="app-logo-icon">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                  <rect width="80" height="80" rx="18" fill="url(#logoGradient)"/>
+                  <path d="M40 20L50 35H30L40 20Z" fill="white" opacity="0.9"/>
+                  <circle cx="40" cy="50" r="8" fill="white" opacity="0.9"/>
+                  <defs>
+                    <linearGradient id="logoGradient" x1="0" y1="0" x2="80" y2="80">
+                      <stop offset="0%" stopColor="#0F503C"/>
+                      <stop offset="100%" stopColor="#125F48"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
               </div>
-              <div className="number-tagline">Verified. Accurate. Trusted globally.</div>
-              <div className="number-subline">Real-time halal verification powered by global datasets</div>
+              <h1 className="app-name">AllHalal</h1>
             </div>
+            
+            {/* Tagline / УТП */}
+            <h2 className="hero-utp">
+              The World&apos;s Most Advanced Halal Verification Platform
+            </h2>
+            
+            <p className="hero-subtitle">
+              Scan any product instantly. Get accurate halal status. 2,000,000+ products verified with AI-powered ingredient analysis.
+            </p>
+            
+            {/* App Store Button */}
+            <a href="/coming-soon" className="app-store-button">
+              <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                <rect width="120" height="40" rx="8" fill="black"/>
+                <text x="60" y="14" fontSize="9" fill="white" textAnchor="middle" opacity="0.8">Download on the</text>
+                <text x="60" y="28" fontSize="16" fill="white" textAnchor="middle" fontWeight="600">App Store</text>
+                <path d="M25 12L27 16H23L25 12Z" fill="white"/>
+                <circle cx="25" cy="22" r="3" fill="white"/>
+              </svg>
+            </a>
           </div>
         </div>
       </section>
@@ -240,8 +262,7 @@ export default function Home() {
       <footer className="footer">
         <div className="container">
           <div className="footer-bottom-simple" style={{borderTop: 'none', paddingTop: 0}}>
-            <p>&copy; 2025 AllHalal. All rights reserved.</p>
-            <p style={{fontSize: '0.875rem', opacity: 0.6, marginTop: '8px'}}>Legal documents updated: December 6, 2025</p>
+            <p>&copy; 2025 Allhalal. Developed by Gezellix</p>
           </div>
         </div>
       </footer>
