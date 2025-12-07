@@ -457,14 +457,22 @@ button.btn-primary-large {
    =============================================== */
 
 .hero-new {
-  padding: calc(80px + var(--space-32)) 0 var(--space-32);
+  padding: calc(80px + var(--space-16)) 0 var(--space-12);
   border-bottom: none;
   background: transparent;
 }
 
 .hero-content-new {
-  max-width: 1000px;
+  max-width: 800px;
   margin: 0 auto;
+  background: rgba(7, 57, 33, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: var(--space-12) var(--space-16);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   text-align: center;
 }
 
@@ -475,9 +483,9 @@ button.btn-primary-large {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #006E53;
+  color: #d7da5e;
   padding: var(--space-2) var(--space-6);
-  border: 1px solid rgba(0, 110, 83, 0.3);
+  border: 1px solid rgba(215, 218, 94, 0.4);
   border-radius: 2px;
   margin-bottom: var(--space-8);
 }
@@ -498,21 +506,21 @@ button.btn-primary-large {
 .title-light {
   font-size: 0.65em;
   font-weight: 300;
-  color: #3d3a35;
+  color: #e5dab5;
   letter-spacing: 0.02em;
 }
 
 .title-strong {
   font-size: 1em;
   font-weight: 600;
-  color: #006E53;
+  color: #d7da5e;
   letter-spacing: -0.03em;
 }
 
 .title-secondary {
   font-size: 0.55em;
   font-weight: 300;
-  color: #F1F7F7;
+  color: #e5dab5;
   letter-spacing: 0.01em;
 }
 
@@ -535,7 +543,7 @@ button.btn-primary-large {
   font-family: var(--font-serif);
   font-size: 4rem;
   font-weight: 300;
-  color: #006E53;
+  color: #d7da5e;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   opacity: 0;
@@ -545,20 +553,20 @@ button.btn-primary-large {
 .number-label {
   font-size: 1.5rem;
   font-weight: 500;
-  color: #6b655a;
+  color: #e5dab5;
 }
 
 .number-tagline {
   font-size: 1.125rem;
   font-weight: 500;
-  color: #3d3a35;
+  color: #ffffff;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .number-subline {
   font-size: 0.9375rem;
-  color: #6b655a;
+  color: rgba(229, 218, 181, 0.8);
   font-style: italic;
 }
 
