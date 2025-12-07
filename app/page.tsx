@@ -305,19 +305,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* App Showcase */}
-      <section className="app-showcase">
-        {/* Animated Background */}
+      {/* App Showcase - Hero with Woman */}
+      <section className="app-showcase-hero">
         <div className="showcase-bg">
           <div className="showcase-gradient showcase-gradient-1"></div>
           <div className="showcase-gradient showcase-gradient-2"></div>
           <div className="showcase-gradient showcase-gradient-3"></div>
         </div>
         
-        {/* Grid Overlay */}
         <div className="showcase-grid"></div>
         
-        {/* Particles */}
         <div className="showcase-particles">
           {[...Array(15)].map((_, i) => (
             <div 
@@ -333,7 +330,6 @@ export default function Home() {
         </div>
         
         <div className="container showcase-content">
-          {/* Hero Section */}
           <div className="showcase-hero">
             <div className="showcase-hero-text">
               <span className="showcase-label">📱 Mobile Experience</span>
@@ -363,116 +359,53 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
-          {/* Features Grid */}
-          <div className="showcase-features">
-            <div className="showcase-feature">
-              <div className="showcase-feature-icon">
+        </div>
+      </section>
+
+      {/* App Features Grid */}
+      <section className="app-features-grid">
+        <div className="container">
+          <div className="features-grid-3">
+            <div className="feature-card-large">
+              <div className="feature-card-image">
                 <img 
-                  src="/app-screens/ingredient-scan.png" 
-                  alt="AI Ingredient Scan"
+                  src="/app-screens/product-verified.png" 
+                  alt="Over 2 Million Products Verified"
                   onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E🔍%3C/text%3E%3C/svg%3E';
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3E2M+ Products%3C/text%3E%3C/svg%3E';
                   }}
                 />
               </div>
-              <h3 className="showcase-feature-title">AI Ingredient Scan</h3>
-              <p className="showcase-feature-description">
-                Automatically extracts and analyzes every ingredient with advanced AI technology.
-              </p>
+              <h3 className="feature-card-title">Over 2 Million Products Verified</h3>
+              <p className="feature-card-description">Comprehensive database covering food, cosmetics, and more.</p>
             </div>
             
-            <div className="showcase-feature">
-              <div className="showcase-feature-icon">
+            <div className="feature-card-large">
+              <div className="feature-card-image">
                 <img 
-                  src="/app-screens/madhhab.png" 
-                  alt="Fiqh-Based Rulings"
+                  src="/app-screens/statistics.png" 
+                  alt="Track Your Halal Journey"
                   onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E📖%3C/text%3E%3C/svg%3E';
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3EHistory %26 Stats%3C/text%3E%3C/svg%3E';
                   }}
                 />
               </div>
-              <h3 className="showcase-feature-title">Fiqh-Based Rulings</h3>
-              <p className="showcase-feature-description">
-                Choose your madhhab for personalized rulings aligned with your Islamic practice.
-              </p>
+              <h3 className="feature-card-title">History & Statistics</h3>
+              <p className="feature-card-description">Track your scans and see your halal journey progress.</p>
             </div>
             
-            <div className="showcase-feature">
-              <div className="showcase-feature-icon">
+            <div className="feature-card-large">
+              <div className="feature-card-image">
                 <img 
-                  src="/app-screens/prayer-times.png" 
-                  alt="Prayer Times & Qibla"
+                  src="/app-screens/smartwatch.png" 
+                  alt="Smartwatch Integration"
                   onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E🕌%3C/text%3E%3C/svg%3E';
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3ESmartwatch%3C/text%3E%3C/svg%3E';
                   }}
                 />
               </div>
-              <h3 className="showcase-feature-title">Prayer Times & Qibla</h3>
-              <p className="showcase-feature-description">
-                Accurate prayer times, Qibla direction, and Islamic calendar - everything in one app.
-              </p>
-            </div>
-            
-            <div className="showcase-feature">
-              <div className="showcase-feature-icon">
-                <img 
-                  src="/app-screens/cosmetics.png" 
-                  alt="Halal Cosmetics"
-                  onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"%3E%3Crect fill="%231A3E45" width="80" height="80" rx="16"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="32"%3E✨%3C/text%3E%3C/svg%3E';
-                  }}
-                />
-              </div>
-              <h3 className="showcase-feature-title">Halal Cosmetics</h3>
-              <p className="showcase-feature-description">
-                Verify cosmetics, skincare, and beauty products - a feature you won&apos;t find anywhere else.
-              </p>
-            </div>
-          </div>
-          
-          {/* Carousel */}
-          <div className="showcase-carousel">
-            <h3 className="carousel-title">Experience the Future of Halal Verification</h3>
-            <div className="carousel-track">
-              <div className="carousel-item">
-                <div className="carousel-phone">
-                  <img 
-                    src="/app-screens/product-verified.png" 
-                    alt="2 Million Products Verified"
-                    onError={(e) => {
-                      e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3E2M+ Products%3C/text%3E%3C/svg%3E';
-                    }}
-                  />
-                </div>
-                <p className="carousel-caption">Over 2 Million Products Verified</p>
-              </div>
-              
-              <div className="carousel-item">
-                <div className="carousel-phone">
-                  <img 
-                    src="/app-screens/statistics.png" 
-                    alt="Track Your Halal Journey"
-                    onError={(e) => {
-                      e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3EHistory %26 Stats%3C/text%3E%3C/svg%3E';
-                    }}
-                  />
-                </div>
-                <p className="carousel-caption">Track Your Halal Journey</p>
-              </div>
-              
-              <div className="carousel-item">
-                <div className="carousel-phone">
-                  <img 
-                    src="/app-screens/smartwatch.png" 
-                    alt="Smartwatch Integration"
-                    onError={(e) => {
-                      e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="320" height="600" viewBox="0 0 320 600"%3E%3Crect fill="%230D2E33" width="320" height="600" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="18" font-family="Arial"%3ESmartwatch%3C/text%3E%3C/svg%3E';
-                    }}
-                  />
-                </div>
-                <p className="carousel-caption">Smartwatch Integration</p>
-              </div>
+              <h3 className="feature-card-title">Smartwatch Integration</h3>
+              <p className="feature-card-description">Stay connected with prayer times and Qibla on your wrist.</p>
             </div>
           </div>
         </div>
