@@ -76,60 +76,6 @@ export default function Home() {
               <div className="number-tagline">Verified. Accurate. Trusted globally.</div>
               <div className="number-subline">Real-time halal verification powered by global datasets</div>
             </div>
-            
-            <div className="islamic-divider">
-              <span className="divider-line"></span>
-              <span className="divider-ornament">◈</span>
-              <span className="divider-line"></span>
-            </div>
-            
-            <div className="hero-cards-grid">
-              <div className="hero-card">
-                <div className="card-label">Coverage</div>
-                <div className="card-value">Food & Cosmetics</div>
-              </div>
-              
-              <div className="hero-card">
-                <div className="card-label">Classification</div>
-                <div className="card-value">Halal - Haram - Mashbooh</div>
-              </div>
-              
-              <div className="hero-card">
-                <div className="card-label">Islamic Schools</div>
-                <div className="card-value">4 Madhhabs</div>
-              </div>
-              
-              <div className="hero-card">
-                <div className="card-label">Languages</div>
-                <div className="card-value">9 Languages</div>
-              </div>
-              
-              <div className="hero-card">
-                <div className="card-label">Database</div>
-                <div className="card-value">Daily Updates</div>
-              </div>
-            </div>
-            
-            <div className="islamic-divider">
-              <span className="divider-line"></span>
-              <span className="divider-ornament">◈</span>
-              <span className="divider-line"></span>
-            </div>
-            
-            <div className="hero-actions-new">
-              <a href="/coming-soon" className="btn-primary-large">
-                <span>Download for iOS</span>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M5 10l5 5 5-5M10 3v12"/>
-                </svg>
-              </a>
-              <a href="#features" className="btn-secondary-large">
-                <span>Explore Features</span>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M5 10h10M10 5l5 5-5 5"/>
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
       </section>
