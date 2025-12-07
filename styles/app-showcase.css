@@ -9,10 +9,10 @@
   padding: var(--space-32) 0 var(--space-16) 0;
 }
 
-.app-features-grid {
+.app-carousel-section {
   position: relative;
   background: linear-gradient(180deg, #0A1F23 0%, #0D2E33 100%);
-  padding: var(--space-16) 0 var(--space-32) 0;
+  padding: var(--space-16) 0 var(--space-24) 0;
   overflow: hidden;
 }
 
@@ -278,48 +278,48 @@
     0 0 80px rgba(217, 176, 140, 0.5);
 }
 
-/* Screenshots Grid - Simple Gallery */
-.screenshots-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-6);
-  max-width: 1400px;
-  margin: 0 auto;
+/* Carousel */
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: var(--space-8) 0;
 }
 
-.screenshot-card {
+.carousel-track {
+  display: flex;
+  gap: var(--space-6);
+  animation: carouselScroll 40s linear infinite;
+  will-change: transform;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes carouselScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+.carousel-slide {
+  flex: 0 0 auto;
+  width: 280px;
   position: relative;
   background: rgba(26, 62, 69, 0.4);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(217, 176, 140, 0.2);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: var(--space-4);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  opacity: 0;
-  animation: screenshotFadeIn 0.8s ease-out forwards;
 }
 
-.screenshot-card:nth-child(1) { animation-delay: 0.1s; }
-.screenshot-card:nth-child(2) { animation-delay: 0.2s; }
-.screenshot-card:nth-child(3) { animation-delay: 0.3s; }
-.screenshot-card:nth-child(4) { animation-delay: 0.4s; }
-.screenshot-card:nth-child(5) { animation-delay: 0.5s; }
-.screenshot-card:nth-child(6) { animation-delay: 0.6s; }
-.screenshot-card:nth-child(7) { animation-delay: 0.7s; }
-
-@keyframes screenshotFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.screenshot-card::before {
+.carousel-slide::before {
   content: '';
   position: absolute;
   top: 0;
@@ -331,27 +331,28 @@
   transition: opacity 0.5s;
 }
 
-.screenshot-card:hover::before {
+.carousel-slide:hover::before {
   opacity: 1;
 }
 
-.screenshot-card:hover {
-  transform: translateY(-6px) scale(1.02);
+.carousel-slide:hover {
+  transform: translateY(-8px) scale(1.03);
   border-color: rgba(217, 176, 140, 0.5);
-  box-shadow: 0 12px 36px rgba(217, 176, 140, 0.25);
+  box-shadow: 0 16px 48px rgba(217, 176, 140, 0.3);
+  z-index: 10;
 }
 
-.screenshot-card img {
+.carousel-slide img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   transition: transform 0.5s;
 }
 
-.screenshot-card:hover img {
-  transform: scale(1.03);
+.carousel-slide:hover img {
+  transform: scale(1.04);
 }
 
 /* Particles */
@@ -398,7 +399,7 @@
     padding: var(--space-16) 0 var(--space-8) 0;
   }
   
-  .app-features-grid {
+  .app-carousel-section {
     padding: var(--space-8) 0 var(--space-16) 0;
   }
   
@@ -419,9 +420,8 @@
     max-width: 100%;
   }
   
-  .screenshots-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-4);
+  .carousel-slide {
+    width: 220px;
   }
   
   .showcase-cta {
@@ -432,9 +432,8 @@
 
 /* Tablet */
 @media (max-width: 1024px) and (min-width: 769px) {
-  .screenshots-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-5);
+  .carousel-slide {
+    width: 240px;
   }
 }
 
@@ -453,9 +452,8 @@
     max-width: 300px;
   }
   
-  .screenshots-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-4);
+  .carousel-slide {
+    width: 200px;
   }
 }
 

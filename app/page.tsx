@@ -134,6 +134,115 @@ export default function Home() {
         </div>
       </section>
 
+      {/* App Showcase Hero - Main Woman Screenshot */}
+      <section className="app-showcase-hero">
+        <div className="showcase-bg">
+          <div className="showcase-gradient showcase-gradient-1"></div>
+          <div className="showcase-gradient showcase-gradient-2"></div>
+          <div className="showcase-gradient showcase-gradient-3"></div>
+        </div>
+        
+        <div className="showcase-grid"></div>
+        
+        <div className="showcase-particles">
+          {[...Array(15)].map((_, i) => (
+            <div 
+              key={i} 
+              className="showcase-particle" 
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 10}s`,
+                animationDuration: `${10 + Math.random() * 10}s`
+              }}
+            ></div>
+          ))}
+        </div>
+        
+        <div className="container showcase-content">
+          <div className="showcase-hero">
+            <div className="showcase-hero-text">
+              <span className="showcase-label">📱 Mobile Experience</span>
+              <h2 className="showcase-title">
+                Your Complete Halal Companion
+              </h2>
+              <p className="showcase-description">
+                Scan any product instantly. Get accurate halal verification. Make confident decisions. Everything you need in one beautiful app.
+              </p>
+              <a href="/coming-soon" className="showcase-cta">
+                Download App
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 10h10M10 5l5 5-5 5"/>
+                </svg>
+              </a>
+            </div>
+            
+            <div className="showcase-hero-image">
+              <div className="showcase-phone-frame">
+                <img 
+                  src="/app-screens/hero-woman.png" 
+                  alt="AllHalal App - Scan any product instantly"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="800" viewBox="0 0 500 800"%3E%3Crect fill="%230D2E33" width="500" height="800"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3EScan Any Product%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* App Screenshots Carousel */}
+      <section className="app-carousel-section">
+        <div className="carousel-container">
+          <div className="carousel-track">
+            {/* First set */}
+            <div className="carousel-slide">
+              <img src="/app-screens/product-verified.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/ingredient-scan.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/madhhab.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/prayer-times.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/statistics.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/smartwatch.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/cosmetics.png" alt="AllHalal Screenshot" />
+            </div>
+            {/* Duplicate for infinite scroll */}
+            <div className="carousel-slide">
+              <img src="/app-screens/product-verified.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/ingredient-scan.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/madhhab.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/prayer-times.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/statistics.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/smartwatch.png" alt="AllHalal Screenshot" />
+            </div>
+            <div className="carousel-slide">
+              <img src="/app-screens/cosmetics.png" alt="AllHalal Screenshot" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features */}
       <section id="features" className="features">
         <div className="container">
@@ -300,140 +409,6 @@ export default function Home() {
                 </div>
                 <div className="madhhab-watermark">حنبلي</div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* App Showcase - Hero with Woman */}
-      <section className="app-showcase-hero">
-        <div className="showcase-bg">
-          <div className="showcase-gradient showcase-gradient-1"></div>
-          <div className="showcase-gradient showcase-gradient-2"></div>
-          <div className="showcase-gradient showcase-gradient-3"></div>
-        </div>
-        
-        <div className="showcase-grid"></div>
-        
-        <div className="showcase-particles">
-          {[...Array(15)].map((_, i) => (
-            <div 
-              key={i} 
-              className="showcase-particle" 
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 10}s`,
-                animationDuration: `${10 + Math.random() * 10}s`
-              }}
-            ></div>
-          ))}
-        </div>
-        
-        <div className="container showcase-content">
-          <div className="showcase-hero">
-            <div className="showcase-hero-text">
-              <span className="showcase-label">📱 Mobile Experience</span>
-              <h2 className="showcase-title">
-                Your Complete Halal Companion
-              </h2>
-              <p className="showcase-description">
-                Scan any product instantly. Get accurate halal verification. Make confident decisions. Everything you need in one beautiful app.
-              </p>
-              <a href="/coming-soon" className="showcase-cta">
-                Download App
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 10h10M10 5l5 5-5 5"/>
-                </svg>
-              </a>
-            </div>
-            
-            <div className="showcase-hero-image">
-              <div className="showcase-phone-frame">
-                <img 
-                  src="/app-screens/hero-woman.png" 
-                  alt="AllHalal App - Scan any product instantly"
-                  onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="800" viewBox="0 0 500 800"%3E%3Crect fill="%230D2E33" width="500" height="800"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3EScan Any Product%3C/text%3E%3C/svg%3E';
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* App Screenshots Gallery */}
-      <section className="app-features-grid">
-        <div className="container">
-          <div className="screenshots-grid">
-            <div className="screenshot-card">
-              <img 
-                src="/app-screens/product-verified.png" 
-                alt="AllHalal App Screenshot"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
-                }}
-              />
-            </div>
-            
-            <div className="screenshot-card">
-              <img 
-                src="/app-screens/ingredient-scan.png" 
-                alt="AllHalal App Screenshot"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
-                }}
-              />
-            </div>
-            
-            <div className="screenshot-card">
-              <img 
-                src="/app-screens/madhhab.png" 
-                alt="AllHalal App Screenshot"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
-                }}
-              />
-            </div>
-            
-            <div className="screenshot-card">
-              <img 
-                src="/app-screens/prayer-times.png" 
-                alt="AllHalal App Screenshot"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
-                }}
-              />
-            </div>
-            
-            <div className="screenshot-card">
-              <img 
-                src="/app-screens/statistics.png" 
-                alt="AllHalal App Screenshot"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
-                }}
-              />
-            </div>
-            
-            <div className="screenshot-card">
-              <img 
-                src="/app-screens/smartwatch.png" 
-                alt="AllHalal App Screenshot"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
-                }}
-              />
-            </div>
-            
-            <div className="screenshot-card">
-              <img 
-                src="/app-screens/cosmetics.png" 
-                alt="AllHalal App Screenshot"
-                onError={(e) => {
-                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
-                }}
-              />
             </div>
           </div>
         </div>
