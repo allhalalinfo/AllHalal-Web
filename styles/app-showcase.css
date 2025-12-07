@@ -4,7 +4,7 @@
 
 .app-carousel-premium {
   position: relative;
-  background: #073921;
+  background: transparent;
   padding: var(--space-16) 0;
   overflow: hidden;
 }

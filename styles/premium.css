@@ -10,10 +10,10 @@
   --ahl-accent-yellow: #d7da5e;
   --ahl-accent-beige: #e5dab5;
   
-  /* Colors - Sleek and Futuristic */
-  --background: #073921;
-  --background-gradient: #006E53;
-  --surface: #006E53;
+  /* Colors - Premium Deep Background */
+  --background: #041f12;
+  --background-gradient: #052b18;
+  --surface: #073921;
   --white: #e5dab5;
   --cream: #e5dab5;
   --gray-100: #e5dab5;
@@ -147,9 +147,9 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(26, 62, 69, 0.95);
+  background: rgba(4, 31, 18, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(17, 100, 102, 0.3);
+  border-bottom: 1px solid rgba(215, 218, 94, 0.15);
   z-index: 1000;
 }
 
@@ -445,7 +445,7 @@ button.btn-primary-large {
 .hero-new {
   padding: calc(80px + var(--space-32)) 0 var(--space-32);
   border-bottom: none;
-  background: linear-gradient(180deg, #2C3531 0%, #116466 40%, #0D2E33 100%);
+  background: transparent;
 }
 
 .hero-content-new {
@@ -1427,8 +1427,8 @@ section {
 
 .footer {
   padding: var(--space-12) 0 var(--space-8); /* Compact padding */
-  border-top: 1px solid rgba(17, 100, 102, 0.3);
-  background: linear-gradient(180deg, transparent 0%, rgba(13, 46, 51, 0.5) 100%);
+  border-top: 1px solid rgba(215, 218, 94, 0.15);
+  background: transparent;
 }
 
 .footer-main-simple {
