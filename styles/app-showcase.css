@@ -67,20 +67,20 @@
 
 .carousel-slide-premium {
   flex: 0 0 auto;
-  width: 340px;
+  width: 320px;
   position: relative;
-  background: rgba(26, 62, 69, 0.5);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(217, 176, 140, 0.25);
-  border-radius: 28px;
-  padding: var(--space-5);
+  background: rgba(17, 45, 49, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(217, 179, 140, 0.15);
+  border-radius: 24px;
+  padding: var(--space-4);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
-/* Hero Slide - Larger */
+/* Hero Slide - Same Size */
 .carousel-slide-hero {
-  width: 420px;
+  width: 320px;
 }
 
 .carousel-slide-premium::before {
@@ -90,9 +90,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(217, 176, 140, 0.15) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(217, 179, 140, 0.08) 0%, transparent 100%);
   opacity: 0;
-  transition: opacity 0.6s;
+  transition: opacity 0.5s;
 }
 
 .carousel-slide-premium:hover::before {
@@ -100,9 +100,11 @@
 }
 
 .carousel-slide-premium:hover {
-  transform: translateY(-12px) scale(1.04);
-  border-color: rgba(217, 176, 140, 0.6);
-  box-shadow: 0 20px 60px rgba(217, 176, 140, 0.35);
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(217, 179, 140, 0.4);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(217, 179, 140, 0.3);
   z-index: 10;
 }
 
@@ -110,13 +112,13 @@
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 24px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
-  transition: transform 0.6s;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s;
 }
 
 .carousel-slide-premium:hover img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 
@@ -134,12 +136,9 @@
     font-size: clamp(1.5rem, 6vw, 2rem);
   }
   
-  .carousel-slide-premium {
-    width: 260px;
-  }
-  
+  .carousel-slide-premium,
   .carousel-slide-hero {
-    width: 300px;
+    width: 240px;
   }
   
   .carousel-track-premium {
@@ -149,23 +148,17 @@
 
 /* Tablet */
 @media (max-width: 1024px) and (min-width: 769px) {
-  .carousel-slide-premium {
-    width: 300px;
-  }
-  
+  .carousel-slide-premium,
   .carousel-slide-hero {
-    width: 360px;
+    width: 280px;
   }
 }
 
 /* Landscape */
 @media (max-width: 926px) and (orientation: landscape) {
-  .carousel-slide-premium {
-    width: 240px;
-  }
-  
+  .carousel-slide-premium,
   .carousel-slide-hero {
-    width: 280px;
+    width: 220px;
   }
   
   .carousel-track-premium {
