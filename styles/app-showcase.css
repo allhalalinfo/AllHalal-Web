@@ -278,34 +278,40 @@
     0 0 80px rgba(217, 176, 140, 0.5);
 }
 
-/* Features Grid - 3 Large Cards */
-.features-grid-3 {
+/* Screenshots Grid - Simple Gallery */
+.screenshots-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-6);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.feature-card-large {
+.screenshot-card {
   position: relative;
-  background: rgba(26, 62, 69, 0.6);
+  background: rgba(26, 62, 69, 0.4);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(217, 176, 140, 0.2);
-  border-radius: 24px;
-  padding: var(--space-8);
+  border-radius: 20px;
+  padding: var(--space-4);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   opacity: 0;
-  animation: featureSlideIn 1s ease-out forwards;
+  animation: screenshotFadeIn 0.8s ease-out forwards;
 }
 
-.feature-card-large:nth-child(1) { animation-delay: 0.3s; }
-.feature-card-large:nth-child(2) { animation-delay: 0.5s; }
-.feature-card-large:nth-child(3) { animation-delay: 0.7s; }
+.screenshot-card:nth-child(1) { animation-delay: 0.1s; }
+.screenshot-card:nth-child(2) { animation-delay: 0.2s; }
+.screenshot-card:nth-child(3) { animation-delay: 0.3s; }
+.screenshot-card:nth-child(4) { animation-delay: 0.4s; }
+.screenshot-card:nth-child(5) { animation-delay: 0.5s; }
+.screenshot-card:nth-child(6) { animation-delay: 0.6s; }
+.screenshot-card:nth-child(7) { animation-delay: 0.7s; }
 
-@keyframes featureSlideIn {
+@keyframes screenshotFadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -313,7 +319,7 @@
   }
 }
 
-.feature-card-large::before {
+.screenshot-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -325,51 +331,27 @@
   transition: opacity 0.5s;
 }
 
-.feature-card-large:hover::before {
+.screenshot-card:hover::before {
   opacity: 1;
 }
 
-.feature-card-large:hover {
-  transform: translateY(-8px);
+.screenshot-card:hover {
+  transform: translateY(-6px) scale(1.02);
   border-color: rgba(217, 176, 140, 0.5);
-  box-shadow: 0 16px 48px rgba(217, 176, 140, 0.2);
+  box-shadow: 0 12px 36px rgba(217, 176, 140, 0.25);
 }
 
-.feature-card-image {
+.screenshot-card img {
   width: 100%;
-  max-width: 280px;
-  margin: 0 auto var(--space-6);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-  transition: transform 0.5s;
-  aspect-ratio: 9 / 16;
-}
-
-.feature-card-large:hover .feature-card-image {
-  transform: scale(1.02) translateY(-4px);
-}
-
-.feature-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
   display: block;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s;
 }
 
-.feature-card-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #D9B08C;
-  margin-bottom: var(--space-2);
-  text-align: center;
-}
-
-.feature-card-description {
-  font-size: 1rem;
-  color: #8FB5AF;
-  line-height: 1.6;
-  text-align: center;
+.screenshot-card:hover img {
+  transform: scale(1.03);
 }
 
 /* Particles */
@@ -437,13 +419,9 @@
     max-width: 100%;
   }
   
-  .features-grid-3 {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-  
-  .feature-card-image {
-    max-width: 240px;
+  .screenshots-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
   }
   
   .showcase-cta {
@@ -454,15 +432,9 @@
 
 /* Tablet */
 @media (max-width: 1024px) and (min-width: 769px) {
-  .features-grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
-  }
-  
-  .feature-card-large:nth-child(3) {
-    grid-column: 1 / -1;
-    max-width: 50%;
-    margin: 0 auto;
+  .screenshots-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
   }
 }
 
@@ -481,13 +453,9 @@
     max-width: 300px;
   }
   
-  .features-grid-3 {
-    grid-template-columns: repeat(3, 1fr);
+  .screenshots-grid {
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-4);
-  }
-  
-  .feature-card-image {
-    max-width: 200px;
   }
 }
 

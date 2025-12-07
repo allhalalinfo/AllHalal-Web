@@ -362,50 +362,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* App Features Grid */}
+      {/* App Screenshots Gallery */}
       <section className="app-features-grid">
         <div className="container">
-          <div className="features-grid-3">
-            <div className="feature-card-large">
-              <div className="feature-card-image">
-                <img 
-                  src="/app-screens/product-verified.png" 
-                  alt="Over 2 Million Products Verified"
-                  onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3E2M+ Products%3C/text%3E%3C/svg%3E';
-                  }}
-                />
-              </div>
-              <h3 className="feature-card-title">Over 2 Million Products Verified</h3>
-              <p className="feature-card-description">Comprehensive database covering food, cosmetics, and more.</p>
+          <div className="screenshots-grid">
+            <div className="screenshot-card">
+              <img 
+                src="/app-screens/product-verified.png" 
+                alt="AllHalal App Screenshot"
+                onError={(e) => {
+                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
+                }}
+              />
             </div>
             
-            <div className="feature-card-large">
-              <div className="feature-card-image">
-                <img 
-                  src="/app-screens/statistics.png" 
-                  alt="Track Your Halal Journey"
-                  onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3EHistory %26 Stats%3C/text%3E%3C/svg%3E';
-                  }}
-                />
-              </div>
-              <h3 className="feature-card-title">History & Statistics</h3>
-              <p className="feature-card-description">Track your scans and see your halal journey progress.</p>
+            <div className="screenshot-card">
+              <img 
+                src="/app-screens/ingredient-scan.png" 
+                alt="AllHalal App Screenshot"
+                onError={(e) => {
+                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
+                }}
+              />
             </div>
             
-            <div className="feature-card-large">
-              <div className="feature-card-image">
-                <img 
-                  src="/app-screens/smartwatch.png" 
-                  alt="Smartwatch Integration"
-                  onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3ESmartwatch%3C/text%3E%3C/svg%3E';
-                  }}
-                />
-              </div>
-              <h3 className="feature-card-title">Smartwatch Integration</h3>
-              <p className="feature-card-description">Stay connected with prayer times and Qibla on your wrist.</p>
+            <div className="screenshot-card">
+              <img 
+                src="/app-screens/madhhab.png" 
+                alt="AllHalal App Screenshot"
+                onError={(e) => {
+                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
+                }}
+              />
+            </div>
+            
+            <div className="screenshot-card">
+              <img 
+                src="/app-screens/prayer-times.png" 
+                alt="AllHalal App Screenshot"
+                onError={(e) => {
+                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
+                }}
+              />
+            </div>
+            
+            <div className="screenshot-card">
+              <img 
+                src="/app-screens/statistics.png" 
+                alt="AllHalal App Screenshot"
+                onError={(e) => {
+                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
+                }}
+              />
+            </div>
+            
+            <div className="screenshot-card">
+              <img 
+                src="/app-screens/smartwatch.png" 
+                alt="AllHalal App Screenshot"
+                onError={(e) => {
+                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
+                }}
+              />
+            </div>
+            
+            <div className="screenshot-card">
+              <img 
+                src="/app-screens/cosmetics.png" 
+                alt="AllHalal App Screenshot"
+                onError={(e) => {
+                  e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800"%3E%3Crect fill="%230D2E33" width="400" height="800" rx="32"/%3E%3C/svg%3E';
+                }}
+              />
             </div>
           </div>
         </div>
