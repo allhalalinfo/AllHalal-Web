@@ -39,10 +39,11 @@
 
 /* Premium Carousel */
 .carousel-wrapper-premium {
-  width: 100%;
+  width: 100vw;
   overflow: hidden;
   position: relative;
   padding: var(--space-8) 0;
+  margin: 0;
 }
 
 .carousel-track-premium {
@@ -50,6 +51,7 @@
   gap: var(--space-8);
   animation: carouselScrollPremium 50s linear infinite;
   will-change: transform;
+  padding: 0 var(--space-8);
 }
 
 .carousel-track-premium:hover {

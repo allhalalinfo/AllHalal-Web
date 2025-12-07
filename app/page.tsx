@@ -87,8 +87,9 @@ export default function Home() {
             <span className="carousel-label">📱 Mobile Experience</span>
             <h2 className="carousel-title">Everything in One Beautiful App</h2>
           </div>
-          
-          <div className="carousel-wrapper-premium">
+        </div>
+        
+        <div className="carousel-wrapper-premium">
             <div className="carousel-track-premium">
               {/* Hero Woman - FIRST */}
               <div className="carousel-slide-premium carousel-slide-hero">
@@ -157,7 +158,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
       </section>
 
       {/* Languages */}
