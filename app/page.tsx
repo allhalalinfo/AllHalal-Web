@@ -360,10 +360,6 @@ export default function Home() {
                     e.currentTarget.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="500" height="800" viewBox="0 0 500 800"%3E%3Crect fill="%230D2E33" width="500" height="800"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23D9B08C" font-size="24" font-family="Arial"%3EScan Any Product%3C/text%3E%3C/svg%3E';
                   }}
                 />
-                <div className="showcase-badge">
-                  <span className="showcase-badge-number">2M+</span>
-                  <span className="showcase-badge-text">Products</span>
-                </div>
               </div>
             </div>
           </div>

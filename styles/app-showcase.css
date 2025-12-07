@@ -271,49 +271,6 @@
     0 0 80px rgba(217, 176, 140, 0.5);
 }
 
-/* Floating Badge */
-.showcase-badge {
-  position: absolute;
-  top: 20px;
-  right: -20px;
-  padding: 16px 24px;
-  background: rgba(26, 62, 69, 0.95);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(217, 176, 140, 0.4);
-  border-radius: 20px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-  animation: badgeFloat 4s ease-in-out infinite;
-  z-index: 10;
-}
-
-@keyframes badgeFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(2deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(-2deg);
-  }
-}
-
-.showcase-badge-number {
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #D9B08C 0%, #FFC89A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: block;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.showcase-badge-text {
-  font-size: 0.875rem;
-  color: #B8D4CF;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 /* Features Grid */
 .showcase-features {
   display: grid;
@@ -374,9 +331,11 @@
 }
 
 .showcase-feature-icon {
-  width: 80px;
-  height: 80px;
-  margin-bottom: var(--space-4);
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  margin: 0 auto var(--space-4);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -390,7 +349,8 @@
 .showcase-feature-icon img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
 }
 
 .showcase-feature-title {
