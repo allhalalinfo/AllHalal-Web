@@ -542,6 +542,31 @@ button.btn-primary-large {
   font-style: italic;
 }
 
+/* App Store Button */
+.hero-app-store {
+  margin-top: var(--space-10);
+  display: flex;
+  justify-content: center;
+}
+
+.app-store-badge {
+  display: inline-block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.app-store-badge:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.5));
+}
+
+.app-store-badge svg {
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
 /* Feature Cards Grid - 5 in a row */
 .hero-cards-grid {
   display: grid;
@@ -604,12 +629,13 @@ button.btn-primary-large {
 .feature-card:hover,
 .madhhab-item:hover,
 .trust-item:hover {
-  background: linear-gradient(180deg, rgba(12, 70, 53, 0.96) 0%, rgba(18, 95, 72, 0.96) 100%);
-  border-color: rgba(217, 179, 140, 0.5);
+  background: linear-gradient(165deg, rgba(10, 85, 64, 0.98) 0%, rgba(18, 110, 82, 0.98) 50%, rgba(12, 95, 72, 0.98) 100%);
+  border-color: rgba(217, 179, 140, 0.6);
   box-shadow: 
-    0 12px 32px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(217, 179, 140, 0.3);
-  transform: translateY(-4px);
+    0 14px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(217, 179, 140, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
 }
 
 /* GLOBAL TITLE STYLE - Beige for ALL card titles */
@@ -1094,9 +1120,9 @@ section {
 
 /* Hover effect - subtle, doesn't override center highlight */
 .language-pill:hover {
-  background: linear-gradient(135deg, rgba(12, 70, 53, 0.95) 0%, rgba(18, 95, 72, 0.95) 100%);
-  border-color: rgba(217, 179, 140, 0.5);
-  box-shadow: 0 0 30px rgba(217, 176, 140, 0.35);
+  background: linear-gradient(135deg, rgba(10, 85, 64, 0.98) 0%, rgba(18, 110, 82, 0.98) 100%);
+  border-color: rgba(217, 179, 140, 0.6);
+  box-shadow: 0 0 35px rgba(217, 176, 140, 0.4);
 }
 
 .language-pill:hover::after {
@@ -1209,11 +1235,12 @@ section {
   opacity: 1;
   filter: none;
   transform: scale(1.02);
-  border-color: rgba(217, 179, 140, 0.5);
-  background: linear-gradient(180deg, rgba(12, 70, 53, 0.96) 0%, rgba(18, 95, 72, 0.96) 100%);
+  border-color: rgba(217, 179, 140, 0.6);
+  background: linear-gradient(165deg, rgba(10, 85, 64, 0.98) 0%, rgba(18, 110, 82, 0.98) 50%, rgba(12, 95, 72, 0.98) 100%);
   box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(217, 179, 140, 0.3);
+    0 14px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(217, 179, 140, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   z-index: 10;
 }
 
