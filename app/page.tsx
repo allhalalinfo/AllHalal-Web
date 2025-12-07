@@ -80,18 +80,10 @@ export default function Home() {
             {/* App Store Button */}
             <div className="hero-app-store">
               <a href="/coming-soon" className="app-store-badge-premium">
-                <svg width="200" height="60" viewBox="0 0 200 60" fill="none">
-                  <defs>
-                    <linearGradient id="appStoreBg" x1="0" y1="0" x2="200" y2="60">
-                      <stop offset="0%" stopColor="#006E53"/>
-                      <stop offset="100%" stopColor="#073921"/>
-                    </linearGradient>
-                  </defs>
-                  <rect width="200" height="60" rx="14" fill="url(#appStoreBg)"/>
-                  <text x="100" y="22" fontSize="11" fill="#ffffff" textAnchor="middle" opacity="0.85" fontFamily="Inter">Download on the</text>
-                  <text x="100" y="42" fontSize="20" fill="#ffffff" textAnchor="middle" fontWeight="600" fontFamily="Inter">App Store</text>
-                  <path d="M32 15L35 21H29L32 15Z" fill="#ffffff"/>
-                  <circle cx="32" cy="30" r="4" fill="#ffffff"/>
+                <svg width="180" height="54" viewBox="0 0 180 54" fill="none">
+                  <rect width="180" height="54" rx="10" fill="#00d094"/>
+                  <text x="90" y="20" fontSize="10" fill="#000000" textAnchor="middle" opacity="0.7" fontFamily="Inter">Download on the</text>
+                  <text x="90" y="38" fontSize="17" fill="#000000" textAnchor="middle" fontWeight="600" fontFamily="Inter">App Store</text>
                 </svg>
               </a>
             </div>
