@@ -2,107 +2,44 @@
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * WHY CHOOSE SECTION - Three Feature Cards
+ * WHY CHOOSE SECTION - NO FLICKERING
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 import SpotlightCard from "../ui/SpotlightCard";
-import ScrambleText from "../ui/ScrambleText";
-
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as const },
-  },
-};
 
 export default function WhyChooseSection() {
   const t = useTranslations("whyChoose");
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   const reasons = [
-    {
-      icon: BookIcon,
-      key: "scholarship",
-    },
-    {
-      icon: ChipIcon,
-      key: "ai",
-    },
-    {
-      icon: GlobeIcon,
-      key: "database",
-    },
+    { icon: BookIcon, key: "scholarship" },
+    { icon: ChipIcon, key: "ai" },
+    { icon: GlobeIcon, key: "database" },
   ];
 
   return (
-    <section
-      ref={containerRef}
-      className="section bg-bg-secondary relative overflow-hidden"
-    >
+    <section className="section bg-bg-secondary relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container relative z-10">
         {/* Section Header */}
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.span
-            className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
             {t("subtitle")}
-          </motion.span>
+          </span>
           
-          <motion.h2
-            className="text-display-2 font-bold text-text-primary mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <h2 className="text-display-2 font-bold text-text-primary mb-6">
             {t("title")}
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
         {/* Cards Grid */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-6 lg:gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {reasons.map((reason, index) => (
-            <motion.div
-              key={reason.key}
-              variants={cardVariants}
-              className="group"
-            >
+            <div key={reason.key} className="group">
               <SpotlightCard className="h-full p-8">
-                {/* Content */}
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
@@ -111,7 +48,7 @@ export default function WhyChooseSection() {
 
                   {/* Title */}
                   <h3 className="text-xl font-bold text-text-primary mb-4">
-                    <ScrambleText text={t(`reasons.${reason.key}.title`)} hover />
+                    {t(`reasons.${reason.key}.title`)}
                   </h3>
 
                   {/* Description */}
@@ -125,15 +62,14 @@ export default function WhyChooseSection() {
                   {String(index + 1).padStart(2, "0")}
                 </div>
               </SpotlightCard>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
 
-// Icon Components
 function BookIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

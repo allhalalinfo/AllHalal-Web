@@ -39,9 +39,9 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
           duration: 1.0,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           orientation: "vertical",
-          smoothWheel: true,
+      smoothWheel: true,
           wheelMultiplier: 0.8,
-        });
+    });
 
         const raf = (time: number) => {
           lenis?.raf(time);

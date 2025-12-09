@@ -37,15 +37,15 @@ export default function Header() {
     setIsScrolled(currentScrollY > 50);
     
     if (!isMobileMenuOpen) {
-      if (currentScrollY > 100) {
+    if (currentScrollY > 100) {
         if (currentScrollY > lastScrollY.current + 10 && currentScrollY > 200) {
-          setIsHidden(true);
+        setIsHidden(true);
         } else if (currentScrollY < lastScrollY.current - 10) {
-          setIsHidden(false);
-        }
-      } else {
         setIsHidden(false);
       }
+    } else {
+      setIsHidden(false);
+    }
     }
     
     lastScrollY.current = currentScrollY;
@@ -113,7 +113,7 @@ export default function Header() {
           <nav className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link 
-              href="/"
+              href="/" 
               onClick={closeMobileMenu}
               className="text-xl font-bold tracking-tight text-text-primary hover:text-primary transition-colors z-10"
             >
@@ -181,34 +181,34 @@ export default function Header() {
         className={`fixed inset-0 z-[90] bg-bg-primary md:hidden transition-opacity duration-200 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
-      >
+          >
         <nav className="flex flex-col items-start px-6 pt-24 pb-8">
           {/* Navigation Links */}
           <div className="w-full space-y-1 mb-8">
             {navItems.map((item) => (
               <Link
-                key={item.label}
-                href={item.href}
+                  key={item.label}
+                    href={item.href}
                 onClick={closeMobileMenu}
                 className="text-xl font-semibold text-text-primary hover:text-primary block py-3 border-b border-border/50"
-              >
-                {item.label}
-              </Link>
+                  >
+                    {item.label}
+                  </Link>
             ))}
           </div>
           
           {/* Bottom section */}
           <div className="w-full space-y-4">
             <LanguageSwitcher openUpward />
-            <Link
-              href="https://apps.apple.com/app/allhalal/id6504640498"
-              target="_blank"
-              rel="noopener noreferrer"
+                <Link
+                  href="https://apps.apple.com/app/allhalal/id6504640498"
+                  target="_blank"
+                  rel="noopener noreferrer"
               onClick={closeMobileMenu}
               className="btn btn-primary w-full justify-center"
-            >
+                >
               {t("downloadApp")}
-            </Link>
+                </Link>
           </div>
         </nav>
       </div>

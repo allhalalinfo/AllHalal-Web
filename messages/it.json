@@ -1,8 +1,4 @@
 {
-  "metadata": {
-    "title": "AllHalal - Il Tuo Compagno Halal di Fiducia",
-    "description": "Scansiona, verifica e vivi halal con sicurezza. Analisi degli ingredienti con IA, orari di preghiera e sentenze specifiche per madhhab."
-  },
   "nav": {
     "home": "Home",
     "features": "Funzionalità",
@@ -16,15 +12,15 @@
     "title1": "SCANSIONA",
     "title2": "VERIFICA",
     "title3": "FIDATI",
-    "description": "Potenziamo i musulmani di tutto il mondo con la verifica halal alimentata dall'IA. Scansiona qualsiasi prodotto, ottieni sentenze fiqh istantanee adattate al tuo madhhab.",
+    "description": "Potenziare i musulmani di tutto il mondo con la verifica halal basata sull'IA. Scansiona qualsiasi prodotto, ottieni sentenze fiqh istantanee su misura per il tuo madhhab.",
     "ctaAppStore": "App Store",
-    "ctaExplore": "Esplora Funzionalità"
+    "ctaExplore": "Esplora"
   },
   "about": {
-    "subtitle": "IL TUO COMPAGNO HALAL DI FIDUCIA",
-    "title": "Semplificare la Vita Halal",
-    "description": "In un mondo di ingredienti complessi ed etichette poco chiare, AllHalal porta chiarezza. La nostra app alimentata dall'IA analizza istantaneamente i prodotti e fornisce sentenze basate su autentica erudizione islamica.",
-    "mission": "La nostra missione è permettere a ogni musulmano di vivere secondo i propri valori con sicurezza e facilità.",
+    "subtitle": "Informazioni su allhalal.info",
+    "title": "Il Tuo Compagno Halal di Fiducia per la Vita Moderna",
+    "description": "allhalal.info combina l'autentica erudizione islamica con la tecnologia IA all'avanguardia per fornire una verifica halal accurata e affidabile per i musulmani di tutto il mondo.",
+    "mission": "La nostra missione è consentire a ogni musulmano di fare scelte informate su ciò che consuma, guidato da un'erudizione autentica e potenziato da una tecnologia avanzata.",
     "stats": {
       "products": "Prodotti Verificati",
       "languages": "Lingue",
@@ -33,103 +29,103 @@
     }
   },
   "whyChoose": {
-    "subtitle": "PERCHÉ ALLHALAL",
-    "title": "Perché Scegliere AllHalal?",
+    "subtitle": "Perché allhalal.info",
+    "title": "Costruito su Tre Pilastri di Eccellenza",
     "reasons": {
       "scholarship": {
         "title": "Erudizione Autentica",
-        "description": "Le nostre sentenze si basano su fonti islamiche autentiche, con supporto per tutte e quattro le principali scuole di pensiero sunnite più sentenze di consenso generale."
+        "description": "Le nostre sentenze si basano sull'autentica erudizione islamica di tutte e quattro le principali scuole di pensiero sunnite. Ogni classificazione degli ingredienti è rivista secondo i principi fiqh stabiliti."
       },
       "ai": {
         "title": "Tecnologia IA Avanzata",
-        "description": "La nostra IA analizza istantaneamente gli ingredienti, identificando numeri E, additivi e potenziali problemi con notevole precisione."
+        "description": "L'intelligenza artificiale all'avanguardia analizza istantaneamente le liste degli ingredienti, incrociandole con il nostro database completo per fornire uno stato halal accurato in pochi secondi."
       },
       "database": {
         "title": "Database Globale",
-        "description": "Accedi a milioni di prodotti verificati da tutto il mondo, con nuovi prodotti aggiunti quotidianamente dalla nostra comunità e dal nostro team."
+        "description": "Accedi a informazioni halal verificate per oltre 2 milioni di prodotti in tutto il mondo. Il nostro database cresce ogni giorno grazie ai contributi della comunità."
       }
     }
   },
   "features": {
-    "subtitle": "FUNZIONALITÀ POTENTI",
-    "title": "Tutto Ciò di Cui Hai Bisogno",
-    "description": "Dalla scansione istantanea dei codici a barre agli strumenti completi per la preghiera, AllHalal è il tuo compagno completo per uno stile di vita halal.",
+    "subtitle": "Funzionalità",
+    "title": "Tutto Ciò di Cui Hai Bisogno per Vivere Halal",
+    "description": "Funzionalità potenti progettate per rendere la verifica halal semplice, accurata e accessibile.",
+    "premium": "Premium",
     "items": {
       "scan": {
-        "title": "Scansione Ingredienti IA",
-        "description": "Punta la fotocamera verso qualsiasi lista di ingredienti. La nostra IA analizza ogni componente e fornisce una sentenza halal istantanea basata sul tuo madhhab scelto."
+        "title": "Scanner Ingredienti IA",
+        "description": "Scansiona semplicemente il codice a barre di un prodotto o scatta una foto della lista degli ingredienti. La nostra IA avanzata analizza ogni ingrediente e fornisce una verifica istantanea."
       },
       "verified": {
-        "title": "Verifica Prodotti",
-        "description": "Scansiona i codici a barre per verificare istantaneamente i prodotti nel nostro database di milioni di articoli verificati. Ottieni analisi dettagliate e suggerimenti alternativi."
-      },
-      "prayer": {
-        "title": "Orari di Preghiera e Qibla",
-        "description": "Orari di preghiera precisi per la tua posizione, bella bussola Qibla e calendario islamico con date ed eventi importanti."
+        "title": "Verifica Prodotti e Stato Halal",
+        "description": "Ottieni una verifica istantanea per qualsiasi prodotto. Il nostro database completo copre milioni di prodotti in tutto il mondo, con informazioni dettagliate sullo stato halal."
       },
       "cosmetics": {
         "title": "Verifica Cosmetici Halal",
-        "description": "Verifica cosmetici e prodotti di bellezza per la conformità halal. Analizza ingredienti che potrebbero contenere componenti di origine animale o a base di alcol."
+        "description": "Non solo cibo — allhalal.info ti aiuta anche a verificare cosmetici e prodotti di bellezza. Controlla gli ingredienti per componenti di origine animale."
+      },
+      "prayer": {
+        "title": "Orari Preghiera, Qibla e Calendario",
+        "description": "Tutto ciò di cui hai bisogno per la tua pratica islamica quotidiana. Orari di preghiera precisi basati sulla tua posizione, direzione Qibla precisa e calendario Hijri completo."
       },
       "watch": {
         "title": "Compagno Apple Watch",
-        "description": "Ottieni orari di preghiera, direzione Qibla e calendario islamico direttamente sul tuo polso. Non perdere mai una preghiera con le notifiche intelligenti."
+        "description": "Accedi alle funzionalità halal essenziali direttamente dal tuo polso. Scansioni rapide, notifiche di preghiera e direzione Qibla."
       }
-    },
-    "premium": "Premium"
+    }
   },
   "madhhab": {
-    "subtitle": "LA TUA PRATICA. IL TUO MADHHAB.",
-    "title": "Adattato alla Tua Scuola di Pensiero",
-    "description": "AllHalal rispetta la diversità della giurisprudenza islamica. Scegli il tuo madhhab e ricevi sentenze in linea con la tua pratica.",
-    "founder": "Fondata da",
-    "regions": "Regioni",
+    "subtitle": "La Tua Pratica. Il Tuo Madhhab.",
+    "title": "Rispetto per Tutte le Quattro Scuole",
+    "description": "allhalal.info fornisce sentenze secondo il tuo madhhab scelto, onorando la ricca tradizione della giurisprudenza islamica.",
+    "regions": "Regioni Principali",
+    "note": "Seleziona il tuo madhhab preferito nelle impostazioni dell'app per ricevere sentenze personalizzate.",
     "schools": {
       "general": {
         "name": "Generale",
-        "arabicName": "عام",
         "founder": "Comunemente Accettato",
-        "description": "Sentenze universali accettate da tutte le scuole. Perfetto per chi preferisce classificazioni halal ampiamente accettate senza interpretazioni specifiche della scuola.",
+        "description": "Sentenze universali accettate da tutte le scuole. Perfetto per chi preferisce classificazioni halal ampiamente riconosciute.",
         "regions": "Mondiale"
       },
       "hanafi": {
         "name": "Hanafi",
-        "arabicName": "حنفي",
         "founder": "Imam Abu Hanifa",
-        "description": "La più grande scuola di giurisprudenza islamica, seguita da circa il 30% dei musulmani in tutto il mondo. Nota per la sua metodologia sistematica e l'uso estensivo della ragione.",
+        "description": "La più grande scuola di giurisprudenza islamica, seguita da circa il 30% dei musulmani in tutto il mondo.",
         "regions": "Turchia, Asia Centrale, Asia Meridionale, Balcani"
       },
       "shafii": {
         "name": "Shafi'i",
-        "arabicName": "شافعي",
         "founder": "Imam al-Shafi'i",
-        "description": "Nota per la sua metodologia equilibrata tra fonti testuali e ragionamento. Seguita ampiamente nel Sud-est asiatico, Africa orientale e parti del Medio Oriente.",
-        "regions": "Sud-est asiatico, Africa orientale, Yemen"
+        "description": "Nota per la sua metodologia equilibrata tra fonti testuali e ragionamento.",
+        "regions": "Sud-est Asiatico, Africa Orientale, Yemen"
       },
       "maliki": {
         "name": "Maliki",
-        "arabicName": "مالكي",
         "founder": "Imam Malik ibn Anas",
-        "description": "Enfatizza le pratiche della gente di Medina come fonte aggiuntiva. Predominante in Nord e Ovest Africa, e storicamente in Al-Andalus.",
-        "regions": "Marocco, Algeria, Africa occidentale, EAU"
+        "description": "Enfatizza le pratiche del popolo di Medina come fonte aggiuntiva.",
+        "regions": "Marocco, Algeria, Africa Occidentale, EAU"
       },
       "hanbali": {
         "name": "Hanbali",
-        "arabicName": "حنبلي",
         "founder": "Imam Ahmad ibn Hanbal",
-        "description": "Nota per la sua stretta aderenza al Corano e all'Hadith. Seguita principalmente in Arabia Saudita e Qatar, con influenza crescente a livello globale.",
+        "description": "Nota per la sua rigorosa aderenza al Corano e agli Hadith.",
         "regions": "Arabia Saudita, Qatar, Stati del Golfo"
       }
     }
   },
   "cta": {
+    "badge": "Disponibile Ora su iOS",
     "title": "Inizia a Vivere Halal Oggi",
-    "description": "Unisciti a migliaia di musulmani che si affidano ad AllHalal per le loro esigenze quotidiane di verifica halal. Scarica ora e sperimenta la differenza.",
+    "description": "Unisciti a migliaia di musulmani che si affidano a allhalal.info per le loro esigenze quotidiane di verifica halal.",
     "button": "Scarica su App Store",
-    "free": "Download gratuito • Funzionalità premium disponibili"
+    "trust": {
+      "secure": "Sicuro e Privato",
+      "worldwide": "Disponibile in Tutto il Mondo",
+      "rating": "Valutazione 4.9★"
+    }
   },
   "footer": {
-    "description": "Il tuo compagno halal di fiducia. Scansiona, verifica e vivi secondo i tuoi valori con sicurezza.",
+    "description": "Il tuo compagno halal di fiducia. Scansiona, verifica e vivi secondo i tuoi valori con fiducia.",
     "product": "Prodotto",
     "company": "Azienda",
     "legal": "Legale",
@@ -141,115 +137,121 @@
       "aboutUs": "Chi Siamo",
       "contact": "Contatti",
       "support": "Supporto",
-      "privacyPolicy": "Informativa Privacy",
-      "termsOfService": "Termini di Servizio",
+      "privacyPolicy": "Privacy",
+      "termsOfService": "Termini",
       "disclaimer": "Disclaimer"
     },
     "copyright": "Tutti i diritti riservati.",
     "developedBy": "Sviluppato da"
   },
   "support": {
-    "title": "Centro Supporto",
-    "subtitle": "AIUTO E SUPPORTO",
-    "description": "Trova risposte alle domande comuni o contatta il nostro team di supporto.",
-    "searchPlaceholder": "Cerca aiuto...",
+    "subtitle": "Centro Assistenza",
+    "title": "Come possiamo aiutarti?",
+    "description": "Trova risposte alle domande frequenti o contatta il nostro team",
+    "faqTitle": "Domande Frequenti",
+    "ctaTitle": "Hai ancora bisogno di aiuto?",
+    "ctaDescription": "Il nostro team di supporto è qui per assisterti con qualsiasi domanda.",
+    "ctaButton": "Contatta il Supporto",
     "quickLinks": {
-      "title": "Link Rapidi",
       "email": {
         "title": "Supporto Email",
-        "desc": "Ottieni aiuto via email"
+        "desc": "Ottieni aiuto via email",
+        "linkText": "app@allhalal.info"
       },
       "privacy": {
-        "title": "Informativa Privacy",
-        "desc": "Come proteggiamo i tuoi dati"
+        "title": "Informativa sulla Privacy",
+        "desc": "Come proteggiamo i tuoi dati",
+        "linkText": "Leggi informativa"
       },
       "terms": {
         "title": "Termini di Servizio",
-        "desc": "Termini e condizioni d'uso"
+        "desc": "Linee guida per l'uso",
+        "linkText": "Leggi termini"
       },
       "disclaimer": {
         "title": "Disclaimer",
-        "desc": "Informazioni legali importanti"
+        "desc": "Informazioni importanti",
+        "linkText": "Leggi disclaimer"
       }
     },
     "faq": {
-      "title": "Domande Frequenti",
-      "items": {
-        "verification": {
-          "question": "Come verifica AllHalal i prodotti?",
-          "answer": "AllHalal utilizza una combinazione di analisi degli ingredienti alimentata dall'IA e un database completo di oltre 2 milioni di prodotti verificati. Il nostro sistema analizza ingredienti, numeri E e additivi per determinare lo stato halal secondo le linee guida alimentari islamiche."
-        },
-        "madhhab": {
-          "question": "Quale madhhab (scuola di pensiero) segue AllHalal?",
-          "answer": "AllHalal supporta tutte e quattro le principali scuole di giurisprudenza islamica sunnita: Hanafi, Shafi'i, Maliki e Hanbali, più un'opzione Generale per sentenze comunemente accettate. Puoi selezionare il tuo madhhab preferito nelle impostazioni dell'app, e tutte le sentenze saranno adattate di conseguenza."
-        },
-        "languages": {
-          "question": "AllHalal è disponibile nella mia lingua?",
-          "answer": "AllHalal è disponibile in 9 lingue: inglese, francese, tedesco, spagnolo, italiano, olandese, russo, arabo e urdu. L'app rileva automaticamente la lingua del tuo dispositivo."
-        },
-        "accuracy": {
-          "question": "Quanto è preciso lo scanner di codici a barre?",
-          "answer": "Il nostro scanner di codici a barre ha un tasso di riconoscimento del 99%+ per i prodotti nel nostro database. Se un prodotto non viene trovato, puoi usare lo scanner di ingredienti IA per analizzare la lista degli ingredienti direttamente dalla confezione."
-        },
-        "offline": {
-          "question": "Posso usare AllHalal offline?",
-          "answer": "Alcune funzionalità richiedono una connessione internet per la verifica in tempo reale. Tuttavia, i prodotti precedentemente scansionati e le funzionalità di base sono disponibili offline."
-        },
-        "report": {
-          "question": "Come segnalo un elenco prodotti errato?",
-          "answer": "Se trovi un elenco errato, inviaci un'email a app@allhalal.info con il nome del prodotto, il codice a barre e il problema identificato. Il nostro team esamina tutte le segnalazioni entro 48 ore."
-        },
-        "security": {
-          "question": "I miei dati sono sicuri?",
-          "answer": "Sì. Seguiamo pratiche di sicurezza standard del settore inclusa crittografia, archiviazione sicura dei dati e controlli di accesso rigorosi. Non vendiamo mai i tuoi dati personali. Leggi la nostra Informativa Privacy per i dettagli completi."
-        },
-        "delete": {
-          "question": "Come posso eliminare il mio account?",
-          "answer": "Puoi richiedere l'eliminazione dell'account inviando un'email a app@allhalal.info con oggetto \"Richiesta di Eliminazione Account\". Elaboreremo la tua richiesta entro 30 giorni come richiesto dal GDPR."
-        }
+      "howVerify": {
+        "question": "Come verifica i prodotti allhalal.info?",
+        "answer": "allhalal.info utilizza una combinazione di analisi degli ingredienti basata su IA e un database completo di oltre 2 milioni di prodotti verificati."
+      },
+      "madhhab": {
+        "question": "Quale madhhab segue allhalal.info?",
+        "answer": "allhalal.info supporta tutte e quattro le principali scuole sunnite: Hanafi, Shafi'i, Maliki e Hanbali, più un'opzione Generale. Puoi selezionare il tuo madhhab preferito nelle impostazioni."
+      },
+      "languages": {
+        "question": "allhalal.info è disponibile nella mia lingua?",
+        "answer": "allhalal.info è disponibile in 9 lingue: inglese, francese, tedesco, spagnolo, italiano, olandese, russo, arabo e urdu."
+      },
+      "scanner": {
+        "question": "Quanto è accurato lo scanner di codici a barre?",
+        "answer": "Il nostro scanner ha un tasso di riconoscimento del 99%+ per i prodotti nel nostro database."
+      },
+      "offline": {
+        "question": "Posso usare allhalal.info offline?",
+        "answer": "Alcune funzionalità richiedono una connessione Internet. Tuttavia, i prodotti scansionati in precedenza sono disponibili offline."
+      },
+      "report": {
+        "question": "Come segnalo un prodotto errato?",
+        "answer": "Inviaci un'email a app@allhalal.info con il nome del prodotto, il codice a barre e il problema. Il nostro team esamina tutte le segnalazioni entro 48 ore."
+      },
+      "security": {
+        "question": "I miei dati sono sicuri?",
+        "answer": "Sì. Seguiamo le pratiche di sicurezza standard del settore. Non vendiamo mai i tuoi dati personali."
+      },
+      "delete": {
+        "question": "Come posso eliminare il mio account?",
+        "answer": "Invia un'email a app@allhalal.info con oggetto \"Richiesta eliminazione account\". Elaboreremo la richiesta entro 30 giorni."
       }
-    },
-    "contact": {
-      "title": "Hai Ancora Bisogno di Aiuto?",
-      "description": "Il nostro team di supporto è qui per aiutarti con qualsiasi domanda.",
-      "button": "Contatta Supporto"
     }
   },
   "contact": {
-    "title": "Contattaci",
-    "subtitle": "CONTATTI",
-    "description": "Hai domande o feedback? Ci piacerebbe sentirti.",
+    "subtitle": "Contattaci",
+    "title": "Mettiti in Contatto",
+    "description": "Hai una domanda o un feedback? Ci piacerebbe sentirti. Il nostro team risponde in genere entro 24-48 ore.",
     "form": {
-      "name": "Il Tuo Nome",
-      "email": "Indirizzo Email",
-      "subject": "Oggetto",
-      "message": "Il Tuo Messaggio",
-      "submit": "Invia Messaggio",
-      "sending": "Invio in corso...",
-      "success": "Messaggio inviato con successo!",
-      "error": "Invio del messaggio fallito. Riprova."
-    },
-    "info": {
+      "name": "Nome",
+      "namePlaceholder": "Il tuo nome",
       "email": "Email",
-      "response": "Di solito rispondiamo entro 24-48 ore"
-    }
-  },
-  "legal": {
-    "privacy": {
-      "title": "Informativa Privacy",
-      "lastUpdated": "Ultimo aggiornamento"
+      "emailPlaceholder": "tua@email.com",
+      "category": "Categoria",
+      "message": "Messaggio",
+      "messagePlaceholder": "Come possiamo aiutarti?",
+      "submit": "Invia Messaggio",
+      "sending": "Invio..."
     },
-    "terms": {
-      "title": "Termini di Servizio",
-      "lastUpdated": "Ultimo aggiornamento"
+    "categories": {
+      "general": "Richiesta Generale",
+      "technical": "Supporto Tecnico",
+      "feedback": "Feedback e Suggerimenti",
+      "bug": "Segnalazione Bug",
+      "business": "Richiesta Commerciale",
+      "religious": "Domanda Religiosa"
     },
-    "disclaimer": {
-      "title": "Disclaimer",
-      "lastUpdated": "Ultimo aggiornamento"
+    "success": {
+      "title": "Messaggio Inviato!",
+      "description": "Grazie per averci contattato. Ti risponderemo presto.",
+      "button": "Invia un Altro Messaggio"
+    },
+    "sidebar": {
+      "directContact": "Contatto Diretto",
+      "helpfulLinks": "Link Utili",
+      "privacy": "Privacy",
+      "privacyDesc": "Come proteggiamo i tuoi dati",
+      "terms": "Termini",
+      "termsDesc": "I nostri termini e condizioni",
+      "disclaimer": "Disclaimer",
+      "disclaimerDesc": "Info legali importanti",
+      "responseTime": "Tempo di Risposta",
+      "responseTimeDesc": "Rispondiamo in genere entro 24-48 ore lavorative."
     }
   },
   "common": {
-    "learnMore": "Scopri di Più",
+    "learnMore": "Scopri di più",
     "getStarted": "Inizia",
     "close": "Chiudi",
     "menu": "Menu",

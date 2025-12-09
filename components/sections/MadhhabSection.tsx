@@ -2,19 +2,15 @@
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * MADHHAB SECTION - Four Schools of Islamic Jurisprudence
+ * MADHHAB SECTION - NO FLICKERING
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-// Madhhab keys for translations
 const madhhabKeys = ["general", "hanafi", "shafii", "maliki", "hanbali"] as const;
 
-// Madhhab config (non-translatable data)
 const madhhabConfig = {
   general: { arabicName: "عام", color: "from-primary" },
   hanafi: { arabicName: "حنفي", color: "from-emerald-500" },
@@ -23,36 +19,11 @@ const madhhabConfig = {
   hanbali: { arabicName: "حنبلي", color: "from-rose-500" },
 };
 
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as const },
-  },
-};
-
 export default function MadhhabSection() {
   const t = useTranslations("madhhab");
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section
-      ref={containerRef}
-      id="madhhab"
-      className="section bg-bg-secondary relative overflow-hidden"
-    >
+    <section id="madhhab" className="section bg-bg-secondary relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -64,46 +35,22 @@ export default function MadhhabSection() {
         {/* Two column: Header + Screenshot */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
           {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.span
-              className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+          <div>
+            <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
               {t("subtitle")}
-            </motion.span>
+            </span>
             
-            <motion.h2
-              className="text-display-2 font-bold text-text-primary mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
+            <h2 className="text-display-2 font-bold text-text-primary mb-6">
               {t("title")}
-            </motion.h2>
+            </h2>
             
-            <motion.p
-              className="text-xl text-text-secondary"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+            <p className="text-xl text-text-secondary">
               {t("description")}
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           {/* Madhhab Screenshot */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
+          <div className="relative">
             <div className="relative mx-auto max-w-[280px]">
               <div className="absolute inset-0 bg-gradient-radial from-amber-500/20 to-transparent blur-3xl scale-150" />
               <div className="relative bg-bg-card rounded-[3rem] p-3 border border-border shadow-2xl">
@@ -119,32 +66,23 @@ export default function MadhhabSection() {
                 <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-6 bg-bg-card rounded-full" />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Madhhab Cards Grid - 5 options */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
+        {/* Madhhab Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {madhhabKeys.map((key) => {
             const config = madhhabConfig[key];
             return (
-              <motion.div
-                key={key}
-                variants={cardVariants}
-                className="group relative"
-              >
-                <div className="relative h-full p-6 rounded-2xl bg-bg-card border border-border overflow-hidden transition-all duration-500 hover:border-primary/30 hover:shadow-glow-sm">
+              <div key={key} className="group relative">
+                <div className="relative h-full p-6 rounded-2xl bg-bg-card border border-border overflow-hidden transition-colors duration-300 hover:border-primary/30">
                   {/* Arabic calligraphy watermark */}
-                  <div className="absolute -right-4 -top-4 text-8xl font-bold text-white/5 select-none transition-all duration-500 group-hover:text-primary/10 group-hover:scale-110">
+                  <div className="absolute -right-4 -top-4 text-8xl font-bold text-white/5 select-none group-hover:text-primary/10 transition-colors duration-300">
                     {config.arabicName}
                   </div>
 
                   {/* Gradient accent */}
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${config.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${config.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
                   {/* Content */}
                   <div className="relative z-10">
@@ -167,20 +105,15 @@ export default function MadhhabSection() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
 
         {/* Bottom note */}
-        <motion.p
-          className="text-center text-text-muted mt-12 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
+        <p className="text-center text-text-muted mt-12 max-w-2xl mx-auto">
           {t("note")}
-        </motion.p>
+        </p>
       </div>
     </section>
   );

@@ -614,7 +614,7 @@ body {
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   MOBILE PERFORMANCE - AGGRESSIVE OPTIMIZATION
+   MOBILE PERFORMANCE - NO FLICKERING
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 /* Reduce motion for users who prefer it */
@@ -627,42 +627,27 @@ body {
   }
 }
 
-/* MOBILE: Disable ALL complex animations */
+/* MOBILE: Simple, fast, no flickering */
 @media (max-width: 768px) {
-  /* Kill all animations and transforms */
-  * {
-    animation-duration: 0s !important;
-    animation-delay: 0s !important;
-    transition-duration: 0.1s !important;
-    transition-delay: 0s !important;
-  }
-  
-  /* Disable transforms that cause repaints */
-  [style*="transform"],
-  [style*="opacity"] {
-    transform: none !important;
-    opacity: 1 !important;
-  }
-  
-  /* Disable will-change everywhere */
+  /* Disable will-change to reduce GPU pressure */
   * {
     will-change: auto !important;
   }
   
-  /* Prevent content shifts */
-  img, video, canvas {
-    content-visibility: auto;
+  /* Faster transitions */
+  * {
+    transition-duration: 0.15s !important;
   }
   
   /* Simple tap feedback */
-  * {
-    -webkit-tap-highlight-color: rgba(0, 208, 148, 0.1);
+  button:active, a:active {
+    opacity: 0.8;
   }
 }
 
-/* Touch devices - disable hover effects */
+/* Touch devices */
 @media (pointer: coarse) {
-  *:hover {
-    transform: none !important;
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }

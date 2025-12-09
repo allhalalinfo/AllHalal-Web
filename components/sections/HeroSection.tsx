@@ -2,23 +2,20 @@
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * HERO SECTION - Responsive Layout
+ * HERO SECTION - NO FLICKERING
  * ═══════════════════════════════════════════════════════════════════════════════
  * 
- * Layout:
- * - Desktop (lg+): Two columns [Text | Animation]
- * - Tablet/Mobile: Stacked [Text above, Animation below]
+ * MOBILE: No Framer Motion animations - content renders immediately
+ * DESKTOP: Smooth animations with GSAP pin effect
  * 
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import ScrambleText from "../ui/ScrambleText";
 import MagneticButton from "../ui/MagneticButton";
 
 const ParticleAnimation = dynamic(() => import("@/components/three/ParticleBarcode"), {
@@ -34,9 +31,13 @@ export default function HeroSection() {
   const t = useTranslations("hero");
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Only apply pin effect on desktop
+    // Mark as loaded to trigger CSS animations on desktop
+    setIsLoaded(true);
+
+    // Only apply GSAP pin effect on desktop
     const mm = gsap.matchMedia();
     
     mm.add("(min-width: 1024px)", () => {
@@ -74,55 +75,34 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative bg-bg-primary"
     >
-      {/* Main Content Container */}
       <div ref={contentRef} className="container">
-        
-        {/* Desktop: Grid Layout | Mobile: Flex Column */}
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-8 min-h-screen lg:items-center pt-28 pb-8 lg:pt-0 lg:pb-0">
-          
-          {/* TEXT COLUMN */}
+
+          {/* TEXT COLUMN - No motion.div, just CSS */}
           <div className="relative z-10 flex flex-col justify-center order-1">
             {/* Subtitle */}
-            <motion.p
-              className="hero-subtitle mb-3 md:mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            <p 
+              className={`hero-subtitle mb-3 md:mb-6 ${isLoaded ? 'opacity-100' : 'opacity-100'}`}
             >
               {t("subtitle")}
-            </motion.p>
+            </p>
 
             {/* Main Title */}
-            <motion.h1
-              className="hero-title text-text-primary mb-4 md:mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <span className="block"><ScrambleText text={t("title1")} delay={0.5} /></span>
-              <span className="block"><ScrambleText text={t("title2")} delay={0.7} /></span>
+            <h1 className="hero-title text-text-primary mb-4 md:mb-8">
+              <span className="block">{t("title1")}</span>
+              <span className="block">{t("title2")}</span>
               <span className="block">
-                <span className="text-highlight"><ScrambleText text={t("title3")} delay={0.9} /></span>
+                <span className="text-highlight">{t("title3")}</span>
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Description */}
-            <motion.p
-              className="text-base md:text-lg text-text-secondary max-w-lg mb-6 md:mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
+            <p className="text-base md:text-lg text-text-secondary max-w-lg mb-6 md:mb-10">
               {t("description")}
-            </motion.p>
+            </p>
 
             {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-wrap gap-3 md:gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-            >
+            <div className="flex flex-wrap gap-3 md:gap-4">
               <MagneticButton
                 href="https://apps.apple.com/app/allhalal/id6504640498"
                 target="_blank"
@@ -142,24 +122,15 @@ export default function HeroSection() {
                 {t("ctaExplore")}
                 <ArrowDownIcon className="w-4 h-4 transition-transform group-hover:translate-y-1" />
               </MagneticButton>
-            </motion.div>
+            </div>
           </div>
 
           {/* ANIMATION COLUMN */}
-          <motion.div 
-            className="relative order-2 w-full flex items-center justify-center pb-6 lg:py-0"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-          >
-            {/* 
-              Mobile: Compact, full width
-              Desktop: Larger, constrained size 
-            */}
+          <div className="relative order-2 w-full flex items-center justify-center pb-6 lg:py-0">
             <div className="w-full max-w-[350px] aspect-[2.5/1] sm:max-w-[450px] sm:aspect-[2.3/1] lg:max-w-[550px] lg:aspect-auto lg:h-[55vh] lg:max-h-[450px]">
               <ParticleAnimation />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

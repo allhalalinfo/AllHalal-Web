@@ -2,17 +2,15 @@
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * CONTACT PAGE
+ * CONTACT PAGE - NO FLICKERING
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-// Category keys for translation
 const categoryKeys = ["general", "technical", "feedback", "bug", "business", "religious"] as const;
 
 export default function ContactPage() {
@@ -49,48 +47,23 @@ export default function ContactPage() {
         <div className="section">
           <div className="container">
             {/* Page Header */}
-            <motion.div
-              className="text-center max-w-2xl mx-auto mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <motion.span
-                className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
                 {t("subtitle")}
-              </motion.span>
+              </span>
               
-              <motion.h1
-                className="text-display-2 font-bold text-text-primary mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
+              <h1 className="text-display-2 font-bold text-text-primary mb-4">
                 {t("title")}
-              </motion.h1>
+              </h1>
               
-              <motion.p
-                className="text-xl text-text-secondary"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
+              <p className="text-xl text-text-secondary">
                 {t("description")}
-              </motion.p>
-            </motion.div>
+              </p>
+            </div>
 
             <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
               {/* Contact Form */}
-              <motion.div
-                className="lg:col-span-3"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
+              <div className="lg:col-span-3">
                 {!isSubmitted ? (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
@@ -165,23 +138,11 @@ export default function ContactPage() {
                       disabled={isSubmitting}
                       className="btn btn-primary btn-lg w-full disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isSubmitting ? (
-                        <span className="flex items-center gap-2">
-                          <LoadingIcon className="w-5 h-5 animate-spin" />
-                          {t("form.sending")}
-                        </span>
-                      ) : (
-                        t("form.submit")
-                      )}
+                      {isSubmitting ? t("form.sending") : t("form.submit")}
                     </button>
                   </form>
                 ) : (
-                  <motion.div
-                    className="text-center py-12"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
+                  <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
                       <CheckIcon className="w-8 h-8 text-primary" />
                     </div>
@@ -200,17 +161,12 @@ export default function ContactPage() {
                     >
                       {t("success.button")}
                     </button>
-                  </motion.div>
+                  </div>
                 )}
-              </motion.div>
+              </div>
 
               {/* Sidebar */}
-              <motion.div
-                className="lg:col-span-2 space-y-8"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
+              <div className="lg:col-span-2 space-y-8">
                 <div className="p-6 rounded-xl bg-bg-card border border-border">
                   <h3 className="text-lg font-semibold text-text-primary mb-4">
                     {t("sidebar.directContact")}
@@ -231,24 +187,9 @@ export default function ContactPage() {
                     {t("sidebar.helpfulLinks")}
                   </h3>
                   <div className="space-y-3">
-                    <QuickLink
-                      href="/legal/privacy-policy"
-                      icon={ShieldIcon}
-                      title={t("sidebar.privacy")}
-                      desc={t("sidebar.privacyDesc")}
-                    />
-                    <QuickLink
-                      href="/legal/terms-of-service"
-                      icon={DocumentIcon}
-                      title={t("sidebar.terms")}
-                      desc={t("sidebar.termsDesc")}
-                    />
-                    <QuickLink
-                      href="/legal/disclaimer"
-                      icon={AlertIcon}
-                      title={t("sidebar.disclaimer")}
-                      desc={t("sidebar.disclaimerDesc")}
-                    />
+                    <QuickLink href="/legal/privacy-policy" icon={ShieldIcon} title={t("sidebar.privacy")} desc={t("sidebar.privacyDesc")} />
+                    <QuickLink href="/legal/terms-of-service" icon={DocumentIcon} title={t("sidebar.terms")} desc={t("sidebar.termsDesc")} />
+                    <QuickLink href="/legal/disclaimer" icon={AlertIcon} title={t("sidebar.disclaimer")} desc={t("sidebar.disclaimerDesc")} />
                   </div>
                 </div>
 
@@ -257,7 +198,7 @@ export default function ContactPage() {
                     <strong className="text-primary">{t("sidebar.responseTime")}:</strong> {t("sidebar.responseTimeDesc")}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -269,15 +210,10 @@ export default function ContactPage() {
 
 function QuickLink({ href, icon: Icon, title, desc }: { href: string; icon: React.FC<{ className?: string }>; title: string; desc: string }) {
   return (
-    <a
-      href={href}
-      className="flex items-start gap-3 p-4 rounded-lg bg-bg-card border border-border hover:border-primary/30 transition-colors group"
-    >
+    <a href={href} className="flex items-start gap-3 p-4 rounded-lg bg-bg-card border border-border hover:border-primary/30 transition-colors group">
       <Icon className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
       <div>
-        <div className="font-medium text-text-primary group-hover:text-primary transition-colors">
-          {title}
-        </div>
+        <div className="font-medium text-text-primary group-hover:text-primary transition-colors">{title}</div>
         <div className="text-sm text-text-muted">{desc}</div>
       </div>
     </a>
@@ -312,14 +248,6 @@ function AlertIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-    </svg>
-  );
-}
-
-function LoadingIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
     </svg>
   );
 }

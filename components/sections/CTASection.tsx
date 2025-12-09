@@ -2,98 +2,47 @@
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * CTA SECTION - Final Call to Action
+ * CTA SECTION - NO FLICKERING
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 
 export default function CTASection() {
   const t = useTranslations("cta");
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section
-      ref={containerRef}
-      className="section-lg bg-bg-primary relative overflow-hidden"
-    >
-      {/* Animated background elements */}
+    <section className="section-lg bg-bg-primary relative overflow-hidden">
+      {/* Static background glow */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30"
           style={{
             background: "radial-gradient(circle, rgba(0, 208, 148, 0.15) 0%, transparent 70%)",
           }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-primary/10 blur-2xl"
-          animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-primary/5 blur-3xl"
-          animate={{ y: [0, 40, 0], x: [0, -30, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
       <div className="container relative z-10">
-        <motion.div
-          className="max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
+        <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8">
+            <span className="w-2 h-2 rounded-full bg-primary" />
             <span className="text-sm text-primary font-medium">{t("badge")}</span>
-          </motion.div>
+          </div>
 
           {/* Headline */}
-          <motion.h2
-            className="text-display-1 font-bold text-text-primary mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <h2 className="text-display-1 font-bold text-text-primary mb-6">
             {t("title")}
-          </motion.h2>
+          </h2>
 
           {/* Description */}
-          <motion.p
-            className="text-xl text-text-secondary mb-10 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          <p className="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
             {t("description")}
-          </motion.p>
+          </p>
 
           {/* Download Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
+          <div>
             <a
               href="https://apps.apple.com/app/allhalal/id6504640498"
               target="_blank"
@@ -102,39 +51,28 @@ export default function CTASection() {
             >
               <AppleIcon className="w-6 h-6" />
               {t("button")}
-              <motion.span
-                className="inline-block"
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
+              <span className="inline-block">→</span>
             </a>
-          </motion.div>
+          </div>
 
           {/* Trust Badges */}
-          <motion.div
-            className="flex flex-wrap justify-center gap-8 mt-12"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <TrustBadge icon={ShieldIcon} text={t("trust.secure")} />
-            <TrustBadge icon={GlobeIcon} text={t("trust.worldwide")} />
-            <TrustBadge icon={StarIcon} text={t("trust.rating")} />
-          </motion.div>
-        </motion.div>
+          <div className="flex flex-wrap justify-center gap-8 mt-12">
+            <div className="flex items-center gap-2 text-text-tertiary">
+              <ShieldIcon className="w-5 h-5 text-primary" />
+              <span className="text-sm">{t("trust.secure")}</span>
+            </div>
+            <div className="flex items-center gap-2 text-text-tertiary">
+              <GlobeIcon className="w-5 h-5 text-primary" />
+              <span className="text-sm">{t("trust.worldwide")}</span>
+            </div>
+            <div className="flex items-center gap-2 text-text-tertiary">
+              <StarIcon className="w-5 h-5 text-primary" />
+              <span className="text-sm">{t("trust.rating")}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-  );
-}
-
-function TrustBadge({ icon: Icon, text }: { icon: React.FC<{ className?: string }>; text: string }) {
-  return (
-    <div className="flex items-center gap-2 text-text-tertiary">
-      <Icon className="w-5 h-5 text-primary" />
-      <span className="text-sm">{text}</span>
-    </div>
   );
 }
 
