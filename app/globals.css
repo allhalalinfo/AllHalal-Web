@@ -612,3 +612,59 @@ body {
    2xl: 1536px
    
    ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MOBILE ANIMATION OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* GPU acceleration for animated elements */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Disable complex animations on mobile for performance */
+  .section,
+  .container {
+    transform: none !important;
+    will-change: auto;
+  }
+  
+  /* Simpler transitions on mobile */
+  * {
+    transition-duration: 0.15s !important;
+  }
+  
+  /* Prevent layout shifts */
+  img {
+    content-visibility: auto;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  /* Faster hover states for touch */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Remove hover animations on touch devices */
+  .group:hover .group-hover\\:translate-x-1,
+  .group:hover .group-hover\\:translate-y-1 {
+    transform: none;
+  }
+}

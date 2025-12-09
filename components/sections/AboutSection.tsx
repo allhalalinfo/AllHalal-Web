@@ -4,27 +4,12 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  * ABOUT SECTION - Your Trusted Halal Companion
  * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Features:
- * - Large heading with scroll reveal
- * - Statistics with animated counters
- * - Hero woman image showcase
- * - Staggered animations
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-
-// Statistics data
-const stats = [
-  { value: 2000000, suffix: "+", label: "Products Verified" },
-  { value: 9, suffix: "", label: "Languages" },
-  { value: 5, suffix: "", label: "Madhhab Options" },
-  { value: 99, suffix: "%", label: "Accuracy Rate" },
-];
 
 // Animated counter component
 function AnimatedCounter({ value, suffix, duration = 2 }: { value: number; suffix: string; duration?: number }) {
@@ -67,8 +52,17 @@ function AnimatedCounter({ value, suffix, duration = 2 }: { value: number; suffi
 }
 
 export default function AboutSection() {
+  const t = useTranslations("about");
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
+  // Statistics with translations
+  const stats = [
+    { value: 2000000, suffix: "+", label: t("stats.products") },
+    { value: 9, suffix: "", label: t("stats.languages") },
+    { value: 5, suffix: "", label: t("stats.madhhab") },
+    { value: 99, suffix: "%", label: t("stats.accuracy") },
+  ];
 
   return (
     <section
@@ -94,7 +88,7 @@ export default function AboutSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              About AllHalal
+              {t("subtitle")}
             </motion.span>
             
             <motion.h2
@@ -103,8 +97,7 @@ export default function AboutSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Your Trusted Halal Companion for{" "}
-              <span className="text-gradient">Modern Living</span>
+              {t("title")}
             </motion.h2>
             
             <motion.p
@@ -113,9 +106,7 @@ export default function AboutSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              AllHalal combines authentic Islamic scholarship with cutting-edge AI technology 
-              to provide accurate, reliable halal verification for Muslims worldwide. 
-              Our mission is to make living a halal lifestyle effortless and accessible.
+              {t("description")}
             </motion.p>
           </motion.div>
 
@@ -215,18 +206,8 @@ export default function AboutSection() {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              &ldquo;Empowering Muslims worldwide to make informed choices 
-              about what they consume, guided by authentic scholarship 
-              and powered by advanced technology.&rdquo;
+              &ldquo;{t("mission")}&rdquo;
             </motion.blockquote>
-            <motion.p
-              className="text-text-muted"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 1 }}
-            >
-              — AllHalal Mission Statement
-            </motion.p>
           </div>
         </motion.div>
       </div>

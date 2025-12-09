@@ -4,47 +4,13 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  * WHY CHOOSE SECTION - Three Feature Cards
  * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Features:
- * - Three horizontally aligned cards
- * - Hover effects with glow
- * - Staggered reveal animations
- * - Icon animations
- * 
- * Based on hatchet.com.au services section layout
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 import SpotlightCard from "../ui/SpotlightCard";
 import ScrambleText from "../ui/ScrambleText";
-
-// Why choose data
-const reasons = [
-  {
-    icon: BookIcon,
-    title: "Authentic Scholarship",
-    description:
-      "Our rulings are based on authentic Islamic scholarship across all four major Sunni schools of thought (madhahib). Every ingredient classification is reviewed against established fiqh principles.",
-    features: ["Hanafi, Shafi'i, Maliki, Hanbali", "Scholarly-reviewed database", "Source citations available"],
-  },
-  {
-    icon: ChipIcon,
-    title: "Advanced AI Technology",
-    description:
-      "Cutting-edge artificial intelligence analyzes ingredient lists instantly, cross-referencing against our comprehensive database to provide accurate halal status in seconds.",
-    features: ["Real-time barcode scanning", "AI ingredient analysis", "Continuous learning system"],
-  },
-  {
-    icon: GlobeIcon,
-    title: "Global Database",
-    description:
-      "Access verified halal information for over 2 million products worldwide. Our database grows daily with community contributions and expert verifications.",
-    features: ["2M+ products verified", "50+ countries covered", "Daily database updates"],
-  },
-];
 
 // Animation variants
 const containerVariants = {
@@ -68,8 +34,24 @@ const cardVariants = {
 };
 
 export default function WhyChooseSection() {
+  const t = useTranslations("whyChoose");
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
+  const reasons = [
+    {
+      icon: BookIcon,
+      key: "scholarship",
+    },
+    {
+      icon: ChipIcon,
+      key: "ai",
+    },
+    {
+      icon: GlobeIcon,
+      key: "database",
+    },
+  ];
 
   return (
     <section
@@ -93,7 +75,7 @@ export default function WhyChooseSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Why Choose AllHalal
+            {t("subtitle")}
           </motion.span>
           
           <motion.h2
@@ -102,8 +84,7 @@ export default function WhyChooseSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Built on Three Pillars of{" "}
-            <span className="text-gradient">Excellence</span>
+            {t("title")}
           </motion.h2>
         </motion.div>
 
@@ -116,7 +97,7 @@ export default function WhyChooseSection() {
         >
           {reasons.map((reason, index) => (
             <motion.div
-              key={reason.title}
+              key={reason.key}
               variants={cardVariants}
               className="group"
             >
@@ -130,26 +111,13 @@ export default function WhyChooseSection() {
 
                   {/* Title */}
                   <h3 className="text-xl font-bold text-text-primary mb-4">
-                    <ScrambleText text={reason.title} hover />
+                    <ScrambleText text={t(`reasons.${reason.key}.title`)} hover />
                   </h3>
 
                   {/* Description */}
-                  <p className="text-text-secondary mb-6 leading-relaxed">
-                    {reason.description}
+                  <p className="text-text-secondary leading-relaxed">
+                    {t(`reasons.${reason.key}.description`)}
                   </p>
-
-                  {/* Features List */}
-                  <ul className="space-y-2">
-                    {reason.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-center gap-2 text-sm text-text-tertiary"
-                      >
-                        <CheckIcon className="w-4 h-4 text-primary flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
 
                 {/* Card number */}
@@ -189,12 +157,3 @@ function GlobeIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M5 13l4 4L19 7" />
-    </svg>
-  );
-}
-

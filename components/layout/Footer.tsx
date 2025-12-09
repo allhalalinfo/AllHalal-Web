@@ -152,7 +152,7 @@ export default function Footer() {
         <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-text-muted text-sm">
-              © {new Date().getFullYear()} AllHalal. {t("copyright")}
+              © {new Date().getFullYear()} allhalal.info. {t("copyright")}
             </p>
             <p className="text-text-muted text-sm">
               {t("developedBy")}{" "}
