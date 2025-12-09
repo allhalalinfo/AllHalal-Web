@@ -79,7 +79,7 @@ export default function Header() {
       {/* Main Header */}
       <motion.header
         className={`fixed top-0 left-0 right-0 z-fixed transition-all duration-300 ${
-          isScrolled ? "bg-bg-primary/90 backdrop-blur-xl border-b border-border" : "bg-transparent"
+          isScrolled ? "bg-bg-primary/90 backdrop-blur-xl shadow-sm" : "bg-transparent"
         }`}
         initial={{ y: 0 }}
         animate={{ y: isHidden ? -100 : 0 }}
@@ -92,7 +92,7 @@ export default function Header() {
               href="/" 
               className="text-xl font-bold tracking-tight text-text-primary hover:text-primary transition-colors"
             >
-              ALLHALAL
+              allhalal.info
             </Link>
 
             {/* Desktop Navigation */}
