@@ -4,7 +4,7 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-export const locales = ['en', 'fr', 'de', 'es', 'it', 'nl'] as const;
+export const locales = ['en', 'fr', 'de', 'es', 'it', 'nl', 'ru'] as const;
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'en';
@@ -16,6 +16,7 @@ export const localeNames: Record<Locale, string> = {
   es: 'Español',
   it: 'Italiano',
   nl: 'Nederlands',
+  ru: 'Русский',
 };
 
 export const localeFlags: Record<Locale, string> = {
@@ -25,4 +26,5 @@ export const localeFlags: Record<Locale, string> = {
   es: '🇪🇸',
   it: '🇮🇹',
   nl: '🇳🇱',
+  ru: '🇷🇺',
 };
