@@ -4,24 +4,23 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   
-  // A+ Grade CSP - Ultra-strict policy with nonce-based scripts
+  // CSP - Allow Three.js WebGL rendering (requires unsafe-eval for shaders)
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://*.vercel-insights.com https://va.vercel-scripts.com;
-    style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com;
+    script-src 'self' 'unsafe-eval' 'nonce-${nonce}' 'strict-dynamic' https://*.vercel-insights.com https://va.vercel-scripts.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' https: data: blob:;
     font-src 'self' https://fonts.gstatic.com data:;
     connect-src 'self' https://*.vercel-insights.com;
     media-src 'none';
     object-src 'none';
-    child-src 'none';
-    worker-src 'self';
+    child-src 'self' blob:;
+    worker-src 'self' blob:;
     frame-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
     manifest-src 'self';
-    block-all-mixed-content;
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
 
@@ -57,13 +56,13 @@ export function middleware(request: NextRequest) {
     'screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()'
   );
 
-  // Additional security headers for A+ grade
+  // Additional security headers
   response.headers.set('X-DNS-Prefetch-Control', 'off');
   response.headers.set('X-Download-Options', 'noopen');
   response.headers.set('X-Permitted-Cross-Domain-Policies', 'none');
-  response.headers.set('Cross-Origin-Embedder-Policy', 'require-corp');
+  // Note: Cross-Origin-Embedder-Policy disabled for WebGL/Three.js compatibility
   response.headers.set('Cross-Origin-Opener-Policy', 'same-origin');
-  response.headers.set('Cross-Origin-Resource-Policy', 'same-origin');
+  response.headers.set('Cross-Origin-Resource-Policy', 'cross-origin');
 
   // Enforce HTTPS in production
   if (process.env.NODE_ENV === 'production' && request.headers.get('x-forwarded-proto') !== 'https') {

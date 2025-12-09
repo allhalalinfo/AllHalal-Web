@@ -1,86 +1,180 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+
+/**
+ * Header Component
+ * 
+ * Sticky header with:
+ * - Logo
+ * - Navigation links (Features, Legal, Contact)
+ * - CTA button
+ * - Mobile hamburger menu
+ * - Backdrop blur effect on scroll
+ * 
+ * Inspired by hatchet.com.au navigation style.
+ */
+
+const navLinks = [
+  { href: '/#features', label: 'Features' },
+  { href: '/legal', label: 'Legal' },
+  { href: '/contact', label: 'Contact' },
+];
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Блокировать scroll когда меню открыто
+  // Handle scroll
   useEffect(() => {
-    if (isMenuOpen) {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     }
-    
     return () => {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     };
-  }, [isMenuOpen]);
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-  };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
-      <header className="header">
+      <header
+        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
+          isScrolled
+            ? 'bg-bg-primary/90 backdrop-blur-xl border-b border-white/5'
+            : 'bg-transparent'
+        }`}
+      >
         <div className="container-wide">
-          <div className="header-content-new">
-            <a href="/" className="logo">ALLHALAL</a>
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link 
+              href="/" 
+              className="text-sm font-semibold tracking-[0.1em] text-white hover:text-primary transition-colors"
+            >
+              ALLHALAL
+            </Link>
             
             {/* Desktop Navigation */}
-            <nav className="nav-new">
-              <a href="/#features">Features</a>
-              <span className="nav-divider"></span>
-              <a href="/legal">Legal</a>
-              <span className="nav-divider"></span>
-              <a href="/contact">Contact</a>
+            <nav className="hidden md:flex items-center gap-6">
+              {navLinks.map((link, index) => (
+                <div key={link.href} className="flex items-center gap-6">
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/60 hover:text-white transition-colors whitespace-nowrap"
+                  >
+                    {link.label}
+                  </Link>
+                  {index < navLinks.length - 1 && (
+                    <span className="w-px h-3 bg-white/10" />
+                  )}
+                </div>
+              ))}
             </nav>
             
-            <a href="/coming-soon" className="btn-download-new">Download iOS</a>
+            {/* CTA Button */}
+            <Link
+              href="/coming-soon"
+              className="hidden md:flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-bg-primary bg-primary rounded-lg hover:bg-primary-light transition-all hover:-translate-y-0.5 hover:shadow-glow-sm"
+            >
+              Download iOS
+            </Link>
             
             {/* Mobile Menu Button */}
             <button 
-              className="mobile-menu-toggle"
-              onClick={toggleMenu}
+              className="md:hidden relative w-10 h-10 flex items-center justify-center"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
-              aria-expanded={isMenuOpen}
-              type="button"
+              aria-expanded={isMobileMenuOpen}
             >
-              <span className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
+              <div className="flex flex-col gap-1.5 w-6">
+                <motion.span
+                  className="block h-0.5 bg-primary rounded-full origin-center"
+                  animate={{
+                    rotate: isMobileMenuOpen ? 45 : 0,
+                    y: isMobileMenuOpen ? 8 : 0,
+                  }}
+                  transition={{ duration: 0.2 }}
+                />
+                <motion.span
+                  className="block h-0.5 bg-primary rounded-full"
+                  animate={{ opacity: isMobileMenuOpen ? 0 : 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <motion.span
+                  className="block h-0.5 bg-primary rounded-full origin-center"
+                  animate={{
+                    rotate: isMobileMenuOpen ? -45 : 0,
+                    y: isMobileMenuOpen ? -8 : 0,
+                  }}
+                  transition={{ duration: 0.2 }}
+                />
+              </div>
             </button>
           </div>
         </div>
       </header>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div 
-          className="mobile-menu-overlay active"
-          onClick={closeMenu}
-        >
-          <nav className="mobile-menu" onClick={(e) => e.stopPropagation()}>
-          <a href="/coming-soon" className="mobile-menu-download">
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 z-[999] bg-black/90 backdrop-blur-xl md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            
+            {/* Menu */}
+            <motion.nav
+              className="fixed top-[88px] right-4 left-4 z-[1000] bg-bg-tertiary border border-primary/30 rounded-2xl p-6 md:hidden"
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* Download button */}
+              <Link
+                href="/coming-soon"
+                className="flex items-center justify-center gap-2 w-full px-5 py-3 mb-4 text-sm font-semibold text-bg-primary bg-primary rounded-xl hover:bg-primary-light transition-all"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
             Download iOS
-          </a>
-            <a href="/#features" onClick={closeMenu}>Features</a>
-            <a href="/legal" onClick={closeMenu}>Legal</a>
-            <a href="/contact" onClick={closeMenu}>Contact</a>
-          </nav>
+              </Link>
+              
+              {/* Nav links */}
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="px-4 py-3 text-lg font-medium text-white hover:text-primary hover:bg-white/5 rounded-lg transition-all"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
         </div>
+            </motion.nav>
+          </>
       )}
+      </AnimatePresence>
     </>
   );
 }

@@ -1,50 +1,76 @@
-import type { Metadata } from "next";
-import { Inter, Amiri, Crimson_Pro } from "next/font/google";
-import Script from "next/script";
+/**
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * ROOT LAYOUT - AllHalal Marketing Website
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * 
+ * This is the root layout that wraps all pages.
+ * It includes:
+ * - Global fonts (Inter)
+ * - Smooth scroll provider (Lenis)
+ * - Global styles
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════════
+ */
 
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import Noise from "@/components/ui/Noise";
+
+// Inter font with all weights
 const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
-});
-
-const amiri = Amiri({
-  subsets: ["latin", "arabic"],
-  weight: ["400", "700"],
-  variable: "--font-amiri",
-});
-
-const crimsonPro = Crimson_Pro({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-crimson",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "AllHalal - The Most Advanced Halal Scanner in the World",
-  description: "AllHalal - The most advanced halal scanner. 2,000,000+ verified products. Expert classification. Trusted globally.",
-  keywords: ["halal scanner", "halal verification", "islamic app", "halal food", "halal cosmetics"],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
+  description: "Scan, verify, and live according to your values with confidence. AI-powered halal verification for over 2 million products worldwide.",
+  keywords: ["halal", "halal scanner", "halal food", "halal verification", "muslim app", "halal products", "ingredient scanner"],
+  authors: [{ name: "AllHalal" }],
+  creator: "AllHalal",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://allhalal.info",
+    siteName: "AllHalal",
+    title: "AllHalal - The Most Advanced Halal Scanner in the World",
+    description: "Scan, verify, and live according to your values with confidence. AI-powered halal verification for over 2 million products worldwide.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AllHalal - The Most Advanced Halal Scanner in the World",
+    description: "AI-powered halal verification for over 2 million products worldwide.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0A0A0A",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en" dir="ltr" className={`${inter.variable} ${amiri.variable} ${crimsonPro.variable}`}>
-      <body>
-        {children}
-        <Script src="/assets/js/counter.js" strategy="afterInteractive" />
-        <Script src="/assets/js/languages-carousel.js" strategy="afterInteractive" />
+    <html lang="en" className={inter.variable}>
+      <body className="bg-bg-primary text-text-primary antialiased">
+        <Noise />
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );
 }
-

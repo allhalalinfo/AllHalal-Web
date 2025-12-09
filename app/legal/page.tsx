@@ -1,86 +1,159 @@
-import Header from '@/components/Header';
-import SimpleFooter from '@/components/SimpleFooter';
-import '../../styles/normalize.css';
-import '../../styles/premium.css';
+"use client";
 
-export const metadata = {
-  title: 'Legal - AllHalal',
-  description: 'Legal information, terms, privacy policy, and disclaimer',
-};
+/**
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * LEGAL HUB PAGE
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * 
+ * Landing page for all legal documents with cards linking to each document.
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════════
+ */
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+const legalDocuments = [
+  {
+    title: "Privacy Policy",
+    description: "How we collect, use, and protect your personal data.",
+    href: "/legal/privacy-policy",
+    icon: ShieldIcon,
+    lastUpdated: "December 2024",
+  },
+  {
+    title: "Terms of Service",
+    description: "The rules and agreements that govern your use of AllHalal.",
+    href: "/legal/terms-of-service",
+    icon: DocumentIcon,
+    lastUpdated: "December 2024",
+  },
+  {
+    title: "Disclaimer",
+    description: "Important information regarding religious accuracy and liability.",
+    href: "/legal/disclaimer",
+    icon: AlertIcon,
+    lastUpdated: "December 2024",
+  },
+];
 
 export default function LegalPage() {
   return (
-    <>
-      <Header />
-      
-      <section className="hero-new" style={{
-        minHeight: '80vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        background: 'var(--background)'
-      }}>
-        <div className="container">
-          <div className="section-header-centered">
-            <div className="section-label">Transparency & Trust</div>
-            <h1 className="hero-title-new" style={{
-              fontSize: 'clamp(3rem, 6vw, 4.5rem)', 
-              marginBottom: 'var(--space-4)'
-            }}>
-              Legal Center
-            </h1>
-            <p className="section-description">
-              Read our terms and policies to understand how we protect your data and rights.
-            </p>
-          </div>
-          
-          <div className="legal-cards-grid">
-            {/* Privacy Policy */}
-            <a href="/legal/privacy-policy" className="legal-card">
-              <div className="legal-card-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <h3 className="legal-card-title">Privacy Policy</h3>
-              <p className="legal-card-desc">How we collect, use, and protect your personal data.</p>
-              <div className="legal-card-arrow">→</div>
-            </a>
-            
-            {/* Terms of Service */}
-            <a href="/legal/terms-of-service" className="legal-card">
-              <div className="legal-card-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                  <polyline points="10 9 9 9 8 9"/>
-                </svg>
-              </div>
-              <h3 className="legal-card-title">Terms of Service</h3>
-              <p className="legal-card-desc">The rules and agreements that govern your use of AllHalal.</p>
-              <div className="legal-card-arrow">→</div>
-            </a>
-            
-            {/* Disclaimer */}
-            <a href="/legal/disclaimer" className="legal-card">
-              <div className="legal-card-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="12" y1="8" x2="12" y2="12"/>
-                  <line x1="12" y1="16" x2="12.01" y2="16"/>
-                </svg>
-              </div>
-              <h3 className="legal-card-title">Disclaimer</h3>
-              <p className="legal-card-desc">Important information regarding religious accuracy.</p>
-              <div className="legal-card-arrow">→</div>
-            </a>
-          </div>
-        </div>
-      </section>
+    <div>
+      {/* Page Header */}
+      <motion.div
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.span
+          className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          Legal Information
+        </motion.span>
+        
+        <motion.h1
+          className="text-display-2 font-bold text-text-primary mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Legal Center
+        </motion.h1>
+        
+        <motion.p
+          className="text-xl text-text-secondary max-w-lg mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          Read our terms and policies to understand how we protect your data and rights.
+        </motion.p>
+      </motion.div>
 
-      <SimpleFooter />
-    </>
+      {/* Document Cards */}
+      <div className="space-y-4">
+        {legalDocuments.map((doc, index) => (
+          <motion.div
+            key={doc.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+          >
+            <Link href={doc.href} className="group block">
+              <div className="p-6 rounded-xl bg-bg-card border border-border transition-all duration-300 hover:border-primary/30 hover:shadow-glow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <doc.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-lg font-semibold text-text-primary group-hover:text-primary transition-colors">
+                        {doc.title}
+                      </h2>
+                      <ArrowIcon className="w-5 h-5 text-text-muted group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <p className="text-text-secondary mb-2">{doc.description}</p>
+                    <p className="text-sm text-text-muted">Last updated: {doc.lastUpdated}</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Contact note */}
+      <motion.div
+        className="mt-12 p-6 rounded-xl bg-bg-tertiary border border-border text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+      >
+        <p className="text-text-secondary">
+          Have questions about our policies?{" "}
+          <Link href="/contact" className="text-primary hover:text-primary-light transition-colors">
+            Contact us
+          </Link>
+        </p>
+      </motion.div>
+    </div>
   );
 }
 
+// Icon Components
+function ShieldIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  );
+}
+
+function DocumentIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+  );
+}
+
+function AlertIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+  );
+}
+
+function ArrowIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M9 5l7 7-7 7" />
+    </svg>
+  );
+}

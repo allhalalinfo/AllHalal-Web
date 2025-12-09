@@ -1,176 +1,148 @@
-import Link from 'next/link';
-import '../../../styles/normalize.css';
-import '../../../styles/legal.css';
+"use client";
 
-export const metadata = {
-  title: 'Privacy Policy - AllHalal (HalalScan)',
-  description: 'AllHalal Privacy Policy - Learn how we collect, use, and protect your data in compliance with GDPR, CCPA, and ISO/IEC 27001 standards.',
-};
+/**
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * PRIVACY POLICY PAGE
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * 
+ * Clean, readable privacy policy with proper typography.
+ * 
+ * ═══════════════════════════════════════════════════════════════════════════════
+ */
+
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="legal-document">
-      <nav className="legal-nav">
-        <Link href="/legal">← Back to Legal</Link>
-      </nav>
-      
-      <header className="legal-header">
+    <motion.article
+      className="prose"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Back link */}
+      <Link 
+        href="/legal" 
+        className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors mb-8 no-underline"
+      >
+        <ArrowLeftIcon className="w-4 h-4" />
+        Back to Legal
+      </Link>
+
+      {/* Header */}
+      <div className="mb-12">
+        <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
+          Last Updated: December 2024
+        </p>
         <h1>Privacy Policy</h1>
-        <div className="legal-meta">
-          <p><strong>Effective Date:</strong> November 8, 2025</p>
-          <p><strong>Last Updated:</strong> December 6, 2025</p>
-        </div>
-      </header>
-      
-      <div className="legal-content">
-        <p>
-          <strong>HalalScan</strong> (&quot;AllHalal&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a mobile application that helps users identify halal, doubtful, and haram products, as well as boycott-related brands.
+        <p className="text-xl text-text-secondary leading-relaxed">
+          Your privacy is important to us. This policy explains how AllHalal collects, 
+          uses, and protects your personal information.
         </p>
-        <p>
-          We respect your privacy and process your data in compliance with global data-protection standards.
-        </p>
-        
-        <h2>1. Data We Collect</h2>
-        
-        <ul>
-          <li><strong>Location Data</strong> — to calculate prayer times and Qibla direction.</li>
-          <li><strong>Camera Access</strong> — to scan barcodes for product evaluation.</li>
-          <li><strong>Language and Country Settings</strong> — for localization and madhhab preferences.</li>
-          <li><strong>Email (optional)</strong> — when registering through Firebase Auth.</li>
-          <li><strong>Anonymous Analytics Data</strong> — collected via Firebase Analytics (device type, app version, language, session length).</li>
-        </ul>
-        
-        <p>
-          <strong>We do not collect</strong> financial, biometric, or sensitive personal information.
-        </p>
-        
-        <h2>2. Purpose of Data Processing</h2>
-        
-        <p>Data is used solely to:</p>
-        
-        <ul>
-          <li>display accurate halal ratings and boycott information;</li>
-          <li>determine prayer times and Qibla direction;</li>
-          <li>show daily hadiths and Islamic calendar events;</li>
-          <li>improve app stability and user experience;</li>
-          <li>deliver notifications (if enabled).</li>
-        </ul>
-        
-        <p>
-          We do not sell or share your personal data with third parties, except Firebase services essential to core functionality.
-        </p>
-        
-        <h2>3. Third-Party Services</h2>
-        
-        <table>
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Purpose</th>
-              <th>Data Processed</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Firebase Authentication</td>
-              <td>User login / account management</td>
-              <td>Email, device ID</td>
-            </tr>
-            <tr>
-              <td>Firebase Analytics</td>
-              <td>Anonymous usage metrics</td>
-              <td>Device and session data</td>
-            </tr>
-            <tr>
-              <td>Firebase Firestore / Storage</td>
-              <td>History / Favorites storage</td>
-              <td>User UID</td>
-            </tr>
-            <tr>
-              <td>Google Sign-In / Apple Sign-In</td>
-              <td>Password-free login</td>
-              <td>Public profile info</td>
-            </tr>
-            <tr>
-              <td>Google AdMob</td>
-              <td>Personalized advertising</td>
-              <td>Device ID, Ad interaction data</td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <p>
-          All Firebase services comply with <strong>GDPR</strong>, <strong>CCPA</strong>, and <strong>ISO/IEC 27001</strong>.
-        </p>
-        
-        <h2>4. Cookies & Analytics</h2>
-        
-        <p>
-          We do not use cookies in the traditional sense.
-        </p>
-        
-        <p>
-          Firebase may collect anonymized technical identifiers for performance monitoring and crash reports.
-        </p>
-        
-        <h2>5. Data Security</h2>
-        
-        <ul>
-          <li>All communication is protected by <strong>HTTPS/TLS 1.2+</strong>.</li>
-          <li>Data is encrypted at rest and in transit.</li>
-          <li>Access is restricted to authorized Firebase services.</li>
-        </ul>
-        
-        <h2>6. Data Retention & Deletion</h2>
-        
-        <p>
-          Data is retained only as long as necessary for providing app features.
-        </p>
-        
-        <p>
-          Users may delete their accounts and related data via <strong>Account → Delete Account</strong> or by contacting <a href="mailto:app@allhalal.info">app@allhalal.info</a>.
-        </p>
-        
-        <h2>7. User Rights</h2>
-        
-        <p>You have the right to:</p>
-        
-        <ul>
-          <li>request a copy of your data;</li>
-          <li>request correction or deletion;</li>
-          <li>withdraw consent at any time;</li>
-          <li>file a complaint with your local data-protection authority.</li>
-        </ul>
-        
-        <h2>8. Policy Updates</h2>
-        
-        <p>
-          We may update this Privacy Policy periodically.
-        </p>
-        
-        <p>
-          Any major changes will be communicated through the app.
-        </p>
-        
-        <p>
-          The latest version will always be available under <strong>Legal / Privacy Policy</strong>.
-        </p>
-        
-        <h2>9. Contact</h2>
-        
-        <p>
-          For privacy inquiries, please contact:
-        </p>
-        
-        <p>
-          📧 <strong>Email:</strong> <a href="mailto:app@allhalal.info">app@allhalal.info</a>
-        </p>
-        
-        <hr />
-        
-        <p><em>This Privacy Policy complies with GDPR, CCPA, and ISO/IEC 27001 data protection standards.</em></p>
       </div>
-    </div>
+
+      {/* Content */}
+      <h2>1. Information We Collect</h2>
+      <p>
+        AllHalal collects information to provide and improve our services. 
+        The types of information we collect include:
+      </p>
+      <ul>
+        <li>
+          <strong>Account Information:</strong> When you create an account, we collect 
+          your email address and any profile information you choose to provide.
+        </li>
+        <li>
+          <strong>Usage Data:</strong> We collect information about how you use our app, 
+          including products scanned, features used, and preferences set.
+        </li>
+        <li>
+          <strong>Device Information:</strong> We collect device identifiers, operating 
+          system version, and app version for troubleshooting and improvement purposes.
+        </li>
+        <li>
+          <strong>Location Data:</strong> With your permission, we collect location data 
+          to provide accurate prayer times and Qibla direction.
+        </li>
+      </ul>
+
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the collected information to:</p>
+      <ul>
+        <li>Provide and maintain our halal verification services</li>
+        <li>Personalize your experience based on your madhhab preference</li>
+        <li>Calculate accurate prayer times for your location</li>
+        <li>Improve and develop new features</li>
+        <li>Send important updates about the app (with your consent)</li>
+        <li>Respond to your inquiries and support requests</li>
+      </ul>
+
+      <h2>3. Data Storage and Security</h2>
+      <p>
+        We implement industry-standard security measures to protect your personal 
+        information. Your data is stored securely using encryption and access controls. 
+        We regularly review and update our security practices.
+      </p>
+
+      <h2>4. Third-Party Services</h2>
+      <p>
+        AllHalal may use third-party services for analytics, crash reporting, and 
+        payment processing. These services have their own privacy policies governing 
+        the use of your information.
+      </p>
+
+      <h2>5. Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access your personal data</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your account and data</li>
+        <li>Opt out of marketing communications</li>
+        <li>Export your data in a portable format</li>
+      </ul>
+
+      <h2>6. Data Retention</h2>
+      <p>
+        We retain your personal information for as long as your account is active or 
+        as needed to provide you services. You can request deletion of your data at 
+        any time by contacting us.
+      </p>
+
+      <h2>7. Children's Privacy</h2>
+      <p>
+        AllHalal is not intended for children under 13 years of age. We do not 
+        knowingly collect personal information from children under 13.
+      </p>
+
+      <h2>8. Changes to This Policy</h2>
+      <p>
+        We may update this privacy policy from time to time. We will notify you of 
+        any changes by posting the new policy on this page and updating the 
+        "Last Updated" date.
+      </p>
+
+      <h2>9. Contact Us</h2>
+      <p>
+        If you have any questions about this Privacy Policy, please contact us at{" "}
+        <a href="mailto:app@allhalal.info">app@allhalal.info</a>.
+      </p>
+
+      {/* Footer note */}
+      <div className="mt-16 pt-8 border-t border-border">
+        <p className="text-sm text-text-muted">
+          This privacy policy is effective as of December 2024 and will remain in 
+          effect except with respect to any changes in its provisions in the future.
+        </p>
+      </div>
+    </motion.article>
   );
 }
 
+function ArrowLeftIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+  );
+}
