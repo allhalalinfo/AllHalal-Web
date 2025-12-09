@@ -19,8 +19,17 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 
-// Madhhab data
+// Madhhab data (5 options including General)
 const madhahib = [
+  {
+    name: "General",
+    arabicName: "عام",
+    founder: "Commonly Accepted",
+    description:
+      "Universal rulings accepted across all schools. Perfect for those who prefer broadly agreed-upon halal classifications without school-specific interpretations.",
+    regions: ["Worldwide"],
+    color: "from-primary",
+  },
   {
     name: "Hanafi",
     arabicName: "حنفي",
@@ -36,7 +45,7 @@ const madhahib = [
     founder: "Imam al-Shafi'i",
     description:
       "Known for its balanced methodology between textual sources and reasoning. Followed extensively in Southeast Asia, East Africa, and parts of the Middle East.",
-    regions: ["Indonesia", "Malaysia", "East Africa", "Yemen"],
+    regions: ["Southeast Asia", "East Africa", "Yemen"],
     color: "from-blue-500",
   },
   {
@@ -165,9 +174,9 @@ export default function MadhhabSection() {
           </motion.div>
         </div>
 
-        {/* Madhhab Cards Grid */}
+        {/* Madhhab Cards Grid - 5 options */}
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}

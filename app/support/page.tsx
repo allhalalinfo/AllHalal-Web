@@ -31,11 +31,11 @@ const faqs = [
   },
   {
     question: "Which madhhab (school of thought) does AllHalal follow?",
-    answer: "AllHalal supports all four major Sunni schools of Islamic jurisprudence: Hanafi, Shafi'i, Maliki, and Hanbali. You can select your preferred madhhab in the app settings, and all rulings will be tailored accordingly."
+    answer: "AllHalal supports all four major Sunni schools of Islamic jurisprudence: Hanafi, Shafi'i, Maliki, and Hanbali, plus a General option for commonly accepted rulings. You can select your preferred madhhab in the app settings, and all rulings will be tailored accordingly."
   },
   {
     question: "Is AllHalal available in my language?",
-    answer: "AllHalal is available in multiple languages including English, Arabic, Turkish, Indonesian, Malay, Urdu, French, German, Spanish, Italian, Russian, and more. The app automatically detects your device language."
+    answer: "AllHalal is available in 9 languages: English, French, German, Spanish, Italian, Dutch, Russian, Arabic, and Urdu. The app automatically detects your device language."
   },
   {
     question: "How accurate is the barcode scanner?",

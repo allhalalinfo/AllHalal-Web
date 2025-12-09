@@ -21,8 +21,8 @@ import Image from "next/image";
 // Statistics data
 const stats = [
   { value: 2000000, suffix: "+", label: "Products Verified" },
-  { value: 50, suffix: "+", label: "Countries Supported" },
-  { value: 4, suffix: "", label: "Madhhab Schools" },
+  { value: 9, suffix: "", label: "Languages" },
+  { value: 5, suffix: "", label: "Madhhab Options" },
   { value: 99, suffix: "%", label: "Accuracy Rate" },
 ];
 
