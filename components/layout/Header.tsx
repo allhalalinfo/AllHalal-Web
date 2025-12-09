@@ -220,78 +220,75 @@ export default function Header() {
         </div>
       </motion.header>
 
-      {/* Mobile Menu Overlay - below header */}
+      {/* Mobile Menu Overlay - compact layout */}
       <AnimatePresence mode="wait">
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-[90] bg-bg-primary md:hidden"
+            className="fixed inset-0 z-[90] bg-bg-primary md:hidden overflow-y-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Backdrop - click to close */}
-            <div 
-              className="absolute inset-0" 
-              onClick={closeMobileMenu}
-              aria-hidden="true"
-            />
-            
-            {/* Menu Content */}
+            {/* Menu Content - compact, top-aligned */}
             <motion.nav
-              className="relative flex flex-col items-center justify-center h-full gap-6 pt-20 pb-10 px-6"
+              className="flex flex-col items-start px-6 pt-24 pb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, delay: 0.1 }}
+              transition={{ duration: 0.2, delay: 0.05 }}
             >
-              {navItems.map((item, index) => (
+              {/* Navigation Links */}
+              <div className="w-full space-y-1 mb-8">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.2, delay: 0.05 + index * 0.03 }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={closeMobileMenu}
+                      className="text-xl font-semibold text-text-primary hover:text-primary active:text-primary transition-colors block py-3 border-b border-border/50"
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Bottom section */}
+              <div className="w-full space-y-4">
+                {/* Language Switcher - opens upward */}
                 <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2, delay: 0.05 + index * 0.03 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.2, delay: 0.2 }}
+                >
+                  <LanguageSwitcher openUpward />
+                </motion.div>
+                
+                {/* Download Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.2, delay: 0.25 }}
                 >
                   <Link
-                    href={item.href}
+                    href="https://apps.apple.com/app/allhalal/id6504640498"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={closeMobileMenu}
-                    className="text-2xl sm:text-3xl font-bold text-text-primary hover:text-primary transition-colors block py-2"
+                    className="btn btn-primary w-full justify-center"
                   >
-                    {item.label}
+                    {t("downloadApp")}
                   </Link>
                 </motion.div>
-              ))}
-              
-              {/* Language Switcher */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.2, delay: 0.2 }}
-                className="mt-6"
-              >
-                <LanguageSwitcher />
-              </motion.div>
-              
-              {/* Download Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.2, delay: 0.25 }}
-                className="mt-4"
-              >
-                <Link
-                  href="https://apps.apple.com/app/allhalal/id6504640498"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={closeMobileMenu}
-                  className="btn btn-primary btn-lg"
-                >
-                  {t("downloadApp")}
-                </Link>
-              </motion.div>
+              </div>
             </motion.nav>
           </motion.div>
         )}
