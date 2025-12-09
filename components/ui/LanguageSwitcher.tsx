@@ -35,6 +35,11 @@ export default function LanguageSwitcher({ openUpward = false }: LanguageSwitche
   const handleLocaleChange = (newLocale: Locale) => {
     setIsOpen(false);
     
+    // Guard: Don't do anything if already on this locale
+    if (locale === newLocale) {
+      return;
+    }
+    
     // Remove current locale prefix from pathname
     let pathWithoutLocale = pathname;
     
@@ -51,12 +56,18 @@ export default function LanguageSwitcher({ openUpward = false }: LanguageSwitche
     }
     
     // Build new path
-    const newPath = newLocale === defaultLocale 
-      ? pathWithoutLocale 
-      : `/${newLocale}${pathWithoutLocale}`;
+    let newPath: string;
+    if (newLocale === defaultLocale) {
+      // English (default) = no prefix
+      newPath = pathWithoutLocale || "/";
+    } else {
+      // Other languages = add prefix
+      newPath = `/${newLocale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`;
+    }
     
-    // Use window.location for reliable navigation
-    window.location.href = newPath;
+    // Use absolute URL for reliable navigation
+    const absoluteUrl = `${window.location.origin}${newPath}`;
+    window.location.href = absoluteUrl;
   };
 
   return (
@@ -90,31 +101,35 @@ export default function LanguageSwitcher({ openUpward = false }: LanguageSwitche
             overflowY: "scroll",
             WebkitOverflowScrolling: "touch",
             overscrollBehavior: "contain",
-            scrollbarWidth: "thin"
+            scrollbarWidth: "thin",
+            paddingTop: 0, // FIX: No padding at top so English is visible
+            paddingBottom: "0.5rem"
           }}
         >
-          <div className="py-2">
-            {locales.map((loc) => (
-              <button
-                key={loc}
-                onClick={() => handleLocaleChange(loc)}
-                type="button"
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm ${
-                  locale === loc
-                    ? "bg-primary/10 text-primary"
-                    : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
-                }`}
-              >
-                <span className="text-lg">{localeFlags[loc]}</span>
-                <span className="flex-1">{localeNames[loc]}</span>
-                {locale === loc && (
-                  <svg className="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-              </button>
-            ))}
-          </div>
+          {locales.map((loc, index) => (
+            <button
+              key={loc}
+              onClick={() => handleLocaleChange(loc)}
+              type="button"
+              className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm ${
+                locale === loc
+                  ? "bg-primary/10 text-primary"
+                  : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
+              }`}
+              style={{ 
+                marginTop: index === 0 ? "0.5rem" : 0, // Add margin only to first item
+                marginBottom: index === locales.length - 1 ? 0 : 0
+              }}
+            >
+              <span className="text-lg">{localeFlags[loc]}</span>
+              <span className="flex-1">{localeNames[loc]}</span>
+              {locale === loc && (
+                <svg className="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </button>
+          ))}
         </div>
       )}
     </div>
