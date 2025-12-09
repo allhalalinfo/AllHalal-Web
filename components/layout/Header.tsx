@@ -2,21 +2,22 @@
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * HEADER COMPONENT - Hatchet-style Navigation
+ * HEADER COMPONENT - Mobile-First Navigation
  * ═══════════════════════════════════════════════════════════════════════════════
  * 
- * Features:
- * - Sticky header that hides on scroll down, reveals on scroll up
- * - Transparent initially, gets backdrop blur when scrolled
- * - Mobile hamburger menu with smooth animation
- * - Active link highlighting
- * 
- * Based on hatchet.com.au header behavior
+ * Best practices implemented:
+ * - useRef for scroll tracking (avoids re-renders)
+ * - Proper z-index layering
+ * - Touch-friendly interactions
+ * - Backdrop click to close
+ * - Auto-close on resize to desktop
+ * - Don't hide header when menu is open
+ * - Accessibility: aria-expanded, aria-label
  * 
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -25,75 +26,139 @@ import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 export default function Header() {
   const t = useTranslations("nav");
   
-  // Navigation items configuration
   const navItems = [
     { label: t("features"), href: "/#features" },
     { label: t("legal"), href: "/legal" },
     { label: t("contact"), href: "/contact" },
     { label: t("support"), href: "/support" },
   ];
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  
+  // Use ref to track scroll position (avoids re-renders)
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
-  // Handle scroll behavior - hide on scroll down, show on scroll up
-  const handleScroll = useCallback(() => {
+  // Optimized scroll handler with requestAnimationFrame
+  const updateScrollState = useCallback(() => {
     const currentScrollY = window.scrollY;
     
-    // Update scrolled state for background change
+    // Update background state
     setIsScrolled(currentScrollY > 50);
     
-    // Hide/show logic - only after scrolling past hero
-    if (currentScrollY > 100) {
-      if (currentScrollY > lastScrollY && currentScrollY > 200) {
-        // Scrolling down - hide header
-        setIsHidden(true);
+    // Don't hide header when mobile menu is open
+    if (!isMobileMenuOpen) {
+      if (currentScrollY > 100) {
+        // Only hide when scrolling down significantly
+        if (currentScrollY > lastScrollY.current + 10 && currentScrollY > 200) {
+          setIsHidden(true);
+        } else if (currentScrollY < lastScrollY.current - 10) {
+          setIsHidden(false);
+        }
       } else {
-        // Scrolling up - show header
         setIsHidden(false);
       }
-    } else {
-      setIsHidden(false);
     }
     
-    setLastScrollY(currentScrollY);
-  }, [lastScrollY]);
+    lastScrollY.current = currentScrollY;
+    ticking.current = false;
+  }, [isMobileMenuOpen]);
 
+  const handleScroll = useCallback(() => {
+    if (!ticking.current) {
+      requestAnimationFrame(updateScrollState);
+      ticking.current = true;
+    }
+  }, [updateScrollState]);
+
+  // Scroll listener
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Prevent body scroll when mobile menu is open
+  // Body scroll lock when menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
+      
+      // Show header when menu is open
+      setIsHidden(false);
     } else {
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
       document.body.style.overflow = "";
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
     }
+    
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
       document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
+  // Close menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMobileMenuOpen]);
+
+  // Close menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isMobileMenuOpen]);
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev);
+
   return (
     <>
-      {/* Main Header */}
+      {/* Main Header - always above mobile menu */}
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-fixed transition-all duration-300 ${
-          isScrolled ? "bg-bg-primary/90 backdrop-blur-xl shadow-sm" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+          isScrolled || isMobileMenuOpen ? "bg-bg-primary/95 backdrop-blur-xl shadow-sm" : "bg-transparent"
         }`}
-        initial={{ y: 0 }}
-        animate={{ y: isHidden ? -100 : 0 }}
+        initial={false}
+        animate={{ y: isHidden && !isMobileMenuOpen ? -100 : 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <div className="container">
           <nav className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link 
-              href="/" 
-              className="text-xl font-bold tracking-tight text-text-primary hover:text-primary transition-colors"
+              href="/"
+              onClick={closeMobileMenu}
+              className="text-xl font-bold tracking-tight text-text-primary hover:text-primary transition-colors z-10"
             >
               allhalal.info
             </Link>
@@ -112,7 +177,7 @@ export default function Header() {
               ))}
             </div>
 
-            {/* CTA Button + Language Switcher - Desktop */}
+            {/* Desktop CTA + Language */}
             <div className="hidden md:flex items-center gap-4">
               <LanguageSwitcher />
               <Link
@@ -125,38 +190,29 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - high z-index to stay clickable */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative w-10 h-10 flex items-center justify-center"
-              aria-label="Toggle menu"
+              onClick={toggleMobileMenu}
+              className="md:hidden relative w-12 h-12 flex items-center justify-center z-10 -mr-2"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              type="button"
             >
               <div className="relative w-6 h-5">
-                <motion.span
-                  className="absolute left-0 w-full h-0.5 bg-text-primary rounded-full"
-                  animate={{
-                    top: isMobileMenuOpen ? "50%" : "0%",
-                    rotate: isMobileMenuOpen ? 45 : 0,
-                    translateY: isMobileMenuOpen ? "-50%" : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
+                <span
+                  className={`absolute left-0 w-full h-0.5 bg-text-primary rounded-full transition-all duration-300 origin-center ${
+                    isMobileMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
+                  }`}
                 />
-                <motion.span
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-0.5 bg-text-primary rounded-full"
-                  animate={{
-                    opacity: isMobileMenuOpen ? 0 : 1,
-                    scaleX: isMobileMenuOpen ? 0 : 1,
-                  }}
-                  transition={{ duration: 0.3 }}
+                <span
+                  className={`absolute left-0 top-1/2 -translate-y-1/2 w-full h-0.5 bg-text-primary rounded-full transition-all duration-300 ${
+                    isMobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
+                  }`}
                 />
-                <motion.span
-                  className="absolute left-0 w-full h-0.5 bg-text-primary rounded-full"
-                  animate={{
-                    bottom: isMobileMenuOpen ? "50%" : "0%",
-                    rotate: isMobileMenuOpen ? -45 : 0,
-                    translateY: isMobileMenuOpen ? "50%" : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
+                <span
+                  className={`absolute left-0 w-full h-0.5 bg-text-primary rounded-full transition-all duration-300 origin-center ${
+                    isMobileMenuOpen ? "bottom-1/2 translate-y-1/2 -rotate-45" : "bottom-0"
+                  }`}
                 />
               </div>
             </button>
@@ -164,64 +220,73 @@ export default function Header() {
         </div>
       </motion.header>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
+      {/* Mobile Menu Overlay - below header */}
+      <AnimatePresence mode="wait">
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-modal-backdrop bg-bg-primary md:hidden"
+            className="fixed inset-0 z-[90] bg-bg-primary md:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
+            {/* Backdrop - click to close */}
+            <div 
+              className="absolute inset-0" 
+              onClick={closeMobileMenu}
+              aria-hidden="true"
+            />
+            
+            {/* Menu Content */}
             <motion.nav
-              className="flex flex-col items-center justify-center h-full gap-8 pt-20"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+              className="relative flex flex-col items-center justify-center h-full gap-6 pt-20 pb-10 px-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
             >
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2, delay: 0.05 + index * 0.03 }}
                 >
                   <Link
                     href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-3xl font-bold text-text-primary hover:text-primary transition-colors"
+                    onClick={closeMobileMenu}
+                    className="text-2xl sm:text-3xl font-bold text-text-primary hover:text-primary transition-colors block py-2"
                   >
                     {item.label}
                   </Link>
                 </motion.div>
               ))}
               
-              {/* Language Switcher - Mobile */}
+              {/* Language Switcher */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3, delay: 0.25 }}
-                className="mt-4"
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2, delay: 0.2 }}
+                className="mt-6"
               >
                 <LanguageSwitcher />
               </motion.div>
               
+              {/* Download Button */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2, delay: 0.25 }}
                 className="mt-4"
               >
                 <Link
                   href="https://apps.apple.com/app/allhalal/id6504640498"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                   className="btn btn-primary btn-lg"
                 >
                   {t("downloadApp")}
@@ -234,4 +299,3 @@ export default function Header() {
     </>
   );
 }
-
