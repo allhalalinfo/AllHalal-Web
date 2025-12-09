@@ -41,8 +41,8 @@ export default function WhyChooseSection() {
             <div key={reason.key} className="group">
               <SpotlightCard className="h-full p-8">
                 <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                  {/* Icon - Mobile: always active, Desktop: hover */}
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-colors bg-primary/20 md:bg-primary/10 md:group-hover:bg-primary/20">
                     <reason.icon className="w-7 h-7 text-primary" />
                   </div>
 

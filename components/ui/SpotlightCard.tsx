@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useState, MouseEvent } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState, useEffect, MouseEvent } from "react";
 
 interface SpotlightCardProps {
   children: React.ReactNode;
@@ -12,54 +11,62 @@ interface SpotlightCardProps {
 export default function SpotlightCard({ 
   children, 
   className = "", 
-  spotlightColor = "rgba(0, 208, 148, 0.15)" // Default to primary green
+  spotlightColor = "rgba(0, 208, 148, 0.15)"
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current) return;
-
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-
+    if (isMobile || !divRef.current) return;
+    const rect = divRef.current.getBoundingClientRect();
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
-  const handleFocus = () => {
-    setOpacity(1);
-  };
-
-  const handleBlur = () => {
-    setOpacity(0);
-  };
-
-  const handleMouseEnter = () => {
-    setOpacity(1);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
-  };
+  const handleMouseEnter = () => !isMobile && setOpacity(1);
+  const handleMouseLeave = () => !isMobile && setOpacity(0);
 
   return (
     <div
       ref={divRef}
       onMouseMove={handleMouseMove}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-xl border border-border bg-bg-card transition-colors duration-300 hover:border-primary/30 ${className}`}
+      className={`
+        relative overflow-hidden rounded-xl bg-bg-card transition-colors duration-300
+        /* Desktop: normal border, hover shows active */
+        border border-border md:hover:border-primary/30
+        /* Mobile: always active border + glow */
+        max-md:border-primary/30 max-md:shadow-[0_0_20px_rgba(0,208,148,0.1)]
+        ${className}
+      `}
     >
+      {/* Desktop: Mouse-following spotlight */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
+        className="pointer-events-none absolute -inset-px transition duration-300 hidden md:block"
         style={{
           opacity,
           background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
         }}
       />
+      
+      {/* Mobile: Static glow overlay - always visible */}
+      <div 
+        className="pointer-events-none absolute inset-0 md:hidden"
+        style={{
+          background: `radial-gradient(circle at 50% 30%, ${spotlightColor}, transparent 70%)`,
+        }}
+      />
+      
       <div className="relative h-full">{children}</div>
     </div>
   );

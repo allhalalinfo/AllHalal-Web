@@ -75,14 +75,15 @@ export default function MadhhabSection() {
             const config = madhhabConfig[key];
             return (
               <div key={key} className="group relative">
-                <div className="relative h-full p-6 rounded-2xl bg-bg-card border border-border overflow-hidden transition-colors duration-300 hover:border-primary/30">
-                  {/* Arabic calligraphy watermark */}
-                  <div className="absolute -right-4 -top-4 text-8xl font-bold text-white/5 select-none group-hover:text-primary/10 transition-colors duration-300">
+                {/* Mobile: always active state | Desktop: hover for active */}
+                <div className="relative h-full p-6 rounded-2xl bg-bg-card overflow-hidden transition-colors duration-300 border border-primary/30 md:border-border md:hover:border-primary/30 shadow-[0_0_15px_rgba(0,208,148,0.08)] md:shadow-none md:hover:shadow-[0_0_15px_rgba(0,208,148,0.08)]">
+                  {/* Arabic calligraphy watermark - Mobile: always visible, Desktop: on hover */}
+                  <div className="absolute -right-4 -top-4 text-8xl font-bold select-none transition-colors duration-300 text-primary/10 md:text-white/5 md:group-hover:text-primary/10">
                     {config.arabicName}
                   </div>
 
-                  {/* Gradient accent */}
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${config.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  {/* Gradient accent - Mobile: always visible, Desktop: on hover */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${config.color} to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300`} />
 
                   {/* Content */}
                   <div className="relative z-10">
