@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
-import { locales, localeNames, localeFlags, defaultLocale, type Locale } from "@/i18n/config";
+import { locales, localeNames, localeFlags, type Locale } from "@/i18n/config";
 
 interface LanguageSwitcherProps {
   openUpward?: boolean;
@@ -41,33 +41,23 @@ export default function LanguageSwitcher({ openUpward = false }: LanguageSwitche
     }
     
     // Remove current locale prefix from pathname
+    // Now ALL locales have a prefix (including /en)
     let pathWithoutLocale = pathname;
     
-    // Check if pathname starts with any locale
-    for (const loc of locales) {
-      const localePrefix = `/${loc}`;
-      if (pathname === localePrefix) {
-        pathWithoutLocale = "/";
-        break;
-      } else if (pathname.startsWith(`${localePrefix}/`)) {
-        pathWithoutLocale = pathname.substring(localePrefix.length);
-        break;
-      }
+    // Use regex to remove locale prefix
+    const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`);
+    pathWithoutLocale = pathWithoutLocale.replace(localePattern, '/');
+    
+    // Remove trailing slash if it's not the root
+    if (pathWithoutLocale !== '/' && pathWithoutLocale.endsWith('/')) {
+      pathWithoutLocale = pathWithoutLocale.slice(0, -1);
     }
     
-    // Build new path
-    let newPath: string;
-    if (newLocale === defaultLocale) {
-      // English (default) = no prefix
-      newPath = pathWithoutLocale || "/";
-    } else {
-      // Other languages = add prefix
-      newPath = `/${newLocale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`;
-    }
+    // Build new path with new locale prefix (ALL locales have prefix now)
+    const newPath = `/${newLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
     
-    // Use absolute URL for reliable navigation
-    const absoluteUrl = `${window.location.origin}${newPath}`;
-    window.location.href = absoluteUrl;
+    // Force full page reload with new locale
+    window.location.href = newPath;
   };
 
   return (
@@ -93,43 +83,38 @@ export default function LanguageSwitcher({ openUpward = false }: LanguageSwitche
 
       {isOpen && (
         <div
-          className={`absolute left-1/2 -translate-x-1/2 w-56 bg-bg-card border border-border rounded-xl shadow-2xl z-[200] ${
+          className={`absolute left-1/2 -translate-x-1/2 w-56 bg-bg-card border border-border rounded-xl shadow-2xl z-[200] overflow-y-auto ${
             openUpward ? "bottom-full mb-2" : "top-full mt-2"
           }`}
           style={{ 
             maxHeight: "min(320px, 50vh)",
-            overflowY: "scroll",
             WebkitOverflowScrolling: "touch",
             overscrollBehavior: "contain",
-            scrollbarWidth: "thin",
-            paddingTop: 0, // FIX: No padding at top so English is visible
-            paddingBottom: "0.5rem"
+            scrollbarWidth: "thin"
           }}
         >
-          {locales.map((loc, index) => (
-            <button
-              key={loc}
-              onClick={() => handleLocaleChange(loc)}
-              type="button"
-              className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm ${
-                locale === loc
-                  ? "bg-primary/10 text-primary"
-                  : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
-              }`}
-              style={{ 
-                marginTop: index === 0 ? "0.5rem" : 0, // Add margin only to first item
-                marginBottom: index === locales.length - 1 ? 0 : 0
-              }}
-            >
-              <span className="text-lg">{localeFlags[loc]}</span>
-              <span className="flex-1">{localeNames[loc]}</span>
-              {locale === loc && (
-                <svg className="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
-              )}
-            </button>
-          ))}
+          <div className="py-2">
+            {locales.map((loc) => (
+              <button
+                key={loc}
+                onClick={() => handleLocaleChange(loc)}
+                type="button"
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm ${
+                  locale === loc
+                    ? "bg-primary/10 text-primary"
+                    : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
+                }`}
+              >
+                <span className="text-lg">{localeFlags[loc]}</span>
+                <span className="flex-1">{localeNames[loc]}</span>
+                {locale === loc && (
+                  <svg className="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
