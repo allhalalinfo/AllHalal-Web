@@ -627,26 +627,17 @@ body {
   }
 }
 
-/* MOBILE: Simple, fast, no flickering */
+/* MOBILE: NO transitions - ZERO flickering */
 @media (max-width: 768px) {
-  /* Disable will-change to reduce GPU pressure */
-  * {
+  /* Disable ALL animations and transitions */
+  *,
+  *::before,
+  *::after {
     will-change: auto !important;
-  }
-  
-  /* NO global transitions - prevents flickering */
-  * {
-    transition: none !important;
-  }
-  
-  /* Allow ONLY specific safe transitions */
-  button, a, input, select, textarea {
-    transition: opacity 0.1s ease !important;
-  }
-  
-  /* Simple tap feedback */
-  button:active, a:active {
-    opacity: 0.8;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
 }
 
