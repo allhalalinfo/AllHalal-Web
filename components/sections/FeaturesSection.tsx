@@ -11,7 +11,7 @@ import Image from "next/image";
 
 const featureKeys = ["scan", "verified", "cosmetics", "prayer", "watch"] as const;
 
-const featureConfig = {
+const featureConfig: Record<string, { image: string; color: string; premium?: boolean }> = {
   scan: { image: "/app-screens/ingredient-scan.png", color: "from-emerald-500/20" },
   verified: { image: "/app-screens/product-verified.png", color: "from-blue-500/20" },
   cosmetics: { image: "/app-screens/cosmetics.png", color: "from-pink-500/20", premium: true },
