@@ -22,22 +22,22 @@ function AnimatedCounter({ value, suffix, duration = 2 }: { value: number; suffi
 
   useEffect(() => {
     if (hasAnimated) return;
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           setHasAnimated(true);
-          let startTime: number;
-          const animate = (currentTime: number) => {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            setCount(Math.floor(easeOutQuart * value));
+    let startTime: number;
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeOutQuart * value));
             if (progress < 1) requestAnimationFrame(animate);
           };
-          requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
           observer.disconnect();
-        }
+      }
       },
       { threshold: 0.5 }
     );
@@ -73,12 +73,12 @@ export default function AboutSection() {
       <div className="container relative z-10">
         {/* Two column layout: Text + Image */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
-          {/* Section Header */}
+        {/* Section Header */}
           <div>
             <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
               {t("subtitle")}
             </span>
-            
+          
             <h2 className="text-display-1 font-bold text-text-primary mb-6">
               {t("title")}
             </h2>
@@ -113,12 +113,12 @@ export default function AboutSection() {
           <div className="lg:col-span-3 grid grid-cols-2 gap-8">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-2">
-                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                </div>
-                <div className="text-text-secondary text-sm md:text-base">
-                  {stat.label}
-                </div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-2">
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="text-text-secondary text-sm md:text-base">
+                {stat.label}
+              </div>
               </div>
             ))}
           </div>

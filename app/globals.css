@@ -634,9 +634,14 @@ body {
     will-change: auto !important;
   }
   
-  /* Faster transitions */
+  /* NO global transitions - prevents flickering */
   * {
-    transition-duration: 0.15s !important;
+    transition: none !important;
+  }
+  
+  /* Allow ONLY specific safe transitions */
+  button, a, input, select, textarea {
+    transition: opacity 0.1s ease !important;
   }
   
   /* Simple tap feedback */

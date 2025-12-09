@@ -62,7 +62,7 @@ export default function WhyChooseSection() {
                   {String(index + 1).padStart(2, "0")}
                 </div>
               </SpotlightCard>
-            </div>
+              </div>
           ))}
         </div>
       </div>

@@ -134,11 +134,11 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       
-      {isOpen && (
-        <div className="p-6 pt-0 text-text-secondary leading-relaxed border-t border-border/50">
-          <div className="pt-4">{answer}</div>
-        </div>
-      )}
+        {isOpen && (
+            <div className="p-6 pt-0 text-text-secondary leading-relaxed border-t border-border/50">
+              <div className="pt-4">{answer}</div>
+            </div>
+        )}
     </div>
   );
 }

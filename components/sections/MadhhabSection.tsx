@@ -34,12 +34,12 @@ export default function MadhhabSection() {
       <div className="container relative z-10">
         {/* Two column: Header + Screenshot */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
-          {/* Section Header */}
+        {/* Section Header */}
           <div>
             <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
               {t("subtitle")}
             </span>
-            
+          
             <h2 className="text-display-2 font-bold text-text-primary mb-6">
               {t("title")}
             </h2>
@@ -80,26 +80,26 @@ export default function MadhhabSection() {
                   {/* Arabic calligraphy watermark - Mobile: always visible, Desktop: on hover */}
                   <div className="absolute -right-4 -top-4 text-8xl font-bold select-none transition-colors duration-300 text-primary/10 md:text-white/5 md:group-hover:text-primary/10">
                     {config.arabicName}
-                  </div>
+                </div>
 
                   {/* Gradient accent - Mobile: always visible, Desktop: on hover */}
                   <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${config.color} to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300`} />
 
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-bold text-text-primary mb-1">
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold text-text-primary mb-1">
                       {t(`schools.${key}.name`)}
-                    </h3>
-                    <p className="text-sm text-primary mb-4">
+                  </h3>
+                  <p className="text-sm text-primary mb-4">
                       {t(`schools.${key}.founder`)}
-                    </p>
-                    <p className="text-text-secondary text-sm mb-6 leading-relaxed">
+                  </p>
+                  <p className="text-text-secondary text-sm mb-6 leading-relaxed">
                       {t(`schools.${key}.description`)}
-                    </p>
-                    <div>
-                      <p className="text-xs text-text-muted uppercase tracking-wider mb-2">
+                  </p>
+                  <div>
+                    <p className="text-xs text-text-muted uppercase tracking-wider mb-2">
                         {t("regions")}
-                      </p>
+                    </p>
                       <p className="text-xs text-text-tertiary">
                         {t(`schools.${key}.regions`)}
                       </p>

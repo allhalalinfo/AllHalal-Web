@@ -41,30 +41,30 @@ export default function HeroSection() {
     const mm = gsap.matchMedia();
     
     mm.add("(min-width: 1024px)", () => {
-      const ctx = gsap.context(() => {
-        if (!sectionRef.current || !contentRef.current) return;
+    const ctx = gsap.context(() => {
+      if (!sectionRef.current || !contentRef.current) return;
 
-        ScrollTrigger.create({
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+          end: "+=50%",
+        pin: true,
+        pinSpacing: true,
+      });
+
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -50,
+        scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=50%",
-          pin: true,
-          pinSpacing: true,
-        });
+          end: "+=30%",
+          scrub: true,
+        },
+      });
+    }, sectionRef);
 
-        gsap.to(contentRef.current, {
-          opacity: 0,
-          y: -50,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "+=30%",
-            scrub: true,
-          },
-        });
-      }, sectionRef);
-
-      return () => ctx.revert();
+    return () => ctx.revert();
     });
 
     return () => mm.revert();
@@ -80,47 +80,47 @@ export default function HeroSection() {
 
           {/* TEXT COLUMN - No motion.div, just CSS */}
           <div className="relative z-10 flex flex-col justify-center order-1">
-            {/* Subtitle */}
+          {/* Subtitle */}
             <p 
               className={`hero-subtitle mb-3 md:mb-6 ${isLoaded ? 'opacity-100' : 'opacity-100'}`}
-            >
+          >
               {t("subtitle")}
             </p>
 
-            {/* Main Title */}
+          {/* Main Title */}
             <h1 className="hero-title text-text-primary mb-4 md:mb-8">
               <span className="block">{t("title1")}</span>
               <span className="block">{t("title2")}</span>
-              <span className="block">
+            <span className="block">
                 <span className="text-highlight">{t("title3")}</span>
-              </span>
+            </span>
             </h1>
 
-            {/* Description */}
+          {/* Description */}
             <p className="text-base md:text-lg text-text-secondary max-w-lg mb-6 md:mb-10">
               {t("description")}
             </p>
 
-            {/* CTA Buttons */}
+          {/* CTA Buttons */}
             <div className="flex flex-wrap gap-3 md:gap-4">
               <MagneticButton
-                href="https://apps.apple.com/app/allhalal/id6504640498"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary btn-lg group"
+              href="https://apps.apple.com/app/allhalal/id6504640498"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary btn-lg group"
                 strength={0.3}
-              >
-                <AppleIcon className="w-5 h-5" />
+            >
+              <AppleIcon className="w-5 h-5" />
                 {t("ctaAppStore")}
-                <ArrowIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </MagneticButton>
               <MagneticButton
-                href="#features"
-                className="btn btn-secondary btn-lg group"
+              href="#features"
+              className="btn btn-secondary btn-lg group"
                 strength={0.3}
-              >
+            >
                 {t("ctaExplore")}
-                <ArrowDownIcon className="w-4 h-4 transition-transform group-hover:translate-y-1" />
+              <ArrowDownIcon className="w-4 h-4 transition-transform group-hover:translate-y-1" />
               </MagneticButton>
             </div>
           </div>
