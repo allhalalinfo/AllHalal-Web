@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "title": "AllHalal - Ihr Vertrauenswürdiger Halal-Begleiter",
+    "description": "Scannen, verifizieren und halal leben mit Zuversicht. KI-gestützte Zutatenanalyse, Gebetszeiten und Madhhab-spezifische Urteile."
+  },
+  "nav": {
+    "home": "Startseite",
+    "features": "Funktionen",
+    "legal": "Rechtliches",
+    "contact": "Kontakt",
+    "support": "Support",
+    "downloadApp": "App Herunterladen"
+  },
+  "hero": {
+    "subtitle": "IHR HALAL-BEGLEITER",
+    "title1": "SCANNEN",
+    "title2": "PRÜFEN",
+    "title3": "VERTRAUEN",
+    "description": "Muslime weltweit unterstützen mit KI-gestützter Halal-Verifizierung. Scannen Sie jedes Produkt, erhalten Sie sofortige Fiqh-Urteile, die auf Ihren Madhhab zugeschnitten sind.",
+    "ctaAppStore": "App Store",
+    "ctaExplore": "Funktionen Erkunden"
+  },
+  "about": {
+    "subtitle": "IHR VERTRAUENSWÜRDIGER HALAL-BEGLEITER",
+    "title": "Halal-Leben Vereinfachen",
+    "description": "In einer Welt komplexer Zutaten und unklarer Etiketten bringt AllHalal Klarheit. Unsere KI-gestützte App analysiert Produkte sofort und liefert Urteile basierend auf authentischer islamischer Gelehrsamkeit.",
+    "mission": "Unsere Mission ist es, jeden Muslim zu befähigen, nach seinen Werten mit Zuversicht und Leichtigkeit zu leben.",
+    "stats": {
+      "products": "Verifizierte Produkte",
+      "languages": "Sprachen",
+      "madhhab": "Madhhab-Optionen",
+      "accuracy": "Genauigkeitsrate"
+    }
+  },
+  "whyChoose": {
+    "subtitle": "WARUM ALLHALAL",
+    "title": "Warum AllHalal Wählen?",
+    "reasons": {
+      "scholarship": {
+        "title": "Authentische Gelehrsamkeit",
+        "description": "Unsere Urteile basieren auf authentischen islamischen Quellen, mit Unterstützung für alle vier großen sunnitischen Rechtsschulen plus allgemeine Konsensurteile."
+      },
+      "ai": {
+        "title": "Fortschrittliche KI-Technologie",
+        "description": "Unsere KI analysiert Zutaten sofort, identifiziert E-Nummern, Zusatzstoffe und potenzielle Bedenken mit bemerkenswerter Genauigkeit."
+      },
+      "database": {
+        "title": "Globale Datenbank",
+        "description": "Zugang zu Millionen verifizierter Produkte aus aller Welt, mit täglich neuen Produkten, die von unserer Community und unserem Team hinzugefügt werden."
+      }
+    }
+  },
+  "features": {
+    "subtitle": "LEISTUNGSSTARKE FUNKTIONEN",
+    "title": "Alles Was Sie Brauchen",
+    "description": "Von sofortigem Barcode-Scanning bis hin zu umfassenden Gebetswerkzeugen ist AllHalal Ihr kompletter Halal-Lifestyle-Begleiter.",
+    "items": {
+      "scan": {
+        "title": "KI-Zutaten-Scan",
+        "description": "Richten Sie Ihre Kamera auf jede Zutatenliste. Unsere KI analysiert jede Komponente und liefert ein sofortiges Halal-Urteil basierend auf Ihrem gewählten Madhhab."
+      },
+      "verified": {
+        "title": "Produktverifizierung",
+        "description": "Scannen Sie Barcodes, um Produkte sofort gegen unsere Datenbank von Millionen verifizierter Artikel zu prüfen. Erhalten Sie detaillierte Aufschlüsselungen und alternative Vorschläge."
+      },
+      "prayer": {
+        "title": "Gebetszeiten & Qibla",
+        "description": "Genaue Gebetszeiten für Ihren Standort, schöner Qibla-Kompass und islamischer Kalender mit wichtigen Daten und Ereignissen."
+      },
+      "cosmetics": {
+        "title": "Halal-Kosmetik-Verifizierung",
+        "description": "Verifizieren Sie Kosmetik- und Schönheitsprodukte auf Halal-Konformität. Analysieren Sie Inhaltsstoffe, die tierische oder alkoholbasierte Bestandteile enthalten können."
+      },
+      "watch": {
+        "title": "Apple Watch Begleiter",
+        "description": "Erhalten Sie Gebetszeiten, Qibla-Richtung und islamischen Kalender direkt an Ihrem Handgelenk. Verpassen Sie nie ein Gebet mit intelligenten Benachrichtigungen."
+      }
+    },
+    "premium": "Premium"
+  },
+  "madhhab": {
+    "subtitle": "IHRE PRAXIS. IHR MADHHAB.",
+    "title": "Angepasst an Ihre Rechtsschule",
+    "description": "AllHalal respektiert die Vielfalt der islamischen Rechtsprechung. Wählen Sie Ihren Madhhab und erhalten Sie Urteile, die mit Ihrer Praxis übereinstimmen.",
+    "founder": "Gegründet von",
+    "regions": "Regionen",
+    "schools": {
+      "general": {
+        "name": "Allgemein",
+        "arabicName": "عام",
+        "founder": "Allgemein Akzeptiert",
+        "description": "Universelle Urteile, die von allen Schulen akzeptiert werden. Perfekt für diejenigen, die weitgehend akzeptierte Halal-Klassifizierungen ohne schulspezifische Interpretationen bevorzugen.",
+        "regions": "Weltweit"
+      },
+      "hanafi": {
+        "name": "Hanafi",
+        "arabicName": "حنفي",
+        "founder": "Imam Abu Hanifa",
+        "description": "Die größte Schule der islamischen Rechtsprechung, der etwa 30% der Muslime weltweit folgen. Bekannt für ihre systematische Methodik und umfangreiche Nutzung der Vernunft.",
+        "regions": "Türkei, Zentralasien, Südasien, Balkan"
+      },
+      "shafii": {
+        "name": "Shafi'i",
+        "arabicName": "شافعي",
+        "founder": "Imam al-Shafi'i",
+        "description": "Bekannt für ihre ausgewogene Methodik zwischen Textquellen und Argumentation. Weit verbreitet in Südostasien, Ostafrika und Teilen des Nahen Ostens.",
+        "regions": "Südostasien, Ostafrika, Jemen"
+      },
+      "maliki": {
+        "name": "Maliki",
+        "arabicName": "مالكي",
+        "founder": "Imam Malik ibn Anas",
+        "description": "Betont die Praktiken der Menschen von Medina als zusätzliche Quelle. Vorherrschend in Nord- und Westafrika, und historisch in Al-Andalus.",
+        "regions": "Marokko, Algerien, Westafrika, VAE"
+      },
+      "hanbali": {
+        "name": "Hanbali",
+        "arabicName": "حنبلي",
+        "founder": "Imam Ahmad ibn Hanbal",
+        "description": "Bekannt für ihre strikte Einhaltung des Korans und der Hadith. Hauptsächlich in Saudi-Arabien und Katar verbreitet, mit wachsendem Einfluss weltweit.",
+        "regions": "Saudi-Arabien, Katar, Golfstaaten"
+      }
+    }
+  },
+  "cta": {
+    "title": "Beginnen Sie Heute Halal zu Leben",
+    "description": "Schließen Sie sich Tausenden von Muslimen an, die AllHalal für ihre täglichen Halal-Verifizierungsbedürfnisse vertrauen. Laden Sie jetzt herunter und erleben Sie den Unterschied.",
+    "button": "Im App Store Herunterladen",
+    "free": "Kostenloser Download • Premium-Funktionen verfügbar"
+  },
+  "footer": {
+    "description": "Ihr vertrauenswürdiger Halal-Begleiter. Scannen, verifizieren und leben Sie nach Ihren Werten mit Zuversicht.",
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "links": {
+      "features": "Funktionen",
+      "howItWorks": "So Funktioniert's",
+      "madhhabSupport": "Madhhab-Unterstützung",
+      "downloadApp": "App Herunterladen",
+      "aboutUs": "Über Uns",
+      "contact": "Kontakt",
+      "support": "Support",
+      "privacyPolicy": "Datenschutzrichtlinie",
+      "termsOfService": "Nutzungsbedingungen",
+      "disclaimer": "Haftungsausschluss"
+    },
+    "copyright": "Alle Rechte vorbehalten.",
+    "developedBy": "Entwickelt von"
+  },
+  "support": {
+    "title": "Support-Center",
+    "subtitle": "HILFE & SUPPORT",
+    "description": "Finden Sie Antworten auf häufige Fragen oder kontaktieren Sie unser Support-Team.",
+    "searchPlaceholder": "Nach Hilfe suchen...",
+    "quickLinks": {
+      "title": "Schnelllinks",
+      "email": {
+        "title": "E-Mail-Support",
+        "desc": "Hilfe per E-Mail erhalten"
+      },
+      "privacy": {
+        "title": "Datenschutzrichtlinie",
+        "desc": "Wie wir Ihre Daten schützen"
+      },
+      "terms": {
+        "title": "Nutzungsbedingungen",
+        "desc": "Nutzungsbedingungen"
+      },
+      "disclaimer": {
+        "title": "Haftungsausschluss",
+        "desc": "Wichtige rechtliche Informationen"
+      }
+    },
+    "faq": {
+      "title": "Häufig Gestellte Fragen",
+      "items": {
+        "verification": {
+          "question": "Wie verifiziert AllHalal Produkte?",
+          "answer": "AllHalal verwendet eine Kombination aus KI-gestützter Zutatenanalyse und einer umfassenden Datenbank von über 2 Millionen verifizierten Produkten. Unser System analysiert Zutaten, E-Nummern und Zusatzstoffe, um den Halal-Status basierend auf islamischen Ernährungsrichtlinien zu bestimmen."
+        },
+        "madhhab": {
+          "question": "Welchem Madhhab (Rechtsschule) folgt AllHalal?",
+          "answer": "AllHalal unterstützt alle vier großen sunnitischen Rechtsschulen: Hanafi, Shafi'i, Maliki und Hanbali, plus eine Allgemeine Option für allgemein akzeptierte Urteile. Sie können Ihren bevorzugten Madhhab in den App-Einstellungen auswählen, und alle Urteile werden entsprechend angepasst."
+        },
+        "languages": {
+          "question": "Ist AllHalal in meiner Sprache verfügbar?",
+          "answer": "AllHalal ist in 9 Sprachen verfügbar: Englisch, Französisch, Deutsch, Spanisch, Italienisch, Niederländisch, Russisch, Arabisch und Urdu. Die App erkennt automatisch die Sprache Ihres Geräts."
+        },
+        "accuracy": {
+          "question": "Wie genau ist der Barcode-Scanner?",
+          "answer": "Unser Barcode-Scanner hat eine Erkennungsrate von 99%+ für Produkte in unserer Datenbank. Wenn ein Produkt nicht gefunden wird, können Sie den KI-Zutaten-Scanner verwenden, um die Zutatenliste direkt von der Verpackung zu analysieren."
+        },
+        "offline": {
+          "question": "Kann ich AllHalal offline nutzen?",
+          "answer": "Einige Funktionen erfordern eine Internetverbindung für Echtzeit-Verifizierung. Zuvor gescannte Produkte und grundlegende Funktionen sind jedoch offline verfügbar."
+        },
+        "report": {
+          "question": "Wie melde ich einen falschen Produkteintrag?",
+          "answer": "Wenn Sie einen falschen Eintrag finden, senden Sie uns bitte eine E-Mail an app@allhalal.info mit dem Produktnamen, dem Barcode und dem festgestellten Problem. Unser Team überprüft alle Meldungen innerhalb von 48 Stunden."
+        },
+        "security": {
+          "question": "Sind meine Daten sicher?",
+          "answer": "Ja. Wir folgen branchenüblichen Sicherheitspraktiken einschließlich Verschlüsselung, sicherer Datenspeicherung und strenger Zugriffskontrollen. Wir verkaufen Ihre persönlichen Daten niemals. Lesen Sie unsere Datenschutzrichtlinie für vollständige Details."
+        },
+        "delete": {
+          "question": "Wie kann ich mein Konto löschen?",
+          "answer": "Sie können die Kontolöschung beantragen, indem Sie eine E-Mail an app@allhalal.info mit dem Betreff \"Antrag auf Kontolöschung\" senden. Wir werden Ihren Antrag innerhalb von 30 Tagen gemäß DSGVO bearbeiten."
+        }
+      }
+    },
+    "contact": {
+      "title": "Brauchen Sie Weitere Hilfe?",
+      "description": "Unser Support-Team hilft Ihnen gerne bei allen Fragen.",
+      "button": "Support Kontaktieren"
+    }
+  },
+  "contact": {
+    "title": "Kontaktieren Sie Uns",
+    "subtitle": "KONTAKT",
+    "description": "Haben Sie Fragen oder Feedback? Wir würden uns freuen, von Ihnen zu hören.",
+    "form": {
+      "name": "Ihr Name",
+      "email": "E-Mail-Adresse",
+      "subject": "Betreff",
+      "message": "Ihre Nachricht",
+      "submit": "Nachricht Senden",
+      "sending": "Wird gesendet...",
+      "success": "Nachricht erfolgreich gesendet!",
+      "error": "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    },
+    "info": {
+      "email": "E-Mail",
+      "response": "Wir antworten normalerweise innerhalb von 24-48 Stunden"
+    }
+  },
+  "legal": {
+    "privacy": {
+      "title": "Datenschutzrichtlinie",
+      "lastUpdated": "Zuletzt aktualisiert"
+    },
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "lastUpdated": "Zuletzt aktualisiert"
+    },
+    "disclaimer": {
+      "title": "Haftungsausschluss",
+      "lastUpdated": "Zuletzt aktualisiert"
+    }
+  },
+  "common": {
+    "learnMore": "Mehr Erfahren",
+    "getStarted": "Loslegen",
+    "close": "Schließen",
+    "menu": "Menü",
+    "language": "Sprache"
+  }
+}

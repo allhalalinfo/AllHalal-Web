@@ -6,14 +6,6 @@
  * Main landing page composed of all section components.
  * Structure mirrors hatchet.com.au with AllHalal content and green branding.
  * 
- * Sections order:
- * 1. Hero (pinned with particle animation)
- * 2. About (trusted companion intro)
- * 3. Why Choose (3 pillars)
- * 4. Features (main app features)
- * 5. Madhhab (4 schools)
- * 6. CTA (final call to action)
- * 
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 

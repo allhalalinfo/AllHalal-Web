@@ -1,8 +1,18 @@
+import createMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { locales, defaultLocale } from './i18n/config';
+
+// Create next-intl middleware
+const intlMiddleware = createMiddleware({
+  locales,
+  defaultLocale,
+  localePrefix: 'as-needed' // Don't add /en prefix for default locale
+});
 
 export function middleware(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
+  // Handle internationalization first
+  const response = intlMiddleware(request);
   
   // CSP - Allow Three.js WebGL rendering (requires unsafe-eval for shaders)
   const cspHeader = `
@@ -23,15 +33,6 @@ export function middleware(request: NextRequest) {
     manifest-src 'self';
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
-
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-nonce', nonce);
-
-  const response = NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
 
   // Security Headers - A+ Configuration
   response.headers.set('Content-Security-Policy', cspHeader);
@@ -60,14 +61,8 @@ export function middleware(request: NextRequest) {
   response.headers.set('X-DNS-Prefetch-Control', 'off');
   response.headers.set('X-Download-Options', 'noopen');
   response.headers.set('X-Permitted-Cross-Domain-Policies', 'none');
-  // Note: Cross-Origin-Embedder-Policy disabled for WebGL/Three.js compatibility
   response.headers.set('Cross-Origin-Opener-Policy', 'same-origin');
   response.headers.set('Cross-Origin-Resource-Policy', 'cross-origin');
-
-  // Enforce HTTPS in production
-  if (process.env.NODE_ENV === 'production' && request.headers.get('x-forwarded-proto') !== 'https') {
-    return NextResponse.redirect(`https://${request.headers.get('host')}${request.nextUrl.pathname}`, 301);
-  }
 
   return response;
 }
@@ -81,7 +76,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - assets (static assets)
+     * - app-screens (app screenshots)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|assets).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|assets|app-screens|.*\\..*).*)',
   ],
 };

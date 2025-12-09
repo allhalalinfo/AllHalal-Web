@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "title": "AllHalal - Uw Vertrouwde Halal Metgezel",
+    "description": "Scan, verifieer en leef halal met vertrouwen. AI-gestuurde ingrediëntenanalyse, gebedstijden en madhhab-specifieke uitspraken."
+  },
+  "nav": {
+    "home": "Home",
+    "features": "Functies",
+    "legal": "Juridisch",
+    "contact": "Contact",
+    "support": "Ondersteuning",
+    "downloadApp": "Download App"
+  },
+  "hero": {
+    "subtitle": "UW HALAL METGEZEL",
+    "title1": "SCAN",
+    "title2": "VERIFIEER",
+    "title3": "VERTROUW",
+    "description": "Moslims wereldwijd ondersteunen met AI-gestuurde halal verificatie. Scan elk product, krijg directe fiqh-uitspraken afgestemd op uw madhhab.",
+    "ctaAppStore": "App Store",
+    "ctaExplore": "Ontdek Functies"
+  },
+  "about": {
+    "subtitle": "UW VERTROUWDE HALAL METGEZEL",
+    "title": "Halal Leven Vereenvoudigen",
+    "description": "In een wereld van complexe ingrediënten en onduidelijke labels brengt AllHalal helderheid. Onze AI-gestuurde app analyseert producten direct en geeft uitspraken gebaseerd op authentieke islamitische geleerdheid.",
+    "mission": "Onze missie is om elke moslim in staat te stellen volgens zijn waarden te leven met vertrouwen en gemak.",
+    "stats": {
+      "products": "Geverifieerde Producten",
+      "languages": "Talen",
+      "madhhab": "Madhhab Opties",
+      "accuracy": "Nauwkeurigheidspercentage"
+    }
+  },
+  "whyChoose": {
+    "subtitle": "WAAROM ALLHALAL",
+    "title": "Waarom AllHalal Kiezen?",
+    "reasons": {
+      "scholarship": {
+        "title": "Authentieke Geleerdheid",
+        "description": "Onze uitspraken zijn gebaseerd op authentieke islamitische bronnen, met ondersteuning voor alle vier grote soennitische rechtsscholen plus algemene consensusuitspraken."
+      },
+      "ai": {
+        "title": "Geavanceerde AI-Technologie",
+        "description": "Onze AI analyseert direct ingrediënten, identificeert E-nummers, additieven en potentiële zorgen met opmerkelijke nauwkeurigheid."
+      },
+      "database": {
+        "title": "Wereldwijde Database",
+        "description": "Toegang tot miljoenen geverifieerde producten van over de hele wereld, met dagelijks nieuwe producten toegevoegd door onze community en team."
+      }
+    }
+  },
+  "features": {
+    "subtitle": "KRACHTIGE FUNCTIES",
+    "title": "Alles Wat U Nodig Heeft",
+    "description": "Van directe barcode-scanning tot uitgebreide gebedshulpmiddelen, AllHalal is uw complete halal levensstijl metgezel.",
+    "items": {
+      "scan": {
+        "title": "AI Ingrediënten Scan",
+        "description": "Richt uw camera op elke ingrediëntenlijst. Onze AI analyseert elk component en geeft een directe halal-uitspraak gebaseerd op uw gekozen madhhab."
+      },
+      "verified": {
+        "title": "Productverificatie",
+        "description": "Scan barcodes om producten direct te controleren in onze database van miljoenen geverifieerde items. Krijg gedetailleerde uitsplitsingen en alternatieve suggesties."
+      },
+      "prayer": {
+        "title": "Gebedstijden & Qibla",
+        "description": "Nauwkeurige gebedstijden voor uw locatie, mooie Qibla-kompas en islamitische kalender met belangrijke data en evenementen."
+      },
+      "cosmetics": {
+        "title": "Halal Cosmetica Verificatie",
+        "description": "Verifieer cosmetica en schoonheidsproducten op halal-conformiteit. Analyseer ingrediënten die dierlijke of op alcohol gebaseerde componenten kunnen bevatten."
+      },
+      "watch": {
+        "title": "Apple Watch Metgezel",
+        "description": "Krijg gebedstijden, Qibla-richting en islamitische kalender direct op uw pols. Mis nooit een gebed met slimme meldingen."
+      }
+    },
+    "premium": "Premium"
+  },
+  "madhhab": {
+    "subtitle": "UW PRAKTIJK. UW MADHHAB.",
+    "title": "Afgestemd op Uw Rechtsschool",
+    "description": "AllHalal respecteert de diversiteit van islamitische jurisprudentie. Kies uw madhhab en ontvang uitspraken die aansluiten bij uw praktijk.",
+    "founder": "Gesticht door",
+    "regions": "Regio's",
+    "schools": {
+      "general": {
+        "name": "Algemeen",
+        "arabicName": "عام",
+        "founder": "Algemeen Geaccepteerd",
+        "description": "Universele uitspraken geaccepteerd door alle scholen. Perfect voor wie breed geaccepteerde halal-classificaties verkiest zonder schoolspecifieke interpretaties.",
+        "regions": "Wereldwijd"
+      },
+      "hanafi": {
+        "name": "Hanafi",
+        "arabicName": "حنفي",
+        "founder": "Imam Abu Hanifa",
+        "description": "De grootste school van islamitische jurisprudentie, gevolgd door ongeveer 30% van de moslims wereldwijd. Bekend om zijn systematische methodologie en uitgebreid gebruik van rede.",
+        "regions": "Turkije, Centraal-Azië, Zuid-Azië, Balkan"
+      },
+      "shafii": {
+        "name": "Shafi'i",
+        "arabicName": "شافعي",
+        "founder": "Imam al-Shafi'i",
+        "description": "Bekend om zijn evenwichtige methodologie tussen tekstuele bronnen en redenering. Uitgebreid gevolgd in Zuidoost-Azië, Oost-Afrika en delen van het Midden-Oosten.",
+        "regions": "Zuidoost-Azië, Oost-Afrika, Jemen"
+      },
+      "maliki": {
+        "name": "Maliki",
+        "arabicName": "مالكي",
+        "founder": "Imam Malik ibn Anas",
+        "description": "Benadrukt de praktijken van het volk van Medina als aanvullende bron. Overheersend in Noord- en West-Afrika, en historisch in Al-Andalus.",
+        "regions": "Marokko, Algerije, West-Afrika, VAE"
+      },
+      "hanbali": {
+        "name": "Hanbali",
+        "arabicName": "حنبلي",
+        "founder": "Imam Ahmad ibn Hanbal",
+        "description": "Bekend om zijn strikte naleving van de Koran en Hadith. Voornamelijk gevolgd in Saoedi-Arabië en Qatar, met groeiende invloed wereldwijd.",
+        "regions": "Saoedi-Arabië, Qatar, Golfstaten"
+      }
+    }
+  },
+  "cta": {
+    "title": "Begin Vandaag Halal te Leven",
+    "description": "Sluit u aan bij duizenden moslims die vertrouwen op AllHalal voor hun dagelijkse halal verificatiebehoeften. Download nu en ervaar het verschil.",
+    "button": "Download in App Store",
+    "free": "Gratis te downloaden • Premium functies beschikbaar"
+  },
+  "footer": {
+    "description": "Uw vertrouwde halal metgezel. Scan, verifieer en leef volgens uw waarden met vertrouwen.",
+    "product": "Product",
+    "company": "Bedrijf",
+    "legal": "Juridisch",
+    "links": {
+      "features": "Functies",
+      "howItWorks": "Hoe Het Werkt",
+      "madhhabSupport": "Madhhab Ondersteuning",
+      "downloadApp": "Download App",
+      "aboutUs": "Over Ons",
+      "contact": "Contact",
+      "support": "Ondersteuning",
+      "privacyPolicy": "Privacybeleid",
+      "termsOfService": "Servicevoorwaarden",
+      "disclaimer": "Disclaimer"
+    },
+    "copyright": "Alle rechten voorbehouden.",
+    "developedBy": "Ontwikkeld door"
+  },
+  "support": {
+    "title": "Ondersteuningscentrum",
+    "subtitle": "HULP & ONDERSTEUNING",
+    "description": "Vind antwoorden op veelgestelde vragen of neem contact op met ons ondersteuningsteam.",
+    "searchPlaceholder": "Zoek naar hulp...",
+    "quickLinks": {
+      "title": "Snelle Links",
+      "email": {
+        "title": "E-mail Ondersteuning",
+        "desc": "Krijg hulp via e-mail"
+      },
+      "privacy": {
+        "title": "Privacybeleid",
+        "desc": "Hoe we uw gegevens beschermen"
+      },
+      "terms": {
+        "title": "Servicevoorwaarden",
+        "desc": "Gebruiksvoorwaarden"
+      },
+      "disclaimer": {
+        "title": "Disclaimer",
+        "desc": "Belangrijke juridische informatie"
+      }
+    },
+    "faq": {
+      "title": "Veelgestelde Vragen",
+      "items": {
+        "verification": {
+          "question": "Hoe verifieert AllHalal producten?",
+          "answer": "AllHalal gebruikt een combinatie van AI-gestuurde ingrediëntenanalyse en een uitgebreide database van meer dan 2 miljoen geverifieerde producten. Ons systeem analyseert ingrediënten, E-nummers en additieven om de halal-status te bepalen op basis van islamitische voedingsrichtlijnen."
+        },
+        "madhhab": {
+          "question": "Welke madhhab (rechtsschool) volgt AllHalal?",
+          "answer": "AllHalal ondersteunt alle vier grote soennitische rechtsscholen: Hanafi, Shafi'i, Maliki en Hanbali, plus een Algemene optie voor algemeen geaccepteerde uitspraken. U kunt uw voorkeurs-madhhab selecteren in de app-instellingen, en alle uitspraken worden dienovereenkomstig aangepast."
+        },
+        "languages": {
+          "question": "Is AllHalal beschikbaar in mijn taal?",
+          "answer": "AllHalal is beschikbaar in 9 talen: Engels, Frans, Duits, Spaans, Italiaans, Nederlands, Russisch, Arabisch en Urdu. De app detecteert automatisch de taal van uw apparaat."
+        },
+        "accuracy": {
+          "question": "Hoe nauwkeurig is de barcodescanner?",
+          "answer": "Onze barcodescanner heeft een herkenningspercentage van 99%+ voor producten in onze database. Als een product niet wordt gevonden, kunt u de AI-ingrediëntenscanner gebruiken om de ingrediëntenlijst direct van de verpakking te analyseren."
+        },
+        "offline": {
+          "question": "Kan ik AllHalal offline gebruiken?",
+          "answer": "Sommige functies vereisen een internetverbinding voor realtime verificatie. Eerder gescande producten en basisfunctionaliteit zijn echter offline beschikbaar."
+        },
+        "report": {
+          "question": "Hoe meld ik een onjuiste productvermelding?",
+          "answer": "Als u een onjuiste vermelding vindt, stuur ons dan een e-mail naar app@allhalal.info met de productnaam, barcode en het geïdentificeerde probleem. Ons team beoordeelt alle meldingen binnen 48 uur."
+        },
+        "security": {
+          "question": "Zijn mijn gegevens veilig?",
+          "answer": "Ja. We volgen industriestandaard beveiligingspraktijken inclusief encryptie, veilige gegevensopslag en strikte toegangscontroles. We verkopen nooit uw persoonlijke gegevens. Lees ons Privacybeleid voor volledige details."
+        },
+        "delete": {
+          "question": "Hoe kan ik mijn account verwijderen?",
+          "answer": "U kunt accountverwijdering aanvragen door een e-mail te sturen naar app@allhalal.info met het onderwerp \"Verzoek tot Accountverwijdering\". We verwerken uw verzoek binnen 30 dagen zoals vereist door de AVG."
+        }
+      }
+    },
+    "contact": {
+      "title": "Nog Hulp Nodig?",
+      "description": "Ons ondersteuningsteam staat klaar om u te helpen met al uw vragen.",
+      "button": "Contact Ondersteuning"
+    }
+  },
+  "contact": {
+    "title": "Neem Contact Op",
+    "subtitle": "CONTACT",
+    "description": "Heeft u vragen of feedback? We horen graag van u.",
+    "form": {
+      "name": "Uw Naam",
+      "email": "E-mailadres",
+      "subject": "Onderwerp",
+      "message": "Uw Bericht",
+      "submit": "Bericht Versturen",
+      "sending": "Versturen...",
+      "success": "Bericht succesvol verzonden!",
+      "error": "Bericht verzenden mislukt. Probeer het opnieuw."
+    },
+    "info": {
+      "email": "E-mail",
+      "response": "We reageren meestal binnen 24-48 uur"
+    }
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacybeleid",
+      "lastUpdated": "Laatst bijgewerkt"
+    },
+    "terms": {
+      "title": "Servicevoorwaarden",
+      "lastUpdated": "Laatst bijgewerkt"
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "lastUpdated": "Laatst bijgewerkt"
+    }
+  },
+  "common": {
+    "learnMore": "Meer Weten",
+    "getStarted": "Aan de Slag",
+    "close": "Sluiten",
+    "menu": "Menu",
+    "language": "Taal"
+  }
+}

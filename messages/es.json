@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "title": "AllHalal - Tu Compañero Halal de Confianza",
+    "description": "Escanea, verifica y vive halal con confianza. Análisis de ingredientes con IA, horarios de oración y dictámenes específicos del madhhab."
+  },
+  "nav": {
+    "home": "Inicio",
+    "features": "Funciones",
+    "legal": "Legal",
+    "contact": "Contacto",
+    "support": "Soporte",
+    "downloadApp": "Descargar App"
+  },
+  "hero": {
+    "subtitle": "TU COMPAÑERO HALAL",
+    "title1": "ESCANEA",
+    "title2": "VERIFICA",
+    "title3": "CONFÍA",
+    "description": "Empoderando a musulmanes en todo el mundo con verificación halal impulsada por IA. Escanea cualquier producto, obtén dictámenes fiqh instantáneos adaptados a tu madhhab.",
+    "ctaAppStore": "App Store",
+    "ctaExplore": "Explorar Funciones"
+  },
+  "about": {
+    "subtitle": "TU COMPAÑERO HALAL DE CONFIANZA",
+    "title": "Simplificando la Vida Halal",
+    "description": "En un mundo de ingredientes complejos y etiquetas poco claras, AllHalal trae claridad. Nuestra app impulsada por IA analiza productos instantáneamente y proporciona dictámenes basados en auténtica erudición islámica.",
+    "mission": "Nuestra misión es empoderar a cada musulmán para vivir según sus valores con confianza y facilidad.",
+    "stats": {
+      "products": "Productos Verificados",
+      "languages": "Idiomas",
+      "madhhab": "Opciones Madhhab",
+      "accuracy": "Tasa de Precisión"
+    }
+  },
+  "whyChoose": {
+    "subtitle": "POR QUÉ ALLHALAL",
+    "title": "¿Por Qué Elegir AllHalal?",
+    "reasons": {
+      "scholarship": {
+        "title": "Erudición Auténtica",
+        "description": "Nuestros dictámenes se basan en fuentes islámicas auténticas, con soporte para las cuatro grandes escuelas de pensamiento sunní más dictámenes de consenso general."
+      },
+      "ai": {
+        "title": "Tecnología IA Avanzada",
+        "description": "Nuestra IA analiza ingredientes instantáneamente, identificando números E, aditivos y preocupaciones potenciales con notable precisión."
+      },
+      "database": {
+        "title": "Base de Datos Global",
+        "description": "Accede a millones de productos verificados de todo el mundo, con nuevos productos añadidos diariamente por nuestra comunidad y equipo."
+      }
+    }
+  },
+  "features": {
+    "subtitle": "FUNCIONES POTENTES",
+    "title": "Todo Lo Que Necesitas",
+    "description": "Desde escaneo instantáneo de códigos de barras hasta herramientas completas de oración, AllHalal es tu compañero completo para un estilo de vida halal.",
+    "items": {
+      "scan": {
+        "title": "Escaneo de Ingredientes IA",
+        "description": "Apunta tu cámara a cualquier lista de ingredientes. Nuestra IA analiza cada componente y proporciona un dictamen halal instantáneo basado en tu madhhab elegido."
+      },
+      "verified": {
+        "title": "Verificación de Productos",
+        "description": "Escanea códigos de barras para verificar productos instantáneamente contra nuestra base de datos de millones de artículos verificados. Obtén desgloses detallados y sugerencias alternativas."
+      },
+      "prayer": {
+        "title": "Horarios de Oración y Qibla",
+        "description": "Horarios de oración precisos para tu ubicación, hermosa brújula Qibla y calendario islámico con fechas y eventos importantes."
+      },
+      "cosmetics": {
+        "title": "Verificación de Cosméticos Halal",
+        "description": "Verifica cosméticos y productos de belleza para cumplimiento halal. Analiza ingredientes que pueden contener componentes de origen animal o a base de alcohol."
+      },
+      "watch": {
+        "title": "Compañero Apple Watch",
+        "description": "Obtén horarios de oración, dirección Qibla y calendario islámico directamente en tu muñeca. Nunca te pierdas una oración con notificaciones inteligentes."
+      }
+    },
+    "premium": "Premium"
+  },
+  "madhhab": {
+    "subtitle": "TU PRÁCTICA. TU MADHHAB.",
+    "title": "Adaptado a Tu Escuela de Pensamiento",
+    "description": "AllHalal respeta la diversidad de la jurisprudencia islámica. Elige tu madhhab y recibe dictámenes que se alineen con tu práctica.",
+    "founder": "Fundada por",
+    "regions": "Regiones",
+    "schools": {
+      "general": {
+        "name": "General",
+        "arabicName": "عام",
+        "founder": "Comúnmente Aceptado",
+        "description": "Dictámenes universales aceptados por todas las escuelas. Perfecto para quienes prefieren clasificaciones halal ampliamente aceptadas sin interpretaciones específicas de escuela.",
+        "regions": "Mundial"
+      },
+      "hanafi": {
+        "name": "Hanafi",
+        "arabicName": "حنفي",
+        "founder": "Imam Abu Hanifa",
+        "description": "La escuela más grande de jurisprudencia islámica, seguida por aproximadamente el 30% de los musulmanes en todo el mundo. Conocida por su metodología sistemática y uso extenso de la razón.",
+        "regions": "Turquía, Asia Central, Asia del Sur, Balcanes"
+      },
+      "shafii": {
+        "name": "Shafi'i",
+        "arabicName": "شافعي",
+        "founder": "Imam al-Shafi'i",
+        "description": "Conocida por su metodología equilibrada entre fuentes textuales y razonamiento. Seguida extensamente en el Sudeste Asiático, África Oriental y partes del Medio Oriente.",
+        "regions": "Sudeste Asiático, África Oriental, Yemen"
+      },
+      "maliki": {
+        "name": "Maliki",
+        "arabicName": "مالكي",
+        "founder": "Imam Malik ibn Anas",
+        "description": "Enfatiza las prácticas del pueblo de Medina como fuente adicional. Predominante en el norte y oeste de África, e históricamente en Al-Ándalus.",
+        "regions": "Marruecos, Argelia, África Occidental, EAU"
+      },
+      "hanbali": {
+        "name": "Hanbali",
+        "arabicName": "حنبلي",
+        "founder": "Imam Ahmad ibn Hanbal",
+        "description": "Conocida por su estricta adherencia al Corán y al Hadiz. Seguida principalmente en Arabia Saudita y Qatar, con influencia creciente a nivel mundial.",
+        "regions": "Arabia Saudita, Qatar, Estados del Golfo"
+      }
+    }
+  },
+  "cta": {
+    "title": "Comienza a Vivir Halal Hoy",
+    "description": "Únete a miles de musulmanes que confían en AllHalal para sus necesidades diarias de verificación halal. Descarga ahora y experimenta la diferencia.",
+    "button": "Descargar en App Store",
+    "free": "Descarga gratuita • Funciones premium disponibles"
+  },
+  "footer": {
+    "description": "Tu compañero halal de confianza. Escanea, verifica y vive según tus valores con confianza.",
+    "product": "Producto",
+    "company": "Empresa",
+    "legal": "Legal",
+    "links": {
+      "features": "Funciones",
+      "howItWorks": "Cómo Funciona",
+      "madhhabSupport": "Soporte Madhhab",
+      "downloadApp": "Descargar App",
+      "aboutUs": "Sobre Nosotros",
+      "contact": "Contacto",
+      "support": "Soporte",
+      "privacyPolicy": "Política de Privacidad",
+      "termsOfService": "Términos de Servicio",
+      "disclaimer": "Aviso Legal"
+    },
+    "copyright": "Todos los derechos reservados.",
+    "developedBy": "Desarrollado por"
+  },
+  "support": {
+    "title": "Centro de Soporte",
+    "subtitle": "AYUDA Y SOPORTE",
+    "description": "Encuentra respuestas a preguntas comunes o contacta con nuestro equipo de soporte.",
+    "searchPlaceholder": "Buscar ayuda...",
+    "quickLinks": {
+      "title": "Enlaces Rápidos",
+      "email": {
+        "title": "Soporte por Email",
+        "desc": "Obtén ayuda por email"
+      },
+      "privacy": {
+        "title": "Política de Privacidad",
+        "desc": "Cómo protegemos tus datos"
+      },
+      "terms": {
+        "title": "Términos de Servicio",
+        "desc": "Términos y condiciones de uso"
+      },
+      "disclaimer": {
+        "title": "Aviso Legal",
+        "desc": "Información legal importante"
+      }
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "items": {
+        "verification": {
+          "question": "¿Cómo verifica AllHalal los productos?",
+          "answer": "AllHalal utiliza una combinación de análisis de ingredientes impulsado por IA y una base de datos completa de más de 2 millones de productos verificados. Nuestro sistema analiza ingredientes, números E y aditivos para determinar el estado halal según las directrices dietéticas islámicas."
+        },
+        "madhhab": {
+          "question": "¿Qué madhhab (escuela de pensamiento) sigue AllHalal?",
+          "answer": "AllHalal soporta las cuatro grandes escuelas de jurisprudencia islámica sunní: Hanafi, Shafi'i, Maliki y Hanbali, más una opción General para dictámenes comúnmente aceptados. Puedes seleccionar tu madhhab preferido en la configuración de la app, y todos los dictámenes se adaptarán en consecuencia."
+        },
+        "languages": {
+          "question": "¿Está AllHalal disponible en mi idioma?",
+          "answer": "AllHalal está disponible en 9 idiomas: inglés, francés, alemán, español, italiano, neerlandés, ruso, árabe y urdu. La app detecta automáticamente el idioma de tu dispositivo."
+        },
+        "accuracy": {
+          "question": "¿Qué tan preciso es el escáner de códigos de barras?",
+          "answer": "Nuestro escáner de códigos de barras tiene una tasa de reconocimiento del 99%+ para productos en nuestra base de datos. Si un producto no se encuentra, puedes usar el escáner de ingredientes IA para analizar la lista de ingredientes directamente del empaque."
+        },
+        "offline": {
+          "question": "¿Puedo usar AllHalal sin conexión?",
+          "answer": "Algunas funciones requieren conexión a internet para verificación en tiempo real. Sin embargo, los productos previamente escaneados y la funcionalidad básica están disponibles sin conexión."
+        },
+        "report": {
+          "question": "¿Cómo reporto un listado de producto incorrecto?",
+          "answer": "Si encuentras un listado incorrecto, por favor envíanos un email a app@allhalal.info con el nombre del producto, código de barras y el problema que has identificado. Nuestro equipo revisa todos los reportes en 48 horas."
+        },
+        "security": {
+          "question": "¿Están seguros mis datos?",
+          "answer": "Sí. Seguimos prácticas de seguridad estándar de la industria incluyendo encriptación, almacenamiento seguro de datos y controles de acceso estrictos. Nunca vendemos tus datos personales. Lee nuestra Política de Privacidad para detalles completos."
+        },
+        "delete": {
+          "question": "¿Cómo puedo eliminar mi cuenta?",
+          "answer": "Puedes solicitar la eliminación de cuenta enviando un email a app@allhalal.info con el asunto \"Solicitud de Eliminación de Cuenta\". Procesaremos tu solicitud dentro de 30 días según lo requerido por el RGPD."
+        }
+      }
+    },
+    "contact": {
+      "title": "¿Aún Necesitas Ayuda?",
+      "description": "Nuestro equipo de soporte está aquí para ayudarte con cualquier pregunta.",
+      "button": "Contactar Soporte"
+    }
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "CONTACTO",
+    "description": "¿Tienes preguntas o comentarios? Nos encantaría saber de ti.",
+    "form": {
+      "name": "Tu Nombre",
+      "email": "Correo Electrónico",
+      "subject": "Asunto",
+      "message": "Tu Mensaje",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado exitosamente!",
+      "error": "Error al enviar el mensaje. Por favor intenta de nuevo."
+    },
+    "info": {
+      "email": "Correo",
+      "response": "Normalmente respondemos en 24-48 horas"
+    }
+  },
+  "legal": {
+    "privacy": {
+      "title": "Política de Privacidad",
+      "lastUpdated": "Última actualización"
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "lastUpdated": "Última actualización"
+    },
+    "disclaimer": {
+      "title": "Aviso Legal",
+      "lastUpdated": "Última actualización"
+    }
+  },
+  "common": {
+    "learnMore": "Saber Más",
+    "getStarted": "Comenzar",
+    "close": "Cerrar",
+    "menu": "Menú",
+    "language": "Idioma"
+  }
+}

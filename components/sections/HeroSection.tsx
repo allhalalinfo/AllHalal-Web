@@ -17,8 +17,8 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 import ScrambleText from "../ui/ScrambleText";
-
 import MagneticButton from "../ui/MagneticButton";
 
 const ParticleAnimation = dynamic(() => import("@/components/three/ParticleBarcode"), {
@@ -31,6 +31,7 @@ if (typeof window !== "undefined") {
 }
 
 export default function HeroSection() {
+  const t = useTranslations("hero");
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -88,7 +89,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Halal Verification Platform
+              {t("subtitle")}
             </motion.p>
 
             {/* Main Title */}
@@ -98,10 +99,10 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <span className="block"><ScrambleText text="SCAN" delay={0.5} /></span>
-              <span className="block"><ScrambleText text="VERIFY" delay={0.7} /></span>
+              <span className="block"><ScrambleText text={t("title1")} delay={0.5} /></span>
+              <span className="block"><ScrambleText text={t("title2")} delay={0.7} /></span>
               <span className="block">
-                <span className="text-highlight"><ScrambleText text="TRUST" delay={0.9} /></span>
+                <span className="text-highlight"><ScrambleText text={t("title3")} delay={0.9} /></span>
               </span>
             </motion.h1>
 
@@ -112,8 +113,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              The most advanced halal scanner in the world. AI-powered verification 
-              for over 2 million products globally.
+              {t("description")}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -131,7 +131,7 @@ export default function HeroSection() {
                 strength={0.3}
               >
                 <AppleIcon className="w-5 h-5" />
-                <span className="hidden sm:inline">Download on</span> App Store
+                {t("ctaAppStore")}
                 <ArrowIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </MagneticButton>
               <MagneticButton
@@ -139,7 +139,7 @@ export default function HeroSection() {
                 className="btn btn-secondary btn-lg group"
                 strength={0.3}
               >
-                Explore Features
+                {t("ctaExplore")}
                 <ArrowDownIcon className="w-4 h-4 transition-transform group-hover:translate-y-1" />
               </MagneticButton>
             </motion.div>

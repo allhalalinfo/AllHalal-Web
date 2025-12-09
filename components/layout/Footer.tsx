@@ -19,35 +19,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-// Footer navigation structure
-const footerNav = {
-  product: {
-    title: "Product",
-    links: [
-      { label: "Features", href: "/#features" },
-      { label: "How It Works", href: "/#about" },
-      { label: "Madhhab Support", href: "/#madhhab" },
-      { label: "Download App", href: "https://apps.apple.com/app/allhalal/id6504640498" },
-    ],
-  },
-  company: {
-    title: "Company",
-    links: [
-      { label: "About Us", href: "/#about" },
-      { label: "Contact", href: "/contact" },
-      { label: "Support", href: "/support" },
-    ],
-  },
-  legal: {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "/legal/privacy-policy" },
-      { label: "Terms of Service", href: "/legal/terms-of-service" },
-      { label: "Disclaimer", href: "/legal/disclaimer" },
-    ],
-  },
-};
+import { useTranslations } from "next-intl";
 
 const socialLinks = [
   { label: "Instagram", href: "https://instagram.com/allhalal.info", icon: InstagramIcon },
@@ -75,6 +47,37 @@ const itemVariants = {
 };
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  
+  // Footer navigation structure with translations
+  const footerNav = {
+    product: {
+      title: t("product"),
+      links: [
+        { label: t("links.features"), href: "/#features" },
+        { label: t("links.howItWorks"), href: "/#about" },
+        { label: t("links.madhhabSupport"), href: "/#madhhab" },
+        { label: t("links.downloadApp"), href: "https://apps.apple.com/app/allhalal/id6504640498" },
+      ],
+    },
+    company: {
+      title: t("company"),
+      links: [
+        { label: t("links.aboutUs"), href: "/#about" },
+        { label: t("links.contact"), href: "/contact" },
+        { label: t("links.support"), href: "/support" },
+      ],
+    },
+    legal: {
+      title: t("legal"),
+      links: [
+        { label: t("links.privacyPolicy"), href: "/legal/privacy-policy" },
+        { label: t("links.termsOfService"), href: "/legal/terms-of-service" },
+        { label: t("links.disclaimer"), href: "/legal/disclaimer" },
+      ],
+    },
+  };
+
   return (
     <footer className="bg-bg-secondary border-t border-border">
       {/* Main Footer Content */}
@@ -92,7 +95,7 @@ export default function Footer() {
               <span className="text-2xl font-bold text-text-primary">allhalal.info</span>
             </Link>
             <p className="mt-4 text-text-secondary max-w-sm leading-relaxed">
-              Your trusted halal companion. Scan, verify, and live according to your values with confidence.
+              {t("description")}
             </p>
             <div className="mt-6">
               <a
@@ -149,10 +152,10 @@ export default function Footer() {
         <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-text-muted text-sm">
-              © {new Date().getFullYear()} AllHalal. All rights reserved.
+              © {new Date().getFullYear()} AllHalal. {t("copyright")}
             </p>
             <p className="text-text-muted text-sm">
-              Developed by{" "}
+              {t("developedBy")}{" "}
               <a
                 href="https://gezellix.com"
                 target="_blank"

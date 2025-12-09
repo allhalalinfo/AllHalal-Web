@@ -19,16 +19,19 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-
-// Navigation items configuration
-const navItems = [
-  { label: "Features", href: "/#features" },
-  { label: "About", href: "/#about" },
-  { label: "Legal", href: "/legal" },
-  { label: "Contact", href: "/contact" },
-];
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 export default function Header() {
+  const t = useTranslations("nav");
+  
+  // Navigation items configuration
+  const navItems = [
+    { label: t("features"), href: "/#features" },
+    { label: t("legal"), href: "/legal" },
+    { label: t("contact"), href: "/contact" },
+    { label: t("support"), href: "/support" },
+  ];
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -109,15 +112,16 @@ export default function Header() {
               ))}
             </div>
 
-            {/* CTA Button - Desktop */}
-            <div className="hidden md:block">
+            {/* CTA Button + Language Switcher - Desktop */}
+            <div className="hidden md:flex items-center gap-4">
+              <LanguageSwitcher />
               <Link
                 href="https://apps.apple.com/app/allhalal/id6504640498"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
               >
-                Download App
+                {t("downloadApp")}
               </Link>
             </div>
 
@@ -195,12 +199,23 @@ export default function Header() {
                 </motion.div>
               ))}
               
+              {/* Language Switcher - Mobile */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3, delay: 0.25 }}
+                className="mt-4"
+              >
+                <LanguageSwitcher />
+              </motion.div>
+              
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3, delay: 0.3 }}
-                className="mt-8"
+                className="mt-4"
               >
                 <Link
                   href="https://apps.apple.com/app/allhalal/id6504640498"
@@ -209,7 +224,7 @@ export default function Header() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="btn btn-primary btn-lg"
                 >
-                  Download App
+                  {t("downloadApp")}
                 </Link>
               </motion.div>
             </motion.nav>
