@@ -3,11 +3,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { locales, defaultLocale } from './i18n/config';
 
-// Create next-intl middleware
+// Create next-intl middleware with locale detection
 const intlMiddleware = createMiddleware({
   locales,
   defaultLocale,
-  localePrefix: 'as-needed' // Don't add /en prefix for default locale
+  localePrefix: 'as-needed', // Don't add /en prefix for default locale
+  localeDetection: true // Auto-detect user's preferred language
 });
 
 export function middleware(request: NextRequest) {
