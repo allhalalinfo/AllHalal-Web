@@ -4,18 +4,11 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  * SUPPORT PAGE
  * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Features:
- * - Hero section with search intent
- * - Quick links grid (Email, Legal docs)
- * - FAQ Accordion section
- * - Contact CTA
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SpotlightCard from "@/components/ui/SpotlightCard";
@@ -23,79 +16,22 @@ import ScrambleText from "@/components/ui/ScrambleText";
 import MagneticButton from "@/components/ui/MagneticButton";
 import Link from "next/link";
 
-// FAQ Data
-const faqs = [
-  {
-    question: "How does AllHalal verify products?",
-    answer: "AllHalal uses a combination of AI-powered ingredient analysis and a comprehensive database of over 2 million verified products. Our system analyzes ingredients, E-numbers, and additives to determine halal status based on Islamic dietary guidelines."
-  },
-  {
-    question: "Which madhhab (school of thought) does AllHalal follow?",
-    answer: "AllHalal supports all four major Sunni schools of Islamic jurisprudence: Hanafi, Shafi'i, Maliki, and Hanbali, plus a General option for commonly accepted rulings. You can select your preferred madhhab in the app settings, and all rulings will be tailored accordingly."
-  },
-  {
-    question: "Is AllHalal available in my language?",
-    answer: "AllHalal is available in 9 languages: English, French, German, Spanish, Italian, Dutch, Russian, Arabic, and Urdu. The app automatically detects your device language."
-  },
-  {
-    question: "How accurate is the barcode scanner?",
-    answer: "Our barcode scanner has a 99%+ recognition rate for products in our database. If a product is not found, you can use the AI ingredient scanner to analyze the ingredients list directly from the packaging."
-  },
-  {
-    question: "Can I use AllHalal offline?",
-    answer: "Some features require an internet connection for real-time verification. However, previously scanned products and basic functionality are available offline."
-  },
-  {
-    question: "How do I report an incorrect product listing?",
-    answer: "If you find an incorrect listing, please email us at app@allhalal.info with the product name, barcode, and the issue you've identified. Our team reviews all reports within 48 hours."
-  },
-  {
-    question: "Is my data secure?",
-    answer: "Yes. We follow industry-standard security practices including encryption, secure data storage, and strict access controls. We never sell your personal data. Read our Privacy Policy for complete details."
-  },
-  {
-    question: "How can I delete my account?",
-    answer: "You can request account deletion by emailing app@allhalal.info with the subject \"Account Deletion Request\". We will process your request within 30 days as required by GDPR."
-  }
-];
+// FAQ keys
+const faqKeys = ["howVerify", "madhhab", "languages", "scanner", "offline", "report", "security", "delete"] as const;
 
-// Quick Links Data
-const quickLinks = [
-  {
-    icon: "✉️",
-    title: "Email Support",
-    desc: "Get help via email",
-    link: "mailto:app@allhalal.info",
-    linkText: "app@allhalal.info",
-    external: true
-  },
-  {
-    icon: "🔒",
-    title: "Privacy Policy",
-    desc: "How we protect your data",
-    link: "/legal/privacy-policy",
-    linkText: "Read policy",
-    external: false
-  },
-  {
-    icon: "📋",
-    title: "Terms of Service",
-    desc: "Usage guidelines",
-    link: "/legal/terms-of-service",
-    linkText: "Read terms",
-    external: false
-  },
-  {
-    icon: "⚠️",
-    title: "Disclaimer",
-    desc: "Important information",
-    link: "/legal/disclaimer",
-    linkText: "Read disclaimer",
-    external: false
-  }
-];
+// Quick Link keys
+const quickLinkKeys = ["email", "privacy", "terms", "disclaimer"] as const;
+
+const quickLinkConfig = {
+  email: { icon: "✉️", link: "mailto:app@allhalal.info", external: true },
+  privacy: { icon: "🔒", link: "/legal/privacy-policy", external: false },
+  terms: { icon: "📋", link: "/legal/terms-of-service", external: false },
+  disclaimer: { icon: "⚠️", link: "/legal/disclaimer", external: false },
+};
 
 export default function SupportPage() {
+  const t = useTranslations("support");
+
   return (
     <>
       <Header />
@@ -110,7 +46,7 @@ export default function SupportPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Support Center
+              {t("subtitle")}
             </motion.span>
             
             <motion.h1
@@ -119,7 +55,7 @@ export default function SupportPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              How can we <span className="text-gradient">help?</span>
+              {t("title")}
             </motion.h1>
             
             <motion.p
@@ -128,37 +64,40 @@ export default function SupportPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Find answers to common questions or reach out to our team
+              {t("description")}
             </motion.p>
           </div>
 
           {/* Quick Links Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
-            {quickLinks.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              >
-                <Link href={item.link} target={item.external ? "_blank" : undefined}>
-                  <SpotlightCard className="h-full p-6 flex flex-col items-start hover:border-primary/50 transition-colors cursor-pointer group">
-                    <div className="text-3xl mb-4 group-transform group-hover:scale-110 transition-transform duration-300">
-                      {item.icon}
-                    </div>
-                    <h3 className="text-lg font-bold text-text-primary mb-2">
-                      <ScrambleText text={item.title} hover />
-                    </h3>
-                    <p className="text-text-secondary text-sm mb-4 flex-grow">
-                      {item.desc}
-                    </p>
-                    <div className="flex items-center text-primary text-sm font-medium mt-auto group-hover:translate-x-1 transition-transform">
-                      {item.linkText} <span className="ml-1">→</span>
-                    </div>
-                  </SpotlightCard>
-                </Link>
-              </motion.div>
-            ))}
+            {quickLinkKeys.map((key, index) => {
+              const config = quickLinkConfig[key];
+              return (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                >
+                  <Link href={config.link} target={config.external ? "_blank" : undefined}>
+                    <SpotlightCard className="h-full p-6 flex flex-col items-start hover:border-primary/50 transition-colors cursor-pointer group">
+                      <div className="text-3xl mb-4 group-transform group-hover:scale-110 transition-transform duration-300">
+                        {config.icon}
+                      </div>
+                      <h3 className="text-lg font-bold text-text-primary mb-2">
+                        <ScrambleText text={t(`quickLinks.${key}.title`)} hover />
+                      </h3>
+                      <p className="text-text-secondary text-sm mb-4 flex-grow">
+                        {t(`quickLinks.${key}.desc`)}
+                      </p>
+                      <div className="flex items-center text-primary text-sm font-medium mt-auto group-hover:translate-x-1 transition-transform">
+                        {t(`quickLinks.${key}.linkText`)} <span className="ml-1">→</span>
+                      </div>
+                    </SpotlightCard>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* FAQ Section */}
@@ -169,12 +108,17 @@ export default function SupportPage() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
-              Frequently Asked Questions
+              {t("faqTitle")}
             </motion.h2>
 
             <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} question={faq.question} answer={faq.answer} index={index} />
+              {faqKeys.map((key, index) => (
+                <AccordionItem 
+                  key={key} 
+                  question={t(`faq.${key}.question`)} 
+                  answer={t(`faq.${key}.answer`)} 
+                  index={index} 
+                />
               ))}
             </div>
           </div>
@@ -187,22 +131,21 @@ export default function SupportPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            {/* Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
             
             <div className="relative z-10">
               <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
-                Still need help?
+                {t("ctaTitle")}
               </h2>
               <p className="text-text-secondary mb-8 max-w-lg mx-auto">
-                Our support team is here to assist you with any questions or issues you may have.
+                {t("ctaDescription")}
               </p>
               
               <MagneticButton
                 href="mailto:app@allhalal.info"
                 className="btn btn-primary btn-lg"
               >
-                Contact Support
+                {t("ctaButton")}
               </MagneticButton>
             </div>
           </motion.div>
@@ -214,7 +157,6 @@ export default function SupportPage() {
   );
 }
 
-// Accordion Component
 function AccordionItem({ question, answer, index }: { question: string; answer: string; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
 

@@ -4,20 +4,14 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  * CTA SECTION - Final Call to Action
  * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Features:
- * - Strong headline with glow effect
- * - Animated background
- * - Primary download button
- * - Trust badges
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function CTASection() {
+  const t = useTranslations("cta");
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
@@ -28,7 +22,6 @@ export default function CTASection() {
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Central glow */}
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
           style={{
@@ -45,30 +38,15 @@ export default function CTASection() {
           }}
         />
         
-        {/* Floating orbs */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-primary/10 blur-2xl"
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 20, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-primary/5 blur-3xl"
-          animate={{
-            y: [0, 40, 0],
-            x: [0, -30, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, 40, 0], x: [0, -30, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -87,7 +65,7 @@ export default function CTASection() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm text-primary font-medium">Available Now on iOS</span>
+            <span className="text-sm text-primary font-medium">{t("badge")}</span>
           </motion.div>
 
           {/* Headline */}
@@ -97,9 +75,7 @@ export default function CTASection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Start Living{" "}
-            <span className="text-gradient">Halal</span>{" "}
-            Today
+            {t("title")}
           </motion.h2>
 
           {/* Description */}
@@ -109,8 +85,7 @@ export default function CTASection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Join millions of Muslims who trust AllHalal for their daily halal 
-            verification needs. Download now and experience the difference.
+            {t("description")}
           </motion.p>
 
           {/* Download Button */}
@@ -126,7 +101,7 @@ export default function CTASection() {
               className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-bg-primary font-semibold text-lg rounded-full transition-all duration-300 hover:bg-primary-light hover:shadow-glow hover:-translate-y-1"
             >
               <AppleIcon className="w-6 h-6" />
-              Download on App Store
+              {t("button")}
               <motion.span
                 className="inline-block"
                 animate={{ x: [0, 4, 0] }}
@@ -144,9 +119,9 @@ export default function CTASection() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <TrustBadge icon={ShieldIcon} text="Secure & Private" />
-            <TrustBadge icon={GlobeIcon} text="Available Worldwide" />
-            <TrustBadge icon={StarIcon} text="4.9★ Rating" />
+            <TrustBadge icon={ShieldIcon} text={t("trust.secure")} />
+            <TrustBadge icon={GlobeIcon} text={t("trust.worldwide")} />
+            <TrustBadge icon={StarIcon} text={t("trust.rating")} />
           </motion.div>
         </motion.div>
       </div>
@@ -154,7 +129,6 @@ export default function CTASection() {
   );
 }
 
-// Trust Badge Component
 function TrustBadge({ icon: Icon, text }: { icon: React.FC<{ className?: string }>; text: string }) {
   return (
     <div className="flex items-center gap-2 text-text-tertiary">
@@ -164,7 +138,6 @@ function TrustBadge({ icon: Icon, text }: { icon: React.FC<{ className?: string 
   );
 }
 
-// Icon Components
 function AppleIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -197,4 +170,3 @@ function StarIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-

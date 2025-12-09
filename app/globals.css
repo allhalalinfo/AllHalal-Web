@@ -614,57 +614,55 @@ body {
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   MOBILE ANIMATION OPTIMIZATIONS
+   MOBILE PERFORMANCE - AGGRESSIVE OPTIMIZATION
    ═══════════════════════════════════════════════════════════════════════════════ */
-
-/* GPU acceleration for animated elements */
-.gpu-accelerated {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
 
-/* Mobile-specific optimizations */
+/* MOBILE: Disable ALL complex animations */
 @media (max-width: 768px) {
-  /* Disable complex animations on mobile for performance */
-  .section,
-  .container {
-    transform: none !important;
-    will-change: auto;
-  }
-  
-  /* Simpler transitions on mobile */
+  /* Kill all animations and transforms */
   * {
-    transition-duration: 0.15s !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.1s !important;
+    transition-delay: 0s !important;
   }
   
-  /* Prevent layout shifts */
-  img {
+  /* Disable transforms that cause repaints */
+  [style*="transform"],
+  [style*="opacity"] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  /* Disable will-change everywhere */
+  * {
+    will-change: auto !important;
+  }
+  
+  /* Prevent content shifts */
+  img, video, canvas {
     content-visibility: auto;
   }
+  
+  /* Simple tap feedback */
+  * {
+    -webkit-tap-highlight-color: rgba(0, 208, 148, 0.1);
+  }
 }
 
-/* Touch device optimizations */
+/* Touch devices - disable hover effects */
 @media (pointer: coarse) {
-  /* Faster hover states for touch */
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Remove hover animations on touch devices */
-  .group:hover .group-hover\\:translate-x-1,
-  .group:hover .group-hover\\:translate-y-1 {
-    transform: none;
+  *:hover {
+    transform: none !important;
   }
 }

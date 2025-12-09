@@ -1,8 +1,4 @@
 {
-  "metadata": {
-    "title": "AllHalal - Your Trusted Halal Companion",
-    "description": "Scan, verify, and live halal with confidence. AI-powered ingredient analysis, prayer times, and madhhab-specific rulings."
-  },
   "nav": {
     "home": "Home",
     "features": "Features",
@@ -21,10 +17,10 @@
     "ctaExplore": "Explore Features"
   },
   "about": {
-    "subtitle": "YOUR TRUSTED HALAL COMPANION",
-    "title": "Making Halal Living Simple",
-    "description": "In a world of complex ingredients and unclear labels, AllHalal brings clarity. Our AI-powered app instantly analyzes products and provides rulings based on authentic Islamic scholarship.",
-    "mission": "Our mission is to empower every Muslim to live according to their values with confidence and ease.",
+    "subtitle": "About allhalal.info",
+    "title": "Your Trusted Halal Companion for Modern Living",
+    "description": "allhalal.info combines authentic Islamic scholarship with cutting-edge AI technology to provide accurate, reliable halal verification for Muslims worldwide. Our mission is to make living a halal lifestyle effortless and accessible.",
+    "mission": "Empowering Muslims worldwide to make informed choices about what they consume, guided by authentic scholarship and powered by advanced technology.",
     "stats": {
       "products": "Products Verified",
       "languages": "Languages",
@@ -33,100 +29,100 @@
     }
   },
   "whyChoose": {
-    "subtitle": "WHY ALLHALAL",
-    "title": "Why Choose AllHalal?",
+    "subtitle": "Why Choose allhalal.info",
+    "title": "Built on Three Pillars of Excellence",
     "reasons": {
       "scholarship": {
         "title": "Authentic Scholarship",
-        "description": "Our rulings are based on authentic Islamic sources, with support for all four major Sunni schools of thought plus general consensus rulings."
+        "description": "Our rulings are based on authentic Islamic scholarship across all four major Sunni schools of thought (madhahib). Every ingredient classification is reviewed against established fiqh principles."
       },
       "ai": {
         "title": "Advanced AI Technology",
-        "description": "Our AI instantly analyzes ingredients, identifying E-numbers, additives, and potential concerns with remarkable accuracy."
+        "description": "Cutting-edge artificial intelligence analyzes ingredient lists instantly, cross-referencing against our comprehensive database to provide accurate halal status in seconds."
       },
       "database": {
         "title": "Global Database",
-        "description": "Access millions of verified products from around the world, with new products added daily by our community and team."
+        "description": "Access verified halal information for over 2 million products worldwide. Our database grows daily with community contributions and expert verifications."
       }
     }
   },
   "features": {
-    "subtitle": "POWERFUL FEATURES",
-    "title": "Everything You Need",
-    "description": "From instant barcode scanning to comprehensive prayer tools, AllHalal is your complete halal lifestyle companion.",
+    "subtitle": "Features",
+    "title": "Everything You Need for Halal Living",
+    "description": "Powerful features designed to make halal verification simple, accurate, and accessible.",
+    "premium": "Premium",
     "items": {
       "scan": {
-        "title": "AI Ingredient Scan",
-        "description": "Point your camera at any ingredient list. Our AI analyzes every component and provides an instant halal ruling based on your chosen madhhab."
+        "title": "AI Ingredient Scanner",
+        "description": "Simply scan any product barcode or take a photo of the ingredient list. Our advanced AI analyzes each ingredient against our comprehensive halal database, providing instant verification with detailed explanations."
       },
       "verified": {
-        "title": "Product Verification",
-        "description": "Scan barcodes to instantly check products against our database of millions of verified items. Get detailed breakdowns and alternative suggestions."
-      },
-      "prayer": {
-        "title": "Prayer Times & Qibla",
-        "description": "Accurate prayer times for your location, beautiful Qibla compass, and Islamic calendar with important dates and events."
+        "title": "Product Verification & Halal Status",
+        "description": "Get instant verification for any product. Our comprehensive database covers millions of products worldwide, with detailed halal status information backed by authentic Islamic scholarship."
       },
       "cosmetics": {
         "title": "Halal Cosmetics Verification",
-        "description": "Verify cosmetics and beauty products for halal compliance. Analyze ingredients that may contain animal-derived or alcohol-based components."
+        "description": "Not just food — allhalal.info helps you verify cosmetics and beauty products too. Check ingredients for animal-derived components and ensure your skincare routine aligns with Islamic principles."
+      },
+      "prayer": {
+        "title": "Prayer Times, Qibla & Islamic Calendar",
+        "description": "Everything you need for your daily Islamic practice in one app. Accurate prayer times based on your location, precise Qibla direction, and a complete Hijri calendar with important Islamic dates."
       },
       "watch": {
         "title": "Apple Watch Companion",
-        "description": "Get prayer times, Qibla direction, and Islamic calendar right on your wrist. Never miss a prayer with smart notifications."
+        "description": "Access essential halal features right from your wrist. Quick product scans, prayer time notifications, and Qibla direction — all optimized for Apple Watch."
       }
-    },
-    "premium": "Premium"
+    }
   },
   "madhhab": {
-    "subtitle": "YOUR PRACTICE. YOUR MADHHAB.",
-    "title": "Tailored to Your School of Thought",
-    "description": "AllHalal respects the diversity of Islamic jurisprudence. Choose your madhhab and receive rulings that align with your practice.",
-    "founder": "Founded by",
-    "regions": "Regions",
+    "subtitle": "Your Practice. Your Madhhab.",
+    "title": "Respect for All Four Schools of Thought",
+    "description": "allhalal.info provides rulings according to your chosen madhhab, honoring the rich tradition of Islamic jurisprudence.",
+    "regions": "Primary Regions",
+    "note": "Select your preferred madhhab in the app settings to receive personalized rulings aligned with your school of thought.",
     "schools": {
       "general": {
         "name": "General",
-        "arabicName": "عام",
         "founder": "Commonly Accepted",
-        "description": "Universal rulings accepted across all schools. Perfect for those who prefer broadly agreed-upon halal classifications without school-specific interpretations.",
+        "description": "Universal rulings accepted across all schools. Perfect for those who prefer broadly agreed-upon halal classifications.",
         "regions": "Worldwide"
       },
       "hanafi": {
         "name": "Hanafi",
-        "arabicName": "حنفي",
         "founder": "Imam Abu Hanifa",
-        "description": "The largest school of Islamic jurisprudence, followed by approximately 30% of Muslims worldwide. Known for its systematic methodology and extensive use of reason.",
+        "description": "The largest school of Islamic jurisprudence, followed by approximately 30% of Muslims worldwide.",
         "regions": "Turkey, Central Asia, South Asia, Balkans"
       },
       "shafii": {
         "name": "Shafi'i",
-        "arabicName": "شافعي",
         "founder": "Imam al-Shafi'i",
-        "description": "Known for its balanced methodology between textual sources and reasoning. Followed extensively in Southeast Asia, East Africa, and parts of the Middle East.",
+        "description": "Known for its balanced methodology between textual sources and reasoning.",
         "regions": "Southeast Asia, East Africa, Yemen"
       },
       "maliki": {
         "name": "Maliki",
-        "arabicName": "مالكي",
         "founder": "Imam Malik ibn Anas",
-        "description": "Emphasizes the practices of the people of Medina as an additional source. Predominant in North and West Africa, and historically in Al-Andalus.",
+        "description": "Emphasizes the practices of the people of Medina as an additional source.",
         "regions": "Morocco, Algeria, West Africa, UAE"
       },
       "hanbali": {
         "name": "Hanbali",
-        "arabicName": "حنبلي",
         "founder": "Imam Ahmad ibn Hanbal",
-        "description": "Known for its strict adherence to the Quran and Hadith. Followed primarily in Saudi Arabia and Qatar, with growing influence globally.",
+        "description": "Known for its strict adherence to the Quran and Hadith.",
         "regions": "Saudi Arabia, Qatar, Gulf States"
       }
     }
   },
   "cta": {
+    "badge": "Available Now on iOS",
     "title": "Start Living Halal Today",
-    "description": "Join thousands of Muslims who trust AllHalal for their daily halal verification needs. Download now and experience the difference.",
+    "description": "Join thousands of Muslims who trust allhalal.info for their daily halal verification needs. Download now and experience the difference.",
     "button": "Download on App Store",
-    "free": "Free to download • Premium features available"
+    "trust": {
+      "secure": "Secure & Private",
+      "worldwide": "Available Worldwide",
+      "rating": "4.9★ Rating"
+    }
   },
   "footer": {
     "description": "Your trusted halal companion. Scan, verify, and live according to your values with confidence.",
@@ -149,103 +145,109 @@
     "developedBy": "Developed by"
   },
   "support": {
-    "title": "Support Center",
-    "subtitle": "HELP & SUPPORT",
-    "description": "Find answers to common questions or get in touch with our support team.",
-    "searchPlaceholder": "Search for help...",
+    "subtitle": "Support Center",
+    "title": "How can we help?",
+    "description": "Find answers to common questions or reach out to our team",
+    "faqTitle": "Frequently Asked Questions",
+    "ctaTitle": "Still need help?",
+    "ctaDescription": "Our support team is here to assist you with any questions or issues you may have.",
+    "ctaButton": "Contact Support",
     "quickLinks": {
-      "title": "Quick Links",
       "email": {
         "title": "Email Support",
-        "desc": "Get help via email"
+        "desc": "Get help via email",
+        "linkText": "app@allhalal.info"
       },
       "privacy": {
         "title": "Privacy Policy",
-        "desc": "How we protect your data"
+        "desc": "How we protect your data",
+        "linkText": "Read policy"
       },
       "terms": {
         "title": "Terms of Service",
-        "desc": "Usage terms and conditions"
+        "desc": "Usage guidelines",
+        "linkText": "Read terms"
       },
       "disclaimer": {
         "title": "Disclaimer",
-        "desc": "Important legal information"
+        "desc": "Important information",
+        "linkText": "Read disclaimer"
       }
     },
     "faq": {
-      "title": "Frequently Asked Questions",
-      "items": {
-        "verification": {
-          "question": "How does AllHalal verify products?",
-          "answer": "AllHalal uses a combination of AI-powered ingredient analysis and a comprehensive database of over 2 million verified products. Our system analyzes ingredients, E-numbers, and additives to determine halal status based on Islamic dietary guidelines."
-        },
-        "madhhab": {
-          "question": "Which madhhab (school of thought) does AllHalal follow?",
-          "answer": "AllHalal supports all four major Sunni schools of Islamic jurisprudence: Hanafi, Shafi'i, Maliki, and Hanbali, plus a General option for commonly accepted rulings. You can select your preferred madhhab in the app settings, and all rulings will be tailored accordingly."
-        },
-        "languages": {
-          "question": "Is AllHalal available in my language?",
-          "answer": "AllHalal is available in 9 languages: English, French, German, Spanish, Italian, Dutch, Russian, Arabic, and Urdu. The app automatically detects your device language."
-        },
-        "accuracy": {
-          "question": "How accurate is the barcode scanner?",
-          "answer": "Our barcode scanner has a 99%+ recognition rate for products in our database. If a product is not found, you can use the AI ingredient scanner to analyze the ingredients list directly from the packaging."
-        },
-        "offline": {
-          "question": "Can I use AllHalal offline?",
-          "answer": "Some features require an internet connection for real-time verification. However, previously scanned products and basic functionality are available offline."
-        },
-        "report": {
-          "question": "How do I report an incorrect product listing?",
-          "answer": "If you find an incorrect listing, please email us at app@allhalal.info with the product name, barcode, and the issue you've identified. Our team reviews all reports within 48 hours."
-        },
-        "security": {
-          "question": "Is my data secure?",
-          "answer": "Yes. We follow industry-standard security practices including encryption, secure data storage, and strict access controls. We never sell your personal data. Read our Privacy Policy for complete details."
-        },
-        "delete": {
-          "question": "How can I delete my account?",
-          "answer": "You can request account deletion by emailing app@allhalal.info with the subject \"Account Deletion Request\". We will process your request within 30 days as required by GDPR."
-        }
+      "howVerify": {
+        "question": "How does allhalal.info verify products?",
+        "answer": "allhalal.info uses a combination of AI-powered ingredient analysis and a comprehensive database of over 2 million verified products. Our system analyzes ingredients, E-numbers, and additives to determine halal status based on Islamic dietary guidelines."
+      },
+      "madhhab": {
+        "question": "Which madhhab (school of thought) does allhalal.info follow?",
+        "answer": "allhalal.info supports all four major Sunni schools of Islamic jurisprudence: Hanafi, Shafi'i, Maliki, and Hanbali, plus a General option for commonly accepted rulings. You can select your preferred madhhab in the app settings."
+      },
+      "languages": {
+        "question": "Is allhalal.info available in my language?",
+        "answer": "allhalal.info is available in 9 languages: English, French, German, Spanish, Italian, Dutch, Russian, Arabic, and Urdu. The app automatically detects your device language."
+      },
+      "scanner": {
+        "question": "How accurate is the barcode scanner?",
+        "answer": "Our barcode scanner has a 99%+ recognition rate for products in our database. If a product is not found, you can use the AI ingredient scanner to analyze the ingredients list directly."
+      },
+      "offline": {
+        "question": "Can I use allhalal.info offline?",
+        "answer": "Some features require an internet connection for real-time verification. However, previously scanned products and basic functionality are available offline."
+      },
+      "report": {
+        "question": "How do I report an incorrect product listing?",
+        "answer": "If you find an incorrect listing, please email us at app@allhalal.info with the product name, barcode, and the issue. Our team reviews all reports within 48 hours."
+      },
+      "security": {
+        "question": "Is my data secure?",
+        "answer": "Yes. We follow industry-standard security practices including encryption and secure data storage. We never sell your personal data. Read our Privacy Policy for complete details."
+      },
+      "delete": {
+        "question": "How can I delete my account?",
+        "answer": "You can request account deletion by emailing app@allhalal.info with the subject \"Account Deletion Request\". We will process your request within 30 days as required by GDPR."
       }
-    },
-    "contact": {
-      "title": "Still Need Help?",
-      "description": "Our support team is here to help you with any questions.",
-      "button": "Contact Support"
     }
   },
   "contact": {
+    "subtitle": "Get in Touch",
     "title": "Contact Us",
-    "subtitle": "GET IN TOUCH",
-    "description": "Have questions or feedback? We'd love to hear from you.",
+    "description": "Have a question or feedback? We'd love to hear from you. Our team typically responds within 24-48 hours.",
     "form": {
-      "name": "Your Name",
-      "email": "Email Address",
-      "subject": "Subject",
-      "message": "Your Message",
-      "submit": "Send Message",
-      "sending": "Sending...",
-      "success": "Message sent successfully!",
-      "error": "Failed to send message. Please try again."
-    },
-    "info": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
       "email": "Email",
-      "response": "We typically respond within 24-48 hours"
-    }
-  },
-  "legal": {
-    "privacy": {
-      "title": "Privacy Policy",
-      "lastUpdated": "Last updated"
+      "emailPlaceholder": "your@email.com",
+      "category": "Category",
+      "message": "Message",
+      "messagePlaceholder": "How can we help you?",
+      "submit": "Send Message",
+      "sending": "Sending..."
     },
-    "terms": {
-      "title": "Terms of Service",
-      "lastUpdated": "Last updated"
+    "categories": {
+      "general": "General Inquiry",
+      "technical": "Technical Support",
+      "feedback": "Feedback & Suggestions",
+      "bug": "Bug Report",
+      "business": "Business Inquiry",
+      "religious": "Religious Question"
     },
-    "disclaimer": {
-      "title": "Disclaimer",
-      "lastUpdated": "Last updated"
+    "success": {
+      "title": "Message Sent!",
+      "description": "Thank you for reaching out. We'll get back to you soon.",
+      "button": "Send Another Message"
+    },
+    "sidebar": {
+      "directContact": "Direct Contact",
+      "helpfulLinks": "Helpful Links",
+      "privacy": "Privacy Policy",
+      "privacyDesc": "Learn how we protect your data",
+      "terms": "Terms of Service",
+      "termsDesc": "Read our terms and conditions",
+      "disclaimer": "Disclaimer",
+      "disclaimerDesc": "Important religious accuracy info",
+      "responseTime": "Response Time",
+      "responseTimeDesc": "We typically respond within 24-48 business hours."
     }
   },
   "common": {

@@ -4,55 +4,19 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  * CONTACT PAGE
  * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Modern contact page with form and support information.
- * Features:
- * - Clean contact form
- * - Support categories
- * - FAQ quick links
- * - Animated elements
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-// Support categories
-const categories = [
-  { value: "general", label: "General Inquiry" },
-  { value: "technical", label: "Technical Support" },
-  { value: "feedback", label: "Feedback & Suggestions" },
-  { value: "bug", label: "Bug Report" },
-  { value: "business", label: "Business Inquiry" },
-  { value: "religious", label: "Religious Question" },
-];
-
-// Quick links
-const quickLinks = [
-  {
-    title: "Privacy Policy",
-    description: "Learn how we protect your data",
-    href: "/legal/privacy-policy",
-    icon: ShieldIcon,
-  },
-  {
-    title: "Terms of Service",
-    description: "Read our terms and conditions",
-    href: "/legal/terms-of-service",
-    icon: DocumentIcon,
-  },
-  {
-    title: "Disclaimer",
-    description: "Important religious accuracy info",
-    href: "/legal/disclaimer",
-    icon: AlertIcon,
-  },
-];
+// Category keys for translation
+const categoryKeys = ["general", "technical", "feedback", "bug", "business", "religious"] as const;
 
 export default function ContactPage() {
+  const t = useTranslations("contact");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -65,10 +29,7 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
@@ -83,7 +44,6 @@ export default function ContactPage() {
     <>
       <Header />
       <main className="min-h-screen bg-bg-primary">
-        {/* Spacer for fixed header */}
         <div className="h-20" />
 
         <div className="section">
@@ -101,7 +61,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Get in Touch
+                {t("subtitle")}
               </motion.span>
               
               <motion.h1
@@ -110,7 +70,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Contact Us
+                {t("title")}
               </motion.h1>
               
               <motion.p
@@ -119,8 +79,7 @@ export default function ContactPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                Have a question or feedback? We'd love to hear from you. 
-                Our team typically responds within 24-48 hours.
+                {t("description")}
               </motion.p>
             </motion.div>
 
@@ -134,10 +93,9 @@ export default function ContactPage() {
               >
                 {!isSubmitted ? (
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Name Field */}
                     <div>
                       <label htmlFor="name" className="form-label">
-                        Name
+                        {t("form.name")}
                       </label>
                       <input
                         type="text"
@@ -147,14 +105,13 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         className="form-input"
-                        placeholder="Your name"
+                        placeholder={t("form.namePlaceholder")}
                       />
                     </div>
 
-                    {/* Email Field */}
                     <div>
                       <label htmlFor="email" className="form-label">
-                        Email
+                        {t("form.email")}
                       </label>
                       <input
                         type="email"
@@ -164,14 +121,13 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         className="form-input"
-                        placeholder="your@email.com"
+                        placeholder={t("form.emailPlaceholder")}
                       />
                     </div>
 
-                    {/* Category Select */}
                     <div>
                       <label htmlFor="category" className="form-label">
-                        Category
+                        {t("form.category")}
                       </label>
                       <select
                         id="category"
@@ -180,18 +136,17 @@ export default function ContactPage() {
                         onChange={handleChange}
                         className="form-input"
                       >
-                        {categories.map((cat) => (
-                          <option key={cat.value} value={cat.value}>
-                            {cat.label}
+                        {categoryKeys.map((key) => (
+                          <option key={key} value={key}>
+                            {t(`categories.${key}`)}
                           </option>
                         ))}
                       </select>
                     </div>
 
-                    {/* Message Field */}
                     <div>
                       <label htmlFor="message" className="form-label">
-                        Message
+                        {t("form.message")}
                       </label>
                       <textarea
                         id="message"
@@ -201,11 +156,10 @@ export default function ContactPage() {
                         required
                         rows={6}
                         className="form-input form-textarea"
-                        placeholder="How can we help you?"
+                        placeholder={t("form.messagePlaceholder")}
                       />
                     </div>
 
-                    {/* Submit Button */}
                     <button
                       type="submit"
                       disabled={isSubmitting}
@@ -214,10 +168,10 @@ export default function ContactPage() {
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
                           <LoadingIcon className="w-5 h-5 animate-spin" />
-                          Sending...
+                          {t("form.sending")}
                         </span>
                       ) : (
-                        "Send Message"
+                        t("form.submit")
                       )}
                     </button>
                   </form>
@@ -232,10 +186,10 @@ export default function ContactPage() {
                       <CheckIcon className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-2xl font-bold text-text-primary mb-2">
-                      Message Sent!
+                      {t("success.title")}
                     </h3>
                     <p className="text-text-secondary mb-6">
-                      Thank you for reaching out. We'll get back to you soon.
+                      {t("success.description")}
                     </p>
                     <button
                       onClick={() => {
@@ -244,7 +198,7 @@ export default function ContactPage() {
                       }}
                       className="btn btn-secondary"
                     >
-                      Send Another Message
+                      {t("success.button")}
                     </button>
                   </motion.div>
                 )}
@@ -257,10 +211,9 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                {/* Direct Contact */}
                 <div className="p-6 rounded-xl bg-bg-card border border-border">
                   <h3 className="text-lg font-semibold text-text-primary mb-4">
-                    Direct Contact
+                    {t("sidebar.directContact")}
                   </h3>
                   <div className="space-y-4">
                     <a
@@ -273,37 +226,35 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Quick Links */}
                 <div>
                   <h3 className="text-lg font-semibold text-text-primary mb-4">
-                    Helpful Links
+                    {t("sidebar.helpfulLinks")}
                   </h3>
                   <div className="space-y-3">
-                    {quickLinks.map((link) => (
-                      <a
-                        key={link.title}
-                        href={link.href}
-                        className="flex items-start gap-3 p-4 rounded-lg bg-bg-card border border-border hover:border-primary/30 transition-colors group"
-                      >
-                        <link.icon className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                        <div>
-                          <div className="font-medium text-text-primary group-hover:text-primary transition-colors">
-                            {link.title}
-                          </div>
-                          <div className="text-sm text-text-muted">
-                            {link.description}
-                          </div>
-                        </div>
-                      </a>
-                    ))}
+                    <QuickLink
+                      href="/legal/privacy-policy"
+                      icon={ShieldIcon}
+                      title={t("sidebar.privacy")}
+                      desc={t("sidebar.privacyDesc")}
+                    />
+                    <QuickLink
+                      href="/legal/terms-of-service"
+                      icon={DocumentIcon}
+                      title={t("sidebar.terms")}
+                      desc={t("sidebar.termsDesc")}
+                    />
+                    <QuickLink
+                      href="/legal/disclaimer"
+                      icon={AlertIcon}
+                      title={t("sidebar.disclaimer")}
+                      desc={t("sidebar.disclaimerDesc")}
+                    />
                   </div>
                 </div>
 
-                {/* Response Time Note */}
                 <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
                   <p className="text-sm text-text-secondary">
-                    <strong className="text-primary">Response Time:</strong> We typically 
-                    respond to all inquiries within 24-48 business hours.
+                    <strong className="text-primary">{t("sidebar.responseTime")}:</strong> {t("sidebar.responseTimeDesc")}
                   </p>
                 </div>
               </motion.div>
@@ -316,7 +267,23 @@ export default function ContactPage() {
   );
 }
 
-// Icon Components
+function QuickLink({ href, icon: Icon, title, desc }: { href: string; icon: React.FC<{ className?: string }>; title: string; desc: string }) {
+  return (
+    <a
+      href={href}
+      className="flex items-start gap-3 p-4 rounded-lg bg-bg-card border border-border hover:border-primary/30 transition-colors group"
+    >
+      <Icon className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+      <div>
+        <div className="font-medium text-text-primary group-hover:text-primary transition-colors">
+          {title}
+        </div>
+        <div className="text-sm text-text-muted">{desc}</div>
+      </div>
+    </a>
+  );
+}
+
 function MailIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

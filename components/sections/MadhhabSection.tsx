@@ -4,79 +4,31 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  * MADHHAB SECTION - Four Schools of Islamic Jurisprudence
  * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Features:
- * - Four interactive cards for each madhhab
- * - Screenshot showcase
- * - Arabic calligraphy watermarks
- * - Hover effects with glow
- * - Staggered animations
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
  */
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-// Madhhab data (5 options including General)
-const madhahib = [
-  {
-    name: "General",
-    arabicName: "عام",
-    founder: "Commonly Accepted",
-    description:
-      "Universal rulings accepted across all schools. Perfect for those who prefer broadly agreed-upon halal classifications without school-specific interpretations.",
-    regions: ["Worldwide"],
-    color: "from-primary",
-  },
-  {
-    name: "Hanafi",
-    arabicName: "حنفي",
-    founder: "Imam Abu Hanifa",
-    description:
-      "The largest school of Islamic jurisprudence, followed by approximately 30% of Muslims worldwide. Known for its systematic methodology and extensive use of reason.",
-    regions: ["Turkey", "Central Asia", "South Asia", "Balkans"],
-    color: "from-emerald-500",
-  },
-  {
-    name: "Shafi'i",
-    arabicName: "شافعي",
-    founder: "Imam al-Shafi'i",
-    description:
-      "Known for its balanced methodology between textual sources and reasoning. Followed extensively in Southeast Asia, East Africa, and parts of the Middle East.",
-    regions: ["Southeast Asia", "East Africa", "Yemen"],
-    color: "from-blue-500",
-  },
-  {
-    name: "Maliki",
-    arabicName: "مالكي",
-    founder: "Imam Malik ibn Anas",
-    description:
-      "Emphasizes the practices of the people of Medina as an additional source. Predominant in North and West Africa, and historically in Al-Andalus.",
-    regions: ["Morocco", "Algeria", "West Africa", "UAE"],
-    color: "from-amber-500",
-  },
-  {
-    name: "Hanbali",
-    arabicName: "حنبلي",
-    founder: "Imam Ahmad ibn Hanbal",
-    description:
-      "Known for its strict adherence to the Quran and Hadith. Followed primarily in Saudi Arabia and Qatar, with growing influence globally.",
-    regions: ["Saudi Arabia", "Qatar", "Gulf States"],
-    color: "from-rose-500",
-  },
-];
+// Madhhab keys for translations
+const madhhabKeys = ["general", "hanafi", "shafii", "maliki", "hanbali"] as const;
+
+// Madhhab config (non-translatable data)
+const madhhabConfig = {
+  general: { arabicName: "عام", color: "from-primary" },
+  hanafi: { arabicName: "حنفي", color: "from-emerald-500" },
+  shafii: { arabicName: "شافعي", color: "from-blue-500" },
+  maliki: { arabicName: "مالكي", color: "from-amber-500" },
+  hanbali: { arabicName: "حنبلي", color: "from-rose-500" },
+};
 
 // Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
   },
 };
 
@@ -91,6 +43,7 @@ const cardVariants = {
 };
 
 export default function MadhhabSection() {
+  const t = useTranslations("madhhab");
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
@@ -122,7 +75,7 @@ export default function MadhhabSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Your Practice. Your Madhhab.
+              {t("subtitle")}
             </motion.span>
             
             <motion.h2
@@ -131,8 +84,7 @@ export default function MadhhabSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Respect for All Four{" "}
-              <span className="text-gradient">Schools of Thought</span>
+              {t("title")}
             </motion.h2>
             
             <motion.p
@@ -141,8 +93,7 @@ export default function MadhhabSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              AllHalal provides rulings according to your chosen madhhab, 
-              honoring the rich tradition of Islamic jurisprudence.
+              {t("description")}
             </motion.p>
           </motion.div>
 
@@ -154,15 +105,12 @@ export default function MadhhabSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="relative mx-auto max-w-[280px]">
-              {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-radial from-amber-500/20 to-transparent blur-3xl scale-150" />
-              
-              {/* Phone frame */}
               <div className="relative bg-bg-card rounded-[3rem] p-3 border border-border shadow-2xl">
                 <div className="relative aspect-[9/19] rounded-[2.5rem] overflow-hidden bg-bg-tertiary">
                   <Image
                     src="/app-screens/madhhab.png"
-                    alt="Madhhab Selection"
+                    alt={t("title")}
                     fill
                     className="object-cover"
                     sizes="280px"
@@ -181,56 +129,47 @@ export default function MadhhabSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {madhahib.map((madhhab) => (
-            <motion.div
-              key={madhhab.name}
-              variants={cardVariants}
-              className="group relative"
-            >
-              <div className="relative h-full p-6 rounded-2xl bg-bg-card border border-border overflow-hidden transition-all duration-500 hover:border-primary/30 hover:shadow-glow-sm">
-                {/* Arabic calligraphy watermark */}
-                <div className="absolute -right-4 -top-4 text-8xl font-bold text-white/5 select-none transition-all duration-500 group-hover:text-primary/10 group-hover:scale-110">
-                  {madhhab.arabicName}
-                </div>
+          {madhhabKeys.map((key) => {
+            const config = madhhabConfig[key];
+            return (
+              <motion.div
+                key={key}
+                variants={cardVariants}
+                className="group relative"
+              >
+                <div className="relative h-full p-6 rounded-2xl bg-bg-card border border-border overflow-hidden transition-all duration-500 hover:border-primary/30 hover:shadow-glow-sm">
+                  {/* Arabic calligraphy watermark */}
+                  <div className="absolute -right-4 -top-4 text-8xl font-bold text-white/5 select-none transition-all duration-500 group-hover:text-primary/10 group-hover:scale-110">
+                    {config.arabicName}
+                  </div>
 
-                {/* Gradient accent */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${madhhab.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
+                  {/* Gradient accent */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${config.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
 
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Name */}
-                  <h3 className="text-2xl font-bold text-text-primary mb-1">
-                    {madhhab.name}
-                  </h3>
-                  <p className="text-sm text-primary mb-4">
-                    {madhhab.founder}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-text-secondary text-sm mb-6 leading-relaxed">
-                    {madhhab.description}
-                  </p>
-
-                  {/* Regions */}
-                  <div>
-                    <p className="text-xs text-text-muted uppercase tracking-wider mb-2">
-                      Primary Regions
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-bold text-text-primary mb-1">
+                      {t(`schools.${key}.name`)}
+                    </h3>
+                    <p className="text-sm text-primary mb-4">
+                      {t(`schools.${key}.founder`)}
                     </p>
-                    <div className="flex flex-wrap gap-1">
-                      {madhhab.regions.map((region) => (
-                        <span
-                          key={region}
-                          className="px-2 py-1 text-xs rounded-md bg-bg-tertiary text-text-tertiary"
-                        >
-                          {region}
-                        </span>
-                      ))}
+                    <p className="text-text-secondary text-sm mb-6 leading-relaxed">
+                      {t(`schools.${key}.description`)}
+                    </p>
+                    <div>
+                      <p className="text-xs text-text-muted uppercase tracking-wider mb-2">
+                        {t("regions")}
+                      </p>
+                      <p className="text-xs text-text-tertiary">
+                        {t(`schools.${key}.regions`)}
+                      </p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Bottom note */}
@@ -240,11 +179,9 @@ export default function MadhhabSection() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          Select your preferred madhhab in the app settings to receive 
-          personalized rulings aligned with your school of thought.
+          {t("note")}
         </motion.p>
       </div>
     </section>
   );
 }
-
