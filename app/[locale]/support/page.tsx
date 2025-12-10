@@ -51,8 +51,13 @@ export default function SupportPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
             {quickLinkKeys.map((key) => {
               const config = quickLinkConfig[key];
+              const LinkComponent = config.external ? 'a' : Link;
+              const linkProps = config.external 
+                ? { href: config.link, target: "_blank", rel: "noopener noreferrer" }
+                : { href: config.link };
+              
               return (
-                <Link key={key} href={config.link} target={config.external ? "_blank" : undefined}>
+                <LinkComponent key={key} {...linkProps}>
                   <SpotlightCard className="h-full p-6 flex flex-col items-start hover:border-primary/50 transition-colors cursor-pointer group">
                     <div className="text-3xl mb-4">
                       {config.icon}
@@ -67,7 +72,7 @@ export default function SupportPage() {
                       {t(`quickLinks.${key}.linkText`)} <span className="ml-1">→</span>
                     </div>
                   </SpotlightCard>
-                </Link>
+                </LinkComponent>
               );
             })}
           </div>
