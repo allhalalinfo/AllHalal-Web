@@ -31,18 +31,25 @@ export default function ContactPage() {
     setError(null);
 
     try {
-      const response = await fetch('/api/contact', {
+      // Web3Forms API endpoint
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE',
+          subject: `[Contact Form] ${formData.category} - ${formData.name}`,
+          from_name: formData.name,
+          email: formData.email,
+          message: `Category: ${formData.category}\n\n${formData.message}`,
+        }),
       });
 
       const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Failed to send message');
       }
 
       setIsSubmitted(true);
