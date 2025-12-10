@@ -1,10 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Initialize Resend with API key from environment variable
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
+  // Initialize Resend at runtime (not at module level)
+  const apiKey = process.env.RESEND_API_KEY;
+  
+  if (!apiKey) {
+    console.error('RESEND_API_KEY is not configured');
+    return NextResponse.json(
+      { error: 'Email service is not configured. Please contact support directly at app@allhalal.info' },
+      { status: 503 }
+    );
+  }
+
+  const resend = new Resend(apiKey);
   try {
     const body = await request.json();
     const { name, email, category, message } = body;
