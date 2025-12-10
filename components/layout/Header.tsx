@@ -199,7 +199,7 @@ export default function Header() {
           
           {/* Bottom section */}
           <div className="w-full space-y-4">
-            <LanguageSwitcher openUpward />
+            <LanguageSwitcher />
                 <Link
                   href="https://apps.apple.com/app/allhalal/id6504640498"
                   target="_blank"
