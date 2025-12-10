@@ -83,38 +83,39 @@ export default function LanguageSwitcher({ openUpward = false }: LanguageSwitche
 
       {isOpen && (
         <div
-          className={`absolute left-1/2 -translate-x-1/2 w-56 bg-bg-card border border-border rounded-xl shadow-2xl z-[200] overflow-y-auto ${
+          className={`absolute left-1/2 -translate-x-1/2 w-56 bg-bg-card border border-border rounded-xl shadow-2xl z-[200] ${
             openUpward ? "bottom-full mb-2" : "top-full mt-2"
           }`}
           style={{ 
             maxHeight: "min(320px, 50vh)",
+            overflowY: "auto",
             WebkitOverflowScrolling: "touch",
             overscrollBehavior: "contain",
-            scrollbarWidth: "thin"
+            scrollbarWidth: "thin",
+            paddingTop: "0.5rem",
+            paddingBottom: "0.5rem"
           }}
         >
-          <div className="py-2">
-            {locales.map((loc) => (
-              <button
-                key={loc}
-                onClick={() => handleLocaleChange(loc)}
-                type="button"
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm ${
-                  locale === loc
-                    ? "bg-primary/10 text-primary"
-                    : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
-                }`}
-              >
-                <span className="text-lg">{localeFlags[loc]}</span>
-                <span className="flex-1">{localeNames[loc]}</span>
-                {locale === loc && (
-                  <svg className="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-              </button>
-            ))}
-          </div>
+          {locales.map((loc) => (
+            <button
+              key={loc}
+              onClick={() => handleLocaleChange(loc)}
+              type="button"
+              className={`w-full flex items-center gap-3 px-4 py-3 text-left text-sm ${
+                locale === loc
+                  ? "bg-primary/10 text-primary"
+                  : "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary"
+              }`}
+            >
+              <span className="text-lg">{localeFlags[loc]}</span>
+              <span className="flex-1">{localeNames[loc]}</span>
+              {locale === loc && (
+                <svg className="w-4 h-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </button>
+          ))}
         </div>
       )}
     </div>
