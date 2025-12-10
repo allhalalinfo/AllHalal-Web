@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' https: data: blob:;
     font-src 'self' https://fonts.gstatic.com data:;
-    connect-src 'self' https://*.vercel-insights.com;
+    connect-src 'self' https://*.vercel-insights.com https://api.web3forms.com;
     media-src 'none';
     object-src 'none';
     child-src 'self' blob:;
