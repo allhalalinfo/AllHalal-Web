@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
       {/* Header */}
       <div className="mb-12">
         <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
-          Last Updated: December 2024
+          Last Updated: December 2025
         </p>
         <h1>Privacy Policy</h1>
         <p className="text-xl text-text-secondary leading-relaxed">
@@ -131,7 +131,7 @@ export default function PrivacyPolicyPage() {
       {/* Footer note */}
       <div className="mt-16 pt-8 border-t border-border">
         <p className="text-sm text-text-muted">
-          This privacy policy is effective as of December 2024 and will remain in 
+          This privacy policy is effective as of December 2025 and will remain in
           effect except with respect to any changes in its provisions in the future.
         </p>
       </div>

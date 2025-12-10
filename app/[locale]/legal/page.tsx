@@ -19,21 +19,21 @@ const legalDocuments = [
     description: "How we collect, use, and protect your personal data.",
     href: "/legal/privacy-policy",
     icon: ShieldIcon,
-    lastUpdated: "December 2024",
+    lastUpdated: "December 2025",
   },
   {
     title: "Terms of Service",
     description: "The rules and agreements that govern your use of AllHalal.",
     href: "/legal/terms-of-service",
     icon: DocumentIcon,
-    lastUpdated: "December 2024",
+    lastUpdated: "December 2025",
   },
   {
     title: "Disclaimer",
     description: "Important information regarding religious accuracy and liability.",
     href: "/legal/disclaimer",
     icon: AlertIcon,
-    lastUpdated: "December 2024",
+    lastUpdated: "December 2025",
   },
 ];
 

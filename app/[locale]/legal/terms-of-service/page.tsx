@@ -33,7 +33,7 @@ export default function TermsOfServicePage() {
       {/* Header */}
       <div className="mb-12">
         <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
-          Last Updated: December 2024
+          Last Updated: December 2025
         </p>
         <h1>Terms of Service</h1>
         <p className="text-xl text-text-secondary leading-relaxed">
