@@ -31,30 +31,49 @@ export default function ContactPage() {
     setError(null);
 
     try {
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+      
+      // Debug: log if key is missing
+      if (!accessKey || accessKey === 'YOUR_ACCESS_KEY_HERE') {
+        console.error('❌ Web3Forms access key not configured!');
+        throw new Error('Contact form is not configured. Please contact app@allhalal.info directly.');
+      }
+
+      console.log('📧 Sending contact form...', {
+        name: formData.name,
+        email: formData.email,
+        category: formData.category,
+      });
+
+      const payload = {
+        access_key: accessKey,
+        subject: `[Contact Form] ${formData.category} - ${formData.name}`,
+        from_name: formData.name,
+        email: formData.email,
+        message: `Category: ${formData.category}\n\n${formData.message}`,
+      };
+
       // Web3Forms API endpoint
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE',
-          subject: `[Contact Form] ${formData.category} - ${formData.name}`,
-          from_name: formData.name,
-          email: formData.email,
-          message: `Category: ${formData.category}\n\n${formData.message}`,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
+
+      console.log('📬 Web3Forms response:', data);
 
       if (!response.ok || !data.success) {
         throw new Error(data.message || 'Failed to send message');
       }
 
+      console.log('✅ Message sent successfully!');
       setIsSubmitted(true);
     } catch (err) {
-      console.error('Contact form error:', err);
+      console.error('❌ Contact form error:', err);
       setError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
