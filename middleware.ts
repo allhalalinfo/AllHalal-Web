@@ -73,12 +73,13 @@ export const config = {
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)
+     * - admin (admin panel - no locale prefix)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - assets (static assets)
      * - app-screens (app screenshots)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|assets|app-screens|.*\\..*).*)',
+    '/((?!api|admin|_next/static|_next/image|favicon.ico|assets|app-screens|.*\\..*).*)',
   ],
 };
