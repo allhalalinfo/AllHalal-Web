@@ -130,32 +130,64 @@ export default function AdminPage() {
     setStatsError(null);
 
     try {
-      // Determine which endpoint to call based on active tab
-      const endpointMap: Record<string, string> = {
-        overview: '?type=all',
-        database: '?type=database',
-        etl: '?type=etl',
-        api: '?type=api',
-        health: '?type=health',
-      };
-
-      const endpoint = endpointMap[activeTab] || '?type=all';
-      const response = await fetch(`/api/admin/stats${endpoint}`, {
-        method: 'GET',
-        credentials: 'include',
-        cache: 'no-store',
-      });
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          setIsAuthenticated(false);
-          return;
+      let data: any = {};
+      
+      // For overview, fetch database and health separately (no 'all' endpoint exists)
+      if (activeTab === 'overview') {
+        const [dbResponse, healthResponse] = await Promise.allSettled([
+          fetch('/api/admin/stats?type=database', { credentials: 'include', cache: 'no-store' }),
+          fetch('/api/admin/stats?type=health', { credentials: 'include', cache: 'no-store' }),
+        ]);
+        
+        if (dbResponse.status === 'fulfilled' && dbResponse.value.ok) {
+          data.database = await dbResponse.value.json();
         }
-        const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP ${response.status}`);
-      }
+        if (healthResponse.status === 'fulfilled' && healthResponse.value.ok) {
+          data.health = await healthResponse.value.json();
+        }
+      } else {
+        // For other tabs, fetch single endpoint
+        const endpointMap: Record<string, string> = {
+          database: '?type=database',
+          etl: '?type=etl',
+          api: '?type=api',
+          health: '?type=health',
+        };
 
-      const data = await response.json();
+        const endpoint = endpointMap[activeTab] || '?type=database';
+        const response = await fetch(`/api/admin/stats${endpoint}`, {
+          method: 'GET',
+          credentials: 'include',
+          cache: 'no-store',
+        });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            setIsAuthenticated(false);
+            return;
+          }
+          // For 500 errors (ETL, API endpoints), show graceful error
+          if (response.status === 500) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(`Backend endpoint not available (500). ${errorData.details || ''}`);
+          }
+          const errorData = await response.json();
+          throw new Error(errorData.error || `HTTP ${response.status}`);
+        }
+
+        data = await response.json();
+        
+        // Wrap single endpoint response in appropriate key
+        if (activeTab === 'database') {
+          data = { database: data };
+        } else if (activeTab === 'etl') {
+          data = { etl: data };
+        } else if (activeTab === 'api') {
+          data = { api: data };
+        } else if (activeTab === 'health') {
+          data = { health: data };
+        }
+      }
       
       // Transform backend data format to match our interface
       const transformedData: StatsData = {

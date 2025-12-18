@@ -38,7 +38,8 @@ export async function GET(request: NextRequest) {
       etl: '/admin/stats/etl',
       api: '/admin/stats/api',
       health: '/admin/health/system',
-      all: '/admin/stats/all', // If backend has aggregated endpoint
+      // 'all' doesn't exist on backend, we'll fetch database and health separately
+      all: '/admin/stats/database', // Fallback to database for overview
     };
 
     const endpoint = endpoints[type] || endpoints.database;
