@@ -288,7 +288,12 @@ export default function AdminPage() {
           setIsAuthenticated(false);
           return;
         }
-        const errorData = await response.json();
+        // Handle 404 - endpoint not implemented yet
+        if (response.status === 404) {
+          setGeoStats({ status: 'not_available', message: 'Geographic statistics endpoint is not available yet on backend.' });
+          return;
+        }
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.error || `HTTP ${response.status}`);
       }
 
@@ -296,7 +301,7 @@ export default function AdminPage() {
       setGeoStats(data);
     } catch (err) {
       console.error('Failed to load geographic stats:', err);
-      setGeoStats(null);
+      setGeoStats({ status: 'error', message: err instanceof Error ? err.message : 'Failed to load geographic statistics' });
     }
   };
 
@@ -975,6 +980,24 @@ function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | n
           <div className="text-5xl mb-4">🌍</div>
           <h3 className="text-xl font-semibold text-text-primary mb-2">No Geographic Data Yet</h3>
           <p className="text-text-secondary">{geoStats.message || 'Start scanning products to see geographic statistics.'}</p>
+        </div>
+      );
+    }
+
+    if (geoStats.status === 'not_available' || geoStats.status === 'error') {
+      return (
+        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-8 text-center">
+          <div className="text-5xl mb-4">⚠️</div>
+          <h3 className="text-lg font-semibold text-yellow-400 mb-2">
+            {geoStats.status === 'not_available' ? 'Endpoint Not Available' : 'Error Loading Data'}
+          </h3>
+          <p className="text-text-secondary mb-4">{geoStats.message}</p>
+          {geoStats.status === 'not_available' && (
+            <p className="text-xs text-text-muted">
+              The geographic statistics endpoint is not yet implemented on backend. 
+              Contact backend team to add <code className="bg-bg-secondary px-2 py-1 rounded">/admin/stats/geographic</code> endpoint.
+            </p>
+          )}
         </div>
       );
     }
