@@ -31,10 +31,49 @@ interface StatsData {
     errors?: number;
   };
   api?: {
+    // Old format (backward compatibility)
     total_scans?: number;
     scans_today?: number;
     scans_this_week?: number;
     unique_users?: number;
+    // New format (from scan_logs)
+    status?: 'active' | 'no_data' | 'not_configured';
+    message?: string;
+    total_scans_all_time?: number;
+    today?: {
+      total_scans?: number;
+      unique_devices?: number;
+    };
+    last_24h?: {
+      total_scans?: number;
+      unique_devices?: number;
+      found_products?: number;
+      not_found?: number;
+      avg_response_time_ms?: number;
+      cache_hits?: number;
+      cache_hit_rate_percent?: number;
+    };
+    last_7d?: {
+      total_scans?: number;
+      unique_devices?: number;
+    };
+    popular_products?: Array<{
+      barcode: string;
+      product_name: string;
+      halal_status: 'halal' | 'haram' | 'mushbooh' | 'unknown';
+      scan_count: number;
+    }>;
+    hourly_stats?: Array<{
+      hour: string;
+      scans: number;
+      found: number;
+      not_found: number;
+      avg_response_ms: number;
+    }>;
+    halal_distribution?: Array<{
+      status: 'halal' | 'haram' | 'mushbooh' | 'unknown';
+      count: number;
+    }>;
   };
   health?: {
     status?: string;
@@ -132,11 +171,12 @@ export default function AdminPage() {
     try {
       let data: any = {};
       
-      // For overview, fetch database and health separately (no 'all' endpoint exists)
+      // For overview, fetch database, health, and api separately (no 'all' endpoint exists)
       if (activeTab === 'overview') {
-        const [dbResponse, healthResponse] = await Promise.allSettled([
+        const [dbResponse, healthResponse, apiResponse] = await Promise.allSettled([
           fetch('/api/admin/stats?type=database', { credentials: 'include', cache: 'no-store' }),
           fetch('/api/admin/stats?type=health', { credentials: 'include', cache: 'no-store' }),
+          fetch('/api/admin/stats?type=api', { credentials: 'include', cache: 'no-store' }),
         ]);
         
         if (dbResponse.status === 'fulfilled' && dbResponse.value.ok) {
@@ -144,6 +184,9 @@ export default function AdminPage() {
         }
         if (healthResponse.status === 'fulfilled' && healthResponse.value.ok) {
           data.health = await healthResponse.value.json();
+        }
+        if (apiResponse.status === 'fulfilled' && apiResponse.value.ok) {
+          data.api = await apiResponse.value.json();
         }
       } else {
         // For other tabs, fetch single endpoint
@@ -461,10 +504,14 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
           />
           <StatCard
             title="API Scans"
-            value={formatNumber(stats.api?.total_scans)}
+            value={formatNumber(stats.api?.total_scans_all_time || stats.api?.total_scans)}
             color="bg-purple-500/10 text-purple-500"
             icon="📊"
-            subtitle={stats.api?.scans_today ? `${formatNumber(stats.api.scans_today)} today` : undefined}
+            subtitle={stats.api?.today?.total_scans 
+              ? `${formatNumber(stats.api.today.total_scans)} today`
+              : stats.api?.scans_today 
+                ? `${formatNumber(stats.api.scans_today)} today`
+                : undefined}
           />
           <StatCard
             title="System Status"
@@ -491,10 +538,14 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
           />
           <StatCard
             title="Unique Users"
-            value={formatNumber(stats.api?.unique_users)}
+            value={formatNumber(stats.api?.last_24h?.unique_devices || stats.api?.today?.unique_devices || stats.api?.unique_users)}
             color="bg-indigo-500/10 text-indigo-500"
             icon="👥"
-            subtitle={stats.api?.scans_this_week ? `${formatNumber(stats.api.scans_this_week)} this week` : undefined}
+            subtitle={stats.api?.last_7d?.total_scans 
+              ? `${formatNumber(stats.api.last_7d.total_scans)} this week`
+              : stats.api?.scans_this_week 
+                ? `${formatNumber(stats.api.scans_this_week)} this week`
+                : undefined}
           />
         </div>
 
@@ -574,34 +625,192 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
   }
 
   if (activeTab === 'api') {
+    // Handle new format from scan_logs
+    if (stats.api?.status === 'no_data') {
+      return (
+        <div className="text-center py-20">
+          <div className="text-5xl mb-4">📊</div>
+          <h3 className="text-xl font-semibold text-text-primary mb-2">No Scan Data Yet</h3>
+          <p className="text-text-secondary mb-4">{stats.api.message || 'Start scanning products to see statistics.'}</p>
+          <p className="text-text-muted text-sm">Total scans: {formatNumber(stats.api.total_scans || 0)}</p>
+        </div>
+      );
+    }
+
+    if (stats.api?.status === 'not_configured') {
+      return (
+        <div className="text-center py-20">
+          <div className="text-5xl mb-4">⚠️</div>
+          <h3 className="text-xl font-semibold text-text-primary mb-2">API Logging Not Configured</h3>
+          <p className="text-text-secondary">{stats.api.message || 'API scan logging is not configured on backend.'}</p>
+        </div>
+      );
+    }
+
+    // New format with detailed stats
+    const apiStats = stats.api;
+    const today = apiStats?.today;
+    const last24h = apiStats?.last_24h;
+    const last7d = apiStats?.last_7d;
+
     return (
       <div className="space-y-6">
+        {/* Main Stats Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
-            title="Total Scans"
-            value={formatNumber(stats.api?.total_scans)}
+            title="Total Scans (All Time)"
+            value={formatNumber(apiStats?.total_scans_all_time || apiStats?.total_scans)}
             color="bg-purple-500/10 text-purple-500"
             icon="📊"
           />
           <StatCard
             title="Scans Today"
-            value={formatNumber(stats.api?.scans_today)}
+            value={formatNumber(today?.total_scans || apiStats?.scans_today)}
             color="bg-blue-500/10 text-blue-500"
             icon="📅"
+            subtitle={today?.unique_devices ? `${formatNumber(today.unique_devices)} unique devices` : undefined}
           />
           <StatCard
-            title="Scans This Week"
-            value={formatNumber(stats.api?.scans_this_week)}
+            title="Scans Last 7 Days"
+            value={formatNumber(last7d?.total_scans || apiStats?.scans_this_week)}
             color="bg-indigo-500/10 text-indigo-500"
             icon="📈"
+            subtitle={last7d?.unique_devices ? `${formatNumber(last7d.unique_devices)} unique devices` : undefined}
           />
           <StatCard
-            title="Unique Users"
-            value={formatNumber(stats.api?.unique_users)}
+            title="Unique Devices (24h)"
+            value={formatNumber(last24h?.unique_devices || apiStats?.unique_users)}
             color="bg-green-500/10 text-green-500"
             icon="👥"
           />
         </div>
+
+        {/* Detailed 24h Stats */}
+        {last24h && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StatCard
+              title="Found Products"
+              value={formatNumber(last24h.found_products)}
+              color="bg-green-500/10 text-green-500"
+              icon="✅"
+            />
+            <StatCard
+              title="Not Found"
+              value={formatNumber(last24h.not_found)}
+              color="bg-red-500/10 text-red-500"
+              icon="❌"
+            />
+            <StatCard
+              title="Avg Response Time"
+              value={last24h.avg_response_time_ms ? `${last24h.avg_response_time_ms}ms` : 'N/A'}
+              color="bg-yellow-500/10 text-yellow-500"
+              icon="⏱️"
+            />
+            <StatCard
+              title="Cache Hit Rate"
+              value={last24h.cache_hit_rate_percent ? `${last24h.cache_hit_rate_percent.toFixed(1)}%` : 'N/A'}
+              color="bg-cyan-500/10 text-cyan-500"
+              icon="💾"
+              subtitle={last24h.cache_hits ? `${formatNumber(last24h.cache_hits)} hits` : undefined}
+            />
+          </div>
+        )}
+
+        {/* Popular Products */}
+        {apiStats?.popular_products && apiStats.popular_products.length > 0 && (
+          <div className="bg-bg-card border border-border rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
+              🔥 Popular Products (Last 24h)
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2 text-text-secondary font-medium">Barcode</th>
+                    <th className="text-left py-2 text-text-secondary font-medium">Product Name</th>
+                    <th className="text-left py-2 text-text-secondary font-medium">Halal Status</th>
+                    <th className="text-right py-2 text-text-secondary font-medium">Scans</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {apiStats.popular_products.map((product, idx) => (
+                    <tr key={idx} className="border-b border-border/50 hover:bg-bg-secondary transition-colors">
+                      <td className="py-3 text-text-primary font-mono text-xs">{product.barcode}</td>
+                      <td className="py-3 text-text-primary">{product.product_name || 'N/A'}</td>
+                      <td className="py-3">
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${
+                          product.halal_status === 'halal' ? 'bg-green-500/10 text-green-500' :
+                          product.halal_status === 'haram' ? 'bg-red-500/10 text-red-500' :
+                          product.halal_status === 'mushbooh' ? 'bg-yellow-500/10 text-yellow-500' :
+                          'bg-gray-500/10 text-gray-500'
+                        }`}>
+                          {product.halal_status}
+                        </span>
+                      </td>
+                      <td className="py-3 text-right text-text-primary font-medium">{formatNumber(product.scan_count)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Halal Distribution */}
+        {apiStats?.halal_distribution && apiStats.halal_distribution.length > 0 && (
+          <div className="bg-bg-card border border-border rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
+              📊 Halal Status Distribution (Last 24h)
+            </h3>
+            <div className="grid md:grid-cols-4 gap-4">
+              {apiStats.halal_distribution.map((dist, idx) => (
+                <div key={idx} className="text-center p-4 rounded-lg bg-bg-secondary">
+                  <div className={`text-2xl font-bold mb-1 ${
+                    dist.status === 'halal' ? 'text-green-500' :
+                    dist.status === 'haram' ? 'text-red-500' :
+                    dist.status === 'mushbooh' ? 'text-yellow-500' :
+                    'text-gray-500'
+                  }`}>
+                    {formatNumber(dist.count)}
+                  </div>
+                  <div className="text-sm text-text-secondary capitalize">{dist.status}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Hourly Stats (Simple List) */}
+        {apiStats?.hourly_stats && apiStats.hourly_stats.length > 0 && (
+          <div className="bg-bg-card border border-border rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
+              📈 Hourly Statistics (Last 24h)
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {apiStats.hourly_stats.slice(0, 8).map((hour, idx) => {
+                const hourDate = new Date(hour.hour);
+                const hourStr = hourDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                return (
+                  <div key={idx} className="p-3 rounded-lg bg-bg-secondary">
+                    <div className="text-xs text-text-muted mb-1">{hourStr}</div>
+                    <div className="text-lg font-bold text-text-primary">{formatNumber(hour.scans)}</div>
+                    <div className="text-xs text-text-secondary mt-1">
+                      {formatNumber(hour.found)} found, {formatNumber(hour.not_found)} not found
+                    </div>
+                    <div className="text-xs text-text-muted mt-1">
+                      Avg: {hour.avg_response_ms}ms
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {apiStats.hourly_stats.length > 8 && (
+              <p className="text-xs text-text-muted mt-4 text-center">
+                Showing first 8 hours of {apiStats.hourly_stats.length} total
+              </p>
+            )}
+          </div>
+        )}
       </div>
     );
   }
