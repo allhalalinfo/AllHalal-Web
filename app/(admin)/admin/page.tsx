@@ -10,6 +10,19 @@ interface StatsData {
     haram_count?: number;
     mushbooh_count?: number;
     last_updated?: string;
+    // Real backend format
+    products?: {
+      food?: number;
+      cosmetics?: number;
+      total?: number;
+    };
+    halal_status?: {
+      halal?: number;
+      haram?: number;
+      mushbooh?: number;
+      invalid?: number;
+      unknown?: number;
+    };
   };
   etl?: {
     last_run?: string;
@@ -28,6 +41,29 @@ interface StatsData {
     database_connected?: boolean;
     api_uptime?: number;
     version?: string;
+    // Real backend format
+    timestamp?: string;
+    checks?: {
+      database?: {
+        status?: string;
+        response_time_ms?: number;
+        products?: {
+          total?: number;
+        };
+      };
+      redis?: {
+        status?: string;
+        uptime_hours?: number;
+      };
+      memory?: {
+        status?: string;
+        percent_used?: number;
+      };
+      cpu?: {
+        status?: string;
+        percent?: number;
+      };
+    };
   };
 }
 
@@ -113,7 +149,30 @@ export default function AdminPage() {
       }
 
       const data = await response.json();
-      setStats(data);
+      
+      // Transform backend data format to match our interface
+      const transformedData: StatsData = {
+        database: data.database || (data.products ? {
+          products: data.products,
+          halal_status: data.halal_status,
+          total_products: data.products?.total,
+          halal_percentage: data.halal_status && data.products?.total 
+            ? (data.halal_status.halal / data.products.total * 100) 
+            : undefined,
+          haram_count: data.halal_status?.haram,
+          mushbooh_count: data.halal_status?.mushbooh,
+        } : undefined),
+        etl: data.etl,
+        api: data.api,
+        health: data.health || (data.status ? {
+          status: data.status,
+          checks: data.checks,
+          database_connected: data.checks?.database?.status === 'healthy' || data.checks?.database?.status === 'ok',
+          api_uptime: data.checks?.redis?.uptime_hours ? data.checks.redis.uptime_hours * 3600 : undefined,
+        } : undefined),
+      };
+      
+      setStats(transformedData);
     } catch (err) {
       console.error('Failed to load stats:', err);
       setStatsError(err instanceof Error ? err.message : 'Failed to load statistics');
@@ -343,17 +402,23 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             title="Total Products"
-            value={formatNumber(stats.database?.total_products)}
+            value={formatNumber(stats.database?.total_products || stats.database?.products?.total)}
             color="bg-blue-500/10 text-blue-500"
             icon="📦"
             subtitle={stats.database?.last_updated ? `Updated: ${formatDate(stats.database.last_updated)}` : undefined}
           />
           <StatCard
             title="Halal Percentage"
-            value={stats.database?.halal_percentage ? `${stats.database.halal_percentage.toFixed(1)}%` : 'N/A'}
+            value={stats.database?.halal_percentage 
+              ? `${stats.database.halal_percentage.toFixed(1)}%`
+              : (stats.database?.halal_status?.halal && stats.database?.products?.total
+                ? `${((stats.database.halal_status.halal / stats.database.products.total) * 100).toFixed(1)}%`
+                : 'N/A')}
             color="bg-green-500/10 text-green-500"
             icon="✅"
-            subtitle={stats.database?.total_products ? `${formatNumber(Math.round((stats.database.halal_percentage || 0) / 100 * stats.database.total_products))} products` : undefined}
+            subtitle={stats.database?.halal_status?.halal 
+              ? `${formatNumber(stats.database.halal_status.halal)} halal products`
+              : undefined}
           />
           <StatCard
             title="API Scans"
@@ -375,13 +440,13 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
         <div className="grid md:grid-cols-3 gap-6">
           <StatCard
             title="Haram Products"
-            value={formatNumber(stats.database?.haram_count)}
+            value={formatNumber(stats.database?.haram_count || stats.database?.halal_status?.haram)}
             color="bg-red-500/10 text-red-500"
             icon="❌"
           />
           <StatCard
             title="Mushbooh Products"
-            value={formatNumber(stats.database?.mushbooh_count)}
+            value={formatNumber(stats.database?.mushbooh_count || stats.database?.halal_status?.mushbooh)}
             color="bg-yellow-500/10 text-yellow-500"
             icon="⚠️"
           />
@@ -432,25 +497,29 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             title="Total Products"
-            value={formatNumber(stats.database?.total_products)}
+            value={formatNumber(stats.database?.total_products || stats.database?.products?.total)}
             color="bg-blue-500/10 text-blue-500"
             icon="📦"
           />
           <StatCard
             title="Halal"
-            value={stats.database?.halal_percentage ? `${stats.database.halal_percentage.toFixed(1)}%` : 'N/A'}
+            value={stats.database?.halal_percentage 
+              ? `${stats.database.halal_percentage.toFixed(1)}%`
+              : (stats.database?.halal_status?.halal && stats.database?.products?.total
+                ? `${((stats.database.halal_status.halal / stats.database.products.total) * 100).toFixed(1)}%`
+                : 'N/A')}
             color="bg-green-500/10 text-green-500"
             icon="✅"
           />
           <StatCard
             title="Haram"
-            value={formatNumber(stats.database?.haram_count)}
+            value={formatNumber(stats.database?.haram_count || stats.database?.halal_status?.haram)}
             color="bg-red-500/10 text-red-500"
             icon="❌"
           />
           <StatCard
             title="Mushbooh"
-            value={formatNumber(stats.database?.mushbooh_count)}
+            value={formatNumber(stats.database?.mushbooh_count || stats.database?.halal_status?.mushbooh)}
             color="bg-yellow-500/10 text-yellow-500"
             icon="⚠️"
           />
@@ -532,34 +601,75 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
   }
 
   if (activeTab === 'health') {
+    const healthStatus = stats.health?.status || stats.health?.checks?.database?.status || 'Unknown';
+    const dbStatus = stats.health?.checks?.database?.status || (stats.health?.database_connected ? 'healthy' : 'error');
+    const dbConnected = dbStatus === 'healthy' || dbStatus === 'ok' || stats.health?.database_connected;
+    const uptimeHours = stats.health?.checks?.redis?.uptime_hours || (stats.health?.api_uptime ? stats.health.api_uptime / 3600 : undefined);
+    
     return (
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <StatCard
             title="Status"
-            value={stats.health?.status || 'Unknown'}
-            color={stats.health?.status === 'healthy' ? 'bg-green-500/10 text-green-500' : 'bg-yellow-500/10 text-yellow-500'}
-            icon={stats.health?.status === 'healthy' ? '💚' : '⚠️'}
+            value={healthStatus === 'healthy' ? 'Healthy' : healthStatus === 'unhealthy' ? 'Unhealthy' : healthStatus}
+            color={healthStatus === 'healthy' ? 'bg-green-500/10 text-green-500' : 'bg-yellow-500/10 text-yellow-500'}
+            icon={healthStatus === 'healthy' ? '💚' : '⚠️'}
           />
           <StatCard
             title="Database"
-            value={stats.health?.database_connected ? 'Connected' : 'Disconnected'}
-            color={stats.health?.database_connected ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'}
-            icon={stats.health?.database_connected ? '✅' : '❌'}
+            value={dbConnected ? 'Connected' : 'Disconnected'}
+            color={dbConnected ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'}
+            icon={dbConnected ? '✅' : '❌'}
+            subtitle={stats.health?.checks?.database?.response_time_ms ? `${stats.health.checks.database.response_time_ms}ms` : undefined}
           />
           <StatCard
             title="Uptime"
-            value={stats.health?.api_uptime ? formatUptime(stats.health.api_uptime) : 'N/A'}
+            value={uptimeHours ? `${uptimeHours.toFixed(1)}h` : 'N/A'}
             color="bg-blue-500/10 text-blue-500"
             icon="⏱️"
+            subtitle={stats.health?.checks?.redis?.status ? `Redis: ${stats.health.checks.redis.status}` : undefined}
           />
           <StatCard
-            title="Version"
-            value={stats.health?.version || 'Unknown'}
-            color="bg-indigo-500/10 text-indigo-500"
-            icon="🔢"
+            title="Memory"
+            value={stats.health?.checks?.memory?.percent_used ? `${stats.health.checks.memory.percent_used.toFixed(1)}%` : 'N/A'}
+            color={stats.health?.checks?.memory?.percent_used && stats.health.checks.memory.percent_used < 80 ? 'bg-green-500/10 text-green-500' : 'bg-yellow-500/10 text-yellow-500'}
+            icon="💾"
+            subtitle={stats.health?.checks?.memory?.status || undefined}
           />
         </div>
+        
+        {/* Additional Health Info */}
+        {stats.health?.checks && (
+          <div className="bg-bg-card border border-border rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-text-primary mb-4">System Details</h3>
+            <div className="grid md:grid-cols-2 gap-4 text-sm">
+              {stats.health.checks.cpu && (
+                <div>
+                  <div className="text-text-secondary mb-1">CPU Usage</div>
+                  <div className="text-text-primary font-medium">{stats.health.checks.cpu.percent?.toFixed(1)}%</div>
+                </div>
+              )}
+              {stats.health.checks.disk && (
+                <div>
+                  <div className="text-text-secondary mb-1">Disk Usage</div>
+                  <div className="text-text-primary font-medium">{stats.health.checks.disk.percent_used?.toFixed(1)}%</div>
+                </div>
+              )}
+              {stats.health.checks.redis && (
+                <div>
+                  <div className="text-text-secondary mb-1">Redis</div>
+                  <div className="text-text-primary font-medium">{stats.health.checks.redis.status}</div>
+                </div>
+              )}
+              {stats.health.timestamp && (
+                <div>
+                  <div className="text-text-secondary mb-1">Last Check</div>
+                  <div className="text-text-primary font-medium">{formatDate(stats.health.timestamp)}</div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
