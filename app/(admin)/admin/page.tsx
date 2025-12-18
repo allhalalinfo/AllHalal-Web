@@ -63,6 +63,13 @@ interface StatsData {
         status?: string;
         percent?: number;
       };
+      disk?: {
+        status?: string;
+        percent_used?: number;
+        total_gb?: number;
+        used_gb?: number;
+        free_gb?: number;
+      };
     };
   };
 }
