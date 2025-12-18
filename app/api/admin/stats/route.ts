@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
       database: '/admin/stats/database',
       etl: '/admin/stats/etl',
       api: '/admin/stats/api',
+      geographic: '/admin/stats/geographic',
       health: '/admin/health/system',
       // 'all' doesn't exist on backend, we'll fetch database and health separately
       all: '/admin/stats/database', // Fallback to database for overview

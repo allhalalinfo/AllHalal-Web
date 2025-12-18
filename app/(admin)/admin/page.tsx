@@ -124,7 +124,8 @@ export default function AdminPage() {
   const [stats, setStats] = useState<StatsData | null>(null);
   const [statsLoading, setStatsLoading] = useState(true);
   const [statsError, setStatsError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'database' | 'etl' | 'api' | 'health'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'database' | 'etl' | 'api' | 'health' | 'geographic'>('overview');
+  const [geoStats, setGeoStats] = useState<any>(null);
 
   // Check if already authenticated and load stats
   useEffect(() => {
@@ -134,8 +135,17 @@ export default function AdminPage() {
   useEffect(() => {
     if (isAuthenticated) {
       loadStats();
+      // Load geographic stats if on geographic tab
+      if (activeTab === 'geographic') {
+        loadGeographicStats();
+      }
       // Refresh stats every 30 seconds
-      const interval = setInterval(loadStats, 30000);
+      const interval = setInterval(() => {
+        loadStats();
+        if (activeTab === 'geographic') {
+          loadGeographicStats();
+        }
+      }, 30000);
       return () => clearInterval(interval);
     }
   }, [isAuthenticated, activeTab]);
@@ -260,6 +270,33 @@ export default function AdminPage() {
       setStatsError(err instanceof Error ? err.message : 'Failed to load statistics');
     } finally {
       setStatsLoading(false);
+    }
+  };
+
+  const loadGeographicStats = async () => {
+    if (!isAuthenticated) return;
+    
+    try {
+      const response = await fetch('/api/admin/stats?type=geographic', {
+        method: 'GET',
+        credentials: 'include',
+        cache: 'no-store',
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          setIsAuthenticated(false);
+          return;
+        }
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      setGeoStats(data);
+    } catch (err) {
+      console.error('Failed to load geographic stats:', err);
+      setGeoStats(null);
     }
   };
 
@@ -419,8 +456,8 @@ export default function AdminPage() {
       <main className="container mx-auto px-6 py-8">
         {/* Tabs */}
         <div className="mb-8 border-b border-border">
-          <nav className="flex gap-1">
-            {(['overview', 'database', 'etl', 'api', 'health'] as const).map((tab) => (
+          <nav className="flex gap-1 overflow-x-auto">
+            {(['overview', 'database', 'etl', 'api', 'geographic', 'health'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -458,14 +495,14 @@ export default function AdminPage() {
             </p>
           </div>
         ) : (
-          <DashboardContent stats={stats} activeTab={activeTab} />
+          <DashboardContent stats={stats} activeTab={activeTab} geoStats={geoStats} />
         )}
       </main>
     </div>
   );
 }
 
-function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activeTab: string }) {
+function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | null; activeTab: string; geoStats?: any }) {
   if (!stats) {
     return (
       <div className="text-center py-20">
@@ -922,7 +959,126 @@ function DashboardContent({ stats, activeTab }: { stats: StatsData | null; activ
     );
   }
 
+  if (activeTab === 'geographic') {
+    if (!geoStats) {
+      return (
+        <div className="text-center py-20">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-text-secondary">Loading geographic statistics...</p>
+        </div>
+      );
+    }
+
+    if (geoStats.status === 'no_data') {
+      return (
+        <div className="text-center py-20">
+          <div className="text-5xl mb-4">🌍</div>
+          <h3 className="text-xl font-semibold text-text-primary mb-2">No Geographic Data Yet</h3>
+          <p className="text-text-secondary">{geoStats.message || 'Start scanning products to see geographic statistics.'}</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        {/* Summary Stats */}
+        <div className="grid md:grid-cols-3 gap-6">
+          <StatCard
+            title="Total Countries"
+            value={formatNumber(geoStats.total_countries)}
+            color="bg-blue-500/10 text-blue-500"
+            icon="🌍"
+          />
+          <StatCard
+            title="Countries (30d)"
+            value={formatNumber(geoStats.last_30_days?.length || 0)}
+            color="bg-indigo-500/10 text-indigo-500"
+            icon="📊"
+          />
+          <StatCard
+            title="Top Country Today"
+            value={geoStats.today_top?.[0]?.country_name || 'N/A'}
+            color="bg-green-500/10 text-green-500"
+            icon="🏆"
+            subtitle={geoStats.today_top?.[0] ? `${formatNumber(geoStats.today_top[0].scan_count)} scans` : undefined}
+          />
+        </div>
+
+        {/* Last 30 Days Table */}
+        {geoStats.last_30_days && geoStats.last_30_days.length > 0 && (
+          <div className="bg-bg-card border border-border rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
+              🌍 Geographic Distribution (Last 30 Days)
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-3 text-text-secondary font-medium">Country</th>
+                    <th className="text-right py-3 text-text-secondary font-medium">Scans</th>
+                    <th className="text-right py-3 text-text-secondary font-medium">Devices</th>
+                    <th className="text-right py-3 text-text-secondary font-medium">Found</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {geoStats.last_30_days.map((country: any, idx: number) => (
+                    <tr key={idx} className="border-b border-border/50 hover:bg-bg-secondary transition-colors">
+                      <td className="py-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{getCountryFlag(country.country_code)}</span>
+                          <div>
+                            <div className="text-text-primary font-medium">{country.country_name}</div>
+                            <div className="text-xs text-text-muted font-mono">{country.country_code}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-3 text-right text-text-primary font-medium">{formatNumber(country.scan_count)}</td>
+                      <td className="py-3 text-right text-text-secondary">{formatNumber(country.unique_devices)}</td>
+                      <td className="py-3 text-right text-text-secondary">{formatNumber(country.found_products)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Today Top Countries */}
+        {geoStats.today_top && geoStats.today_top.length > 0 && (
+          <div className="bg-bg-card border border-border rounded-xl p-6">
+            <h3 className="text-lg font-semibold text-text-primary mb-4 flex items-center gap-2">
+              📅 Top Countries Today
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {geoStats.today_top.slice(0, 10).map((country: any, idx: number) => (
+                <div key={idx} className="p-4 rounded-lg bg-bg-secondary text-center">
+                  <div className="text-2xl mb-2">{getCountryFlag(country.country_code)}</div>
+                  <div className="text-sm font-medium text-text-primary mb-1">{country.country_name}</div>
+                  <div className="text-lg font-bold text-primary">{formatNumber(country.scan_count)}</div>
+                  <div className="text-xs text-text-muted mt-1">scans</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return null;
+}
+
+function getCountryFlag(countryCode: string): string {
+  // Convert country code to flag emoji
+  // Example: "RU" -> "🇷🇺", "US" -> "🇺🇸"
+  if (!countryCode || countryCode.length !== 2) return '🌍';
+  
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    .map(char => 127397 + char.charCodeAt(0));
+  
+  return String.fromCodePoint(...codePoints);
 }
 
 function StatCard({ 
