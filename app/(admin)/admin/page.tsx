@@ -533,7 +533,7 @@ export default function AdminPage() {
             <h3 className="text-lg font-semibold text-red-400 mb-2">Failed to Load Stats</h3>
             <p className="text-text-secondary text-sm mb-6">{statsError}</p>
             <button
-              onClick={loadStats}
+              onClick={() => loadStats()}
               className="px-6 py-2 bg-bg-secondary hover:bg-bg-elevated text-text-primary rounded-lg transition-colors text-sm font-medium"
             >
               Retry
