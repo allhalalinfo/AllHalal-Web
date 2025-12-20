@@ -126,27 +126,36 @@ export default function AdminPage() {
   const [statsError, setStatsError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'database' | 'etl' | 'api' | 'health' | 'geographic'>('overview');
   const [geoStats, setGeoStats] = useState<any>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Check if already authenticated and load stats
   useEffect(() => {
     checkAuth();
   }, []);
 
+  // Load stats on authentication and auto-refresh every hour
   useEffect(() => {
-    if (isAuthenticated) {
+    if (!isAuthenticated) return;
+    
+    // Initial load
+    loadStats();
+    
+    // Auto-refresh every hour (3600 seconds)
+    const interval = setInterval(() => {
       loadStats();
-      // Load geographic stats if on geographic tab
+      // Also refresh geographic stats if on that tab
       if (activeTab === 'geographic') {
         loadGeographicStats();
       }
-      // Refresh stats every 30 seconds
-      const interval = setInterval(() => {
-        loadStats();
-        if (activeTab === 'geographic') {
-          loadGeographicStats();
-        }
-      }, 30000);
-      return () => clearInterval(interval);
+    }, 3600000);
+    
+    return () => clearInterval(interval);
+  }, [isAuthenticated]);
+
+  // Load geographic stats only when switching to geographic tab (if not already loaded)
+  useEffect(() => {
+    if (isAuthenticated && activeTab === 'geographic' && !geoStats) {
+      loadGeographicStats();
     }
   }, [isAuthenticated, activeTab]);
 
@@ -172,10 +181,13 @@ export default function AdminPage() {
     }
   };
 
-  const loadStats = async () => {
+  const loadStats = async (showLoading = true) => {
     if (!isAuthenticated) return;
     
-    setStatsLoading(true);
+    if (showLoading) {
+      setStatsLoading(true);
+    }
+    setIsRefreshing(true);
     setStatsError(null);
 
     try {
@@ -269,13 +281,24 @@ export default function AdminPage() {
       console.error('Failed to load stats:', err);
       setStatsError(err instanceof Error ? err.message : 'Failed to load statistics');
     } finally {
-      setStatsLoading(false);
+      if (showLoading) {
+        setStatsLoading(false);
+      }
+      setIsRefreshing(false);
+    }
+  };
+
+  const handleRefresh = async () => {
+    await loadStats(false);
+    if (activeTab === 'geographic') {
+      await loadGeographicStats();
     }
   };
 
   const loadGeographicStats = async () => {
     if (!isAuthenticated) return;
     
+    setIsRefreshing(true);
     try {
       const response = await fetch('/api/admin/stats?type=geographic', {
         method: 'GET',
@@ -302,6 +325,8 @@ export default function AdminPage() {
     } catch (err) {
       console.error('Failed to load geographic stats:', err);
       setGeoStats({ status: 'error', message: err instanceof Error ? err.message : 'Failed to load geographic statistics' });
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -448,12 +473,30 @@ export default function AdminPage() {
             </span>
           </div>
           
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors"
-          >
-            Logout
-          </button>
+          <div className="flex items-center gap-3">
+            <a
+              href="/ceo"
+              className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors"
+              title="CEO Панель"
+            >
+              👔 CEO
+            </a>
+            <button
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+              className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              title="Обновить данные"
+            >
+              <span className={isRefreshing ? 'animate-spin' : ''}>🔄</span>
+              {isRefreshing ? 'Обновление...' : 'Обновить'}
+            </button>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
@@ -500,14 +543,32 @@ export default function AdminPage() {
             </p>
           </div>
         ) : (
-          <DashboardContent stats={stats} activeTab={activeTab} geoStats={geoStats} />
+          <DashboardContent 
+            stats={stats} 
+            activeTab={activeTab} 
+            geoStats={geoStats} 
+            onRefresh={handleRefresh}
+            isRefreshing={isRefreshing}
+          />
         )}
       </main>
     </div>
   );
 }
 
-function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | null; activeTab: string; geoStats?: any }) {
+function DashboardContent({ 
+  stats, 
+  activeTab, 
+  geoStats, 
+  onRefresh, 
+  isRefreshing 
+}: { 
+  stats: StatsData | null; 
+  activeTab: string; 
+  geoStats?: any;
+  onRefresh: () => void;
+  isRefreshing: boolean;
+}) {
   if (!stats) {
     return (
       <div className="text-center py-20">
@@ -523,6 +584,18 @@ function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | n
   if (activeTab === 'overview') {
     return (
       <div className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-text-primary">Обзор статистики</h2>
+          <button
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            title="Обновить данные"
+          >
+            <span className={isRefreshing ? 'animate-spin' : ''}>🔄</span>
+            {isRefreshing ? 'Обновление...' : 'Обновить'}
+          </button>
+        </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             title="Total Products"
@@ -626,6 +699,18 @@ function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | n
   if (activeTab === 'database') {
     return (
       <div className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-text-primary">Статистика базы данных</h2>
+          <button
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            title="Обновить данные"
+          >
+            <span className={isRefreshing ? 'animate-spin' : ''}>🔄</span>
+            {isRefreshing ? 'Обновление...' : 'Обновить'}
+          </button>
+        </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             title="Total Products"
@@ -697,6 +782,18 @@ function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | n
 
     return (
       <div className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-text-primary">Статистика API</h2>
+          <button
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            title="Обновить данные"
+          >
+            <span className={isRefreshing ? 'animate-spin' : ''}>🔄</span>
+            {isRefreshing ? 'Обновление...' : 'Обновить'}
+          </button>
+        </div>
         {/* Main Stats Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
@@ -860,6 +957,18 @@ function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | n
   if (activeTab === 'etl') {
     return (
       <div className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-text-primary">Статистика ETL</h2>
+          <button
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            title="Обновить данные"
+          >
+            <span className={isRefreshing ? 'animate-spin' : ''}>🔄</span>
+            {isRefreshing ? 'Обновление...' : 'Обновить'}
+          </button>
+        </div>
         <div className="grid md:grid-cols-2 gap-6">
           <StatCard
             title="Last Run"
@@ -898,6 +1007,18 @@ function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | n
     
     return (
       <div className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-text-primary">Состояние системы</h2>
+          <button
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            title="Обновить данные"
+          >
+            <span className={isRefreshing ? 'animate-spin' : ''}>🔄</span>
+            {isRefreshing ? 'Обновление...' : 'Обновить'}
+          </button>
+        </div>
         <div className="grid md:grid-cols-2 gap-6">
           <StatCard
             title="Status"
@@ -1004,6 +1125,18 @@ function DashboardContent({ stats, activeTab, geoStats }: { stats: StatsData | n
 
     return (
       <div className="space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-text-primary">Географическая статистика</h2>
+          <button
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            className="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            title="Обновить данные"
+          >
+            <span className={isRefreshing ? 'animate-spin' : ''}>🔄</span>
+            {isRefreshing ? 'Обновление...' : 'Обновить'}
+          </button>
+        </div>
         {/* Summary Stats */}
         <div className="grid md:grid-cols-3 gap-6">
           <StatCard
