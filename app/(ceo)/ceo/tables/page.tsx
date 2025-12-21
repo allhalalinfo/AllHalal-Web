@@ -74,8 +74,50 @@ export default function CEOTablesPage() {
       }
 
       const result = await response.json();
-      // Backend может вернуть массив таблиц или объект с tables
-      setTables(Array.isArray(result) ? result : result.tables || []);
+      
+      // Backend возвращает объект с schemas: { admin: [...], common: [...], ... }
+      // Нужно преобразовать в плоский массив таблиц
+      if (result.schemas && typeof result.schemas === 'object') {
+        const allTables: TableInfo[] = [];
+        
+        // Проходим по всем схемам и собираем все таблицы
+        Object.keys(result.schemas).forEach((schemaName) => {
+          const schemaTables = result.schemas[schemaName];
+          if (Array.isArray(schemaTables)) {
+            schemaTables.forEach((table: any) => {
+              // Преобразуем размер из строки "24 kB" в число MB
+              let sizeMb: number | undefined;
+              if (table.size) {
+                const sizeStr = table.size.toString().toLowerCase();
+                if (sizeStr.includes('mb')) {
+                  sizeMb = parseFloat(sizeStr.replace('mb', '').trim());
+                } else if (sizeStr.includes('kb')) {
+                  sizeMb = parseFloat(sizeStr.replace('kb', '').trim()) / 1024;
+                } else if (sizeStr.includes('gb')) {
+                  sizeMb = parseFloat(sizeStr.replace('gb', '').trim()) * 1024;
+                } else if (sizeStr.includes('bytes')) {
+                  sizeMb = parseFloat(sizeStr.replace('bytes', '').trim()) / (1024 * 1024);
+                }
+              }
+              
+              allTables.push({
+                name: `${schemaName}.${table.name}`, // Добавляем префикс схемы
+                row_count: table.rows,
+                size_mb: sizeMb,
+                description: table.description || `${schemaName} schema`,
+              });
+            });
+          }
+        });
+        
+        setTables(allTables);
+      } else if (Array.isArray(result)) {
+        setTables(result);
+      } else if (result.tables) {
+        setTables(result.tables);
+      } else {
+        setTables([]);
+      }
     } catch (err) {
       console.error('Failed to load tables:', err);
       setError(err instanceof Error ? err.message : 'Не удалось загрузить данные');
