@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface TableInfo {
   name: string;
+  schema?: string;
   row_count?: number;
   size_mb?: number;
   description?: string;
@@ -18,6 +19,10 @@ export default function CEOTablesPage() {
   const [tables, setTables] = useState<TableInfo[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState<'name' | 'rows' | 'size'>('name');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [expandedSchemas, setExpandedSchemas] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     checkAuth();
@@ -101,7 +106,8 @@ export default function CEOTablesPage() {
               }
               
               allTables.push({
-                name: `${schemaName}.${table.name}`, // Добавляем префикс схемы
+                name: table.name,
+                schema: schemaName, // Сохраняем схему отдельно
                 row_count: table.rows,
                 size_mb: sizeMb,
                 description: table.description || `${schemaName} schema`,
@@ -129,6 +135,93 @@ export default function CEOTablesPage() {
 
   const handleRefresh = () => {
     loadData();
+  };
+
+  // Группировка таблиц по схемам
+  const groupedTables = useMemo(() => {
+    const groups: Record<string, TableInfo[]> = {};
+    tables.forEach(table => {
+      const schema = table.schema || 'unknown';
+      if (!groups[schema]) {
+        groups[schema] = [];
+      }
+      groups[schema].push(table);
+    });
+    return groups;
+  }, [tables]);
+
+  // Фильтрация и сортировка
+  const filteredAndSortedTables = useMemo(() => {
+    let filtered = tables.filter(table => {
+      const searchLower = searchQuery.toLowerCase();
+      const fullName = `${table.schema}.${table.name}`.toLowerCase();
+      return fullName.includes(searchLower) || 
+             table.name.toLowerCase().includes(searchLower) ||
+             (table.schema && table.schema.toLowerCase().includes(searchLower));
+    });
+
+    filtered.sort((a, b) => {
+      let aVal: any, bVal: any;
+      
+      if (sortBy === 'name') {
+        aVal = `${a.schema}.${a.name}`.toLowerCase();
+        bVal = `${b.schema}.${b.name}`.toLowerCase();
+      } else if (sortBy === 'rows') {
+        aVal = a.row_count || 0;
+        bVal = b.row_count || 0;
+      } else { // size
+        aVal = a.size_mb || 0;
+        bVal = b.size_mb || 0;
+      }
+
+      if (sortOrder === 'asc') {
+        return aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+      } else {
+        return aVal < bVal ? 1 : aVal > bVal ? -1 : 0;
+      }
+    });
+
+    return filtered;
+  }, [tables, searchQuery, sortBy, sortOrder]);
+
+  // Группировка отфильтрованных таблиц
+  const filteredGroupedTables = useMemo(() => {
+    const groups: Record<string, TableInfo[]> = {};
+    filteredAndSortedTables.forEach(table => {
+      const schema = table.schema || 'unknown';
+      if (!groups[schema]) {
+        groups[schema] = [];
+      }
+      groups[schema].push(table);
+    });
+    return groups;
+  }, [filteredAndSortedTables]);
+
+  const toggleSchema = (schema: string) => {
+    const newExpanded = new Set(expandedSchemas);
+    if (newExpanded.has(schema)) {
+      newExpanded.delete(schema);
+    } else {
+      newExpanded.add(schema);
+    }
+    setExpandedSchemas(newExpanded);
+  };
+
+  // Автоматически разворачиваем все схемы при первой загрузке
+  useEffect(() => {
+    if (tables.length > 0 && expandedSchemas.size === 0) {
+      const allSchemas = new Set(Object.keys(groupedTables));
+      setExpandedSchemas(allSchemas);
+    }
+  }, [tables, groupedTables]);
+
+  const handleSort = (column: 'name' | 'rows' | 'size') => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(column);
+      setSortOrder('asc');
+    }
   };
 
   if (isLoading) {
@@ -180,8 +273,27 @@ export default function CEOTablesPage() {
       </header>
 
       <main className="container mx-auto px-6 py-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-text-primary">Все таблицы базы данных</h2>
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-text-primary mb-4">Все таблицы базы данных</h2>
+          
+          {/* Поиск и статистика */}
+          <div className="flex flex-col md:flex-row gap-4 mb-6">
+            <div className="flex-1">
+              <input
+                type="text"
+                placeholder="Поиск по названию таблицы или схеме..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2 bg-bg-secondary border border-border rounded-lg text-text-primary placeholder-text-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+              />
+            </div>
+            <div className="text-sm text-text-secondary flex items-center gap-4">
+              <span>Всего: <strong className="text-text-primary">{tables.length}</strong> таблиц</span>
+              {searchQuery && (
+                <span>Найдено: <strong className="text-text-primary">{filteredAndSortedTables.length}</strong></span>
+              )}
+            </div>
+          </div>
         </div>
 
         {error ? (
@@ -201,36 +313,137 @@ export default function CEOTablesPage() {
             <div className="text-4xl mb-4">🗄️</div>
             <p className="text-text-secondary">Нет данных о таблицах</p>
           </div>
-        ) : (
+        ) : searchQuery ? (
+          // Плоский список при поиске
           <div className="bg-bg-card border border-border rounded-xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-bg-secondary">
-                    <th className="text-left py-4 px-6 text-text-secondary font-medium">Таблица</th>
-                    <th className="text-right py-4 px-6 text-text-secondary font-medium">Строк</th>
-                    <th className="text-right py-4 px-6 text-text-secondary font-medium">Размер</th>
-                    <th className="text-left py-4 px-6 text-text-secondary font-medium">Описание</th>
+                    <th 
+                      className="text-left py-4 px-6 text-text-secondary font-medium cursor-pointer hover:text-text-primary transition-colors"
+                      onClick={() => handleSort('name')}
+                    >
+                      Таблица {sortBy === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th 
+                      className="text-right py-4 px-6 text-text-secondary font-medium cursor-pointer hover:text-text-primary transition-colors"
+                      onClick={() => handleSort('rows')}
+                    >
+                      Строк {sortBy === 'rows' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th 
+                      className="text-right py-4 px-6 text-text-secondary font-medium cursor-pointer hover:text-text-primary transition-colors"
+                      onClick={() => handleSort('size')}
+                    >
+                      Размер {sortBy === 'size' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    </th>
+                    <th className="text-left py-4 px-6 text-text-secondary font-medium">Схема</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {tables.map((table, idx) => (
+                  {filteredAndSortedTables.map((table, idx) => (
                     <tr key={idx} className="border-b border-border/50 hover:bg-bg-secondary transition-colors">
-                      <td className="py-4 px-6 text-text-primary font-medium font-mono">{table.name}</td>
+                      <td className="py-4 px-6 text-text-primary font-medium font-mono">
+                        {table.schema && <span className="text-text-muted">{table.schema}.</span>}
+                        {table.name}
+                      </td>
                       <td className="py-4 px-6 text-right text-text-primary">
                         {table.row_count !== undefined ? formatNumber(table.row_count) : 'N/A'}
                       </td>
                       <td className="py-4 px-6 text-right text-text-secondary">
                         {table.size_mb !== undefined ? `${table.size_mb.toFixed(2)} MB` : 'N/A'}
                       </td>
-                      <td className="py-4 px-6 text-text-secondary text-sm">
-                        {table.description || '-'}
+                      <td className="py-4 px-6">
+                        {table.schema && (
+                          <span className="px-2 py-1 rounded text-xs bg-blue-500/10 text-blue-500">
+                            {table.schema}
+                          </span>
+                        )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+          </div>
+        ) : (
+          // Группировка по схемам
+          <div className="space-y-4">
+            {Object.keys(filteredGroupedTables).sort().map((schema) => {
+              const schemaTables = filteredGroupedTables[schema];
+              const isExpanded = expandedSchemas.has(schema);
+              const totalRows = schemaTables.reduce((sum, t) => sum + (t.row_count || 0), 0);
+              const totalSize = schemaTables.reduce((sum, t) => sum + (t.size_mb || 0), 0);
+
+              return (
+                <div key={schema} className="bg-bg-card border border-border rounded-xl overflow-hidden">
+                  {/* Заголовок схемы */}
+                  <button
+                    onClick={() => toggleSchema(schema)}
+                    className="w-full px-6 py-4 flex items-center justify-between hover:bg-bg-secondary transition-colors text-left"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-lg">{isExpanded ? '📂' : '📁'}</span>
+                      <div>
+                        <h3 className="text-lg font-semibold text-text-primary">{schema}</h3>
+                        <p className="text-sm text-text-secondary">
+                          {schemaTables.length} таблиц • {formatNumber(totalRows)} строк • {totalSize.toFixed(2)} MB
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-text-muted">{isExpanded ? '▼' : '▶'}</span>
+                  </button>
+
+                  {/* Таблицы схемы */}
+                  {isExpanded && (
+                    <div className="border-t border-border">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="border-b border-border bg-bg-secondary">
+                              <th 
+                                className="text-left py-3 px-6 text-text-secondary font-medium cursor-pointer hover:text-text-primary transition-colors"
+                                onClick={() => handleSort('name')}
+                              >
+                                Таблица {sortBy === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
+                              </th>
+                              <th 
+                                className="text-right py-3 px-6 text-text-secondary font-medium cursor-pointer hover:text-text-primary transition-colors"
+                                onClick={() => handleSort('rows')}
+                              >
+                                Строк {sortBy === 'rows' && (sortOrder === 'asc' ? '↑' : '↓')}
+                              </th>
+                              <th 
+                                className="text-right py-3 px-6 text-text-secondary font-medium cursor-pointer hover:text-text-primary transition-colors"
+                                onClick={() => handleSort('size')}
+                              >
+                                Размер {sortBy === 'size' && (sortOrder === 'asc' ? '↑' : '↓')}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {schemaTables.map((table, idx) => (
+                              <tr key={idx} className="border-b border-border/50 hover:bg-bg-secondary transition-colors">
+                                <td className="py-3 px-6 text-text-primary font-medium font-mono">
+                                  {table.name}
+                                </td>
+                                <td className="py-3 px-6 text-right text-text-primary">
+                                  {table.row_count !== undefined ? formatNumber(table.row_count) : 'N/A'}
+                                </td>
+                                <td className="py-3 px-6 text-right text-text-secondary">
+                                  {table.size_mb !== undefined ? `${table.size_mb.toFixed(2)} MB` : 'N/A'}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
       </main>
