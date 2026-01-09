@@ -12,10 +12,23 @@ const intlMiddleware = createMiddleware({
 });
 
 export function middleware(request: NextRequest) {
-  // Skip middleware for static files that should be served directly
   const pathname = request.nextUrl.pathname;
+  
+  // Handle app-ads.txt directly in middleware to bypass Vercel domain redirects
+  // This ensures both apex (allhalal.info) and www (www.allhalal.info) return 200
+  if (pathname === '/app-ads.txt') {
+    const content = 'google.com, pub-5317347727083675, DIRECT, f08c47fec0942fa0';
+    return new NextResponse(content, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600',
+      },
+    });
+  }
+  
+  // Skip middleware for other static files that should be served directly
   if (
-    pathname === '/app-ads.txt' ||
     pathname === '/robots.txt' ||
     pathname === '/sitemap.xml' ||
     pathname.startsWith('/_next/') ||
@@ -96,7 +109,11 @@ export const config = {
      * - favicon.ico (favicon file)
      * - assets (static assets)
      * - app-screens (app screenshots)
+     * 
+     * Note: app-ads.txt is explicitly included to handle it directly in middleware
+     * to bypass Vercel domain redirects and return 200 on both apex and www domains
      */
-    '/((?!api|admin|ceo|_next/static|_next/image|favicon.ico|assets|app-screens|app-ads.txt|robots.txt|sitemap.xml|.*\\..*).*)',
+    '/app-ads.txt', // Handle app-ads.txt directly in middleware (before regex exclusion)
+    '/((?!api|admin|ceo|_next/static|_next/image|favicon.ico|assets|app-screens|robots.txt|sitemap.xml|.*\\..*).*)',
   ],
 };
