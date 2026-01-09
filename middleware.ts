@@ -81,6 +81,6 @@ export const config = {
      * - assets (static assets)
      * - app-screens (app screenshots)
      */
-    '/((?!api|admin|ceo|_next/static|_next/image|favicon.ico|assets|app-screens|.*\\..*).*)',
+    '/((?!api|admin|ceo|_next/static|_next/image|favicon.ico|assets|app-screens|app-ads.txt|robots.txt|sitemap.xml|.*\\..*).*)',
   ],
 };
