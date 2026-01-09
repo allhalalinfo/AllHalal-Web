@@ -20,6 +20,10 @@
   ],
   "rewrites": [
     {
+      "source": "/app-ads.txt",
+      "destination": "/api/app-ads.txt"
+    },
+    {
       "source": "/:path((?!_next|api|assets|favicon\\.ico|robots\\.txt|sitemap\\.xml|app-ads\\.txt).*)",
       "destination": "/:path*"
     }
