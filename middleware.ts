@@ -12,6 +12,22 @@ const intlMiddleware = createMiddleware({
 });
 
 export function middleware(request: NextRequest) {
+  // Skip middleware for static files that should be served directly
+  const pathname = request.nextUrl.pathname;
+  if (
+    pathname === '/app-ads.txt' ||
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/api/') ||
+    pathname.startsWith('/admin/') ||
+    pathname.startsWith('/ceo/') ||
+    pathname.startsWith('/assets/') ||
+    pathname.startsWith('/app-screens/')
+  ) {
+    return NextResponse.next();
+  }
+  
   // Handle internationalization first
   const response = intlMiddleware(request);
   
