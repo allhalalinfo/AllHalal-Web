@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
   // Handle app-ads.txt directly in middleware to bypass Vercel domain redirects
   // This ensures both apex (allhalal.info) and www (www.allhalal.info) return 200
   if (pathname === '/app-ads.txt') {
-    const content = 'google.com, pub-5317347727083675, DIRECT, f08c47fec0942fa0';
+    const content = 'google.com, pub-5317347727083675, DIRECT, f08c47fec0942fa0\n';
     return new NextResponse(content, {
       status: 200,
       headers: {

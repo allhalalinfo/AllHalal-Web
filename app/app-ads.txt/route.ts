@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const content = 'google.com, pub-5317347727083675, DIRECT, f08c47fec0942fa0';
+  const content = 'google.com, pub-5317347727083675, DIRECT, f08c47fec0942fa0\n';
   
   return new NextResponse(content, {
     status: 200,
