@@ -9,6 +9,7 @@
  * - Global fonts (Inter)
  * - Smooth scroll provider (Lenis)
  * - Noise overlay
+ * - Speed Insights for performance monitoring
  * 
  * ═══════════════════════════════════════════════════════════════════════════════
  */
@@ -21,6 +22,7 @@ import { getMessages } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/config";
 import "../globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { SpeedInsightsProvider } from "@/components/providers/SpeedInsightsProvider";
 import Noise from "@/components/ui/Noise";
 
 // Inter font with all weights
@@ -96,6 +98,7 @@ export default async function LocaleLayout({
             {children}
           </SmoothScrollProvider>
         </NextIntlClientProvider>
+        <SpeedInsightsProvider />
       </body>
     </html>
   );
