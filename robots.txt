@@ -1,6 +1,18 @@
 # robots.txt for AllHalal / HalalScan
 # https://allhalal.info/robots.txt
 
+# Allow Google app-ads.txt crawler to access app-ads.txt file
+User-agent: Google-adstxt
+Disallow:
+
+# Allow Mediapartners-Google crawler
+User-agent: Mediapartners-Google
+Disallow:
+
+# Allow Googlebot crawler
+User-agent: Googlebot
+Disallow:
+
 # Allow all search engines to crawl the entire site
 User-agent: *
 Allow: /
