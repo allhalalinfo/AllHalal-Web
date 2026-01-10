@@ -29,7 +29,6 @@ export function middleware(request: NextRequest) {
   
   // Skip middleware for other static files that should be served directly
   if (
-    pathname === '/robots.txt' ||
     pathname === '/sitemap.xml' ||
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/api/') ||
@@ -38,6 +37,11 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/assets/') ||
     pathname.startsWith('/app-screens/')
   ) {
+    return NextResponse.next();
+  }
+  
+  // robots.txt is handled by route handler, skip middleware
+  if (pathname === '/robots.txt') {
     return NextResponse.next();
   }
   
