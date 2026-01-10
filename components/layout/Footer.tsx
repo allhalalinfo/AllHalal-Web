@@ -57,7 +57,7 @@ export default function Footer() {
         { label: t("links.features"), href: "/#features" },
         { label: t("links.howItWorks"), href: "/#about" },
         { label: t("links.madhhabSupport"), href: "/#madhhab" },
-        { label: t("links.downloadApp"), href: "https://apps.apple.com/app/allhalal/id6504640498" },
+        { label: t("links.downloadApp"), href: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" },
       ],
     },
     company: {

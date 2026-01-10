@@ -44,7 +44,7 @@ export default function CTASection() {
           {/* Download Button */}
           <div>
             <a
-              href="https://apps.apple.com/app/allhalal/id6504640498"
+              href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-bg-primary font-semibold text-lg rounded-full transition-all duration-300 hover:bg-primary-light hover:shadow-glow hover:-translate-y-1"

@@ -104,7 +104,7 @@ export default function HeroSection() {
           {/* CTA Buttons */}
             <div className="flex flex-wrap gap-3 md:gap-4">
               <MagneticButton
-              href="https://apps.apple.com/app/allhalal/id6504640498"
+              href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary btn-lg group"

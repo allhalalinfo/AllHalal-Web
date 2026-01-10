@@ -122,7 +122,9 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.7 }}
         >
           <a
-            href="/coming-soon"
+            href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-primary btn-lg group"
           >
             <svg

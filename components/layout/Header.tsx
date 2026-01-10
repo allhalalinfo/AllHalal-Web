@@ -137,7 +137,7 @@ export default function Header() {
             <div className="hidden md:flex items-center gap-4">
               <LanguageSwitcher />
               <Link
-                href="https://apps.apple.com/app/allhalal/id6504640498"
+                href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
@@ -201,7 +201,7 @@ export default function Header() {
           <div className="w-full space-y-4">
             <LanguageSwitcher />
                 <Link
-                  href="https://apps.apple.com/app/allhalal/id6504640498"
+                  href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
                   target="_blank"
                   rel="noopener noreferrer"
               onClick={closeMobileMenu}

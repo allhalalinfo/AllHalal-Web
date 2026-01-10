@@ -46,7 +46,9 @@ export default function CTASection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <a
-              href="/coming-soon"
+              href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold text-bg-primary bg-primary rounded-xl hover:bg-primary-light transition-all duration-300 hover:-translate-y-1 shadow-glow hover:shadow-[0_0_60px_rgba(0,208,148,0.4)]"
             >
               <svg

@@ -86,12 +86,14 @@ export default function Header() {
             </nav>
             
             {/* CTA Button */}
-            <Link
-              href="/coming-soon"
+            <a
+              href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-bg-primary bg-primary rounded-lg hover:bg-primary-light transition-all hover:-translate-y-0.5 hover:shadow-glow-sm"
             >
               Download iOS
-            </Link>
+            </a>
             
             {/* Mobile Menu Button */}
             <button 
@@ -150,13 +152,15 @@ export default function Header() {
               transition={{ duration: 0.2 }}
             >
               {/* Download button */}
-              <Link
-                href="/coming-soon"
+              <a
+                href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full px-5 py-3 mb-4 text-sm font-semibold text-bg-primary bg-primary rounded-xl hover:bg-primary-light transition-all"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
             Download iOS
-              </Link>
+              </a>
               
               {/* Nav links */}
               <div className="flex flex-col gap-2">
