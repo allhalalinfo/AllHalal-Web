@@ -12,32 +12,34 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-
-const legalDocuments = [
-  {
-    title: "Privacy Policy",
-    description: "How we collect, use, and protect your personal data.",
-    href: "/legal/privacy-policy",
-    icon: ShieldIcon,
-    lastUpdated: "December 2025",
-  },
-  {
-    title: "Terms of Service",
-    description: "The rules and agreements that govern your use of AllHalal.",
-    href: "/legal/terms-of-service",
-    icon: DocumentIcon,
-    lastUpdated: "December 2025",
-  },
-  {
-    title: "Disclaimer",
-    description: "Important information regarding religious accuracy and liability.",
-    href: "/legal/disclaimer",
-    icon: AlertIcon,
-    lastUpdated: "December 2025",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function LegalPage() {
+  const t = useTranslations("legal");
+  
+  const legalDocuments = [
+    {
+      title: t("documents.privacyPolicy.title"),
+      description: t("documents.privacyPolicy.description"),
+      href: "/legal/privacy-policy",
+      icon: ShieldIcon,
+      lastUpdated: t("documents.privacyPolicy.lastUpdated"),
+    },
+    {
+      title: t("documents.termsOfService.title"),
+      description: t("documents.termsOfService.description"),
+      href: "/legal/terms-of-service",
+      icon: DocumentIcon,
+      lastUpdated: t("documents.termsOfService.lastUpdated"),
+    },
+    {
+      title: t("documents.disclaimer.title"),
+      description: t("documents.disclaimer.description"),
+      href: "/legal/disclaimer",
+      icon: AlertIcon,
+      lastUpdated: t("documents.disclaimer.lastUpdated"),
+    },
+  ];
   return (
     <div>
       {/* Page Header */}
@@ -53,7 +55,7 @@ export default function LegalPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Legal Information
+          {t("subtitle")}
         </motion.span>
         
         <motion.h1
@@ -62,7 +64,7 @@ export default function LegalPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Legal Center
+          {t("title")}
         </motion.h1>
         
         <motion.p
@@ -71,7 +73,7 @@ export default function LegalPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          Read our terms and policies to understand how we protect your data and rights.
+          {t("description")}
         </motion.p>
       </motion.div>
 
@@ -98,7 +100,7 @@ export default function LegalPage() {
                       <ArrowIcon className="w-5 h-5 text-text-muted group-hover:text-primary group-hover:translate-x-1 transition-all" />
                     </div>
                     <p className="text-text-secondary mb-2">{doc.description}</p>
-                    <p className="text-sm text-text-muted">Last updated: {doc.lastUpdated}</p>
+                    <p className="text-sm text-text-muted">{t("common.lastUpdated", { date: doc.lastUpdated })}</p>
                   </div>
                 </div>
               </div>
@@ -115,9 +117,9 @@ export default function LegalPage() {
         transition={{ duration: 0.6, delay: 0.8 }}
       >
         <p className="text-text-secondary">
-          Have questions about our policies?{" "}
+          {t("contactNote")}{" "}
           <Link href="/contact" className="text-primary hover:text-primary-light transition-colors">
-            Contact us
+            {t("contactLink")}
           </Link>
         </p>
       </motion.div>

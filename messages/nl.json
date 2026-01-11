@@ -250,11 +250,40 @@
       "responseTimeDesc": "We reageren doorgaans binnen 24-48 werkuren."
     }
   },
+  "legal": {
+    "subtitle": "Juridische informatie",
+    "title": "Juridisch centrum",
+    "description": "Lees onze voorwaarden en beleidsregels om te begrijpen hoe we uw gegevens en rechten beschermen.",
+    "backToLegal": "Terug naar Juridisch",
+    "documents": {
+      "privacyPolicy": {
+        "title": "Privacybeleid",
+        "description": "Hoe we uw persoonlijke gegevens verzamelen, gebruiken en beschermen.",
+        "lastUpdated": "December 2025",
+        "intro": "Uw privacy is belangrijk voor ons. Dit beleid legt uit hoe AllHalal uw persoonlijke informatie verzamelt, gebruikt en beschermt in overeenstemming met de vereisten van Apple App Store en GDPR-voorschriften."
+      },
+      "termsOfService": {
+        "title": "Servicevoorwaarden",
+        "description": "De regels en overeenkomsten die uw gebruik van AllHalal bepalen.",
+        "lastUpdated": "December 2025",
+        "intro": "Lees deze voorwaarden zorgvuldig door voordat u AllHalal gebruikt. Door onze app te gebruiken, gaat u akkoord met deze voorwaarden."
+      },
+      "disclaimer": {
+        "title": "Disclaimer",
+        "description": "Belangrijke informatie over religieuze nauwkeurigheid en aansprakelijkheid.",
+        "lastUpdated": "December 2025",
+        "intro": "Belangrijke informatie over religieuze nauwkeurigheid, aansprakelijkheid en het juiste gebruik van AllHalal."
+      }
+    },
+    "contactNote": "Vragen over ons beleid?",
+    "contactLink": "Neem contact met ons op"
+  },
   "common": {
     "learnMore": "Meer informatie",
     "getStarted": "Aan de slag",
     "close": "Sluiten",
     "menu": "Menu",
-    "language": "Taal"
+    "language": "Taal",
+    "lastUpdated": "Laatst bijgewerkt: {date}"
   }
 }

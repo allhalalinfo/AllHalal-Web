@@ -12,8 +12,10 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function PrivacyPolicyPage() {
+  const t = useTranslations("legal");
   return (
     <motion.article
       className="prose"
@@ -27,19 +29,17 @@ export default function PrivacyPolicyPage() {
         className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors mb-8 no-underline"
       >
         <ArrowLeftIcon className="w-4 h-4" />
-        Back to Legal
+        {t("backToLegal")}
       </Link>
 
       {/* Header */}
       <div className="mb-12">
         <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
-          Last Updated: December 17, 2025
+          {t("common.lastUpdated", { date: "December 17, 2025" })}
         </p>
-        <h1>Privacy Policy</h1>
+        <h1>{t("documents.privacyPolicy.title")}</h1>
         <p className="text-xl text-text-secondary leading-relaxed">
-          Your privacy is important to us. This policy explains how AllHalal collects, 
-          uses, and protects your personal information in compliance with Apple App Store 
-          requirements and GDPR regulations.
+          {t("documents.privacyPolicy.intro")}
         </p>
         <p className="text-sm text-text-muted mt-4">
           <strong>Contact:</strong> <a href="mailto:app@allhalal.info">app@allhalal.info</a> | 

@@ -250,11 +250,40 @@
       "responseTimeDesc": "Rispondiamo in genere entro 24-48 ore lavorative."
     }
   },
+  "legal": {
+    "subtitle": "Informazioni legali",
+    "title": "Centro legale",
+    "description": "Leggi i nostri termini e politiche per capire come proteggiamo i tuoi dati e i tuoi diritti.",
+    "backToLegal": "Torna alle note legali",
+    "documents": {
+      "privacyPolicy": {
+        "title": "Informativa sulla privacy",
+        "description": "Come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali.",
+        "lastUpdated": "Dicembre 2025",
+        "intro": "La tua privacy è importante per noi. Questa politica spiega come AllHalal raccoglie, utilizza e protegge le tue informazioni personali in conformità con i requisiti dell'Apple App Store e le normative GDPR."
+      },
+      "termsOfService": {
+        "title": "Termini di servizio",
+        "description": "Le regole e gli accordi che disciplinano il tuo utilizzo di AllHalal.",
+        "lastUpdated": "Dicembre 2025",
+        "intro": "Si prega di leggere attentamente questi termini prima di utilizzare AllHalal. Utilizzando la nostra app, accetti di essere vincolato da questi termini."
+      },
+      "disclaimer": {
+        "title": "Esclusione di responsabilità",
+        "description": "Informazioni importanti sull'accuratezza religiosa e la responsabilità.",
+        "lastUpdated": "Dicembre 2025",
+        "intro": "Informazioni importanti sull'accuratezza religiosa, la responsabilità e l'uso corretto di AllHalal."
+      }
+    },
+    "contactNote": "Hai domande sulle nostre politiche?",
+    "contactLink": "Contattaci"
+  },
   "common": {
     "learnMore": "Scopri di più",
     "getStarted": "Inizia",
     "close": "Chiudi",
     "menu": "Menu",
-    "language": "Lingua"
+    "language": "Lingua",
+    "lastUpdated": "Ultimo aggiornamento: {date}"
   }
 }

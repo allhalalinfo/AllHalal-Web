@@ -12,8 +12,10 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function TermsOfServicePage() {
+  const t = useTranslations("legal");
   return (
     <motion.article
       className="prose"
@@ -27,18 +29,17 @@ export default function TermsOfServicePage() {
         className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors mb-8 no-underline"
       >
         <ArrowLeftIcon className="w-4 h-4" />
-        Back to Legal
+        {t("backToLegal")}
       </Link>
 
       {/* Header */}
       <div className="mb-12">
         <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
-          Last Updated: December 2025
+          {t("common.lastUpdated", { date: t("documents.termsOfService.lastUpdated") })}
         </p>
-        <h1>Terms of Service</h1>
+        <h1>{t("documents.termsOfService.title")}</h1>
         <p className="text-xl text-text-secondary leading-relaxed">
-          Please read these terms carefully before using AllHalal. By using our app, 
-          you agree to be bound by these terms.
+          {t("documents.termsOfService.intro")}
         </p>
       </div>
 
