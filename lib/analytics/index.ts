@@ -1,5 +1,5 @@
 /**
- * Analytics Abstraction Layer
+ * Analytics Module
  * Provider-agnostic analytics tracking
  */
 
@@ -164,6 +164,27 @@ const defaultConfig: AnalyticsConfig = {
 // Singleton instance
 export const analytics = new Analytics(defaultConfig);
 
+// Helper functions
+export function initAnalytics() {
+  analytics.init();
+}
+
+export function trackPageView(path: string, title: string): void {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'page_view', {
+      page_path: path,
+      page_title: title
+    });
+  }
+}
+
+export function trackEvent(type: string, properties?: Record<string, any>): void {
+  analytics.track({
+    type: type as any,
+    ...properties
+  });
+}
+
 // Type augmentation for window
 declare global {
   interface Window {
@@ -177,3 +198,4 @@ declare global {
 
 // Export for testing
 export { Analytics };
+export type { AnalyticsEvent };
