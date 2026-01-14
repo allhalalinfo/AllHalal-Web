@@ -14,9 +14,11 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import { SearchButton, useSearch } from "@/components/media/search";
 
 export default function Header() {
   const t = useTranslations("nav");
+  const { openSearch } = useSearch();
   
   const navItems = [
     { label: t("features"), href: "/#features" },
@@ -135,6 +137,7 @@ export default function Header() {
 
             {/* Desktop CTA + Language */}
             <div className="hidden md:flex items-center gap-4">
+              <SearchButton onClick={openSearch} />
               <LanguageSwitcher />
               <Link
                 href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
