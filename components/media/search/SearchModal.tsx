@@ -9,7 +9,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { createSearchClient, search, groupResultsByCategory, getPopularSearches } from '@/lib/search/client';
 import type { SearchResult } from '@/lib/search/types';
-import { trackEvent } from '@/lib/analytics';
+// import { trackEvent } from '@/lib/analytics';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -45,7 +45,7 @@ export default function SearchModal({ isOpen, onClose, searchIndex }: SearchModa
       setIsSearching(false);
       
       // Track search
-      trackEvent('search_query', { query: q, results: searchResults.length });
+      // trackEvent('search_query', { query: q, results: searchResults.length });
     }, 150);
   }, []);
   
@@ -88,7 +88,7 @@ export default function SearchModal({ isOpen, onClose, searchIndex }: SearchModa
   useEffect(() => {
     if (isOpen) {
       inputRef.current?.focus();
-      trackEvent('search_open', {});
+      // trackEvent('search_open', {});
     }
   }, [isOpen]);
   
@@ -178,11 +178,11 @@ export default function SearchModal({ isOpen, onClose, searchIndex }: SearchModa
                         key={result.url}
                         href={result.url}
                         onClick={() => {
-                          trackEvent('search_result_click', {
-                            query,
-                            url: result.url,
-                            position: globalIndex
-                          });
+                          // trackEvent('search_result_click', {
+                          //   query,
+                          //   url: result.url,
+                          //   position: globalIndex
+                          // });
                           onClose();
                         }}
                         className={`block px-6 py-3 transition-colors ${
