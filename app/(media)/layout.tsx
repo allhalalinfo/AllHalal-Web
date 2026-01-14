@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 import { Inter } from "next/font/google";
 import { SearchProvider } from "@/components/media/search";
 import { getSearchIndex } from "@/lib/search";
+import Header from "@/components/layout/Header";
 import "../globals.css";
 
 const inter = Inter({
@@ -23,6 +24,7 @@ export default function MediaLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={inter.variable}>
       <body className="bg-bg-primary text-text-primary antialiased">
         <SearchProvider searchIndex={searchIndex.items}>
+          <Header />
           {children}
         </SearchProvider>
       </body>
