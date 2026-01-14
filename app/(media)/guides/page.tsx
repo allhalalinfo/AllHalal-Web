@@ -59,12 +59,10 @@ export default async function GuidesPage() {
                   key={guide.slug}
                   title={guide.title}
                   description={guide.description}
-                  url={`/guides/${guide.slug}`}
+                  slug={guide.slug} basePath="/guides"
                   category={guide.category}
-                  date={guide.dateUpdated || guide.datePublished}
-                  readingTime={guide.readingTime}
-                  size="M"
-                  badge={guide.evergreen ? 'Evergreen' : undefined}
+                  datePublished={guide.dateUpdated || guide.datePublished}
+                  size="medium"
                 />
               ))}
             </div>
@@ -90,12 +88,10 @@ export default async function GuidesPage() {
                   key={guide.slug}
                   title={guide.title}
                   description={guide.description}
-                  url={`/guides/${guide.slug}`}
+                  slug={guide.slug} basePath="/guides"
                   category={guide.category}
-                  date={guide.dateUpdated || guide.datePublished}
-                  readingTime={guide.readingTime}
-                  size="S"
-                  badge={guide.evergreen ? 'Evergreen' : undefined}
+                  datePublished={guide.dateUpdated || guide.datePublished}
+                  size="small"
                 />
               ))}
             </div>

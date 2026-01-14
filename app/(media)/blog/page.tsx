@@ -13,7 +13,7 @@ export const metadata: Metadata = genMeta({
   title: 'Blog - AllHalal',
   description: 'Latest news, updates, and insights on halal lifestyle, travel, food, finance, and more.',
   path: '/blog',
-  type: 'blog'
+  type: 'website'
 });
 
 export default async function BlogPage() {
@@ -46,11 +46,10 @@ export default async function BlogPage() {
                   key={post.slug}
                   title={post.title}
                   description={post.description}
-                  url={`/blog/${post.slug}`}
+                  slug={post.slug} basePath="/blog"
                   category={post.category}
-                  date={post.datePublished}
-                  readingTime={post.readingTime}
-                  size="M"
+                  datePublished={post.datePublished}
+                  size="medium"
                 />
               ))}
             </div>
@@ -76,11 +75,10 @@ export default async function BlogPage() {
                   key={post.slug}
                   title={post.title}
                   description={post.description}
-                  url={`/blog/${post.slug}`}
+                  slug={post.slug} basePath="/blog"
                   category={post.category}
-                  date={post.datePublished}
-                  readingTime={post.readingTime}
-                  size="S"
+                  datePublished={post.datePublished}
+                  size="small"
                 />
               ))}
             </div>

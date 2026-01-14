@@ -19,8 +19,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { area: string } }) {
-  const area = getDubaiAreaBySlug(params.area);
+export async function generateMetadata({ params }: { params: Promise<{ area: string }> }) {
+  const { area: areaSlug } = await params;
+  const area = getDubaiAreaBySlug(areaSlug);
   
   if (!area) {
     return {
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: { params: { area: string } })
   return generateDubaiAreaMetadata(area);
 }
 
-export default function DubaiAreaPage({ params }: { params: { area: string } }) {
-  const area = getDubaiAreaBySlug(params.area);
+export default async function DubaiAreaPage({ params }: { params: Promise<{ area: string }> }) {
+  const { area: areaSlug } = await params;
+  const area = getDubaiAreaBySlug(areaSlug);
   
   if (!area) {
     notFound();

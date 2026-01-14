@@ -10,7 +10,7 @@ import { getContentBySlug, getAllContent, getRelatedPosts, renderMDX } from '@/l
 import { Breadcrumbs } from '@/components/media/layout/Breadcrumbs';
 import { ArticleCard } from '@/components/media/cards/ArticleCard';
 import { generateMetadata as genMeta } from '@/lib/seo/metadata';
-import { generateArticleSchema } from '@/lib/seo/structured-data';
+import { generateArticleLD } from '@/lib/seo/structured-data';
 import type { Guide } from '@/data/types';
 
 interface GuidePageProps {
@@ -33,8 +33,7 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
     image: guide.coverImage,
     publishedTime: guide.datePublished,
     modifiedTime: guide.dateUpdated,
-    author: guide.author,
-    tags: guide.tags
+    author: guide.author
   });
 }
 
@@ -52,14 +51,15 @@ export default async function GuidePage({ params }: GuidePageProps) {
   }
   
   const relatedGuides = getRelatedPosts(slug, guide.tags, 3);
-  const articleSchema = generateArticleSchema({
+  const articleSchema = generateArticleLD({
     title: guide.title,
     description: guide.description,
+    slug: slug,
+    author: guide.author,
     datePublished: guide.datePublished,
     dateModified: guide.dateUpdated,
-    author: guide.author,
-    authorUrl: guide.authorUrl,
-    image: guide.coverImage,
+    coverImage: guide.coverImage,
+    category: guide.category,
     tags: guide.tags
   });
   
@@ -187,11 +187,10 @@ export default async function GuidePage({ params }: GuidePageProps) {
                   key={related.slug}
                   title={related.title}
                   description={related.description}
-                  url={`/guides/${related.slug}`}
+                  slug={related.slug} basePath="/guides"
                   category={related.category}
-                  date={related.dateUpdated || related.datePublished}
-                  readingTime={related.readingTime}
-                  size="S"
+                  datePublished={related.dateUpdated || related.datePublished}
+                  size="small"
                 />
               ))}
             </div>

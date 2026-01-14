@@ -21,8 +21,9 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each city
-export async function generateMetadata({ params }: { params: { city: string } }) {
-  const city = getCityBySlug(params.city);
+export async function generateMetadata({ params }: { params: Promise<{ city: string }> }) {
+  const { city: citySlug } = await params;
+  const city = getCityBySlug(citySlug);
   
   if (!city) {
     return {
@@ -34,8 +35,9 @@ export async function generateMetadata({ params }: { params: { city: string } })
   return generateCityMetadata(city);
 }
 
-export default function CityRestaurantsPage({ params }: { params: { city: string } }) {
-  const city = getCityBySlug(params.city);
+export default async function CityRestaurantsPage({ params }: { params: Promise<{ city: string }> }) {
+  const { city: citySlug } = await params;
+  const city = getCityBySlug(citySlug);
   
   if (!city) {
     notFound();

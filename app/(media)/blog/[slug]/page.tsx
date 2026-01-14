@@ -10,7 +10,7 @@ import { getContentBySlug, getAllContent, getRelatedPosts, renderMDX } from '@/l
 import { Breadcrumbs } from '@/components/media/layout/Breadcrumbs';
 import { ArticleCard } from '@/components/media/cards/ArticleCard';
 import { generateMetadata as genMeta } from '@/lib/seo/metadata';
-import { generateArticleSchema } from '@/lib/seo/structured-data';
+import { generateArticleLD } from '@/lib/seo/structured-data';
 import type { Post } from '@/data/types';
 
 interface BlogPostPageProps {
@@ -33,8 +33,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     image: post.coverImage,
     publishedTime: post.datePublished,
     modifiedTime: post.dateUpdated,
-    author: post.author,
-    tags: post.tags
+    author: post.author
   });
 }
 
@@ -52,14 +51,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
   
   const relatedPosts = getRelatedPosts(slug, post.tags, 3);
-  const articleSchema = generateArticleSchema({
+  const articleSchema = generateArticleLD({
     title: post.title,
     description: post.description,
+    slug: slug,
+    author: post.author,
     datePublished: post.datePublished,
     dateModified: post.dateUpdated,
-    author: post.author,
-    authorUrl: post.authorUrl,
-    image: post.coverImage,
+    coverImage: post.coverImage,
+    category: post.category,
     tags: post.tags
   });
   
@@ -160,11 +160,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   key={related.slug}
                   title={related.title}
                   description={related.description}
-                  url={`/blog/${related.slug}`}
+                  slug={related.slug} basePath="/blog"
                   category={related.category}
-                  date={related.datePublished}
-                  readingTime={related.readingTime}
-                  size="S"
+                  datePublished={related.datePublished}
+                  size="small"
                 />
               ))}
             </div>

@@ -47,6 +47,8 @@ export interface BlogPost {
   description: string;
   content: string; // MDX
   author: string; // Author ID
+  authorRole?: string;
+  authorUrl?: string;
   category: string;
   tags: string[];
   coverImage?: string;
@@ -60,19 +62,25 @@ export interface BlogPost {
   noindex?: boolean;
 }
 
+// Alias for BlogPost
+export type Post = BlogPost;
+
 export interface Guide {
   slug: string;
   title: string;
   description: string;
   content: string; // MDX
   author: string;
+  authorRole?: string;
+  authorUrl?: string;
   category: string;
   tags: string[];
   coverImage?: string;
   datePublished: string;
-  dateUpdated: string; // Required for guides
-  lastReviewed: string;
-  version: string; // "2.1"
+  dateUpdated?: string; // Optional for guides
+  lastReviewed?: string;
+  version?: string; // "2.1"
+  evergreen?: boolean;
   featured?: boolean;
   editorsPick?: boolean;
   series?: {

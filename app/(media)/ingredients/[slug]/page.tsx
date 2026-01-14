@@ -19,8 +19,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const ingredient = getIngredientBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const ingredient = getIngredientBySlug(slug);
   
   if (!ingredient) {
     return {
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return generateIngredientMetadata(ingredient);
 }
 
-export default function IngredientPage({ params }: { params: { slug: string } }) {
-  const ingredient = getIngredientBySlug(params.slug);
+export default async function IngredientPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const ingredient = getIngredientBySlug(slug);
   
   if (!ingredient) {
     notFound();
