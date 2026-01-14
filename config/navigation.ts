@@ -7,36 +7,25 @@ export interface NavItem {
   label: string;
   href: string;
   enabled: boolean;
-  comingSoon?: boolean;
-  children?: NavItem[];
 }
 
+/**
+ * Main navigation items (always visible in header)
+ */
 export const MAIN_NAV_ITEMS: NavItem[] = [
-  {
-    label: 'Travel',
-    href: '/travel',
-    enabled: true,
-    comingSoon: true
-  },
   {
     label: 'Restaurants',
     href: '/restaurants/dubai',
     enabled: true
   },
   {
-    label: 'Ingredients',
-    href: '/ingredients/gelatin',
+    label: 'Travel',
+    href: '/travel',
     enabled: true
   },
   {
-    label: 'Finance',
-    href: '/finance',
-    enabled: true,
-    comingSoon: true
-  },
-  {
-    label: 'Real Estate',
-    href: '/real-estate/dubai/downtown-dubai',
+    label: 'Guides',
+    href: '/guides',
     enabled: true
   },
   {
@@ -45,13 +34,15 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     enabled: true
   },
   {
-    label: 'Guides',
-    href: '/guides',
+    label: 'Finance',
+    href: '/finance',
     enabled: true
-  }
-];
-
-export const SECONDARY_NAV_ITEMS: NavItem[] = [
+  },
+  {
+    label: 'Real Estate',
+    href: '/real-estate/dubai/downtown-dubai',
+    enabled: true
+  },
   {
     label: 'Legal',
     href: '/legal',
@@ -68,5 +59,3 @@ export const SECONDARY_NAV_ITEMS: NavItem[] = [
     enabled: true
   }
 ];
-
-export const MOBILE_NAV_ITEMS = [...MAIN_NAV_ITEMS, ...SECONDARY_NAV_ITEMS];
