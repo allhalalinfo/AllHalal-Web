@@ -255,6 +255,9 @@
     "title": "Legal Center",
     "description": "Read our terms and policies to understand how we protect your data and rights.",
     "backToLegal": "Back to Legal",
+    "common": {
+      "lastUpdated": "Last updated: {date}"
+    },
     "documents": {
       "privacyPolicy": {
         "title": "Privacy Policy",
