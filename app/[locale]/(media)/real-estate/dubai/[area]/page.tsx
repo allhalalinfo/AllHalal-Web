@@ -252,7 +252,7 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
           </div>
           
           <section id="faq" className="mt-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+            <h2 className="text-3xl font-bold text-text-primary mb-8">
               Frequently Asked Questions
             </h2>
             <FAQAccordion items={faqs} />
