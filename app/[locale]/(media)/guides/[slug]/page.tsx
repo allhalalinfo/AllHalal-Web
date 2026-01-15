@@ -129,7 +129,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
               {guide.dateUpdated && guide.dateUpdated !== guide.datePublished && (
                 <>
                   <span>•</span>
-                  <span className={daysSinceUpdate < 90 ? 'text-green-600 dark:text-green-400 font-medium' : ''}>
+                  <span className={daysSinceUpdate < 90 ? 'text-primary font-medium' : ''}>
                     Last updated {new Date(guide.dateUpdated).toLocaleDateString('en-US', { 
                       month: 'short', 
                       day: 'numeric',
@@ -143,8 +143,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
           
           {/* Freshness Indicator */}
           {guide.evergreen && daysSinceUpdate < 90 && (
-            <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-800 rounded-lg">
-              <p className="text-sm text-green-800 dark:text-green-300">
+            <div className="mt-4 p-3 bg-primary/10 border border-primary/20 rounded-lg">
+              <p className="text-sm text-text-primary">
                 ✓ This guide was recently updated and reflects the latest information.
               </p>
             </div>
@@ -199,12 +199,12 @@ export default async function GuidePage({ params }: GuidePageProps) {
       )}
       
       {/* CTA */}
-      <section className="py-16 border-t border-neutral-200 dark:border-neutral-800">
+      <section className="py-16 border-t border-border">
         <div className="container max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-text-primary">
             Use AllHalal App
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-lg text-text-secondary mb-8">
             Scan products, check ingredients, and find halal options on the go
           </p>
           <div className="flex gap-4 justify-center">
