@@ -26,6 +26,7 @@ import { SpeedInsightsProvider } from "@/components/providers/SpeedInsightsProvi
 import { SearchProvider } from "@/components/media/search";
 import { getSearchIndex } from "@/lib/search";
 import Noise from "@/components/ui/Noise";
+import Header from "@/components/layout/Header";
 
 // Inter font with all weights
 const inter = Inter({
@@ -100,6 +101,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <SearchProvider searchIndex={searchIndex.items}>
             <Noise />
+            <Header />
             <SmoothScrollProvider>
               {children}
             </SmoothScrollProvider>
