@@ -68,7 +68,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
     : 0;
   
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -89,28 +89,28 @@ export default async function GuidePage({ params }: GuidePageProps) {
       <article className="container max-w-4xl py-12">
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
+            <span className="px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20">
               {guide.category}
             </span>
             {guide.evergreen && (
-              <span className="px-3 py-1 text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full">
+              <span className="px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20">
                 ⭐ Evergreen
               </span>
             )}
-            <span className="text-sm text-neutral-500 dark:text-neutral-400">
+            <span className="text-sm text-text-secondary">
               {guide.readingTime}
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-text-primary">
             {guide.title}
           </h1>
           
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-6">
+          <p className="text-xl text-text-secondary mb-6">
             {guide.description}
           </p>
           
-          <div className="flex flex-col gap-2 text-sm text-neutral-500 dark:text-neutral-400">
+          <div className="flex flex-col gap-2 text-sm text-text-secondary">
             <div className="flex items-center gap-4">
               <span>By {guide.author}</span>
               {guide.authorRole && (
@@ -158,15 +158,15 @@ export default async function GuidePage({ params }: GuidePageProps) {
         
         {/* Tags */}
         {guide.tags && guide.tags.length > 0 && (
-          <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-            <h3 className="text-sm font-semibold text-neutral-500 dark:text-neutral-400 mb-3">
+          <div className="mt-12 pt-8 border-t border-border">
+            <h3 className="text-sm font-semibold text-text-secondary mb-3">
               Tags
             </h3>
             <div className="flex flex-wrap gap-2">
               {guide.tags.map(tag => (
                 <span
                   key={tag}
-                  className="px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                  className="px-3 py-1 text-sm bg-bg-card border border-border text-text-primary rounded-full"
                 >
                   {tag}
                 </span>
@@ -178,9 +178,9 @@ export default async function GuidePage({ params }: GuidePageProps) {
       
       {/* Related Guides */}
       {relatedGuides.length > 0 && (
-        <section className="py-16 bg-neutral-50 dark:bg-neutral-900/50">
+        <section className="py-16 bg-surface">
           <div className="container max-w-6xl">
-            <h2 className="text-2xl font-bold mb-8">Related Guides</h2>
+            <h2 className="text-2xl font-bold mb-8 text-text-primary">Related Guides</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {relatedGuides.map(related => (
                 <ArticleCard

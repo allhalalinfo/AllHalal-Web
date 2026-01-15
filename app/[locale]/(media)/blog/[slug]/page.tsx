@@ -64,7 +64,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   });
   
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -85,23 +85,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <article className="container max-w-4xl py-12">
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <span className="px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
+            <span className="px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full border border-primary/20">
               {post.category}
             </span>
-            <span className="text-sm text-neutral-500 dark:text-neutral-400">
+            <span className="text-sm text-text-secondary">
               {post.readingTime}
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-text-primary">
             {post.title}
           </h1>
           
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-6">
+          <p className="text-xl text-text-secondary mb-6">
             {post.description}
           </p>
           
-          <div className="flex items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400">
+          <div className="flex items-center gap-4 text-sm text-text-secondary">
             <span>By {post.author}</span>
             <span>•</span>
             <time dateTime={post.datePublished}>
@@ -125,21 +125,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </header>
         
         {/* Article Content */}
-        <div className="prose prose-lg dark:prose-invert max-w-none">
+        <div className="prose prose-lg prose-invert max-w-none">
           {await renderMDX(post.content)}
         </div>
         
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (
-          <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-            <h3 className="text-sm font-semibold text-neutral-500 dark:text-neutral-400 mb-3">
+          <div className="mt-12 pt-8 border-t border-border">
+            <h3 className="text-sm font-semibold text-text-secondary mb-3">
               Tags
             </h3>
             <div className="flex flex-wrap gap-2">
               {post.tags.map(tag => (
                 <span
                   key={tag}
-                  className="px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                  className="px-3 py-1 text-sm bg-bg-card border border-border text-text-primary rounded-full"
                 >
                   {tag}
                 </span>
@@ -151,9 +151,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section className="py-16 bg-neutral-50 dark:bg-neutral-900/50">
+        <section className="py-16 bg-surface">
           <div className="container max-w-6xl">
-            <h2 className="text-2xl font-bold mb-8">Related Posts</h2>
+            <h2 className="text-2xl font-bold mb-8 text-text-primary">Related Posts</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {relatedPosts.map(related => (
                 <ArticleCard
@@ -172,12 +172,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       )}
       
       {/* CTA */}
-      <section className="py-16 border-t border-neutral-200 dark:border-neutral-800">
+      <section className="py-16 border-t border-border">
         <div className="container max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-text-primary">
             Explore More Guides
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-lg text-text-secondary mb-8">
             Dive deeper into halal lifestyle topics
           </p>
           <div className="flex gap-4 justify-center">
