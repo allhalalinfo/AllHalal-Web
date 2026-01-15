@@ -64,31 +64,31 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
         }}
       />
       
-      <div className="min-h-screen bg-white dark:bg-gray-950">
-        <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-12">
+      <div className="min-h-screen bg-bg-primary text-text-primary">
+        <header className="bg-gradient-to-b from-bg-secondary to-bg-primary py-12 border-b border-border">
           <div className="max-w-7xl mx-auto px-4">
-            <Breadcrumbs className="text-blue-100 mb-4" />
+            <Breadcrumbs className="text-text-secondary mb-4" />
             
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">
               {area.name}: Real Estate Guide
             </h1>
             
-            <p className="text-xl text-blue-100">
+            <p className="text-xl text-text-secondary">
               Dubai • {area.zone} • Sharia-Compliant Payment Plans Available
             </p>
           </div>
         </header>
         
         {stats.length > 0 && (
-          <section className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+          <section className="border-b border-border bg-surface">
             <div className="max-w-7xl mx-auto px-4 py-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                    <div className="text-3xl font-bold text-primary">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <div className="text-sm text-text-secondary mt-1">
                       {stat.label}
                     </div>
                   </div>
@@ -112,11 +112,11 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-12">
               {/* Sharia Compliance Disclaimer */}
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-                <h3 className="font-bold text-blue-900 dark:text-blue-100 mb-2">
+              <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+                <h3 className="font-bold text-text-primary mb-2">
                   📌 Sharia Compliance Note
                 </h3>
-                <p className="text-blue-800 dark:text-blue-200 text-sm">
+                <p className="text-text-secondary text-sm">
                   Information provided about Sharia-compliant financing is for educational purposes. 
                   Payment plan structures and Islamic finance availability change frequently. 
                   Always verify current terms with developers and consult qualified Islamic finance advisors 
@@ -127,7 +127,7 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
               {/* Active Developers */}
               {activeDevelopers.length > 0 && (
                 <section>
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                  <h2 className="text-3xl font-bold text-text-primary mb-6">
                     Active Developers in {area.name}
                   </h2>
                   
@@ -135,29 +135,29 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
                     {activeDevelopers.slice(0, 5).map(dev => (
                       <div
                         key={dev.slug}
-                        className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:border-blue-500 dark:hover:border-blue-600 transition-colors"
+                        className="border border-border bg-bg-card rounded-lg p-6 hover:border-primary transition-colors group"
                       >
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">
                           {dev.name}
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-4">
+                        <p className="text-text-secondary mb-4">
                           {dev.description}
                         </p>
                         <div className="flex flex-wrap gap-2 mb-4">
                           {dev.shariaCompliance.certified && (
-                            <span className="inline-block px-3 py-1 text-xs font-semibold text-green-800 dark:text-green-200 bg-green-100 dark:bg-green-900/30 rounded-full">
+                            <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-primary/10 border border-primary/20 rounded-full">
                               ✓ Sharia-Compliant Plans
                             </span>
                           )}
                           {dev.projectCount && (
-                            <span className="inline-block px-3 py-1 text-xs text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full">
+                            <span className="inline-block px-3 py-1 text-xs text-text-primary bg-surface border border-border rounded-full">
                               {dev.projectCount}+ Projects
                             </span>
                           )}
                         </div>
                         <a
                           href={`/real-estate/developers/${dev.slug}`}
-                          className="text-blue-600 dark:text-blue-400 hover:underline font-semibold"
+                          className="text-primary hover:text-primary-light hover:underline font-semibold"
                         >
                           View Developer Profile →
                         </a>
@@ -166,7 +166,7 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
                   </div>
                   
                   {activeDevelopers.length > 5 && (
-                    <p className="text-gray-600 dark:text-gray-400 mt-4">
+                    <p className="text-text-secondary mt-4">
                       + {activeDevelopers.length - 5} more developers active in this area
                     </p>
                   )}
@@ -175,7 +175,7 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
               
               {/* Payment Plans */}
               <section>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-3xl font-bold text-text-primary mb-6">
                   Sharia-Compliant Financing Options
                 </h2>
                 
@@ -196,8 +196,8 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
                     The bank purchases the property and sells it to you at a markup, payable in installments.
                   </p>
                   
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    📖 Learn more: <a href="/finance/guides/murabaha">What is Murabaha Financing?</a>
+                  <p className="text-sm text-text-secondary">
+                    📖 Learn more: <a href="/finance/guides/murabaha" className="text-primary hover:text-primary-light">What is Murabaha Financing?</a>
                   </p>
                 </div>
               </section>
@@ -213,14 +213,14 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
               
               {/* Amenities */}
               {area.amenities.length > 0 && (
-                <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-4">
+                <div className="bg-bg-card border border-border rounded-lg p-6">
+                  <h3 className="font-bold text-text-primary mb-4">
                     Key Amenities
                   </h3>
                   <ul className="space-y-2">
                     {area.amenities.slice(0, 8).map(amenity => (
-                      <li key={amenity} className="text-gray-700 dark:text-gray-300 flex items-center">
-                        <span className="text-blue-500 mr-2">✓</span>
+                      <li key={amenity} className="text-text-primary flex items-center">
+                        <span className="text-primary mr-2">✓</span>
                         {amenity}
                       </li>
                     ))}
@@ -230,8 +230,8 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
               
               {/* Related Areas */}
               {relatedAreas.length > 0 && (
-                <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-4">
+                <div className="bg-bg-card border border-border rounded-lg p-6">
+                  <h3 className="font-bold text-text-primary mb-4">
                     Nearby Areas
                   </h3>
                   <ul className="space-y-3">
@@ -239,7 +239,7 @@ export default async function DubaiAreaPage({ params }: { params: Promise<{ area
                       <li key={link.href}>
                         <a
                           href={link.href}
-                          className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                          className="text-primary hover:text-primary-light hover:underline font-medium"
                         >
                           {link.title}
                         </a>
