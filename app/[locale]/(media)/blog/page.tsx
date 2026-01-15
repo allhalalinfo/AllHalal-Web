@@ -22,14 +22,14 @@ export default async function BlogPage() {
   const recentPosts = posts.slice(0, 12);
   
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-900">
+      <section className="py-20 bg-gradient-to-b from-bg-secondary to-bg-primary">
         <div className="container max-w-6xl">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-text-primary">
             AllHalal Blog
           </h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl">
+          <p className="text-xl text-text-secondary max-w-2xl">
             Latest news, guides, and insights on living a halal lifestyle with confidence.
           </p>
         </div>
@@ -37,9 +37,9 @@ export default async function BlogPage() {
       
       {/* Featured Posts */}
       {featuredPosts.length > 0 && (
-        <section className="py-12 border-b border-neutral-200 dark:border-neutral-800">
+        <section className="py-12 border-b border-border">
           <div className="container max-w-6xl">
-            <h2 className="text-2xl font-bold mb-8">Featured</h2>
+            <h2 className="text-2xl font-bold mb-8 text-text-primary">Featured</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {featuredPosts.map(post => (
                 <ArticleCard
@@ -64,7 +64,7 @@ export default async function BlogPage() {
           
           {recentPosts.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-neutral-600 dark:text-neutral-400">
+              <p className="text-text-secondary">
                 No posts yet. Check back soon!
               </p>
             </div>
@@ -87,12 +87,12 @@ export default async function BlogPage() {
       </section>
       
       {/* CTA */}
-      <section className="py-16 bg-neutral-50 dark:bg-neutral-900/50">
+      <section className="py-16 bg-surface">
         <div className="container max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-text-primary">
             Stay Updated
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-lg text-text-secondary mb-8">
             Get the latest halal lifestyle insights delivered to your inbox
           </p>
           <Link 

@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export default function FinancePage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-900">
+      <section className="py-20 bg-gradient-to-b from-bg-secondary to-bg-primary">
         <div className="container max-w-4xl text-center">
-          <div className="inline-block px-4 py-2 mb-6 text-sm font-semibold bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">
+          <div className="inline-block px-4 py-2 mb-6 text-sm font-semibold bg-primary/10 text-primary rounded-full border border-primary/20">
             Coming Soon
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-text-primary">
             Islamic Finance
           </h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto mb-8">
             Your comprehensive guide to Sharia-compliant banking, Murabaha financing, halal investments, and Islamic financial solutions.
           </p>
         </div>
@@ -31,35 +31,35 @@ export default function FinancePage() {
       {/* Coming Soon Content */}
       <section className="py-16">
         <div className="container max-w-4xl">
-          <div className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl p-8 md:p-12">
-            <h2 className="text-3xl font-bold mb-6">What's Coming</h2>
-            <div className="space-y-4 text-lg text-neutral-700 dark:text-neutral-300">
+          <div className="bg-bg-card rounded-2xl p-8 md:p-12 border border-border">
+            <h2 className="text-3xl font-bold mb-6 text-text-primary">What's Coming</h2>
+            <div className="space-y-4 text-lg text-text-primary">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">🏦</span>
                 <div>
-                  <strong>Islamic Banks Directory</strong>
-                  <p className="text-neutral-600 dark:text-neutral-400">Find Sharia-compliant banks in your country</p>
+                  <strong className="text-text-primary">Islamic Banks Directory</strong>
+                  <p className="text-text-secondary">Find Sharia-compliant banks in your country</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">💰</span>
                 <div>
-                  <strong>Murabaha & Ijara Guides</strong>
-                  <p className="text-neutral-600 dark:text-neutral-400">Learn about Islamic financing options</p>
+                  <strong className="text-text-primary">Murabaha & Ijara Guides</strong>
+                  <p className="text-text-secondary">Learn about Islamic financing options</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">📊</span>
                 <div>
-                  <strong>Halal Investments</strong>
-                  <p className="text-neutral-600 dark:text-neutral-400">Discover Sharia-compliant investment opportunities</p>
+                  <strong className="text-text-primary">Halal Investments</strong>
+                  <p className="text-text-secondary">Discover Sharia-compliant investment opportunities</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">🧮</span>
                 <div>
-                  <strong>Finance Calculators</strong>
-                  <p className="text-neutral-600 dark:text-neutral-400">Estimate payments and returns</p>
+                  <strong className="text-text-primary">Finance Calculators</strong>
+                  <p className="text-text-secondary">Estimate payments and returns</p>
                 </div>
               </div>
             </div>
@@ -68,12 +68,12 @@ export default function FinancePage() {
       </section>
       
       {/* Explore More */}
-      <section className="py-16 border-t border-neutral-200 dark:border-neutral-800">
+      <section className="py-16 border-t border-border">
         <div className="container max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-text-primary">
             Explore AllHalal
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-8">
+          <p className="text-lg text-text-secondary mb-8">
             While we're building the Finance section, check out what's already available
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
