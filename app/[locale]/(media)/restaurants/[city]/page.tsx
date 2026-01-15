@@ -87,17 +87,17 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
       />
       
       {/* Page Content */}
-      <div className="min-h-screen bg-white dark:bg-gray-950">
+      <div className="min-h-screen bg-bg-primary text-text-primary">
         {/* Header */}
-        <header className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-12">
+        <header className="bg-gradient-to-b from-bg-secondary to-bg-primary py-12 border-b border-border">
           <div className="max-w-7xl mx-auto px-4">
-            <Breadcrumbs className="text-emerald-100 mb-4" />
+            <Breadcrumbs className="text-text-secondary mb-4" />
             
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-text-primary">
               Best Halal Restaurants in {city.name}
             </h1>
             
-            <p className="text-xl text-emerald-100">
+            <p className="text-xl text-text-secondary">
               {city.country} • {city.halalRestaurantCount ? `${city.halalRestaurantCount.toLocaleString()}+ Halal Restaurants` : 'Multiple Halal Options'}
             </p>
           </div>
@@ -105,15 +105,15 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
         
         {/* Quick Stats */}
         {stats.length > 0 && (
-          <section className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+          <section className="border-b border-border bg-surface">
             <div className="max-w-7xl mx-auto px-4 py-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+                    <div className="text-3xl font-bold text-primary">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    <div className="text-sm text-text-secondary mt-1">
                       {stat.label}
                     </div>
                   </div>
@@ -143,24 +143,24 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
             <div className="lg:col-span-2 space-y-12">
               {/* Featured Restaurants Section (Placeholder) */}
               <section>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-3xl font-bold text-text-primary mb-6">
                   Top Rated Halal Restaurants
                 </h2>
                 
-                <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg p-6">
-                  <p className="text-emerald-900 dark:text-emerald-100">
+                <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+                  <p className="text-text-primary">
                     🚧 <strong>Coming Soon:</strong> We're currently verifying and reviewing halal restaurants in {city.name}. 
                     Check back soon for detailed reviews, menus, and certification information.
                   </p>
-                  <p className="text-emerald-800 dark:text-emerald-200 mt-2 text-sm">
-                    Know a great halal restaurant in {city.name}? <a href="/contact" className="underline font-semibold">Let us know!</a>
+                  <p className="text-text-secondary mt-2 text-sm">
+                    Know a great halal restaurant in {city.name}? <a href="/contact" className="underline font-semibold text-primary hover:text-primary-light">Let us know!</a>
                   </p>
                 </div>
               </section>
               
               {/* Categories */}
               <section>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-3xl font-bold text-text-primary mb-6">
                   Explore by Cuisine
                 </h2>
                 
@@ -168,12 +168,12 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
                   {['Middle Eastern', 'South Asian', 'Turkish', 'Mediterranean', 'Asian Fusion', 'Fine Dining'].map(cuisine => (
                     <div
                       key={cuisine}
-                      className="border border-gray-200 dark:border-gray-800 rounded-lg p-4 hover:border-emerald-500 dark:hover:border-emerald-600 transition-colors cursor-pointer"
+                      className="border border-border rounded-lg p-4 bg-bg-card hover:border-primary transition-colors cursor-pointer group"
                     >
-                      <h3 className="font-semibold text-gray-900 dark:text-white">
+                      <h3 className="font-semibold text-text-primary group-hover:text-primary transition-colors">
                         {cuisine}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      <p className="text-sm text-text-secondary mt-1">
                         Coming soon
                       </p>
                     </div>
@@ -183,7 +183,7 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
               
               {/* How to Find Halal Food */}
               <section>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-3xl font-bold text-text-primary mb-6">
                   Finding Halal Food in {city.name}
                 </h2>
                 
@@ -220,23 +220,23 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
               />
               
               {/* Quick Links */}
-              <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
-                <h3 className="font-bold text-gray-900 dark:text-white mb-4">
+              <div className="bg-bg-card border border-border rounded-lg p-6">
+                <h3 className="font-bold text-text-primary mb-4">
                   Quick Links
                 </h3>
                 <ul className="space-y-2">
                   <li>
-                    <a href="#faq" className="text-emerald-600 dark:text-emerald-400 hover:underline">
+                    <a href="#faq" className="text-primary hover:text-primary-light hover:underline">
                       Frequently Asked Questions
                     </a>
                   </li>
                   <li>
-                    <a href="/certification" className="text-emerald-600 dark:text-emerald-400 hover:underline">
+                    <a href="/certification" className="text-primary hover:text-primary-light hover:underline">
                       About Halal Certification
                     </a>
                   </li>
                   <li>
-                    <a href={`/travel/cities/${city.slug}`} className="text-emerald-600 dark:text-emerald-400 hover:underline">
+                    <a href={`/travel/cities/${city.slug}`} className="text-primary hover:text-primary-light hover:underline">
                       {city.name} Travel Guide
                     </a>
                   </li>
@@ -245,8 +245,8 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
               
               {/* Related Cities */}
               {relatedCities.length > 0 && (
-                <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-4">
+                <div className="bg-bg-card border border-border rounded-lg p-6">
+                  <h3 className="font-bold text-text-primary mb-4">
                     Explore Other Cities
                   </h3>
                   <ul className="space-y-3">
@@ -254,7 +254,7 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
                       <li key={link.href}>
                         <a
                           href={link.href}
-                          className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+                          className="text-primary hover:text-primary-light hover:underline font-medium"
                         >
                           {link.title}
                         </a>
@@ -268,21 +268,21 @@ export default async function CityRestaurantsPage({ params }: { params: Promise<
           
           {/* FAQ Section */}
           <section id="faq" className="mt-16">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+            <h2 className="text-3xl font-bold text-text-primary mb-8">
               Frequently Asked Questions
             </h2>
             <FAQAccordion items={faqs} />
           </section>
           
           {/* Newsletter CTA (Placeholder) */}
-          <section className="mt-16 bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-lg p-8 text-white text-center">
-            <h2 className="text-3xl font-bold mb-4">
+          <section className="mt-16 bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-lg p-8 text-center">
+            <h2 className="text-3xl font-bold mb-4 text-text-primary">
               Get Halal Restaurant Updates
             </h2>
-            <p className="text-xl text-emerald-100 mb-6">
+            <p className="text-xl text-text-secondary mb-6">
               Subscribe to receive new halal restaurant listings in {city.name} and exclusive dining guides.
             </p>
-            <button className="bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-colors">
+            <button className="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-light transition-colors">
               Subscribe (Coming Soon)
             </button>
           </section>
