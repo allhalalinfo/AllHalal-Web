@@ -56,9 +56,15 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
               <p className="text-lg text-text-secondary">{item.shortReason}</p>
             </div>
             
-            <div>
+            <div className="prose prose-lg dark:prose-invert max-w-none text-text-secondary">
               <h2 className="text-xl font-semibold text-text-primary mb-3">Detailed Explanation</h2>
-              <p className="text-lg text-text-secondary leading-relaxed">{item.detailedReason}</p>
+              {/* Splitting by double newline to handle basic markdown-like paragraphs generated earlier */}
+              {item.detailedReason.split('\n\n').map((paragraph, idx) => {
+                if (paragraph.startsWith('### ')) {
+                  return <h3 key={idx} className="text-lg font-bold text-text-primary mt-6 mb-2">{paragraph.replace('### ', '')}</h3>;
+                }
+                return <p key={idx} className="text-lg leading-relaxed">{paragraph}</p>;
+              })}
             </div>
           </div>
         </div>

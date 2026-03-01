@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 
 export const metadata: Metadata = {
-  title: 'Halal Banks | AllHalal',
-  description: 'Discover Islamic banking options and credit unions.',
+  title: 'Islamic Banks in America | AllHalal Finance Guide',
+  description: 'Discover the top Islamic banks in America, credit unions, and Sharia-compliant financial institutions operating without Riba in the USA.',
 };
 
 export default async function BanksPage(props: { params: Promise<{ locale: string }> }) {
@@ -15,7 +15,7 @@ export default async function BanksPage(props: { params: Promise<{ locale: strin
       <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">Halal Banking</h1>
       
       <div className="prose prose-lg dark:prose-invert max-w-none text-text-secondary">
-        <p>Islamic banks and credit unions operate without dealing in interest (Riba). They use profit-sharing and fee-based models for their services.</p>
+        <p>Finding a full-service <strong>Islamic bank in America</strong> can be challenging, but the landscape is growing. Islamic banks and credit unions operate strictly without dealing in interest (Riba). Instead of lending and borrowing for interest, they use profit-sharing, asset-backing, and fee-based models for their services.</p>
         
         <h2 className="text-2xl font-bold text-text-primary mt-10 mb-6">Institutions</h2>
         
@@ -62,6 +62,14 @@ export default async function BanksPage(props: { params: Promise<{ locale: strin
           <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
             <summary className="font-bold text-text-primary outline-none">Are credit cards halal?</summary>
             <p className="mt-3 text-text-secondary">Credit cards themselves are tools. If you pay your balance in full every month and never accrue interest, many scholars permit their use. However, revolving balances and paying interest is strictly haram.</p>
+          </details>
+          <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
+            <summary className="font-bold text-text-primary outline-none">Do Islamic banks charge late fees?</summary>
+            <p className="mt-3 text-text-secondary">Islamic banks cannot charge late fees as a profit-making mechanism, as this resembles Riba. Some may charge a fixed administrative penalty for late payments, but this money is typically donated to charity, not kept as profit.</p>
+          </details>
+          <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
+            <summary className="font-bold text-text-primary outline-none">Is my money insured in an Islamic bank in the US?</summary>
+            <p className="mt-3 text-text-secondary">Yes, if you use an "Islamic Window" at a traditional bank or a registered credit union (like Devon Bank), your deposits are typically FDIC or NCUA insured up to standard limits, just like any other American bank.</p>
           </details>
         </div>
 

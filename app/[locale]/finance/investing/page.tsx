@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 
 export const metadata: Metadata = {
-  title: 'Halal Investing Guide | AllHalal',
-  description: 'Grow your wealth the halal way without compromising your faith.',
+  title: 'Sharia-Compliant Investing: Beginner\'s Guide | AllHalal',
+  description: 'Grow your wealth the halal way without compromising your faith. Learn the basics of sharia-compliant investing and explore Halal ETFs and robo-advisors.',
 };
 
 export default async function InvestingPage(props: { params: Promise<{ locale: string }> }) {
@@ -15,7 +15,7 @@ export default async function InvestingPage(props: { params: Promise<{ locale: s
       <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">Halal Investing</h1>
       
       <div className="prose prose-lg dark:prose-invert max-w-none text-text-secondary">
-        <p>Halal investing ensures that your money grows in ways that align with Islamic principles. It's about ethical growth, avoiding harm, and contributing to permissible businesses.</p>
+        <p>Halal investing ensures that your money grows in ways that align with Islamic principles. It's about ethical growth, avoiding harm, and contributing to permissible businesses. Today, getting started with <strong>sharia-compliant investing</strong> is easier than ever, thanks to specialized platforms and modern financial tools designed specifically for Muslims.</p>
         
         <h2 className="text-2xl font-bold text-text-primary mt-10 mb-4">Basic Principles</h2>
         <ul className="list-disc pl-6 mb-8 space-y-2">
@@ -25,7 +25,7 @@ export default async function InvestingPage(props: { params: Promise<{ locale: s
         </ul>
 
         <h2 className="text-2xl font-bold text-text-primary mt-10 mb-4">How to start?</h2>
-        <p>Today, there are numerous Halal ETFs, mutual funds, and robo-advisors that automatically screen and manage your portfolio according to Shariah rules.</p>
+        <p>There are numerous Halal ETFs, mutual funds, and robo-advisors that automatically screen and manage your portfolio according to Shariah rules. They do the heavy lifting of continuous financial and business activity screening for you.</p>
         
         <div className="grid gap-6 mt-6 mb-10">
           <div className="border border-border p-6 rounded-2xl bg-bg-card">
@@ -53,7 +53,15 @@ export default async function InvestingPage(props: { params: Promise<{ locale: s
           </details>
           <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
             <summary className="font-bold text-text-primary outline-none">What is dividend purification?</summary>
-            <p className="mt-3 text-text-secondary">Even in Shariah-compliant companies, a tiny fraction of their income might come from interest (like cash sitting in a bank). Purification involves donating that small percentage of your dividends to charity to cleanse your wealth.</p>
+            <p className="mt-3 text-text-secondary">Even in Shariah-compliant companies, a tiny fraction of their income might come from interest (like cash sitting in a bank). Purification involves calculating that small percentage of your dividends and donating it to charity to cleanse your wealth.</p>
+          </details>
+          <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
+            <summary className="font-bold text-text-primary outline-none">Are index funds like the S&P 500 halal?</summary>
+            <p className="mt-3 text-text-secondary">Standard index funds like the S&P 500 are not halal because they include banks, alcohol companies, and highly leveraged businesses. However, you can invest in specifically designed Islamic index funds (like SPUS or HLAL) which track similar markets but filter out non-compliant companies.</p>
+          </details>
+          <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
+            <summary className="font-bold text-text-primary outline-none">Do I need a lot of money to start halal investing?</summary>
+            <p className="mt-3 text-text-secondary">No. Many modern robo-advisors and fractional share brokerages allow you to start investing with as little as $10 to $100. The key is starting early and being consistent, not having a massive initial sum.</p>
           </details>
         </div>
 
