@@ -19,7 +19,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/allhalal.info?igsh=OXAzbWc4dW9tMTgy&utm_source=qr", icon: InstagramIcon },
@@ -55,15 +55,24 @@ const itemVariants = {
 
 export default function Footer() {
   const t = useTranslations("footer");
+  const locale = useLocale();
   
   // Footer navigation structure with translations
   const footerNav = {
+    explore: {
+      title: "Explore",
+      links: [
+        { label: "Halal Checker", href: "/is-it-halal" },
+        { label: "Finance", href: "/finance" },
+        { label: "Learn", href: "/learn" },
+        { label: "Blog", href: "/blog" },
+      ],
+    },
     product: {
       title: t("product"),
       links: [
         { label: t("links.features"), href: "/#features" },
         { label: t("links.howItWorks"), href: "/#about" },
-        { label: t("links.madhhabSupport"), href: "/#madhhab" },
         { label: t("links.downloadApp"), href: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" },
       ],
     },
@@ -131,8 +140,8 @@ export default function Footer() {
           </motion.div>
 
           {/* Navigation Columns */}
-          {Object.values(footerNav).map((section) => (
-            <motion.div key={section.title} variants={itemVariants}>
+          {Object.entries(footerNav).map(([key, section]) => (
+            <motion.div key={key} variants={itemVariants}>
               <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wider mb-4">
                 {section.title}
               </h3>
@@ -140,7 +149,7 @@ export default function Footer() {
                 {section.links.map((link) => (
                   <li key={link.label}>
                     <Link
-                      href={link.href}
+                      href={link.href.startsWith('http') || link.href.startsWith('/#') ? link.href : `/${locale}${link.href}`}
                       className="text-text-secondary hover:text-text-primary transition-colors inline-block relative group"
                     >
                       {link.label}

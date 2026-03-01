@@ -32,8 +32,6 @@ export function middleware(request: NextRequest) {
     pathname === '/sitemap.xml' ||
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/api/') ||
-    pathname.startsWith('/admin/') ||
-    pathname.startsWith('/ceo/') ||
     pathname.startsWith('/assets/') ||
     pathname.startsWith('/app-screens/')
   ) {
@@ -106,8 +104,6 @@ export const config = {
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)
-     * - admin (admin panel - no locale prefix)
-     * - ceo (CEO panel - no locale prefix)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
@@ -118,6 +114,6 @@ export const config = {
      * to bypass Vercel domain redirects and return 200 on both apex and www domains
      */
     '/app-ads.txt', // Handle app-ads.txt directly in middleware (before regex exclusion)
-    '/((?!api|admin|ceo|_next/static|_next/image|favicon.ico|assets|app-screens|robots.txt|sitemap.xml|.*\\..*).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|assets|app-screens|robots.txt|sitemap.xml|.*\\..*).*)',
   ],
 };

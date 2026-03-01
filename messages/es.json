@@ -52,25 +52,45 @@
     "description": "Funciones potentes diseñadas para hacer que la verificación halal sea simple, precisa y accesible.",
     "premium": "Premium",
     "items": {
-      "scan": {
-        "title": "Escáner de ingredientes IA",
-        "description": "Simplemente escanea el código de barras de cualquier producto o toma una foto de la lista de ingredientes. Nuestra IA avanzada analiza cada ingrediente con nuestra completa base de datos halal, proporcionando verificación instantánea con explicaciones detalladas."
+      "lifestyle": {
+        "title": "Your trusted Muslim lifestyle app",
+        "description": "Access your daily prayer times, Halal places, Qibla direction, and more all in one complete dashboard."
       },
-      "verified": {
-        "title": "Verificación de productos y estado halal",
-        "description": "Obtén verificación instantánea para cualquier producto. Nuestra completa base de datos cubre millones de productos en todo el mundo, con información detallada sobre el estado halal respaldada por conocimiento islámico auténtico."
+      "scan": {
+        "title": "Halal check with nutrition score",
+        "description": "Scan products to instantly see their Halal status along with detailed nutritional information and Nutri-Score."
+      },
+      "ingredients": {
+        "title": "Healthy choices made simple",
+        "description": "View detailed breakdowns of food additives, calories, and ingredients to make informed and healthy decisions."
       },
       "cosmetics": {
-        "title": "Verificación de cosméticos halal",
-        "description": "No solo alimentos: allhalal.info también te ayuda a verificar cosméticos y productos de belleza. Comprueba ingredientes de origen animal y asegúrate de que tu rutina de cuidado de la piel se alinee con los principios islámicos."
+        "title": "Find the Qibla anywhere",
+        "description": "Use our accurate compass to find the precise direction of the Qibla from any location in the world."
+      },
+      "ecodes": {
+        "title": "99 Names of Allah",
+        "description": "Learn and reflect upon the beautiful names of Allah with their meanings and descriptions."
+      },
+      "restaurants": {
+        "title": "Prayer times",
+        "description": "Stay on top of your daily prayers with accurate, location-based timings and countdowns."
       },
       "prayer": {
-        "title": "Horarios de oración, Qibla y calendario islámico",
-        "description": "Todo lo que necesitas para tu práctica islámica diaria en una sola app. Horarios de oración precisos según tu ubicación, dirección exacta de la Qibla y calendario Hijri completo con fechas islámicas importantes."
+        "title": "Upcoming Islamic events",
+        "description": "Keep track of important Islamic dates, holidays, and events throughout the Hijri calendar year."
       },
-      "watch": {
-        "title": "App para Apple Watch",
-        "description": "Accede a las funciones halal esenciales directamente desde tu muñeca. Escaneos rápidos de productos, notificaciones de horarios de oración y dirección de la Qibla, todo optimizado para Apple Watch."
+      "authorities": {
+        "title": "Tasbih counter",
+        "description": "Keep track of your dhikr and daily supplications with our easy-to-use digital tasbih counter."
+      },
+      "journey": {
+        "title": "Find halal places nearby",
+        "description": "Discover nearby mosques, Halal restaurants, and certified food places on an interactive map."
+      },
+      "status": {
+        "title": "Zakat calculator",
+        "description": "Calculate your annual Zakat obligation accurately based on your wealth, assets, and current Nisab thresholds."
       }
     }
   },

@@ -24,38 +24,38 @@
 
 :root {
   /* ─────────────────────────────────────────────────────────────────────────────
-     COLOR PALETTE - AllHalal Green (replacing Hatchet red)
+     COLOR PALETTE - Elegant Warm Caramel & Sandy Tones
      ───────────────────────────────────────────────────────────────────────────── */
   
-  /* Primary Green */
-  --color-primary: #00D094;
-  --color-primary-light: #00E5A3;
-  --color-primary-dark: #00B87D;
-  --color-primary-soft: rgba(0, 208, 148, 0.1);
-  --color-primary-glow: rgba(0, 208, 148, 0.4);
+  /* Primary Caramel */
+  --color-primary: #977C58;
+  --color-primary-light: #BAA788;
+  --color-primary-dark: #704E32;
+  --color-primary-soft: rgba(151, 124, 88, 0.1);
+  --color-primary-glow: rgba(151, 124, 88, 0.4);
   
-  /* Background Colors (dark theme like hatchet) */
-  --color-bg-primary: #0A0A0A;
-  --color-bg-secondary: #0F0F0F;
-  --color-bg-tertiary: #141414;
-  --color-bg-elevated: #1A1A1A;
-  --color-bg-card: #161616;
+  /* Background Colors (Light Theme) */
+  --color-bg-primary: #EBE9DF;
+  --color-bg-secondary: #E6E4D8;
+  --color-bg-tertiary: #DFDDD3;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-card: #F8F7F4;
   
   /* Surface Colors */
-  --color-surface: rgba(255, 255, 255, 0.02);
-  --color-surface-hover: rgba(255, 255, 255, 0.05);
-  --color-surface-active: rgba(255, 255, 255, 0.08);
+  --color-surface: rgba(255, 255, 255, 0.4);
+  --color-surface-hover: rgba(255, 255, 255, 0.7);
+  --color-surface-active: #FFFFFF;
   
   /* Border Colors */
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-light: rgba(255, 255, 255, 0.12);
-  --color-border-hover: rgba(255, 255, 255, 0.2);
+  --color-border: rgba(44, 31, 28, 0.1);
+  --color-border-light: rgba(44, 31, 28, 0.05);
+  --color-border-hover: rgba(44, 31, 28, 0.2);
   
   /* Text Colors */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: rgba(255, 255, 255, 0.7);
-  --color-text-tertiary: rgba(255, 255, 255, 0.5);
-  --color-text-muted: rgba(255, 255, 255, 0.35);
+  --color-text-primary: #2C1F1C;
+  --color-text-secondary: rgba(44, 31, 28, 0.7);
+  --color-text-tertiary: rgba(44, 31, 28, 0.5);
+  --color-text-muted: rgba(44, 31, 28, 0.35);
   
   /* ─────────────────────────────────────────────────────────────────────────────
      TYPOGRAPHY SCALE
@@ -365,7 +365,7 @@ body {
 
 .card-interactive:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 0 30px rgba(0, 208, 148, 0.1);
+  box-shadow: 0 0 30px rgba(151, 124, 88, 0.1);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════

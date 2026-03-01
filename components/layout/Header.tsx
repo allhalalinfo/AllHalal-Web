@@ -9,13 +9,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
-import { useSearch } from "@/components/media/search";
 import { MAIN_NAV_ITEMS } from "@/config/navigation";
 
 export default function Header() {
   const pathname = usePathname();
-  const { openSearch } = useSearch();
+  const locale = useLocale();
   
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
@@ -117,7 +117,7 @@ export default function Header() {
               {MAIN_NAV_ITEMS.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={`/${locale}${item.href}`}
                   className="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
                 >
                   {item.label}
@@ -127,15 +127,6 @@ export default function Header() {
 
             {/* Desktop CTA + Language */}
             <div className="hidden md:flex items-center gap-4">
-              <button
-                onClick={openSearch}
-                className="p-2 text-text-secondary hover:text-text-primary transition-colors"
-                aria-label="Search"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
               <LanguageSwitcher />
             </div>
 
@@ -181,7 +172,7 @@ export default function Header() {
             {MAIN_NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={`/${locale}${item.href}`}
                 onClick={closeMobileMenu}
                 className="text-xl font-semibold text-text-primary hover:text-primary block py-3 border-b border-border/50"
               >
@@ -189,17 +180,6 @@ export default function Header() {
               </Link>
             ))}
           </div>
-          
-          {/* Search in mobile */}
-          <button
-            onClick={() => {
-              openSearch();
-              closeMobileMenu();
-            }}
-            className="w-full mb-4 px-4 py-3 text-left bg-neutral-100 dark:bg-neutral-800 rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
-          >
-            <span className="text-sm">Search...</span>
-          </button>
           
           {/* Bottom section */}
           <div className="w-full space-y-4">

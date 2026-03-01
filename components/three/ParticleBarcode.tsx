@@ -254,13 +254,13 @@ export default function ParticleBarcode({ className = "" }: { className?: string
       const pulse = 0.85 + Math.sin(time * 1.5) * 0.15;
       
       // White color with glow
-      ctx.strokeStyle = `rgba(255, 255, 255, ${pulse})`;
+      ctx.strokeStyle = `rgba(151, 124, 88, ${pulse})`;
       ctx.lineWidth = lineWidth;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       
       // White glow effect
-      ctx.shadowColor = "rgba(255, 255, 255, 0.7)";
+      ctx.shadowColor = "rgba(151, 124, 88, 0.7)";
       ctx.shadowBlur = 12;
       
       // Top-left corner
@@ -357,10 +357,10 @@ export default function ParticleBarcode({ className = "" }: { className?: string
         
         const finalAlpha = Math.min(1, p.alpha + scanHighlight);
         
-        // Green base color, brighter when highlighted
-        const g = Math.floor(208 + scanHighlight * 47);
-        const b = Math.floor(148 + scanHighlight * 60);
-        const r = Math.floor(scanHighlight * 100); // Add some white when highlighted
+        // Black base color, caramel when highlighted
+        const r = Math.floor(0 + scanHighlight * 151);
+        const g = Math.floor(0 + scanHighlight * 124);
+        const b = Math.floor(0 + scanHighlight * 88);
         
         // Draw particle
         ctx.beginPath();
@@ -372,7 +372,7 @@ export default function ParticleBarcode({ className = "" }: { className?: string
         if (scanHighlight > 0.15 && scanLineBrightness > 0.3) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${scanHighlight * 0.15 * scanLineBrightness})`;
+          ctx.fillStyle = `rgba(151, 124, 88, ${scanHighlight * 0.15 * scanLineBrightness})`;
           ctx.fill();
         }
       });
@@ -391,14 +391,14 @@ export default function ParticleBarcode({ className = "" }: { className?: string
         lineStartX, scanY,
         lineStartX + lineWidth, scanY
       );
-      gradient.addColorStop(0, `rgba(255, 255, 255, 0)`);
-      gradient.addColorStop(0.15, `rgba(255, 255, 255, ${sideAlpha})`);
-      gradient.addColorStop(0.5, `rgba(255, 255, 255, ${mainAlpha})`);
-      gradient.addColorStop(0.85, `rgba(255, 255, 255, ${sideAlpha})`);
-      gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+      gradient.addColorStop(0, `rgba(151, 124, 88, 0)`);
+      gradient.addColorStop(0.15, `rgba(151, 124, 88, ${sideAlpha})`);
+      gradient.addColorStop(0.5, `rgba(151, 124, 88, ${mainAlpha})`);
+      gradient.addColorStop(0.85, `rgba(151, 124, 88, ${sideAlpha})`);
+      gradient.addColorStop(1, `rgba(151, 124, 88, 0)`);
       
       // Draw scan line with glow (glow also affected by brightness)
-      ctx.shadowColor = `rgba(255, 255, 255, ${glowAlpha})`;
+      ctx.shadowColor = `rgba(151, 124, 88, ${glowAlpha})`;
       ctx.shadowBlur = 10 * scanLineBrightness;
       
       // Main line (thicker in center via multiple passes)
@@ -412,11 +412,11 @@ export default function ParticleBarcode({ className = "" }: { className?: string
         lineStartX, scanY,
         lineStartX + lineWidth, scanY
       );
-      centerGradient.addColorStop(0, `rgba(255, 255, 255, 0)`);
-      centerGradient.addColorStop(0.3, `rgba(255, 255, 255, ${centerSideAlpha})`);
-      centerGradient.addColorStop(0.5, `rgba(255, 255, 255, ${centerAlpha})`);
-      centerGradient.addColorStop(0.7, `rgba(255, 255, 255, ${centerSideAlpha})`);
-      centerGradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+      centerGradient.addColorStop(0, `rgba(151, 124, 88, 0)`);
+      centerGradient.addColorStop(0.3, `rgba(151, 124, 88, ${centerSideAlpha})`);
+      centerGradient.addColorStop(0.5, `rgba(151, 124, 88, ${centerAlpha})`);
+      centerGradient.addColorStop(0.7, `rgba(151, 124, 88, ${centerSideAlpha})`);
+      centerGradient.addColorStop(1, `rgba(151, 124, 88, 0)`);
       
       ctx.fillStyle = centerGradient;
       ctx.fillRect(lineStartX, scanY - 2, lineWidth, 4);

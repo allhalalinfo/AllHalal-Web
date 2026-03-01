@@ -19,43 +19,43 @@ const config: Config = {
   theme: {
     extend: {
       /* ─────────────────────────────────────────────────────────────────────────
-         COLORS - AllHalal Green Palette
+         COLORS - Elegant Warm Caramel & Sandy Tones
          ───────────────────────────────────────────────────────────────────────── */
       colors: {
-        // Primary Green (replacing Hatchet red)
+        // Primary Caramel
         primary: {
-          DEFAULT: '#00D094',
-          light: '#00E5A3',
-          dark: '#00B87D',
-          soft: 'rgba(0, 208, 148, 0.1)',
-          glow: 'rgba(0, 208, 148, 0.4)',
+          DEFAULT: '#977C58',
+          light: '#BAA788',
+          dark: '#704E32',
+          soft: 'rgba(151, 124, 88, 0.1)',
+          glow: 'rgba(151, 124, 88, 0.4)',
         },
         // Background Colors
         bg: {
-          primary: '#0A0A0A',
-          secondary: '#0F0F0F',
-          tertiary: '#141414',
-          elevated: '#1A1A1A',
-          card: '#161616',
+          primary: '#EBE9DF',
+          secondary: '#E6E4D8',
+          tertiary: '#DFDDD3',
+          elevated: '#FFFFFF',
+          card: '#F8F7F4',
         },
         // Surface Colors
         surface: {
-          DEFAULT: 'rgba(255, 255, 255, 0.02)',
-          hover: 'rgba(255, 255, 255, 0.05)',
-          active: 'rgba(255, 255, 255, 0.08)',
+          DEFAULT: 'rgba(255, 255, 255, 0.4)',
+          hover: 'rgba(255, 255, 255, 0.7)',
+          active: '#FFFFFF',
         },
         // Border Colors
         border: {
-          DEFAULT: 'rgba(255, 255, 255, 0.08)',
-          light: 'rgba(255, 255, 255, 0.12)',
-          hover: 'rgba(255, 255, 255, 0.2)',
+          DEFAULT: 'rgba(44, 31, 28, 0.1)',
+          light: 'rgba(44, 31, 28, 0.05)',
+          hover: 'rgba(44, 31, 28, 0.2)',
         },
         // Text Colors
         text: {
-          primary: '#FFFFFF',
-          secondary: 'rgba(255, 255, 255, 0.7)',
-          tertiary: 'rgba(255, 255, 255, 0.5)',
-          muted: 'rgba(255, 255, 255, 0.35)',
+          primary: '#2C1F1C',
+          secondary: 'rgba(44, 31, 28, 0.7)',
+          tertiary: 'rgba(44, 31, 28, 0.5)',
+          muted: 'rgba(44, 31, 28, 0.35)',
         },
       },
 
@@ -114,9 +114,9 @@ const config: Config = {
          SHADOWS & EFFECTS
          ───────────────────────────────────────────────────────────────────────── */
       boxShadow: {
-        'glow': '0 0 40px rgba(0, 208, 148, 0.4)',
-        'glow-sm': '0 0 20px rgba(0, 208, 148, 0.3)',
-        'glow-lg': '0 0 80px rgba(0, 208, 148, 0.4)',
+        'glow': '0 0 40px rgba(151, 124, 88, 0.4)',
+        'glow-sm': '0 0 20px rgba(151, 124, 88, 0.3)',
+        'glow-lg': '0 0 80px rgba(151, 124, 88, 0.4)',
         'card': '0 4px 30px rgba(0, 0, 0, 0.3)',
         'card-hover': '0 8px 40px rgba(0, 0, 0, 0.4)',
       },

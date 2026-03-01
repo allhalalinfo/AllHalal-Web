@@ -153,7 +153,7 @@ export default function HeroParticles() {
         Math.PI * 2
       );
       
-      // Green gradient based on position
+      // Black gradient based on position
       const gradient = ctx.createRadialGradient(
         particle.x + floatX,
         particle.y + floatY,
@@ -162,8 +162,8 @@ export default function HeroParticles() {
         particle.y + floatY,
         particle.size * 2
       );
-      gradient.addColorStop(0, `rgba(0, 208, 148, ${particle.alpha})`);
-      gradient.addColorStop(1, `rgba(0, 208, 148, 0)`);
+      gradient.addColorStop(0, `rgba(0, 0, 0, ${particle.alpha})`);
+      gradient.addColorStop(1, `rgba(0, 0, 0, 0)`);
       
       ctx.fillStyle = gradient;
       ctx.fill();
@@ -172,9 +172,9 @@ export default function HeroParticles() {
     // Add scan line effect
     const scanLineY = (Date.now() / 30) % height;
     const scanGradient = ctx.createLinearGradient(0, scanLineY - 30, 0, scanLineY + 30);
-    scanGradient.addColorStop(0, 'rgba(0, 208, 148, 0)');
-    scanGradient.addColorStop(0.5, 'rgba(0, 208, 148, 0.03)');
-    scanGradient.addColorStop(1, 'rgba(0, 208, 148, 0)');
+    scanGradient.addColorStop(0, 'rgba(151, 124, 88, 0)');
+    scanGradient.addColorStop(0.5, 'rgba(151, 124, 88, 0.03)');
+    scanGradient.addColorStop(1, 'rgba(151, 124, 88, 0)');
     ctx.fillStyle = scanGradient;
     ctx.fillRect(0, scanLineY - 30, width, 60);
     

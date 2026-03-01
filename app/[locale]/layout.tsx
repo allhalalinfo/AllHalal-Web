@@ -23,8 +23,6 @@ import { locales, type Locale } from "@/i18n/config";
 import "../globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SpeedInsightsProvider } from "@/components/providers/SpeedInsightsProvider";
-import { SearchProvider } from "@/components/media/search";
-import { getSearchIndex } from "@/lib/search";
 import Noise from "@/components/ui/Noise";
 import Header from "@/components/layout/Header";
 
@@ -91,21 +89,16 @@ export default async function LocaleLayout({
 
   // Get messages for the locale
   const messages = await getMessages();
-  
-  // Get search index
-  const searchIndex = getSearchIndex();
 
   return (
     <html lang={locale} className={inter.variable}>
       <body className="bg-bg-primary text-text-primary antialiased">
         <NextIntlClientProvider messages={messages}>
-          <SearchProvider searchIndex={searchIndex.items}>
-            <Noise />
-            <Header />
-            <SmoothScrollProvider>
-              {children}
-            </SmoothScrollProvider>
-          </SearchProvider>
+          <Noise />
+          <Header />
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
         </NextIntlClientProvider>
         <SpeedInsightsProvider />
       </body>

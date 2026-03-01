@@ -1,0 +1,147 @@
+export type HalalItem = {
+  slug: string;
+  name: string;
+  aliases?: string[];
+  verdict: 'halal' | 'haram' | 'doubtful';
+  shortReason: string;
+  detailedReason: string;
+  category: 'ingredient' | 'snack' | 'drink' | 'additive' | 'cosmetics' | 'fast-food' | 'other';
+};
+
+export const halalItems: HalalItem[] = [
+  {
+    slug: 'is-doritos-halal',
+    name: 'Doritos (Nacho Cheese)',
+    aliases: ['doritos', 'doritos nacho cheese'],
+    verdict: 'doubtful',
+    shortReason: 'Contains animal enzymes (rennet) in some regions, while in others it uses microbial rennet.',
+    detailedReason: 'The halal status of Doritos depends heavily on the country of manufacture. In the US, Frito-Lay has stated that Doritos Nacho Cheese contains animal enzymes (porcine or bovine). In Muslim-majority countries or regions with specific halal certifications, microbial rennet is used. Always check for a local halal certification mark.',
+    category: 'snack',
+  },
+  {
+    slug: 'is-skittles-halal',
+    name: 'Skittles',
+    aliases: ['skittles original'],
+    verdict: 'halal',
+    shortReason: 'Skittles are fully plant-based and do not contain gelatin or carmine.',
+    detailedReason: 'Skittles used to contain gelatin, but Wrigley removed it several years ago. They are now considered vegan-friendly and halal, as they do not contain any animal-derived ingredients, including carmine (E120).',
+    category: 'snack',
+  },
+  {
+    slug: 'is-nutella-halal',
+    name: 'Nutella',
+    aliases: ['nutella spread', 'ferrero nutella'],
+    verdict: 'halal',
+    shortReason: 'Nutella is certified halal in many countries and contains permissible ingredients.',
+    detailedReason: 'Nutella is made from sugar, palm oil, hazelnuts, cocoa, milk powder, lecithin (soy), and vanillin. The whey powder and milk products used are sourced from halal-compliant processes. Ferrero has confirmed that Nutella sold worldwide is suitable for halal consumption, with many factories being officially certified.',
+    category: 'snack',
+  },
+  {
+    slug: 'is-oreo-halal',
+    name: 'Oreo Cookies',
+    aliases: ['oreos', 'oreo original'],
+    verdict: 'halal',
+    shortReason: 'Standard Oreos do not contain animal ingredients or alcohol.',
+    detailedReason: 'Mondelez, the maker of Oreos, has confirmed that the original Oreo cookies do not contain any animal-derived ingredients. While they might not carry a halal certification in every country (like the US or UK), the ingredients themselves are permissible (halal). However, cross-contamination with dairy is possible.',
+    category: 'snack',
+  },
+  {
+    slug: 'is-red-bull-halal',
+    name: 'Red Bull Energy Drink',
+    aliases: ['redbull'],
+    verdict: 'halal',
+    shortReason: 'Red Bull uses synthetic taurine and is free from alcohol and animal products.',
+    detailedReason: 'Red Bull uses synthetic taurine, not animal-derived taurine. It is free from alcohol and animal products. Therefore, it is considered halal to consume globally.',
+    category: 'drink',
+  },
+  {
+    slug: 'is-gelatin-halal',
+    name: 'Gelatin',
+    aliases: ['gelatine', 'bovine gelatin', 'porcine gelatin'],
+    verdict: 'doubtful',
+    shortReason: 'Gelatin can be sourced from both halal and haram animals. Must be verified.',
+    detailedReason: 'Gelatin is a protein obtained by boiling skin, tendons, ligaments, and/or bones with water. If it is sourced from a pig, it is haram. If it is sourced from a halal animal slaughtered according to Islamic law (zabiha), it is halal. Plant-based (agar-agar, pectin) or fish gelatin is always halal.',
+    category: 'ingredient',
+  },
+  {
+    slug: 'is-carmine-halal',
+    name: 'Carmine (E120)',
+    aliases: ['e120', 'cochineal', 'natural red 4'],
+    verdict: 'doubtful',
+    shortReason: 'Carmine is derived from crushed insects. Scholars differ on its permissibility.',
+    detailedReason: 'Carmine is a red dye extracted from crushed cochineal insects. According to the Hanafi madhhab, consuming insects is not permissible, making carmine haram. The Maliki, Shafi\'i, and Hanbali madhhabs have differing views, with some allowing it. Best to avoid if following Hanafi rulings.',
+    category: 'additive',
+  },
+  {
+    slug: 'is-whey-halal',
+    name: 'Whey / Whey Protein',
+    aliases: ['whey powder', 'milk whey'],
+    verdict: 'doubtful',
+    shortReason: 'Whey is halal if the rennet used to curdle the milk is microbial or from a halal-slaughtered animal.',
+    detailedReason: 'Whey is the liquid remaining after milk has been curdled. The process requires rennet. If microbial or plant-based rennet is used, it is 100% halal. If animal rennet is used, the animal must be halal-slaughtered. Always look for a halal certification or vegetarian label.',
+    category: 'ingredient',
+  },
+  {
+    slug: 'is-vanilla-extract-halal',
+    name: 'Vanilla Extract',
+    aliases: ['pure vanilla extract'],
+    verdict: 'doubtful',
+    shortReason: 'Pure vanilla extract contains at least 35% alcohol, making it disputed.',
+    detailedReason: 'By FDA definition, pure vanilla extract must contain at least 35% alcohol. Many scholars consider this haram due to the high alcohol content. Vanilla flavoring or imitation vanilla without alcohol is fully halal.',
+    category: 'ingredient',
+  },
+  {
+    slug: 'is-e471-halal',
+    name: 'E471 (Mono- and diglycerides)',
+    aliases: ['e471', 'emulsifier e471'],
+    verdict: 'doubtful',
+    shortReason: 'E471 can be from plant or animal fats. It is halal if plant-based.',
+    detailedReason: 'E471 is an emulsifier made from fats. If the source is plant-based (like soy or palm oil), it is completely halal. If the source is animal fat, it is haram unless the animal was slaughtered according to Islamic law. Look for "suitable for vegetarians" to be safe.',
+    category: 'additive',
+  },
+  {
+    slug: 'is-shellac-halal',
+    name: 'Shellac (E904)',
+    aliases: ['e904', 'confectioners glaze'],
+    verdict: 'halal',
+    shortReason: 'Shellac is a resin secreted by the lac bug, not the bug itself. Widely considered halal.',
+    detailedReason: 'Shellac is used as a glazing agent on pills and candies. Because it is an excretion of the insect (like honey from bees) and not the crushed insect itself, most Islamic scholars consider it halal.',
+    category: 'additive',
+  },
+  {
+    slug: 'is-coca-cola-halal',
+    name: 'Coca-Cola',
+    aliases: ['coke', 'diet coke', 'coca cola'],
+    verdict: 'halal',
+    shortReason: 'Coca-Cola does not contain animal products and is considered halal.',
+    detailedReason: 'Coca-Cola is recognized as halal globally. The ingredients are water, sugar, carbon dioxide, caramel color, phosphoric acid, natural flavorings, and caffeine. The trace amounts of alcohol used in flavor extraction evaporate and are considered negligible by most Islamic authorities.',
+    category: 'drink',
+  },
+  {
+    slug: 'is-mcdonalds-fries-halal',
+    name: 'McDonald\'s French Fries',
+    aliases: ['mcdonalds fries', 'macca fries'],
+    verdict: 'doubtful',
+    shortReason: 'Depends on the country. In the US, they contain natural beef flavoring.',
+    detailedReason: 'In the US, McDonald\'s fries contain "Natural Beef Flavor" which includes hydrolyzed wheat and hydrolyzed milk as starting ingredients, but is not considered halal. In the UK, Canada, and Muslim-majority countries, the fries are cooked in dedicated vegetable oil and are considered halal or vegetarian.',
+    category: 'fast-food',
+  },
+  {
+    slug: 'is-pepsi-halal',
+    name: 'Pepsi',
+    aliases: ['pepsi cola'],
+    verdict: 'halal',
+    shortReason: 'Pepsi is free of animal products and haram ingredients.',
+    detailedReason: 'Like Coca-Cola, Pepsi\'s ingredients are entirely synthetic or plant-derived. It does not contain any animal products or intoxicating levels of alcohol.',
+    category: 'drink',
+  },
+  {
+    slug: 'is-glycerin-halal',
+    name: 'Glycerin / Glycerol (E422)',
+    aliases: ['e422', 'glycerine', 'glycerol'],
+    verdict: 'doubtful',
+    shortReason: 'Can be derived from plants, animals, or synthetic sources.',
+    detailedReason: 'If the glycerin is sourced from plants (vegetable glycerin) or is synthetically made, it is halal. If derived from animal fats (like tallow), it is haram unless the animal was halal-slaughtered. Always verify the source or look for a vegan/halal mark.',
+    category: 'additive',
+  }
+];

@@ -15,7 +15,6 @@ import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
-import MadhhabSection from "@/components/sections/MadhhabSection";
 import CTASection from "@/components/sections/CTASection";
 
 export default function HomePage() {
@@ -27,7 +26,6 @@ export default function HomePage() {
         <AboutSection />
         <WhyChooseSection />
         <FeaturesSection />
-        <MadhhabSection />
         <CTASection />
       </main>
       <Footer />

@@ -29,16 +29,16 @@ export default function ComingSoonPage() {
         {/* Logo */}
         <Link 
           href="/" 
-          className="inline-block text-sm font-semibold tracking-[0.1em] text-white hover:text-primary transition-colors mb-12"
+          className="inline-block text-sm font-semibold tracking-[0.1em] text-text-primary hover:text-primary transition-colors mb-12"
         >
           ALLHALAL
         </Link>
 
         {/* Ornament */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <span className="w-12 h-px bg-gradient-to-r from-transparent to-white/20" />
-          <span className="text-white/30">◈</span>
-          <span className="w-12 h-px bg-gradient-to-l from-transparent to-white/20" />
+          <span className="w-12 h-px bg-gradient-to-r from-transparent to-primary/20" />
+          <span className="text-text-muted">◈</span>
+          <span className="w-12 h-px bg-gradient-to-l from-transparent to-primary/20" />
         </div>
 
         {/* Main Content */}
@@ -51,12 +51,12 @@ export default function ComingSoonPage() {
 
           {/* Title */}
           <h1 className="text-display-2 mb-6">
-            <span className="block text-[0.7em] font-light text-white/70 mb-2">Coming</span>
+            <span className="block text-[0.7em] font-light text-text-secondary mb-2">Coming</span>
             <span className="block gradient-text font-black">Very Soon</span>
           </h1>
 
           {/* Description */}
-          <p className="text-lg text-white/60 mb-12 leading-relaxed">
+          <p className="text-lg text-text-secondary mb-12 leading-relaxed">
             We're crafting the ultimate halal verification experience.
             <br />
             The most advanced scanner in the world is almost ready.
@@ -71,10 +71,10 @@ export default function ComingSoonPage() {
             ].map((feature) => (
               <div 
                 key={feature.text}
-                className="flex flex-col items-center gap-2 p-4 bg-surface border border-white/5 rounded-xl"
+                className="flex flex-col items-center gap-2 p-4 bg-surface border border-border rounded-xl"
               >
                 <span className="text-2xl">{feature.icon}</span>
-                <span className="text-xs text-white/60">{feature.text}</span>
+                <span className="text-xs text-text-secondary">{feature.text}</span>
               </div>
             ))}
           </div>
@@ -82,7 +82,7 @@ export default function ComingSoonPage() {
           {/* Progress */}
           <div className="mb-12">
             <div className="flex justify-between text-sm mb-2">
-              <span className="text-white/50">Development Progress</span>
+              <span className="text-text-tertiary">Development Progress</span>
               <span className="text-primary font-medium">87%</span>
             </div>
             <div className="h-2 bg-surface rounded-full overflow-hidden">
@@ -97,7 +97,7 @@ export default function ComingSoonPage() {
 
           {/* Email Notify */}
           <div className="mb-12">
-            <p className="text-sm text-white/50 mb-4">Be the first to know when we launch</p>
+            <p className="text-sm text-text-tertiary mb-4">Be the first to know when we launch</p>
             <form 
               className="flex gap-3 max-w-md mx-auto"
               onSubmit={(e) => e.preventDefault()}
@@ -105,7 +105,7 @@ export default function ComingSoonPage() {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="flex-1 px-4 py-3 bg-surface border border-white/10 rounded-lg text-white placeholder-white/30 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                className="flex-1 px-4 py-3 bg-surface border border-border rounded-lg text-text-primary placeholder-text-muted focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                 required
               />
               <button
@@ -120,15 +120,15 @@ export default function ComingSoonPage() {
 
         {/* Ornament Bottom */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <span className="w-12 h-px bg-gradient-to-r from-transparent to-white/20" />
-          <span className="text-white/30">◈</span>
-          <span className="w-12 h-px bg-gradient-to-l from-transparent to-white/20" />
+          <span className="w-12 h-px bg-gradient-to-r from-transparent to-primary/20" />
+          <span className="text-text-muted">◈</span>
+          <span className="w-12 h-px bg-gradient-to-l from-transparent to-primary/20" />
         </div>
 
         {/* Back Link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-primary transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-text-tertiary hover:text-primary transition-colors"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
