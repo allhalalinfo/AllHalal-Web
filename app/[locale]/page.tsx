@@ -3,7 +3,6 @@ import Footer from "@/components/layout/Footer";
 import ExploreSection from "@/components/sections/ExploreSection";
 import Link from "next/link";
 import Image from "next/image";
-import heroBg from "../../public/assets/hero-bg.png";
 
 export default async function PortalHomePage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
@@ -28,11 +27,10 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <Image
-                src={heroBg}
+                src="/assets/hero-bg.png"
                 alt="Background"
                 fill
                 className="object-cover object-center opacity-30 group-hover:scale-105 transition-transform duration-700"
-                placeholder="blur"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-bg-dark via-bg-dark/90 to-transparent" />
             </div>
