@@ -11,7 +11,7 @@ interface SpotlightCardProps {
 export default function SpotlightCard({ 
   children, 
   className = "", 
-  spotlightColor = "rgba(0, 208, 148, 0.15)"
+  spotlightColor = "rgba(151, 124, 88, 0.15)"
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -46,7 +46,7 @@ export default function SpotlightCard({
         /* Desktop: normal border, hover shows active */
         border border-border md:hover:border-primary/30
         /* Mobile: always active border + glow */
-        max-md:border-primary/30 max-md:shadow-[0_0_20px_rgba(0,208,148,0.1)]
+        max-md:border-primary/30 max-md:shadow-[0_0_20px_rgba(151,124,88,0.1)]
         ${className}
       `}
     >

@@ -18,7 +18,7 @@ export default function CTASection() {
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30"
           style={{
-            background: "radial-gradient(circle, rgba(0, 208, 148, 0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(151, 124, 88, 0.15) 0%, transparent 70%)",
           }}
         />
       </div>
