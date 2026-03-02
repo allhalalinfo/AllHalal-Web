@@ -80,6 +80,7 @@ export default function Footer() {
       title: t("company"),
       links: [
         { label: t("links.aboutUs"), href: "/#about" },
+        { label: "Our Methodology", href: "/methodology" },
         { label: t("links.contact"), href: "/contact" },
         { label: t("links.support"), href: "/support" },
       ],

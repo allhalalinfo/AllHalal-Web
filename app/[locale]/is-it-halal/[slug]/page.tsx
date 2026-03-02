@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 export async function generateStaticParams() {
   return halalItems.map((item) => ({
@@ -32,6 +33,7 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
 
   return (
     <div className="container py-32 min-h-screen">
+      <FAQSchema faqs={[{ question: `Is ${item.name} halal?`, answer: item.shortReason }]} />
       <div className="max-w-3xl mx-auto">
         <Link href={`/${params.locale}/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">
           &larr; Back to all items
