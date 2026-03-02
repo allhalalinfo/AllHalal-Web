@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
+import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 
 export async function generateStaticParams() {
   return halalItems.map((item) => ({
@@ -66,6 +67,8 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
                 return <p key={idx} className="text-lg leading-relaxed">{paragraph}</p>;
               })}
             </div>
+            
+            <AppDeepLinkCTA itemName={item.name} />
           </div>
         </div>
 
