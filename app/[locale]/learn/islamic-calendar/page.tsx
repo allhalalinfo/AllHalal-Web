@@ -14,6 +14,9 @@ export default async function IslamicCalendarPage(props: { params: Promise<{ loc
   try {
     // Fetch server-side for optimal SEO since events rarely change minute-by-minute
     const res = await fetch("https://api.allhalal.info/api/v1/calendar/events", { 
+      headers: {
+        'X-Source': 'web'
+      },
       next: { revalidate: 3600 } // Revalidate every hour
     });
     

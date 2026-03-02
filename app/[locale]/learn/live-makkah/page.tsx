@@ -13,6 +13,9 @@ export default async function LiveStreamsPage(props: { params: Promise<{ locale:
   try {
     // Fetch live stream IDs from the backend API
     const res = await fetch("https://api.allhalal.info/api/v1/config/live-streams", {
+      headers: {
+        'X-Source': 'web'
+      },
       next: { revalidate: 3600 }
     });
     

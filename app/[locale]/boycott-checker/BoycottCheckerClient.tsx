@@ -32,7 +32,11 @@ export default function BoycottCheckerClient() {
     setResult(null);
 
     try {
-      const res = await fetch(`https://api.allhalal.info/api/v1/boycott/check?brand=${encodeURIComponent(query)}`);
+      const res = await fetch(`https://api.allhalal.info/api/v1/boycott/check?brand=${encodeURIComponent(query)}`, {
+        headers: {
+          'X-Source': 'web'
+        }
+      });
       if (res.ok) {
         const data = await res.json();
         setResult(data);
