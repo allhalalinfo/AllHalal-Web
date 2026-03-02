@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
   title: 'Sharia-Compliant Investing: Beginner\'s Guide | AllHalal',
@@ -9,8 +10,29 @@ export const metadata: Metadata = {
 
 export default async function InvestingPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
+  
+  const faqs = [
+    {
+      question: "Are stocks halal?",
+      answer: "Yes, buying shares (ownership) in a company is permissible, provided the company's core business is halal and it passes the financial screening criteria (e.g., its debt and interest income are within acceptable limits)."
+    },
+    {
+      question: "What is dividend purification?",
+      answer: "Even in Shariah-compliant companies, a tiny fraction of their income might come from interest (like cash sitting in a bank). Purification involves calculating that small percentage of your dividends and donating it to charity to cleanse your wealth."
+    },
+    {
+      question: "Are index funds like the S&P 500 halal?",
+      answer: "Standard index funds like the S&P 500 are not halal because they include banks, alcohol companies, and highly leveraged businesses. However, you can invest in specifically designed Islamic index funds (like SPUS or HLAL) which track similar markets but filter out non-compliant companies."
+    },
+    {
+      question: "Do I need a lot of money to start halal investing?",
+      answer: "No. Many modern robo-advisors and fractional share brokerages allow you to start investing with as little as $10 to $100. The key is starting early and being consistent, not having a massive initial sum."
+    }
+  ];
+
   return (
     <div className="container py-32 max-w-4xl mx-auto min-h-screen">
+      <FAQSchema faqs={faqs} />
       <Link href={`/${params.locale}/finance`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Finance</Link>
       <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">Halal Investing</h1>
       

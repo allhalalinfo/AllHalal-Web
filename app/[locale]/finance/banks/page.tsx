@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
   title: 'Islamic Banks in America | AllHalal Finance Guide',
@@ -9,8 +10,29 @@ export const metadata: Metadata = {
 
 export default async function BanksPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
+  
+  const faqs = [
+    {
+      question: "Can I open a checking account at a normal bank?",
+      answer: "Yes, a standard checking account that does not pay interest is permissible. If you use a savings account that automatically accrues interest, you must give the interest money away to charity (without expecting reward) to purify your wealth."
+    },
+    {
+      question: "Are credit cards halal?",
+      answer: "Credit cards themselves are tools. If you pay your balance in full every month and never accrue interest, many scholars permit their use. However, revolving balances and paying interest is strictly haram."
+    },
+    {
+      question: "Do Islamic banks charge late fees?",
+      answer: "Islamic banks cannot charge late fees as a profit-making mechanism, as this resembles Riba. Some may charge a fixed administrative penalty for late payments, but this money is typically donated to charity, not kept as profit."
+    },
+    {
+      question: "Is my money insured in an Islamic bank in the US?",
+      answer: "Yes, if you use an \"Islamic Window\" at a traditional bank or a registered credit union (like Devon Bank), your deposits are typically FDIC or NCUA insured up to standard limits, just like any other American bank."
+    }
+  ];
+
   return (
     <div className="container py-32 max-w-4xl mx-auto min-h-screen">
+      <FAQSchema faqs={faqs} />
       <Link href={`/${params.locale}/finance`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Finance</Link>
       <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">Halal Banking</h1>
       

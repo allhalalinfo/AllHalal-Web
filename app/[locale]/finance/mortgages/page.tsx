@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
   title: 'Halal Mortgage in the US: A Complete Guide | AllHalal',
@@ -9,8 +10,29 @@ export const metadata: Metadata = {
 
 export default async function MortgagesPage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
+  
+  const faqs = [
+    {
+      question: "Are Islamic mortgages really interest-free?",
+      answer: "Yes. Instead of lending money for interest, the institution buys the asset and sells/leases it to you. The profit they make is tied to a tangible asset (the house), which is permissible in Islam."
+    },
+    {
+      question: "Why are the rates similar to conventional banks?",
+      answer: "Islamic banks must remain competitive in the same housing market. They often benchmark their profit rates against standard interest rates (like LIBOR or the Fed rate) to determine a fair market price for rent or markup. Benchmarking against an interest rate is widely accepted by Shariah boards, as long as the underlying contract mechanism is valid."
+    },
+    {
+      question: "Is a halal mortgage more expensive than a traditional one?",
+      answer: "Generally, Islamic mortgages can be slightly more expensive due to higher administrative costs, legal complexities in setting up Sharia-compliant contracts, and less availability of secondary market funding compared to conventional loans. However, the gap is closing as the market grows."
+    },
+    {
+      question: "Can I refinance my conventional mortgage into an Islamic one?",
+      answer: "Yes, many Islamic finance providers in the US offer refinancing options. You essentially sell your portion of the house to the Islamic financier, who then pays off your conventional interest-bearing loan, and you enter a new Sharia-compliant contract (like Musharaka or Ijara) with them."
+    }
+  ];
+
   return (
     <div className="container py-32 max-w-4xl mx-auto min-h-screen">
+      <FAQSchema faqs={faqs} />
       <Link href={`/${params.locale}/finance`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Finance</Link>
       <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">Guide to Halal Mortgages</h1>
       
