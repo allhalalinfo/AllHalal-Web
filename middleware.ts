@@ -44,8 +44,32 @@ export function middleware(request: NextRequest) {
   }
   
   // Handle internationalization first
-  const response = intlMiddleware(request);
+  let response = intlMiddleware(request);
   
+  // 301 Redirect for non-English content paths
+  // Force content-heavy paths to English to avoid SEO duplication
+  const contentPaths = ['/is-it-halal', '/finance', '/learn', '/blog'];
+  
+  // Check if current path is a localized path (e.g. /ru/is-it-halal)
+  const segments = pathname.split('/').filter(Boolean);
+  const currentLocale = segments[0];
+  
+  // If it's a known locale, not English, and starts with one of our content paths
+  if (currentLocale && currentLocale !== 'en' && locales.includes(currentLocale as any)) {
+    const pathAfterLocale = '/' + segments.slice(1).join('/');
+    
+    // Check if the path belongs to one of the content areas
+    const isContentPath = contentPaths.some(cp => 
+      pathAfterLocale === cp || pathAfterLocale.startsWith(cp + '/')
+    );
+
+    if (isContentPath) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/en${pathAfterLocale}`;
+      return NextResponse.redirect(url, 301);
+    }
+  }
+
   // CSP - Allow Three.js WebGL rendering (requires unsafe-eval for shaders)
   const cspHeader = `
     default-src 'self';
