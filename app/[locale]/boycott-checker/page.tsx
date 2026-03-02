@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   description: 'Check if a brand or product is on the BDS boycott list. Instantly verify companies with ties to the occupation economy.',
 };
 
-export default function BoycottCheckerPage({ params }: { params: { locale: string } }) {
+export default async function BoycottCheckerPage(props: { params: Promise<{ locale: string }> }) {
+  const params = await props.params;
   return (
     <div className="container py-32 max-w-4xl mx-auto min-h-screen">
       <Link href={`/${params.locale}/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Halal Checker</Link>
