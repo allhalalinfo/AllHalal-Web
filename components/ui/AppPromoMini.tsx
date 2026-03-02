@@ -20,7 +20,7 @@ export default function AppPromoMini() {
         href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="shrink-0 bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors shadow-glow-sm"
+        className="shrink-0 bg-primary text-bg-elevated px-8 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors shadow-glow-sm"
       >
         Get the App
       </a>
