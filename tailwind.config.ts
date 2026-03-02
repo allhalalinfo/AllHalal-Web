@@ -131,6 +131,7 @@ const config: Config = {
         'scale-in': 'scaleIn 0.5s ease-out forwards',
         'slide-in-left': 'slideInLeft 0.6s ease-out forwards',
         'slide-in-right': 'slideInRight 0.6s ease-out forwards',
+        'slide-in-up': 'slideInUp 0.4s ease-out forwards',
         'marquee': 'marquee 30s linear infinite',
         'marquee-slow': 'marquee 45s linear infinite',
         'marquee-fast': 'marquee 20s linear infinite',
@@ -161,6 +162,10 @@ const config: Config = {
         slideInRight: {
           '0%': { opacity: '0', transform: 'translateX(40px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideInUp: {
+          '0%': { opacity: '0', transform: 'translateY(100%)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         marquee: {
           '0%': { transform: 'translateX(0)' },

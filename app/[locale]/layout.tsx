@@ -25,6 +25,7 @@ import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvide
 import { SpeedInsightsProvider } from "@/components/providers/SpeedInsightsProvider";
 import Noise from "@/components/ui/Noise";
 import Header from "@/components/layout/Header";
+import StickyAppBanner from "@/components/ui/StickyAppBanner";
 
 // Inter font with all weights
 const inter = Inter({
@@ -98,6 +99,7 @@ export default async function LocaleLayout({
           <Header />
           <SmoothScrollProvider>
             {children}
+            <StickyAppBanner />
           </SmoothScrollProvider>
         </NextIntlClientProvider>
         <SpeedInsightsProvider />
