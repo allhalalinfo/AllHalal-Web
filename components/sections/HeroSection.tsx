@@ -18,6 +18,7 @@ import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import MagneticButton from "../ui/MagneticButton";
+import heroBg from "@/public/assets/hero-bg.png";
 
 const ParticleAnimation = dynamic(() => import("@/components/three/ParticleBarcode"), {
   ssr: false,
@@ -79,12 +80,13 @@ export default function HeroSection() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/hero-bg.png"
+          src={heroBg}
           alt="Islamic background"
           fill
           priority
           className="object-cover object-center opacity-40"
           sizes="100vw"
+          placeholder="blur"
         />
         {/* Gradient overlay to ensure text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/80 via-bg-primary/60 to-bg-primary" />
