@@ -1287,5 +1287,193 @@ export const halalItems: HalalItem[] = [
     detailedReason: "### What is it?\nTriscuit is a popular snack.\n\n### Why it may be halal\nOriginal Triscuit crackers are completely vegan and halal. However, cheese or meat-flavored varieties might contain doubtful enzymes or flavorings. Always stick to the original or check the specific flavor.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the AllHalal scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
     category: "snack",
     priority: "normal"
-  }
+  },
+  {
+  "slug": "is-dunkin-donuts-coffee-halal",
+  "name": "Dunkin' Donuts Coffee",
+  "aliases": [
+    "dunkin",
+    "dunkin coffee",
+    "dunkin donuts iced coffee"
+  ],
+  "verdict": "halal",
+  "shortReason": "Plain coffee and most milk-based drinks are safe.",
+  "detailedReason": "### What is it?\nDunkin' Donuts offers a variety of coffees and espresso drinks.\n\n### Why it may be halal\nPlain hot and iced coffee, cold brew, and espresso are inherently halal. When adding milk, sugar, or standard flavor swirls (like Caramel or Mocha), they are generally permissible as they do not contain alcohol or animal derivatives. However, always check seasonal or limited-time syrups, as some might use alcohol-based vanilla extract or haram flavorings. Avoid drinks with marshmallows or certain whipped toppings unless confirmed gelatin-free.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol. Vanilla extract is heavily debated; some scholars permit it if the alcohol boils off or is in trace amounts, while others advise caution.\n\n### Practical advice\nWhen in doubt, stick to plain lattes or coffees with standard sugar and milk. Ask the barista to check the syrup bottle if you are unsure about a new flavor.",
+  "category": "drink",
+  "priority": "high"
+},
+  {
+  "slug": "is-starbucks-caramel-macchiato-halal",
+  "name": "Starbucks Caramel Macchiato",
+  "aliases": [
+    "caramel macchiato",
+    "starbucks macchiato"
+  ],
+  "verdict": "doubtful",
+  "shortReason": "The caramel drizzle may contain trace dairy/enzymes or flavorings of concern.",
+  "detailedReason": "### What is it?\nA popular espresso-based beverage from Starbucks featuring vanilla syrup, steamed milk, espresso, and caramel drizzle.\n\n### Why it may be doubtful\nWhile the espresso and milk are halal, the vanilla syrup and the caramel drizzle are areas of investigation. The caramel drizzle contains butter and heavy cream (which are halal), but sometimes natural flavorings in Starbucks products have raised questions regarding trace alcohol used as a carrier. Most scholars consider standard Starbucks syrups acceptable due to the minute trace amounts of alcohol used in flavor extraction, but strict adherents may avoid it.\n\n### Fiqh considerations\nThe primary issue is Istihlak (transformation/dilution) of trace alcohol in flavorings. Many major halal certifiers allow trace alcohol in flavorings if it's less than 0.1% and not sourced from grapes/dates.\n\n### Practical advice\nIf you follow the opinion that trace alcohol in flavorings is permissible, this drink is fine. If you are strict, you might prefer a plain latte with sugar.",
+  "category": "drink",
+  "priority": "high"
+},
+  {
+  "slug": "is-celsius-energy-drink-halal",
+  "name": "Celsius Energy Drink",
+  "aliases": [
+    "celsius",
+    "celsius fitness drink"
+  ],
+  "verdict": "halal",
+  "shortReason": "Contains synthetic and plant-based ingredients with no animal products.",
+  "detailedReason": "### What is it?\nA popular fitness energy drink containing caffeine, green tea extract, guarana, and vitamins.\n\n### Why it may be halal\nCelsius uses synthetic vitamins, plant extracts, and artificial/natural flavors. It contains no animal derivatives (it is certified vegan) and no intoxicating alcohol. The caffeine is sourced from green tea and guarana.\n\n### Fiqh considerations\nAs a plant-based and synthetic beverage without intoxicants, it falls under the general ruling of permissibility (Halal) for foods.\n\n### Practical advice\nIt is safe to consume from a halal perspective, though individuals should monitor their caffeine intake for health reasons.",
+  "category": "drink",
+  "priority": "high"
+},
+  {
+  "slug": "is-ghost-energy-drink-halal",
+  "name": "Ghost Energy Drink",
+  "aliases": [
+    "ghost energy",
+    "ghost"
+  ],
+  "verdict": "halal",
+  "shortReason": "Vegan-friendly and free from animal products.",
+  "detailedReason": "### What is it?\nA popular energy drink brand known for its collaborations with candy brands like Sour Patch Kids and Warheads.\n\n### Why it may be halal\nGhost Energy drinks are formulated to be vegan. The amino acids (like Taurine and L-Carnitine) used are typically synthesized rather than extracted from animals. They contain no animal byproducts or alcohol.\n\n### Fiqh considerations\nBeverages that do not contain alcohol, blood, or haram animal derivatives are permissible.\n\n### Practical advice\nWhile the energy drink itself is halal, be mindful of the high caffeine content.",
+  "category": "drink",
+  "priority": "normal"
+},
+  {
+  "slug": "is-takis-fuego-halal",
+  "name": "Takis Fuego",
+  "aliases": [
+    "takis",
+    "takis chips",
+    "barcel takis"
+  ],
+  "verdict": "doubtful",
+  "shortReason": "May contain controversial artificial colors and flavor carriers.",
+  "detailedReason": "### What is it?\nA brand of spicy, rolled corn tortilla chips popular in North America.\n\n### Why it may be doubtful\nTakis Fuego do not contain obvious meat products, but they use a complex blend of artificial flavors and colors. The primary concern for Muslims is the source of \"Natural and Artificial Flavors.\" Sometimes, dairy derivatives or enzymes are used in the flavor powders. Additionally, they use Red 40 and Yellow 6, which are synthetic and halal, but cross-contamination in factories making cheese-flavored snacks is a minor risk. The manufacturer does not claim halal certification in the US.\n\n### Fiqh considerations\nWithout clear haram ingredients, they are technically presumed permissible by some, but doubtful (Mashbooh) by those who require verification of the origin of every flavor chemical.\n\n### Practical advice\nMany Muslims consume them, but if you want to be strictly certain, you may want to avoid them until the manufacturer provides a clear breakdown of the flavor sources.",
+  "category": "snack",
+  "priority": "high"
+},
+  {
+  "slug": "is-haribo-gummy-bears-halal",
+  "name": "Haribo Goldbears (US Version)",
+  "aliases": [
+    "haribo",
+    "haribo gummy bears",
+    "gummy bears",
+    "goldbears"
+  ],
+  "verdict": "haram",
+  "shortReason": "Contains pork gelatin.",
+  "detailedReason": "### What is it?\nThe classic gummy bear candy manufactured by Haribo.\n\n### Why it may be haram\nThe standard Haribo Goldbears sold in the United States and Europe are made with pork-derived gelatin. Pork and its byproducts are strictly haram.\n\n### Fiqh considerations\nPork gelatin is universally considered haram by all major Islamic schools of thought, as the chemical alteration is not deemed sufficient to change its impure nature (no complete Istihalah).\n\n### Practical advice\nLook specifically for the Haribo products made in Turkey, which clearly state \"Beef Gelatin\" and usually bear a Halal certification logo on the back of the package. The Turkish versions are halal.",
+  "category": "snack",
+  "priority": "high"
+},
+  {
+  "slug": "is-sour-patch-kids-halal",
+  "name": "Sour Patch Kids",
+  "aliases": [
+    "sour patch",
+    "sour patch candy"
+  ],
+  "verdict": "halal",
+  "shortReason": "Does not contain gelatin; uses corn starch to bind.",
+  "detailedReason": "### What is it?\nA popular soft, chewy candy with a sour sugar coating.\n\n### Why it may be halal\nUnlike many chewy candies, Sour Patch Kids do not use gelatin. They rely on modified corn starch for their gummy texture. The colors and flavors used are generally synthetic and plant-based.\n\n### Fiqh considerations\nBecause they lack animal-derived gelatin and intoxicating substances, they are permissible.\n\n### Practical advice\nSour Patch Kids are generally safe for halal diets in the US, but always check the label, as limited edition varieties (like marshmallows or certain bites) might introduce new ingredients.",
+  "category": "snack",
+  "priority": "high"
+},
+  {
+  "slug": "is-swedish-fish-halal",
+  "name": "Swedish Fish",
+  "aliases": [
+    "swedish fish candy"
+  ],
+  "verdict": "halal",
+  "shortReason": "Vegan-friendly; no gelatin used.",
+  "detailedReason": "### What is it?\nFish-shaped, chewy fruit-flavored candies.\n\n### Why it may be halal\nSwedish Fish do not contain gelatin. Like Sour Patch Kids, they use modified corn starch to achieve their gummy texture. The ingredients are sugar, invert sugar, corn syrup, modified corn starch, citric acid, white mineral oil, natural and artificial flavors, and Red 40. Mineral oil is petroleum-based and halal.\n\n### Fiqh considerations\nFree from animal products and alcohol, thus halal.\n\n### Practical advice\nSafe to consume. (Note: Only applies to the standard US Swedish Fish; always check novelty shapes or mixes).",
+  "category": "snack",
+  "priority": "normal"
+},
+  {
+  "slug": "is-chick-fil-a-chicken-halal",
+  "name": "Chick-fil-A Chicken",
+  "aliases": [
+    "chick fil a",
+    "chickfila"
+  ],
+  "verdict": "haram",
+  "shortReason": "The chicken is machine-slaughtered and not certified Zabiha Halal.",
+  "detailedReason": "### What is it?\nA major American fast-food chain specializing in chicken sandwiches.\n\n### Why it may be haram\nChick-fil-A sources its chicken from massive commercial poultry suppliers in the US. These chickens are machine-slaughtered, often stunned using water baths, and the name of Allah is not pronounced over each bird. Therefore, it does not meet the requirements for Zabiha Halal meat.\n\n### Fiqh considerations\nWhile a minority of scholars allow meat from \"People of the Book\" (Ahl al-Kitab) regardless of slaughter method, the vast majority of scholars in the US agree that modern commercial machine-slaughtered poultry without the Tasmiyah is not halal.\n\n### Practical advice\nAvoid the chicken. You can opt for their fries (cooked in canola oil) or a fruit cup, but be aware of cross-contamination risks in the kitchen.",
+  "category": "fast-food",
+  "priority": "high"
+},
+  {
+  "slug": "is-burger-king-impossible-whopper-halal",
+  "name": "Burger King Impossible Whopper",
+  "aliases": [
+    "impossible whopper",
+    "bk impossible"
+  ],
+  "verdict": "doubtful",
+  "shortReason": "The patty is plant-based, but it is cooked on the same grill as beef and pork.",
+  "detailedReason": "### What is it?\nA plant-based burger patty served at Burger King.\n\n### Why it may be doubtful\nThe Impossible patty itself is 100% plant-based and theoretically halal. However, Burger King openly states that the Impossible Whopper is cooked on the exact same broiler as their beef patties and chicken. This guarantees severe cross-contamination with haram meat fats and juices.\n\n### Fiqh considerations\nFood cooked in the direct fats and juices of haram meat becomes haram due to Najasa (impurity) transfer.\n\n### Practical advice\nIf you want it to be halal, you MUST ask the staff to prepare it \"off the broiler\" or \"microwave it.\" Burger King has a policy allowing customers to request this to avoid the meat grill.",
+  "category": "fast-food",
+  "priority": "high"
+},
+  {
+  "slug": "is-carmine-e120-halal",
+  "name": "Carmine (E120)",
+  "aliases": [
+    "e120",
+    "carmine",
+    "cochineal",
+    "crimson lake"
+  ],
+  "verdict": "haram",
+  "shortReason": "A red dye extracted from crushed insects.",
+  "detailedReason": "### What is it?\nA bright red food coloring used in candies, juices, yogurts, and cosmetics. It is extracted from the dried, crushed bodies of the female cochineal insect.\n\n### Why it may be haram\nInsects (other than locusts) are widely considered haram to consume in Islamic jurisprudence.\n\n### Fiqh considerations\nThe majority of scholars (Hanafi, Shafi'i, Hanbali) prohibit the consumption of insects, making E120 haram. A minority view (some Maliki/Maliki-leaning scholars) permits it based on it being a \"bloodless\" creature or undergoing transformation, but the safest and most widely accepted stance is to avoid it.\n\n### Practical advice\nAlways check labels for \"Carmine,\" \"Cochineal Extract,\" or \"E120,\" especially in strawberry/cherry flavored yogurts, red candies (like Skittles in the UK), and red lipsticks.",
+  "category": "additive",
+  "priority": "high"
+},
+  {
+  "slug": "is-e471-mono-and-diglycerides-halal",
+  "name": "E471 (Mono- and Diglycerides)",
+  "aliases": [
+    "e471",
+    "mono and diglycerides",
+    "monoglycerides"
+  ],
+  "verdict": "doubtful",
+  "shortReason": "An emulsifier that can be made from either plant oils or animal fats (including pork).",
+  "detailedReason": "### What is it?\nA common emulsifier used to blend water and oil together. It makes bread softer, ice cream smoother, and prevents peanut butter from separating.\n\n### Why it may be doubtful\nE471 can be derived from plant sources (like soybean or palm oil) or animal sources (like beef tallow or pork lard). Looking at the ingredient list alone does not tell you the source.\n\n### Fiqh considerations\nIf derived from plants, it is Halal. If derived from pork, it is strictly Haram. If derived from beef that isn't Zabiha, it is also Haram. \n\n### Practical advice\nIf a product is certified Kosher, Vegan, or Vegetarian, the E471 is plant-based and Halal. Otherwise, you must contact the manufacturer to verify the source.",
+  "category": "additive",
+  "priority": "high"
+},
+  {
+  "slug": "is-heinz-ketchup-halal",
+  "name": "Heinz Tomato Ketchup",
+  "aliases": [
+    "heinz ketchup",
+    "ketchup"
+  ],
+  "verdict": "halal",
+  "shortReason": "Contains only plant-based ingredients and vinegar.",
+  "detailedReason": "### What is it?\nThe world's most popular tomato ketchup.\n\n### Why it may be halal\nThe ingredients are tomato concentrate, distilled vinegar, high fructose corn syrup, corn syrup, salt, spice, onion powder, and natural flavoring. The vinegar is distilled from grain or corn and is perfectly halal. The natural flavorings do not contain animal products.\n\n### Fiqh considerations\nVinegar is halal in Islam, even if it was originally alcohol, because the transformation (Istihalah) into acetic acid makes it pure.\n\n### Practical advice\nStandard Heinz Ketchup is fully permissible and widely considered halal.",
+  "category": "other",
+  "priority": "normal"
+},
+  {
+  "slug": "is-soy-sauce-halal",
+  "name": "Soy Sauce (Naturally Brewed)",
+  "aliases": [
+    "kikkoman soy sauce",
+    "soy sauce"
+  ],
+  "verdict": "doubtful",
+  "shortReason": "Naturally brewed soy sauce contains trace naturally occurring alcohol (1-2%).",
+  "detailedReason": "### What is it?\nA liquid condiment of Chinese origin, traditionally made from a fermented paste of soybeans, roasted grain, brine, and Aspergillus oryzae molds.\n\n### Why it may be doubtful\nNaturally brewed soy sauce (like Kikkoman) undergoes fermentation, producing about 1.5% to 2% alcohol naturally. This is not added alcohol, but a byproduct of brewing. Non-brewed (chemical) soy sauce does not have this.\n\n### Fiqh considerations\nThere is a difference of opinion. Many scholars say that because this alcohol is a natural byproduct, is not added to intoxicate, and the sauce cannot intoxicate even if consumed in large quantities, it is permissible. Others prefer absolute strictness and advise using \"Tamari\" or \"All-Purpose\" soy sauces that explicitly have no alcohol.\n\n### Practical advice\nIf you follow the majority opinion on natural trace alcohol, it is fine. If you want to be completely safe, buy Halal-certified soy sauce or look for Kikkoman's specific Halal/Gluten-Free variants.",
+  "category": "other",
+  "priority": "high"
+}
 ];
