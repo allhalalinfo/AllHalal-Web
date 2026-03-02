@@ -73,9 +73,13 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-bg-primary"
+      className="relative bg-bg-primary overflow-hidden"
     >
-      <div ref={contentRef} className="container">
+      {/* Abstract blurred background shapes for depth */}
+      <div className="absolute top-[-10%] right-[-5%] w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-gradient-to-br from-[#977C58]/10 to-[#819C80]/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-gradient-to-tr from-[#819C80]/10 to-[#977C58]/10 rounded-full blur-[80px] pointer-events-none" />
+      
+      <div ref={contentRef} className="container relative z-10">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-8 min-h-screen lg:items-center pt-28 pb-8 lg:pt-0 lg:pb-0">
 
           {/* TEXT COLUMN - No motion.div, just CSS */}
