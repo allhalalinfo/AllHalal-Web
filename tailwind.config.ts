@@ -37,6 +37,11 @@ const config: Config = {
           tertiary: '#DFDDD3',
           elevated: '#FFFFFF',
           card: 'rgba(255, 255, 255, 0.7)', // Translucent white for glass effect
+          dark: '#31231E', // Deep chocolate/brown for contrast sections
+        },
+        // Accent Colors
+        accent: {
+          yellow: '#F4B942', // Sunset yellow
         },
         // Surface Colors
         surface: {
@@ -56,6 +61,8 @@ const config: Config = {
           secondary: 'rgba(44, 31, 28, 0.7)',
           tertiary: 'rgba(44, 31, 28, 0.5)',
           muted: 'rgba(44, 31, 28, 0.35)',
+          inverse: '#F2F1E8', // For text on dark backgrounds
+          'inverse-secondary': 'rgba(242, 241, 232, 0.7)',
         },
       },
 

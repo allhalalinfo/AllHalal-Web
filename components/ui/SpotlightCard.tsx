@@ -36,20 +36,16 @@ export default function SpotlightCard({
   const handleMouseLeave = () => !isMobile && setOpacity(0);
 
   return (
-    <div
-      ref={divRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`
-        relative overflow-hidden rounded-xl bg-bg-card transition-colors duration-300
-        /* Desktop: normal border, hover shows active */
-        border border-border md:hover:border-primary/30
-        /* Mobile: always active border + glow */
-        max-md:border-primary/30 max-md:shadow-[0_0_20px_rgba(151,124,88,0.1)]
-        ${className}
-      `}
-    >
+      <div
+        ref={divRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`
+          relative overflow-hidden rounded-xl transition-colors duration-300
+          ${className}
+        `}
+      >
       {/* Desktop: Mouse-following spotlight */}
       <div
         className="pointer-events-none absolute -inset-px transition duration-300 hidden md:block"

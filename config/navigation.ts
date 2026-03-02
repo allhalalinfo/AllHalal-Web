@@ -13,6 +13,7 @@ export interface NavItem {
  * Main navigation items (always visible in header)
  */
 export const MAIN_NAV_ITEMS: NavItem[] = [
+  { label: 'App', href: '/app', enabled: true },
   { label: 'Halal Checker', href: '/is-it-halal', enabled: true },
   { label: 'Finance', href: '/finance', enabled: true },
   { label: 'Learn', href: '/learn', enabled: true },

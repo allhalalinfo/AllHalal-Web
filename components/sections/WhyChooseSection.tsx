@@ -19,18 +19,18 @@ export default function WhyChooseSection() {
   ];
 
   return (
-    <section className="section bg-bg-secondary relative overflow-hidden">
+    <section className="section bg-bg-dark text-text-inverse relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-accent-yellow/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block text-accent-yellow text-sm font-semibold uppercase tracking-widest mb-4">
             {t("subtitle")}
           </span>
           
-          <h2 className="text-display-2 font-bold font-display text-text-primary mb-6">
+          <h2 className="text-display-2 font-bold font-display text-text-inverse mb-6">
             {t("title")}
           </h2>
         </div>
@@ -39,26 +39,26 @@ export default function WhyChooseSection() {
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {reasons.map((reason, index) => (
             <div key={reason.key} className="group">
-              <SpotlightCard className="h-full p-8">
+              <SpotlightCard className="h-full p-8 bg-white/5 border-white/10 hover:border-accent-yellow/50 transition-colors">
                 <div className="relative z-10">
                   {/* Icon - Mobile: always active, Desktop: hover */}
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-colors bg-primary/20 md:bg-primary/10 md:group-hover:bg-primary/20">
-                    <reason.icon className="w-7 h-7 text-primary" />
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-colors bg-accent-yellow/10 md:group-hover:bg-accent-yellow/20">
+                    <reason.icon className="w-7 h-7 text-accent-yellow" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold font-display text-text-primary mb-4">
+                  <h3 className="text-xl font-bold font-display text-text-inverse mb-4">
                     {t(`reasons.${reason.key}.title`)}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-text-secondary leading-relaxed">
+                  <p className="text-text-inverse-secondary leading-relaxed">
                     {t(`reasons.${reason.key}.description`)}
                   </p>
                 </div>
 
                 {/* Card number */}
-                <div className="absolute top-6 right-6 text-6xl font-black text-border/50 select-none opacity-50">
+                <div className="absolute top-6 right-6 text-6xl font-black text-white/5 select-none transition-colors group-hover:text-accent-yellow/10">
                   {String(index + 1).padStart(2, "0")}
                 </div>
               </SpotlightCard>

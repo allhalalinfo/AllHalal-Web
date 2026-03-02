@@ -98,7 +98,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-bg-secondary border-t border-border">
+    <footer className="bg-bg-dark text-text-inverse border-t border-border">
       {/* Main Footer Content */}
       <div className="container py-16 md:py-24">
         <motion.div
@@ -111,15 +111,15 @@ export default function Footer() {
           {/* Brand Column */}
           <motion.div variants={itemVariants} className="lg:col-span-2">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold font-display text-text-primary">allhalal.info</span>
+              <span className="text-2xl font-bold font-display text-text-inverse">allhalal.info</span>
             </Link>
-            <p className="mt-4 text-text-secondary max-w-sm leading-relaxed">
+            <p className="mt-4 text-text-inverse-secondary max-w-sm leading-relaxed">
               {t("description")}
             </p>
             <div className="mt-6">
               <a
                 href="mailto:app@allhalal.info"
-                className="text-primary hover:text-primary-light transition-colors"
+                className="text-primary-light hover:text-primary transition-colors"
               >
                 app@allhalal.info
               </a>
@@ -133,7 +133,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-bg-tertiary border border-border hover:border-primary hover:text-primary transition-all"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-primary-light hover:bg-white/10 transition-all text-text-inverse-secondary hover:text-primary-light"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -145,7 +145,7 @@ export default function Footer() {
           {/* Navigation Columns */}
           {Object.entries(footerNav).map(([key, section]) => (
             <motion.div key={key} variants={itemVariants}>
-              <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wider mb-4">
+              <h3 className="text-sm font-semibold text-text-inverse uppercase tracking-wider mb-4">
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -153,10 +153,10 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href.startsWith('http') || link.href.startsWith('/#') ? link.href : `/${locale}${link.href}`}
-                      className="text-text-secondary hover:text-text-primary transition-colors inline-block relative group"
+                      className="text-text-inverse-secondary hover:text-text-inverse transition-colors inline-block relative group"
                     >
                       {link.label}
-                      <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary-light transition-all duration-300 group-hover:w-full" />
                     </Link>
                   </li>
                 ))}
@@ -167,19 +167,19 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-border">
+      <div className="border-t border-white/10">
         <div className="container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-text-muted text-sm">
+            <p className="text-text-inverse-secondary text-sm">
               © {new Date().getFullYear()} allhalal.info. {t("copyright")}
             </p>
-            <p className="text-text-muted text-sm">
+            <p className="text-text-inverse-secondary text-sm">
               {t("developedBy")}{" "}
               <a
                 href="https://gezellix.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-tertiary hover:text-primary transition-colors"
+                className="text-text-inverse hover:text-primary-light transition-colors"
               >
                 Gezellix
               </a>

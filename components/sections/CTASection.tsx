@@ -12,13 +12,13 @@ export default function CTASection() {
   const t = useTranslations("cta");
 
   return (
-    <section className="section-lg bg-bg-primary relative overflow-hidden">
+    <section className="section-lg bg-bg-dark text-text-inverse relative overflow-hidden">
       {/* Static background glow */}
       <div className="absolute inset-0 overflow-hidden">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30"
           style={{
-            background: "radial-gradient(circle, rgba(151, 124, 88, 0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(176, 144, 98, 0.25) 0%, transparent 70%)",
           }}
         />
       </div>
@@ -26,18 +26,18 @@ export default function CTASection() {
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary" />
-            <span className="text-sm text-primary font-medium">{t("badge")}</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
+            <span className="w-2 h-2 rounded-full bg-accent-yellow shadow-[0_0_10px_rgba(244,185,66,0.5)]" />
+            <span className="text-sm text-accent-yellow font-medium">{t("badge")}</span>
           </div>
 
           {/* Headline */}
-          <h2 className="text-display-1 font-bold font-display text-text-primary mb-6">
+          <h2 className="text-display-1 font-bold font-display text-text-inverse mb-6">
             {t("title")}
           </h2>
 
           {/* Description */}
-          <p className="text-xl text-text-secondary mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-text-inverse-secondary mb-10 max-w-2xl mx-auto">
             {t("description")}
           </p>
 
@@ -47,7 +47,7 @@ export default function CTASection() {
               href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-[#4A3319] font-bold text-lg rounded-full shadow-[0_4px_15px_rgba(176,144,98,0.3)] transition-all duration-300 hover:bg-gradient-gold-hover hover:-translate-y-1"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-[#4A3319] font-bold text-lg rounded-full shadow-[0_4px_25px_rgba(176,144,98,0.4)] transition-all duration-300 hover:bg-gradient-gold-hover hover:-translate-y-1"
             >
               <AppleIcon className="w-6 h-6" />
               {t("button")}
@@ -57,16 +57,16 @@ export default function CTASection() {
 
           {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-8 mt-12">
-            <div className="flex items-center gap-2 text-text-tertiary">
-              <ShieldIcon className="w-5 h-5 text-primary" />
+            <div className="flex items-center gap-2 text-text-inverse-secondary">
+              <ShieldIcon className="w-5 h-5 text-accent-yellow" />
               <span className="text-sm">{t("trust.secure")}</span>
             </div>
-            <div className="flex items-center gap-2 text-text-tertiary">
-              <GlobeIcon className="w-5 h-5 text-primary" />
+            <div className="flex items-center gap-2 text-text-inverse-secondary">
+              <GlobeIcon className="w-5 h-5 text-accent-yellow" />
               <span className="text-sm">{t("trust.worldwide")}</span>
             </div>
-            <div className="flex items-center gap-2 text-text-tertiary">
-              <StarIcon className="w-5 h-5 text-primary" />
+            <div className="flex items-center gap-2 text-text-inverse-secondary">
+              <StarIcon className="w-5 h-5 text-accent-yellow" />
               <span className="text-sm">{t("trust.rating")}</span>
             </div>
           </div>

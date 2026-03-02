@@ -103,15 +103,14 @@ export default function AboutSection() {
         </div>
 
         {/* Mission Statement */}
-        <div className="relative p-8 md:p-12 lg:p-16 rounded-3xl bg-bg-card border border-border shadow-lg">
-          <div className="absolute top-0 left-0 w-32 h-32 bg-primary/5 rounded-tl-3xl -z-10" />
-          <div className="absolute bottom-0 right-0 w-32 h-32 bg-primary/5 rounded-br-3xl -z-10" />
+        <div className="relative p-8 md:p-12 lg:p-16 rounded-t-full bg-bg-dark border border-white/10 shadow-lg text-text-inverse overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-accent-yellow/5 to-transparent -z-10" />
           
           <div className="text-center max-w-4xl mx-auto">
-            <svg className="w-12 h-12 text-primary/40 mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32">
+            <svg className="w-12 h-12 text-accent-yellow mx-auto mb-6" fill="currentColor" viewBox="0 0 32 32">
               <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
             </svg>
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light text-text-primary leading-relaxed">
+            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-light text-text-inverse leading-relaxed">
               {t("mission")}
             </blockquote>
           </div>
