@@ -78,13 +78,9 @@ export default function HeroSection() {
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/hero-bg.png"
-          alt="Islamic background"
-          fill
-          priority
-          className="object-cover object-center opacity-40"
-          sizes="100vw"
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-40"
+          style={{ backgroundImage: "url('/assets/hero-bg.png')" }}
         />
         {/* Gradient overlay to ensure text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/80 via-bg-primary/60 to-bg-primary" />

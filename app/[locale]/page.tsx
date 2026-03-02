@@ -26,11 +26,9 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
           <div className="relative overflow-hidden rounded-[2rem] bg-bg-dark text-text-inverse shadow-2xl border border-white/10 group">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
-              <Image
-                src="/assets/hero-bg.png"
-                alt="Background"
-                fill
-                className="object-cover object-center opacity-30 group-hover:scale-105 transition-transform duration-700"
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:scale-105 transition-transform duration-700"
+                style={{ backgroundImage: "url('/assets/hero-bg.png')" }}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-bg-dark via-bg-dark/90 to-transparent" />
             </div>
