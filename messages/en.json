@@ -327,6 +327,10 @@
     "blog": {
       "title": "Our Blog",
       "desc": "Read the latest articles on halal lifestyle, diet guides, and tips for living as a Muslim in the modern world."
+    },
+    "boycott": {
+      "title": "Boycott Checker",
+      "desc": "Check if a brand or product is on the BDS boycott list. Instantly verify companies with ties to the occupation."
     }
   }
 }

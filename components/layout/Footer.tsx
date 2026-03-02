@@ -63,6 +63,7 @@ export default function Footer() {
       title: "Explore",
       links: [
         { label: "Halal Checker", href: "/is-it-halal" },
+        { label: "Boycott Checker", href: "/boycott-checker" },
         { label: "Finance", href: "/finance" },
         { label: "Learn", href: "/learn" },
         { label: "Blog", href: "/blog" },

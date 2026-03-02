@@ -1450,5 +1450,81 @@ export const halalItems: HalalItem[] = [
     "detailedReason": "### What is it?\nA liquid condiment of Chinese origin, traditionally made from a fermented paste of soybeans, roasted grain, brine, and Aspergillus oryzae molds.\n\n### Why it may be doubtful\nNaturally brewed soy sauce (like Kikkoman) undergoes fermentation, producing about 1.5% to 2% alcohol naturally. This is not added alcohol, but a byproduct of brewing. Non-brewed (chemical) soy sauce does not have this.\n\n### Fiqh considerations\nThere is a difference of opinion. Many scholars say that because this alcohol is a natural byproduct, is not added to intoxicate, and the sauce cannot intoxicate even if consumed in large quantities, it is permissible. Others prefer absolute strictness and advise using \"Tamari\" or \"All-Purpose\" soy sauces that explicitly have no alcohol.\n\n### Practical advice\nIf you follow the majority opinion on natural trace alcohol, it is fine. If you want to be completely safe, buy Halal-certified soy sauce or look for Kikkoman's specific Halal/Gluten-Free variants.",
     "category": "other",
     "priority": "high"
-  }
+  },
+  {
+  "slug": "is-red-bull-halal",
+  "name": "Red Bull Energy Drink",
+  "aliases": [
+    "red bull"
+  ],
+  "verdict": "halal",
+  "shortReason": "Contains synthetic taurine and no animal products.",
+  "detailedReason": "### What is it?\nOne of the most popular energy drinks globally, containing caffeine, taurine, B-group vitamins, sucrose, and glucose.\n\n### Why it may be halal\nThe most questioned ingredient in Red Bull is Taurine. While taurine was originally discovered in bull semen (hence the myth), the taurine used in modern Red Bull and most energy drinks is entirely synthetic and produced in pharmaceutical laboratories. The drink does not contain any animal by-products or alcohol.\n\n### Fiqh considerations\nBecause all ingredients are synthetic or plant-based, and it does not contain intoxicants, it is permissible.\n\n### Practical advice\nRed Bull is generally safe to consume from a halal perspective, but moderation is advised due to high caffeine and sugar content.",
+  "category": "drink",
+  "priority": "high"
+},
+  {
+  "slug": "is-oreo-halal",
+  "name": "Oreo Cookies (US)",
+  "aliases": [
+    "oreos",
+    "nabisco oreo"
+  ],
+  "verdict": "halal",
+  "shortReason": "US Oreos are vegan and do not contain animal products.",
+  "detailedReason": "### What is it?\nThe classic chocolate sandwich cookie with a sweet creme filling.\n\n### Why it may be halal\nIn the United States, regular Oreos do not contain any animal-derived ingredients like gelatin or rennet. The creme is made from sugar, palm/canola oil, high fructose corn syrup, and soy lecithin. The soy lecithin (an emulsifier) is plant-based.\n\n### Fiqh considerations\nAs a plant-based product without haram additives, it is halal.\n\n### Practical advice\nWhile standard Oreos in the US are halal-friendly (often certified Kosher OUD, meaning dairy equipment was used, but no meat), always check limited edition flavors or Oreos produced in other countries, as recipes can vary.",
+  "category": "snack",
+  "priority": "high"
+},
+  {
+  "slug": "is-pringles-halal",
+  "name": "Pringles",
+  "aliases": [
+    "pringles chips"
+  ],
+  "verdict": "doubtful",
+  "shortReason": "Plain flavors are safe, but cheese/meat flavors may contain doubtful enzymes.",
+  "detailedReason": "### What is it?\nA popular brand of stackable potato-based crisps.\n\n### Why it may be doubtful\nThe \"Original\" (red can) Pringles contain just dried potatoes, vegetable oil, corn flour, starch, and salt, making them halal. However, flavors like Sour Cream & Onion or Cheddar Cheese contain whey and cheese cultures (enzymes). The source of these enzymes in the US is often not specified and could be animal-derived rennet.\n\n### Fiqh considerations\nEnzymes derived from non-Zabiha animals are considered haram by the majority of scholars. Therefore, cheese-flavored snacks without a Kosher or Halal certification are Mashbooh (doubtful).\n\n### Practical advice\nStick to the Original flavor. For other flavors, look for a \"U\" or \"OU-D\" Kosher symbol, which generally means the enzymes used are microbial/plant-based or derived from Kosher-slaughtered animals.",
+  "category": "snack",
+  "priority": "high"
+},
+  {
+  "slug": "is-skittles-halal-us",
+  "name": "Skittles (US)",
+  "aliases": [
+    "skittles candy"
+  ],
+  "verdict": "halal",
+  "shortReason": "US Skittles are gelatin-free and vegan.",
+  "detailedReason": "### What is it?\nBite-sized, fruit-flavored chewy candies.\n\n### Why it may be halal\nYears ago, Skittles used gelatin, making them haram for Muslims in many regions. However, Mars Wrigley has removed gelatin from the standard US Skittles formulation. They also do not use Carmine (E120) for the red color in the US (they use synthetic Red 40 instead).\n\n### Fiqh considerations\nWithout gelatin or insect-derived colors, the product is permissible.\n\n### Practical advice\nStandard Skittles bought in the US are halal. *Warning:* If you buy Skittles imported from the UK or Europe, they often contain Carmine (E120), which is haram.",
+  "category": "snack",
+  "priority": "high"
+},
+  {
+  "slug": "is-msg-e621-halal",
+  "name": "MSG (Monosodium Glutamate / E621)",
+  "aliases": [
+    "msg",
+    "e621",
+    "monosodium glutamate"
+  ],
+  "verdict": "halal",
+  "shortReason": "A flavor enhancer produced through bacterial fermentation.",
+  "detailedReason": "### What is it?\nA popular flavor enhancer used in savory foods, soups, and snacks to provide an umami taste.\n\n### Why it may be halal\nMSG is commercially produced through the fermentation of plant-based carbohydrates (like sugar beet, sugar cane, or molasses) using specific bacteria. It is not derived from meat or animal products.\n\n### Fiqh considerations\nProducts of plant fermentation that do not produce intoxicating alcohol are completely halal.\n\n### Practical advice\nFrom a purely religious (fiqh) standpoint, MSG is Halal. Any health concerns regarding MSG are separate from its religious permissibility.",
+  "category": "additive",
+  "priority": "high"
+},
+  {
+  "slug": "is-mcdonalds-fries-halal-us",
+  "name": "McDonald's French Fries (US)",
+  "aliases": [
+    "mcdonalds fries",
+    "mcdonalds french fries"
+  ],
+  "verdict": "haram",
+  "shortReason": "Contains \"Natural Beef Flavor\" derived from beef and milk.",
+  "detailedReason": "### What is it?\nThe famous french fries sold at McDonald's restaurants.\n\n### Why it may be haram\nIn the United States, McDonald's explicitly lists \"Natural Beef Flavor\" as an ingredient in their french fries (and hash browns). McDonald's confirms that this flavor contains hydrolyzed wheat and hydrolyzed milk as starting ingredients, but it is formulated to mimic beef tallow. Because it is not certified Halal or Kosher, and specifically calls out \"Beef Flavor\", Islamic dietary experts advise against it.\n\n### Fiqh considerations\nAny ingredient derived from non-Zabiha beef is Haram.\n\n### Practical advice\nAvoid McDonald's fries in the US. Note: McDonald's fries in the UK, Canada, and many other countries do *not* contain this beef flavor and are often certified vegetarian or halal.",
+  "category": "fast-food",
+  "priority": "high"
+}
 ];
