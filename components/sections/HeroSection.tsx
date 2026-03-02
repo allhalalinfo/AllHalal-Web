@@ -18,7 +18,7 @@ import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import MagneticButton from "../ui/MagneticButton";
-import heroBg from "@/public/assets/hero-bg.png";
+import heroBg from "../../public/assets/hero-bg.png";
 
 const ParticleAnimation = dynamic(() => import("@/components/three/ParticleBarcode"), {
   ssr: false,

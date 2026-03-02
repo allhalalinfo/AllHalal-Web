@@ -3,7 +3,7 @@ import Footer from "@/components/layout/Footer";
 import ExploreSection from "@/components/sections/ExploreSection";
 import Link from "next/link";
 import Image from "next/image";
-import heroBg from "@/public/assets/hero-bg.png";
+import heroBg from "../../public/assets/hero-bg.png";
 
 export default async function PortalHomePage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
