@@ -12,7 +12,7 @@ export default async function PrayerTimesPage(props: { params: Promise<{ locale:
   return (
     <div className="container py-32 min-h-screen">
       <div className="max-w-4xl mx-auto text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
+        <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-6">
           Muslim Prayer Times
         </h1>
         <p className="text-xl text-text-secondary leading-relaxed">

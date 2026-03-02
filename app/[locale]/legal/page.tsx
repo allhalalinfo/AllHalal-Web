@@ -59,7 +59,7 @@ export default function LegalPage() {
         </motion.span>
         
         <motion.h1
-          className="text-display-2 font-bold text-text-primary mb-4"
+          className="text-display-2 font-bold font-display text-text-primary mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}

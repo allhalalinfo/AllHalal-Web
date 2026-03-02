@@ -72,7 +72,7 @@ export default function ExploreSection() {
           <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
             {t("subtitle")}
           </span>
-          <h2 className="text-display-2 font-bold text-text-primary mb-6">
+          <h2 className="text-display-2 font-bold font-display text-text-primary mb-6">
             {t("title")}
           </h2>
         </div>
@@ -85,7 +85,7 @@ export default function ExploreSection() {
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-text-primary mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-bold font-display text-text-primary mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
                     {t(`${item.id}.title`)}
                     <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                       &rarr;

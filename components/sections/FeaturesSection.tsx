@@ -40,7 +40,7 @@ export default function FeaturesSection() {
             {t("subtitle")}
           </span>
           
-          <h2 className="text-display-1 font-bold text-text-primary mb-6">
+          <h2 className="text-display-1 font-bold font-display text-text-primary mb-6">
             {t("title")}
           </h2>
           
@@ -84,7 +84,7 @@ export default function FeaturesSection() {
                         {t("premium")}
                       </span>
                     )}
-                    <h3 className="text-xl font-bold text-text-primary mb-3">
+                    <h3 className="text-xl font-bold font-display text-text-primary mb-3">
                       {t(`items.${key}.title`)}
                     </h3>
                     <p className="text-sm text-text-secondary leading-relaxed">

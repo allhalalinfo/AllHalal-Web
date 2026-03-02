@@ -35,7 +35,7 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
           &larr; Back to all categories
         </Link>
         
-        <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6 capitalize">
+        <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-6 capitalize">
           {categoryName}
         </h1>
         
@@ -59,7 +59,7 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
             All Items
           </Link>
           {['ingredient', 'additive', 'snack', 'drink', 'fast-food'].map(cat => (
-            <Link key={cat} href={`/${params.locale}/is-it-halal/category/${cat}`} className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors ${params.category === cat ? 'bg-primary text-white border border-primary hover:bg-primary-dark' : 'bg-bg-card border border-border text-text-primary hover:border-primary'}`}>
+              <Link key={cat} href={`/${params.locale}/is-it-halal/category/${cat}`} className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all ${params.category === cat ? 'bg-gradient-gold text-[#4A3319] shadow-[0_4px_10px_rgba(176,144,98,0.3)] font-bold' : 'bg-bg-card border border-border text-text-primary hover:border-primary'}`}>
               {cat === 'additive' ? 'Additives (E-Codes)' : cat.charAt(0).toUpperCase() + cat.slice(1).replace('-', ' ')}
             </Link>
           ))}
@@ -73,7 +73,7 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
               className="block bg-bg-card border border-border p-6 rounded-2xl hover:border-primary transition-colors shadow-sm"
             >
               <div className="flex items-start justify-between gap-4 mb-3">
-                <h2 className="text-xl font-bold text-text-primary leading-tight">{item.name}</h2>
+                <h2 className="text-xl font-bold font-display text-text-primary leading-tight">{item.name}</h2>
                 <span className={`shrink-0 inline-block px-3 py-1 rounded-full text-xs font-bold ${
                   item.verdict === 'halal' ? 'bg-green-500/10 text-green-700 dark:text-green-400' :
                   item.verdict === 'haram' ? 'bg-red-500/10 text-red-700 dark:text-red-400' :

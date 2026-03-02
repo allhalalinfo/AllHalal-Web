@@ -111,7 +111,7 @@ export default function Footer() {
           {/* Brand Column */}
           <motion.div variants={itemVariants} className="lg:col-span-2">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold text-text-primary">allhalal.info</span>
+              <span className="text-2xl font-bold font-display text-text-primary">allhalal.info</span>
             </Link>
             <p className="mt-4 text-text-secondary max-w-sm leading-relaxed">
               {t("description")}

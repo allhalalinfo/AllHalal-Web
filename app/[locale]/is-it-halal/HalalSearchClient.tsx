@@ -43,7 +43,7 @@ export default function HalalSearchClient({ items, locale }: { items: HalalItem[
             className="block bg-bg-card border border-border p-6 rounded-2xl hover:border-primary transition-colors shadow-sm"
           >
             <div className="flex items-start justify-between gap-4 mb-3">
-              <h2 className="text-xl font-bold text-text-primary leading-tight">{item.name}</h2>
+              <h2 className="text-xl font-bold font-display text-text-primary leading-tight">{item.name}</h2>
               <span className={`shrink-0 inline-block px-3 py-1 rounded-full text-xs font-bold ${
                 item.verdict === 'halal' ? 'bg-green-500/10 text-green-700 dark:text-green-400' :
                 item.verdict === 'haram' ? 'bg-red-500/10 text-red-700 dark:text-red-400' :

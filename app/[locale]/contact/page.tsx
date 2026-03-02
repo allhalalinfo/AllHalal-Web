@@ -100,7 +100,7 @@ export default function ContactPage() {
                 {t("subtitle")}
               </span>
               
-              <h1 className="text-display-2 font-bold text-text-primary mb-4">
+              <h1 className="text-display-2 font-bold font-display text-text-primary mb-4">
                 {t("title")}
               </h1>
               
@@ -200,7 +200,7 @@ export default function ContactPage() {
                     <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
                       <CheckIcon className="w-8 h-8 text-primary" />
                     </div>
-                    <h3 className="text-2xl font-bold text-text-primary mb-2">
+                    <h3 className="text-2xl font-bold font-display text-text-primary mb-2">
                       {t("success.title")}
                     </h3>
                     <p className="text-text-secondary mb-6">

@@ -10,7 +10,7 @@ export default function AppPromoMini() {
           </svg>
         </div>
         <div>
-          <h4 className="text-xl font-bold text-text-primary mb-1">Scan & Verify Instantly</h4>
+          <h4 className="text-xl font-bold font-display text-text-primary mb-1">Scan & Verify Instantly</h4>
           <p className="text-text-secondary text-sm">
             Get the allhalal.info app to scan barcodes, analyze ingredients, and find halal places nearby.
           </p>
@@ -20,7 +20,7 @@ export default function AppPromoMini() {
         href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="shrink-0 bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors shadow-glow-sm"
+            className="shrink-0 bg-gradient-gold text-[#4A3319] hover:bg-gradient-gold-hover px-8 py-3 rounded-full font-bold shadow-[0_4px_15px_rgba(176,144,98,0.3)] transition-all transform hover:-translate-y-0.5"
       >
         Get the App
       </a>

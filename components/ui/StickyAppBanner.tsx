@@ -54,7 +54,7 @@ export default function StickyAppBanner() {
             </svg>
           </div>
           <div className="truncate">
-            <p className="text-sm font-bold text-text-primary truncate">allhalal.info - Food Scanner</p>
+            <p className="text-sm font-bold font-display text-text-primary truncate">allhalal.info - Food Scanner</p>
             <p className="text-xs text-text-secondary truncate">Scan 2M+ products</p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function StickyAppBanner() {
           href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="shrink-0 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors"
+          className="shrink-0 bg-gradient-gold text-[#4A3319] hover:bg-gradient-gold-hover px-4 py-2 rounded-full text-sm font-bold shadow-[0_4px_15px_rgba(176,144,98,0.3)] transition-all transform hover:-translate-y-0.5"
         >
           OPEN
         </a>

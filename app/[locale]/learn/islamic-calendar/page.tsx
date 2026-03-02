@@ -33,7 +33,7 @@ export default async function IslamicCalendarPage(props: { params: Promise<{ loc
       <Link href={`/${params.locale}/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn Islam</Link>
       
       <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">Islamic Calendar 2026</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-4">Islamic Calendar 2026</h1>
         <p className="text-xl text-text-secondary max-w-2xl">
           Important Islamic dates, religious holidays, and sunnah fasting days according to the Hijri calendar.
         </p>
@@ -58,7 +58,7 @@ export default async function IslamicCalendarPage(props: { params: Promise<{ loc
                 
                 <div className="flex-1">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
-                    <h3 className="text-2xl font-bold text-text-primary">{event.title}</h3>
+                    <h3 className="text-2xl font-bold font-display text-text-primary">{event.title}</h3>
                     <div className="text-right">
                       <span className="inline-block px-3 py-1 bg-bg-secondary text-text-secondary rounded-lg text-sm font-medium border border-border">
                         {event.hijri_date}

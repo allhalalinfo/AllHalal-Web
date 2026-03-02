@@ -96,7 +96,7 @@ export default function ZakatCalculatorClient() {
 
       {/* Calculator */}
       <div className="bg-bg-card border border-border rounded-3xl p-6 md:p-10 shadow-sm">
-        <h2 className="text-2xl font-bold text-text-primary mb-6">Calculate Your Zakat</h2>
+        <h2 className="text-2xl font-bold font-display text-text-primary mb-6">Calculate Your Zakat</h2>
         <p className="text-text-secondary mb-8">
           Enter your assets and liabilities below. We use the silver Nisab standard (${nisabData.nisab.silver_usd.toLocaleString()}) by default, as it ensures more people give charity, which is the preferred scholarly opinion in modern times.
         </p>
@@ -169,7 +169,7 @@ export default function ZakatCalculatorClient() {
           <div className="bg-primary/5 rounded-2xl p-8 border border-primary/20 flex flex-col justify-center">
             <div className="mb-6 pb-6 border-b border-primary/20">
               <div className="text-sm text-text-secondary mb-1">Net Wealth</div>
-              <div className="text-2xl font-bold text-text-primary">${netWealth.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+              <div className="text-2xl font-bold font-display text-text-primary">${netWealth.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
             </div>
 
             {netWealth > 0 && (

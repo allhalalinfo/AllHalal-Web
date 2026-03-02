@@ -40,7 +40,7 @@ export default async function LiveStreamsPage(props: { params: Promise<{ locale:
       <Link href={`/${params.locale}/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn Islam</Link>
       
       <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">Makkah & Madinah Live</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-4">Makkah & Madinah Live</h1>
         <p className="text-xl text-text-secondary max-w-2xl">
           Watch the 24/7 live broadcasts from the Holy Mosques.
         </p>
@@ -60,7 +60,7 @@ export default async function LiveStreamsPage(props: { params: Promise<{ locale:
               />
             </div>
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-text-primary mb-2 flex items-center gap-3">
+              <h2 className="text-2xl font-bold font-display text-text-primary mb-2 flex items-center gap-3">
                 <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
                 {stream.title}
               </h2>

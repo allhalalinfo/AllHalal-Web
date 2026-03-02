@@ -41,7 +41,7 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
         
         <div className="bg-bg-card border border-border rounded-3xl p-8 md:p-12 mb-12 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-border pb-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-text-primary">
+            <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary">
               Is {item.name} Halal?
             </h1>
             <span className={`inline-block px-6 py-3 rounded-full text-lg font-bold text-center ${
@@ -64,7 +64,7 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
               {/* Splitting by double newline to handle basic markdown-like paragraphs generated earlier */}
               {item.detailedReason.split('\n\n').map((paragraph, idx) => {
                 if (paragraph.startsWith('### ')) {
-                  return <h3 key={idx} className="text-lg font-bold text-text-primary mt-6 mb-2">{paragraph.replace('### ', '')}</h3>;
+                  return <h3 key={idx} className="text-lg font-bold font-display text-text-primary mt-6 mb-2">{paragraph.replace('### ', '')}</h3>;
                 }
                 return <p key={idx} className="text-lg leading-relaxed">{paragraph}</p>;
               })}
@@ -76,11 +76,11 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
 
         {similarItems.length > 0 && (
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-text-primary mb-6">Similar Items</h3>
+            <h3 className="text-2xl font-bold font-display text-text-primary mb-6">Similar Items</h3>
             <div className="grid md:grid-cols-3 gap-4">
               {similarItems.map(sim => (
                 <Link key={sim.slug} href={`/${params.locale}/is-it-halal/${sim.slug}`} className="bg-bg-card border border-border p-4 rounded-xl hover:border-primary transition-colors">
-                  <div className="font-bold text-text-primary mb-2">{sim.name}</div>
+                  <div className="font-bold font-display text-text-primary mb-2">{sim.name}</div>
                   <div className="text-sm text-text-secondary line-clamp-2">{sim.shortReason}</div>
                 </Link>
               ))}

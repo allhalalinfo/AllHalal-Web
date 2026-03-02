@@ -171,7 +171,7 @@ export default function PrayerTimesClient() {
         <button
           type="submit"
           disabled={isSearching || !searchQuery.trim()}
-          className="absolute right-2 top-2 bottom-2 bg-primary text-white px-6 rounded-xl font-bold hover:bg-primary-dark transition-colors disabled:opacity-50"
+          className="absolute right-2 top-2 bottom-2 bg-gradient-gold text-[#4A3319] hover:bg-gradient-gold-hover px-6 rounded-xl font-bold shadow-[0_4px_15px_rgba(176,144,98,0.3)] transition-all disabled:opacity-50"
         >
           {isSearching ? "Searching..." : "Search"}
         </button>
@@ -190,7 +190,7 @@ export default function PrayerTimesClient() {
       ) : times ? (
         <div className="animate-fade-in">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-2">
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary mb-2">
               {location?.city}
             </h2>
             {location?.country && (
@@ -212,7 +212,7 @@ export default function PrayerTimesClient() {
 
       <div className="bg-bg-card border border-border p-8 rounded-3xl text-center max-w-2xl mx-auto shadow-glow-sm">
         <div className="text-4xl mb-4">📱</div>
-        <h3 className="text-2xl font-bold text-text-primary mb-3">Never Miss a Prayer</h3>
+        <h3 className="text-2xl font-bold font-display text-text-primary mb-3">Never Miss a Prayer</h3>
         <p className="text-text-secondary mb-6">
           Get precise adhan notifications, customizable widgets, and Qibla direction based on your exact GPS location.
         </p>

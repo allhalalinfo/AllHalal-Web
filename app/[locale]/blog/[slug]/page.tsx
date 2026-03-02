@@ -37,7 +37,7 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: st
               <span key={tag} className="px-3 py-1 bg-primary/10 text-primary text-sm font-bold rounded-full">{tag}</span>
             ))}
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6 leading-tight">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-6 leading-tight">{post.title}</h1>
           <div className="text-text-muted">{new Date(post.publishedAt).toLocaleDateString()}</div>
         </div>
 
@@ -45,7 +45,7 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: st
           {/* Extremely basic markdown rendering for the MVP */}
           {post.content.split('\n\n').map((paragraph, idx) => {
             if (paragraph.startsWith('## ')) {
-              return <h2 key={idx} className="text-2xl font-bold text-text-primary mt-10 mb-4">{paragraph.replace('## ', '')}</h2>;
+              return <h2 key={idx} className="text-2xl font-bold font-display text-text-primary mt-10 mb-4">{paragraph.replace('## ', '')}</h2>;
             }
             if (paragraph.startsWith('- ')) {
               const items = paragraph.split('\n').map(i => i.replace('- ', ''));
@@ -71,12 +71,12 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: st
         
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-bg-card border border-border p-8 rounded-3xl shadow-sm">
-            <h3 className="text-xl font-bold text-text-primary mb-3">Check if your food is halal</h3>
+            <h3 className="text-xl font-bold font-display text-text-primary mb-3">Check if your food is halal</h3>
             <p className="text-text-secondary mb-4">Search our database of ingredients and products.</p>
             <Link href={`/${params.locale}/is-it-halal`} className="text-primary font-semibold hover:underline">Explore Halal Checker &rarr;</Link>
           </div>
           <div className="bg-bg-card border border-border p-8 rounded-3xl shadow-sm">
-            <h3 className="text-xl font-bold text-text-primary mb-3">Explore Halal Finance</h3>
+            <h3 className="text-xl font-bold font-display text-text-primary mb-3">Explore Halal Finance</h3>
             <p className="text-text-secondary mb-4">Learn how to manage your wealth Islamically.</p>
             <Link href={`/${params.locale}/finance`} className="text-primary font-semibold hover:underline">View Finance Hub &rarr;</Link>
           </div>

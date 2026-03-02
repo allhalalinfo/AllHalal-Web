@@ -24,19 +24,19 @@ const config: Config = {
       colors: {
         // Primary Caramel
         primary: {
-          DEFAULT: '#977C58',
-          light: '#BAA788',
-          dark: '#704E32',
-          soft: 'rgba(151, 124, 88, 0.1)',
-          glow: 'rgba(151, 124, 88, 0.4)',
+          DEFAULT: '#B09062', // Slightly brighter gold/caramel base
+          light: '#CEB284',
+          dark: '#8C6C42',
+          soft: 'rgba(176, 144, 98, 0.1)',
+          glow: 'rgba(176, 144, 98, 0.4)',
         },
         // Background Colors
         bg: {
-          primary: '#EBE9DF',
-          secondary: '#E6E4D8',
+          primary: '#F2F1E8', // Lighter, slightly fresher beige
+          secondary: '#EBE9DF',
           tertiary: '#DFDDD3',
           elevated: '#FFFFFF',
-          card: '#F8F7F4',
+          card: 'rgba(255, 255, 255, 0.7)', // Translucent white for glass effect
         },
         // Surface Colors
         surface: {
@@ -59,12 +59,17 @@ const config: Config = {
         },
       },
 
+      backgroundImage: {
+        'gradient-gold': 'linear-gradient(135deg, #B09062 0%, #E2CFB0 50%, #B09062 100%)',
+        'gradient-gold-hover': 'linear-gradient(135deg, #C2A77A 0%, #F0E3CB 50%, #C2A77A 100%)',
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       /* ─────────────────────────────────────────────────────────────────────────
          TYPOGRAPHY
          ───────────────────────────────────────────────────────────────────────── */
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'], // Serif for premium look
       },
       fontSize: {
         // Hero: 120px desktop, 56px mobile - clean, not overwhelming

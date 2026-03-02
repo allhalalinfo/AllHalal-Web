@@ -30,7 +30,7 @@ export default function WhyChooseSection() {
             {t("subtitle")}
           </span>
           
-          <h2 className="text-display-2 font-bold text-text-primary mb-6">
+          <h2 className="text-display-2 font-bold font-display text-text-primary mb-6">
             {t("title")}
           </h2>
         </div>
@@ -47,7 +47,7 @@ export default function WhyChooseSection() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-text-primary mb-4">
+                  <h3 className="text-xl font-bold font-display text-text-primary mb-4">
                     {t(`reasons.${reason.key}.title`)}
                   </h3>
 

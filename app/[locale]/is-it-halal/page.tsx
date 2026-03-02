@@ -25,7 +25,7 @@ export default async function IsItHalalPage(props: { params: Promise<{ locale: s
   return (
     <div className="container py-32 min-h-screen">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
+        <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-6">
           Is it Halal?
         </h1>
         <div className="bg-primary/5 border border-primary/20 p-6 rounded-2xl mb-6">
@@ -50,7 +50,7 @@ export default async function IsItHalalPage(props: { params: Promise<{ locale: s
         </Link>
 
         <div className="flex flex-wrap gap-3 mb-8">
-          <Link href={`/${locale}/is-it-halal`} className="px-4 py-2 bg-primary text-white border border-primary rounded-full text-sm font-medium hover:bg-primary-dark cursor-pointer transition-colors">
+          <Link href={`/${locale}/is-it-halal`} className="px-4 py-2 bg-gradient-gold text-[#4A3319] shadow-[0_4px_10px_rgba(176,144,98,0.3)] rounded-full text-sm font-bold cursor-pointer transition-all hover:-translate-y-0.5">
             All Items
           </Link>
           {categories.filter(c => c.id !== 'all').map(cat => (
@@ -62,14 +62,14 @@ export default async function IsItHalalPage(props: { params: Promise<{ locale: s
 
         <HalalSearchClient items={halalItems} locale={locale} />
 
-        <h2 className="text-2xl font-bold text-text-primary mt-12 mb-4">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-bold font-display text-text-primary mt-12 mb-4">Frequently Asked Questions</h2>
         <div className="space-y-4 mb-10">
           <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
-            <summary className="font-bold text-text-primary outline-none">How accurate is this list?</summary>
+            <summary className="font-bold font-display text-text-primary outline-none">How accurate is this list?</summary>
             <p className="mt-3 text-text-secondary text-sm leading-relaxed">Our information is sourced from prominent Islamic scholars and halal certification bodies. However, product recipes change frequently. The allhalal.info app uses live data to ensure accuracy.</p>
           </details>
           <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
-            <summary className="font-bold text-text-primary outline-none">What does "Doubtful" (Mashbooh) mean?</summary>
+            <summary className="font-bold font-display text-text-primary outline-none">What does "Doubtful" (Mashbooh) mean?</summary>
             <p className="mt-3 text-text-secondary text-sm leading-relaxed">Doubtful items either have conflicting opinions among scholars or can be derived from both halal and haram sources (like E471 or Gelatin). It is generally recommended to avoid them unless certified halal.</p>
           </details>
         </div>

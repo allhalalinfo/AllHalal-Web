@@ -59,7 +59,7 @@ export default function SuggestProductForm({ initialProductName = "", locale = "
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-lg font-bold text-text-primary mb-2">Thank you!</h3>
+        <h3 className="text-lg font-bold font-display text-text-primary mb-2">Thank you!</h3>
         <p className="text-text-secondary text-sm">
           Your suggestion has been received. Our team will review and add it to allhalal.info soon.
         </p>
@@ -76,7 +76,7 @@ export default function SuggestProductForm({ initialProductName = "", locale = "
   return (
     <div className="bg-bg-card border border-border rounded-2xl p-6 text-left max-w-xl mx-auto w-full">
       <div className="mb-6">
-        <h3 className="text-xl font-bold text-text-primary mb-2">Didn't find your product?</h3>
+        <h3 className="text-xl font-bold font-display text-text-primary mb-2">Didn't find your product?</h3>
         <p className="text-text-secondary text-sm">
           Suggest it below and we'll verify and add it to the allhalal.info database.
         </p>
@@ -168,7 +168,7 @@ export default function SuggestProductForm({ initialProductName = "", locale = "
         <button
           type="submit"
           disabled={status === "loading"}
-          className="w-full bg-primary text-white px-6 py-3.5 rounded-xl font-semibold hover:bg-primary-dark transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-gradient-gold text-[#4A3319] hover:bg-gradient-gold-hover px-6 py-3.5 rounded-xl font-bold shadow-[0_4px_15px_rgba(176,144,98,0.3)] transition-all transform hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
         >
           {status === "loading" ? (
             <>

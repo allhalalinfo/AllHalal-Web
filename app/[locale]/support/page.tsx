@@ -38,7 +38,7 @@ export default function SupportPage() {
               {t("subtitle")}
             </span>
             
-            <h1 className="text-display-1 font-bold text-text-primary mb-6">
+            <h1 className="text-display-1 font-bold font-display text-text-primary mb-6">
               {t("title")}
             </h1>
             
@@ -58,7 +58,7 @@ export default function SupportPage() {
                     <div className="text-3xl mb-4">
                       {config.icon}
                     </div>
-                    <h3 className="text-lg font-bold text-text-primary mb-2">
+                    <h3 className="text-lg font-bold font-display text-text-primary mb-2">
                       {t(`quickLinks.${key}.title`)}
                     </h3>
                     <p className="text-text-secondary text-sm mb-4 flex-grow">
@@ -75,7 +75,7 @@ export default function SupportPage() {
 
           {/* FAQ Section */}
           <div className="max-w-3xl mx-auto mb-32">
-            <h2 className="text-3xl font-bold text-text-primary mb-12 text-center">
+            <h2 className="text-3xl font-bold font-display text-text-primary mb-12 text-center">
               {t("faqTitle")}
             </h2>
 
@@ -95,7 +95,7 @@ export default function SupportPage() {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
             
             <div className="relative z-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold font-display text-text-primary mb-4">
                 {t("ctaTitle")}
               </h2>
               <p className="text-text-secondary mb-8 max-w-lg mx-auto">

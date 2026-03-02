@@ -14,7 +14,7 @@ export default async function BoycottCheckerPage(props: { params: Promise<{ loca
       <Link href={`/${params.locale}/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Halal Checker</Link>
       
       <div className="mb-12 text-center max-w-2xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">Boycott Checker</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-4">Boycott Checker</h1>
         <p className="text-xl text-text-secondary">
           Search for a brand to see if it's on the boycott list based on its corporate ties and investments.
         </p>

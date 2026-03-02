@@ -32,7 +32,7 @@ export default function CTASection() {
           </div>
 
           {/* Headline */}
-          <h2 className="text-display-1 font-bold text-text-primary mb-6">
+          <h2 className="text-display-1 font-bold font-display text-text-primary mb-6">
             {t("title")}
           </h2>
 
