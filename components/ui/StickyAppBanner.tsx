@@ -64,7 +64,7 @@ export default function StickyAppBanner() {
           href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="shrink-0 bg-primary text-bg-elevated px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors"
+          className="shrink-0 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors"
         >
           OPEN
         </a>

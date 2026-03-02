@@ -59,7 +59,7 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
             All Items
           </Link>
           {['ingredient', 'additive', 'snack', 'drink', 'fast-food'].map(cat => (
-            <Link key={cat} href={`/${params.locale}/is-it-halal/category/${cat}`} className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors ${params.category === cat ? 'bg-primary text-bg-elevated border border-primary hover:bg-primary-dark' : 'bg-bg-card border border-border text-text-primary hover:border-primary'}`}>
+            <Link key={cat} href={`/${params.locale}/is-it-halal/category/${cat}`} className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors ${params.category === cat ? 'bg-primary text-white border border-primary hover:bg-primary-dark' : 'bg-bg-card border border-border text-text-primary hover:border-primary'}`}>
               {cat === 'additive' ? 'Additives (E-Codes)' : cat.charAt(0).toUpperCase() + cat.slice(1).replace('-', ' ')}
             </Link>
           ))}

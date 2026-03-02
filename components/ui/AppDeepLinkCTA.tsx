@@ -28,7 +28,7 @@ export default function AppDeepLinkCTA({ itemName, variant = 'product' }: AppDee
         href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
         target="_blank"
         rel="noopener noreferrer"
-        className="shrink-0 bg-primary text-bg-elevated px-6 py-3 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors text-center w-full sm:w-auto"
+        className="shrink-0 bg-primary text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors text-center w-full sm:w-auto"
       >
         Scan in App
       </a>

@@ -50,7 +50,7 @@ export default async function IsItHalalPage(props: { params: Promise<{ locale: s
         </Link>
 
         <div className="flex flex-wrap gap-3 mb-8">
-          <Link href={`/${locale}/is-it-halal`} className="px-4 py-2 bg-primary text-bg-elevated border border-primary rounded-full text-sm font-medium hover:bg-primary-dark cursor-pointer transition-colors">
+          <Link href={`/${locale}/is-it-halal`} className="px-4 py-2 bg-primary text-white border border-primary rounded-full text-sm font-medium hover:bg-primary-dark cursor-pointer transition-colors">
             All Items
           </Link>
           {categories.filter(c => c.id !== 'all').map(cat => (

@@ -59,7 +59,7 @@ export default function BoycottCheckerClient() {
         <button 
           type="submit"
           disabled={loading || !query.trim()}
-          className="absolute right-2 top-2 bottom-2 bg-primary text-bg-elevated px-6 rounded-xl font-bold hover:bg-primary-dark transition-colors disabled:opacity-50 flex items-center justify-center min-w-[100px]"
+          className="absolute right-2 top-2 bottom-2 bg-primary text-white px-6 rounded-xl font-bold hover:bg-primary-dark transition-colors disabled:opacity-50 flex items-center justify-center min-w-[100px]"
         >
           {loading ? (
             <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
