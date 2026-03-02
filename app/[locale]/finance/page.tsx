@@ -41,6 +41,14 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
           <h2 className="text-2xl font-bold text-text-primary mb-3">Halal Banks</h2>
           <p className="text-text-secondary">Find Islamic banking institutions and credit unions available in America.</p>
         </Link>
+
+        <Link href={`/${params.locale}/finance/zakat-calculator`} className="bg-bg-card border border-border p-8 rounded-3xl hover:border-primary hover:shadow-glow-sm transition-all group md:col-span-3 lg:col-span-1">
+          <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+          </div>
+          <h2 className="text-2xl font-bold text-text-primary mb-3">Zakat Calculator</h2>
+          <p className="text-text-secondary">Calculate your Zakat and check the live Nisab threshold using real-time gold and silver prices.</p>
+        </Link>
       </div>
     </div>
   );

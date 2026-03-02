@@ -32,6 +32,16 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
           <h2 className="text-2xl font-bold text-text-primary mb-3">Ramadan Guide</h2>
           <p className="text-text-secondary">Preparation, rules, and tips for the holy month.</p>
         </Link>
+        
+        <Link href={`/${params.locale}/learn/islamic-calendar`} className="bg-bg-card border border-border p-8 rounded-3xl hover:border-primary hover:shadow-glow-sm transition-all text-center">
+          <h2 className="text-2xl font-bold text-text-primary mb-3">Islamic Calendar</h2>
+          <p className="text-text-secondary">View Hijri dates, religious holidays, and sunnah fasting days.</p>
+        </Link>
+        
+        <Link href={`/${params.locale}/learn/live-makkah`} className="bg-bg-card border border-border p-8 rounded-3xl hover:border-primary hover:shadow-glow-sm transition-all text-center">
+          <h2 className="text-2xl font-bold text-text-primary mb-3">Makkah & Madinah Live</h2>
+          <p className="text-text-secondary">Watch 24/7 live streams from the Holy Mosques.</p>
+        </Link>
       </div>
     </div>
   );
