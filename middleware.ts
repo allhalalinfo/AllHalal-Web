@@ -48,7 +48,7 @@ export function middleware(request: NextRequest) {
   
   // 301 Redirect for non-English content paths
   // Force content-heavy paths to English to avoid SEO duplication
-  const contentPaths = ['/is-it-halal', '/finance', '/learn', '/blog'];
+  const contentPaths = ['/is-it-halal', '/finance', '/learn', '/blog', '/prayer-times'];
   
   // Check if current path is a localized path (e.g. /ru/is-it-halal)
   const segments = pathname.split('/').filter(Boolean);

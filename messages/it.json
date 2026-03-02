@@ -328,6 +328,10 @@
     "boycott": {
       "title": "Boycott Checker",
       "desc": "Check if a brand or product is on the BDS boycott list. Instantly verify companies with ties to the occupation."
+    },
+    "prayer": {
+      "title": "Orari di Preghiera",
+      "desc": "Trova orari precisi per la preghiera locale e la direzione della Qibla."
     }
   }
 }
