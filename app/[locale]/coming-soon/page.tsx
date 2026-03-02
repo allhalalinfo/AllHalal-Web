@@ -31,7 +31,7 @@ export default function ComingSoonPage() {
           href="/" 
           className="inline-block text-sm font-semibold tracking-[0.1em] text-text-primary hover:text-primary transition-colors mb-12"
         >
-          ALLHALAL
+          allhalal.info
         </Link>
 
         {/* Ornament */}
