@@ -178,20 +178,20 @@
         "desc": "Krijg hulp via e-mail",
         "linkText": "app@allhalal.info"
       },
-      "privacy": {
-        "title": "Privacybeleid",
-        "desc": "Hoe we je gegevens beschermen",
-        "linkText": "Beleid lezen"
+      "faq": {
+        "title": "Lees FAQ's",
+        "desc": "Antwoorden op veelgestelde vragen",
+        "linkText": "Omlaag scrollen"
       },
-      "terms": {
-        "title": "Gebruiksvoorwaarden",
-        "desc": "Gebruiksrichtlijnen",
-        "linkText": "Voorwaarden lezen"
+      "checker": {
+        "title": "Halal Checker",
+        "desc": "Controleer producten en ingrediënten",
+        "linkText": "Openen"
       },
-      "disclaimer": {
-        "title": "Disclaimer",
-        "desc": "Belangrijke informatie",
-        "linkText": "Disclaimer lezen"
+      "app": {
+        "title": "Download App",
+        "desc": "Overal en altijd scannen",
+        "linkText": "Download"
       }
     },
     "faq": {

@@ -178,20 +178,20 @@
         "desc": "Get help via email",
         "linkText": "app@allhalal.info"
       },
-      "privacy": {
-        "title": "Privacy Policy",
-        "desc": "How we protect your data",
-        "linkText": "Read policy"
+      "faq": {
+        "title": "Read FAQs",
+        "desc": "Answers to common questions",
+        "linkText": "Scroll down"
       },
-      "terms": {
-        "title": "Terms of Service",
-        "desc": "Usage guidelines",
-        "linkText": "Read terms"
+      "checker": {
+        "title": "Halal Checker",
+        "desc": "Verify products and ingredients",
+        "linkText": "Open tool"
       },
-      "disclaimer": {
-        "title": "Disclaimer",
-        "desc": "Important information",
-        "linkText": "Read disclaimer"
+      "app": {
+        "title": "Get the App",
+        "desc": "Scan anywhere, anytime",
+        "linkText": "Download"
       }
     },
     "faq": {

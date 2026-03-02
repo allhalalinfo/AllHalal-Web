@@ -178,20 +178,20 @@
         "desc": "Obtén ayuda por email",
         "linkText": "app@allhalal.info"
       },
-      "privacy": {
-        "title": "Política de privacidad",
-        "desc": "Cómo protegemos tus datos",
-        "linkText": "Leer política"
+      "faq": {
+        "title": "Leer FAQs",
+        "desc": "Respuestas a preguntas comunes",
+        "linkText": "Desplazarse"
       },
-      "terms": {
-        "title": "Términos de servicio",
-        "desc": "Directrices de uso",
-        "linkText": "Leer términos"
+      "checker": {
+        "title": "Halal Checker",
+        "desc": "Verificar productos e ingredientes",
+        "linkText": "Abrir"
       },
-      "disclaimer": {
-        "title": "Descargo de responsabilidad",
-        "desc": "Información importante",
-        "linkText": "Leer descargo"
+      "app": {
+        "title": "Obtener la App",
+        "desc": "Escanea en cualquier lugar",
+        "linkText": "Descargar"
       }
     },
     "faq": {

@@ -14,13 +14,13 @@ import SpotlightCard from "@/components/ui/SpotlightCard";
 import Link from "next/link";
 
 const faqKeys = ["howVerify", "madhhab", "languages", "scanner", "offline", "report", "security", "delete"] as const;
-const quickLinkKeys = ["email", "privacy", "terms", "disclaimer"] as const;
+const quickLinkKeys = ["email", "faq", "checker", "app"] as const;
 
 const quickLinkConfig = {
   email: { icon: "✉️", link: "/contact", external: false },
-  privacy: { icon: "🔒", link: "/legal/privacy-policy", external: false },
-  terms: { icon: "📋", link: "/legal/terms-of-service", external: false },
-  disclaimer: { icon: "⚠️", link: "/legal/disclaimer", external: false },
+  faq: { icon: "❓", link: "#faq", external: false },
+  checker: { icon: "🔍", link: "/is-it-halal", external: false },
+  app: { icon: "📱", link: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265", external: true },
 };
 
 export default function SupportPage() {
@@ -74,7 +74,7 @@ export default function SupportPage() {
           </div>
 
           {/* FAQ Section */}
-          <div className="max-w-3xl mx-auto mb-32">
+          <div id="faq" className="max-w-3xl mx-auto mb-32 scroll-mt-32">
             <h2 className="text-3xl font-bold font-display text-text-primary mb-12 text-center">
               {t("faqTitle")}
             </h2>
