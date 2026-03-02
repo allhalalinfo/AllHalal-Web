@@ -61,7 +61,7 @@ export default function SuggestProductForm({ initialProductName = "", locale = "
         </div>
         <h3 className="text-lg font-bold text-text-primary mb-2">Thank you!</h3>
         <p className="text-text-secondary text-sm">
-          Your suggestion has been received. Our team will review and add it to AllHalal soon.
+          Your suggestion has been received. Our team will review and add it to allhalal.info soon.
         </p>
         <button 
           onClick={() => setStatus("idle")}
@@ -78,7 +78,7 @@ export default function SuggestProductForm({ initialProductName = "", locale = "
       <div className="mb-6">
         <h3 className="text-xl font-bold text-text-primary mb-2">Didn't find your product?</h3>
         <p className="text-text-secondary text-sm">
-          Suggest it below and we'll verify and add it to the AllHalal database.
+          Suggest it below and we'll verify and add it to the allhalal.info database.
         </p>
       </div>
 

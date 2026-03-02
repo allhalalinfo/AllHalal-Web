@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import AppPromoMini from '@/components/ui/AppPromoMini';
 
 export const metadata: Metadata = {
-  title: 'Our Methodology | How AllHalal Verifies Food & Finance',
+  title: 'Our Methodology | How allhalal.info Verifies Food & Finance',
   description: 'Learn about our rigorous process for classifying halal, haram, and doubtful products. We rely on authentic scholarship and trusted certification bodies.',
 };
 

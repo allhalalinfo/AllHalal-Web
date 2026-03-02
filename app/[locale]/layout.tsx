@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * LOCALE LAYOUT - AllHalal Marketing Website
+ * LOCALE LAYOUT - allhalal.info Marketing Website
  * ═══════════════════════════════════════════════════════════════════════════════
  * 
  * This layout wraps all localized pages.
@@ -36,22 +36,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AllHalal - The Most Advanced Halal Scanner in the World",
+  title: "allhalal.info - The Most Advanced Halal Scanner in the World",
   description: "Scan, verify, and live according to your values with confidence. AI-powered halal verification for over 2 million products worldwide.",
   keywords: ["halal", "halal scanner", "halal food", "halal verification", "muslim app", "halal products", "ingredient scanner"],
-  authors: [{ name: "AllHalal" }],
-  creator: "AllHalal",
+  authors: [{ name: "allhalal.info" }],
+  creator: "allhalal.info",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://allhalal.info",
-    siteName: "AllHalal",
-    title: "AllHalal - The Most Advanced Halal Scanner in the World",
+    siteName: "allhalal.info",
+    title: "allhalal.info - The Most Advanced Halal Scanner in the World",
     description: "Scan, verify, and live according to your values with confidence. AI-powered halal verification for over 2 million products worldwide.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AllHalal - The Most Advanced Halal Scanner in the World",
+    title: "allhalal.info - The Most Advanced Halal Scanner in the World",
     description: "AI-powered halal verification for over 2 million products worldwide.",
   },
   robots: {

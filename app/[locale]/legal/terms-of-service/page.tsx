@@ -70,7 +70,7 @@ export default function TermsOfServicePage(props: { params: Promise<{ locale: st
       {/* Footer note */}
       <div className="mt-16 pt-8 border-t border-border">
         <p className="text-sm text-text-muted">
-          By using AllHalal, you acknowledge that you have read, understood, and agree 
+          By using allhalal.info, you acknowledge that you have read, understood, and agree 
           to be bound by these Terms of Service.
         </p>
       </div>

@@ -54,7 +54,7 @@ export default function StickyAppBanner() {
             </svg>
           </div>
           <div className="truncate">
-            <p className="text-sm font-bold text-text-primary truncate">AllHalal - Food Scanner</p>
+            <p className="text-sm font-bold text-text-primary truncate">allhalal.info - Food Scanner</p>
             <p className="text-xs text-text-secondary truncate">Scan 2M+ products</p>
           </div>
         </div>

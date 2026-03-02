@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Halal Finance in the US | AllHalal Guide',
+  title: 'Halal Finance in the US | allhalal.info Guide',
   description: 'Explore halal mortgages in the US, sharia-compliant investing, and Islamic banking options available for American Muslims.',
 };
 

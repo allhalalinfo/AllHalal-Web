@@ -1,11 +1,11 @@
 ## 1. Acceptance of Terms
-By accessing or using AllHalal, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using this app.
+By accessing or using allhalal.info, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using this app.
 
 ## 2. Description of Service
-AllHalal provides halal verification services through barcode scanning and ingredient analysis. Our app also offers prayer times, Qibla direction, and Islamic calendar features. The service is provided "as is" and we make no guarantees about the accuracy or availability of the service.
+allhalal.info provides halal verification services through barcode scanning and ingredient analysis. Our app also offers prayer times, Qibla direction, and Islamic calendar features. The service is provided "as is" and we make no guarantees about the accuracy or availability of the service.
 
 ## 3. User Responsibilities
-As a user of AllHalal, you agree to:
+As a user of allhalal.info, you agree to:
 - Provide accurate information when creating an account
 - Keep your account credentials secure
 - Use the app in accordance with all applicable laws
@@ -14,15 +14,15 @@ As a user of AllHalal, you agree to:
 - Not interfere with or disrupt the service
 
 ## 4. Intellectual Property
-All content, features, and functionality of AllHalal, including but not limited to text, graphics, logos, and software, are the exclusive property of AllHalal and are protected by international copyright, trademark, and other intellectual property laws.
+All content, features, and functionality of allhalal.info, including but not limited to text, graphics, logos, and software, are the exclusive property of allhalal.info and are protected by international copyright, trademark, and other intellectual property laws.
 
 ## 5. Limitation of Liability
-AllHalal provides halal verification information as a convenience and reference tool. We are not liable for any decisions made based on the information provided. Users should consult with qualified Islamic scholars for definitive rulings on specific matters.
+allhalal.info provides halal verification information as a convenience and reference tool. We are not liable for any decisions made based on the information provided. Users should consult with qualified Islamic scholars for definitive rulings on specific matters.
 
-In no event shall AllHalal be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the service.
+In no event shall allhalal.info be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the service.
 
 ## 6. Religious Disclaimer
-AllHalal provides information based on our research and database. Different scholars and schools of thought may have varying opinions on certain ingredients or products. Users are encouraged to verify information with their local scholars for matters of religious importance.
+allhalal.info provides information based on our research and database. Different scholars and schools of thought may have varying opinions on certain ingredients or products. Users are encouraged to verify information with their local scholars for matters of religious importance.
 
 ## 7. Modifications to Service
 We reserve the right to modify, suspend, or discontinue any part of the service at any time without prior notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuation.

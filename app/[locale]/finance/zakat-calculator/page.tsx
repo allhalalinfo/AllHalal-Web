@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ZakatCalculatorClient from './ZakatCalculatorClient';
 
 export const metadata: Metadata = {
-  title: 'Zakat Calculator & Live Nisab 2026 | AllHalal',
+  title: 'Zakat Calculator & Live Nisab 2026 | allhalal.info',
   description: 'Calculate your Zakat accurately using live gold and silver prices. Understand the current Nisab threshold in USD.',
 };
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AppPromoMini from '@/components/ui/AppPromoMini';
 
 export const metadata: Metadata = {
-  title: 'Islamic Calendar & Events 2026 | AllHalal',
+  title: 'Islamic Calendar & Events 2026 | allhalal.info',
   description: 'View the complete Islamic Hijri calendar for 2026. Find the exact dates for Ramadan, Eid al-Fitr, Eid al-Adha, and other important Muslim holidays.',
 };
 

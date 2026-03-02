@@ -16,7 +16,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   if (!post) return { title: 'Not Found' };
   
   return {
-    title: `${post.title} | AllHalal Blog`,
+    title: `${post.title} | allhalal.info Blog`,
     description: post.summary,
   };
 }

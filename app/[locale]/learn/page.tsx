@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Learn Islam & Halal | AllHalal',
+  title: 'Learn Islam & Halal | allhalal.info',
   description: 'Educational resources, 99 Names of Allah, and Duas.',
 };
 

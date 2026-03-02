@@ -3,7 +3,7 @@ import Link from 'next/link';
 import BoycottCheckerClient from './BoycottCheckerClient';
 
 export const metadata: Metadata = {
-  title: 'BDS Boycott Checker | AllHalal',
+  title: 'BDS Boycott Checker | allhalal.info',
   description: 'Check if a brand or product is on the BDS boycott list. Instantly verify companies with ties to the occupation economy.',
 };
 

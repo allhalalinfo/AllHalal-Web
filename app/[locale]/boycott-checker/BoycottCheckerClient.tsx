@@ -123,7 +123,7 @@ export default function BoycottCheckerClient() {
                 We could not find <strong>"{query}"</strong> in our database of boycotted brands.
               </p>
               <div className="text-sm text-text-secondary bg-white/60 dark:bg-black/20 p-4 rounded-xl inline-block text-left">
-                <strong>Note:</strong> This does not automatically mean the brand is Halal or completely ethical. Always check the ingredients and use the AllHalal app scanner for detailed product verification.
+                <strong>Note:</strong> This does not automatically mean the brand is Halal or completely ethical. Always check the ingredients and use the allhalal.info app scanner for detailed product verification.
               </div>
             </div>
           ) : (

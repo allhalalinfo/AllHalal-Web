@@ -5,7 +5,7 @@ import AppPromoMini from "@/components/ui/AppPromoMini";
 import HalalSearchClient from "./HalalSearchClient";
 
 export const metadata: Metadata = {
-  title: 'Is it Halal? Check popular products & ingredients | AllHalal',
+  title: 'Is it Halal? Check popular products & ingredients | allhalal.info',
   description: 'Search our database of ingredients, snacks, and products to find out if they are Halal, Haram, or Doubtful.',
 };
 
@@ -30,7 +30,7 @@ export default async function IsItHalalPage(props: { params: Promise<{ locale: s
         </h1>
         <div className="bg-primary/5 border border-primary/20 p-6 rounded-2xl mb-6">
           <p className="text-text-secondary leading-relaxed">
-            Welcome to the AllHalal web directory. This is a curated list of the most frequently asked about products and ingredients. <strong className="text-text-primary">For access to our complete, live-updated database of over 2 million products</strong>, please use the <a href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">AllHalal mobile app scanner</a>.
+            Welcome to the allhalal.info web directory. This is a curated list of the most frequently asked about products and ingredients. <strong className="text-text-primary">For access to our complete, live-updated database of over 2 million products</strong>, please use the <a href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">allhalal.info mobile app scanner</a>.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export default async function IsItHalalPage(props: { params: Promise<{ locale: s
         <div className="space-y-4 mb-10">
           <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
             <summary className="font-bold text-text-primary outline-none">How accurate is this list?</summary>
-            <p className="mt-3 text-text-secondary text-sm leading-relaxed">Our information is sourced from prominent Islamic scholars and halal certification bodies. However, product recipes change frequently. The AllHalal app uses live data to ensure accuracy.</p>
+            <p className="mt-3 text-text-secondary text-sm leading-relaxed">Our information is sourced from prominent Islamic scholars and halal certification bodies. However, product recipes change frequently. The allhalal.info app uses live data to ensure accuracy.</p>
           </details>
           <details className="bg-bg-card border border-border p-4 rounded-xl cursor-pointer group">
             <summary className="font-bold text-text-primary outline-none">What does "Doubtful" (Mashbooh) mean?</summary>

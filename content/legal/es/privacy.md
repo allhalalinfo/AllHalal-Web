@@ -1,5 +1,5 @@
 ## 1. Information We Collect
-AllHalal collects information to provide and improve our services. The types of information we collect include:
+allhalal.info collects information to provide and improve our services. The types of information we collect include:
 
 ### 1.1 Device ID (for Advertising & Tracking)
 We collect device identifiers (IDFA/Advertising ID) for advertising and tracking purposes when you use the free version of our app. This data is used by Google AdMob to show personalized advertisements and measure ad performance.
@@ -17,7 +17,7 @@ We collect device identifiers (IDFA/Advertising ID) for advertising and tracking
 **Tracking:** This data **IS used for tracking purposes** across apps and websites owned by other companies (via Google AdMob's advertising network). This data is **NOT linked to your identity** but is used for ad targeting.
 
 **Your control:**
-- **Opt out of tracking:** iOS Settings → Privacy & Security → Tracking → AllHalal → OFF (or decline when prompted)
+- **Opt out of tracking:** iOS Settings → Privacy & Security → Tracking → allhalal.info → OFF (or decline when prompted)
 - **Remove ads completely:** Upgrade to Premium subscription (removes all ads and AdMob tracking)
 
 **Important:** Premium subscription removes all advertisements and eliminates AdMob tracking entirely.
@@ -42,7 +42,7 @@ With your permission, we collect coarse location data (city-level accuracy) to:
 
 **Important:** This data is **NOT stored permanently** and is **NOT linked to your identity**. We only use your location when the app is actively calculating prayer times.
 
-**Your control:** You can deny location access in iOS Settings → Privacy → Location Services → AllHalal. The app will still function, but prayer times will be less accurate.
+**Your control:** You can deny location access in iOS Settings → Privacy → Location Services → allhalal.info. The app will still function, but prayer times will be less accurate.
 
 ### 1.4 User ID (Optional Login)
 If you choose to create an account, we collect:
@@ -156,7 +156,7 @@ Marketing communications are only sent with your explicit consent, and you can o
 - **Regular security audits** and updates
 
 ## 4. Third-Party Services
-AllHalal uses the following third-party services. Each service has its own privacy policy governing the use of your information:
+allhalal.info uses the following third-party services. Each service has its own privacy policy governing the use of your information:
 
 ### 4.1 Google AdMob (Advertising & Tracking)
 We use **Google AdMob** to display advertisements in the free version of our app. AdMob collects device identifiers and usage data for personalized advertising and tracking purposes.
@@ -174,7 +174,7 @@ We use **Google AdMob** to display advertisements in the free version of our app
 **Tracking:** AdMob uses this data for tracking purposes across apps and websites owned by other companies in Google's advertising network.
 
 **Opt-Out:**
-- iOS Settings → Privacy & Security → Tracking → AllHalal → OFF
+- iOS Settings → Privacy & Security → Tracking → allhalal.info → OFF
 - Or upgrade to Premium (removes all ads and AdMob tracking)
 
 **Privacy Policy:** https://policies.google.com/privacy
@@ -227,7 +227,7 @@ You have the right to receive your personal data in a structured, commonly used,
 You have the right to object to the processing of your personal data for certain purposes, including direct marketing, profiling, and advertising tracking.
 
 **How to exercise:**
-- **Object to tracking:** iOS Settings → Privacy & Security → Tracking → AllHalal → OFF (or decline the ATT prompt when asked)
+- **Object to tracking:** iOS Settings → Privacy & Security → Tracking → allhalal.info → OFF (or decline the ATT prompt when asked)
 - **Object to advertising:** Upgrade to Premium subscription (removes all ads and AdMob tracking) OR disable tracking as above
 - **Object to marketing communications:** Unsubscribe from marketing emails or contact us at app@allhalal.info with subject "GDPR Request - Object to Marketing"
 - **Object to specific data processing:** Contact us at app@allhalal.info with subject "GDPR Request - Object to Processing" and specify what processing you object to
@@ -261,7 +261,7 @@ If you are a parent or guardian and believe that your child under 13 has provide
 ## 8. App Tracking Transparency & Cookies
 
 ### 8.1 App Tracking Transparency (ATT)
-When you first open AllHalal, you may see a request to allow tracking (iOS App Tracking Transparency prompt).
+When you first open allhalal.info, you may see a request to allow tracking (iOS App Tracking Transparency prompt).
 
 **What is tracked:**
 - Device ID (Advertising Identifier / IDFA)
@@ -279,7 +279,7 @@ When you first open AllHalal, you may see a request to allow tracking (iOS App T
 - **Upgrade to Premium:** Removes all ads and tracking completely
 
 **Change Your Mind:** You can change this setting at any time:
-- iOS Settings → Privacy & Security → Tracking → AllHalal → ON/OFF
+- iOS Settings → Privacy & Security → Tracking → allhalal.info → ON/OFF
 
 ### 8.2 Cookies
 **Mobile App:** Our mobile app does **NOT** use cookies. Instead, we use:

@@ -19,8 +19,8 @@ export default function AppDeepLinkCTA({ itemName, variant = 'product' }: AppDee
         </h3>
         <p className="text-text-secondary text-sm">
           {isBlog
-            ? "Scan barcodes and check exact E-codes instantly with the AllHalal app. We verify against 2M+ products."
-            : "Scan barcodes and check exact E-codes instantly with the AllHalal app. We verify against 2M+ products."
+            ? "Scan barcodes and check exact E-codes instantly with the allhalal.info app. We verify against 2M+ products."
+            : "Scan barcodes and check exact E-codes instantly with the allhalal.info app. We verify against 2M+ products."
           }
         </p>
       </div>

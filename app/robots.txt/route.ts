@@ -18,7 +18,7 @@ export async function GET() {
     });
   } catch (error) {
     // Fallback if file doesn't exist
-    const fallbackContent = `# robots.txt for AllHalal / HalalScan
+    const fallbackContent = `# robots.txt for allhalal.info / HalalScan
 # https://allhalal.info/robots.txt
 
 # Allow Google app-ads.txt crawler to access app-ads.txt file

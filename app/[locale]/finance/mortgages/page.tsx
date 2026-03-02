@@ -4,7 +4,7 @@ import AppPromoMini from "@/components/ui/AppPromoMini";
 import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
-  title: 'Halal Mortgage in the US: A Complete Guide | AllHalal',
+  title: 'Halal Mortgage in the US: A Complete Guide | allhalal.info',
   description: 'Learn how to get a halal mortgage in the US. Discover how Islamic mortgages work without Riba and explore top Sharia-compliant home financing providers.',
 };
 

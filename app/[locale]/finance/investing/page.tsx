@@ -4,7 +4,7 @@ import AppPromoMini from "@/components/ui/AppPromoMini";
 import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
-  title: 'Sharia-Compliant Investing: Beginner\'s Guide | AllHalal',
+  title: 'Sharia-Compliant Investing: Beginner\'s Guide | allhalal.info',
   description: 'Grow your wealth the halal way without compromising your faith. Learn the basics of sharia-compliant investing and explore Halal ETFs and robo-advisors.',
 };
 

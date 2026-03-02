@@ -4,7 +4,7 @@ import AppPromoMini from "@/components/ui/AppPromoMini";
 import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
-  title: 'Islamic Banks in America | AllHalal Finance Guide',
+  title: 'Islamic Banks in America | allhalal.info Finance Guide',
   description: 'Discover the top Islamic banks in America, credit unions, and Sharia-compliant financial institutions operating without Riba in the USA.',
 };
 

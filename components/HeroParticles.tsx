@@ -9,7 +9,7 @@ import { useEffect, useRef, useCallback } from 'react';
  * Uses HTML Canvas for performance (lighter than Three.js for this use case).
  * 
  * The particles form and animate around barcode lines, reacting to mouse movement.
- * Uses AllHalal green color (#00D094) instead of reference site's red.
+ * Uses allhalal.info green color (#00D094) instead of reference site's red.
  * 
  * Performance notes:
  * - On mobile: simplified animation with fewer particles

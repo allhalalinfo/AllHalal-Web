@@ -15,7 +15,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   const params = await props.params;
   const categoryName = params.category.charAt(0).toUpperCase() + params.category.slice(1);
   return {
-    title: `Is it Halal? ${categoryName} | AllHalal`,
+    title: `Is it Halal? ${categoryName} | allhalal.info`,
     description: `Check the halal status of popular ${categoryName} products and ingredients.`,
   };
 }
@@ -41,7 +41,7 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
         
         <div className="bg-primary/5 border border-primary/20 p-6 rounded-2xl mb-10">
           <p className="text-text-secondary leading-relaxed mb-4">
-            Welcome to the AllHalal web directory for {categoryName}. 
+            Welcome to the allhalal.info web directory for {categoryName}. 
             {params.category === 'snack' && " From chips and chocolates to gummies and cookies, navigating halal snacks in the US can be tricky. Many popular snacks contain hidden animal-derived enzymes, non-halal gelatin, or alcohol-based flavorings. Browse our verified list to snack with confidence."}
             {params.category === 'drink' && " While most sodas and juices are straightforward, some energy drinks, fermented teas, and specialty coffees carry hidden risks like carmine (E120) or trace alcohol. Check the halal status of popular drinks here."}
             {params.category === 'additive' && " E-numbers and complex chemical names often hide haram ingredients like pork gelatin (E441), crushed insects (E120), or animal-derived emulsifiers (E471). Understand the true source of these common food additives."}
@@ -49,7 +49,7 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
             {params.category === 'cosmetics' && " Halal isn't just about what you eat; it's also about what you apply to your skin. Many lipsticks, lotions, and shampoos contain haram animal byproducts like keratin, non-marine collagen, or intoxicating alcohols. Discover permissible beauty products."}
           </p>
           <p className="text-text-secondary leading-relaxed">
-            This is a curated list of the most frequently asked about products and ingredients in this category. <strong className="text-text-primary">For access to our complete, live-updated database of over 2 million products</strong>, please use the <a href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">AllHalal mobile app scanner</a>.
+            This is a curated list of the most frequently asked about products and ingredients in this category. <strong className="text-text-primary">For access to our complete, live-updated database of over 2 million products</strong>, please use the <a href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">allhalal.info mobile app scanner</a>.
           </p>
         </div>
 

@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 
 export const metadata: Metadata = {
-  title: 'Duas & Athkar | AllHalal',
+  title: 'Duas & Athkar | allhalal.info',
 };
 
 export default async function DuasPage(props: { params: Promise<{ locale: string }> }) {

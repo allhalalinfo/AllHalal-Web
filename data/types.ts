@@ -1,5 +1,5 @@
 /**
- * AllHalal.info - Data Types
+ * allhalal.info.info - Data Types
  * 
  * TypeScript type definitions for all content and data entities
  */

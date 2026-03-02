@@ -1,5 +1,5 @@
 /**
- * AllHalal.info - Data Index
+ * allhalal.info.info - Data Index
  * Central export for all seed data
  */
 

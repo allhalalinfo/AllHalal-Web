@@ -12,7 +12,7 @@ export default function AppPromoMini() {
         <div>
           <h4 className="text-xl font-bold text-text-primary mb-1">Scan & Verify Instantly</h4>
           <p className="text-text-secondary text-sm">
-            Get the AllHalal app to scan barcodes, analyze ingredients, and find halal places nearby.
+            Get the allhalal.info app to scan barcodes, analyze ingredients, and find halal places nearby.
           </p>
         </div>
       </div>

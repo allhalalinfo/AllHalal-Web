@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 
 export const metadata: Metadata = {
-  title: '99 Names of Allah | AllHalal',
+  title: '99 Names of Allah | allhalal.info',
 };
 
 export default async function NamesOfAllahPage(props: { params: Promise<{ locale: string }> }) {

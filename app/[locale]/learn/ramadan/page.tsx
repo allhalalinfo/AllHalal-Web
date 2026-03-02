@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Ramadan & Fasting Guide | AllHalal',
+  title: 'Ramadan & Fasting Guide | allhalal.info',
   description: 'Essential rulings, tips, and supplications for the holy month of Ramadan.',
 };
 

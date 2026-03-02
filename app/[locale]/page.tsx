@@ -1,10 +1,10 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════════════
- * HOME PAGE - AllHalal Marketing Website
+ * HOME PAGE - allhalal.info Marketing Website
  * ═══════════════════════════════════════════════════════════════════════════════
  * 
  * Main landing page composed of all section components.
- * Structure mirrors hatchet.com.au with AllHalal content and green branding.
+ * Structure mirrors hatchet.com.au with allhalal.info content and green branding.
  * 
  * ═══════════════════════════════════════════════════════════════════════════════
  */

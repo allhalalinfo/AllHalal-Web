@@ -1,5 +1,5 @@
 ## 1. General Information
-AllHalal is designed to assist Muslims in making informed decisions about halal consumption. The information provided in our app is for general informational purposes only and should not be considered as a substitute for consultation with qualified Islamic scholars.
+allhalal.info is designed to assist Muslims in making informed decisions about halal consumption. The information provided in our app is for general informational purposes only and should not be considered as a substitute for consultation with qualified Islamic scholars.
 
 ## 2. Religious Accuracy
 While we strive to provide accurate halal information based on authentic Islamic scholarship, we acknowledge that:
@@ -9,7 +9,7 @@ While we strive to provide accurate halal information based on authentic Islamic
 - Our database, while extensive, may not cover all products or regions.
 
 ## 3. Not a Religious Authority
-AllHalal is a technology tool and does not claim to be a religious authority. Our team includes researchers who consult scholarly sources, but our app should not replace guidance from qualified muftis, imams, or Islamic scholars for matters of religious importance.
+allhalal.info is a technology tool and does not claim to be a religious authority. Our team includes researchers who consult scholarly sources, but our app should not replace guidance from qualified muftis, imams, or Islamic scholars for matters of religious importance.
 
 > We strongly encourage users to consult with their local scholars, especially for products with uncertain or disputed ingredients.
 
@@ -21,20 +21,20 @@ Our halal verification database is continuously updated, but users should be awa
 - Some ingredients may have multiple sources (halal and non-halal)
 
 ## 5. Boycott Information
-Any boycott-related information provided in AllHalal is based on publicly available data and various Islamic guidance sources. Users should verify this information and make their own informed decisions based on their personal beliefs and the guidance of their scholars.
+Any boycott-related information provided in allhalal.info is based on publicly available data and various Islamic guidance sources. Users should verify this information and make their own informed decisions based on their personal beliefs and the guidance of their scholars.
 
 ## 6. Medical and Dietary Disclaimer
-AllHalal is not a medical or dietary advice application. Information about ingredients is provided for halal verification purposes only. Users with allergies, dietary restrictions, or health conditions should consult with healthcare professionals.
+allhalal.info is not a medical or dietary advice application. Information about ingredients is provided for halal verification purposes only. Users with allergies, dietary restrictions, or health conditions should consult with healthcare professionals.
 
 ## 7. Limitation of Liability
-To the fullest extent permitted by law, AllHalal and its developers, employees, and affiliates shall not be liable for:
+To the fullest extent permitted by law, allhalal.info and its developers, employees, and affiliates shall not be liable for:
 - Any religious consequences arising from reliance on our information
 - Any health issues related to consumption of verified products
 - Any financial losses related to purchasing decisions
 - Any damages arising from app errors or database inaccuracies
 
 ## 8. User Responsibility
-Users of AllHalal are responsible for:
+Users of allhalal.info are responsible for:
 - Verifying product information when in doubt
 - Consulting scholars for definitive religious rulings
 - Checking actual product labels before consumption
@@ -44,7 +44,7 @@ Users of AllHalal are responsible for:
 We may update our database and information at any time without prior notice. We recommend users periodically re-verify products, especially those that were borderline or questionable.
 
 ## 10. Contact for Corrections
-If you believe any information in AllHalal is incorrect or needs updating, please contact us at app@allhalal.info. We welcome corrections and scholarly input to improve our service.
+If you believe any information in allhalal.info is incorrect or needs updating, please contact us at app@allhalal.info. We welcome corrections and scholarly input to improve our service.
 
 ### Important Notice
-By using AllHalal, you acknowledge that you have read and understood this disclaimer. You agree to use the app as a helpful tool while maintaining your own due diligence and consulting with appropriate religious authorities for matters of spiritual significance.
+By using allhalal.info, you acknowledge that you have read and understood this disclaimer. You agree to use the app as a helpful tool while maintaining your own due diligence and consulting with appropriate religious authorities for matters of spiritual significance.
