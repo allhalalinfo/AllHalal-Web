@@ -305,5 +305,25 @@
     "menu": "Menü",
     "language": "Sprache",
     "lastUpdated": "Zuletzt aktualisiert: {date}"
+  },
+  "explore": {
+    "title": "Explore Our Resources",
+    "subtitle": "Knowledge Base",
+    "checker": {
+      "title": "Halal Checker",
+      "desc": "Search our database of popular products, ingredients, and E-codes to verify their halal status instantly."
+    },
+    "finance": {
+      "title": "Halal Finance",
+      "desc": "Learn about sharia-compliant investing, halal mortgages, and Islamic banks available in the US."
+    },
+    "learn": {
+      "title": "Learn Islam",
+      "desc": "Discover the 99 Names of Allah, daily Duas, and comprehensive guides for Ramadan and fasting."
+    },
+    "blog": {
+      "title": "Our Blog",
+      "desc": "Read the latest articles on halal lifestyle, diet guides, and tips for living as a Muslim in the modern world."
+    }
   }
 }
