@@ -9,7 +9,7 @@ export type HalalItem = {
   priority?: 'high' | 'normal';
 };
 
-export const halalItems: HalalItem[
+export const halalItems: HalalItem[] = [
   {
     "slug": "is-doritos-halal",
     "name": "Doritos (Nacho Cheese)",
