@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { HalalItem } from "@/data/halalItems";
+import SuggestProductForm from "@/components/is-it-halal/SuggestProductForm";
 
 export default function HalalSearchClient({ items, locale }: { items: HalalItem[], locale: string }) {
   const [query, setQuery] = useState("");
@@ -55,28 +56,8 @@ export default function HalalSearchClient({ items, locale }: { items: HalalItem[
           </Link>
         ))}
         {filteredItems.length === 0 && (
-          <div className="col-span-1 lg:col-span-2 text-center py-16 px-6 bg-primary/5 border border-primary/20 rounded-3xl">
-            <h3 className="text-2xl font-bold text-text-primary mb-3">Didn't find what you're looking for?</h3>
-            <p className="text-text-secondary max-w-lg mx-auto mb-8">
-              Our web directory is just a small curated list. To check the halal status of <strong className="text-text-primary">over 2 million products</strong> instantly, download our mobile app.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a 
-                href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="bg-primary text-bg-elevated px-8 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors shadow-glow-sm w-full sm:w-auto"
-              >
-                Get the Free App
-              </a>
-              <a 
-                href={`mailto:app@allhalal.info?subject=Suggest a product for Halal Checker: ${query}`}
-                className="bg-bg-card text-text-primary border border-border px-8 py-3 rounded-full font-medium hover:border-primary transition-colors w-full sm:w-auto"
-              >
-                Suggest Product
-              </a>
-            </div>
+          <div className="col-span-1 lg:col-span-2 text-center py-12 px-4 sm:px-6">
+            <SuggestProductForm initialProductName={query} locale={locale} />
           </div>
         )}
       </div>

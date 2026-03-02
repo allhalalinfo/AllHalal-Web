@@ -2,7 +2,7 @@ import { blogPosts } from "@/data/blogPosts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
-import AppPromoMini from "@/components/ui/AppPromoMini";
+import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -65,7 +65,7 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: st
           })}
         </div>
 
-        <AppPromoMini />
+        <AppDeepLinkCTA variant="blog" />
 
         <hr className="border-border my-12" />
         

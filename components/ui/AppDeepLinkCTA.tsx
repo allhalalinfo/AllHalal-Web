@@ -2,17 +2,26 @@ import React from 'react';
 
 interface AppDeepLinkCTAProps {
   itemName?: string;
+  variant?: 'product' | 'blog';
 }
 
-export default function AppDeepLinkCTA({ itemName }: AppDeepLinkCTAProps) {
+export default function AppDeepLinkCTA({ itemName, variant = 'product' }: AppDeepLinkCTAProps) {
+  const isBlog = variant === 'blog';
+  
   return (
     <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 my-8 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div className="flex-1">
         <h3 className="text-lg font-bold text-text-primary mb-2">
-          Want to check {itemName ? `similar products to ${itemName}` : 'this product'} in real life?
+          {isBlog 
+            ? "Check your food before you eat it" 
+            : `Want to check ${itemName ? `similar products to ${itemName}` : 'this product'} in real life?`
+          }
         </h3>
         <p className="text-text-secondary text-sm">
-          Scan barcodes and check exact E-codes instantly with the AllHalal app. We verify against 2M+ products.
+          {isBlog
+            ? "Scan barcodes and check exact E-codes instantly with the AllHalal app. We verify against 2M+ products."
+            : "Scan barcodes and check exact E-codes instantly with the AllHalal app. We verify against 2M+ products."
+          }
         </p>
       </div>
       <a
