@@ -47,7 +47,7 @@ export default function CTASection() {
               href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-bg-primary font-semibold text-lg rounded-full transition-all duration-300 hover:bg-primary-light hover:shadow-glow hover:-translate-y-1"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-[#4A3319] font-bold text-lg rounded-full shadow-[0_4px_15px_rgba(176,144,98,0.3)] transition-all duration-300 hover:bg-gradient-gold-hover hover:-translate-y-1"
             >
               <AppleIcon className="w-6 h-6" />
               {t("button")}
