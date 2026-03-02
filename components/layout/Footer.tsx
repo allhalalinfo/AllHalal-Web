@@ -27,7 +27,7 @@ const socialLinks = [
   { label: "Threads", href: "https://www.threads.com/@allhalal.info?igshid=NTc4MTIwNjQ2YQ==", icon: ThreadsIcon },
   { label: "Pinterest", href: "https://pin.it/7ELmrZcrw", icon: PinterestIcon },
   { label: "Reddit", href: "https://www.reddit.com/u/allhalalinfo/s/LNKknn54za", icon: RedditIcon },
-  { label: "X (Twitter)", href: "https://x.com/Allhalalinfo", icon: XIcon },
+  { label: "X (Twitter)", href: "https://x.com/allhalalinfo", icon: XIcon },
   { label: "Bluesky", href: "https://bsky.app/profile/allhalalinfo.bsky.social", icon: BlueskyIcon },
   { label: "YouTube", href: "https://youtube.com/@allhalalinfo?si=h0044GYscW2jXN92", icon: YouTubeIcon },
 ];

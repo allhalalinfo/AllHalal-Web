@@ -1,8 +1,8 @@
 # How We Verify: The allhalal.info Methodology
 
-At allhalal.info.info, we understand that determining the halal status of complex modern food products and financial services is a serious responsibility. We want to be completely transparent about our methodology.
+At allhalal.info, we understand that determining the halal status of complex modern food products and financial services is a serious responsibility. We want to be completely transparent about our methodology.
 
-**Disclaimer:** allhalal.info.info is an educational and informational tool. We are not a Fatwa council, and we do not issue independent religious rulings. Our goal is to aggregate, simplify, and provide access to existing data from verified sources so you can make informed decisions.
+**Disclaimer:** allhalal.info is an educational and informational tool. We are not a Fatwa council, and we do not issue independent religious rulings. Our goal is to aggregate, simplify, and provide access to existing data from verified sources so you can make informed decisions.
 
 ## 1. Data Aggregation from Certified Bodies
 
