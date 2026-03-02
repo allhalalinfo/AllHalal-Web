@@ -40,8 +40,8 @@ export default function PrayerTimesClient() {
     setLoading(true);
     setError(null);
     try {
-      // First try our API
-      const res = await fetch(`https://api.allhalal.info/api/v1/prayer-times?lat=${lat}&lon=${lon}`);
+      // First try our internal proxy API (which bypasses CORS and fetches from the real backend)
+      const res = await fetch(`/api/prayer-times?lat=${lat}&lon=${lon}`);
       if (!res.ok) throw new Error("API returned an error");
       const json = await res.json();
       
