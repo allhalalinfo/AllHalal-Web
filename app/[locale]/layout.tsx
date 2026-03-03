@@ -19,6 +19,7 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/next";
 import { locales, type Locale } from "@/i18n/config";
 import "../globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
@@ -103,6 +104,7 @@ export default async function LocaleLayout({
           </SmoothScrollProvider>
         </NextIntlClientProvider>
         <SpeedInsightsProvider />
+        <Analytics />
       </body>
     </html>
   );
