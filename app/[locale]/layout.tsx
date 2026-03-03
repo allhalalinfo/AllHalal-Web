@@ -8,7 +8,6 @@
  * - NextIntlClientProvider for translations
  * - Global fonts (Inter)
  * - Smooth scroll provider (Lenis)
- * - Noise overlay
  * - Speed Insights for performance monitoring
  * 
  * ═══════════════════════════════════════════════════════════════════════════════
@@ -24,7 +23,6 @@ import { locales, type Locale } from "@/i18n/config";
 import "../globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SpeedInsightsProvider } from "@/components/providers/SpeedInsightsProvider";
-import Noise from "@/components/ui/Noise";
 import Header from "@/components/layout/Header";
 import StickyAppBanner from "@/components/ui/StickyAppBanner";
 
@@ -96,7 +94,6 @@ export default async function LocaleLayout({
     <html lang={locale} className={inter.variable}>
       <body className="bg-bg-primary text-text-primary antialiased">
         <NextIntlClientProvider messages={messages}>
-          <Noise />
           <Header />
           <SmoothScrollProvider>
             {children}
