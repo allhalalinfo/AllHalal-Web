@@ -158,40 +158,40 @@ export default function ExploreSection() {
             </SpotlightCard>
           </Link>
 
-          {/* Learn - Light Beige (Default) */}
+          {/* Learn - Navy */}
           <Link href={resources[4].href} className="group block">
-            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-white text-text-primary border-border hover:border-primary/30 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                <div className="text-primary">{resources[4].icon}</div>
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-accent-navy text-text-inverse border-transparent hover:border-accent-navy/50 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                <div className="text-white">{resources[4].icon}</div>
               </div>
               <div>
-                <h3 className="text-xl font-bold font-display text-text-primary mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
                   {t(`${resources[4].id}.title`)}
                   <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                     &rarr;
                   </span>
                 </h3>
-                <p className="text-text-secondary leading-relaxed">
+                <p className="text-text-inverse-secondary leading-relaxed">
                   {t(`${resources[4].id}.desc`)}
                 </p>
               </div>
             </SpotlightCard>
           </Link>
 
-          {/* Blog - Light Beige (Default) */}
+          {/* Blog - Olive */}
           <Link href={resources[5].href} className="group block">
-            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-white text-text-primary border-border hover:border-primary/30 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                <div className="text-primary">{resources[5].icon}</div>
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-accent-olive text-text-inverse border-transparent hover:border-accent-olive/50 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                <div className="text-white">{resources[5].icon}</div>
               </div>
               <div>
-                <h3 className="text-xl font-bold font-display text-text-primary mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
                   {t(`${resources[5].id}.title`)}
                   <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                     &rarr;
                   </span>
                 </h3>
-                <p className="text-text-secondary leading-relaxed">
+                <p className="text-text-inverse-secondary leading-relaxed">
                   {t(`${resources[5].id}.desc`)}
                 </p>
               </div>

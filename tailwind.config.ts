@@ -45,6 +45,8 @@ const config: Config = {
           green: '#2C4A3B', // Forest green
           terracotta: '#C86A53', // Terracotta
           teal: '#4B6E70', // Slate blue
+          navy: '#30424D', // Deep muted blue
+          olive: '#4A533E', // Deep muted olive
         },
         // Surface Colors
         surface: {
