@@ -78,26 +78,126 @@ export default function ExploreSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {resources.map((item) => (
-            <Link key={item.id} href={item.href} className="group block">
-              <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                  {item.icon}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold font-display text-text-primary mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
-                    {t(`${item.id}.title`)}
-                    <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-                      &rarr;
-                    </span>
-                  </h3>
-                  <p className="text-text-secondary leading-relaxed">
-                    {t(`${item.id}.desc`)}
-                  </p>
-                </div>
-              </SpotlightCard>
-            </Link>
-          ))}
+          {/* Halal Checker - Green */}
+          <Link href={resources[0].href} className="group block">
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-accent-green text-text-inverse border-transparent hover:border-accent-green/50 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                <div className="text-white">{resources[0].icon}</div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
+                  {t(`${resources[0].id}.title`)}
+                  <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                    &rarr;
+                  </span>
+                </h3>
+                <p className="text-text-inverse-secondary leading-relaxed">
+                  {t(`${resources[0].id}.desc`)}
+                </p>
+              </div>
+            </SpotlightCard>
+          </Link>
+
+          {/* Prayer Times - Teal */}
+          <Link href={resources[1].href} className="group block">
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-accent-teal text-text-inverse border-transparent hover:border-accent-teal/50 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                <div className="text-white">{resources[1].icon}</div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
+                  {t(`${resources[1].id}.title`)}
+                  <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                    &rarr;
+                  </span>
+                </h3>
+                <p className="text-text-inverse-secondary leading-relaxed">
+                  {t(`${resources[1].id}.desc`)}
+                </p>
+              </div>
+            </SpotlightCard>
+          </Link>
+
+          {/* Finance - Dark Chocolate */}
+          <Link href={resources[2].href} className="group block">
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-bg-dark text-text-inverse border-transparent hover:border-white/10 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-colors">
+                <div className="text-accent-yellow">{resources[2].icon}</div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-accent-yellow transition-colors">
+                  {t(`${resources[2].id}.title`)}
+                  <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-accent-yellow">
+                    &rarr;
+                  </span>
+                </h3>
+                <p className="text-text-inverse-secondary leading-relaxed">
+                  {t(`${resources[2].id}.desc`)}
+                </p>
+              </div>
+            </SpotlightCard>
+          </Link>
+
+          {/* Boycott Checker - Terracotta */}
+          <Link href={resources[3].href} className="group block">
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-accent-terracotta text-text-inverse border-transparent hover:border-accent-terracotta/50 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                <div className="text-white">{resources[3].icon}</div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
+                  {t(`${resources[3].id}.title`)}
+                  <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                    &rarr;
+                  </span>
+                </h3>
+                <p className="text-text-inverse-secondary leading-relaxed">
+                  {t(`${resources[3].id}.desc`)}
+                </p>
+              </div>
+            </SpotlightCard>
+          </Link>
+
+          {/* Learn - Light Beige (Default) */}
+          <Link href={resources[4].href} className="group block">
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-white text-text-primary border-border hover:border-primary/30 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                <div className="text-primary">{resources[4].icon}</div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-display text-text-primary mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
+                  {t(`${resources[4].id}.title`)}
+                  <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                    &rarr;
+                  </span>
+                </h3>
+                <p className="text-text-secondary leading-relaxed">
+                  {t(`${resources[4].id}.desc`)}
+                </p>
+              </div>
+            </SpotlightCard>
+          </Link>
+
+          {/* Blog - Light Beige (Default) */}
+          <Link href={resources[5].href} className="group block">
+            <SpotlightCard className="h-full p-8 flex flex-col sm:flex-row gap-6 items-start bg-white text-text-primary border-border hover:border-primary/30 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                <div className="text-primary">{resources[5].icon}</div>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-display text-text-primary mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
+                  {t(`${resources[5].id}.title`)}
+                  <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                    &rarr;
+                  </span>
+                </h3>
+                <p className="text-text-secondary leading-relaxed">
+                  {t(`${resources[5].id}.desc`)}
+                </p>
+              </div>
+            </SpotlightCard>
+          </Link>
+
         </div>
       </div>
     </section>
