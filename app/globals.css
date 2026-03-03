@@ -46,6 +46,9 @@
 
   /* Accent Colors */
   --color-accent-yellow: #F4B942;
+  --color-accent-green: #2C4A3B;
+  --color-accent-terracotta: #C86A53;
+  --color-accent-teal: #4B6E70;
   
   /* Surface Colors */
   --color-surface: rgba(255, 255, 255, 0.4);

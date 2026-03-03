@@ -42,6 +42,9 @@ const config: Config = {
         // Accent Colors
         accent: {
           yellow: '#F4B942', // Sunset yellow
+          green: '#2C4A3B', // Forest green
+          terracotta: '#C86A53', // Terracotta
+          teal: '#4B6E70', // Slate blue
         },
         // Surface Colors
         surface: {
