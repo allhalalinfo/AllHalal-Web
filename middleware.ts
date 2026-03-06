@@ -77,12 +77,12 @@ export function middleware(request: NextRequest) {
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' https: data: blob:;
     font-src 'self' https://fonts.gstatic.com data:;
-    connect-src 'self' https://*.vercel-insights.com https://api.web3forms.com https://api.allhalal.info https://nominatim.openstreetmap.org;
+    connect-src 'self' https://*.vercel-insights.com https://api.web3forms.com https://api.allhalal.info https://nominatim.openstreetmap.org https://api.aladhan.com;
     media-src 'none';
     object-src 'none';
     child-src 'self' blob:;
     worker-src 'self' blob:;
-    frame-src 'none';
+    frame-src 'self' https://www.youtube.com https://www.openstreetmap.org;
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
@@ -103,15 +103,15 @@ export function middleware(request: NextRequest) {
     'max-age=63072000; includeSubDomains; preload'
   );
   
-  // Permissions Policy - Block all unnecessary features
-  response.headers.set(
-    'Permissions-Policy',
-    'accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), ' +
-    'display-capture=(), document-domain=(), encrypted-media=(), fullscreen=(self), ' +
-    'geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), ' +
-    'payment=(), picture-in-picture=(), publickey-credentials-get=(), ' +
-    'screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()'
-  );
+    // Permissions Policy - Block all unnecessary features (allow geolocation, picture-in-picture for youtube)
+    response.headers.set(
+      'Permissions-Policy',
+      'accelerometer=(), autoplay=(), camera=(), ' +
+      'display-capture=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com"), ' +
+      'geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), midi=(), ' +
+      'payment=(), picture-in-picture=(self "https://www.youtube.com"), publickey-credentials-get=(), ' +
+      'screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()'
+    );
 
   // Additional security headers
   response.headers.set('X-DNS-Prefetch-Control', 'off');

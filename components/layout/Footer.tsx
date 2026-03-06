@@ -98,45 +98,37 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-bg-dark text-text-inverse border-t border-border">
+    <footer className="bg-bg-dark text-text-inverse border-t border-white/10 mt-12">
       {/* Main Footer Content */}
-      <div className="container py-16 md:py-24">
+      <div className="container py-10 md:py-12">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8"
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-50px" }}
         >
           {/* Brand Column */}
-          <motion.div variants={itemVariants} className="lg:col-span-2">
+          <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold font-display text-text-inverse">allhalal.info</span>
+              <span className="text-xl font-bold font-display text-text-inverse">allhalal.info</span>
             </Link>
-            <p className="mt-4 text-text-inverse-secondary max-w-sm leading-relaxed">
-              {t("description")}
+            <p className="mt-3 text-text-inverse-secondary text-sm max-w-xs leading-relaxed">
+              Your trusted halal companion. Scan, verify, and live according to your values with confidence.
             </p>
-            <div className="mt-6">
-              <a
-                href="mailto:app@allhalal.info"
-                className="text-primary-light hover:text-primary transition-colors"
-              >
-                app@allhalal.info
-              </a>
-            </div>
             
             {/* Social Links */}
-            <div className="flex flex-wrap gap-3 mt-6">
+            <div className="flex flex-wrap gap-2 mt-5">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-primary-light hover:bg-white/10 transition-all text-text-inverse-secondary hover:text-primary-light"
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-primary-light hover:bg-white/10 transition-all text-text-inverse-secondary hover:text-primary-light"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
@@ -145,15 +137,15 @@ export default function Footer() {
           {/* Navigation Columns */}
           {Object.entries(footerNav).map(([key, section]) => (
             <motion.div key={key} variants={itemVariants}>
-              <h3 className="text-sm font-semibold text-text-inverse uppercase tracking-wider mb-4">
+              <h3 className="text-xs font-semibold text-text-inverse uppercase tracking-wider mb-3 opacity-50">
                 {section.title}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href.startsWith('http') || link.href.startsWith('/#') ? link.href : `/${locale}${link.href}`}
-                      className="text-text-inverse-secondary hover:text-text-inverse transition-colors inline-block relative group"
+                      className="text-text-inverse-secondary text-sm hover:text-text-inverse transition-colors inline-block relative group"
                     >
                       {link.label}
                       <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary-light transition-all duration-300 group-hover:w-full" />
@@ -167,13 +159,11 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="container py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-text-inverse-secondary text-sm">
-              © {new Date().getFullYear()} allhalal.info. {t("copyright")}
-            </p>
-            <p className="text-text-inverse-secondary text-sm">
+      <div className="border-t border-white/5">
+        <div className="container py-4">
+          <div className="flex justify-between items-center text-xs text-text-inverse-secondary">
+            <p>© {new Date().getFullYear()} allhalal.info. {t("copyright")}</p>
+            <p>
               {t("developedBy")}{" "}
               <a
                 href="https://gezellix.com"

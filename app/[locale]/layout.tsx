@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://allhalal.info",
+    url: "https://allhalal.info/en",
     siteName: "allhalal.info",
     title: "allhalal.info - The Most Advanced Halal Scanner in the World",
     description: "Scan, verify, and live according to your values with confidence. AI-powered halal verification for over 2 million products worldwide.",
@@ -57,6 +57,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: "https://allhalal.info/en",
+  }
 };
 
 export const viewport: Viewport = {

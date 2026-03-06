@@ -47,29 +47,46 @@ export default async function LiveStreamsPage(props: { params: Promise<{ locale:
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8 mb-16">
-        {streams.map((stream: any) => (
+        {streams.map((stream: any) => {
+          const isChannel = stream.video_id?.startsWith('UC');
+          return (
           <div key={stream.id} className="bg-bg-card border border-border rounded-3xl overflow-hidden shadow-sm flex flex-col">
             {/* 16:9 Aspect Ratio Container for YouTube iFrame */}
-            <div className="relative w-full pb-[56.25%] bg-black">
-              <iframe 
-                src={`https://www.youtube.com/embed/${stream.video_id}?autoplay=0&mute=0&rel=0`}
-                title={stream.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute top-0 left-0 w-full h-full border-0"
-              />
+            <div className="relative w-full pb-[56.25%] bg-black flex items-center justify-center">
+              {!isChannel ? (
+                <iframe 
+                  src={`https://www.youtube.com/embed/${stream.video_id}?autoplay=0&mute=0&rel=0`}
+                  title={stream.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute top-0 left-0 w-full h-full border-0"
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white/80 p-6 text-center">
+                  <svg className="w-12 h-12 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                  <p className="mb-4">Трансляция временно недоступна в плеере.</p>
+                  <a 
+                    href={`https://www.youtube.com/channel/${stream.video_id}/live`} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                  >
+                    Смотреть на YouTube
+                  </a>
+                </div>
+              )}
             </div>
             <div className="p-6">
               <h2 className="text-2xl font-bold font-display text-text-primary mb-2 flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+                <span className={`w-3 h-3 rounded-full ${!isChannel ? 'bg-red-500 animate-pulse' : 'bg-gray-400'}`}></span>
                 {stream.title}
               </h2>
               <p className="text-text-secondary text-sm">
-                Live broadcast from {stream.title.includes('Makkah') ? 'Masjid al-Haram' : 'Al-Masjid an-Nabawi'}.
+                Live broadcast from {stream.title?.includes('Makkah') ? 'Masjid al-Haram' : 'Al-Masjid an-Nabawi'}.
               </p>
             </div>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   );

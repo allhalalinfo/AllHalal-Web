@@ -67,15 +67,14 @@ export default function LanguageSwitcher({ openUpward = false }: LanguageSwitche
         ref={buttonRef}
         onClick={() => setIsOpen(prev => !prev)}
         type="button"
-        className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-bg-tertiary border border-border hover:border-primary/30 text-sm min-h-[44px] w-full md:w-auto"
-        style={{ transition: "border-color 0.15s ease" }}
+        className="flex items-center gap-1.5 px-2 py-2 text-text-secondary hover:text-text-primary transition-colors text-sm font-medium"
         aria-label="Select language"
         aria-expanded={isOpen}
       >
-        <span className="text-lg">{localeFlags[locale]}</span>
-        <span className="text-text-secondary">{localeNames[locale]}</span>
+        <span className="text-base">{localeFlags[locale]}</span>
+        <span className="uppercase tracking-wide">{locale}</span>
         <svg 
-          className={`w-4 h-4 text-text-muted ml-auto ${isOpen ? "rotate-180" : ""}`}
+          className={`w-3.5 h-3.5 opacity-50 ml-0.5 ${isOpen ? "rotate-180" : ""}`}
           style={{ transition: "transform 0.15s ease" }}
           viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
         >
