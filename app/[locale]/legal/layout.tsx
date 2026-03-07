@@ -13,7 +13,6 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 export default function LegalLayout({
@@ -23,7 +22,6 @@ export default function LegalLayout({
 }) {
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-bg-primary">
         {/* Spacer for fixed header */}
         <div className="h-20" />
@@ -41,4 +39,3 @@ export default function LegalLayout({
     </>
   );
 }
-

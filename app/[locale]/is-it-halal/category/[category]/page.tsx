@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 export async function generateStaticParams() {
   const categories = Array.from(new Set(halalItems.map(item => item.category)));
@@ -27,9 +28,22 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
   if (items.length === 0) notFound();
 
   const categoryName = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+  const featuredItems = items.filter((item) => item.priority === "high").slice(0, 4);
+  const faqs = [
+    {
+      question: `How should I use the ${categoryName} halal page?`,
+      answer: `Start with the exact ${categoryName.toLowerCase()} item you are unsure about, then compare the verdict, explanation and similar items in the same category.`,
+    },
+    {
+      question: `Why are some ${categoryName.toLowerCase()} items marked doubtful?`,
+      answer:
+        "Doubtful items often depend on source ingredients, region of manufacture, certification or scholarly differences about the underlying substance.",
+    },
+  ];
 
   return (
     <div className="container py-32 min-h-screen">
+      <FAQSchema faqs={faqs} />
       <div className="max-w-5xl mx-auto">
         <Link href={`/${params.locale}/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">
           &larr; Back to all categories
@@ -53,6 +67,25 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
           </p>
         </div>
 
+        {featuredItems.length > 0 && (
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mb-10">
+            {featuredItems.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/${params.locale}/is-it-halal/${item.slug}`}
+                className="rounded-[1.35rem] border border-border bg-white p-5 shadow-sm hover:border-primary transition-colors"
+              >
+                <span className="inline-flex px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-[0.18em] mb-3">
+                  Popular query
+                </span>
+                <h2 className="text-lg font-bold font-display text-text-primary mb-2 leading-tight">
+                  {item.name}
+                </h2>
+                <p className="text-sm text-text-secondary leading-relaxed">{item.shortReason}</p>
+              </Link>
+            ))}
+          </div>
+        )}
 
         <div className="flex flex-wrap gap-3 mb-10">
           <Link href={`/${params.locale}/is-it-halal`} className="px-4 py-2 bg-bg-card border border-border rounded-full text-sm font-medium text-text-primary hover:border-primary cursor-pointer transition-colors">
@@ -85,6 +118,29 @@ export default async function HalalCategoryPage(props: { params: Promise<{ local
               <p className="text-text-secondary text-sm">{item.shortReason}</p>
             </Link>
           ))}
+        </div>
+
+        <div className="rounded-[1.8rem] border border-border bg-white p-6 mb-12 shadow-sm">
+          <h3 className="text-2xl font-bold font-display text-text-primary mb-4">
+            Keep exploring this halal category
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            <Link href={`/${params.locale}/is-it-halal/category/ingredient`} className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
+              Ingredients
+            </Link>
+            <Link href={`/${params.locale}/is-it-halal/category/additive`} className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
+              Additives
+            </Link>
+            <Link href={`/${params.locale}/is-it-halal/category/snack`} className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
+              Snacks
+            </Link>
+            <Link href={`/${params.locale}/is-it-halal/category/drink`} className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
+              Drinks
+            </Link>
+            <Link href={`/${params.locale}/is-it-halal/category/fast-food`} className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold">
+              Fast Food
+            </Link>
+          </div>
         </div>
 
         <AppPromoMini />

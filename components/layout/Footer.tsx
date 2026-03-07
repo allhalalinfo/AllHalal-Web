@@ -110,7 +110,7 @@ export default function Footer() {
         >
           {/* Brand Column */}
           <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
-            <Link href="/" className="inline-block">
+            <Link href={`/${locale}`} className="inline-block">
               <span className="text-xl font-bold font-display text-text-inverse">allhalal.info</span>
             </Link>
             <p className="mt-3 text-text-inverse-secondary text-sm max-w-xs leading-relaxed">
@@ -245,5 +245,4 @@ function YouTubeIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 

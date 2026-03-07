@@ -7,8 +7,7 @@
  */
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
-import Header from "@/components/layout/Header";
+import { useLocale, useTranslations } from "next-intl";
 import Footer from "@/components/layout/Footer";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import Link from "next/link";
@@ -25,10 +24,10 @@ const quickLinkConfig = {
 
 export default function SupportPage() {
   const t = useTranslations("support");
+  const locale = useLocale();
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-bg-primary pt-32 pb-20">
         <div className="container">
           
@@ -51,9 +50,10 @@ export default function SupportPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
             {quickLinkKeys.map((key) => {
               const config = quickLinkConfig[key];
+              const href = config.external ? config.link : `/${locale}${config.link}`;
               
               return (
-                <Link key={key} href={config.link}>
+                <Link key={key} href={href}>
                   <SpotlightCard className="h-full p-6 flex flex-col items-start hover:border-primary/50 transition-colors cursor-pointer group">
                     <div className="text-3xl mb-4">
                       {config.icon}

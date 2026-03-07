@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
@@ -112,10 +113,13 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
             className="absolute inset-0 w-full h-full group/play cursor-pointer focus:outline-none"
           >
             {thumbnailUrl ? (
-              <img
+              <Image
                 src={thumbnailUrl}
                 alt={activeStream?.title || 'Live stream thumbnail'}
-                className="w-full h-full object-cover"
+                fill
+                unoptimized
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-neutral-900 to-neutral-800" />

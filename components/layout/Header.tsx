@@ -89,6 +89,10 @@ export default function Header() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev);
 
@@ -105,7 +109,7 @@ export default function Header() {
           <nav className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link 
-              href="/" 
+              href={`/${locale}`}
               onClick={closeMobileMenu}
               className="text-xl font-bold tracking-tight text-text-primary hover:text-primary transition-colors z-10"
             >

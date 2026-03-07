@@ -215,7 +215,7 @@ export default function TodayForYou({ locale }: { locale: string }) {
     };
 
     fetchPrayerData(location.latitude, location.longitude);
-  }, [location]);
+  }, [location, locale]);
 
   return (
     <div className="bg-accent-navy text-text-inverse rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 group">

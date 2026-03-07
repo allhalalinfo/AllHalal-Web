@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
+import { readFile } from 'fs/promises';
 import path from 'path';
+import { defaultLocale, locales, type Locale } from '@/i18n/config';
+
+const LEGAL_DOCS = new Set(['privacy', 'terms', 'disclaimer']);
+const LEGAL_DIR = path.join(process.cwd(), 'content', 'legal');
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -11,19 +15,23 @@ export async function GET(request: Request) {
     return new NextResponse('Missing doc or locale', { status: 400 });
   }
 
+  if (!LEGAL_DOCS.has(doc)) {
+    return new NextResponse('Document not found', { status: 404 });
+  }
+
+  const normalizedLocale: Locale = locales.includes(locale as Locale)
+    ? (locale as Locale)
+    : defaultLocale;
+
   try {
-    // Try requested locale
-    let filePath = path.join(process.cwd(), 'content', 'legal', locale, `${doc}.md`);
-    if (!fs.existsSync(filePath)) {
-      // Fallback to English
-      filePath = path.join(process.cwd(), 'content', 'legal', 'en', `${doc}.md`);
+    let content: string;
+
+    try {
+      content = await readFile(path.join(LEGAL_DIR, normalizedLocale, `${doc}.md`), 'utf8');
+    } catch {
+      content = await readFile(path.join(LEGAL_DIR, defaultLocale, `${doc}.md`), 'utf8');
     }
 
-    if (!fs.existsSync(filePath)) {
-      return new NextResponse('Document not found', { status: 404 });
-    }
-
-    const content = fs.readFileSync(filePath, 'utf8');
     return new NextResponse(content, {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',

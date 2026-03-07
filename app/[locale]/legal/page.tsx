@@ -12,30 +12,31 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function LegalPage() {
   const t = useTranslations("legal");
+  const locale = useLocale();
   
   const legalDocuments = [
     {
       title: t("documents.privacyPolicy.title"),
       description: t("documents.privacyPolicy.description"),
-      href: "/legal/privacy-policy",
+      href: `/${locale}/legal/privacy-policy`,
       icon: ShieldIcon,
       lastUpdated: t("documents.privacyPolicy.lastUpdated"),
     },
     {
       title: t("documents.termsOfService.title"),
       description: t("documents.termsOfService.description"),
-      href: "/legal/terms-of-service",
+      href: `/${locale}/legal/terms-of-service`,
       icon: DocumentIcon,
       lastUpdated: t("documents.termsOfService.lastUpdated"),
     },
     {
       title: t("documents.disclaimer.title"),
       description: t("documents.disclaimer.description"),
-      href: "/legal/disclaimer",
+      href: `/${locale}/legal/disclaimer`,
       icon: AlertIcon,
       lastUpdated: t("documents.disclaimer.lastUpdated"),
     },
@@ -118,7 +119,7 @@ export default function LegalPage() {
       >
         <p className="text-text-secondary">
           {t("contactNote")}{" "}
-          <Link href="/contact" className="text-primary hover:text-primary-light transition-colors">
+          <Link href={`/${locale}/contact`} className="text-primary hover:text-primary-light transition-colors">
             {t("contactLink")}
           </Link>
         </p>

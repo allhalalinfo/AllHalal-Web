@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, useCallback } from "react";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 
 type PrayerTimes = {
@@ -17,6 +17,15 @@ type LocationData = {
   country: string;
 };
 
+const fallbackTimes = {
+  fajr: "05:15",
+  sunrise: "06:30",
+  dhuhr: "12:15",
+  asr: "15:30",
+  maghrib: "18:00",
+  isha: "19:15"
+};
+
 export default function PrayerTimesClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -25,18 +34,8 @@ export default function PrayerTimesClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
-  // Fallback data if API fails to avoid blank screen
-  const fallbackTimes = {
-    fajr: "05:15",
-    sunrise: "06:30",
-    dhuhr: "12:15",
-    asr: "15:30",
-    maghrib: "18:00",
-    isha: "19:15"
-  };
-
   // Fetch times using lat and lon
-  const fetchPrayerTimes = async (lat: number, lon: number, cityName?: string) => {
+  const fetchPrayerTimes = useCallback(async (lat: number, lon: number, cityName?: string) => {
     setLoading(true);
     setError(null);
     try {
@@ -98,7 +97,7 @@ export default function PrayerTimesClient() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Get user location on mount
   useEffect(() => {
@@ -117,7 +116,7 @@ export default function PrayerTimesClient() {
       // Default to New York if geolocation is not supported
       fetchPrayerTimes(40.7128, -74.0060, "New York");
     }
-  }, []);
+  }, [fetchPrayerTimes]);
 
   // Search for city using Nominatim (OpenStreetMap)
   const handleSearch = async (e: FormEvent) => {

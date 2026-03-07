@@ -13,11 +13,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ReactMarkdown from 'react-markdown';
 
 export default function TermsOfServicePage(props: { params: Promise<{ locale: string }> }) {
   const t = useTranslations("legal");
+  const params = useParams<{ locale: string }>();
   const [content, setContent] = useState<string>('');
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function TermsOfServicePage(props: { params: Promise<{ locale: st
     >
       {/* Back link */}
       <Link 
-        href="/legal" 
+        href={`/${params.locale}/legal`}
         className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors mb-8 no-underline"
       >
         <ArrowLeftIcon className="w-4 h-4" />

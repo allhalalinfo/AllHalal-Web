@@ -36,7 +36,7 @@ export const newsSources: NewsSource[] = [
     rssUrl: 'https://muslimmatters.org/feed/',
     categories: ['Faith & Practice', 'Ummah & World'],
     priority: 2,
-    safe: true,
+    safe: false,
     fallbackGradient: 'from-amber-600 to-red-800',
   },
   {
@@ -45,7 +45,7 @@ export const newsSources: NewsSource[] = [
     rssUrl: 'https://www.islam21c.com/feed/',
     categories: ['Faith & Practice', 'Ummah & World'],
     priority: 3,
-    safe: true,
+    safe: false,
     fallbackGradient: 'from-sky-500 to-blue-800',
   },
   {
@@ -145,7 +145,7 @@ export const newsSources: NewsSource[] = [
     rssUrl: 'https://islamic-relief.org/feed/',
     categories: ['Ummah & World', 'Faith & Practice'],
     priority: 3,
-    safe: true,
+    safe: false,
     fallbackGradient: 'from-cyan-500 to-blue-700',
   },
   {
@@ -161,7 +161,7 @@ export const newsSources: NewsSource[] = [
 
 // Helper to define quotas for the homepage
 export const HOMEPAGE_QUOTAS: Record<NewsCategory, number> = {
-  'Faith & Practice': 3,
+  'Faith & Practice': 2,
   'Family & Education': 1,
   'Halal Living': 1,
   'Islamic Finance': 1,

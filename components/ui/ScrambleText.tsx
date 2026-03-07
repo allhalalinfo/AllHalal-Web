@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const CHARS = "-_~=+*!@#%&^?|/\\0101";
@@ -24,7 +24,7 @@ export default function ScrambleText({
   const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const scramble = () => {
+  const scramble = useCallback(() => {
     let pos = 0;
 
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -48,7 +48,7 @@ export default function ScrambleText({
         if (intervalRef.current) clearInterval(intervalRef.current);
       }
     }, 30);
-  };
+  }, [text]);
 
   useEffect(() => {
     if (isInView && !hover) {
@@ -57,13 +57,19 @@ export default function ScrambleText({
       }, delay * 1000);
       return () => clearTimeout(timeout);
     }
-  }, [isInView, hover, delay]);
+  }, [isInView, hover, delay, scramble]);
 
   useEffect(() => {
     if (hover && isHovered) {
       scramble();
     }
-  }, [isHovered]);
+  }, [hover, isHovered, scramble]);
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <motion.span

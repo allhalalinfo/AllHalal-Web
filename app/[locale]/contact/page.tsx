@@ -7,14 +7,15 @@
  */
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
-import Header from "@/components/layout/Header";
+import { useLocale, useTranslations } from "next-intl";
 import Footer from "@/components/layout/Footer";
+import Link from "next/link";
 
 const categoryKeys = ["general", "technical", "feedback", "bug", "business", "religious"] as const;
 
 export default function ContactPage() {
   const t = useTranslations("contact");
+  const locale = useLocale();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -88,7 +89,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-bg-primary">
         <div className="h-20" />
 
@@ -241,9 +241,9 @@ export default function ContactPage() {
                     {t("sidebar.helpfulLinks")}
                   </h3>
                   <div className="space-y-3">
-                    <QuickLink href="/legal/privacy-policy" icon={ShieldIcon} title={t("sidebar.privacy")} desc={t("sidebar.privacyDesc")} />
-                    <QuickLink href="/legal/terms-of-service" icon={DocumentIcon} title={t("sidebar.terms")} desc={t("sidebar.termsDesc")} />
-                    <QuickLink href="/legal/disclaimer" icon={AlertIcon} title={t("sidebar.disclaimer")} desc={t("sidebar.disclaimerDesc")} />
+                    <QuickLink href={`/${locale}/legal/privacy-policy`} icon={ShieldIcon} title={t("sidebar.privacy")} desc={t("sidebar.privacyDesc")} />
+                    <QuickLink href={`/${locale}/legal/terms-of-service`} icon={DocumentIcon} title={t("sidebar.terms")} desc={t("sidebar.termsDesc")} />
+                    <QuickLink href={`/${locale}/legal/disclaimer`} icon={AlertIcon} title={t("sidebar.disclaimer")} desc={t("sidebar.disclaimerDesc")} />
                   </div>
                 </div>
 
@@ -264,13 +264,13 @@ export default function ContactPage() {
 
 function QuickLink({ href, icon: Icon, title, desc }: { href: string; icon: React.FC<{ className?: string }>; title: string; desc: string }) {
   return (
-    <a href={href} className="flex items-start gap-3 p-4 rounded-lg bg-bg-card border border-border hover:border-primary/30 transition-colors group">
+    <Link href={href} className="flex items-start gap-3 p-4 rounded-lg bg-bg-card border border-border hover:border-primary/30 transition-colors group">
       <Icon className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
       <div>
         <div className="font-medium text-text-primary group-hover:text-primary transition-colors">{title}</div>
         <div className="text-sm text-text-muted">{desc}</div>
       </div>
-    </a>
+    </Link>
   );
 }
 

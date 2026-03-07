@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "X-DNS-Prefetch-Control",
-          "value": "on"
+          "value": "off"
         },
         {
           "key": "X-Download-Options",
@@ -25,4 +25,3 @@
     }
   ]
 }
-
