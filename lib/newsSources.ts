@@ -88,14 +88,23 @@ export const newsSources: NewsSource[] = [
     safe: true,
     fallbackGradient: 'from-pink-500 to-rose-800',
   },
+  // {
+  //   id: 'halalfocus',
+  //   name: 'Halal Focus',
+  //   rssUrl: 'https://halalfocus.net/feed/',
+  //   categories: ['Halal Living', 'Islamic Finance'],
+  //   priority: 3,
+  //   safe: true,
+  //   fallbackGradient: 'from-green-600 to-emerald-800',
+  // }, // Temporarily disabled - SSL certificate issues
   {
-    id: 'halalfocus',
-    name: 'Halal Focus',
-    rssUrl: 'https://halalfocus.net/feed/',
-    categories: ['Halal Living', 'Islamic Finance'],
-    priority: 3,
+    id: 'seekersguidance',
+    name: 'SeekersGuidance',
+    rssUrl: 'https://seekersguidance.org/feed/',
+    categories: ['Faith & Practice', 'Family & Education'],
+    priority: 1,
     safe: true,
-    fallbackGradient: 'from-green-600 to-emerald-800',
+    fallbackGradient: 'from-indigo-600 to-blue-900',
   },
   {
     id: 'salaamgateway',
@@ -128,14 +137,23 @@ export const newsSources: NewsSource[] = [
   },
 
   // --- Health, Wellness & Lifestyle ---
+  // {
+  //   id: 'hautehijab',
+  //   name: 'Haute Hijab',
+  //   rssUrl: 'https://blog.hautehijab.com/rss.xml',
+  //   categories: ['Health & Wellness', 'Halal Living', 'Family & Education'],
+  //   priority: 3,
+  //   safe: true,
+  //   fallbackGradient: 'from-fuchsia-400 to-purple-700',
+  // }, // Temporarily disabled - RSS feed returns 402
   {
-    id: 'hautehijab',
-    name: 'Haute Hijab',
-    rssUrl: 'https://blog.hautehijab.com/rss.xml',
-    categories: ['Health & Wellness', 'Halal Living', 'Family & Education'],
-    priority: 3,
+    id: 'muslimgirl',
+    name: 'Muslim Girl',
+    rssUrl: 'https://muslimgirl.com/feed/',
+    categories: ['Health & Wellness', 'Family & Education', 'Halal Living'],
+    priority: 2,
     safe: true,
-    fallbackGradient: 'from-fuchsia-400 to-purple-700',
+    fallbackGradient: 'from-rose-400 to-pink-700',
   },
 
   // --- Humanitarian & Ummah ---
