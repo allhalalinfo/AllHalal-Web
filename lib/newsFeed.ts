@@ -59,22 +59,49 @@ const HEAVY_HEADLINE_PATTERNS = [
   /\bkilled?\b/i,
   /\bdeaths?\b/i,
 ];
+const BAD_IMAGE_URL_PATTERNS = [
+  /s\.w\.org\/images\/core\/emoji/i,
+  /gravatar\.com/i,
+  /\/emoji\//i,
+  /\/avatar\//i,
+  /\/icon\//i,
+  /\/logo\//i,
+  /\/logos\//i,
+  /plugins\/islamic-graphics/i,
+];
+
+function sanitizeImageUrl(imageUrl: string | null | undefined) {
+  if (!imageUrl) {
+    return null;
+  }
+
+  const normalized = imageUrl.trim();
+  if (!normalized) {
+    return null;
+  }
+
+  if (BAD_IMAGE_URL_PATTERNS.some((pattern) => pattern.test(normalized))) {
+    return null;
+  }
+
+  return normalized;
+}
 
 function extractImageFromItem(item: Record<string, unknown>): string | null {
   const mediaContent = item.mediaContent as { $?: { url?: string } } | undefined;
   const enclosure = item.enclosure as { url?: string } | undefined;
 
   if (mediaContent?.$?.url) {
-    return mediaContent.$.url;
+    return sanitizeImageUrl(mediaContent.$.url);
   }
 
   if (enclosure?.url) {
-    return enclosure.url;
+    return sanitizeImageUrl(enclosure.url);
   }
 
   const content = String(item.contentEncoded || item.content || item.description || "");
   const imgMatch = content.match(/<img[^>]+src="([^">]+)"/i);
-  return imgMatch?.[1] || null;
+  return sanitizeImageUrl(imgMatch?.[1] || null);
 }
 
 function cleanExcerpt(html: string): string {
@@ -181,7 +208,11 @@ async function fetchSourceItems(source: NewsSource): Promise<NewsItem[]> {
     });
 
     if (!response.ok) {
-      throw new Error(`RSS feed responded with status ${response.status}`);
+      const error = new Error(`RSS feed responded with status ${response.status}`) as Error & {
+        status?: number;
+      };
+      error.status = response.status;
+      throw error;
     }
 
     const feed = await parser.parseString(await response.text());
@@ -199,6 +230,20 @@ async function fetchSourceItems(source: NewsSource): Promise<NewsItem[]> {
       fallbackGradient: source.fallbackGradient,
     }));
   } catch (error) {
+    const status = typeof error === "object" && error !== null && "status" in error
+      ? Number((error as { status?: number }).status)
+      : undefined;
+
+    // Some RSS providers intentionally block generic fetch clients or rate limit aggressively.
+    // Treat these as normal source dropouts and keep the feed alive without noisy server logs.
+    if (status && [401, 403, 404, 410, 429].includes(status)) {
+      return [];
+    }
+
+    if (error instanceof Error && error.name === "AbortError") {
+      return [];
+    }
+
     console.error(`Failed to fetch RSS for ${source.name}:`, error);
     return [];
   } finally {

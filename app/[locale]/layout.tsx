@@ -106,8 +106,8 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body className="bg-bg-primary text-text-primary antialiased">
+    <html lang={locale} suppressHydrationWarning>
+      <body className="bg-bg-primary text-text-primary antialiased" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <Header />
           <SmoothScrollProvider>

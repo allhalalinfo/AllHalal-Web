@@ -31,10 +31,52 @@ const featureConfig: Record<string, { image: string; color: string; premium?: bo
 export default function FeaturesSection() {
   const t = useTranslations("features");
 
+  const renderFeatureCard = (key: typeof featureKeys[number], indexKey: string) => {
+    const config = featureConfig[key];
+
+    return (
+      <div
+        key={indexKey}
+        className="flex-none w-[260px] md:w-[300px] snap-center flex flex-col gap-6 transform-gpu"
+      >
+        <div className="relative mx-auto w-full">
+          <div className={`absolute inset-0 bg-gradient-radial ${config.color} to-transparent scale-125 opacity-40 pointer-events-none`} />
+
+          <div className="relative bg-bg-card rounded-[2.5rem] p-2 border border-border shadow-xl">
+            <div className="relative aspect-[9/19] rounded-[2rem] overflow-hidden bg-bg-tertiary">
+              <Image
+                src={config.image}
+                alt={t(`items.${key}.title`)}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 280px, 320px"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center px-2">
+          {config.premium && (
+            <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold mb-3">
+              {t("premium")}
+            </span>
+          )}
+          <h3 className="text-xl font-bold font-display text-text-primary mb-3">
+            {t(`items.${key}.title`)}
+          </h3>
+          <p className="text-sm text-text-secondary leading-relaxed">
+            {t(`items.${key}.description`)}
+          </p>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <section id="features" className="section-lg bg-bg-primary relative overflow-hidden">
-      <div className="relative z-10">
-        {/* Section Header */}
+    <>
+      {/* Section Header */}
+      <section id="features" className="section-lg bg-bg-primary relative overflow-hidden">
         <div className="container relative z-10 text-center max-w-3xl mx-auto mb-16 md:mb-24">
           <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
             {t("subtitle")}
@@ -48,55 +90,31 @@ export default function FeaturesSection() {
             {t("description")}
           </p>
         </div>
+      </section>
 
-        {/* Features Carousel - Full Width */}
-        <div className="relative z-10 w-full">
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 md:gap-10 pb-16 pt-8 px-6 md:px-12 xl:px-24 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            {featureKeys.map((key) => {
-              const config = featureConfig[key];
+      {/* Features Carousel - Full Width Breakout */}
+      <div style={{
+        position: 'relative',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw',
+        width: '100vw',
+        maxWidth: '100vw'
+      }} className="bg-bg-primary pb-24">
+        <div className="lg:hidden flex overflow-x-auto snap-x snap-mandatory gap-6 md:gap-10 pb-16 pt-8 px-6 md:px-12 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          {featureKeys.map((key) => renderFeatureCard(key, key))}
+        </div>
 
-              return (
-                <div
-                  key={key}
-                  className="flex-none w-[260px] md:w-[300px] snap-center flex flex-col gap-6"
-                >
-                  {/* Image */}
-                  <div className="relative mx-auto w-full">
-                    <div className={`absolute inset-0 bg-gradient-radial ${config.color} to-transparent blur-3xl scale-125 opacity-40`} />
-                    
-                    <div className="relative bg-bg-card rounded-[2.5rem] p-2 border border-border shadow-xl">
-                      <div className="relative aspect-[9/19] rounded-[2rem] overflow-hidden bg-bg-tertiary">
-                        <Image
-                          src={config.image}
-                          alt={t(`items.${key}.title`)}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 280px, 320px"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="text-center px-2">
-                    {config.premium && (
-                      <span className="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold mb-3">
-                        {t("premium")}
-                      </span>
-                    )}
-                    <h3 className="text-xl font-bold font-display text-text-primary mb-3">
-                      {t(`items.${key}.title`)}
-                    </h3>
-                    <p className="text-sm text-text-secondary leading-relaxed">
-                      {t(`items.${key}.description`)}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+        <div className="hidden lg:block pb-16 pt-8">
+          <div className="marquee-rail">
+            <div className="marquee-track gap-10 xl:gap-12 pl-10 xl:pl-12 pr-10 xl:pr-12">
+              {featureKeys.map((key, index) => renderFeatureCard(key, `primary-${key}-${index}`))}
+              {featureKeys.map((key, index) => renderFeatureCard(key, `secondary-${key}-${index}`))}
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 }

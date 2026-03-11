@@ -1,179 +1,250 @@
 "use client";
 
-/**
- * ═══════════════════════════════════════════════════════════════════════════════
- * FOOTER COMPONENT - Hatchet-style Multi-column Footer
- * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Features:
- * - Multi-column layout with navigation links
- * - Contact information
- * - Social media links
- * - Legal links and copyright
- * - Smooth hover effects
- * 
- * Based on hatchet.com.au footer design
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
- */
-
+import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/allhalal.info?igsh=OXAzbWc4dW9tMTgy&utm_source=qr", icon: InstagramIcon },
-  { label: "TikTok", href: "https://www.tiktok.com/@allhalal.info?_r=1&_t=ZN-92xfO5qF7UE", icon: TikTokIcon },
-  { label: "Threads", href: "https://www.threads.com/@allhalal.info?igshid=NTc4MTIwNjQ2YQ==", icon: ThreadsIcon },
-  { label: "Pinterest", href: "https://pin.it/7ELmrZcrw", icon: PinterestIcon },
-  { label: "Reddit", href: "https://www.reddit.com/u/allhalalinfo/s/LNKknn54za", icon: RedditIcon },
-  { label: "X (Twitter)", href: "https://x.com/allhalalinfo", icon: XIcon },
-  { label: "Bluesky", href: "https://bsky.app/profile/allhalalinfo.bsky.social", icon: BlueskyIcon },
-  { label: "YouTube", href: "https://youtube.com/@allhalalinfo?si=h0044GYscW2jXN92", icon: YouTubeIcon },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/allhalal.info?igsh=OXAzbWc4dW9tMTgy&utm_source=qr",
+    icon: InstagramIcon,
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@allhalal.info?_r=1&_t=ZN-92xfO5qF7UE",
+    icon: TikTokIcon,
+  },
+  {
+    label: "X",
+    href: "https://x.com/allhalalinfo",
+    icon: XIcon,
+  },
+  {
+    label: "YouTube",
+    href: "https://youtube.com/@allhalalinfo?si=h0044GYscW2jXN92",
+    icon: YouTubeIcon,
+  },
+  {
+    label: "Bluesky",
+    href: "https://bsky.app/profile/allhalalinfo.bsky.social",
+    icon: BlueskyIcon,
+  },
 ];
 
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
+function isExternalLink(href: string) {
+  return href.startsWith("http");
+}
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] as const },
-  },
-};
+function localizeHref(locale: string, href: string) {
+  if (isExternalLink(href) || href.startsWith("/#")) {
+    return href;
+  }
+
+  return `/${locale}${href}`;
+}
 
 export default function Footer() {
   const t = useTranslations("footer");
   const locale = useLocale();
-  
-  // Footer navigation structure with translations
-  const footerNav = {
-    explore: {
-      title: "Explore",
+
+  const primaryLinks = [
+    { label: "Open halal checker", href: "/is-it-halal" },
+    { label: "See prayer times", href: "/prayer-times" },
+    { label: "Read Muslim updates", href: "/blog" },
+  ];
+
+  const navGroups = [
+    {
+      title: "Use AllHalal",
       links: [
         { label: "Halal Checker", href: "/is-it-halal" },
         { label: "Prayer Times", href: "/prayer-times" },
         { label: "Boycott Checker", href: "/boycott-checker" },
         { label: "Finance", href: "/finance" },
+      ],
+    },
+    {
+      title: "Read & Learn",
+      links: [
         { label: "Learn", href: "/learn" },
         { label: "Blog", href: "/blog" },
+        { label: "Ramadan", href: "/learn/ramadan" },
+        { label: "Our Methodology", href: "/methodology" },
       ],
     },
-    product: {
-      title: t("product"),
-      links: [
-        { label: t("links.features"), href: "/#features" },
-        { label: t("links.howItWorks"), href: "/#about" },
-        { label: t("links.downloadApp"), href: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" },
-      ],
-    },
-    company: {
+    {
       title: t("company"),
       links: [
         { label: t("links.aboutUs"), href: "/#about" },
-        { label: "Our Methodology", href: "/methodology" },
         { label: t("links.contact"), href: "/contact" },
         { label: t("links.support"), href: "/support" },
+        { label: t("links.downloadApp"), href: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" },
       ],
     },
-    legal: {
-      title: t("legal"),
-      links: [
-        { label: t("links.privacyPolicy"), href: "/legal/privacy-policy" },
-        { label: t("links.termsOfService"), href: "/legal/terms-of-service" },
-        { label: t("links.disclaimer"), href: "/legal/disclaimer" },
-      ],
-    },
-  };
+  ];
+
+  const legalLinks = [
+    { label: t("links.privacyPolicy"), href: "/legal/privacy-policy" },
+    { label: t("links.termsOfService"), href: "/legal/terms-of-service" },
+    { label: t("links.disclaimer"), href: "/legal/disclaimer" },
+  ];
 
   return (
-    <footer className="bg-bg-dark text-text-inverse border-t border-white/10 mt-12">
-      {/* Main Footer Content */}
-      <div className="container py-10 md:py-12">
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {/* Brand Column */}
-          <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
-            <Link href={`/${locale}`} className="inline-block">
-              <span className="text-xl font-bold font-display text-text-inverse">allhalal.info</span>
-            </Link>
-            <p className="mt-3 text-text-inverse-secondary text-sm max-w-xs leading-relaxed">
-              Your trusted halal companion. Scan, verify, and live according to your values with confidence.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex flex-wrap gap-2 mt-5">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-primary-light hover:bg-white/10 transition-all text-text-inverse-secondary hover:text-primary-light"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
+    <footer className="mt-16 pb-6">
+      <div className="container">
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-[rgba(73,58,42,0.08)] bg-[linear-gradient(180deg,#2E1C18_0%,#251612_45%,#1D120F_100%)] text-text-inverse shadow-[0_30px_80px_rgba(33,23,18,0.22)]">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(230,187,104,0.16),transparent_28%),radial-gradient(circle_at_85%_18%,rgba(92,128,148,0.16),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.06),transparent_38%)]" />
 
-          {/* Navigation Columns */}
-          {Object.entries(footerNav).map(([key, section]) => (
-            <motion.div key={key} variants={itemVariants}>
-              <h3 className="text-xs font-semibold text-text-inverse uppercase tracking-wider mb-3 opacity-50">
-                {section.title}
-              </h3>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.label}>
+          <div className="relative border-b border-white/8 px-6 py-8 md:px-10 md:py-10">
+            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+              <div>
+                <Link href={`/${locale}`} className="inline-flex items-center gap-3 rounded-full bg-white/5 px-3 py-2 ring-1 ring-white/10 backdrop-blur-sm">
+                  <span className="relative h-11 w-11 overflow-hidden rounded-full">
+                    <Image
+                      src="/branding/publicbrandingheader-logo.png"
+                      alt="AllHalal logo"
+                      fill
+                      sizes="44px"
+                      className="object-contain"
+                    />
+                  </span>
+                  <span>
+                    <span className="block text-lg font-bold tracking-tight text-white">allhalal.info</span>
+                    <span className="mt-0.5 block text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-white/56">
+                      Muslim portal
+                    </span>
+                  </span>
+                </Link>
+
+                <h2 className="mt-6 max-w-3xl text-3xl font-display font-bold leading-tight text-white md:text-5xl">
+                  Halal clarity, prayer rhythm, finance tools and Muslim life in one place.
+                </h2>
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-inverse-secondary md:text-lg">
+                  {t("description")}
+                </p>
+              </div>
+
+              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm">
+                <div className="text-[0.72rem] font-bold uppercase tracking-[0.28em] text-[#E6BB68]">
+                  Start Here
+                </div>
+                <div className="mt-3 text-2xl font-display font-bold leading-tight text-white">
+                  Keep the most useful tools one tap away.
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2.5">
+                  {primaryLinks.map((link) => (
                     <Link
-                      href={link.href.startsWith('http') || link.href.startsWith('/#') ? link.href : `/${locale}${link.href}`}
-                      className="text-text-inverse-secondary text-sm hover:text-text-inverse transition-colors inline-block relative group"
+                      key={link.label}
+                      href={localizeHref(locale, link.href)}
+                      className="rounded-full border border-white/12 bg-white/6 px-4 py-2.5 text-sm font-semibold text-white/86 transition-colors hover:border-white/18 hover:bg-white/10"
                     >
                       {link.label}
-                      <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary-light transition-all duration-300 group-hover:w-full" />
                     </Link>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    href={`/${locale}/app`}
+                    className="inline-flex items-center justify-center rounded-full bg-gradient-gold px-5 py-3 text-sm font-bold text-[#4A3319] shadow-[0_12px_28px_rgba(176,144,98,0.24)] transition-transform hover:-translate-y-0.5"
+                  >
+                    Open app
+                  </Link>
+                  <Link
+                    href={`/${locale}/methodology`}
+                    className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-5 py-3 text-sm font-bold text-white/86 transition-colors hover:bg-white/10"
+                  >
+                    Review methodology
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/5">
-        <div className="container py-4">
-          <div className="flex justify-between items-center text-xs text-text-inverse-secondary">
-            <p>© {new Date().getFullYear()} allhalal.info. {t("copyright")}</p>
-            <p>
-              {t("developedBy")}{" "}
-              <a
-                href="https://gezellix.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-inverse hover:text-primary-light transition-colors"
-              >
-                Gezellix
-              </a>
-            </p>
+          <div className="relative px-6 py-8 md:px-10 md:py-10">
+            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="space-y-6">
+                <div>
+                  <div className="text-[0.72rem] font-bold uppercase tracking-[0.28em] text-white/42">
+                    Follow AllHalal
+                  </div>
+                  <p className="mt-3 max-w-md text-sm leading-relaxed text-text-inverse-secondary">
+                    New halal answers, Muslim updates, Ramadan reminders and product launches.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2.5">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-medium text-white/78 transition-colors hover:border-white/16 hover:bg-white/9 hover:text-white"
+                      aria-label={social.label}
+                    >
+                      <social.icon className="h-4 w-4" />
+                      <span>{social.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-3">
+                {navGroups.map((group) => (
+                  <div key={group.title}>
+                    <h3 className="text-[0.72rem] font-bold uppercase tracking-[0.28em] text-white/42">
+                      {group.title}
+                    </h3>
+                    <ul className="mt-4 space-y-3">
+                      {group.links.map((link) => (
+                        <li key={link.label}>
+                          <Link
+                            href={localizeHref(locale, link.href)}
+                            className="text-sm text-white/72 transition-colors hover:text-white"
+                          >
+                            {link.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="relative border-t border-white/8 px-6 py-5 md:px-10">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex flex-wrap gap-2.5">
+                {legalLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={localizeHref(locale, link.href)}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/66 transition-colors hover:bg-white/9 hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-2 text-xs text-white/48 md:flex-row md:items-center md:gap-5">
+                <p>
+                  © {new Date().getFullYear()} allhalal.info. {t("copyright")}
+                </p>
+                <p>
+                  {t("developedBy")}{" "}
+                  <a
+                    href="https://gezellix.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/72 transition-colors hover:text-white"
+                  >
+                    Gezellix
+                  </a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -181,7 +252,6 @@ export default function Footer() {
   );
 }
 
-// Icon Components
 function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -194,30 +264,6 @@ function TikTokIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
       <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-    </svg>
-  );
-}
-
-function ThreadsIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12.001.007C5.326.007.007 5.326.007 12.001c0 6.676 5.319 11.994 11.994 11.994s11.994-5.318 11.994-11.994S18.677.007 12.001.007zm0 1.994c5.524 0 10 4.476 10 10s-4.476 10-10 10-10-4.476-10-10 4.476-10 10-10zm-3.846 3.675a.797.797 0 0 0-.795.795v8.407a3.85 3.85 0 0 0 3.846 3.846 3.85 3.85 0 0 0 3.846-3.846v-4.893a.797.797 0 0 0-1.595 0v4.893a2.25 2.25 0 0 1-2.251 2.251 2.25 2.25 0 0 1-2.251-2.251V6.471a.797.797 0 0 0-.8-.795z" />
-    </svg>
-  );
-}
-
-function PinterestIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 0C5.373 0 0 5.372 0 12s5.373 12 12 12c5.302 0 9.917-3.158 11.877-7.716-.163-.68-.35-2.916.074-4.15.477-1.566 3.07-10.754 3.07-10.754s-.78-.78-.78-1.936c0-1.812 1.05-3.163 2.357-3.163 1.112 0 1.65.835 1.65 1.836 0 1.118-.71 2.79-1.078 4.337-.307 1.3.652 2.364 1.93 2.364 2.317 0 3.91-2.443 3.91-5.97 0-2.52-1.812-4.28-4.4-4.28-2.998 0-4.76 2.246-4.76 4.57 0 .888.342 1.842.77 2.36a.3.3 0 0 1 .07.287l-.3 1.188c-.05.2-.16.24-.37.146-1.38-.643-2.244-2.662-2.244-4.285 0-3.5 2.545-6.715 7.34-6.715 3.855 0 6.85 2.745 6.85 6.412 0 3.828-2.415 6.9-5.767 6.9-1.127 0-2.188-.586-2.55-1.285l-.692 2.64c-.25.98-.925 2.21-1.38 2.96 1.04.32 2.14.49 3.28.49 6.627 0 12-5.372 12-12S18.627 0 12 0z" />
-    </svg>
-  );
-}
-
-function RedditIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-1.272a1.134 1.134 0 0 0-1.156-.14c-.408.17-.738.52-.925.94-.24.49-.37 1.02-.37 1.56v.835a1.25 1.25 0 0 1-2.498-.056V7.5a5.5 5.5 0 0 1 5.5-5.5c.28 0 .56.02.84.07a1.25 1.25 0 0 1 1.17-.826zM9.5 12a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-2.5-2.5zm7 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-2.5-2.5zm-7 1.5a1 1 0 0 1 1 1h4a1 1 0 0 1 0 2h-4a1 1 0 0 1-1-1z" />
     </svg>
   );
 }
@@ -241,8 +287,7 @@ function BlueskyIcon({ className }: { className?: string }) {
 function YouTubeIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+      <path d="M23.498 6.186a2.998 2.998 0 0 0-2.11-2.12C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.388.566a2.998 2.998 0 0 0-2.11 2.12C0 8.06 0 12 0 12s0 3.94.502 5.814a2.998 2.998 0 0 0 2.11 2.12C4.47 20.5 12 20.5 12 20.5s7.53 0 9.388-.566a2.998 2.998 0 0 0 2.11-2.12C24 15.94 24 12 24 12s0-3.94-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z" />
     </svg>
   );
 }
-

@@ -1,478 +1,579 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { getDailyInspiration } from "@/data/dailyInspiration";
+import { useEffect, useRef, useState } from "react";
 import { useUserLocation } from "@/hooks/useUserLocation";
 import LocationSelector from "@/components/ui/LocationSelector";
+import {
+  buildPrayerState,
+  locationsMatch,
+  normalizeCalculationMethod,
+  type PrayerListItem,
+  type PrayerTimes,
+  type TodayForYouInitialData,
+} from "@/lib/todayForYou";
 
-type PrayerTimes = {
-  Fajr: string;
-  Sunrise: string;
-  Dhuhr: string;
-  Asr: string;
-  Maghrib: string;
-  Isha: string;
-};
+const METHOD_OPTIONS = [
+  { value: 0, label: "Auto by location" },
+  { value: 1, label: "University of Islamic Sciences, Karachi" },
+  { value: 2, label: "Islamic Society of North America (ISNA)" },
+  { value: 3, label: "Muslim World League (MWL)" },
+  { value: 4, label: "Umm Al-Qura University, Makkah" },
+  { value: 5, label: "Egyptian General Authority of Survey" },
+  { value: 13, label: "Diyanet (Turkey)" },
+  { value: 14, label: "Spiritual Administration of Muslims of Russia (DUM RF)" },
+];
 
-export default function TodayForYou({ locale }: { locale: string }) {
-  const { location, isLoading: locationLoading, error: locationError, setLocation, requestGeolocation } = useUserLocation();
+async function readJsonResponse(response: Response) {
+  const contentType = response.headers.get("content-type") || "";
+  const bodyText = await response.text();
+
+  if (!response.ok || !contentType.includes("application/json")) {
+    throw new Error(`Expected JSON, got ${response.status} ${contentType || "unknown content type"}: ${bodyText.slice(0, 120)}`);
+  }
+
+  return JSON.parse(bodyText);
+}
+
+function getQibla(lat: number, lng: number) {
+  const makkahLat = 21.422487 * Math.PI / 180;
+  const makkahLng = 39.826206 * Math.PI / 180;
+  const latRad = lat * Math.PI / 180;
+  const lngRad = lng * Math.PI / 180;
+
+  const y = Math.sin(makkahLng - lngRad);
+  const x = Math.cos(latRad) * Math.tan(makkahLat) - Math.sin(latRad) * Math.cos(makkahLng - lngRad);
+
+  const qibla = Math.atan2(y, x) * 180 / Math.PI;
+  return (qibla + 360) % 360;
+}
+
+function getCompassDirection(angle: number) {
+  const directions = ["North", "North-East", "East", "South-East", "South", "South-West", "West", "North-West"];
+  const index = Math.round(((angle %= 360) < 0 ? angle + 360 : angle) / 45) % 8;
+  return directions[index];
+}
+
+export default function TodayForYou({
+  locale,
+  initialData,
+}: {
+  locale: string;
+  initialData?: TodayForYouInitialData | null;
+}) {
+  const { location, error: locationError, setLocation, requestGeolocation } = useUserLocation();
   const [hijriDate, setHijriDate] = useState("Loading...");
-  const [prayersList, setPrayersList] = useState<Array<{ id: string, name: string, time: string, status: string }>>([]);
-  const [nextPrayerInfo, setNextPrayerInfo] = useState({ name: "...", countdown: "...", progressPct: 0 });
-  const [nextEvent, setNextEvent] = useState<any>(null);
-  
-  // Start with a safe default that matches the server
-  const [inspiration, setInspiration] = useState({ type: "Hadith", text: "Loading daily inspiration...", source: "" });
-  const [mounted, setMounted] = useState(false);
-  const [qiblaAngle, setQiblaAngle] = useState(45);
+  const initialPrayerState = initialData?.timings ? buildPrayerState(initialData.timings) : null;
+  const [prayersList, setPrayersList] = useState(initialPrayerState?.prayersList || []);
+  const [nextPrayerInfo, setNextPrayerInfo] = useState(
+    initialPrayerState?.nextPrayerInfo || { name: "Loading prayer times", countdown: "--", progressPct: 0 }
+  );
+  const [tomorrowPrayersList, setTomorrowPrayersList] = useState<PrayerListItem[]>(
+    initialData?.tomorrowTimings
+      ? [
+          { id: "fajr", name: "Fajr", time: initialData.tomorrowTimings.Fajr, status: "future" },
+          { id: "sunrise", name: "Sunrise", time: initialData.tomorrowTimings.Sunrise, status: "future" },
+          { id: "dhuhr", name: "Dhuhr", time: initialData.tomorrowTimings.Dhuhr, status: "future" },
+          { id: "asr", name: "Asr", time: initialData.tomorrowTimings.Asr, status: "future" },
+          { id: "maghrib", name: "Maghrib", time: initialData.tomorrowTimings.Maghrib, status: "future" },
+          { id: "isha", name: "Isha", time: initialData.tomorrowTimings.Isha, status: "future" },
+        ]
+      : []
+  );
+  const [nextEvent, setNextEvent] = useState<any>(initialData?.nextEvent || null);
+  const [upcomingEvents, setUpcomingEvents] = useState(initialData?.upcomingEvents || []);
   const [qiblaDirection, setQiblaDirection] = useState("North-East");
-  const [isHadithExpanded, setIsHadithExpanded] = useState(false);
+  const [currentTime, setCurrentTime] = useState("");
+  const [gregorianDate, setGregorianDate] = useState("");
+  const [nextEventCountdown, setNextEventCountdown] = useState("");
+  const [calculationMethod, setCalculationMethod] = useState(initialData?.calculationMethod || "Umm Al-Qura");
+  const [prayerLoading, setPrayerLoading] = useState(!initialData?.timings);
+  const [selectedMethod, setSelectedMethod] = useState<number>(0);
+  const [methodMenuOpen, setMethodMenuOpen] = useState(false);
+  const localeCode = locale === "ru" ? "ru-RU" : "en-US";
+  const hasConsumedInitialData = useRef(Boolean(initialData?.timings));
+  const prefetchedTimings = initialData?.timings;
+  const prefetchedTomorrowTimings = initialData?.tomorrowTimings;
+  const prefetchedLocation = initialData?.location;
+  const prefetchedCalculationMethod = initialData?.calculationMethod;
+  const prefetchedNextEvent = initialData?.nextEvent;
+  const prefetchedUpcomingEvents = initialData?.upcomingEvents;
+  const initialNextEventDate = initialData?.nextEvent?.date;
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    try {
+      const hDate = new Intl.DateTimeFormat("en-US-u-ca-islamic", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date());
+      setHijriDate(hDate);
+    } catch {
+      setHijriDate("Islamic Date");
+    }
+
+    setCurrentTime(
+      new Intl.DateTimeFormat(localeCode, {
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(new Date())
+    );
+
+    setGregorianDate(
+      new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(new Date())
+    );
+
+    if (initialNextEventDate) {
+      const now = new Date();
+      const target = new Date(initialNextEventDate);
+      const diffDays = Math.max(0, Math.ceil((target.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
+      setNextEventCountdown(diffDays === 0 ? "Today" : `In ${diffDays} day${diffDays === 1 ? "" : "s"}`);
+    }
+  }, [initialNextEventDate, localeCode]);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setCurrentTime(
+        new Intl.DateTimeFormat(localeCode, {
+          hour: "2-digit",
+          minute: "2-digit",
+        }).format(new Date())
+      );
+    }, 30000);
+
+    return () => window.clearInterval(interval);
+  }, [localeCode]);
 
   useEffect(() => {
     if (!location) return;
-    
-    // Calculate Qibla
-    const getQibla = (lat: number, lng: number) => {
-      const makkahLat = 21.422487 * Math.PI / 180;
-      const makkahLng = 39.826206 * Math.PI / 180;
-      const latRad = lat * Math.PI / 180;
-      const lngRad = lng * Math.PI / 180;
-      
-      const y = Math.sin(makkahLng - lngRad);
-      const x = Math.cos(latRad) * Math.tan(makkahLat) - Math.sin(latRad) * Math.cos(makkahLng - lngRad);
-      
-      let qibla = Math.atan2(y, x) * 180 / Math.PI;
-      return (qibla + 360) % 360;
-    };
-    
-    const getCompassDirection = (angle: number) => {
-      const directions = ["North", "North-East", "East", "South-East", "South", "South-West", "West", "North-West"];
-      const index = Math.round(((angle %= 360) < 0 ? angle + 360 : angle) / 45) % 8;
-      return directions[index];
-    };
 
     const angle = getQibla(location.latitude, location.longitude);
-    setQiblaAngle(angle);
     setQiblaDirection(getCompassDirection(angle));
 
-    const fetchPrayerData = async (lat: number, lon: number) => {
-      try {
-        // Fetch Prayer Times from our backend
-        const prayerRes = await fetch(`https://api.allhalal.info/api/v1/prayer-times?lat=${lat}&lon=${lon}&madhhab=general`, {
-          headers: { 'X-Source': 'web', 'Accept': 'application/json' }
-        });
-        const prayerData = await prayerRes.json();
+    let countdownInterval: number | null = null;
 
-        if (prayerData.status === "success") {
-          // The API returns lowercase keys
-          const times = prayerData.data.times;
-          const timings: PrayerTimes = {
-            Fajr: times.fajr,
-            Sunrise: times.sunrise,
-            Dhuhr: times.dhuhr,
-            Asr: times.asr,
-            Maghrib: times.maghrib,
-            Isha: times.isha
-          };
-          
-          // Format Hijri Date using native JS Intl API
-          try {
-            const hDate = new Intl.DateTimeFormat('en-US-u-ca-islamic', {day: 'numeric', month: 'long', year: 'numeric'}).format(new Date());
-            setHijriDate(hDate);
-          } catch (e) {
-            setHijriDate("Islamic Date");
-          }
+    const fetchWidgetData = async (lat: number, lon: number, method: number) => {
+      const language = locale === "ru" ? "ru" : "en";
+      setPrayerLoading(true);
+      setNextEvent(null);
 
-          // Calculate Next Prayer
-          calculateNextPrayer(timings);
-          // Set interval to update countdown every minute
-          const interval = setInterval(() => calculateNextPrayer(timings), 60000);
-          
-          // Also fetch calendar events and hadith in parallel
-          fetchAdditionalData(lat, lon);
-          
-          return () => clearInterval(interval);
-        }
-      } catch (error) {
-        console.error("Failed to fetch prayer data:", error);
+      let prayerUrl = `/api/prayer-times?lat=${lat}&lon=${lon}`;
+      let tomorrowPrayerUrl = `/api/prayer-times?lat=${lat}&lon=${lon}`;
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrowPrayerUrl += `&date=${tomorrow.toISOString().split("T")[0]}`;
+      if (method !== 0) {
+        prayerUrl += `&method=${method}`;
+        tomorrowPrayerUrl += `&method=${method}`;
       }
+
+      const [prayerResult, tomorrowPrayerResult, calendarResult] = await Promise.allSettled([
+        fetch(prayerUrl).then(readJsonResponse),
+        fetch(tomorrowPrayerUrl).then(readJsonResponse),
+        fetch(`/api/calendar-events?language=${language}&lat=${lat}&lon=${lon}`).then(readJsonResponse),
+      ]);
+
+      if (prayerResult.status === "fulfilled" && prayerResult.value.status === "success") {
+        const times = prayerResult.value.data.times;
+        const timings: PrayerTimes = {
+          Fajr: times.fajr,
+          Sunrise: times.sunrise,
+          Dhuhr: times.dhuhr,
+          Asr: times.asr,
+          Maghrib: times.maghrib,
+          Isha: times.isha,
+        };
+
+        setCalculationMethod(normalizeCalculationMethod(prayerResult.value.data.calculation_method?.name));
+
+        const snapshot = buildPrayerState(timings, new Date());
+        setPrayersList(snapshot.prayersList);
+        setNextPrayerInfo(snapshot.nextPrayerInfo);
+        countdownInterval = window.setInterval(() => {
+          const nextSnapshot = buildPrayerState(timings, new Date());
+          setPrayersList(nextSnapshot.prayersList);
+          setNextPrayerInfo(nextSnapshot.nextPrayerInfo);
+        }, 60000);
+      } else if (prayerResult.status === "rejected") {
+        console.error("Failed to fetch prayer data:", prayerResult.reason);
+        setPrayersList([]);
+        setNextPrayerInfo({
+          name: "Prayer times unavailable",
+          countdown: "--",
+          progressPct: 0,
+        });
+      }
+
+      if (tomorrowPrayerResult.status === "fulfilled" && tomorrowPrayerResult.value.status === "success") {
+        const tomorrowTimes = tomorrowPrayerResult.value.data.times;
+        setTomorrowPrayersList([
+          { id: "fajr", name: "Fajr", time: tomorrowTimes.fajr, status: "future" },
+          { id: "sunrise", name: "Sunrise", time: tomorrowTimes.sunrise, status: "future" },
+          { id: "dhuhr", name: "Dhuhr", time: tomorrowTimes.dhuhr, status: "future" },
+          { id: "asr", name: "Asr", time: tomorrowTimes.asr, status: "future" },
+          { id: "maghrib", name: "Maghrib", time: tomorrowTimes.maghrib, status: "future" },
+          { id: "isha", name: "Isha", time: tomorrowTimes.isha, status: "future" },
+        ]);
+      } else {
+        setTomorrowPrayersList([]);
+      }
+
+      if (calendarResult.status === "fulfilled" && calendarResult.value.status === "success" && calendarResult.value.data.events?.length > 0) {
+        const today = new Date().toISOString().split("T")[0];
+        const upcomingList = calendarResult.value.data.events.filter((event: any) => event.date >= today);
+        setUpcomingEvents(upcomingList.slice(0, 6));
+        const upcoming = upcomingList[0];
+        if (upcoming) {
+          setNextEvent(upcoming);
+          const diffDays = Math.max(
+            0,
+            Math.ceil((new Date(upcoming.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+          );
+          setNextEventCountdown(diffDays === 0 ? "Today" : `In ${diffDays} day${diffDays === 1 ? "" : "s"}`);
+        }
+      } else if (calendarResult.status === "fulfilled") {
+        setUpcomingEvents([]);
+        setNextEvent(null);
+        setNextEventCountdown("");
+      } else if (calendarResult.status === "rejected") {
+        console.error("Failed to fetch calendar events:", calendarResult.reason);
+      }
+
+      setPrayerLoading(false);
     };
 
-    const fetchAdditionalData = async (lat: number, lon: number) => {
-      try {
-        // Fetch Hadith
-        const hadithRes = await fetch(`https://api.allhalal.info/api/v1/hadith/of-the-day?language=${locale === 'ru' ? 'ru' : 'en'}`, {
-          headers: { 'X-Source': 'web', 'Accept': 'application/json' }
-        });
-        const hadithData = await hadithRes.json();
-        if (hadithData.status === "success") {
-          setInspiration({
-            type: "Hadith",
-            text: hadithData.data.content.trim(),
-            source: hadithData.data.reference || hadithData.data.source
-          });
+    if (
+      hasConsumedInitialData.current &&
+      prefetchedTimings &&
+      locationsMatch(location, prefetchedLocation) &&
+      selectedMethod === 0
+    ) {
+      const snapshot = buildPrayerState(prefetchedTimings, new Date());
+      setPrayersList(snapshot.prayersList);
+      setNextPrayerInfo(snapshot.nextPrayerInfo);
+      if (prefetchedTomorrowTimings) {
+        setTomorrowPrayersList([
+          { id: "fajr", name: "Fajr", time: prefetchedTomorrowTimings.Fajr, status: "future" },
+          { id: "sunrise", name: "Sunrise", time: prefetchedTomorrowTimings.Sunrise, status: "future" },
+          { id: "dhuhr", name: "Dhuhr", time: prefetchedTomorrowTimings.Dhuhr, status: "future" },
+          { id: "asr", name: "Asr", time: prefetchedTomorrowTimings.Asr, status: "future" },
+          { id: "maghrib", name: "Maghrib", time: prefetchedTomorrowTimings.Maghrib, status: "future" },
+          { id: "isha", name: "Isha", time: prefetchedTomorrowTimings.Isha, status: "future" },
+        ]);
+      } else {
+        setTomorrowPrayersList([]);
+      }
+      setCalculationMethod(prefetchedCalculationMethod || "Umm Al-Qura");
+      setNextEvent(prefetchedNextEvent || null);
+      setUpcomingEvents(prefetchedUpcomingEvents || []);
+      if (prefetchedNextEvent?.date) {
+        const diffDays = Math.max(
+          0,
+          Math.ceil((new Date(prefetchedNextEvent.date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+        );
+        setNextEventCountdown(diffDays === 0 ? "Today" : `In ${diffDays} day${diffDays === 1 ? "" : "s"}`);
+      } else {
+        setNextEventCountdown("");
+      }
+      setPrayerLoading(false);
+      hasConsumedInitialData.current = false;
+
+      countdownInterval = window.setInterval(() => {
+        const nextSnapshot = buildPrayerState(prefetchedTimings);
+        setPrayersList(nextSnapshot.prayersList);
+        setNextPrayerInfo(nextSnapshot.nextPrayerInfo);
+      }, 60000);
+
+      return () => {
+        if (countdownInterval) {
+          window.clearInterval(countdownInterval);
         }
-        
-        // Fetch Calendar Events
-        const calRes = await fetch(`https://api.allhalal.info/api/v1/calendar/events?language=${locale === 'ru' ? 'ru' : 'en'}&lat=${lat}&lon=${lon}`, {
-          headers: { 'X-Source': 'web', 'Accept': 'application/json' }
-        });
-        const calData = await calRes.json();
-        if (calData.status === "success" && calData.data.events && calData.data.events.length > 0) {
-          // Find the next upcoming event
-          const today = new Date().toISOString().split('T')[0];
-          const upcoming = calData.data.events.find((e: any) => e.date >= today);
-          if (upcoming) setNextEvent(upcoming);
-        }
-      } catch (e) {
-        console.error("Failed to fetch additional data:", e);
+      };
+    }
+
+    fetchWidgetData(location.latitude, location.longitude, selectedMethod);
+
+    return () => {
+      if (countdownInterval) {
+        window.clearInterval(countdownInterval);
       }
     };
+  }, [
+    locale,
+    location,
+    prefetchedCalculationMethod,
+    prefetchedLocation,
+    prefetchedNextEvent,
+    prefetchedUpcomingEvents,
+    prefetchedTimings,
+    prefetchedTomorrowTimings,
+    selectedMethod,
+  ]);
 
-    const calculateNextPrayer = (timings: PrayerTimes) => {
-      const now = new Date();
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-      const prayers = [
-        { id: 'fajr', name: "Fajr", time: timings.Fajr },
-        { id: 'sunrise', name: "Sunrise", time: timings.Sunrise },
-        { id: 'dhuhr', name: "Dhuhr", time: timings.Dhuhr },
-        { id: 'asr', name: "Asr", time: timings.Asr },
-        { id: 'maghrib', name: "Maghrib", time: timings.Maghrib },
-        { id: 'isha', name: "Isha", time: timings.Isha },
-      ];
-
-      let nextIndex = 0;
-      let minDiff = Infinity;
-
-      const prayerMinutesArray = prayers.map(p => {
-        const [h, m] = p.time.split(':').map(Number);
-        return h * 60 + m;
-      });
-
-      for (let i = 0; i < prayerMinutesArray.length; i++) {
-        const diff = prayerMinutesArray[i] - currentMinutes;
-        if (diff > 0 && diff < minDiff) {
-          minDiff = diff;
-          nextIndex = i;
-        }
-      }
-
-      // If all passed, next is Fajr tomorrow
-      let isNextTomorrow = false;
-      if (minDiff === Infinity) {
-        nextIndex = 0; // Fajr
-        minDiff = (24 * 60 - currentMinutes) + prayerMinutesArray[0];
-        isNextTomorrow = true;
-      }
-
-      // Format countdown
-      const hoursLeft = Math.floor(minDiff / 60);
-      const minsLeft = minDiff % 60;
-      const countdown = `${hoursLeft > 0 ? hoursLeft + 'h ' : ''}${minsLeft}m`;
-
-      // Calculate progress percentage
-      let prevIndex = nextIndex === 0 ? prayers.length - 1 : nextIndex - 1;
-      let prevMinutes = prayerMinutesArray[prevIndex];
-      let nextMinutes = prayerMinutesArray[nextIndex];
-      let currentRel = currentMinutes;
-
-      if (isNextTomorrow) {
-        // We are between Isha and Midnight
-        nextMinutes += 24 * 60; 
-      } else if (nextIndex === 0 && currentMinutes < prayerMinutesArray[0]) {
-        // We are between Midnight and Fajr
-        prevMinutes -= 24 * 60;
-      }
-
-      const totalDuration = nextMinutes - prevMinutes;
-      const elapsed = currentRel - prevMinutes;
-      const progressPct = Math.max(0, Math.min(100, (elapsed / totalDuration) * 100));
-
-      // Build updated list with statuses
-      const updatedPrayers = prayers.map((p, i) => {
-        let status = 'future';
-        if (isNextTomorrow) {
-          status = 'past'; // All today's prayers are past
-        } else {
-          if (i < nextIndex) status = 'past';
-          else if (i === nextIndex) status = 'next';
-        }
-        return { ...p, status };
-      });
-
-      setPrayersList(updatedPrayers);
-      setNextPrayerInfo({
-        name: prayers[nextIndex].name,
-        countdown,
-        progressPct
-      });
-    };
-
-    fetchPrayerData(location.latitude, location.longitude);
-  }, [location, locale]);
+  const hasPrayerData = prayersList.length > 0;
+  const tomorrowTimesByPrayer = new Map(tomorrowPrayersList.map((prayer) => [prayer.id, prayer.time]));
 
   return (
-    <div className="bg-accent-navy text-text-inverse rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 group">
-      <div className="grid grid-cols-1 lg:grid-cols-3 relative">
-        
-        {/* Abstract Background Layer spanning the whole widget */}
-        <div className="absolute inset-0 z-0 opacity-10 mix-blend-overlay pointer-events-none"
-             style={{ backgroundImage: "url('/assets/card-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }} />
+    <div className="mx-auto max-w-[1180px] bg-accent-navy text-text-inverse rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 relative">
+      <div
+        className="absolute inset-0 z-0 opacity-10 mix-blend-overlay pointer-events-none"
+        style={{ backgroundImage: "url('/assets/card-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}
+      />
 
-        {/* COLUMN 1: PRAYER TIMES */}
-        <div className="p-8 md:p-10 relative z-10 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 mb-3 text-xs font-bold uppercase tracking-wider">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                Live Tracker
+      <div className="relative z-10 p-4 md:p-5">
+        <div className="mb-3 rounded-[1.15rem] border border-white/10 bg-white/5 px-4 py-3">
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1.15fr_1fr_1fr_auto] xl:items-center">
+            <div className="min-w-0 xl:pr-5">
+              <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45 mb-1.5">
+                Location
               </div>
-              <LocationSelector 
+              <LocationSelector
                 currentLocation={location}
                 onLocationChange={setLocation}
                 onRequestGeolocation={requestGeolocation}
               />
+              <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/80">
+                <span className="h-2 w-2 rounded-full bg-accent-yellow" />
+                Now {currentTime || "--:--"}
+              </div>
             </div>
-          </div>
 
-          <div className="flex-1 flex flex-col justify-center">
-            {/* Top: Progress and Next Prayer - Modern UI */}
-            <div className="mb-6 bg-gradient-to-br from-white/10 to-transparent rounded-[2rem] p-6 border border-white/10 text-center relative overflow-hidden shadow-lg group">
-              {/* Animated Background Pulse */}
-              <div className="absolute inset-0 bg-accent-yellow/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-              
-              {/* Circular Progress Design instead of linear bar */}
-              <div className="relative w-40 h-40 mx-auto mb-4">
-                {/* SVG Circular Progress */}
-                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  {/* Background Circle */}
-                  <circle 
-                    cx="50" cy="50" r="45" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="4" 
-                    className="text-white/10"
-                  />
-                  {/* Foreground Circle (Progress) */}
-                  <circle 
-                    cx="50" cy="50" r="45" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="4" 
+            <div className="min-w-0 xl:border-l xl:border-white/10 xl:pl-5">
+              <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45 mb-1.5">
+                Prayer Method
+              </div>
+              <div className="text-sm md:text-base font-display font-bold leading-tight text-white truncate">
+                {calculationMethod}
+              </div>
+              <button
+                type="button"
+                onClick={() => setMethodMenuOpen((open) => !open)}
+                className="mt-2 inline-flex text-xs font-bold text-accent-yellow hover:text-white transition-colors"
+              >
+                Change
+              </button>
+              {methodMenuOpen && (
+                <div className="mt-3 rounded-xl border border-white/10 bg-[#294655] p-2 shadow-xl">
+                  <select
+                    value={selectedMethod}
+                    onChange={(event) => {
+                      setSelectedMethod(Number(event.target.value));
+                      setMethodMenuOpen(false);
+                    }}
+                    className="w-full rounded-lg bg-transparent px-2 py-2 text-sm text-white outline-none"
+                  >
+                    {METHOD_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value} className="bg-[#294655] text-white">
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+
+            <div className="min-w-0 xl:border-l xl:border-white/10 xl:pl-5">
+              <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45 mb-1.5">
+                Islamic Calendar
+              </div>
+              <div className="text-sm md:text-base font-display font-bold leading-tight text-white">
+                {hijriDate}
+              </div>
+              <div className="mt-2 text-xs text-white/65">
+                {gregorianDate || "Today"}
+              </div>
+            </div>
+
+            {location && location.city === "Makkah" && !location.isAuto ? (
+              <div className="xl:justify-self-end xl:border-l xl:border-white/10 xl:pl-5">
+                <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45 mb-1.5">
+                  Qibla
+                </div>
+                <button
+                  onClick={requestGeolocation}
+                  className="bg-accent-yellow text-accent-navy px-4 py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 transition-transform"
+                >
+                  Allow location
+                </button>
+              </div>
+            ) : location && (
+              <div className="xl:justify-self-end xl:border-l xl:border-white/10 xl:pl-5">
+                <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45 mb-1.5">
+                  Qibla Bearing
+                </div>
+                <div className="text-xl md:text-2xl font-display font-black text-accent-yellow">
+                  {getQibla(location.latitude, location.longitude).toFixed(1)}°
+                </div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/60 mt-1">
+                  {qiblaDirection}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {locationError && (
+          <div className="mb-3 rounded-xl border border-red-300/20 bg-red-300/10 px-4 py-3 text-sm text-red-200">
+            {locationError === "User denied Geolocation"
+              ? "Location access denied. You can still search your city manually."
+              : "Could not fetch location. Try searching your city manually."}
+          </div>
+        )}
+
+        <div className="grid gap-3 xl:grid-cols-[1.55fr_0.95fr]">
+          <div className="rounded-[1.35rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 md:p-5">
+            <div className="grid gap-4 md:grid-cols-[8rem_1fr] md:items-center">
+              <div className="relative w-32 h-32 md:w-[8.5rem] md:h-[8.5rem] mx-auto">
+                <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="4" className="text-white/10" />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
                     strokeLinecap="round"
-                    className="text-accent-yellow drop-shadow-[0_0_8px_rgba(252,211,77,0.6)] transition-all duration-1000 ease-in-out"
+                    className="text-accent-yellow drop-shadow-[0_0_8px_rgba(252,211,77,0.55)] transition-all duration-1000 ease-in-out"
                     strokeDasharray={`${2 * Math.PI * 45}`}
                     strokeDashoffset={`${2 * Math.PI * 45 * (1 - nextPrayerInfo.progressPct / 100)}`}
                   />
                 </svg>
-                
-                {/* Inner Content (Timer) */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-white/60 text-[10px] font-bold uppercase tracking-wider mb-1">Starts in</span>
-                  <span className="text-2xl md:text-3xl font-mono font-bold text-white tracking-tight">{nextPrayerInfo.countdown}</span>
+                  <span className="text-white/55 text-[10px] font-bold uppercase tracking-wider mb-1">Starts in</span>
+                  <span className="text-2xl font-mono font-bold text-white tracking-tight">{nextPrayerInfo.countdown}</span>
                 </div>
               </div>
-              
-              <div className="text-4xl md:text-5xl font-black font-display text-accent-yellow mb-1 tracking-tight drop-shadow-sm">{nextPrayerInfo.name}</div>
-              <p className="text-white/40 text-[10px] font-medium uppercase tracking-widest">{nextPrayerInfo.progressPct.toFixed(0)}% elapsed</p>
+
+              <div className="text-center md:text-left">
+                <div className="inline-flex items-center rounded-full border border-accent-yellow/25 bg-accent-yellow/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-yellow mb-3">
+                  {prayerLoading ? "Loading" : "Next prayer"}
+                </div>
+                <div className="text-3xl md:text-4xl font-black font-display text-accent-yellow tracking-tight">
+                  {nextPrayerInfo.name}
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/70">
+                    {prayerLoading ? "Syncing..." : `${nextPrayerInfo.progressPct.toFixed(0)}% elapsed`}
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Bottom: List of prayers */}
-            <div className="flex flex-col gap-1.5">
-              {prayersList.map((prayer) => (
-                <div key={prayer.id} className={`flex justify-between items-center px-4 py-2.5 rounded-xl transition-colors ${
-                  prayer.status === 'next' ? 'bg-accent-yellow/10 border border-accent-yellow/30' : 
-                  prayer.status === 'past' ? 'opacity-50' : 'bg-white/5'
-                }`}>
-                  <div className="flex items-center gap-3">
-                    {prayer.status === 'past' ? (
-                      <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    ) : prayer.status === 'next' ? (
-                      <div className="w-5 h-5 rounded-full bg-accent-yellow/30 border border-accent-yellow flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-accent-yellow animate-pulse" />
-                      </div>
-                    ) : (
-                      <div className="w-5 h-5 rounded-full border-2 border-white/20" />
-                    )}
-                    <span className={`font-medium text-sm ${prayer.status === 'next' ? 'text-accent-yellow font-bold' : 'text-white'}`}>
-                      {prayer.name}
-                      {prayer.id === 'sunrise' && <span className="ml-2 text-[10px] uppercase opacity-70 font-normal">(Not a prayer)</span>}
-                    </span>
-                  </div>
-                  <div className={`font-mono text-sm font-bold ${prayer.status === 'next' ? 'text-accent-yellow' : 'text-white'}`}>
-                    {prayer.time}
+            <div className="mt-4 flex flex-col gap-1.5">
+              {hasPrayerData && (
+                <div className="flex items-center px-4 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
+                  <span className="flex-1">Prayer</span>
+                  <div className="ml-auto grid w-[11rem] grid-cols-2 gap-x-6 md:w-[12rem] md:gap-x-8">
+                    <span className="text-left">Today</span>
+                    <span className="text-left">Tomorrow</span>
                   </div>
                 </div>
-              ))}
+              )}
+              {hasPrayerData ? (
+                prayersList.map((prayer) => (
+                  <div
+                    key={prayer.id}
+                    className={`flex items-center px-4 py-2.5 rounded-xl transition-colors ${
+                      prayer.status === "next"
+                        ? "bg-accent-yellow/10 border border-accent-yellow/30"
+                        : prayer.status === "past"
+                          ? "opacity-50"
+                          : "bg-white/5"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {prayer.status === "past" ? (
+                        <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      ) : prayer.status === "next" ? (
+                        <div className="w-5 h-5 rounded-full bg-accent-yellow/30 border border-accent-yellow flex items-center justify-center">
+                          <div className="w-2 h-2 rounded-full bg-accent-yellow animate-pulse" />
+                        </div>
+                      ) : (
+                        <div className="w-5 h-5 rounded-full border-2 border-white/20" />
+                      )}
+                      <span className={`font-medium text-sm ${prayer.status === "next" ? "text-accent-yellow font-bold" : "text-white"}`}>
+                        {prayer.name}
+                        {prayer.id === "sunrise" && (
+                          <span className="ml-2 text-[10px] uppercase opacity-70 font-normal">(Not a prayer)</span>
+                        )}
+                      </span>
+                    </div>
+                    <div className="ml-auto grid w-[11rem] grid-cols-2 gap-x-6 md:w-[12rem] md:gap-x-8">
+                      <div className={`text-left font-mono text-sm font-bold tabular-nums ${prayer.status === "next" ? "text-accent-yellow" : "text-white"}`}>
+                        {prayer.time}
+                      </div>
+                      <div className="text-left font-mono text-sm font-bold tabular-nums text-white/75">
+                        {tomorrowTimesByPrayer.get(prayer.id) || "--"}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-[1.25rem] border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/70">
+                  {prayerLoading
+                    ? "Loading local prayer times..."
+                  : "Prayer times could not be loaded right now. Try switching city or reloading."}
+                </div>
+              )}
             </div>
           </div>
-          
-          <Link href={`/${locale}/prayer-times`} className="mt-6 text-sm font-bold text-accent-yellow hover:text-white transition-colors inline-flex items-center gap-1">
-            View full prayer timetable &rarr;
-          </Link>
-        </div>
 
-        {/* COLUMN 2: QIBLA & RAMADAN */}
-        <div className="p-8 md:p-10 relative z-10 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
-          <div>
-            <div className="text-white/60 text-sm font-medium uppercase tracking-wider mb-2">
+          <div className="rounded-[1.35rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 md:p-5">
+            <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45 mb-3">
               Islamic Calendar
             </div>
-            <div className="text-3xl font-bold font-display leading-tight mb-2">
-              {hijriDate}
-            </div>
-            <div className="text-white/70">
-              {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-            </div>
-            
-            {nextEvent && (
-              <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-                <div className="text-xs font-bold uppercase tracking-wider text-accent-yellow mb-1">
-                  Upcoming Event
+
+            {nextEvent ? (
+              <div className="rounded-[1.1rem] border border-white/10 bg-white/5 p-4">
+                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-accent-yellow mb-2">
+                  Next Islamic event
                 </div>
-                <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <div className="font-bold text-lg leading-tight mb-0.5">{nextEvent.emoji} {nextEvent.title}</div>
-                    <div className="text-xs text-white/60">{nextEvent.title_ar}</div>
-                  </div>
-                  <div className="text-right whitespace-nowrap">
-                    <div className="font-mono font-medium">{new Date(nextEvent.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
-                  </div>
+                <div className="text-lg font-semibold leading-snug text-white">
+                  {nextEvent.title}
                 </div>
+                <div className="mt-2 flex items-center justify-between gap-3 text-sm text-white/70">
+                  <span>
+                    {new Date(nextEvent.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/80">
+                    {nextEventCountdown || "Upcoming"}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="mt-5 rounded-[1.1rem] border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+                Upcoming Islamic dates will appear here for your region.
               </div>
             )}
-          </div>
-          
-          <div className="mt-8 flex-1 flex flex-col justify-center">
-            {location && location.city === "Makkah" && !location.isAuto ? (
-              <div className="bg-white/5 rounded-2xl p-6 border border-white/10 text-center flex flex-col items-center justify-center h-full relative overflow-hidden">
-                <svg className="w-8 h-8 text-white/40 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <p className="text-sm text-white/70 mb-4 px-2">Allow location access to calculate Qibla direction and local prayer times accurately.</p>
-                <button 
-                  onClick={requestGeolocation}
-                  className="bg-accent-yellow text-accent-navy px-5 py-2.5 rounded-full text-sm font-bold shadow-lg hover:scale-105 transition-transform"
-                >
-                  Allow Location
-                </button>
-                {locationError && (
-                  <p className="text-red-400 text-xs mt-3 bg-red-400/10 px-3 py-1.5 rounded-lg border border-red-400/20">
-                    {locationError === "User denied Geolocation" ? "Location access denied. Please enable it in your browser settings or search manually." : "Could not fetch location. Please try searching your city manually."}
-                  </p>
-                )}
-              </div>
-            ) : location && (
-              <div className="bg-white/5 rounded-2xl p-6 border border-white/10 text-center relative overflow-hidden group flex flex-col h-full">
-                <div className="text-white/60 text-xs font-bold uppercase tracking-wider mb-4">
-                  Qibla Direction
-                </div>
-                
-                {/* Map visual */}
-                <div className="relative w-full flex-1 min-h-[140px] rounded-xl overflow-hidden mb-4 bg-white/10 border border-white/5 opacity-90 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  {/* Iframe is scaled and shifted to hide the OpenStreetMap UI text and controls */}
-                  <div className="absolute inset-0 w-[120%] h-[130%] -top-[15%] -left-[10%] pointer-events-none">
-                    <iframe 
-                      width="100%" 
-                      height="100%" 
-                      frameBorder="0" 
-                      style={{ border: 0 }} 
-                      src={`https://www.openstreetmap.org/export/embed.html?bbox=${location.longitude-0.05},${location.latitude-0.05},${location.longitude+0.05},${location.latitude+0.05}&layer=mapnik`} 
-                      allowFullScreen 
-                    />
-                  </div>
-                  
-                  {/* Dark overlay to make map sit better in dark mode */}
-                  <div className="absolute inset-0 z-10 bg-accent-navy/40 mix-blend-multiply pointer-events-none" />
-                  <div className="absolute inset-0 z-10 bg-black/20 pointer-events-none" />
 
-                  {/* Qibla Direction Line Overlay */}
-                  <div 
-                    className="absolute top-1/2 left-1/2 w-[3px] h-[65px] origin-bottom z-20 transition-transform duration-1000 ease-out"
-                    style={{ 
-                      transform: `translate(-50%, -100%) rotate(${qiblaAngle}deg)`,
-                    }}
-                  >
-                    <div className="w-full h-full bg-gradient-to-t from-accent-yellow to-transparent opacity-80" />
-                    {/* Arrow head */}
-                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-accent-yellow drop-shadow-[0_0_5px_rgba(252,211,77,0.8)]" />
-                  </div>
-                  
-                  {/* Center Dot (covers the default map marker) */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-accent-yellow rounded-full z-30 border-[3px] border-accent-navy shadow-[0_0_15px_rgba(252,211,77,1)]">
-                    <div className="absolute inset-0 rounded-full bg-accent-yellow animate-ping opacity-50" />
-                  </div>
+            {upcomingEvents.length > 1 && (
+              <div className="mt-5 rounded-[1.1rem] border border-white/10 bg-white/5 p-4">
+                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/45 mb-3">
+                  Upcoming Islamic dates
                 </div>
-                
-                <div className="mt-auto">
-                  <div className="text-3xl font-display font-black text-accent-yellow">
-                    {qiblaAngle.toFixed(1)}°
-                  </div>
-                  <div className="text-xs font-bold text-white/60 uppercase tracking-widest mt-1">
-                    {qiblaDirection}
-                  </div>
+                <div className="space-y-3">
+                  {upcomingEvents.slice(1, 6).map((event: any) => (
+                    <div key={`${event.date}-${event.title}`} className="flex items-start justify-between gap-3 border-b border-white/5 pb-3 last:border-b-0 last:pb-0">
+                      <div className="min-w-0 text-sm text-white/85">{event.title}</div>
+                      <div className="whitespace-nowrap text-sm text-white/60">
+                        {new Date(event.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
           </div>
         </div>
-
-        {/* COLUMN 3: INSPIRATION OF THE DAY */}
-        <div className="p-8 md:p-10 relative z-10 flex flex-col justify-between bg-gradient-to-br from-transparent to-black/20">
-          <div className={`transition-opacity duration-500 ${mounted ? "opacity-100" : "opacity-0"}`}>
-            <div className="flex items-center gap-2 mb-6">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-yellow/20 text-accent-yellow border border-accent-yellow/30 text-xs font-bold uppercase tracking-wider">
-                {inspiration.type} of the Day
-              </span>
-              {inspiration.source && (
-                <span className="inline-flex items-center px-2 py-1 rounded-md bg-white/10 text-white/80 text-xs font-medium border border-white/5">
-                  {inspiration.source}
-                </span>
-              )}
-            </div>
-            <div className="relative">
-              <p className={`text-lg md:text-xl font-display font-medium leading-relaxed italic ${!isHadithExpanded ? "line-clamp-4" : ""}`}>
-                "{inspiration.text}"
-              </p>
-              {inspiration.text.length > 150 && (
-                <button 
-                  onClick={() => setIsHadithExpanded(!isHadithExpanded)}
-                  className="text-accent-yellow text-sm font-bold mt-2 hover:underline focus:outline-none"
-                >
-                  {isHadithExpanded ? "Show less" : "Read more"}
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-8">
-             <div className="bg-black/40 border border-white/10 rounded-2xl p-5 flex flex-col items-center text-center relative overflow-hidden group">
-               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-               <svg className="w-8 h-8 text-white mb-3 relative z-10" viewBox="0 0 384 512" fill="currentColor">
-                 <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 24 184.5 15.6 235.1c-10.4 62.6 15.3 146.6 44.7 190.6 13 22 29.3 45.4 52.8 44.4 22.9-1 31.7-14.7 59.8-14.7 28.1 0 35.8 14.7 59.8 14.7 24.9 0 39.5-21.5 52.5-43.5 16-27.1 22.5-53.5 23-55.2-1-1-53.6-20.2-54.1-81.8zM242.1 98.4c13.7-16.7 23-40.1 20.4-63.4-20.5 1-43.6 14.1-57.8 30.6-11.9 13.9-22.6 37.9-19.6 60.5 23.3 1.8 43.6-10.9 57-27.7z"/>
-               </svg>
-               <h4 className="text-white font-bold text-lg mb-1 relative z-10">Get the App</h4>
-               <p className="text-white/60 text-xs leading-relaxed mb-4 relative z-10">
-                 Get prayer alerts, halal scanner and Islamic tools in the AllHalal app.
-               </p>
-               <Link href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" target="_blank" className="w-full bg-white text-black hover:bg-white/90 transition-colors text-center py-2.5 rounded-xl text-sm font-bold relative z-10">
-                 Download the App
-               </Link>
-             </div>
-          </div>
-        </div>
-
       </div>
     </div>
   );

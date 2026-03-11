@@ -12,20 +12,20 @@
     "title1": "SCAN",
     "title2": "VERIFY",
     "title3": "TRUST",
-    "description": "Empowering Muslims worldwide with AI-powered halal verification. Scan any product, get instant fiqh-based rulings tailored to your madhhab.",
+    "description": "Empowering Muslims worldwide with AI-powered halal verification. Scan any product and get instant ingredient analysis and halal status in seconds.",
     "ctaAppStore": "App Store",
     "ctaExplore": "Explore Features"
   },
   "about": {
     "subtitle": "About allhalal.info",
     "title": "Your Trusted Halal Companion for Modern Living",
-    "description": "allhalal.info combines authentic Islamic scholarship with cutting-edge AI technology to provide accurate, reliable halal verification for Muslims worldwide. Our mission is to make living a halal lifestyle effortless and accessible.",
-    "mission": "Empowering Muslims worldwide to make informed choices about what they consume, guided by authentic scholarship and powered by advanced technology.",
+    "description": "allhalal.info combines cutting-edge AI technology with a comprehensive ingredient database to provide accurate, reliable halal verification for Muslims worldwide. Our mission is to make living a halal lifestyle effortless and accessible.",
+    "mission": "Empowering Muslims worldwide to make informed choices about what they consume, guided by intelligent ingredient analysis and powered by advanced technology.",
     "stats": {
       "products": "Products Verified",
       "languages": "Languages",
-      "madhhab": "Madhhab Options",
-      "accuracy": "Accuracy Rate"
+      "madhhab": "Product Labels",
+      "accuracy": "Live Boycott Updates"
     }
   },
   "whyChoose": {
@@ -33,12 +33,12 @@
     "title": "Built on Three Pillars of Excellence",
     "reasons": {
       "scholarship": {
-        "title": "Authentic Scholarship",
-        "description": "Our rulings are based on authentic Islamic scholarship across all four major Sunni schools of thought (madhahib). Every ingredient classification is reviewed against established fiqh principles."
+        "title": "Smart Ingredient OCR",
+        "description": "Can't find a barcode? Simply photograph the ingredients list. Our AI-powered OCR technology reads and analyzes text in real-time, identifying problematic ingredients like pork, alcohol, carmine, and non-halal additives."
       },
       "ai": {
-        "title": "Advanced AI Technology",
-        "description": "Cutting-edge artificial intelligence analyzes ingredient lists instantly, cross-referencing against our comprehensive database to provide accurate halal status in seconds."
+        "title": "Boycott Checker",
+        "description": "Beyond ingredients, we verify brand ethics. Our app instantly alerts you if a company is on the BDS list or has ties to oppression, helping you make choices that align with your values."
       },
       "database": {
         "title": "Global Database",

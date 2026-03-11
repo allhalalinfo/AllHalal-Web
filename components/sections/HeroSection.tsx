@@ -79,11 +79,12 @@ export default function HeroSection() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-40"
+          className="absolute inset-0 bg-cover bg-center opacity-[0.62]"
           style={{ backgroundImage: "url('/assets/hero-bg.png')" }}
         />
-        {/* Gradient overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/80 via-bg-primary/60 to-bg-primary" />
+        {/* Softer wash keeps readability without burying the image */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(247,243,235,0.74),rgba(247,243,235,0.42)_38%,rgba(247,243,235,0.68))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_38%,rgba(247,243,235,0.58),transparent_34%),radial-gradient(circle_at_78%_42%,rgba(255,255,255,0.1),transparent_28%)]" />
       </div>
       
       <div ref={contentRef} className="container relative z-10">

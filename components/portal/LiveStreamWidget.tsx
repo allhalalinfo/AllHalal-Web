@@ -12,6 +12,17 @@ interface Stream {
   fallback_video_ids?: string[];
 }
 
+async function readJsonResponse(response: Response) {
+  const contentType = response.headers.get('content-type') || '';
+  const bodyText = await response.text();
+
+  if (!response.ok || !contentType.includes('application/json')) {
+    throw new Error(`Expected JSON, got ${response.status} ${contentType || 'unknown content type'}: ${bodyText.slice(0, 120)}`);
+  }
+
+  return JSON.parse(bodyText);
+}
+
 export default function LiveStreamWidget({ locale }: { locale: string }) {
   const [streams, setStreams] = useState<Stream[]>([]);
   const [activeTab, setActiveTab] = useState(0);
@@ -20,15 +31,11 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
 
   const fetchStreams = useCallback(async () => {
     try {
-      const res = await fetch('https://api.allhalal.info/api/v1/config/live-streams', {
-        headers: { 'X-Source': 'web' },
-      });
-      if (res.ok) {
-        const json = await res.json();
-        const data: Stream[] = json.data?.streams || [];
-        if (data.length > 0) {
-          setStreams(data);
-        }
+      const res = await fetch('/api/live-streams');
+      const json = await readJsonResponse(res);
+      const data: Stream[] = json.data?.streams || [];
+      if (data.length > 0) {
+        setStreams(data);
       }
     } catch {
       // silent fail — keep fallback
@@ -50,7 +57,7 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
 
   if (loading) {
     return (
-      <div className="bg-black text-white rounded-[2rem] p-6 shadow-card flex flex-col relative overflow-hidden border border-white/10">
+      <div className="bg-[linear-gradient(180deg,#102432,#0C1A24)] text-white rounded-[1.75rem] p-5 shadow-[0_18px_40px_rgba(14,24,32,0.26)] flex flex-col relative overflow-hidden border border-[#284556]">
         <div className="flex items-center gap-2 mb-4">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
           <span className="text-sm font-bold uppercase tracking-wider text-white/70">Live</span>
@@ -64,7 +71,7 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
     return (
       <Link
         href={`/${locale}/learn/live-makkah`}
-        className="bg-black text-white rounded-[2rem] p-6 shadow-card flex flex-col relative overflow-hidden border border-white/10 group hover:border-white/20 transition-colors"
+        className="bg-[linear-gradient(180deg,#102432,#0C1A24)] text-white rounded-[1.75rem] p-5 shadow-[0_18px_40px_rgba(14,24,32,0.26)] flex flex-col relative overflow-hidden border border-[#284556] group hover:border-[#35586E] transition-colors"
       >
         <div className="flex items-center gap-2 mb-3">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
@@ -78,16 +85,16 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
   }
 
   return (
-    <div className="bg-black text-white rounded-[2rem] shadow-card flex flex-col relative overflow-hidden border border-white/10">
+    <div className="bg-[linear-gradient(180deg,#102432,#0C1A24)] text-white rounded-[1.75rem] shadow-[0_18px_40px_rgba(14,24,32,0.26)] flex flex-col relative overflow-hidden border border-[#284556]">
       {/* Tabs */}
       <div className="flex border-b border-white/10">
         {streams.map((stream, i) => (
           <button
             key={stream.id}
             onClick={() => { setActiveTab(i); setIsPlaying(false); }}
-            className={`flex-1 px-4 py-3.5 text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 ${
+            className={`flex-1 px-4 py-3 text-[11px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 ${
               activeTab === i
-                ? 'text-white bg-white/5'
+                ? 'text-white bg-white/6'
                 : 'text-white/50 hover:text-white/70 hover:bg-white/[0.02]'
             }`}
           >
@@ -98,7 +105,7 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
       </div>
 
       {/* Player / Thumbnail */}
-      <div className="relative aspect-video bg-black">
+      <div className="relative aspect-video bg-black/20">
         {isPlaying && !isChannel ? (
           <iframe
             src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&modestbranding=1`}
@@ -129,7 +136,7 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
             
             {!isChannel ? (
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl group-hover/play:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shadow-2xl group-hover/play:scale-110 transition-transform">
                   <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
@@ -157,7 +164,7 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
       </div>
 
       {/* Footer */}
-      <div className="px-5 py-3.5 flex items-center justify-between border-t border-white/10">
+      <div className="px-5 py-3 flex items-center justify-between border-t border-white/10">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
           <span className="text-white/60 text-xs font-medium uppercase tracking-wider">Live 24/7</span>

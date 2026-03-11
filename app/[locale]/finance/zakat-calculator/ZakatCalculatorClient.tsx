@@ -40,12 +40,7 @@ export default function ZakatCalculatorClient() {
   useEffect(() => {
     async function fetchNisab() {
       try {
-        // Fetching directly from the provided backend API
-        const res = await fetch("https://api.allhalal.info/api/v1/config/nisab", {
-          headers: {
-            'X-Source': 'web'
-          }
-        });
+        const res = await fetch("/api/nisab");
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setNisabData(data);

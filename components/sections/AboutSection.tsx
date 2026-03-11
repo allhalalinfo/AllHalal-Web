@@ -59,9 +59,9 @@ export default function AboutSection() {
 
   const stats = [
     { value: 2000000, suffix: "+", label: t("stats.products") },
-    { value: 9, suffix: "", label: t("stats.languages") },
-    { value: 5, suffix: "", label: t("stats.madhhab") },
-    { value: 99, suffix: "%", label: t("stats.accuracy") },
+    { value: 11, suffix: "", label: t("stats.languages") },
+    { value: 70, suffix: "+", label: t("stats.madhhab") },
+    { value: 1, suffix: "", label: t("stats.accuracy") },
   ];
 
   return (

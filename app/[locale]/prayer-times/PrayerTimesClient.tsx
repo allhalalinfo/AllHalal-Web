@@ -34,13 +34,44 @@ export default function PrayerTimesClient() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
+  // Settings states
+  const [coords, setCoords] = useState<{lat: number, lon: number} | null>(null);
+  const [selectedDay, setSelectedDay] = useState<"today" | "tomorrow">("today");
+  const [selectedMethod, setSelectedMethod] = useState<number>(0);
+  const [selectedMadhhab, setSelectedMadhhab] = useState<"general" | "hanafi">("general");
+  const [currentCityName, setCurrentCityName] = useState<string | undefined>(undefined);
+  const [calculationMethodName, setCalculationMethodName] = useState<string>("Muslim World League");
+
   // Fetch times using lat and lon
-  const fetchPrayerTimes = useCallback(async (lat: number, lon: number, cityName?: string) => {
+  const fetchPrayerTimes = useCallback(async (
+    lat: number, 
+    lon: number, 
+    cityName?: string, 
+    day: "today" | "tomorrow" = "today",
+    method: number = 0,
+    madhhab: "general" | "hanafi" = "general"
+  ) => {
     setLoading(true);
     setError(null);
+    setCoords({ lat, lon });
+    if (cityName) setCurrentCityName(cityName);
+
     try {
       // First try our internal proxy API (which bypasses CORS and fetches from the real backend)
-      const res = await fetch(`/api/prayer-times?lat=${lat}&lon=${lon}`);
+      let url = `/api/prayer-times?lat=${lat}&lon=${lon}`;
+      if (day === "tomorrow") {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        url += `&date=${tomorrow.toISOString().split('T')[0]}`;
+      }
+      if (method !== 0) {
+        url += `&method=${method}`;
+      }
+      if (madhhab !== "general") {
+        url += `&madhhab=${madhhab}`;
+      }
+
+      const res = await fetch(url);
       if (!res.ok) throw new Error("API returned an error");
       const json = await res.json();
       
@@ -51,6 +82,9 @@ export default function PrayerTimesClient() {
           city: cityName || json.data.location?.city || "Unknown City",
           country: json.data.location?.country || ""
         });
+        if (json.data.calculation_method?.name) {
+          setCalculationMethodName(json.data.calculation_method.name);
+        }
       } else {
         throw new Error(json.error || "Unknown error occurred");
       }
@@ -59,15 +93,17 @@ export default function PrayerTimesClient() {
       // If the API fails (e.g. CORS or offline), use Aladhan API as a fallback
       try {
         const date = new Date();
+        if (day === "tomorrow") date.setDate(date.getDate() + 1);
+        
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
-        const aladhanRes = await fetch(`https://api.aladhan.com/v1/calendar/${year}/${month}?latitude=${lat}&longitude=${lon}&method=2`);
+        const aladhanRes = await fetch(`https://api.aladhan.com/v1/calendar/${year}/${month}?latitude=${lat}&longitude=${lon}&method=${method === 0 ? 2 : method}`);
         const aladhanData = await aladhanRes.json();
         
         if (aladhanData.code === 200 && aladhanData.data) {
-          // Find today's date in the calendar
-          const today = date.getDate() - 1; // 0-indexed array
-          const todayTimes = aladhanData.data[today].timings;
+          // Find the date in the calendar
+          const targetDate = date.getDate() - 1; // 0-indexed array
+          const todayTimes = aladhanData.data[targetDate].timings;
           
           setTimes({
             fajr: todayTimes.Fajr.split(' ')[0],
@@ -82,6 +118,7 @@ export default function PrayerTimesClient() {
             city: cityName || "Your Location",
             country: ""
           });
+          setCalculationMethodName("Fallback API");
         } else {
           throw new Error("Fallback API failed");
         }
@@ -93,6 +130,7 @@ export default function PrayerTimesClient() {
           city: cityName || "Estimated Times",
           country: "Could not connect to server"
         });
+        setCalculationMethodName("Offline estimation");
       }
     } finally {
       setLoading(false);
@@ -101,6 +139,7 @@ export default function PrayerTimesClient() {
 
   // Get user location on mount
   useEffect(() => {
+    // Only run on mount
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -116,7 +155,15 @@ export default function PrayerTimesClient() {
       // Default to New York if geolocation is not supported
       fetchPrayerTimes(40.7128, -74.0060, "New York");
     }
-  }, [fetchPrayerTimes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Re-fetch when settings change, if we have coordinates
+  useEffect(() => {
+    if (coords) {
+      fetchPrayerTimes(coords.lat, coords.lon, currentCityName, selectedDay, selectedMethod, selectedMadhhab);
+    }
+  }, [selectedDay, selectedMethod, selectedMadhhab, fetchPrayerTimes, currentCityName]); // omitting coords intentionally to not loop
 
   // Search for city using Nominatim (OpenStreetMap)
   const handleSearch = async (e: FormEvent) => {
@@ -135,7 +182,7 @@ export default function PrayerTimesClient() {
         const lon = parseFloat(data[0].lon);
         // Use the display name up to the first comma as the city name
         const shortName = data[0].display_name.split(",")[0];
-        await fetchPrayerTimes(lat, lon, shortName);
+        await fetchPrayerTimes(lat, lon, shortName, selectedDay, selectedMethod, selectedMadhhab);
       } else {
         setError("City not found. Please try a different search term.");
       }
@@ -195,7 +242,57 @@ export default function PrayerTimesClient() {
             {location?.country && (
               <p className="text-text-secondary text-lg">{location.country}</p>
             )}
-            <p className="text-text-muted mt-2">Times for today • Muslim World League calculation</p>
+            <p className="text-text-muted mt-2">Times for {selectedDay === 'today' ? 'today' : 'tomorrow'} • {calculationMethodName}</p>
+          </div>
+
+          {/* Settings Controls */}
+          <div className="flex flex-wrap justify-center gap-4 mb-10">
+            <div className="flex bg-bg-card border border-border rounded-xl overflow-hidden p-1 shadow-sm">
+              <button 
+                onClick={() => setSelectedDay("today")}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${selectedDay === "today" ? "bg-primary text-primary-foreground shadow-sm" : "text-text-secondary hover:text-text-primary"}`}
+              >
+                Today
+              </button>
+              <button 
+                onClick={() => setSelectedDay("tomorrow")}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${selectedDay === "tomorrow" ? "bg-primary text-primary-foreground shadow-sm" : "text-text-secondary hover:text-text-primary"}`}
+              >
+                Tomorrow
+              </button>
+            </div>
+            
+            <div className="flex bg-bg-card border border-border rounded-xl overflow-hidden p-1 shadow-sm">
+              <button 
+                onClick={() => setSelectedMadhhab("general")}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${selectedMadhhab === "general" ? "bg-primary text-primary-foreground shadow-sm" : "text-text-secondary hover:text-text-primary"}`}
+              >
+                Standard Asr
+              </button>
+              <button 
+                onClick={() => setSelectedMadhhab("hanafi")}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${selectedMadhhab === "hanafi" ? "bg-primary text-primary-foreground shadow-sm" : "text-text-secondary hover:text-text-primary"}`}
+              >
+                Hanafi Asr
+              </button>
+            </div>
+
+            <div className="flex items-center bg-bg-card border border-border rounded-xl px-3 shadow-sm">
+              <select 
+                value={selectedMethod}
+                onChange={(e) => setSelectedMethod(Number(e.target.value))}
+                className="bg-transparent text-sm text-text-primary py-2 outline-none cursor-pointer max-w-[200px] md:max-w-xs truncate"
+              >
+                <option value={0}>Auto (Recommended)</option>
+                <option value={1}>University of Islamic Sciences, Karachi</option>
+                <option value={2}>Islamic Society of North America (ISNA)</option>
+                <option value={3}>Muslim World League (MWL)</option>
+                <option value={4}>Umm Al-Qura University, Makkah</option>
+                <option value={5}>Egyptian General Authority of Survey</option>
+                <option value={13}>Diyanet (Turkey)</option>
+                <option value={14}>Spiritual Administration of Muslims of Russia (ДУМ РФ)</option>
+              </select>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
