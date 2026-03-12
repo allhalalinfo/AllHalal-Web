@@ -88,20 +88,69 @@ function sanitizeImageUrl(imageUrl: string | null | undefined) {
 }
 
 function extractImageFromItem(item: Record<string, unknown>): string | null {
-  const mediaContent = item.mediaContent as { $?: { url?: string } } | undefined;
+  const mediaContent = item.mediaContent as { $?: { url?: string; width?: string; height?: string } } | undefined;
   const enclosure = item.enclosure as { url?: string } | undefined;
-
-  if (mediaContent?.$?.url) {
-    return sanitizeImageUrl(mediaContent.$.url);
-  }
-
-  if (enclosure?.url) {
-    return sanitizeImageUrl(enclosure.url);
-  }
-
   const content = String(item.contentEncoded || item.content || item.description || "");
-  const imgMatch = content.match(/<img[^>]+src="([^">]+)"/i);
-  return sanitizeImageUrl(imgMatch?.[1] || null);
+  
+  const allImageUrls: Array<{ url: string; score: number }> = [];
+
+  // 1. Check media:content (often highest quality)
+  if (mediaContent?.$?.url) {
+    const width = Number.parseInt(mediaContent.$.width || "0", 10);
+    const height = Number.parseInt(mediaContent.$.height || "0", 10);
+    const area = width * height;
+    allImageUrls.push({ 
+      url: mediaContent.$.url, 
+      score: area > 0 ? area : 1000000  // Prefer media:content if no dimensions
+    });
+  }
+
+  // 2. Check enclosure
+  if (enclosure?.url && /\.(jpg|jpeg|png|webp)$/i.test(enclosure.url)) {
+    allImageUrls.push({ url: enclosure.url, score: 800000 });
+  }
+
+  // 3. Extract all <img> tags from content and find largest
+  const imgMatches = content.matchAll(/<img[^>]+>/gi);
+  for (const match of imgMatches) {
+    const imgTag = match[0];
+    const srcMatch = imgTag.match(/src=["']([^"']+)["']/i);
+    const widthMatch = imgTag.match(/width=["']?(\d+)["']?/i);
+    const heightMatch = imgTag.match(/height=["']?(\d+)["']?/i);
+    
+    if (srcMatch) {
+      const url = srcMatch[1];
+      const width = widthMatch ? Number.parseInt(widthMatch[1], 10) : 0;
+      const height = heightMatch ? Number.parseInt(heightMatch[1], 10) : 0;
+      const area = width * height;
+      
+      // Heuristic: larger images are usually better quality
+      // URLs with "large", "full", "1200", etc. get bonus
+      let score = area > 0 ? area : 500000;
+      if (/large|full|original|1200|1600|2000/i.test(url)) {
+        score += 500000;
+      }
+      if (/thumb|small|icon|avatar|150x150|300x300/i.test(url)) {
+        score -= 400000;
+      }
+      
+      allImageUrls.push({ url, score });
+    }
+  }
+
+  // 4. Check for OpenGraph image in content (often high quality)
+  const ogImageMatch = content.match(/og:image["'\s]+content=["']([^"']+)["']/i);
+  if (ogImageMatch) {
+    allImageUrls.push({ url: ogImageMatch[1], score: 900000 });
+  }
+
+  // Sort by score (highest first) and return best image
+  if (allImageUrls.length > 0) {
+    allImageUrls.sort((a, b) => b.score - a.score);
+    return sanitizeImageUrl(allImageUrls[0].url);
+  }
+
+  return null;
 }
 
 function cleanExcerpt(html: string): string {

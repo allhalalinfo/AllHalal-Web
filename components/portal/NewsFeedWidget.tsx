@@ -429,7 +429,7 @@ function RadarStoryCard({ item }: { item: NewsItem }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group rounded-[1.35rem] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(246,241,234,0.92))] p-3.5 transition-colors hover:border-primary/25 hover:bg-white ${
+      className={`group rounded-[1.35rem] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(246,241,234,0.92))] p-3.5 transition-all duration-300 hover:border-primary/25 hover:bg-white hover:shadow-lg hover:-translate-y-0.5 ${
         showImage ? "grid grid-cols-[88px_1fr] gap-4" : "block"
       }`}
     >
@@ -439,24 +439,25 @@ function RadarStoryCard({ item }: { item: NewsItem }) {
             item={item}
             label={item.categories[0] || "Update"}
             sizes="88px"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
             onImageUnavailable={() => setShowImage(false)}
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       ) : null}
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2 mb-2 text-[11px] text-text-muted">
-          <span className="font-bold uppercase tracking-[0.16em] text-primary">
+          <span className="font-bold uppercase tracking-[0.16em] text-primary transition-colors group-hover:text-primary/80">
             {item.categories[0]}
           </span>
-          <span>{item.sourceName}</span>
-          <span>&bull;</span>
-          <span>{timeAgo(item.publishedAt)}</span>
+          <span className="transition-opacity group-hover:opacity-60">{item.sourceName}</span>
+          <span className="transition-opacity group-hover:opacity-60">&bull;</span>
+          <span className="transition-opacity group-hover:opacity-60">{timeAgo(item.publishedAt)}</span>
         </div>
-        <h4 className="text-lg font-bold text-text-primary leading-snug line-clamp-2 group-hover:text-primary transition-colors mb-1.5">
+        <h4 className="text-lg font-bold text-text-primary leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-300 mb-1.5">
           {item.title}
         </h4>
-        <p className="text-sm text-text-secondary leading-relaxed line-clamp-2">
+        <p className="text-sm text-text-secondary leading-relaxed line-clamp-2 group-hover:text-text-primary transition-colors duration-300">
           {item.excerpt}
         </p>
       </div>
@@ -478,7 +479,7 @@ function LaneStoryCard({
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group rounded-[1.25rem] border border-border bg-white/72 p-3 transition-colors hover:border-primary/25 hover:bg-white ${
+      className={`group rounded-[1.25rem] border border-border bg-white/72 p-3 transition-all duration-300 hover:border-primary/25 hover:bg-white hover:shadow-md hover:-translate-y-0.5 ${
         showImage ? "grid grid-cols-[72px_1fr] gap-4" : "block"
       }`}
     >
@@ -488,21 +489,22 @@ function LaneStoryCard({
             item={item}
             label={laneTitle}
             sizes="72px"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
             onImageUnavailable={() => setShowImage(false)}
           />
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       ) : null}
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2 mb-1.5 text-[11px] text-text-muted">
-          <span className="font-bold text-text-secondary">{item.sourceName}</span>
-          <span>&bull;</span>
-          <span>{timeAgo(item.publishedAt)}</span>
+          <span className="font-bold text-text-secondary group-hover:text-primary transition-colors">{item.sourceName}</span>
+          <span className="transition-opacity group-hover:opacity-60">&bull;</span>
+          <span className="transition-opacity group-hover:opacity-60">{timeAgo(item.publishedAt)}</span>
         </div>
-        <h4 className="text-base font-bold leading-snug text-text-primary line-clamp-2 group-hover:text-primary transition-colors mb-1">
+        <h4 className="text-base font-bold leading-snug text-text-primary line-clamp-2 group-hover:text-primary transition-colors duration-300 mb-1">
           {item.title}
         </h4>
-        <p className="text-sm text-text-secondary leading-relaxed line-clamp-2">
+        <p className="text-sm text-text-secondary leading-relaxed line-clamp-2 group-hover:text-text-primary transition-colors duration-300">
           {item.excerpt}
         </p>
       </div>
@@ -578,10 +580,14 @@ export default function NewsFeedWidget({
         </div>
 
         <div className="flex flex-wrap gap-2 mb-8">
-          {activeLanes.map((lane) => (
+          {activeLanes.map((lane, index) => (
             <div
               key={lane.id}
-              className={`inline-flex rounded-full border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] ${lane.accentClass}`}
+              className={`inline-flex rounded-full border px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] transition-all duration-300 hover:scale-105 hover:shadow-md animate-in fade-in zoom-in-95 ${lane.accentClass}`}
+              style={{
+                animationDelay: `${index * 80}ms`,
+                animationFillMode: 'backwards'
+              }}
             >
               <span>{lane.title}</span>
             </div>
@@ -615,42 +621,50 @@ export default function NewsFeedWidget({
                 href={leadStory.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative overflow-hidden rounded-[2rem] border border-border bg-[#102432] text-white shadow-[0_24px_52px_rgba(17,27,36,0.24)]"
+                className="group relative overflow-hidden rounded-[2rem] border border-border bg-[#102432] text-white shadow-[0_24px_52px_rgba(17,27,36,0.24)] transition-all duration-500 hover:shadow-[0_32px_64px_rgba(17,27,36,0.32)] hover:-translate-y-1"
               >
                 <div className="relative aspect-[1.35/1] min-h-[26rem] w-full">
                   <StoryImage
                     item={leadStory}
                     label={leadStory.categories[0] || "Top story"}
                     sizes="(max-width: 1280px) 100vw, 70vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,14,20,0.08),rgba(7,14,20,0.72)_62%,rgba(7,14,20,0.92))]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,14,20,0.08),rgba(7,14,20,0.72)_62%,rgba(7,14,20,0.92))] transition-opacity duration-500 group-hover:opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                  <div className="flex flex-wrap items-center gap-2 mb-4 transform transition-transform duration-300 group-hover:translate-x-1">
                     {leadStory.categories.slice(0, 2).map((category) => (
                       <span
                         key={category}
-                        className="rounded-full bg-white/12 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white"
+                        className="rounded-full bg-white/12 backdrop-blur-sm px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition-all duration-300 group-hover:bg-white/20 group-hover:scale-105"
                       >
                         {category}
                       </span>
                     ))}
                   </div>
 
-                  <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-white/72">
+                  <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-white/72 transition-all duration-300 group-hover:text-white/90">
                     <span className="font-bold text-white/92">{leadStory.sourceName}</span>
                     <span>&bull;</span>
                     <span>{timeAgo(leadStory.publishedAt)}</span>
                   </div>
 
-                  <h3 className="max-w-3xl text-3xl md:text-[2.7rem] font-bold font-display leading-tight mb-3 text-white group-hover:text-accent-yellow transition-colors">
+                  <h3 className="max-w-3xl text-3xl md:text-[2.7rem] font-bold font-display leading-tight mb-3 text-white group-hover:text-accent-yellow transition-all duration-500 transform group-hover:translate-x-1">
                     {leadStory.title}
                   </h3>
-                  <p className="max-w-2xl text-base md:text-lg leading-relaxed text-white/78 line-clamp-3">
+                  <p className="max-w-2xl text-base md:text-lg leading-relaxed text-white/78 line-clamp-3 transition-all duration-300 group-hover:text-white/90">
                     {leadStory.excerpt}
                   </p>
+                  
+                  <div className="mt-4 flex items-center gap-2 text-sm font-bold text-accent-yellow opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                    <span>Read full story</span>
+                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
               </a>
 
@@ -681,15 +695,19 @@ export default function NewsFeedWidget({
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {activeLanes.map((lane) => (
+              {activeLanes.map((lane, laneIndex) => (
                 <div
                   key={lane.id}
-                  className="rounded-[1.8rem] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,240,232,0.92))] p-5 shadow-[0_12px_30px_rgba(48,40,29,0.06)]"
+                  className="rounded-[1.8rem] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,240,232,0.92))] p-5 shadow-[0_12px_30px_rgba(48,40,29,0.06)] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(48,40,29,0.12)] hover:-translate-y-1 animate-in fade-in slide-in-from-bottom-4"
+                  style={{ 
+                    animationDelay: `${laneIndex * 100}ms`,
+                    animationFillMode: 'backwards'
+                  }}
                 >
                   <div className="flex items-start justify-between gap-3 mb-5">
                     <div>
                       <span
-                        className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${lane.accentClass}`}
+                        className={`inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:scale-105 ${lane.accentClass}`}
                       >
                         {lane.title}
                       </span>
@@ -700,8 +718,17 @@ export default function NewsFeedWidget({
                   </div>
 
                   <div className="space-y-3">
-                    {lane.items.map((item) => (
-                      <LaneStoryCard key={item.id} item={item} laneTitle={lane.title} />
+                    {lane.items.map((item, itemIndex) => (
+                      <div
+                        key={item.id}
+                        className="animate-in fade-in slide-in-from-left-2"
+                        style={{
+                          animationDelay: `${(laneIndex * 100) + (itemIndex * 50) + 200}ms`,
+                          animationFillMode: 'backwards'
+                        }}
+                      >
+                        <LaneStoryCard item={item} laneTitle={lane.title} />
+                      </div>
                     ))}
                   </div>
                 </div>
