@@ -572,7 +572,7 @@ export default function NewsFeedWidget({
           </div>
 
           <Link
-            href={`/${locale}/blog`}
+            href={`/${locale}/news`}
             className="inline-flex items-center justify-center rounded-full bg-[#17323E] px-5 py-3 text-sm font-bold text-white shadow-[0_14px_30px_rgba(23,50,62,0.24)] transition-transform hover:-translate-y-0.5 shrink-0"
           >
             Explore more &rarr;
@@ -743,7 +743,7 @@ export default function NewsFeedWidget({
             <div className="text-text-secondary mb-5">
               No trusted-source updates are available right now.
             </div>
-            <Link href={`/${locale}/blog`} className="text-sm font-bold text-primary">
+            <Link href={`/${locale}/news`} className="text-sm font-bold text-primary">
               Explore Muslim World &rarr;
             </Link>
           </div>

@@ -29,7 +29,7 @@ export default async function BlogPostPage(props: { params: Promise<{ locale: st
   return (
     <div className="container py-32 min-h-screen">
       <div className="max-w-3xl mx-auto">
-        <Link href={`/${params.locale}/blog`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Blog</Link>
+        <Link href={`/${params.locale}/news`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to News</Link>
         
         <div className="mb-12">
           <div className="flex gap-2 mb-6">

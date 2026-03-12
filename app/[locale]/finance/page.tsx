@@ -138,7 +138,7 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
       links: [
         { label: "Halal investing", href: `/${locale}/finance/investing` },
         { label: "Methodology", href: `/${locale}/methodology` },
-        { label: "Read the briefing", href: `/${locale}/blog` },
+        { label: "Read the briefing", href: `/${locale}/news` },
       ],
       accent: "from-[#E8E0D5] to-[#F6F0E7] text-text-primary",
     },
@@ -547,7 +547,7 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
                 },
                 {
                   title: "Read Muslim briefing",
-                  href: `/${locale}/blog`,
+                  href: `/${locale}/news`,
                 },
                 {
                   title: "Open support",

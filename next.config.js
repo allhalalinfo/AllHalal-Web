@@ -22,6 +22,21 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  // Redirects for URL changes
+  async redirects() {
+    return [
+      {
+        source: '/:locale/blog',
+        destination: '/:locale/news',
+        permanent: true,
+      },
+      {
+        source: '/:locale/blog/:slug',
+        destination: '/:locale/news/:slug',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = withNextIntl(nextConfig);

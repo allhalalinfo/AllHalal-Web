@@ -51,7 +51,7 @@ export default function Footer() {
   const primaryLinks = [
     { label: "Open halal checker", href: "/is-it-halal" },
     { label: "See prayer times", href: "/prayer-times" },
-    { label: "Read Muslim updates", href: "/blog" },
+    { label: "Read Muslim updates", href: "/news" },
   ];
 
   const navGroups = [
@@ -68,7 +68,7 @@ export default function Footer() {
       title: "Read & Learn",
       links: [
         { label: "Learn", href: "/learn" },
-        { label: "Blog", href: "/blog" },
+        { label: "News", href: "/news" },
         { label: "Ramadan", href: "/learn/ramadan" },
         { label: "Our Methodology", href: "/methodology" },
       ],

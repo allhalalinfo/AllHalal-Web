@@ -83,8 +83,8 @@ export default async function BlogIndex(props: { params: Promise<{ locale: strin
     "@graph": [
       {
         "@type": "CollectionPage",
-        "@id": `${SITE_URL}/${locale}/blog#webpage`,
-        url: `${SITE_URL}/${locale}/blog`,
+        "@id": `${SITE_URL}/${locale}/news#webpage`,
+        url: `${SITE_URL}/${locale}/news`,
         name: "AllHalal News Hub",
         description:
           "Muslim news hub for halal living, Islamic finance, faith, family and editorial guides.",
@@ -95,7 +95,7 @@ export default async function BlogIndex(props: { params: Promise<{ locale: strin
         itemListElement: sortedPosts.slice(0, 6).map((post, index) => ({
           "@type": "ListItem",
           position: index + 1,
-          url: `${SITE_URL}/${locale}/blog/${post.slug}`,
+          url: `${SITE_URL}/${locale}/news/${post.slug}`,
           name: post.title,
         })),
       },
@@ -127,7 +127,7 @@ export default async function BlogIndex(props: { params: Promise<{ locale: strin
       <section className="grid xl:grid-cols-[1fr_1fr] gap-6 mb-12">
         {/* Featured - Smaller, More Info */}
         <Link
-          href={`/${locale}/blog/${featuredPost.slug}`}
+          href={`/${locale}/news/${featuredPost.slug}`}
           className="group rounded-[1.75rem] border border-border bg-bg-dark text-white p-6 shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all"
         >
           <div className="flex items-center justify-between mb-3">
@@ -166,7 +166,7 @@ export default async function BlogIndex(props: { params: Promise<{ locale: strin
             {recentPosts.map((post) => (
               <Link
                 key={post.slug}
-                href={`/${locale}/blog/${post.slug}`}
+                href={`/${locale}/news/${post.slug}`}
                 className="block rounded-xl border border-border bg-bg-secondary/50 p-4 hover:bg-white hover:border-primary/30 hover:shadow-sm transition-all"
               >
                 <div className="flex flex-wrap gap-1.5 mb-2">

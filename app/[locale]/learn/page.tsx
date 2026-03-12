@@ -206,7 +206,7 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
       links: [
         { label: "99 Names of Allah", href: `/${locale}/learn/99-names` },
         { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
-        { label: "Read the briefing", href: `/${locale}/blog` },
+        { label: "Read the briefing", href: `/${locale}/news` },
       ],
       accent: "from-[#E9E1D6] to-[#F6F0E7] text-text-primary",
     },
@@ -433,7 +433,7 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
                   Pages a Muslim learning hub should surface before users go looking elsewhere.
                 </h2>
               </div>
-              <Link href={`/${locale}/blog`} className="text-sm font-bold text-primary hover:underline shrink-0">
+              <Link href={`/${locale}/news`} className="text-sm font-bold text-primary hover:underline shrink-0">
                 Read Muslim updates →
               </Link>
             </div>
@@ -562,7 +562,7 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
                 },
                 {
                   title: "See what matters today",
-                  href: `/${locale}/blog`,
+                  href: `/${locale}/news`,
                 },
                 {
                   title: "Return to the homepage",

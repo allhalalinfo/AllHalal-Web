@@ -156,7 +156,7 @@ export function generateBlogMetadata(options: {
   return generateMetadata({
     title: options.title,
     description: options.description,
-    path: `/blog/${options.slug}`,
+    path: `/news/${options.slug}`,
     keywords: [options.category, ...options.tags],
     image: options.coverImage,
     type: 'article',

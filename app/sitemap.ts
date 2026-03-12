@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const englishStaticRoutes = [
     '',
-    '/blog',
+    '/news',
     '/finance',
     '/finance/banks',
     '/finance/investing',
@@ -46,13 +46,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/en${route}`,
       lastModified: now,
       changeFrequency:
-        route === '' || route === '/blog' || route === '/is-it-halal'
+        route === '' || route === '/news' || route === '/is-it-halal'
           ? 'daily' as const
           : 'weekly' as const,
       priority: route === '' ? 1 : route === '/is-it-halal' ? 0.9 : 0.8,
     })),
     ...blogPosts.map((post) => ({
-      url: `${baseUrl}/en/blog/${post.slug}`,
+      url: `${baseUrl}/en/news/${post.slug}`,
       lastModified: new Date(post.publishedAt),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
