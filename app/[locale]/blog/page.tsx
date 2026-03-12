@@ -108,135 +108,102 @@ export default async function BlogIndex(props: { params: Promise<{ locale: strin
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <FAQSchema faqs={faqs} />
 
-      <section className="max-w-5xl mx-auto text-center mb-14">
-        <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-4">
-          News & Editorial
-        </p>
-        <h1 className="text-5xl md:text-6xl font-bold font-display text-text-primary mb-6 leading-tight">
-          Muslim news, halal living and Islamic guidance in one hub.
+      {/* Compact Hero - Less talk, more action */}
+      <section className="max-w-4xl mx-auto mb-12">
+        <div className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-primary mb-4">
+          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          Live News & Guides
+        </div>
+        <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-4 leading-tight">
+          Muslim news, halal guides, finance insights.
         </h1>
-        <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-          Follow current Muslim headlines, read practical halal and finance guides, and move directly into the parts of AllHalal that help you act on what you learn.
+        <p className="text-lg text-text-secondary leading-relaxed">
+          Updated every 30 minutes from trusted sources.
         </p>
       </section>
 
-      <section className="grid xl:grid-cols-[1.15fr_0.85fr] gap-6 mb-16">
+      {/* Compact Grid - Featured + Recent */}
+      <section className="grid xl:grid-cols-[1fr_1fr] gap-6 mb-12">
+        {/* Featured - Smaller, More Info */}
         <Link
           href={`/${locale}/blog/${featuredPost.slug}`}
-          className="rounded-[2rem] border border-border bg-bg-dark text-white p-8 shadow-2xl hover:-translate-y-1 transition-transform"
+          className="group rounded-[1.75rem] border border-border bg-bg-dark text-white p-6 shadow-xl hover:-translate-y-1 hover:shadow-2xl transition-all"
         >
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent-yellow mb-4">
-            Featured Guide
-          </p>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {featuredPost.tags.map((tag) => (
-              <span key={tag} className="px-3 py-1 rounded-full bg-white/10 text-xs font-bold uppercase tracking-[0.12em]">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold uppercase tracking-[0.18em] text-accent-yellow">
+              Editor's Pick
+            </span>
+            <span className="text-xs text-white/60">5 min read</span>
+          </div>
+          <div className="flex flex-wrap gap-2 mb-3">
+            {featuredPost.tags.slice(0, 2).map((tag) => (
+              <span key={tag} className="px-2.5 py-1 rounded-full bg-white/10 text-[10px] font-bold uppercase tracking-[0.12em]">
                 {tag}
               </span>
             ))}
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold font-display leading-tight mb-3 group-hover:text-accent-yellow transition-colors">
             {featuredPost.title}
           </h2>
-          <p className="text-white/75 text-base leading-relaxed mb-6">{featuredPost.summary}</p>
-          <span className="text-sm font-bold text-accent-yellow">Read featured article →</span>
+          <p className="text-white/75 text-sm leading-relaxed line-clamp-2">{featuredPost.summary}</p>
         </Link>
 
-        <div className="rounded-[2rem] border border-border bg-white p-8 shadow-card">
-          <div className="flex items-center justify-between mb-6">
+        {/* Recent - Compact List */}
+        <div className="rounded-[1.75rem] border border-border bg-white p-6 shadow-card">
+          <div className="flex items-center justify-between mb-5">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-2">
-                Recent Editorial
-              </p>
-              <h2 className="text-3xl font-bold font-display text-text-primary">
-                Fresh reads from AllHalal.
+              <span className="text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                Latest from AllHalal
+              </span>
+              <h2 className="text-xl font-bold font-display text-text-primary mt-1">
+                Fresh guides
               </h2>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {recentPosts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/${locale}/blog/${post.slug}`}
-                className="block rounded-[1.5rem] border border-border bg-bg-secondary/50 p-5 hover:bg-white hover:border-primary/30 transition-colors"
+                className="block rounded-xl border border-border bg-bg-secondary/50 p-4 hover:bg-white hover:border-primary/30 hover:shadow-sm transition-all"
               >
-                <div className="flex flex-wrap gap-2 mb-3">
+                <div className="flex flex-wrap gap-1.5 mb-2">
                   {post.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="px-2.5 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-[0.14em]">
+                    <span key={tag} className="px-2 py-0.5 bg-primary/10 text-primary text-[9px] font-bold rounded uppercase tracking-wider">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h3 className="text-xl font-bold font-display text-text-primary mb-2 leading-snug">
+                <h3 className="text-base font-bold font-display text-text-primary leading-snug line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">{post.summary}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Live News Feed - Main Content */}
       <NewsHubClient initialNews={initialNews} />
 
-      <section className="mt-16 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+      {/* Quick Navigation - Keep hubCards but make them more action-oriented */}
+      <section className="mt-12 grid md:grid-cols-4 gap-3">
         {hubCards.map((card) => (
           <Link
             key={card.title}
             href={card.href}
-            className="rounded-[1.75rem] border border-border bg-white p-6 shadow-card hover:-translate-y-1 transition-transform"
+            className="rounded-xl border border-border bg-white p-4 hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all group"
           >
-            <h2 className="text-xl font-bold font-display text-text-primary mb-3 leading-snug">
+            <h3 className="text-sm font-bold text-text-primary mb-1 leading-snug group-hover:text-primary transition-colors">
               {card.title}
-            </h2>
-            <p className="text-sm text-text-secondary leading-relaxed mb-4">
-              {card.description}
-            </p>
-            <span className="text-sm font-bold text-primary">Explore section →</span>
+            </h3>
+            <span className="text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+              Explore →
+            </span>
           </Link>
         ))}
-      </section>
-
-      <section className="mt-16 grid xl:grid-cols-[0.9fr_1.1fr] gap-6">
-        <div className="rounded-[2rem] border border-border bg-white p-8 shadow-card">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-            Why This Hub Matters
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary mb-4">
-            News should lead into useful Muslim action, not just passive scrolling.
-          </h2>
-          <div className="space-y-4 text-text-secondary leading-relaxed">
-            <p>
-              A stronger Muslim portal does not separate current updates from useful next steps. People reading about halal living should be able to continue into the halal checker. People reading about finance should move naturally into zakat, investing or mortgages. People reading about family and faith should discover learning resources they can return to daily.
-            </p>
-            <p>
-              That is the role of this hub. It combines timely Muslim coverage with editorial guidance and then routes readers deeper into the wider AllHalal ecosystem.
-            </p>
-          </div>
-        </div>
-
-        <div className="rounded-[2rem] border border-border bg-white p-8 shadow-card">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-            Quick Answers
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary mb-6">
-            What readers should understand immediately.
-          </h2>
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <details key={faq.question} className="rounded-[1.5rem] border border-border bg-bg-secondary/50 p-5 group">
-                <summary className="list-none cursor-pointer flex items-center justify-between gap-4">
-                  <span className="font-bold text-text-primary">{faq.question}</span>
-                  <span className="text-primary font-bold transition-transform group-open:rotate-45">+</span>
-                </summary>
-                <p className="mt-4 text-sm text-text-secondary leading-relaxed">{faq.answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
       </section>
     </main>
   );
