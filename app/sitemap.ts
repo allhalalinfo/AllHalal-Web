@@ -8,7 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const localizedStaticRoutes = [
     '',
-    '/app',
     '/contact',
     '/support',
     '/legal',
@@ -19,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const englishStaticRoutes = [
     '',
     '/blog',
-    '/boycott-checker',
     '/finance',
     '/finance/banks',
     '/finance/investing',
@@ -29,11 +27,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/learn',
     '/learn/99-names',
     '/learn/duas',
-    '/learn/islamic-calendar',
     '/learn/live-makkah',
     '/learn/ramadan',
     '/methodology',
-    '/prayer-times',
   ];
   const halalCategories = Array.from(new Set(halalItems.map((item) => item.category)));
 
@@ -50,10 +46,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/en${route}`,
       lastModified: now,
       changeFrequency:
-        route === '' || route === '/blog' || route === '/is-it-halal' || route === '/prayer-times'
+        route === '' || route === '/blog' || route === '/is-it-halal'
           ? 'daily' as const
           : 'weekly' as const,
-      priority: route === '' ? 1 : route === '/is-it-halal' || route === '/prayer-times' ? 0.9 : 0.8,
+      priority: route === '' ? 1 : route === '/is-it-halal' ? 0.9 : 0.8,
     })),
     ...blogPosts.map((post) => ({
       url: `${baseUrl}/en/blog/${post.slug}`,

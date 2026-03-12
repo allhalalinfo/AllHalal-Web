@@ -19,29 +19,11 @@ export default function ExploreSection() {
       )
     },
     {
-      id: "prayer",
-      href: `/${locale}/prayer-times`,
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    },
-    {
       id: "finance",
       href: `/${locale}/finance`,
       icon: (
         <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    },
-    {
-      id: "boycott",
-      href: `/${locale}/boycott-checker`,
-      icon: (
-        <svg className="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
       )
     },
@@ -105,22 +87,22 @@ export default function ExploreSection() {
             </SpotlightCard>
           </Link>
 
-          {/* Prayer Times - Teal */}
+          {/* Finance - Dark Chocolate */}
           <Link href={resources[1].href} className="group block">
-            <SpotlightCard className="h-full bg-accent-teal text-text-inverse border-transparent hover:border-accent-teal/50 transition-all">
+            <SpotlightCard className="h-full bg-bg-dark text-text-inverse border-transparent hover:border-white/10 transition-all">
               {/* Background Image Layer */}
               <div 
                 className="absolute inset-0 opacity-20 bg-cover bg-bottom bg-no-repeat mix-blend-overlay group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                 style={{ backgroundImage: "url('/assets/card-bg.png')" }}
               />
               <div className="relative z-10 flex flex-col sm:flex-row gap-6 items-start p-8 h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
-                  <div className="text-white">{resources[1].icon}</div>
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-colors">
+                  <div className="text-accent-yellow">{resources[1].icon}</div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
+                  <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-accent-yellow transition-colors">
                     {t(`${resources[1].id}.title`)}
-                    <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+                    <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-accent-yellow">
                       &rarr;
                     </span>
                   </h3>
@@ -132,22 +114,22 @@ export default function ExploreSection() {
             </SpotlightCard>
           </Link>
 
-          {/* Finance - Dark Chocolate */}
+          {/* Learn - Navy */}
           <Link href={resources[2].href} className="group block">
-            <SpotlightCard className="h-full bg-bg-dark text-text-inverse border-transparent hover:border-white/10 transition-all">
+            <SpotlightCard className="h-full bg-accent-navy text-text-inverse border-transparent hover:border-accent-navy/50 transition-all">
               {/* Background Image Layer */}
               <div 
                 className="absolute inset-0 opacity-20 bg-cover bg-bottom bg-no-repeat mix-blend-overlay group-hover:scale-105 transition-transform duration-700 pointer-events-none"
                 style={{ backgroundImage: "url('/assets/card-bg.png')" }}
               />
               <div className="relative z-10 flex flex-col sm:flex-row gap-6 items-start p-8 h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/10 transition-colors">
-                  <div className="text-accent-yellow">{resources[2].icon}</div>
+                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                  <div className="text-white">{resources[2].icon}</div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-accent-yellow transition-colors">
+                  <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
                     {t(`${resources[2].id}.title`)}
-                    <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-accent-yellow">
+                    <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
                       &rarr;
                     </span>
                   </h3>
@@ -159,9 +141,9 @@ export default function ExploreSection() {
             </SpotlightCard>
           </Link>
 
-          {/* Boycott Checker - Terracotta */}
+          {/* Blog - Olive */}
           <Link href={resources[3].href} className="group block">
-            <SpotlightCard className="h-full bg-accent-terracotta text-text-inverse border-transparent hover:border-accent-terracotta/50 transition-all">
+            <SpotlightCard className="h-full bg-accent-olive text-text-inverse border-transparent hover:border-accent-olive/50 transition-all">
               {/* Background Image Layer */}
               <div 
                 className="absolute inset-0 opacity-20 bg-cover bg-bottom bg-no-repeat mix-blend-overlay group-hover:scale-105 transition-transform duration-700 pointer-events-none"
@@ -180,60 +162,6 @@ export default function ExploreSection() {
                   </h3>
                   <p className="text-text-inverse-secondary leading-relaxed">
                     {t(`${resources[3].id}.desc`)}
-                  </p>
-                </div>
-              </div>
-            </SpotlightCard>
-          </Link>
-
-          {/* Learn - Navy */}
-          <Link href={resources[4].href} className="group block">
-            <SpotlightCard className="h-full bg-accent-navy text-text-inverse border-transparent hover:border-accent-navy/50 transition-all">
-              {/* Background Image Layer */}
-              <div 
-                className="absolute inset-0 opacity-20 bg-cover bg-bottom bg-no-repeat mix-blend-overlay group-hover:scale-105 transition-transform duration-700 pointer-events-none"
-                style={{ backgroundImage: "url('/assets/card-bg.png')" }}
-              />
-              <div className="relative z-10 flex flex-col sm:flex-row gap-6 items-start p-8 h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
-                  <div className="text-white">{resources[4].icon}</div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
-                    {t(`${resources[4].id}.title`)}
-                    <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-                      &rarr;
-                    </span>
-                  </h3>
-                  <p className="text-text-inverse-secondary leading-relaxed">
-                    {t(`${resources[4].id}.desc`)}
-                  </p>
-                </div>
-              </div>
-            </SpotlightCard>
-          </Link>
-
-          {/* Blog - Olive */}
-          <Link href={resources[5].href} className="group block">
-            <SpotlightCard className="h-full bg-accent-olive text-text-inverse border-transparent hover:border-accent-olive/50 transition-all">
-              {/* Background Image Layer */}
-              <div 
-                className="absolute inset-0 opacity-20 bg-cover bg-bottom bg-no-repeat mix-blend-overlay group-hover:scale-105 transition-transform duration-700 pointer-events-none"
-                style={{ backgroundImage: "url('/assets/card-bg.png')" }}
-              />
-              <div className="relative z-10 flex flex-col sm:flex-row gap-6 items-start p-8 h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
-                  <div className="text-white">{resources[5].icon}</div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold font-display text-text-inverse mb-2 flex items-center gap-2 group-hover:text-white transition-colors">
-                    {t(`${resources[5].id}.title`)}
-                    <span className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
-                      &rarr;
-                    </span>
-                  </h3>
-                  <p className="text-text-inverse-secondary leading-relaxed">
-                    {t(`${resources[5].id}.desc`)}
                   </p>
                 </div>
               </div>
