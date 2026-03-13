@@ -1,5 +1,6 @@
 import Parser from "rss-parser";
 import { HOMEPAGE_QUOTAS, newsSources, type NewsCategory, type NewsSource } from "@/lib/newsSources";
+import { getCachedNews, setCachedNews } from "@/lib/redis";
 
 export interface NewsItem {
   id: string;
@@ -36,8 +37,7 @@ const parser = new Parser({
   },
 });
 
-const cache: Record<string, CachedNews> = {};
-const CACHE_TTL = 1000 * 60 * 30;
+const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
 const FEED_SOURCE_CAP = 3;
 const HOMEPAGE_SOURCE_CAP = 2;
 const HOMEPAGE_MAX_AGE_HOURS = 24 * 120;
@@ -469,9 +469,20 @@ export async function getAggregatedNews({
   const normalizedLimit = Number.isFinite(limit) ? Math.min(Math.max(limit, 1), 50) : 20;
   const cacheKey = getCacheKey({ category, safeOnly });
 
-  if (!bypassCache && cache[cacheKey] && Date.now() - cache[cacheKey].timestamp < CACHE_TTL) {
-    return cache[cacheKey].items.slice(0, normalizedLimit);
+  // Try Redis cache first
+  if (!bypassCache) {
+    try {
+      const cached = await getCachedNews(cacheKey);
+      if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+        console.log(`✅ Cache hit (${cached.source}): ${cacheKey}`);
+        return cached.items.slice(0, normalizedLimit);
+      }
+    } catch (error) {
+      console.warn('Cache read error, fetching fresh:', error);
+    }
   }
+
+  console.log(`🔄 Fetching fresh news (bypass: ${bypassCache}): ${cacheKey}`);
 
   const activeSources = filterSources({ category, safeOnly });
   const fetchedItems = await Promise.all(activeSources.map(fetchSourceItems));
@@ -481,10 +492,12 @@ export async function getAggregatedNews({
     ? curateHomepageItems(rankedItems, normalizedLimit)
     : curateFeedItems(rankedItems, normalizedLimit);
 
-  cache[cacheKey] = {
-    items: curatedItems,
-    timestamp: Date.now(),
-  };
+  // Save to Redis cache
+  try {
+    await setCachedNews(cacheKey, curatedItems, Math.floor(CACHE_TTL / 1000));
+  } catch (error) {
+    console.error('Cache write error:', error);
+  }
 
   return curatedItems.slice(0, normalizedLimit);
 }
