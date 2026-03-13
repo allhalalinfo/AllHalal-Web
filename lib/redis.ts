@@ -1,9 +1,14 @@
 /**
  * Redis Client Configuration
  * 
- * Priority:
- * 1. Hetzner Redis (your existing server) - primary, $0
- * 2. Upstash Redis (managed) - fallback, free tier
+ * SECURITY WARNING:
+ * - NEVER expose Redis directly to internet without authentication
+ * - Use SSH tunnel or Upstash (REST API with TLS)
+ * - Hetzner Redis should be localhost-only or behind VPN
+ * 
+ * Architecture:
+ * - Upstash Redis REST API (TLS encrypted, no direct TCP)
+ * - Falls back to memory cache if no Redis configured
  * 
  * Usage:
  * - News feed caching (TTL: 30 minutes)
@@ -16,7 +21,7 @@ import { Redis } from '@upstash/redis';
 export interface CachedNewsData {
   items: any[];
   timestamp: number;
-  source: 'hetzner' | 'upstash' | 'memory';
+  source: 'upstash' | 'memory';
 }
 
 // Memory fallback (same as current implementation)
@@ -24,27 +29,15 @@ const memoryCache = new Map<string, CachedNewsData>();
 
 /**
  * Get Redis client
- * Tries Hetzner first, falls back to Upstash, then memory
+ * ONLY uses Upstash (secure REST API over HTTPS)
  */
 function getRedisClient(): Redis | null {
-  // Option 1: Hetzner Redis (preferred)
-  if (process.env.HETZNER_REDIS_URL) {
+  // Upstash Redis REST API (secure, no direct TCP exposure)
+  if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
     try {
       return new Redis({
-        url: process.env.HETZNER_REDIS_URL,
-        token: process.env.HETZNER_REDIS_PASSWORD || '',
-      });
-    } catch (error) {
-      console.warn('Hetzner Redis connection failed, trying Upstash...', error);
-    }
-  }
-
-  // Option 2: Upstash Redis (fallback)
-  if (process.env.UPSTASH_REDIS_URL && process.env.UPSTASH_REDIS_TOKEN) {
-    try {
-      return new Redis({
-        url: process.env.UPSTASH_REDIS_URL,
-        token: process.env.UPSTASH_REDIS_TOKEN,
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
       });
     } catch (error) {
       console.warn('Upstash Redis connection failed, using memory cache', error);
@@ -70,7 +63,7 @@ export async function getCachedNews(key: string): Promise<CachedNewsData | null>
     if (redisClient) {
       const data = await redisClient.get<CachedNewsData>(key);
       if (data) {
-        return { ...data, source: process.env.HETZNER_REDIS_URL ? 'hetzner' : 'upstash' };
+        return { ...data, source: 'upstash' };
       }
     }
 
@@ -110,7 +103,7 @@ export async function setCachedNews(
 
     if (redisClient) {
       await redisClient.set(key, cacheData, { ex: ttlSeconds });
-      console.log(`✅ Cached to Redis (${process.env.HETZNER_REDIS_URL ? 'Hetzner' : 'Upstash'}): ${key}`);
+      console.log(`✅ Cached to Redis (Upstash): ${key}`);
     } else {
       // Memory fallback
       memoryCache.set(key, cacheData);
@@ -155,7 +148,7 @@ export async function deleteCachedNews(key: string): Promise<void> {
  */
 export async function checkRedisHealth(): Promise<{
   connected: boolean;
-  source: 'hetzner' | 'upstash' | 'memory' | 'none';
+  source: 'upstash' | 'memory' | 'none';
   latency?: number;
 }> {
   try {
@@ -173,7 +166,7 @@ export async function checkRedisHealth(): Promise<{
 
     return {
       connected: true,
-      source: process.env.HETZNER_REDIS_URL ? 'hetzner' : 'upstash',
+      source: 'upstash',
       latency,
     };
   } catch (error) {

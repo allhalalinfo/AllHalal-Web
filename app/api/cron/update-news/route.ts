@@ -10,7 +10,11 @@
  * - Requires CRON_SECRET header for authentication
  * - Prevents unauthorized cache refreshes
  * 
- * Setup on Hetzner:
+ * Setup on Hetzner (NOT Vercel Cron):
+ * 
+ * Why Hetzner? Vercel Hobby plan limits cron to 1 execution/day.
+ * Upgrading to Vercel Pro costs $20/month just for cron.
+ * Hetzner cron is free and unlimited.
  * 
  * 1. SSH into your server:
  *    ssh root@your-hetzner-ip
@@ -26,8 +30,13 @@
  * 
  * Environment Variables (add to Vercel):
  * - CRON_SECRET: Random string (e.g., openssl rand -hex 32)
- * - HETZNER_REDIS_URL: redis://user:password@your-server-ip:6379
- * - HETZNER_REDIS_PASSWORD: your-redis-password (optional if in URL)
+ * - UPSTASH_REDIS_REST_URL: https://xxx.upstash.io (from Upstash console)
+ * - UPSTASH_REDIS_REST_TOKEN: your_token (from Upstash console)
+ * 
+ * Architecture:
+ * Hetzner Cron → HTTPS → Vercel API → HTTPS REST API → Upstash Redis
+ * 
+ * SECURITY: Uses Upstash REST API (TLS encrypted), NOT direct Redis TCP.
  */
 
 import { NextResponse } from 'next/server';
