@@ -6,7 +6,7 @@
 **Было:**
 ```typescript
 HETZNER_REDIS_URL=redis://:password@public-ip:6379
-// Direct TCP connection - НЕБЕЗОПАСНО!
+// Direct TCP connection from Vercel - НЕБЕЗОПАСНО!
 ```
 
 **Стало:**
@@ -17,10 +17,9 @@ UPSTASH_REDIS_REST_TOKEN=AYxxxxx
 ```
 
 **Почему:**
-- Direct Redis TCP = открытый порт в интернете
-- Риск brute force, DDoS, unauthorized access
-- @upstash/redis SDK работает через REST API, а не TCP
-- Upstash REST API: встроенный TLS, token auth, serverless-ready
+- Direct Redis TCP from Vercel через открытый интернет = security risk
+- Self-hosted Hetzner Redis через SSH tunnel/VPN = secure (но сложнее setup)
+- Upstash REST API = built-in TLS, token auth, serverless-ready
 
 ---
 
@@ -84,20 +83,25 @@ crontab -e
 - "99% faster"
 - "Instant loading"
 
-**Реальность (честно):**
+**Стало (честно, с пометкой estimated):**
 ```
-Типичная latency: ~200ms
-Breakdown:
+Estimated latency: ~200ms typical
+Breakdown (all estimated until measured):
 - Upstash REST API: 20-50ms
 - Next.js SSR: 50-150ms
 - Network (user → Vercel): 50-200ms
 Total: 120-400ms (обычно ~200ms)
 ```
 
-**Что улучшилось:**
-- ✅ Убрали cold starts (8-15 секунд)
-- ✅ Consistent latency (не зависит от RSS)
-- ⚠️ НЕ "мгновенно" (~200ms vs 8-15s)
+**Expected improvement:**
+- ✅ Should eliminate 8-15s cold starts
+- ✅ Should provide consistent latency
+- ⚠️ All numbers are estimates - measure in production
+
+**Upstash Free Tier (corrected):**
+- 500K commands/month (not 10K/day)
+- Estimated usage: ~30K/month
+- Headroom: 16x
 
 ---
 
@@ -178,13 +182,13 @@ if (process.env.UPSTASH_REDIS_REST_URL &&
 | Ресурс | Free Tier | Использование | Достаточно? | Стоимость |
 |--------|-----------|---------------|-------------|-----------|
 | Hetzner cron | Unlimited | 48/день | ✅ | $0 |
-| Upstash Redis | 10K cmd/день | ~2,500/день | ✅ (4x запас) | $0 |
+| Upstash Redis | 500K cmd/мес | ~30K/мес (est.) | ✅ (16x запас) | $0 |
 | Vercel API | 100K req/мес | ~1,440/мес | ✅ | $0 |
 | **TOTAL** | - | - | - | **$0/мес** |
 
 **Если превысите:**
 - Upstash paid: $0.20/100K commands
-- При 250K cmd/месяц = $0.50/месяц
+- При 30K cmd/месяц = $0.06/месяц
 
 ---
 

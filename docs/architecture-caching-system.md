@@ -110,24 +110,26 @@ Hetzner (ваш сервер):
 ### 3. **Upstash Redis**
 **Тип:** Managed Redis с REST API
 
-**Почему Upstash:**
+**Почему Upstash для Vercel:**
 - ✅ REST API over HTTPS (secure by design)
 - ✅ Работает с serverless из коробки
-- ✅ Free tier: 10K commands/day (достаточно)
+- ✅ Free tier: 500K commands/month (достаточно)
 - ✅ No firewall configuration needed
 - ✅ TLS encryption included
 
-**Ваше использование:**
+**Ваше использование (estimated):**
 ```
-48 cron runs/day × (1 SET + ~50 GET) = ~2,500 commands/day
-Free tier: 10,000 commands/day
-Запас: 4x ✅
+48 cron runs/день × 30 дней = 1,440 runs/мес
+Each run: 1 SET + ~20 GET requests/день = ~1,000 commands/день
+Total: ~30,000 commands/мес
+Free tier: 500,000 commands/мес
+Headroom: 16x ✅
 ```
 
-**Альтернативы (НЕ рекомендуются):**
-- ❌ Прямой Hetzner Redis → требует VPN/SSH tunnel
-- ❌ Vercel KV → дороже, меньше free tier
-- ❌ Cloudflare KV → не замена Redis (ограничения API)
+**Альтернативы:**
+- ✅ Self-hosted Hetzner Redis через SSH tunnel (secure, $0)
+- ✅ Vercel KV (дороже, меньше free tier)
+- ⚠️ Direct Hetzner Redis TCP from Vercel (insecure без VPN/tunnel)
 
 ---
 
@@ -144,30 +146,32 @@ Free tier: 10,000 commands/day
 
 ## 📈 Реалистичные performance метрики
 
-### ⚠️ **БЕЗ ГАРАНТИЙ "99% faster"**
+### ⚠️ **Estimates (not measured in production yet)**
 
 **Текущая система (in-memory cache):**
-- First request after deploy: 8-15 seconds (RSS parsing)
-- Subsequent requests (cache hit): 50-200ms (memory read)
+- First request after deploy: 8-15 seconds (RSS parsing) - estimated
+- Subsequent requests (cache hit): 50-200ms (memory read) - estimated
 - After 30 minutes: cache expires, next user waits 8-15s
 
-**С Redis cache:**
-- First request after deploy: ~100-300ms (Redis REST API + SSR)
-- Cache hit: ~100-300ms (зависит от Vercel region, network)
+**С Redis cache (estimated):**
+- First request after deploy: ~150-300ms (Redis REST API + SSR) - estimated
+- Cache hit: ~150-300ms (depends on Vercel region, network) - estimated
 - After 30 minutes: cache expires, BUT cron updates it before users
 
-**Реальные факторы latency:**
+**Estimated latency breakdown:**
 ```
-Redis REST API: 20-50ms (Upstash → Vercel)
-Next.js SSR: 50-150ms (rendering)
-Network (user → Vercel): 50-200ms (зависит от региона)
-Total: 120-400ms (типично ~200ms)
+Redis REST API: 20-50ms (Upstash → Vercel) - estimated
+Next.js SSR: 50-150ms (rendering) - estimated
+Network (user → Vercel): 50-200ms (depends on region) - estimated
+Total: 120-400ms (typically ~200ms) - estimated
 ```
 
-**Improvement:**
-- ✅ Устраняет cold starts (8-15s)
-- ✅ Consistent latency (не зависит от RSS availability)
-- ⚠️ НЕ делает сайт "мгновенным" (~200ms все равно)
+**Expected improvement:**
+- ✅ Should eliminate cold starts (8-15s)
+- ✅ Should provide consistent latency
+- ⚠️ Actual performance needs measurement
+
+**⚠️ Measure in production to confirm these estimates.**
 
 ---
 
@@ -176,12 +180,21 @@ Total: 120-400ms (типично ~200ms)
 | Компонент | Free Tier | Ваше использование | Достаточно? | Стоимость |
 |-----------|-----------|---------------------|-------------|-----------|
 | Hetzner Cron | Unlimited | 48/день | ✅ | $0 (уже оплачено) |
-| Upstash Redis | 10K cmd/день | ~2,500/день | ✅ (4x запас) | $0 |
+| Upstash Redis | 500K cmd/мес | ~30K/мес (estimated) | ✅ (16x запас) | $0 |
 | Vercel Hobby | 100GB bandwidth | ~1GB/месяц | ✅ | $0 |
 | **TOTAL** | - | - | - | **$0/месяц** |
 
+**Расчет команд (estimated):**
+```
+48 cron runs/день × 30 дней = 1,440 runs/мес
+Each run: 1 SET + ~20 GET requests/день = ~1,000 commands/день  
+Total: ~30,000 commands/мес (estimated)
+Free tier: 500,000 commands/мес
+Headroom: 16x ✅
+```
+
 **Если превысите free tier Upstash:**
-- Paid tier: $0.2 за 100K команд = $0.50/месяц при 250K команд
+- Paid tier: $0.2 за 100K команд = ~$0.06/мес при 30K команд/мес
 
 ---
 
@@ -226,18 +239,18 @@ https://console.upstash.com
 ## ⚠️ Что исправлено
 
 ### 1. Безопасность
-- ❌ Убрана опция прямого Hetzner Redis (небезопасно)
-- ✅ Только Upstash REST API (TLS encrypted)
+- ⚠️ Public direct TCP Redis from Vercel (insecure без VPN/tunnel)
+- ✅ Upstash REST API (TLS encrypted, secure)
+- ✅ Self-hosted Hetzner Redis через SSH tunnel (также secure)
 
 ### 2. Vercel Cron
 - ❌ Vercel Hobby limit: 1/день (не 48/день!)
 - ✅ Hetzner cron: unlimited
 
 ### 3. Performance claims
-- ❌ "50-100ms" → нереалистично (REST API + SSR latency)
-- ✅ "~200ms typical" → правда
-- ❌ "99% faster" → не измеряли
-- ✅ "Eliminates 8-15s cold starts" → правда
+- ❌ All previous numbers were estimates, not measurements
+- ✅ Now clearly marked as "estimated until measured"
+- ⚠️ Measure in production to confirm
 
 ---
 

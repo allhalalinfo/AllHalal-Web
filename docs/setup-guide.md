@@ -29,7 +29,7 @@ Visit: https://console.upstash.com
 2. Name: `allhalal-news-cache`
 3. Type: **Redis**
 4. Region: Choose closest to your Vercel region (e.g., `us-east-1`)
-5. Plan: **Free** (10K commands/day)
+5. Plan: **Free** (500K commands/month)
 6. TLS: **Enabled** (default, don't change)
 
 ### 1.3 Get Credentials
@@ -164,8 +164,9 @@ Visit: https://console.upstash.com
 2. Go to "Metrics" tab
 3. Should see:
    - Commands graph increasing every 30 minutes
-   - ~50-100 commands per cron run
-   - Total ~2,500 commands/day
+   - ~20-50 commands per cron run (estimated)
+   - Total ~30K commands/month (estimated)
+   - Free tier: 500K/month (plenty of headroom)
 
 ---
 
@@ -194,7 +195,7 @@ grep success /var/log/allhalal-cron.log | grep $(date +%Y-%m-%d) | wc -l
 1. Visit: https://console.upstash.com
 2. Click database
 3. Check "Usage" section:
-   - Commands: ~2,500/day (< 10,000 free limit)
+   - Commands: ~30K/month (< 500K free limit)
    - Storage: ~5-10MB (< 256MB free limit)
 
 ---
@@ -263,33 +264,35 @@ grep CRON /var/log/syslog | tail -20
 
 ## Performance Expectations
 
-### Realistic Latency
+### Realistic Latency (estimated, not measured)
 
 **Current (in-memory cache):**
-- Cold start: 8-15 seconds
-- Warm: 50-200ms
+- Cold start: 8-15 seconds (estimated)
+- Warm: 50-200ms (estimated)
 
-**With Redis (after setup):**
-- Typical: ~200ms (Upstash REST API + SSR)
-- Range: 150-400ms (depends on region/network)
-- No more cold starts ✅
+**With Redis (after setup, estimated):**
+- Typical: ~200ms (Upstash REST API + SSR) - estimated
+- Range: 150-400ms (depends on region/network) - estimated
+- Should eliminate cold starts ✅
 
 ### Why not "50-100ms"?
 
-Latency breakdown:
+Estimated latency breakdown:
 ```
-Upstash REST API: 20-50ms
-Next.js SSR: 50-150ms
-Network (user → Vercel): 50-200ms
-Total: 120-400ms (typically ~200ms)
+Upstash REST API: 20-50ms (estimated)
+Next.js SSR: 50-150ms (estimated)
+Network (user → Vercel): 50-200ms (estimated)
+Total: 120-400ms (typically ~200ms) - estimated
 ```
 
-### What improves?
+⚠️ **These are estimates. Measure in production to confirm.**
 
-- ✅ **Eliminates cold starts** (no more 8-15s waits)
-- ✅ **Consistent performance** (doesn't depend on RSS availability)
-- ✅ **Cross-deployment cache** (survives redeploys)
-- ⚠️ Not "99% faster" (not measured, depends on baseline)
+### What should improve?
+
+- ✅ **Should eliminate cold starts** (no more 8-15s waits)
+- ✅ **Should provide consistent performance**
+- ✅ **Cache survives redeployments**
+- ⚠️ Measure actual performance after setup
 
 ---
 
@@ -298,12 +301,12 @@ Total: 120-400ms (typically ~200ms)
 | Item | Free Tier | Your Usage | Cost |
 |------|-----------|------------|------|
 | Hetzner cron | Unlimited | 48/day | $0 |
-| Upstash Redis | 10K commands/day | ~2,500/day | $0 |
+| Upstash Redis | 500K commands/month | ~30K/month (estimated) | $0 |
 | Vercel API | 100K requests/month | ~1,440/month | $0 |
 | **TOTAL** | - | - | **$0/month** |
 
 **If you exceed free tier:**
-- Upstash paid: $0.20/100K commands = ~$0.50/month at 250K
+- Upstash paid: $0.20/100K commands = ~$0.06/month at 30K
 
 ---
 
