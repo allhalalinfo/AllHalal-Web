@@ -1,0 +1,44 @@
+Привет, Codex GPT 5.4!
+
+У меня большое задание: трансформировать AllHalal.info из "плоского сгенерированного" сайта в живой, современный, красивый веб-продукт.
+
+**Прочитай полное задание:**
+`/Users/adelyanurusheva/Desktop/Allhalal-Web/docs/CODEX-DESIGN-MISSION.md`
+
+**Твоя цель:**
+Превратить сайт в уровень Stripe, Linear, Vercel - современные анимации, глубина, wow-эффект.
+
+**Начни с ФАЗЫ 1: Finance Widget**
+- Создай `/components/portal/FinanceWidget.tsx`
+- Live курсы валют из `/api/v1/finance/rates`
+- Используй Framer Motion для анимаций
+- Добавь на homepage
+- Код готов в задании, но можешь улучшить
+
+**Что использовать:**
+- Framer Motion (установи: `npm install framer-motion`)
+- React CountUp (установи: `npm install react-countup`)
+- Tailwind CSS (уже есть)
+- TypeScript (уже есть)
+
+**Порядок работы:**
+1. Finance Widget (сегодня)
+2. Hero Section redesign (сегодня)
+3. News Feed improvement (сегодня)
+4. Stats Section animated (завтра)
+5. Typography & Polish (завтра)
+
+**После каждой фазы:**
+- Сделай скриншот
+- Напиши что изменил
+- Жди feedback от руководителя
+
+**Референсы:**
+- Stripe.com - hero section, buttons
+- Linear.app - animations, cards
+- Vercel.com - smooth transitions
+
+Начинай с чтения задания и создания Finance Widget!
+
+Время: ~2-3 дня
+Цель: Wow-эффект на каждой странице
