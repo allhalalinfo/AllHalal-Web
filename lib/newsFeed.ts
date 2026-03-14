@@ -1,6 +1,5 @@
 import Parser from "rss-parser";
 import { HOMEPAGE_QUOTAS, newsSources, type NewsCategory, type NewsSource } from "@/lib/newsSources";
-import { getCachedNews, setCachedNews } from "@/lib/redis";
 
 export interface NewsItem {
   id: string;
@@ -13,11 +12,6 @@ export interface NewsItem {
   imageUrl: string | null;
   categories: NewsCategory[];
   fallbackGradient?: string;
-}
-
-interface CachedNews {
-  items: NewsItem[];
-  timestamp: number;
 }
 
 interface GetAggregatedNewsOptions {
@@ -169,10 +163,6 @@ function cleanExcerpt(html: string): string {
 
   const trimmed = text.replace(/\s+/g, " ").trim();
   return trimmed.slice(0, 180) + (trimmed.length > 180 ? "..." : "");
-}
-
-function getCacheKey({ category, safeOnly }: { category?: NewsCategory; safeOnly: boolean }) {
-  return `news_${category || "all"}_${safeOnly ? "safe" : "all"}`;
 }
 
 function filterSources({ category, safeOnly }: { category?: NewsCategory; safeOnly: boolean }) {
@@ -467,37 +457,47 @@ export async function getAggregatedNews({
   bypassCache = false,
 }: GetAggregatedNewsOptions = {}) {
   const normalizedLimit = Number.isFinite(limit) ? Math.min(Math.max(limit, 1), 50) : 20;
-  const cacheKey = getCacheKey({ category, safeOnly });
 
-  // Try Redis cache first
-  if (!bypassCache) {
-    try {
-      const cached = await getCachedNews(cacheKey);
-      if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-        console.log(`✅ Cache hit (${cached.source}): ${cacheKey}`);
-        return cached.items.slice(0, normalizedLimit);
-      }
-    } catch (error) {
-      console.warn('Cache read error, fetching fresh:', error);
-    }
-  }
-
-  console.log(`🔄 Fetching fresh news (bypass: ${bypassCache}): ${cacheKey}`);
-
-  const activeSources = filterSources({ category, safeOnly });
-  const fetchedItems = await Promise.all(activeSources.map(fetchSourceItems));
-
-  const rankedItems = dedupeAndRank(fetchedItems.flat());
-  const curatedItems = safeOnly
-    ? curateHomepageItems(rankedItems, normalizedLimit)
-    : curateFeedItems(rankedItems, normalizedLimit);
-
-  // Save to Redis cache
+  // Fetch from Hetzner FastAPI (with ISR caching)
   try {
-    await setCachedNews(cacheKey, curatedItems, Math.floor(CACHE_TTL / 1000));
-  } catch (error) {
-    console.error('Cache write error:', error);
-  }
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.allhalal.info';
+    const url = `${apiUrl}/api/v1/news/cached?safe_only=${safeOnly}&limit=${normalizedLimit}${category ? `&category=${encodeURIComponent(category)}` : ''}`;
+    
+    console.log(`🌐 Fetching from Hetzner API: ${url}`);
+    
+    const response = await fetch(url, {
+      next: { 
+        revalidate: bypassCache ? 0 : 1800  // ISR: 30 minutes (or force fresh if bypass)
+      },
+      signal: AbortSignal.timeout(10000)  // 10 second timeout
+    });
 
-  return curatedItems.slice(0, normalizedLimit);
+    if (!response.ok) {
+      throw new Error(`API responded with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.success && Array.isArray(data.items)) {
+      console.log(`✅ Got ${data.items.length} items from Hetzner (cache age: ${data.age_minutes?.toFixed(1)}min)`);
+      return data.items.slice(0, normalizedLimit);
+    }
+
+    throw new Error('Invalid API response format');
+    
+  } catch (error) {
+    console.error('❌ Hetzner API error, falling back to direct RSS fetch:', error);
+    
+    // Fallback: direct RSS parsing (original logic)
+    const activeSources = filterSources({ category, safeOnly });
+    const fetchedItems = await Promise.all(activeSources.map(fetchSourceItems));
+
+    const rankedItems = dedupeAndRank(fetchedItems.flat());
+    const curatedItems = safeOnly
+      ? curateHomepageItems(rankedItems, normalizedLimit)
+      : curateFeedItems(rankedItems, normalizedLimit);
+
+    console.log(`⚠️ Fallback: parsed ${curatedItems.length} items directly`);
+    return curatedItems.slice(0, normalizedLimit);
+  }
 }
