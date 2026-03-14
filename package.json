@@ -25,6 +25,7 @@
     "next-intl": "^4.5.8",
     "next-mdx-remote": "^6.0.0",
     "react": "^19.2.1",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.2.1",
     "react-intersection-observer": "^10.0.0",
     "react-markdown": "^10.1.0",

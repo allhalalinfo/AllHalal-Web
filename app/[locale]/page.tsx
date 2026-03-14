@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Footer from "@/components/layout/Footer";
+import FinanceWidget from "@/components/portal/FinanceWidget";
 import TodayForYouServer from "@/components/portal/TodayForYouServer";
+import HeroSection from "@/components/sections/HeroSection";
 import { getAggregatedNews } from "@/lib/newsFeed";
 import { SITE_URL } from "@/lib/seo/metadata";
 
@@ -82,24 +84,36 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
 
   return (
     <>
-      <main className="relative overflow-hidden pt-32 pb-20 bg-bg-primary min-h-screen home-ambient-grid">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_top_left,rgba(244,185,66,0.18),transparent_34%),radial-gradient(circle_at_78%_12%,rgba(75,122,136,0.18),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.25),transparent_82%)]" />
-        <div className="pointer-events-none absolute left-[-10rem] top-[28rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(143,95,70,0.16),transparent_72%)] blur-3xl" />
-        <div className="pointer-events-none absolute right-[-12rem] top-[70rem] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(78,109,120,0.18),transparent_70%)] blur-3xl" />
+      <main className="relative min-h-screen overflow-hidden bg-bg-primary">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSchema) }}
         />
 
-        <div className="container relative z-10 max-w-7xl mx-auto">
-          <section className="mb-8">
-            <TodayForYouServer locale={locale} />
-          </section>
+        <HeroSection />
 
-          <section className="mt-10">
-            <NewsFeedWidget locale={locale} initialNews={initialNews} />
-          </section>
-        </div>
+        <section
+          id="portal-home"
+          className="relative overflow-hidden pb-20 pt-12 home-ambient-grid"
+        >
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_top_left,rgba(244,185,66,0.18),transparent_34%),radial-gradient(circle_at_78%_12%,rgba(75,122,136,0.18),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.25),transparent_82%)]" />
+          <div className="pointer-events-none absolute left-[-10rem] top-[28rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(143,95,70,0.16),transparent_72%)] blur-3xl" />
+          <div className="pointer-events-none absolute right-[-12rem] top-[70rem] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(78,109,120,0.18),transparent_70%)] blur-3xl" />
+
+          <div className="container relative z-10 mx-auto max-w-7xl">
+            <section className="mb-8">
+              <TodayForYouServer locale={locale} />
+            </section>
+
+            <section className="mt-10">
+              <FinanceWidget locale={locale} />
+            </section>
+
+            <section className="mt-10">
+              <NewsFeedWidget locale={locale} initialNews={initialNews} />
+            </section>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
