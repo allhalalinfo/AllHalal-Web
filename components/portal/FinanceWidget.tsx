@@ -20,6 +20,7 @@ type RateCard = {
   region: string;
   accent: string;
   decimals: number;
+  microCopy: string;
   value: number;
 };
 
@@ -36,10 +37,7 @@ type FinanceApiResponse = {
 
 const REFRESH_INTERVAL_MS = 1000 * 60 * 5;
 const RATE_ORDER: CurrencyCode[] = ["SAR", "AED", "EUR", "GBP", "TRY", "MYR"];
-const CURRENCY_META: Record<
-  CurrencyCode,
-  Omit<RateCard, "value"> & { microCopy: string }
-> = {
+const CURRENCY_META: Record<CurrencyCode, Omit<RateCard, "value">> = {
   SAR: {
     code: "SAR",
     label: "Saudi Riyal",
