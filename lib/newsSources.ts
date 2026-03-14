@@ -127,9 +127,27 @@ export const newsSources: NewsSource[] = [
     fallbackGradient: 'from-slate-700 to-black',
   },
   {
+    id: 'islamicfinancenews',
+    name: 'Islamic Finance News',
+    rssUrl: 'https://www.islamicfinancenews.com/rss',
+    categories: ['Islamic Finance'],
+    priority: 1,
+    safe: true,
+    fallbackGradient: 'from-emerald-700 to-teal-900',
+  },
+  {
+    id: 'gulfnews-islamic-economy',
+    name: 'Gulf News Islamic Economy',
+    rssUrl: 'https://gulfnews.com/business/markets/islamic-economy/rss',
+    categories: ['Islamic Finance', 'Halal Living'],
+    priority: 2,
+    safe: true,
+    fallbackGradient: 'from-amber-600 to-orange-800',
+  },
+  {
     id: 'mifc',
-    name: 'MIFC', // Malaysia International Islamic Financial Centre
-    rssUrl: 'https://www.mifc.com/rss', // Standard news feeds
+    name: 'MIFC',
+    rssUrl: 'https://www.mifc.com/rss',
     categories: ['Islamic Finance'],
     priority: 3,
     safe: true,
@@ -172,8 +190,72 @@ export const newsSources: NewsSource[] = [
     rssUrl: 'https://www.aljazeera.com/xml/rss/all.xml',
     categories: ['Ummah & World'],
     priority: 4,
-    safe: false, // NOT for homepage by default
+    safe: false,
     fallbackGradient: 'from-orange-500 to-yellow-600',
+  },
+  {
+    id: 'middleeasteye',
+    name: 'Middle East Eye',
+    rssUrl: 'https://www.middleeasteye.net/rss',
+    categories: ['Ummah & World'],
+    priority: 3,
+    safe: false,
+    fallbackGradient: 'from-red-600 to-orange-800',
+  },
+  
+  // --- Technology & Innovation ---
+  {
+    id: 'muslimtechcrunch',
+    name: 'Muslim Pro Blog',
+    rssUrl: 'https://blog.muslimpro.com/feed/',
+    categories: ['Family & Education', 'Faith & Practice'],
+    priority: 2,
+    safe: true,
+    fallbackGradient: 'from-blue-500 to-purple-700',
+  },
+  
+  // --- Arts, Culture & History ---
+  {
+    id: 'lostislamichistory',
+    name: 'Lost Islamic History',
+    rssUrl: 'https://lostislamichistory.com/feed/',
+    categories: ['Family & Education', 'Faith & Practice'],
+    priority: 2,
+    safe: true,
+    fallbackGradient: 'from-amber-700 to-brown-900',
+  },
+  
+  // --- Halal Travel & Lifestyle ---
+  {
+    id: 'halaltrip',
+    name: 'HalalTrip',
+    rssUrl: 'https://www.halaltrip.com/blog/feed/',
+    categories: ['Halal Living', 'Family & Education'],
+    priority: 2,
+    safe: true,
+    fallbackGradient: 'from-teal-500 to-cyan-700',
+  },
+  
+  // --- Women & Family Focus ---
+  {
+    id: 'virtualmosque',
+    name: 'Virtual Mosque',
+    rssUrl: 'https://www.virtualmosque.com/feed/',
+    categories: ['Family & Education', 'Faith & Practice'],
+    priority: 2,
+    safe: true,
+    fallbackGradient: 'from-purple-500 to-indigo-700',
+  },
+  
+  // --- Youth & Students ---
+  {
+    id: 'muslimyouthmusings',
+    name: 'Muslim Youth Musings',
+    rssUrl: 'https://muslimyouthmusings.com/feed/',
+    categories: ['Family & Education', 'Faith & Practice'],
+    priority: 3,
+    safe: true,
+    fallbackGradient: 'from-green-500 to-teal-700',
   }
 ];
 
