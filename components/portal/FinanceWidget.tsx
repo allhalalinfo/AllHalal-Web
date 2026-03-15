@@ -4,24 +4,28 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  BadgeDollarSign,
-  RefreshCw,
-  Signal,
-  TriangleAlert,
-} from "lucide-react";
+import { TriangleAlert } from "lucide-react";
 
 type CurrencyCode = "EUR" | "GBP" | "SAR" | "AED" | "TRY" | "MYR";
 
 type RateCard = {
   code: CurrencyCode;
+  pair: string;
   label: string;
-  region: string;
-  accent: string;
-  decimals: number;
-  microCopy: string;
+  symbol: string;
+  rate: number;
+  symbolClass: string;
+  tintClass: string;
+};
+
+type PreciousMetalCard = {
+  key: "gold" | "silver";
+  pair: string;
+  label: string;
+  symbol: string;
   value: number;
+  symbolClass: string;
+  tintClass: string;
 };
 
 type FinanceApiResponse = {
@@ -29,378 +33,338 @@ type FinanceApiResponse = {
   base?: string;
   rates?: Partial<Record<CurrencyCode, number>>;
   timestamp?: number;
-  cached?: boolean;
-  age_hours?: number;
-  fallback?: boolean;
-  message?: string;
 };
+
+type NisabApiResponse = {
+  updated_at?: string;
+  prices?: {
+    gold_per_gram_usd?: number;
+    silver_per_gram_usd?: number;
+  };
+};
+
+type FinanceBoardItem =
+  | ({ kind: "rate" } & RateCard)
+  | ({ kind: "metal" } & PreciousMetalCard);
 
 const REFRESH_INTERVAL_MS = 1000 * 60 * 5;
 const RATE_ORDER: CurrencyCode[] = ["SAR", "AED", "EUR", "GBP", "TRY", "MYR"];
-const CURRENCY_META: Record<CurrencyCode, Omit<RateCard, "value">> = {
+
+const CURRENCY_META: Record<
+  CurrencyCode,
+  { label: string; symbol: string; symbolClass: string; tintClass: string }
+> = {
   SAR: {
-    code: "SAR",
     label: "Saudi Riyal",
-    region: "Makkah and Madinah travel",
-    accent: "from-[#f3c86a]/35 via-[#f3c86a]/5 to-transparent",
-    decimals: 2,
-    microCopy: "Useful for Umrah and Hajj budgeting",
+    symbol: "﷼",
+    symbolClass: "text-[#a67921]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(240,197,110,0.14),transparent_52%)]",
   },
   AED: {
-    code: "AED",
     label: "UAE Dirham",
-    region: "Gulf family finance",
-    accent: "from-[#88c2b9]/35 via-[#88c2b9]/5 to-transparent",
-    decimals: 2,
-    microCopy: "Track GCC spending and remittance flows",
+    symbol: "DH",
+    symbolClass: "text-[#2f7d76]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(130,214,203,0.16),transparent_52%)]",
   },
   EUR: {
-    code: "EUR",
     label: "Euro",
-    region: "European Muslim households",
-    accent: "from-[#8cb0ff]/35 via-[#8cb0ff]/5 to-transparent",
-    decimals: 2,
-    microCopy: "Compare halal savings and zakat in Europe",
+    symbol: "€",
+    symbolClass: "text-[#4963b4]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(154,181,255,0.15),transparent_52%)]",
   },
   GBP: {
-    code: "GBP",
     label: "British Pound",
-    region: "UK Islamic banking",
-    accent: "from-[#d6a0ff]/35 via-[#d6a0ff]/5 to-transparent",
-    decimals: 2,
-    microCopy: "Helpful for UK mortgages and savings",
+    symbol: "£",
+    symbolClass: "text-[#7c5aac]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(201,166,255,0.14),transparent_52%)]",
   },
   TRY: {
-    code: "TRY",
     label: "Turkish Lira",
-    region: "Turkey market watch",
-    accent: "from-[#ff9c8a]/35 via-[#ff9c8a]/5 to-transparent",
-    decimals: 2,
-    microCopy: "Monitor price movement around halal travel",
+    symbol: "₺",
+    symbolClass: "text-[#bb6249]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(242,169,143,0.16),transparent_52%)]",
   },
   MYR: {
-    code: "MYR",
     label: "Malaysian Ringgit",
-    region: "Southeast Asia",
-    accent: "from-[#8fd58f]/35 via-[#8fd58f]/5 to-transparent",
-    decimals: 2,
-    microCopy: "Follow Malaysia's Islamic finance hub",
+    symbol: "RM",
+    symbolClass: "text-[#3f8756]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(159,216,164,0.15),transparent_52%)]",
   },
 };
 
-function buildRateCards(payload: FinanceApiResponse): RateCard[] {
-  return RATE_ORDER.flatMap((code) => {
-    const value = payload.rates?.[code];
+const METAL_META = {
+  gold: {
+    pair: "USD / G",
+    label: "Gold",
+    symbol: "Au",
+    symbolClass: "text-[#9a7520]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(241,207,119,0.16),transparent_52%)]",
+  },
+  silver: {
+    pair: "USD / G",
+    label: "Silver",
+    symbol: "Ag",
+    symbolClass: "text-[#5f6f84]",
+    tintClass: "before:bg-[radial-gradient(circle_at_top_left,rgba(207,215,225,0.18),transparent_52%)]",
+  },
+} as const;
 
-    if (typeof value !== "number") {
-      return [];
-    }
+function formatTimestamp(value?: string | number) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+  }).format(date);
+}
+
+async function parseJsonResponse<T>(response: Response, errorMessage: string): Promise<T> {
+  const raw = await response.text();
+
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    throw new Error(`${errorMessage}: expected JSON but received a different response.`);
+  }
+}
+
+function buildRateCards(payload: FinanceApiResponse | null): RateCard[] {
+  if (!payload?.rates) return [];
+
+  return RATE_ORDER.flatMap((code) => {
+    const rate = payload.rates?.[code];
+    if (typeof rate !== "number") return [];
+
+    const meta = CURRENCY_META[code];
 
     return [
       {
-        ...CURRENCY_META[code],
-        value,
+        code,
+        pair: `USD / ${code}`,
+        label: meta.label,
+        symbol: meta.symbol,
+        rate,
+        symbolClass: meta.symbolClass,
+        tintClass: meta.tintClass,
       },
     ];
   });
 }
 
-function formatUpdatedLabel(timestamp: number | null, nowTick: number) {
-  if (!timestamp) {
-    return "Awaiting first update";
-  }
+function buildPreciousMetals(payload: NisabApiResponse | null): PreciousMetalCard[] {
+  const gold = payload?.prices?.gold_per_gram_usd;
+  const silver = payload?.prices?.silver_per_gram_usd;
 
-  const elapsedSeconds = Math.max(0, Math.floor(nowTick / 1000 - timestamp));
+  return ([
+    typeof gold === "number"
+      ? {
+          key: "gold" as const,
+          pair: METAL_META.gold.pair,
+          label: METAL_META.gold.label,
+          symbol: METAL_META.gold.symbol,
+          value: gold,
+          symbolClass: METAL_META.gold.symbolClass,
+          tintClass: METAL_META.gold.tintClass,
+        }
+      : null,
+    typeof silver === "number"
+      ? {
+          key: "silver" as const,
+          pair: METAL_META.silver.pair,
+          label: METAL_META.silver.label,
+          symbol: METAL_META.silver.symbol,
+          value: silver,
+          symbolClass: METAL_META.silver.symbolClass,
+          tintClass: METAL_META.silver.tintClass,
+        }
+      : null,
+  ].filter(Boolean) as PreciousMetalCard[]);
+}
 
-  if (elapsedSeconds < 60) {
-    return "Updated just now";
-  }
+function buildBoardItems(
+  cards: RateCard[],
+  metals: PreciousMetalCard[]
+): FinanceBoardItem[] {
+  const leadingRates = cards.slice(0, 2).map((card) => ({ kind: "rate" as const, ...card }));
+  const metalItems = metals.map((metal) => ({ kind: "metal" as const, ...metal }));
+  const trailingRates = cards.slice(2).map((card) => ({ kind: "rate" as const, ...card }));
 
-  if (elapsedSeconds < 3600) {
-    return `Updated ${Math.floor(elapsedSeconds / 60)} min ago`;
-  }
-
-  if (elapsedSeconds < 86400) {
-    return `Updated ${Math.floor(elapsedSeconds / 3600)} h ago`;
-  }
-
-  return `Updated ${Math.floor(elapsedSeconds / 86400)} d ago`;
+  return [...leadingRates, ...metalItems, ...trailingRates];
 }
 
 function FinanceWidgetSkeleton() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      {Array.from({ length: 4 }).map((_, index) => (
-        <motion.div
-          key={index}
-          className="rounded-[1.5rem] border border-white/10 bg-white/8 p-5 backdrop-blur-md"
-          animate={{ opacity: [0.45, 0.9, 0.45] }}
-          transition={{ duration: 1.4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-        >
-          <div className="h-3 w-20 rounded-full bg-white/15" />
-          <div className="mt-4 h-6 w-28 rounded-full bg-white/20" />
-          <div className="mt-8 h-10 w-24 rounded-full bg-white/25" />
-          <div className="mt-3 h-3 w-32 rounded-full bg-white/15" />
-        </motion.div>
-      ))}
-    </div>
+    <section className="rounded-[1.9rem] border border-[#d9d1c3] bg-[linear-gradient(135deg,#f8f3e8_0%,#f5f1eb_52%,#edf3f4_100%)] p-4 shadow-[0_18px_48px_rgba(45,38,28,0.08)] sm:p-5">
+      <div className="mb-3 h-4 w-32 animate-pulse rounded-full bg-[#d9d2c6]" />
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <div
+            key={index}
+            className="h-[3.5rem] animate-pulse rounded-[0.9rem] border border-[#e9decf] bg-white/80"
+          />
+        ))}
+      </div>
+    </section>
   );
 }
 
-export default function FinanceWidget({ locale }: { locale: string }) {
+export default function FinanceWidget() {
   const [cards, setCards] = useState<RateCard[]>([]);
+  const [metals, setMetals] = useState<PreciousMetalCard[]>([]);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [lastTimestamp, setLastTimestamp] = useState<number | null>(null);
-  const [isCached, setIsCached] = useState(false);
-  const [isFallback, setIsFallback] = useState(false);
-  const [nowTick, setNowTick] = useState(Date.now());
+  const [updatedLabel, setUpdatedLabel] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
 
-    const fetchRates = async (backgroundRefresh = false) => {
-      if (backgroundRefresh) {
-        setRefreshing(true);
-      } else {
-        setLoading(true);
-      }
-
+    async function fetchFinanceData() {
       try {
-        const response = await fetch(
-          "/api/v1/finance/rates?base=USD&symbols=SAR,AED,EUR,GBP,TRY,MYR",
-          {
+        const [ratesResult, nisabResult] = await Promise.allSettled([
+          fetch("/api/v1/finance/rates?base=USD&symbols=SAR,AED,EUR,GBP,TRY,MYR", {
             headers: { Accept: "application/json" },
             cache: "no-store",
-          }
-        );
-        const payload = (await response.json()) as FinanceApiResponse;
+          }),
+          fetch("/api/nisab", {
+            headers: { Accept: "application/json" },
+            cache: "no-store",
+          }),
+        ]);
 
-        if (!response.ok || payload.success === false) {
-          throw new Error(payload.message || "Could not load exchange rates.");
+        const nextRates =
+          ratesResult.status === "fulfilled" && ratesResult.value.ok
+            ? await parseJsonResponse<FinanceApiResponse>(
+                ratesResult.value,
+                "Finance data unavailable"
+              )
+            : null;
+
+        const nextNisab =
+          nisabResult.status === "fulfilled" && nisabResult.value.ok
+            ? await parseJsonResponse<NisabApiResponse>(
+                nisabResult.value,
+                "Islamic finance data unavailable"
+              )
+            : null;
+
+        if (!active) return;
+
+        const nextCards = buildRateCards(nextRates);
+        const nextMetals = buildPreciousMetals(nextNisab);
+
+        if (!nextCards.length) {
+          throw new Error("Finance data unavailable");
         }
 
-        if (!active) {
-          return;
-        }
-
-        setCards(buildRateCards(payload));
-        setLastTimestamp(
-          typeof payload.timestamp === "number" ? payload.timestamp : Math.floor(Date.now() / 1000)
+        setCards(nextCards);
+        setMetals(nextMetals);
+        setUpdatedLabel(
+          formatTimestamp(nextNisab?.updated_at || nextRates?.timestamp) || null
         );
-        setIsCached(Boolean(payload.cached));
-        setIsFallback(Boolean(payload.fallback));
         setError(null);
-      } catch (fetchError) {
-        if (!active) {
-          return;
-        }
+      } catch (nextError) {
+        if (!active) return;
 
         const message =
-          fetchError instanceof Error ? fetchError.message : "Could not load exchange rates.";
+          nextError instanceof Error ? nextError.message : "Finance data unavailable";
         setError(message);
       } finally {
-        if (!active) {
-          return;
+        if (active) {
+          setLoading(false);
         }
-
-        setLoading(false);
-        setRefreshing(false);
       }
-    };
+    }
 
-    void fetchRates(false);
-
-    const refreshTimer = window.setInterval(() => {
-      void fetchRates(true);
-    }, REFRESH_INTERVAL_MS);
-    const clockTimer = window.setInterval(() => {
-      setNowTick(Date.now());
-    }, 30000);
+    fetchFinanceData();
+    const interval = window.setInterval(fetchFinanceData, REFRESH_INTERVAL_MS);
 
     return () => {
       active = false;
-      window.clearInterval(refreshTimer);
-      window.clearInterval(clockTimer);
+      window.clearInterval(interval);
     };
   }, []);
 
-  const updateLabel = formatUpdatedLabel(lastTimestamp, nowTick);
+  if (loading) {
+    return <FinanceWidgetSkeleton />;
+  }
+
+  if (error && !cards.length) {
+    return (
+      <section className="rounded-[2.4rem] border border-[#dfd4c2] bg-[linear-gradient(135deg,#faf5ea_0%,#f7f3ec_54%,#eff4f5_100%)] p-6 shadow-[0_18px_48px_rgba(45,38,28,0.08)] sm:p-7">
+        <div className="flex items-start gap-3 rounded-[1.5rem] border border-amber-200/80 bg-amber-50/80 p-4 text-[#5f4830]">
+          <TriangleAlert className="mt-0.5 h-5 w-5 flex-none" />
+          <div>
+            <p className="text-sm font-semibold tracking-[0.18em] text-[#9d7441] uppercase">
+              Exchange Rates
+            </p>
+            <p className="mt-1 text-sm leading-6">{error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const boardItems = buildBoardItems(cards, metals);
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      viewport={{ once: true, amount: 0.3 }}
-      className="relative overflow-hidden rounded-[2.25rem] border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(247,242,232,0.92))] shadow-[0_24px_90px_rgba(45,33,20,0.12)]"
-    >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_16%,rgba(244,185,66,0.16),transparent_22%),radial-gradient(circle_at_82%_18%,rgba(75,110,112,0.18),transparent_28%),radial-gradient(circle_at_72%_82%,rgba(176,144,98,0.12),transparent_30%)]" />
-        <div className="absolute -left-20 top-16 h-44 w-44 rounded-full bg-[rgba(244,185,66,0.16)] blur-3xl" />
-        <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-[rgba(75,110,112,0.14)] blur-3xl" />
-      </div>
-
-      <div className="relative grid gap-6 p-6 sm:p-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-8">
-        <div className="flex flex-col justify-between">
+    <section className="relative overflow-hidden rounded-[1.9rem] border border-[#ddd2c3] bg-[linear-gradient(135deg,#f9f4e9_0%,#f5f2eb_48%,#eef4f4_100%)] p-4 shadow-[0_18px_42px_rgba(47,39,28,0.08)] sm:p-5">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_18%,rgba(224,186,92,0.14),transparent_26%),radial-gradient(circle_at_88%_10%,rgba(87,140,145,0.12),transparent_22%)]" />
+      <div className="relative">
+        <div className="mb-2 flex items-end justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.08)] bg-white/80 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.24em] text-text-secondary backdrop-blur-md">
-              <Signal className="h-3.5 w-3.5 text-primary" />
-              Live Finance Signal
-            </div>
-
-            <h2 className="mt-5 max-w-md text-[2.25rem] font-black font-display leading-[0.95] text-text-primary sm:text-[2.75rem]">
-              Exchange rates that make the finance section feel alive.
-            </h2>
-
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
-              Real-time currency context for zakat planning, halal travel, remittances and Islamic
-              finance reading. Built to feel fast, polished and unmistakably current.
+            <p className="text-[0.74rem] font-semibold uppercase tracking-[0.32em] text-[#7c6a52]">
+              Exchange Rates
             </p>
           </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <div className="rounded-full border border-[rgba(47,37,30,0.08)] bg-white/72 px-4 py-2 text-sm text-text-secondary backdrop-blur-md">
-              6 tracked currencies
-            </div>
-            <div className="rounded-full border border-[rgba(47,37,30,0.08)] bg-white/72 px-4 py-2 text-sm text-text-secondary backdrop-blur-md">
-              Auto refresh every 5 minutes
-            </div>
-            <div className="rounded-full border border-[rgba(47,37,30,0.08)] bg-white/72 px-4 py-2 text-sm text-text-secondary backdrop-blur-md">
-              {isFallback ? "Graceful fallback enabled" : isCached ? "Serving cached upstream data" : "Direct live read"}
-            </div>
-          </div>
-
-          <div className="mt-8">
-            <Link
-              href={`/${locale}/finance`}
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-5 py-3 text-sm font-semibold text-[var(--color-text-on-gradient)] shadow-[0_18px_50px_rgba(176,144,98,0.28)] transition-transform duration-300 hover:-translate-y-0.5"
-            >
-              Explore the Finance Hub
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
+          {updatedLabel ? (
+            <p className="hidden text-[0.68rem] font-medium tracking-[0.18em] text-[#90979a] uppercase sm:block">
+              Updated {updatedLabel}
+            </p>
+          ) : null}
         </div>
 
-        <div className="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(180deg,#26333B,#111A1F)] p-5 text-white shadow-[0_26px_70px_rgba(17,24,31,0.35)] sm:p-6">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,185,66,0.22),transparent_24%),radial-gradient(circle_at_80%_20%,rgba(136,194,185,0.18),transparent_28%)]" />
-          <div className="relative">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/70">
-                  <BadgeDollarSign className="h-3.5 w-3.5 text-[#F4B942]" />
-                  USD Base
-                </div>
-                <h3 className="mt-4 text-2xl font-bold font-display leading-tight text-white">
-                  Live Exchange Rates
-                </h3>
-                <p className="mt-2 max-w-md text-sm leading-relaxed text-white/64">
-                  A responsive card designed for finance momentum, not placeholder content.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm text-white/72 backdrop-blur-md">
-                <span className="relative inline-flex h-2.5 w-2.5">
-                  <span className="absolute inset-0 animate-ping rounded-full bg-[#74e4c7] opacity-60" />
-                  <span className="relative rounded-full bg-[#74e4c7] h-2.5 w-2.5" />
-                </span>
-                <span>{updateLabel}</span>
-                <RefreshCw
-                  className={`h-4 w-4 ${refreshing ? "animate-spin text-[#F4B942]" : "text-white/50"}`}
-                />
-              </div>
-            </div>
-
-            <div className="mt-6">
-              {loading ? (
-                <FinanceWidgetSkeleton />
-              ) : error && cards.length === 0 ? (
-                <div className="rounded-[1.5rem] border border-[rgba(255,255,255,0.09)] bg-white/7 p-6 backdrop-blur-md">
-                  <div className="flex items-start gap-3">
-                    <TriangleAlert className="mt-0.5 h-5 w-5 text-[#F4B942]" />
-                    <div>
-                      <p className="text-lg font-semibold text-white">Finance feed unavailable</p>
-                      <p className="mt-2 text-sm leading-relaxed text-white/70">{error}</p>
-                      <button
-                        type="button"
-                        onClick={() => window.location.reload()}
-                        className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/12"
-                      >
-                        Retry widget
-                        <RefreshCw className="h-4 w-4" />
-                      </button>
-                    </div>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {boardItems.map((item, index) => (
+            <motion.article
+              key={item.kind === "rate" ? item.code : item.key}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: index * 0.04 }}
+              whileHover={{ y: -2, scale: 1.01 }}
+              className={`group relative overflow-hidden rounded-[0.9rem] border border-[#e4d8c8] bg-white/88 px-2.5 py-2 shadow-[0_8px_18px_rgba(63,50,30,0.05)] transition-all duration-200 before:pointer-events-none before:absolute before:inset-0 before:opacity-100 after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:bg-[linear-gradient(90deg,rgba(255,255,255,0.7),rgba(255,255,255,0.12),rgba(255,255,255,0.6))] hover:border-[#d8c4a4] hover:bg-white ${item.tintClass}`}
+            >
+              <div className="relative flex min-h-[3.2rem] items-center justify-between gap-2.5">
+                <div className="flex items-center justify-between gap-2">
+                  <span className={`inline-flex min-w-6 items-center justify-center text-[1.05rem] font-semibold ${item.symbolClass}`}>
+                    {item.symbol}
+                  </span>
+                  <div>
+                    <p className="text-[0.7rem] font-medium tracking-[0.16em] text-[#677076] uppercase">
+                      {item.pair}
+                    </p>
+                    <p className="mt-0.5 text-[0.8rem] font-medium leading-snug text-[#4b555b]">
+                      {item.label}
+                    </p>
                   </div>
                 </div>
-              ) : (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {cards.map((card, index) => (
-                    <motion.div
-                      key={`${card.code}-${card.value}`}
-                      initial={{ opacity: 0, y: 18 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.06 }}
-                      whileHover={{ y: -6, scale: 1.015 }}
-                      className="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/7 p-5 backdrop-blur-md"
-                    >
-                      <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${card.accent} opacity-90`} />
-                      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.65),transparent)]" />
-
-                      <div className="relative">
-                        <div className="flex items-start justify-between gap-3">
-                          <div>
-                            <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/50">
-                              USD / {card.code}
-                            </p>
-                            <h4 className="mt-3 text-xl font-bold text-white">{card.label}</h4>
-                          </div>
-                          <span className="rounded-full border border-white/10 bg-black/15 px-2.5 py-1 text-[0.64rem] font-bold uppercase tracking-[0.18em] text-white/60">
-                            Live
-                          </span>
-                        </div>
-
-                        <div className="mt-7 flex items-end justify-between gap-4">
-                          <div>
-                            <div className="text-[2rem] font-black leading-none tracking-tight text-white tabular-nums">
-                              <CountUp
-                                start={Math.max(card.value - 0.18, 0)}
-                                end={card.value}
-                                duration={1.1}
-                                decimals={card.decimals}
-                                separator=","
-                              />
-                            </div>
-                            <p className="mt-2 text-sm text-white/58">{card.region}</p>
-                          </div>
-                          <div className="max-w-[8rem] text-right text-[0.72rem] leading-relaxed text-white/52">
-                            {card.microCopy}
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                <div className="text-right">
+                  <div className="text-[1.48rem] font-semibold leading-none tracking-[-0.05em] text-[#1e272d]">
+                    {item.kind === "metal" ? "$" : null}
+                    <CountUp
+                      end={item.kind === "rate" ? item.rate : item.value}
+                      decimals={2}
+                      duration={1.1}
+                      preserveValue
+                    />
+                  </div>
                 </div>
-              )}
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5 text-sm text-white/62">
-              <div className="flex flex-wrap items-center gap-3">
-                <span>{updateLabel}</span>
-                <span className="h-1 w-1 rounded-full bg-white/25" />
-                <span>{isFallback ? "Snapshot mode" : isCached ? "Cached upstream" : "Live endpoint"}</span>
               </div>
-              <Link
-                href={`/${locale}/finance`}
-                className="group inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-[#F4B942]"
-              >
-                View all finance guides
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
+            </motion.article>
+          ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

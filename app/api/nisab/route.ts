@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const res = await fetch("https://api.allhalal.info/api/v1/config/nisab", {
+    const res = await fetch("https://api.allhalal.info/api/v1/finance/nisab", {
       headers: {
         Accept: "application/json",
         "X-Source": "web",
