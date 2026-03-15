@@ -9,7 +9,9 @@ import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 import { blogPosts } from "@/data/blogPosts";
 import {
   formatTimeAgo,
+  getBriefDisplayTimestamp,
   getBriefDetail,
+  hasValidBriefImage,
 } from "@/lib/briefs";
 
 function renderBlogFallback(params: { locale: string; slug: string }) {
@@ -127,6 +129,7 @@ export default async function NewsDetailPage(props: {
   }
 
   const { brief, related: relatedBriefs } = detail;
+  const displayTimestamp = getBriefDisplayTimestamp(brief);
   const summaryParagraphs = brief.summary
     .split("\n\n")
     .map((paragraph) => paragraph.trim())
@@ -149,8 +152,12 @@ export default async function NewsDetailPage(props: {
           <article className="mt-6 rounded-[2.2rem] border border-[rgba(47,37,30,0.08)] bg-white/92 p-6 shadow-[0_24px_72px_rgba(43,34,24,0.07)] md:p-8">
             <div className="flex flex-wrap items-center gap-3">
               <CategoryBadge category={brief.category} />
-              <span className="text-sm text-text-muted">{formatTimeAgo(brief.published_at)}</span>
-              <span className="text-sm text-text-muted">•</span>
+              {displayTimestamp ? (
+                <>
+                  <span className="text-sm text-text-muted">{formatTimeAgo(displayTimestamp)}</span>
+                  <span className="text-sm text-text-muted">•</span>
+                </>
+              ) : null}
               <span className="text-sm text-text-muted">
                 {brief.source_count} {brief.source_count === 1 ? "source" : "sources"}
               </span>
@@ -164,7 +171,7 @@ export default async function NewsDetailPage(props: {
               {brief.dek}
             </p>
 
-            {brief.image_url ? (
+            {hasValidBriefImage(brief) && brief.image_url ? (
               <div className="relative mt-8 aspect-[1.9/1] overflow-hidden rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(246,241,233,0.72)]">
                 <Image
                   src={brief.image_url}

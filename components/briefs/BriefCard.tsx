@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import CategoryBadge from "@/components/briefs/CategoryBadge";
-import { formatTimeAgo } from "@/lib/briefs";
+import { formatTimeAgo, getBriefDisplayTimestamp, hasValidBriefImage } from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
 
 function BriefMeta({ brief, compact = false }: { brief: Brief; compact?: boolean }) {
+  const displayTimestamp = getBriefDisplayTimestamp(brief);
+
   return (
     <div
       className={`flex flex-wrap items-center gap-x-3 gap-y-2 text-text-muted ${
@@ -13,8 +15,12 @@ function BriefMeta({ brief, compact = false }: { brief: Brief; compact?: boolean
       }`}
     >
       <span className="font-semibold text-text-secondary">{brief.sources[0]?.name}</span>
-      <span aria-hidden="true">•</span>
-      <time dateTime={brief.published_at}>{formatTimeAgo(brief.published_at)}</time>
+      {displayTimestamp ? (
+        <>
+          <span aria-hidden="true">•</span>
+          <time dateTime={displayTimestamp}>{formatTimeAgo(displayTimestamp)}</time>
+        </>
+      ) : null}
       {brief.source_count > 1 ? (
         <>
           <span aria-hidden="true">•</span>
@@ -26,7 +32,7 @@ function BriefMeta({ brief, compact = false }: { brief: Brief; compact?: boolean
 }
 
 function BriefImage({ brief, priority = false }: { brief: Brief; priority?: boolean }) {
-  if (!brief.image_url) {
+  if (!hasValidBriefImage(brief) || !brief.image_url) {
     return null;
   }
 
@@ -57,6 +63,8 @@ export default function BriefCard({
   const href = `/${locale}/news/${brief.slug}`;
 
   if (size === "compact") {
+    const displayTimestamp = getBriefDisplayTimestamp(brief);
+
     return (
       <Link
         href={href}
@@ -64,7 +72,9 @@ export default function BriefCard({
       >
         <div className="flex items-start justify-between gap-3">
           <CategoryBadge category={brief.category} size="sm" />
-          <span className="text-[0.75rem] text-text-muted">{formatTimeAgo(brief.published_at)}</span>
+          {displayTimestamp ? (
+            <span className="text-[0.75rem] text-text-muted">{formatTimeAgo(displayTimestamp)}</span>
+          ) : null}
         </div>
 
         <h3 className="mt-4 text-[1.1rem] font-bold font-display leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">

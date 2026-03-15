@@ -16,6 +16,13 @@ type FeedResponse = BriefsResponse & {
   limit?: number;
 };
 
+type HomeResponse = {
+  success: boolean;
+  hero?: Brief | null;
+  featured?: Brief[];
+  compact?: Brief[];
+};
+
 type DetailResponse = {
   success: boolean;
   brief?: Brief;
@@ -31,15 +38,6 @@ type CategoriesResponse = {
   }>;
 };
 
-const homepageHeroCategoryWeight: Record<BriefCategory, number> = {
-  "Ummah & World": 6,
-  "Islamic Finance": 5,
-  "Family & Education": 4,
-  "Health & Wellness": 3,
-  "Halal Living": 2,
-  "Faith & Practice": 1,
-};
-
 export const briefCategoryTheme: Record<
   BriefCategory,
   {
@@ -49,33 +47,53 @@ export const briefCategoryTheme: Record<
 > = {
   "Faith & Practice": {
     badgeClassName:
-      "border-[rgba(41,91,145,0.18)] bg-[rgba(33,103,181,0.1)] text-[#1E5F9A]",
-    chipClassName: "bg-[rgba(33,103,181,0.06)] text-[#1E5F9A]",
-  },
-  "Islamic Finance": {
-    badgeClassName:
-      "border-[rgba(42,117,84,0.18)] bg-[rgba(53,125,83,0.1)] text-[#2E6D49]",
-    chipClassName: "bg-[rgba(53,125,83,0.06)] text-[#2E6D49]",
-  },
-  "Family & Education": {
-    badgeClassName:
-      "border-[rgba(196,122,38,0.18)] bg-[rgba(196,122,38,0.1)] text-[#A86518]",
-    chipClassName: "bg-[rgba(196,122,38,0.06)] text-[#A86518]",
-  },
-  "Halal Living": {
-    badgeClassName:
-      "border-[rgba(39,126,128,0.18)] bg-[rgba(39,126,128,0.1)] text-[#1E7072]",
-    chipClassName: "bg-[rgba(39,126,128,0.06)] text-[#1E7072]",
-  },
-  "Health & Wellness": {
-    badgeClassName:
-      "border-[rgba(110,88,154,0.18)] bg-[rgba(110,88,154,0.1)] text-[#6A4EA3]",
-    chipClassName: "bg-[rgba(110,88,154,0.06)] text-[#6A4EA3]",
+      "border-[rgba(16,185,129,0.18)] bg-[rgba(16,185,129,0.1)] text-[#065F46]",
+    chipClassName: "bg-[rgba(16,185,129,0.08)] text-[#065F46]",
   },
   "Ummah & World": {
     badgeClassName:
-      "border-[rgba(162,73,65,0.18)] bg-[rgba(162,73,65,0.1)] text-[#9F4036]",
-    chipClassName: "bg-[rgba(162,73,65,0.06)] text-[#9F4036]",
+      "border-[rgba(59,130,246,0.18)] bg-[rgba(59,130,246,0.1)] text-[#1D4ED8]",
+    chipClassName: "bg-[rgba(59,130,246,0.08)] text-[#1D4ED8]",
+  },
+  "Family & Education": {
+    badgeClassName:
+      "border-[rgba(245,158,11,0.18)] bg-[rgba(245,158,11,0.1)] text-[#92400E]",
+    chipClassName: "bg-[rgba(245,158,11,0.08)] text-[#92400E]",
+  },
+  "Islamic Finance": {
+    badgeClassName:
+      "border-[rgba(139,92,246,0.18)] bg-[rgba(139,92,246,0.1)] text-[#5B21B6]",
+    chipClassName: "bg-[rgba(139,92,246,0.08)] text-[#5B21B6]",
+  },
+  "Halal Lifestyle": {
+    badgeClassName:
+      "border-[rgba(236,72,153,0.18)] bg-[rgba(236,72,153,0.1)] text-[#9D174D]",
+    chipClassName: "bg-[rgba(236,72,153,0.08)] text-[#9D174D]",
+  },
+  "Tech & Innovation": {
+    badgeClassName:
+      "border-[rgba(99,102,241,0.18)] bg-[rgba(99,102,241,0.1)] text-[#4338CA]",
+    chipClassName: "bg-[rgba(99,102,241,0.08)] text-[#4338CA]",
+  },
+  "Travel & Wellness": {
+    badgeClassName:
+      "border-[rgba(6,182,212,0.18)] bg-[rgba(6,182,212,0.1)] text-[#0F766E]",
+    chipClassName: "bg-[rgba(6,182,212,0.08)] text-[#0F766E]",
+  },
+  "Travel & Lifestyle": {
+    badgeClassName:
+      "border-[rgba(6,182,212,0.18)] bg-[rgba(6,182,212,0.1)] text-[#0F766E]",
+    chipClassName: "bg-[rgba(6,182,212,0.08)] text-[#0F766E]",
+  },
+  "Halal Living": {
+    badgeClassName:
+      "border-[rgba(236,72,153,0.18)] bg-[rgba(236,72,153,0.1)] text-[#9D174D]",
+    chipClassName: "bg-[rgba(236,72,153,0.08)] text-[#9D174D]",
+  },
+  "Health & Wellness": {
+    badgeClassName:
+      "border-[rgba(124,58,237,0.18)] bg-[rgba(124,58,237,0.1)] text-[#6D28D9]",
+    chipClassName: "bg-[rgba(124,58,237,0.08)] text-[#6D28D9]",
   },
 };
 
@@ -113,117 +131,8 @@ async function fetchBriefsJson<T>(url: string, revalidate: number) {
 
 function sortBriefsByDate(items: Brief[]) {
   return [...items].sort(
-    (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+    (a, b) => getBriefSortTimestamp(b) - getBriefSortTimestamp(a)
   );
-}
-
-function getPrimarySourceName(brief: Brief) {
-  return brief.sources[0]?.name ?? "";
-}
-
-function isQuestionStyleHeadline(title: string) {
-  return /^(what|how|can|does|is|are|should|who)\b/i.test(title.trim());
-}
-
-function scoreBriefForHero(brief: Brief) {
-  let score = homepageHeroCategoryWeight[brief.category];
-
-  if (brief.image_url) {
-    score += 3;
-  }
-
-  score += Math.min(brief.source_count, 3) * 2;
-
-  if (isQuestionStyleHeadline(brief.title)) {
-    score -= 2.5;
-  }
-
-  if (brief.title.length >= 52 && brief.title.length <= 110) {
-    score += 1.5;
-  }
-
-  if (brief.dek.length >= 70) {
-    score += 1;
-  }
-
-  return score;
-}
-
-function scoreBriefForSlot(
-  brief: Brief,
-  usedSources: Map<string, number>,
-  usedCategories: Map<BriefCategory, number>,
-  position: number
-) {
-  let score = Math.min(brief.source_count, 3) * 2;
-  score += brief.image_url ? 1.25 : 0;
-  score += Math.max(0, 4 - position) * 0.35;
-
-  const primarySource = getPrimarySourceName(brief);
-  const sourceCount = primarySource ? usedSources.get(primarySource) ?? 0 : 0;
-  const categoryCount = usedCategories.get(brief.category) ?? 0;
-
-  score += sourceCount === 0 ? 2.25 : -sourceCount * 2;
-  score += categoryCount === 0 ? 1.5 : -categoryCount * 1.25;
-
-  if (position < 4 && isQuestionStyleHeadline(brief.title)) {
-    score -= 1.75;
-  }
-
-  return score;
-}
-
-export function buildHomepageBriefLayout(briefs: Brief[]): HomepageBriefLayout {
-  if (!briefs.length) {
-    return { hero: null, featured: [], compact: [] };
-  }
-
-  const sortedCandidates = sortBriefsByDate(briefs);
-  const hero = [...sortedCandidates].sort((a, b) => scoreBriefForHero(b) - scoreBriefForHero(a))[0];
-
-  if (!hero) {
-    return { hero: null, featured: [], compact: [] };
-  }
-
-  const usedSources = new Map<string, number>();
-  const usedCategories = new Map<BriefCategory, number>();
-  const heroSource = getPrimarySourceName(hero);
-
-  if (heroSource) {
-    usedSources.set(heroSource, 1);
-  }
-  usedCategories.set(hero.category, 1);
-
-  const remaining = sortedCandidates.filter((brief) => brief.id !== hero.id);
-  const selected: Brief[] = [];
-
-  while (remaining.length > 0 && selected.length < 8) {
-    let bestIndex = 0;
-    let bestScore = Number.NEGATIVE_INFINITY;
-
-    remaining.forEach((brief, index) => {
-      const score = scoreBriefForSlot(brief, usedSources, usedCategories, selected.length);
-      if (score > bestScore) {
-        bestScore = score;
-        bestIndex = index;
-      }
-    });
-
-    const [chosen] = remaining.splice(bestIndex, 1);
-    selected.push(chosen);
-
-    const sourceName = getPrimarySourceName(chosen);
-    if (sourceName) {
-      usedSources.set(sourceName, (usedSources.get(sourceName) ?? 0) + 1);
-    }
-    usedCategories.set(chosen.category, (usedCategories.get(chosen.category) ?? 0) + 1);
-  }
-
-  return {
-    hero,
-    featured: selected.slice(0, 4),
-    compact: selected.slice(4, 8),
-  };
 }
 
 export async function getHomepageBriefs(limit = 12) {
@@ -236,12 +145,30 @@ export async function getHomepageBriefs(limit = 12) {
 }
 
 export async function getHomepageBriefLayout() {
+  const data = await fetchBriefsJson<HomeResponse>(
+    `${BRIEFS_API_BASE}/home?limit=12`,
+    900
+  );
+
+  if (data?.success) {
+    return {
+      hero: data.hero && isBriefFresh(data.hero, DEFAULT_FRESHNESS_DAYS) ? data.hero : null,
+      featured: filterFreshBriefs(data.featured ?? [], DEFAULT_FRESHNESS_DAYS).slice(0, 3),
+      compact: filterFreshBriefs(data.compact ?? [], DEFAULT_FRESHNESS_DAYS).slice(0, 8),
+    };
+  }
+
   const { items } = await getFeedBriefs({
     limit: 18,
     offset: 0,
   });
 
-  return buildHomepageBriefLayout(filterFreshBriefs(items, DEFAULT_FRESHNESS_DAYS));
+  const freshItems = filterFreshBriefs(items, DEFAULT_FRESHNESS_DAYS);
+  return {
+    hero: freshItems[0] ?? null,
+    featured: freshItems.slice(1, 4),
+    compact: freshItems.slice(4, 12),
+  };
 }
 
 export async function getFeedBriefs({
@@ -323,8 +250,42 @@ function parseBriefTimestamp(value: string) {
   return Number.isNaN(timestamp) ? null : timestamp;
 }
 
+export function getBriefSourcePublishedAt(brief: Brief) {
+  return brief.source_published_at || brief.published_at || brief.generated_at || "";
+}
+
+export function getBriefSortTimestamp(brief: Brief) {
+  return (
+    parseBriefTimestamp(brief.generated_at || "") ??
+    parseBriefTimestamp(getBriefSourcePublishedAt(brief)) ??
+    parseBriefTimestamp(brief.published_at) ??
+    0
+  );
+}
+
+export function getBriefDisplayTimestamp(brief: Brief) {
+  return getBriefSourcePublishedAt(brief);
+}
+
+export function hasValidBriefImage(brief: Brief) {
+  if (!brief.image_url) {
+    return false;
+  }
+
+  const imageUrl = brief.image_url.trim().toLowerCase();
+  if (!imageUrl.startsWith("http://") && !imageUrl.startsWith("https://")) {
+    return false;
+  }
+
+  if (imageUrl.includes("youtube.com/embed") || imageUrl.includes("youtu.be/")) {
+    return false;
+  }
+
+  return true;
+}
+
 export function isBriefFresh(brief: Brief, maxAgeDays = 30) {
-  const timestamp = parseBriefTimestamp(brief.published_at);
+  const timestamp = parseBriefTimestamp(getBriefSourcePublishedAt(brief));
   if (!timestamp) {
     return false;
   }

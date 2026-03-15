@@ -8,7 +8,7 @@ export default function CategoryBadge({
   category: BriefCategory;
   size?: "sm" | "md";
 }) {
-  const theme = briefCategoryTheme[category];
+  const theme = briefCategoryTheme[category] ?? briefCategoryTheme["Ummah & World"];
   const sizeClassName =
     size === "sm"
       ? "px-2.5 py-1 text-[0.62rem] tracking-[0.18em]"

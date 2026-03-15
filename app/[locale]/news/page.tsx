@@ -3,7 +3,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { type Brief } from "@/types/brief";
-import { filterFreshBriefs, formatTimeAgo, getBriefCategories, getFeedBriefs } from "@/lib/briefs";
+import {
+  filterFreshBriefs,
+  formatTimeAgo,
+  getBriefCategories,
+  getBriefDisplayTimestamp,
+  getFeedBriefs,
+  hasValidBriefImage,
+} from "@/lib/briefs";
 
 const NEWS_FRESHNESS_DAYS = 30;
 
@@ -32,6 +39,8 @@ function NewsMeta({
   brief: Brief;
   small?: boolean;
 }) {
+  const displayTimestamp = getBriefDisplayTimestamp(brief);
+
   return (
     <div
       className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-text-muted ${
@@ -39,8 +48,12 @@ function NewsMeta({
       }`}
     >
       <span className="font-medium text-text-secondary">{brief.sources[0]?.name}</span>
-      <span aria-hidden="true">•</span>
-      <time dateTime={brief.published_at}>{formatTimeAgo(brief.published_at)}</time>
+      {displayTimestamp ? (
+        <>
+          <span aria-hidden="true">•</span>
+          <time dateTime={displayTimestamp}>{formatTimeAgo(displayTimestamp)}</time>
+        </>
+      ) : null}
       {brief.source_count > 1 ? (
         <>
           <span aria-hidden="true">•</span>
@@ -65,7 +78,7 @@ function LeadStory({
       href={href}
       className="group grid overflow-hidden rounded-[2rem] border border-[rgba(47,37,30,0.08)] bg-white/90 shadow-[0_20px_60px_rgba(43,34,24,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_26px_72px_rgba(43,34,24,0.08)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]"
     >
-      {brief.image_url ? (
+      {hasValidBriefImage(brief) && brief.image_url ? (
         <div className="relative aspect-[1.4/1] overflow-hidden bg-[rgba(243,238,230,0.72)] lg:aspect-auto">
           <Image
             src={brief.image_url}
@@ -79,10 +92,7 @@ function LeadStory({
       ) : null}
 
       <div className="flex flex-col p-6 md:p-7">
-        <div className="text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-[#8b765e]">
-          Lead Story
-        </div>
-        <div className="mt-3">
+        <div>
           <NewsMeta brief={brief} />
         </div>
 
@@ -128,7 +138,7 @@ function HeadlineCard({
         </h3>
       </div>
 
-      {brief.image_url ? (
+      {hasValidBriefImage(brief) && brief.image_url ? (
         <div className="relative hidden h-24 w-24 overflow-hidden rounded-[1.1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)] md:block">
           <Image
             src={brief.image_url}
@@ -157,7 +167,7 @@ function StreamCard({
       href={href}
       className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/86 p-4 shadow-[0_14px_36px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)]"
     >
-      {brief.image_url ? (
+      {hasValidBriefImage(brief) && brief.image_url ? (
         <div className="relative aspect-[1.8/1] overflow-hidden rounded-[1.15rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)]">
           <Image
             src={brief.image_url}
