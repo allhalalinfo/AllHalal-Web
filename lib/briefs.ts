@@ -1,3 +1,5 @@
+import type { NewsCategory } from "@/lib/newsSources";
+import { getAggregatedNews, type NewsItem } from "@/lib/newsFeed";
 import { BRIEF_CATEGORIES, type Brief, type BriefCategory, type BriefsResponse } from "@/types/brief";
 
 const BRIEFS_API_BASE = "https://api.allhalal.info/api/v1/briefs";
@@ -37,6 +39,161 @@ type CategoriesResponse = {
     slug: string;
   }>;
 };
+
+const LIVE_NEWS_CATEGORIES: NewsCategory[] = [
+  "Faith & Practice",
+  "Family & Education",
+  "Halal Living",
+  "Islamic Finance",
+  "Health & Wellness",
+  "Ummah & World",
+];
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function hashString(value: string) {
+  let hash = 0;
+
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash << 5) - hash + value.charCodeAt(index);
+    hash |= 0;
+  }
+
+  return Math.abs(hash);
+}
+
+function resolveBriefCategorySlug(slug?: string): NewsCategory | undefined {
+  if (!slug) {
+    return undefined;
+  }
+
+  return LIVE_NEWS_CATEGORIES.find((category) => slugify(category) === slug);
+}
+
+function getFallbackBriefCategory(item: NewsItem): BriefCategory {
+  const matchedCategory = item.categories.find((category) =>
+    BRIEF_CATEGORIES.includes(category as BriefCategory)
+  );
+
+  return (matchedCategory as BriefCategory | undefined) ?? "Faith & Practice";
+}
+
+function buildFallbackBriefSlug(item: NewsItem) {
+  const normalizedTitle = slugify(item.title).slice(0, 72) || "story";
+  return `${item.sourceId}-${normalizedTitle}`;
+}
+
+function mapNewsItemToBrief(item: NewsItem): Brief {
+  const category = getFallbackBriefCategory(item);
+  const excerpt = item.excerpt.trim() || `Current reporting from ${item.sourceName}.`;
+  const sourcePublishedAt = item.publishedAt || new Date().toISOString();
+
+  return {
+    id: hashString(`${item.sourceId}:${item.url}:${item.title}`),
+    slug: buildFallbackBriefSlug(item),
+    title: item.title,
+    dek: excerpt,
+    summary: `${excerpt}\n\nRead the original article from ${item.sourceName} for the full report and any follow-up updates.`,
+    why_it_matters: `This story is part of the live AllHalal news feed and reflects current reporting from ${item.sourceName}.`,
+    category,
+    image_url: item.imageUrl,
+    published_at: sourcePublishedAt,
+    source_published_at: sourcePublishedAt,
+    generated_at: sourcePublishedAt,
+    brief_type: "news",
+    image_strategy: item.imageUrl ? "real" : "none",
+    sources: [
+      {
+        name: item.sourceName,
+        url: item.url,
+      },
+    ],
+    source_count: 1,
+    primary_source: item.sourceName,
+    kind: "live_news_fallback",
+    hero_candidate: false,
+  };
+}
+
+async function getFallbackFeedBriefs({
+  category,
+  limit,
+  offset,
+}: {
+  category?: string;
+  limit: number;
+  offset: number;
+}) {
+  const resolvedCategory = resolveBriefCategorySlug(category);
+
+  if (category && !resolvedCategory) {
+    return {
+      items: [],
+      count: 0,
+      total: 0,
+      hasMore: false,
+      offset,
+      limit,
+    };
+  }
+
+  const requestedLimit = Math.min(Math.max(offset + limit, 20), 50);
+  const items = await getAggregatedNews({
+    category: resolvedCategory,
+    limit: requestedLimit,
+  });
+  const briefs = sortBriefsByDate(items.map(mapNewsItemToBrief));
+  const paginatedItems = briefs.slice(offset, offset + limit);
+
+  return {
+    items: paginatedItems,
+    count: paginatedItems.length,
+    total: briefs.length,
+    hasMore: offset + limit < briefs.length,
+    offset,
+    limit,
+  };
+}
+
+async function getFallbackBriefBySlug(slug: string) {
+  const items = await getAggregatedNews({ limit: 50 });
+  const briefs = sortBriefsByDate(items.map(mapNewsItemToBrief));
+  const brief = briefs.find((entry) => entry.slug === slug);
+
+  if (!brief) {
+    return null;
+  }
+
+  return {
+    brief,
+    related: briefs
+      .filter((entry) => entry.slug !== slug && entry.category === brief.category)
+      .slice(0, 3),
+  };
+}
+
+async function getFallbackHomepageLayout() {
+  const items = await getAggregatedNews({
+    safeOnly: true,
+    limit: 12,
+  });
+  const freshItems = filterFreshBriefs(
+    sortBriefsByDate(items.map(mapNewsItemToBrief)),
+    DEFAULT_FRESHNESS_DAYS,
+  );
+
+  return {
+    hero: freshItems[0] ?? null,
+    featured: freshItems.slice(1, 4),
+    compact: freshItems.slice(4, 12),
+  };
+}
 
 export const briefCategoryTheme: Record<
   BriefCategory,
@@ -150,7 +307,12 @@ export async function getHomepageBriefLayout() {
     900
   );
 
-  if (data?.success) {
+  const hasLiveBriefs =
+    Boolean(data?.hero) ||
+    Boolean(data?.featured?.length) ||
+    Boolean(data?.compact?.length);
+
+  if (data?.success && hasLiveBriefs) {
     return {
       hero: data.hero && isBriefFresh(data.hero, DEFAULT_FRESHNESS_DAYS) ? data.hero : null,
       featured: filterFreshBriefs(data.featured ?? [], DEFAULT_FRESHNESS_DAYS).slice(0, 3),
@@ -158,17 +320,7 @@ export async function getHomepageBriefLayout() {
     };
   }
 
-  const { items } = await getFeedBriefs({
-    limit: 18,
-    offset: 0,
-  });
-
-  const freshItems = filterFreshBriefs(items, DEFAULT_FRESHNESS_DAYS);
-  return {
-    hero: freshItems[0] ?? null,
-    featured: freshItems.slice(1, 4),
-    compact: freshItems.slice(4, 12),
-  };
+  return getFallbackHomepageLayout();
 }
 
 export async function getFeedBriefs({
@@ -204,14 +356,8 @@ export async function getFeedBriefs({
       limit: data.limit ?? limit,
     };
   }
-  return {
-    items: [],
-    count: 0,
-    total: 0,
-    hasMore: false,
-    offset,
-    limit,
-  };
+
+  return getFallbackFeedBriefs({ category, limit, offset });
 }
 
 export async function getBriefCategories() {
@@ -223,7 +369,21 @@ export async function getBriefCategories() {
     );
   }
 
-  return [];
+  const fallbackItems = await getAggregatedNews({ limit: 50 });
+  const counts = new Map<BriefCategory, number>();
+
+  for (const item of fallbackItems) {
+    const category = getFallbackBriefCategory(item);
+    counts.set(category, (counts.get(category) ?? 0) + 1);
+  }
+
+  return BRIEF_CATEGORIES
+    .map((category) => ({
+      name: category,
+      count: counts.get(category) ?? 0,
+      slug: slugify(category),
+    }))
+    .filter((category) => category.count > 0);
 }
 
 export async function getBriefDetail(slug: string) {
@@ -238,7 +398,8 @@ export async function getBriefDetail(slug: string) {
           : [],
     };
   }
-  return null;
+
+  return getFallbackBriefBySlug(slug);
 }
 
 export function getRelatedBriefs(_brief: Brief, _limit = 3) {
