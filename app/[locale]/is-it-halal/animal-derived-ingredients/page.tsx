@@ -79,7 +79,7 @@ export default async function AnimalDerivedIngredientsGuide(props: {
                   A
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-[#2A2419]">AllHalal Editorial Team</p>
+                  <p className="text-sm font-bold text-[#2A2419]">allhalal.info Editorial Team</p>
                   <p className="text-xs text-[#7A7569]">2026-03-12</p>
                 </div>
               </div>
@@ -563,7 +563,7 @@ export default async function AnimalDerivedIngredientsGuide(props: {
                   rel="noopener noreferrer"
                   className="inline-block px-6 py-2 bg-[#4B7A88] text-white font-bold rounded-xl hover:bg-[#3D6270] transition-colors text-sm"
                 >
-                  Or Use AllHalal App
+                  Or use the allhalal.info app
                 </a>
               </div>
             </div>

@@ -42,7 +42,7 @@ export default function PortalSearchWidget({ locale }: { locale: string }) {
             Check a product, ingredient or E-code right now.
           </h2>
           <p className="text-text-inverse-secondary mb-8 text-lg max-w-2xl">
-            Search the highest-intent part of AllHalal first: packaged foods, ingredients, additives, snacks, drinks and brand questions.
+            Search the highest-intent part of allhalal.info first: packaged foods, ingredients, additives, snacks, drinks and brand questions.
           </p>
 
           <div className="flex flex-wrap gap-2 mb-8">

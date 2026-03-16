@@ -64,7 +64,7 @@ export default async function ReadingLabelsGuide(props: {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[#4B7A88] flex items-center justify-center text-white font-bold">A</div>
                 <div>
-                  <p className="text-sm font-bold text-[#2A2419]">AllHalal Editorial Team</p>
+                  <p className="text-sm font-bold text-[#2A2419]">allhalal.info Editorial Team</p>
                   <p className="text-xs text-[#7A7569]">2026-03-12</p>
                 </div>
               </div>
@@ -297,7 +297,7 @@ export default async function ReadingLabelsGuide(props: {
           <h2 className="text-3xl font-black text-[#2A2419] mt-16 mb-6">Using technology</h2>
 
           <div className="bg-gradient-to-br from-[#4B7A88] to-[#3D6270] text-white rounded-2xl p-8 mb-12">
-            <h3 className="text-2xl font-black mb-4">AllHalal App: Your Halal Scanner</h3>
+            <h3 className="text-2xl font-black mb-4">allhalal.info App: Your Halal Scanner</h3>
             <p className="text-white/90 mb-4">
               Tired of emailing manufacturers? Use our app to scan barcodes and get instant halal verification.
             </p>
@@ -325,7 +325,7 @@ export default async function ReadingLabelsGuide(props: {
               rel="noopener noreferrer"
               className="inline-block px-8 py-3 bg-white text-[#4B7A88] font-black rounded-xl hover:bg-[#FAFAF8] transition-colors"
             >
-              Download AllHalal App
+              Download the allhalal.info app
             </a>
           </div>
 
@@ -353,7 +353,7 @@ export default async function ReadingLabelsGuide(props: {
               <li className="flex items-start gap-3">
                 <span className="text-[#F0C65F] font-bold text-xl mt-0.5 flex-shrink-0">4.</span>
                 <span className="text-white leading-relaxed">
-                  When in doubt, contact the manufacturer or use AllHalal app for instant verification.
+                  When in doubt, contact the manufacturer or use the allhalal.info app for instant verification.
                 </span>
               </li>
             </ul>

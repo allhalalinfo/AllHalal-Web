@@ -79,7 +79,7 @@ export default async function ECodesGuide(props: {
                   A
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-[#2A2419]">AllHalal Editorial Team</p>
+                  <p className="text-sm font-bold text-[#2A2419]">allhalal.info Editorial Team</p>
                   <p className="text-xs text-[#7A7569]">Coming March 2026</p>
                 </div>
               </div>
@@ -494,7 +494,7 @@ export default async function ECodesGuide(props: {
             </div>
 
             <div className="bg-white border-2 border-[#E8E6E1] rounded-xl p-6 hover:border-[#4B7A88] transition-colors">
-              <h4 className="font-bold text-[#2A2419] mb-2">3. Use the AllHalal app</h4>
+              <h4 className="font-bold text-[#2A2419] mb-2">3. Use the allhalal.info app</h4>
               <p className="text-[#5A5449]">
                 Scan the barcode. Our database includes E471 source verification for 100,000+ products.
               </p>
@@ -587,7 +587,7 @@ export default async function ECodesGuide(props: {
               <div>
                 <h4 className="font-bold text-[#2A2419] mb-2">When in doubt, use tech</h4>
                 <p className="text-[#5A5449]">
-                  Scan the barcode with AllHalal app. We've already verified the E-codes for you.
+                  Scan the barcode with the allhalal.info app. We&apos;ve already verified the E-codes for you.
                 </p>
               </div>
             </div>

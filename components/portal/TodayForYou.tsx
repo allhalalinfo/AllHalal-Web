@@ -318,7 +318,7 @@ export default function TodayForYou({
   const tomorrowTimesByPrayer = new Map(tomorrowPrayersList.map((prayer) => [prayer.id, prayer.time]));
 
   return (
-    <div className="mx-auto max-w-[1180px] bg-accent-navy text-text-inverse rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 relative">
+    <div className="mx-auto w-full max-w-[1180px] max-w-full rounded-[2rem] border border-white/10 bg-accent-navy text-text-inverse shadow-2xl relative overflow-hidden">
       <div
         className="absolute inset-0 z-0 opacity-10 mix-blend-overlay pointer-events-none"
         style={{ backgroundImage: "url('/assets/card-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}
@@ -456,19 +456,14 @@ export default function TodayForYou({
                 <div className="text-3xl md:text-4xl font-black font-display text-accent-yellow tracking-tight">
                   {nextPrayerInfo.name}
                 </div>
-                <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/70">
-                    {prayerLoading ? "Syncing..." : `${nextPrayerInfo.progressPct.toFixed(0)}% elapsed`}
-                  </span>
-                </div>
               </div>
             </div>
 
             <div className="mt-4 flex flex-col gap-1.5">
               {hasPrayerData && (
-                <div className="flex items-center px-4 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">
+                <div className="flex items-center px-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 sm:px-4">
                   <span className="flex-1">Prayer</span>
-                  <div className="ml-auto grid w-[11rem] grid-cols-2 gap-x-6 md:w-[12rem] md:gap-x-8">
+                  <div className="ml-auto grid w-[8.5rem] grid-cols-2 gap-x-3 text-[9px] sm:w-[11rem] sm:gap-x-6 sm:text-[10px] md:w-[12rem] md:gap-x-8">
                     <span className="text-left">Today</span>
                     <span className="text-left">Tomorrow</span>
                   </div>
@@ -478,7 +473,7 @@ export default function TodayForYou({
                 prayersList.map((prayer) => (
                   <div
                     key={prayer.id}
-                    className={`flex items-center px-4 py-2.5 rounded-xl transition-colors ${
+                    className={`flex items-center px-3 py-2.5 rounded-xl transition-colors sm:px-4 ${
                       prayer.status === "next"
                         ? "bg-accent-yellow/10 border border-accent-yellow/30"
                         : prayer.status === "past"
@@ -486,7 +481,7 @@ export default function TodayForYou({
                           : "bg-white/5"
                     }`}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
                       {prayer.status === "past" ? (
                         <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
                           <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -500,18 +495,24 @@ export default function TodayForYou({
                       ) : (
                         <div className="w-5 h-5 rounded-full border-2 border-white/20" />
                       )}
-                      <span className={`font-medium text-sm ${prayer.status === "next" ? "text-accent-yellow font-bold" : "text-white"}`}>
+                      <span
+                        className={`min-w-0 text-xs sm:text-sm ${prayer.status === "next" ? "font-bold text-accent-yellow" : "font-medium text-white"}`}
+                      >
                         {prayer.name}
                         {prayer.id === "sunrise" && (
-                          <span className="ml-2 text-[10px] uppercase opacity-70 font-normal">(Not a prayer)</span>
+                          <span className="ml-1 text-[9px] uppercase opacity-70 font-normal sm:ml-2 sm:text-[10px]">
+                            (Not a prayer)
+                          </span>
                         )}
                       </span>
                     </div>
-                    <div className="ml-auto grid w-[11rem] grid-cols-2 gap-x-6 md:w-[12rem] md:gap-x-8">
-                      <div className={`text-left font-mono text-sm font-bold tabular-nums ${prayer.status === "next" ? "text-accent-yellow" : "text-white"}`}>
+                    <div className="ml-2 grid w-[8.5rem] shrink-0 grid-cols-2 gap-x-3 sm:ml-auto sm:w-[11rem] sm:gap-x-6 md:w-[12rem] md:gap-x-8">
+                      <div
+                        className={`text-left font-mono text-xs font-bold tabular-nums sm:text-sm ${prayer.status === "next" ? "text-accent-yellow" : "text-white"}`}
+                      >
                         {prayer.time}
                       </div>
-                      <div className="text-left font-mono text-sm font-bold tabular-nums text-white/75">
+                      <div className="text-left font-mono text-xs font-bold tabular-nums text-white/75 sm:text-sm">
                         {tomorrowTimesByPrayer.get(prayer.id) || "--"}
                       </div>
                     </div>

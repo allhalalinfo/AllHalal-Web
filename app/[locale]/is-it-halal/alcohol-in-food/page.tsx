@@ -76,7 +76,7 @@ export default async function AlcoholInFoodGuide(props: {
                   A
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-[#2A2419]">AllHalal Editorial Team</p>
+                  <p className="text-sm font-bold text-[#2A2419]">allhalal.info Editorial Team</p>
                   <p className="text-xs text-[#7A7569]">2026-03-12</p>
                 </div>
               </div>

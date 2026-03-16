@@ -196,7 +196,7 @@ export default function HeroSection() {
                 <div className="relative flex items-center justify-between gap-4 border-b border-white/10 pb-4">
                   <div>
                     <div className="text-[0.68rem] font-bold uppercase tracking-[0.26em] text-white/45">
-                      AllHalal Portal
+                      allhalal.info Portal
                     </div>
                     <h2 className="mt-2 text-[2rem] font-bold font-display leading-tight text-white md:text-[2.6rem]">
                       Muslim life,

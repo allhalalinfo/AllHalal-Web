@@ -15,20 +15,20 @@ import {
 const NEWS_FRESHNESS_DAYS = 30;
 
 export const metadata: Metadata = {
-  title: "AllHalal News Desk | Original Muslim Briefs, Finance, Faith and Family",
+  title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
   description:
-    "Read AllHalal briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
+    "Read allhalal.info briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
   openGraph: {
-    title: "AllHalal News Desk | Original Muslim Briefs, Finance, Faith and Family",
+    title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
     description:
-      "Read AllHalal briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
+      "Read allhalal.info briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AllHalal News Desk | Original Muslim Briefs, Finance, Faith and Family",
+    title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
     description:
-      "Read AllHalal briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
+      "Read allhalal.info briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
   },
 };
 

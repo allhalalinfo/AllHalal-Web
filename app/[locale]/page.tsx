@@ -7,9 +7,9 @@ import { getHomepageBriefLayout } from "@/lib/briefs";
 import { SITE_URL } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = {
-  title: "AllHalal Muslim Portal | Prayer Times, Halal Guides, Finance & News",
+  title: "allhalal.info Muslim Portal | Prayer Times, Halal Guides, Finance & News",
   description:
-    "AllHalal is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
+    "allhalal.info is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
   keywords: [
     "muslim portal",
     "prayer times",
@@ -22,16 +22,16 @@ export const metadata: Metadata = {
     "99 names of Allah",
   ],
   openGraph: {
-    title: "AllHalal Muslim Portal | Prayer Times, Finance Signals, Muslim News & Islamic Learning",
+    title: "allhalal.info Muslim Portal | Prayer Times, Finance Signals, Muslim News & Islamic Learning",
     description:
-      "AllHalal is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
+      "allhalal.info is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AllHalal Muslim Portal | Prayer Times, Finance Signals, Muslim News & Islamic Learning",
+    title: "allhalal.info Muslim Portal | Prayer Times, Finance Signals, Muslim News & Islamic Learning",
     description:
-      "AllHalal is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
+      "allhalal.info is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
   },
 };
 
@@ -45,7 +45,7 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
       {
         "@type": "WebSite",
         "@id": `${SITE_URL}/#website`,
-        name: "AllHalal",
+        name: "allhalal.info",
         url: SITE_URL,
         description:
           "Muslim portal for prayer times, Islamic calendar, halal guides, finance signals and Muslim news.",
@@ -59,7 +59,7 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
         "@type": "WebPage",
         "@id": `${SITE_URL}/${locale}#webpage`,
         url: `${SITE_URL}/${locale}`,
-        name: "AllHalal Muslim Portal",
+        name: "allhalal.info Muslim Portal",
         description:
           "Daily Muslim portal for prayer times, Islamic calendar, live finance signals, Muslim news and Islamic learning.",
         isPartOf: { "@id": `${SITE_URL}/#website` },

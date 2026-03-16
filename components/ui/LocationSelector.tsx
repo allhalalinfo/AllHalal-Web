@@ -76,20 +76,22 @@ export default function LocationSelector({ currentLocation, onLocationChange, on
     <div className="relative z-50">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="group flex items-center gap-2 text-xl font-bold opacity-90 hover:opacity-100 transition-opacity"
+        className="group flex max-w-full items-center gap-2 text-base font-bold opacity-90 transition-opacity hover:opacity-100 sm:text-xl"
       >
         <svg className="w-5 h-5 text-accent-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
-        <span>{currentLocation ? currentLocation.city : "Select Location"}</span>
+        <span className="max-w-[11rem] truncate sm:max-w-none">
+          {currentLocation ? currentLocation.city : "Select Location"}
+        </span>
         <svg className={`w-4 h-4 opacity-50 transition-transform ${isOpen ? 'rotate-180' : 'group-hover:translate-y-0.5'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
       {isOpen && (
-        <div ref={modalRef} className="absolute top-full left-0 mt-2 w-72 md:w-80 bg-bg-elevated border border-border rounded-2xl shadow-xl overflow-hidden text-text-primary">
+        <div ref={modalRef} className="absolute top-full left-0 mt-2 w-[min(18rem,calc(100vw-2rem))] md:w-80 bg-bg-elevated border border-border rounded-2xl shadow-xl overflow-hidden text-text-primary">
           <div className="p-4 border-b border-border">
             <button 
               onClick={handleAutoLocation}

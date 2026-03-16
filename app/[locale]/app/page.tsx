@@ -5,20 +5,20 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import HeroSection from "@/components/sections/HeroSection";
 
 export const metadata: Metadata = {
-  title: "AllHalal App | Halal Scanner, Ingredient Verification & Muslim Utilities",
+  title: "allhalal.info App | Halal Scanner, Ingredient Verification & Muslim Utilities",
   description:
-    "Explore the dedicated AllHalal app experience with halal scanning, ingredient verification, prayer tools and app-first Muslim utilities.",
+    "Explore the dedicated allhalal.info app experience with halal scanning, ingredient verification, prayer tools and app-first Muslim utilities.",
   openGraph: {
-    title: "AllHalal App | Halal Scanner, Ingredient Verification & Muslim Utilities",
+    title: "allhalal.info App | Halal Scanner, Ingredient Verification & Muslim Utilities",
     description:
-      "Explore the dedicated AllHalal app experience with halal scanning, ingredient verification, prayer tools and app-first Muslim utilities.",
+      "Explore the dedicated allhalal.info app experience with halal scanning, ingredient verification, prayer tools and app-first Muslim utilities.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AllHalal App | Halal Scanner, Ingredient Verification & Muslim Utilities",
+    title: "allhalal.info App | Halal Scanner, Ingredient Verification & Muslim Utilities",
     description:
-      "Explore the dedicated AllHalal app experience with halal scanning, ingredient verification, prayer tools and app-first Muslim utilities.",
+      "Explore the dedicated allhalal.info app experience with halal scanning, ingredient verification, prayer tools and app-first Muslim utilities.",
   },
 };
 

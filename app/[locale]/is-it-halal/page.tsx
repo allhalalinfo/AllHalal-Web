@@ -441,7 +441,7 @@ export default async function HalalGuidesPage(props: {
                 rel="noopener noreferrer"
                 className="block w-full px-8 py-4 rounded-2xl bg-gradient-to-r from-[#F0C65F] to-[#E5BA55] text-[#2A2419] font-black text-center hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
-                Download AllHalal App
+                Download the allhalal.info app
               </a>
             </div>
           </div>

@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/seo/metadata";
 export const metadata: Metadata = {
   title: "Halal Finance Hub | Zakat, Investing, Mortgages & Islamic Banking",
   description:
-    "Explore halal finance on AllHalal with zakat tools, halal investing guides, Islamic banking pages and halal mortgage resources for Muslims making real money decisions.",
+    "Explore halal finance on allhalal.info with zakat tools, halal investing guides, Islamic banking pages and halal mortgage resources for Muslims making real money decisions.",
   keywords: [
     "halal finance",
     "Islamic finance",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 const financeFaqs = [
   {
-    question: "What can I do in the AllHalal finance hub?",
+    question: "What can I do in the allhalal.info finance hub?",
     answer:
       "You can calculate zakat, explore halal investing, understand Islamic banking options and learn how halal mortgages work without relying on generic conventional-finance advice.",
   },

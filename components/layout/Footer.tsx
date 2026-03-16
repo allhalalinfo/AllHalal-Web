@@ -56,7 +56,7 @@ export default function Footer() {
 
   const navGroups = [
     {
-      title: "Use AllHalal",
+      title: "Use allhalal.info",
       links: [
         { label: "Halal Checker", href: "/is-it-halal" },
         { label: "Prayer Times", href: "/prayer-times" },
@@ -91,68 +91,73 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-16 pb-6">
+    <footer className="mt-12 pb-4 md:mt-16 md:pb-6">
       <div className="container">
         <div className="relative overflow-hidden rounded-[2.5rem] border border-[rgba(73,58,42,0.08)] bg-[linear-gradient(180deg,#2E1C18_0%,#251612_45%,#1D120F_100%)] text-text-inverse shadow-[0_30px_80px_rgba(33,23,18,0.22)]">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(230,187,104,0.16),transparent_28%),radial-gradient(circle_at_85%_18%,rgba(92,128,148,0.16),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.06),transparent_38%)]" />
 
-          <div className="relative border-b border-white/8 px-6 py-8 md:px-10 md:py-10">
+          <div className="relative border-b border-white/8 px-4 py-6 sm:px-6 sm:py-7 md:px-10 md:py-10">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
               <div>
-                <Link href={`/${locale}`} className="inline-flex items-center gap-3 rounded-full bg-white/5 px-3 py-2 ring-1 ring-white/10 backdrop-blur-sm">
-                  <span className="relative h-11 w-11 overflow-hidden rounded-full">
+                <Link
+                  href={`/${locale}`}
+                  className="inline-flex items-center gap-3 rounded-full bg-white/5 px-3 py-2 ring-1 ring-white/10 backdrop-blur-sm"
+                >
+                  <span className="relative h-10 w-10 overflow-hidden rounded-full sm:h-11 sm:w-11">
                     <Image
                       src="/branding/publicbrandingheader-logo.png"
-                      alt="AllHalal logo"
+                      alt="allhalal.info logo"
                       fill
-                      sizes="44px"
+                      sizes="(min-width: 640px) 44px, 40px"
                       className="object-contain"
                     />
                   </span>
                   <span>
-                    <span className="block text-lg font-bold tracking-tight text-white">allhalal.info</span>
-                    <span className="mt-0.5 block text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-white/56">
+                    <span className="block text-base font-bold tracking-tight text-white sm:text-lg">
+                      allhalal.info
+                    </span>
+                    <span className="mt-0.5 block text-[0.62rem] font-semibold uppercase tracking-[0.24em] text-white/56 sm:text-[0.68rem] sm:tracking-[0.28em]">
                       Muslim portal
                     </span>
                   </span>
                 </Link>
 
-                <h2 className="mt-6 max-w-3xl text-3xl font-display font-bold leading-tight text-white md:text-5xl">
+                <h2 className="mt-5 max-w-3xl text-2xl font-display font-bold leading-tight text-white sm:text-[2rem] md:mt-6 md:text-5xl">
                   Halal clarity, prayer rhythm, finance tools and Muslim life in one place.
                 </h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-inverse-secondary md:text-lg">
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-inverse-secondary sm:text-[0.95rem] md:mt-4 md:text-lg">
                   {t("description")}
                 </p>
               </div>
 
-              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm">
-                <div className="text-[0.72rem] font-bold uppercase tracking-[0.28em] text-[#E6BB68]">
+              <div className="rounded-[1.6rem] border border-white/10 bg-white/5 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm sm:rounded-[2rem] sm:p-5">
+                <div className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[#E6BB68] sm:text-[0.72rem] sm:tracking-[0.28em]">
                   Start Here
                 </div>
-                <div className="mt-3 text-2xl font-display font-bold leading-tight text-white">
+                <div className="mt-2 text-xl font-display font-bold leading-tight text-white sm:mt-3 sm:text-2xl">
                   Keep the most useful tools one tap away.
                 </div>
-                <div className="mt-5 flex flex-wrap gap-2.5">
+                <div className="mt-4 flex flex-wrap gap-2">
                   {primaryLinks.map((link) => (
                     <Link
                       key={link.label}
                       href={localizeHref(locale, link.href)}
-                      className="rounded-full border border-white/12 bg-white/6 px-4 py-2.5 text-sm font-semibold text-white/86 transition-colors hover:border-white/18 hover:bg-white/10"
+                      className="rounded-full border border-white/12 bg-white/6 px-3 py-2 text-[0.82rem] font-semibold text-white/86 transition-colors hover:border-white/18 hover:bg-white/10 sm:px-4 sm:py-2.5 sm:text-sm"
                     >
                       {link.label}
                     </Link>
                   ))}
                 </div>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:gap-3">
                   <Link
                     href={`/${locale}/app`}
-                    className="inline-flex items-center justify-center rounded-full bg-gradient-gold px-5 py-3 text-sm font-bold text-[#4A3319] shadow-[0_12px_28px_rgba(176,144,98,0.24)] transition-transform hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-full bg-gradient-gold px-4 py-2.5 text-sm font-bold text-[#4A3319] shadow-[0_12px_28px_rgba(176,144,98,0.24)] transition-transform hover:-translate-y-0.5 sm:px-5 sm:py-3"
                   >
                     Open app
                   </Link>
                   <Link
                     href={`/${locale}/methodology`}
-                    className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-5 py-3 text-sm font-bold text-white/86 transition-colors hover:bg-white/10"
+                    className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-2.5 text-sm font-bold text-white/86 transition-colors hover:bg-white/10 sm:px-5 sm:py-3"
                   >
                     Review methodology
                   </Link>
@@ -161,26 +166,26 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="relative px-6 py-8 md:px-10 md:py-10">
+          <div className="relative px-4 py-6 sm:px-6 sm:py-7 md:px-10 md:py-10">
             <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="space-y-6">
+              <div className="space-y-5 sm:space-y-6">
                 <div>
-                  <div className="text-[0.72rem] font-bold uppercase tracking-[0.28em] text-white/42">
-                    Follow AllHalal
+                  <div className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/42 sm:text-[0.72rem] sm:tracking-[0.28em]">
+                    Follow allhalal.info
                   </div>
-                  <p className="mt-3 max-w-md text-sm leading-relaxed text-text-inverse-secondary">
+                  <p className="mt-2 max-w-md text-[0.9rem] leading-relaxed text-text-inverse-secondary sm:mt-3 sm:text-sm">
                     New halal answers, Muslim updates, Ramadan reminders and product launches.
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2">
                   {socialLinks.map((social) => (
                     <a
                       key={social.label}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm font-medium text-white/78 transition-colors hover:border-white/16 hover:bg-white/9 hover:text-white"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.86rem] font-medium text-white/78 transition-colors hover:border-white/16 hover:bg-white/9 hover:text-white sm:px-3.5 sm:py-2 sm:text-sm"
                       aria-label={social.label}
                     >
                       <social.icon className="h-4 w-4" />
@@ -190,18 +195,18 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-3">
+              <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
                 {navGroups.map((group) => (
                   <div key={group.title}>
-                    <h3 className="text-[0.72rem] font-bold uppercase tracking-[0.28em] text-white/42">
+                    <h3 className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/42 sm:text-[0.72rem] sm:tracking-[0.28em]">
                       {group.title}
                     </h3>
-                    <ul className="mt-4 space-y-3">
+                    <ul className="mt-3 space-y-2.5 sm:mt-4 sm:space-y-3">
                       {group.links.map((link) => (
                         <li key={link.label}>
                           <Link
                             href={localizeHref(locale, link.href)}
-                            className="text-sm text-white/72 transition-colors hover:text-white"
+                            className="text-[0.95rem] text-white/72 transition-colors hover:text-white sm:text-sm"
                           >
                             {link.label}
                           </Link>
@@ -214,21 +219,21 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="relative border-t border-white/8 px-6 py-5 md:px-10">
+          <div className="relative border-t border-white/8 px-4 py-4 sm:px-6 sm:py-5 md:px-10">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-wrap gap-2">
                 {legalLinks.map((link) => (
                   <Link
                     key={link.label}
                     href={localizeHref(locale, link.href)}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/66 transition-colors hover:bg-white/9 hover:text-white"
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.72rem] font-medium text-white/66 transition-colors hover:bg-white/9 hover:text-white sm:text-xs"
                   >
                     {link.label}
                   </Link>
                 ))}
               </div>
 
-              <div className="flex flex-col gap-2 text-xs text-white/48 md:flex-row md:items-center md:gap-5">
+              <div className="flex flex-col gap-1.5 text-[0.72rem] text-white/48 sm:text-xs md:flex-row md:items-center md:gap-5">
                 <p>
                   © {new Date().getFullYear()} allhalal.info. {t("copyright")}
                 </p>

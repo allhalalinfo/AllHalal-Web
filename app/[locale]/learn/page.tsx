@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/seo/metadata";
 export const metadata: Metadata = {
   title: "Learn Islam | Duas, 99 Names, Ramadan Guides & Islamic Calendar",
   description:
-    "Explore Islamic learning on AllHalal with duas and athkar, 99 Names of Allah, Ramadan guides, Islamic calendar context and live Makkah resources.",
+    "Explore Islamic learning on allhalal.info with duas and athkar, 99 Names of Allah, Ramadan guides, Islamic calendar context and live Makkah resources.",
   keywords: [
     "learn islam",
     "duas and athkar",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 const learnFaqs = [
   {
-    question: "What can I learn on AllHalal?",
+    question: "What can I learn on allhalal.info?",
     answer:
       "You can read duas and athkar, explore the 99 Names of Allah, follow Ramadan guidance, check Islamic calendar dates and use learning pages designed for everyday Muslim practice.",
   },
@@ -256,7 +256,7 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
         "@type": "WebPage",
         "@id": `${SITE_URL}/${locale}/learn#webpage`,
         url: `${SITE_URL}/${locale}/learn`,
-        name: "Learn Islam on AllHalal",
+        name: "Learn Islam on allhalal.info",
         description:
           "Islamic learning hub for duas, 99 Names of Allah, Ramadan guides, Islamic calendar context and daily Muslim study.",
         isPartOf: { "@id": `${SITE_URL}/#website` },

@@ -85,7 +85,7 @@ export default async function HalalCertificationGuide(props: {
                   A
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-[#2A2419]">AllHalal Editorial Team</p>
+                  <p className="text-sm font-bold text-[#2A2419]">allhalal.info Editorial Team</p>
                   <p className="text-xs text-[#7A7569]">March 11, 2026</p>
                 </div>
               </div>
@@ -446,7 +446,7 @@ export default async function HalalCertificationGuide(props: {
             </div>
 
             <div className="bg-white border-2 border-[#E8E6E1] rounded-xl p-6 hover:border-[#4B7A88] transition-colors">
-              <h4 className="font-bold text-[#2A2419] mb-2">4. Use the AllHalal app</h4>
+              <h4 className="font-bold text-[#2A2419] mb-2">4. Use the allhalal.info app</h4>
               <p className="text-[#5A5449]">
                 Scan the barcode with our app to see certification status, ingredient analysis, and
                 community reports.
@@ -497,7 +497,7 @@ export default async function HalalCertificationGuide(props: {
               <h4 className="text-xl font-bold text-[#2A2419] mb-2">Consumer awareness</h4>
               <p className="text-[#5A5449] leading-relaxed">
                 Muslims are becoming more educated about certification differences. Apps like
-                AllHalal make it easier to verify products and compare standards.
+                allhalal.info makes it easier to verify products and compare standards.
               </p>
             </div>
           </div>

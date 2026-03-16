@@ -93,7 +93,7 @@ export async function generateMetadata(props: {
   if (detail?.brief) {
     const { brief } = detail;
     return {
-      title: `${brief.title} | AllHalal News Desk`,
+      title: `${brief.title} | allhalal.info News`,
       description: brief.dek,
       openGraph: {
         title: brief.title,

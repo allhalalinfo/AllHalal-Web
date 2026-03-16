@@ -63,7 +63,7 @@ export default async function RegionalDifferencesGuide(props: {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[#4B7A88] flex items-center justify-center text-white font-bold">A</div>
                 <div>
-                  <p className="text-sm font-bold text-[#2A2419]">AllHalal Editorial Team</p>
+                  <p className="text-sm font-bold text-[#2A2419]">allhalal.info Editorial Team</p>
                   <p className="text-xs text-[#7A7569]">2026-03-12</p>
                 </div>
               </div>
@@ -368,7 +368,7 @@ export default async function RegionalDifferencesGuide(props: {
                 1: { title: "Check the country of manufacture", desc: '"Made in Malaysia/Indonesia/UAE" is usually a good sign. "Made in US/Europe" requires verification.' },
                 2: { title: "Look for halal logos specific to that region", desc: "JAKIM (Malaysia), MUI (Indonesia), HMC (UK), IFANCA (US). Regional logos = regional verification." },
                 3: { title: "Never assume consistency", desc: "Even if a product was halal in one country, verify when you buy it elsewhere." },
-                4: { title: "Use apps for verification", desc: "AllHalal app includes regional data. Scan the barcode to see certification status for that specific product." },
+                4: { title: "Use apps for verification", desc: "The allhalal.info app includes regional data. Scan the barcode to see certification status for that specific product." },
                 5: { title: "When traveling, research in advance", desc: "Before your trip, check which global brands are halal in your destination country." },
               };
               return (
@@ -407,7 +407,7 @@ export default async function RegionalDifferencesGuide(props: {
               <li className="flex items-start gap-3">
                 <span className="text-[#F0C65F] font-bold text-xl mt-0.5 flex-shrink-0">4.</span>
                 <span className="text-white leading-relaxed">
-                  When in doubt, look for regional halal logos or use AllHalal app for instant verification.
+                  When in doubt, look for regional halal logos or use the allhalal.info app for instant verification.
                 </span>
               </li>
             </ul>

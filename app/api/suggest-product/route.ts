@@ -87,7 +87,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           access_key: accessKey,
           subject: `[Product Suggestion] ${logEntry.productName}`,
-          from_name: 'AllHalal Website',
+          from_name: 'allhalal.info Website',
           email: logEntry.userEmail || 'app@allhalal.info',
           message: [
             `Product: ${logEntry.productName}`,

@@ -126,7 +126,7 @@ export default function Header() {
               <span className="relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-transparent shadow-none">
                 <Image
                   src="/branding/publicbrandingheader-logo.png"
-                  alt="AllHalal logo"
+                  alt="allhalal.info logo"
                   fill
                   sizes="44px"
                   className="object-contain"
@@ -211,7 +211,7 @@ export default function Header() {
           <div className="mb-5 flex items-center justify-between">
             <div>
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-primary/80">Navigation</p>
-              <p className="mt-2 text-xl font-display font-bold text-text-primary">Move through AllHalal</p>
+              <p className="mt-2 text-xl font-display font-bold text-text-primary">Move through allhalal.info</p>
             </div>
             <div className="rounded-full border border-[rgba(73,58,42,0.1)] bg-white/60 px-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
               <LanguageSwitcher openUpward />
