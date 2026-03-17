@@ -2,53 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import {
-  ArrowRight,
-  BarChart3,
-  Clock3,
-  Globe2,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
-
-const floatingCards = [
-  {
-    title: "Prayer rhythm",
-    value: "Dhuhr in 28m",
-    detail: "A calmer daily command center",
-    icon: Clock3,
-    className:
-      "left-0 top-10 w-[14rem] md:left-4 md:top-14 lg:left-0 lg:top-16 xl:left-10 xl:top-20",
-    delay: 0.15,
-  },
-  {
-    title: "Finance signal",
-    value: "USD / SAR 3.75",
-    detail: "Live rates for zakat and travel",
-    icon: BarChart3,
-    className:
-      "right-0 top-0 w-[15rem] md:right-6 md:top-8 lg:right-0 lg:top-2 xl:right-10 xl:top-8",
-    delay: 0.28,
-  },
-  {
-    title: "Trusted checker",
-    value: "AI + methodology",
-    detail: "From barcode to ingredient clarity",
-    icon: ShieldCheck,
-    className:
-      "left-6 bottom-4 w-[15rem] md:left-16 md:bottom-10 lg:left-8 lg:bottom-6 xl:left-20 xl:bottom-10",
-    delay: 0.42,
-  },
-  {
-    title: "Muslim world",
-    value: "Fresh curated news",
-    detail: "Faith, finance and community in one feed",
-    icon: Globe2,
-    className:
-      "right-4 bottom-0 w-[14rem] md:right-10 md:bottom-8 lg:right-2 lg:bottom-6 xl:right-16 xl:bottom-10",
-    delay: 0.52,
-  },
-];
+import { ArrowRight, Sparkles } from "lucide-react";
+import ParticleBarcode from "@/components/three/ParticleBarcode";
 
 const quickStats = [
   { label: "Products", value: "2M+" },
@@ -192,8 +147,14 @@ export default function HeroSection() {
 
               <div className="relative overflow-hidden rounded-[1.7rem] bg-[linear-gradient(180deg,#20333d,#142127)] px-5 pb-5 pt-4 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:px-6 md:pb-6">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,185,66,0.22),transparent_24%),radial-gradient(circle_at_84%_18%,rgba(116,228,199,0.18),transparent_26%),radial-gradient(circle_at_40%_100%,rgba(83,122,140,0.18),transparent_28%)]" />
+                <div className="pointer-events-none absolute inset-x-6 top-20 h-28 opacity-70 md:inset-x-8 md:top-24 md:h-36">
+                  <div className="absolute inset-0 rounded-[1.6rem] bg-[radial-gradient(circle_at_center,rgba(244,185,66,0.08),transparent_60%)] blur-xl" />
+                  <ParticleBarcode className="opacity-55 [mask-image:linear-gradient(180deg,transparent,black_14%,black_86%,transparent)]" />
+                </div>
+                <div className="pointer-events-none absolute inset-x-10 top-[8.25rem] h-px bg-[linear-gradient(90deg,transparent,rgba(244,185,66,0.22),transparent)] md:top-[9.5rem]" />
+                <div className="pointer-events-none absolute inset-x-12 top-[11.75rem] h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)] md:top-[13.75rem]" />
 
-                <div className="relative flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div className="relative z-10 flex items-center justify-between gap-4 border-b border-white/10 pb-4">
                   <div>
                     <div className="text-[0.68rem] font-bold uppercase tracking-[0.26em] text-white/45">
                       allhalal.info Portal
@@ -210,7 +171,7 @@ export default function HeroSection() {
                   </div>
                 </div>
 
-                <div className="relative mt-5 grid gap-4 md:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
+                <div className="relative z-10 mt-5 grid gap-4 md:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
                   <div className="rounded-[1.6rem] border border-white/10 bg-white/6 p-4 backdrop-blur-md">
                     <div className="flex items-center justify-between gap-3">
                       <div>
@@ -276,44 +237,6 @@ export default function HeroSection() {
                 </div>
               </div>
             </motion.div>
-
-            {floatingCards.map((card) => {
-              const Icon = card.icon;
-
-              return (
-                <motion.div
-                  key={card.title}
-                  initial={{ opacity: 0, y: 22, scale: 0.96 }}
-                  animate={{
-                    opacity: 1,
-                    y: [0, -10, 0],
-                    scale: 1,
-                  }}
-                  transition={{
-                    opacity: { duration: 0.55, delay: card.delay, ease: "easeOut" },
-                    y: {
-                      duration: 5.4 + card.delay * 3,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "easeInOut",
-                    },
-                  }}
-                  className={`pointer-events-none absolute hidden rounded-[1.35rem] border border-white/55 bg-white/74 p-4 shadow-[0_18px_42px_rgba(43,34,24,0.1)] backdrop-blur-xl lg:block ${card.className}`}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="text-[0.64rem] font-bold uppercase tracking-[0.22em] text-text-muted">
-                        {card.title}
-                      </div>
-                      <div className="mt-2 text-base font-semibold text-text-primary">{card.value}</div>
-                      <div className="mt-1 text-sm text-text-secondary">{card.detail}</div>
-                    </div>
-                    <div className="rounded-full bg-[rgba(176,144,98,0.12)] p-2 text-primary">
-                      <Icon className="h-4 w-4" />
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
           </div>
         </div>
       </div>
