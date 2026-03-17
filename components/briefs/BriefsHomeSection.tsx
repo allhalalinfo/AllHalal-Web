@@ -113,9 +113,15 @@ function NewsGridCard({
           {brief.title}
         </h3>
 
-        <p className="mt-2 line-clamp-4 text-[0.92rem] leading-relaxed text-text-secondary sm:min-h-[6.5rem] sm:line-clamp-4 sm:text-sm">
-          {brief.summary.split("\n\n")[0] || brief.dek}
+        <p className="mt-2 text-[0.92rem] leading-relaxed text-text-secondary sm:text-sm">
+          {brief.dek}
         </p>
+
+        {brief.summary && (
+          <p className="mt-2 line-clamp-3 text-[0.88rem] leading-relaxed text-text-secondary/90 sm:line-clamp-4">
+            {brief.summary}
+          </p>
+        )}
       </div>
     </Link>
   );
