@@ -11,12 +11,6 @@ const quickStats = [
   { label: "Live tools", value: "Prayer + finance" },
 ];
 
-const spotlightItems = [
-  "Halal verification that feels immediate",
-  "Live Muslim utilities in one destination",
-  "Modern UI with trust signals, not filler",
-];
-
 export default function HeroSection() {
   const t = useTranslations("hero");
 
@@ -141,101 +135,20 @@ export default function HeroSection() {
               initial={{ opacity: 0, scale: 0.96, y: 18 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
-              className="relative mx-auto max-w-[42rem] rounded-[2rem] border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(248,244,236,0.76))] p-5 shadow-[0_30px_90px_rgba(43,34,24,0.12)] backdrop-blur-2xl md:p-6"
+              className="relative mx-auto flex min-h-[30rem] max-w-[42rem] items-center justify-center overflow-hidden rounded-[2.4rem] lg:min-h-[42rem]"
             >
-              <div className="pointer-events-none absolute inset-0 rounded-[2rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.34),transparent_40%,transparent_70%,rgba(255,255,255,0.15))]" />
-
-              <div className="relative overflow-hidden rounded-[1.7rem] bg-[linear-gradient(180deg,#20333d,#142127)] px-5 pb-5 pt-4 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] md:px-6 md:pb-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,185,66,0.22),transparent_24%),radial-gradient(circle_at_84%_18%,rgba(116,228,199,0.18),transparent_26%),radial-gradient(circle_at_40%_100%,rgba(83,122,140,0.18),transparent_28%)]" />
-                <div className="pointer-events-none absolute inset-x-6 top-20 h-28 opacity-70 md:inset-x-8 md:top-24 md:h-36">
-                  <div className="absolute inset-0 rounded-[1.6rem] bg-[radial-gradient(circle_at_center,rgba(244,185,66,0.08),transparent_60%)] blur-xl" />
-                  <ParticleBarcode className="opacity-55 [mask-image:linear-gradient(180deg,transparent,black_14%,black_86%,transparent)]" />
-                </div>
-                <div className="pointer-events-none absolute inset-x-10 top-[8.25rem] h-px bg-[linear-gradient(90deg,transparent,rgba(244,185,66,0.22),transparent)] md:top-[9.5rem]" />
-                <div className="pointer-events-none absolute inset-x-12 top-[11.75rem] h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)] md:top-[13.75rem]" />
-
-                <div className="relative z-10 flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-                  <div>
-                    <div className="text-[0.68rem] font-bold uppercase tracking-[0.26em] text-white/45">
-                      allhalal.info Portal
-                    </div>
-                    <h2 className="mt-2 text-[2rem] font-bold font-display leading-tight text-white md:text-[2.6rem]">
-                      Muslim life,
-                      <br />
-                      now with rhythm.
-                    </h2>
-                  </div>
-
-                  <div className="rounded-full border border-white/10 bg-white/6 px-3 py-2 text-[0.72rem] font-bold uppercase tracking-[0.22em] text-white/62">
-                    Live layer
-                  </div>
-                </div>
-
-                <div className="relative z-10 mt-5 grid gap-4 md:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
-                  <div className="rounded-[1.6rem] border border-white/10 bg-white/6 p-4 backdrop-blur-md">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <div className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/42">
-                          Daily command
-                        </div>
-                        <div className="mt-2 text-xl font-bold text-white">Today for you</div>
-                      </div>
-                      <div className="rounded-full bg-[#F4B942] px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[#513718]">
-                        Smooth
-                      </div>
-                    </div>
-
-                    <div className="mt-5 grid gap-3">
-                      <div className="rounded-[1.25rem] bg-black/15 p-4">
-                        <div className="flex items-center justify-between text-sm text-white/64">
-                          <span>Next prayer</span>
-                          <span>Starts in 28m</span>
-                        </div>
-                        <div className="mt-2 text-3xl font-display font-black text-[#F4B942]">
-                          Dhuhr
-                        </div>
-                      </div>
-
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        <div className="rounded-[1.25rem] border border-white/8 bg-white/5 p-4">
-                          <div className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/45">
-                            Finance
-                          </div>
-                          <div className="mt-2 text-lg font-semibold text-white">USD / SAR 3.75</div>
-                          <div className="mt-2 text-sm text-white/58">Live travel and zakat context</div>
-                        </div>
-                        <div className="rounded-[1.25rem] border border-white/8 bg-white/5 p-4">
-                          <div className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/45">
-                            News
-                          </div>
-                          <div className="mt-2 text-lg font-semibold text-white">Faith • Finance • Ummah</div>
-                          <div className="mt-2 text-sm text-white/58">Curated across trusted Muslim sources</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 backdrop-blur-md">
-                    <div className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-white/42">
-                      Why this feels different
-                    </div>
-
-                    <div className="mt-4 grid gap-3">
-                      {spotlightItems.map((item, index) => (
-                        <motion.div
-                          key={item}
-                          initial={{ opacity: 0, x: 18 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.55, delay: 0.35 + index * 0.08, ease: "easeOut" }}
-                          className="rounded-[1.25rem] border border-white/8 bg-black/12 p-4 text-sm leading-relaxed text-white/76"
-                        >
-                          {item}
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              <div className="pointer-events-none absolute inset-0 rounded-[2.4rem] bg-[radial-gradient(circle_at_18%_18%,rgba(244,185,66,0.18),transparent_24%),radial-gradient(circle_at_84%_16%,rgba(67,118,122,0.16),transparent_22%),radial-gradient(circle_at_50%_82%,rgba(107,138,99,0.12),transparent_26%)]" />
+              <div className="pointer-events-none absolute inset-[2.5%] rounded-[2rem] border border-white/40 bg-[linear-gradient(180deg,rgba(255,255,255,0.34),rgba(255,255,255,0.12))] shadow-[0_28px_80px_rgba(43,34,24,0.08)] backdrop-blur-[10px]" />
+              <div className="pointer-events-none absolute inset-[7%] rounded-[1.9rem] bg-[linear-gradient(180deg,rgba(33,53,61,0.18),rgba(20,33,39,0.04))]" />
+              <div className="pointer-events-none absolute inset-x-[10%] top-[16%] h-[42%] opacity-80">
+                <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(244,185,66,0.08),transparent_58%)] blur-2xl" />
+                <ParticleBarcode className="opacity-70 [mask-image:linear-gradient(180deg,transparent,black_10%,black_86%,transparent)]" />
               </div>
+              <div className="pointer-events-none absolute inset-x-[18%] top-[42%] h-px bg-[linear-gradient(90deg,transparent,rgba(244,185,66,0.3),transparent)]" />
+              <div className="pointer-events-none absolute inset-x-[22%] top-[46%] h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]" />
+              <div className="pointer-events-none absolute bottom-[12%] left-[10%] h-24 w-24 rounded-full border border-white/24 bg-white/10 blur-[1px]" />
+              <div className="pointer-events-none absolute right-[12%] top-[18%] h-20 w-20 rounded-full border border-[rgba(244,185,66,0.22)] bg-[rgba(244,185,66,0.06)]" />
+              <div className="pointer-events-none absolute bottom-[16%] right-[16%] h-32 w-32 rounded-full bg-[radial-gradient(circle,rgba(73,110,112,0.14),transparent_68%)] blur-3xl" />
             </motion.div>
           </div>
         </div>

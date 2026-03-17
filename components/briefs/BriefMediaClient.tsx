@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { hasValidBriefImage } from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
 
@@ -62,13 +61,15 @@ export default function BriefMediaClient({
               "radial-gradient(circle at top left, rgba(244,185,66,0.14), transparent 34%), linear-gradient(145deg, rgba(241,235,226,0.86), rgba(255,255,255,0.92) 58%, rgba(228,221,211,0.84))",
           }}
         />
-        <Image
+        <img
           src={brief.image_url}
           alt={brief.title}
-          fill
-          priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
           sizes={sizes}
-          className={className}
+          className={`absolute inset-0 h-full w-full ${className ?? ""}`}
+          referrerPolicy="no-referrer"
           onError={() => {
             setHasImageError(true);
           }}
