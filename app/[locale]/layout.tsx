@@ -91,6 +91,9 @@ export async function generateMetadata({
     alternates: {
       canonical: "./",
     },
+    other: {
+      "google-adsense-account": ADSENSE_CLIENT_ID,
+    },
   };
 }
 
@@ -110,8 +113,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <meta name="google-adsense-account" content={ADSENSE_CLIENT_ID} />
+      <body className="bg-bg-primary text-text-primary antialiased" suppressHydrationWarning>
         <Script
           id="adsense-script"
           async
@@ -119,8 +121,6 @@ export default async function LocaleLayout({
           crossOrigin="anonymous"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
         />
-      </head>
-      <body className="bg-bg-primary text-text-primary antialiased" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <Header />
           <SmoothScrollProvider>
