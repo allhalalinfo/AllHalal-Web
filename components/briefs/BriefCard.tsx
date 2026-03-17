@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import CategoryBadge from "@/components/briefs/CategoryBadge";
-import BriefMedia from "@/components/briefs/BriefMedia";
+import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import { formatTimeAgo, getBriefDisplayTimestamp } from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
 
@@ -34,7 +34,7 @@ function BriefMeta({ brief, compact = false }: { brief: Brief; compact?: boolean
 function BriefImage({ brief, priority = false }: { brief: Brief; priority?: boolean }) {
   return (
     <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.45rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(246,241,233,0.72)]">
-      <BriefMedia
+      <BriefMediaClient
         brief={brief}
         priority={priority}
         sizes="(min-width: 1280px) 720px, (min-width: 768px) 100vw, 100vw"

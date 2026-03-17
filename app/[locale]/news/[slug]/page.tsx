@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import AdSlot from "@/components/ads/AdSlot";
 import BriefCard, { BriefSourceLinks } from "@/components/briefs/BriefCard";
 import CategoryBadge from "@/components/briefs/CategoryBadge";
-import BriefMedia from "@/components/briefs/BriefMedia";
+import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 import { blogPosts } from "@/data/blogPosts";
 import {
@@ -174,7 +174,7 @@ export default async function NewsDetailPage(props: {
             </p>
 
             <div className="relative mt-8 aspect-[1.9/1] overflow-hidden rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(246,241,233,0.72)]">
-              <BriefMedia
+              <BriefMediaClient
                 brief={brief}
                 priority
                 sizes="(min-width: 1280px) 1100px, 100vw"

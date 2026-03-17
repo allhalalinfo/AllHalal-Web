@@ -23,7 +23,7 @@ function NewsGridCard({
       href={href}
       className="group grid grid-cols-[6.75rem_minmax(0,1fr)] items-start gap-3 rounded-[1.3rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:flex sm:h-full sm:flex-col sm:gap-0 sm:rounded-[1.55rem] sm:p-4"
     >
-      <div className="relative h-[6.75rem] overflow-hidden rounded-[1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)] sm:h-auto sm:aspect-[1.75/1] sm:rounded-[1.2rem]">
+      <div className="relative h-[9rem] overflow-hidden rounded-[1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)] sm:h-[10.5rem] sm:rounded-[1.2rem] xl:h-[11.5rem]">
         <BriefMedia
           brief={brief}
           priority
