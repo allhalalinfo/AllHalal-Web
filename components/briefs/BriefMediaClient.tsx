@@ -68,7 +68,7 @@ export default function BriefMediaClient({
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
           sizes={sizes}
-          className={`absolute inset-0 h-full w-full ${className ?? ""}`}
+          className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
           referrerPolicy="no-referrer"
           onError={() => {
             setHasImageError(true);

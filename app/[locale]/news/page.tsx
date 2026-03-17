@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import AdSlot from "@/components/ads/AdSlot";
 import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import { type Brief } from "@/types/brief";
@@ -17,7 +16,7 @@ const NEWS_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_TOP;
 const NEWS_INLINE_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_INLINE;
 const NEWS_BOTTOM_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_BOTTOM;
 
-function balanceNewsDeskBriefs(briefs: Brief[], limit = 20) {
+function balanceNewsDeskBriefs(briefs: Brief[], limit = 30) {
   const result: Brief[] = [];
   const sourceCounts = new Map<string, number>();
 
@@ -29,7 +28,7 @@ function balanceNewsDeskBriefs(briefs: Brief[], limit = 20) {
     const sourceName = brief.sources[0]?.name || brief.primary_source || "Unknown source";
     const sourceCount = sourceCounts.get(sourceName) ?? 0;
 
-    if (sourceCount >= 3) {
+    if (sourceCount >= 4) {
       continue;
     }
 
@@ -142,9 +141,8 @@ function LeadStory({
           {brief.summary.split("\n\n")[0]}
         </p>
 
-        <div className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-          Open brief
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+        <div className="mt-auto pt-6 text-sm font-semibold text-primary">
+          {brief.category}
         </div>
       </div>
     </Link>
@@ -170,6 +168,9 @@ function HeadlineCard({
         <h3 className="mt-2 line-clamp-3 text-[1.18rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
           {brief.title}
         </h3>
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
+          {brief.dek}
+        </p>
       </div>
 
       <div className="relative hidden h-24 w-24 overflow-hidden rounded-[1.1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)] md:block">
@@ -210,7 +211,9 @@ function StreamCard({
         <h3 className="mt-2 line-clamp-3 text-[1.16rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
           {brief.title}
         </h3>
-        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-text-secondary">{brief.dek}</p>
+        <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-text-secondary">
+          {brief.summary.split("\n\n")[0] || brief.dek}
+        </p>
       </div>
     </Link>
   );
@@ -227,10 +230,10 @@ export default async function NewsDeskPage(props: {
   const activeCategory = categories.find((category) => category.slug === activeCategorySlug);
   const { items: briefs, total } = await getFeedBriefs({
     category: activeCategorySlug,
-    limit: 50,
+    limit: 80,
     offset: 0,
   });
-  const freshBriefs = balanceNewsDeskBriefs(filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS), 20);
+  const freshBriefs = balanceNewsDeskBriefs(filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS), 30);
 
   const [lead, ...rest] = freshBriefs;
   const headlines = rest.slice(0, 4);
@@ -248,7 +251,7 @@ export default async function NewsDeskPage(props: {
                 Fresh Muslim news, easier to follow
               </h1>
               <p className="mt-3 max-w-3xl text-base leading-relaxed text-text-secondary md:text-lg">
-                Current briefs from trusted Muslim sources, with clear attribution.
+                Current briefs from trusted Muslim sources, with clearer previews, stronger variety and more useful context directly in the feed.
               </p>
             </div>
           </div>

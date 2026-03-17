@@ -137,18 +137,13 @@ export default function HeroSection() {
               transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
               className="relative mx-auto flex min-h-[30rem] max-w-[42rem] items-center justify-center overflow-hidden rounded-[2.4rem] lg:min-h-[42rem]"
             >
-              <div className="pointer-events-none absolute inset-0 rounded-[2.4rem] bg-[radial-gradient(circle_at_18%_18%,rgba(244,185,66,0.18),transparent_24%),radial-gradient(circle_at_84%_16%,rgba(67,118,122,0.16),transparent_22%),radial-gradient(circle_at_50%_82%,rgba(107,138,99,0.12),transparent_26%)]" />
-              <div className="pointer-events-none absolute inset-[2.5%] rounded-[2rem] border border-white/40 bg-[linear-gradient(180deg,rgba(255,255,255,0.34),rgba(255,255,255,0.12))] shadow-[0_28px_80px_rgba(43,34,24,0.08)] backdrop-blur-[10px]" />
-              <div className="pointer-events-none absolute inset-[7%] rounded-[1.9rem] bg-[linear-gradient(180deg,rgba(33,53,61,0.18),rgba(20,33,39,0.04))]" />
-              <div className="pointer-events-none absolute inset-x-[10%] top-[16%] h-[42%] opacity-80">
-                <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(244,185,66,0.08),transparent_58%)] blur-2xl" />
-                <ParticleBarcode className="opacity-70 [mask-image:linear-gradient(180deg,transparent,black_10%,black_86%,transparent)]" />
+              <div className="pointer-events-none absolute inset-0 rounded-[2.4rem] bg-[radial-gradient(circle_at_18%_18%,rgba(244,185,66,0.12),transparent_24%),radial-gradient(circle_at_84%_16%,rgba(67,118,122,0.1),transparent_22%)]" />
+              <div className="pointer-events-none absolute inset-[3%] rounded-[2rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,255,255,0.06))] backdrop-blur-[6px]" />
+              <div className="pointer-events-none absolute inset-[8%] rounded-[1.9rem] bg-[linear-gradient(180deg,rgba(33,53,61,0.12),rgba(20,33,39,0.02))]" />
+              <div className="pointer-events-none absolute inset-x-[12%] top-[17%] h-[40%] opacity-85">
+                <ParticleBarcode className="opacity-78 [mask-image:linear-gradient(180deg,transparent,black_12%,black_88%,transparent)]" />
               </div>
-              <div className="pointer-events-none absolute inset-x-[18%] top-[42%] h-px bg-[linear-gradient(90deg,transparent,rgba(244,185,66,0.3),transparent)]" />
-              <div className="pointer-events-none absolute inset-x-[22%] top-[46%] h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]" />
-              <div className="pointer-events-none absolute bottom-[12%] left-[10%] h-24 w-24 rounded-full border border-white/24 bg-white/10 blur-[1px]" />
-              <div className="pointer-events-none absolute right-[12%] top-[18%] h-20 w-20 rounded-full border border-[rgba(244,185,66,0.22)] bg-[rgba(244,185,66,0.06)]" />
-              <div className="pointer-events-none absolute bottom-[16%] right-[16%] h-32 w-32 rounded-full bg-[radial-gradient(circle,rgba(73,110,112,0.14),transparent_68%)] blur-3xl" />
+              <div className="pointer-events-none absolute inset-x-[18%] top-[42%] h-px bg-[linear-gradient(90deg,transparent,rgba(244,185,66,0.22),transparent)]" />
             </motion.div>
           </div>
         </div>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import {
   formatTimeAgo,
@@ -56,14 +55,9 @@ function NewsGridCard({
           {brief.title}
         </h3>
 
-        <p className="mt-2 line-clamp-2 text-[0.92rem] leading-relaxed text-text-secondary sm:line-clamp-3 sm:text-sm">
-          {brief.dek}
+        <p className="mt-2 line-clamp-4 text-[0.92rem] leading-relaxed text-text-secondary sm:min-h-[6.5rem] sm:line-clamp-4 sm:text-sm">
+          {brief.summary.split("\n\n")[0] || brief.dek}
         </p>
-
-        <div className="mt-3 inline-flex items-center gap-2 text-[0.92rem] font-semibold text-primary sm:mt-4 sm:text-sm">
-          Open brief
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-        </div>
       </div>
     </Link>
   );
@@ -100,10 +94,9 @@ export default function BriefsHomeSection({
 
         <Link
           href={`/${locale}/news`}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#173640] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(23,54,64,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13303a] sm:w-auto"
+          className="inline-flex w-full items-center justify-center rounded-full bg-[#173640] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(23,54,64,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13303a] sm:w-auto"
         >
           Open news desk
-          <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
 
