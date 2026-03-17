@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import BriefMedia from "@/components/briefs/BriefMedia";
+import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import {
   formatTimeAgo,
   getBriefDisplayTimestamp,
@@ -11,9 +11,11 @@ import type { Brief } from "@/types/brief";
 function NewsGridCard({
   brief,
   locale,
+  priority = false,
 }: {
   brief: Brief;
   locale: string;
+  priority?: boolean;
 }) {
   const href = `/${locale}/news/${brief.slug}`;
   const displayTimestamp = getBriefDisplayTimestamp(brief);
@@ -24,9 +26,9 @@ function NewsGridCard({
       className="group grid grid-cols-[6.75rem_minmax(0,1fr)] items-start gap-3 rounded-[1.3rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:flex sm:h-full sm:flex-col sm:gap-0 sm:rounded-[1.55rem] sm:p-4"
     >
       <div className="relative h-[9rem] overflow-hidden rounded-[1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)] sm:h-[10.5rem] sm:rounded-[1.2rem] xl:h-[11.5rem]">
-        <BriefMedia
+        <BriefMediaClient
           brief={brief}
-          priority
+          priority={priority}
           sizes="(min-width: 1280px) 300px, (min-width: 768px) 50vw, 108px"
           className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
         />
@@ -107,8 +109,13 @@ export default function BriefsHomeSection({
 
       {gridStories.length ? (
         <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {gridStories.map((brief) => (
-            <NewsGridCard key={brief.id} brief={brief} locale={locale} />
+          {gridStories.map((brief, index) => (
+            <NewsGridCard
+              key={brief.id}
+              brief={brief}
+              locale={locale}
+              priority={index < 4}
+            />
           ))}
         </div>
       ) : null}
