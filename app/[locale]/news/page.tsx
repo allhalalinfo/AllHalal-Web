@@ -108,11 +108,13 @@ function LeadStory({
   brief: Brief;
   locale: string;
 }) {
-  const href = `/${locale}/news/${brief.slug}`;
+  const sourceUrl = brief.sources[0]?.url || "";
 
   return (
-    <Link
-      href={href}
+    <a
+      href={sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group grid overflow-hidden rounded-[2rem] border border-[rgba(47,37,30,0.08)] bg-white/90 shadow-[0_20px_60px_rgba(43,34,24,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_26px_72px_rgba(43,34,24,0.08)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]"
     >
       <div className="relative aspect-[1.4/1] overflow-hidden bg-[rgba(243,238,230,0.72)] lg:aspect-auto">
@@ -145,7 +147,7 @@ function LeadStory({
           {brief.category}
         </div>
       </div>
-    </Link>
+    </a>
   );
 }
 
@@ -156,11 +158,13 @@ function HeadlineCard({
   brief: Brief;
   locale: string;
 }) {
-  const href = `/${locale}/news/${brief.slug}`;
+  const sourceUrl = brief.sources[0]?.url || "";
 
   return (
-    <Link
-      href={href}
+    <a
+      href={sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group grid grid-cols-[1fr_auto] items-center gap-4 rounded-[1.45rem] border border-[rgba(47,37,30,0.08)] bg-white/86 p-4 shadow-[0_14px_34px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_42px_rgba(43,34,24,0.06)]"
     >
       <div className="min-w-0">
@@ -180,7 +184,7 @@ function HeadlineCard({
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-    </Link>
+    </a>
   );
 }
 
@@ -191,11 +195,13 @@ function StreamCard({
   brief: Brief;
   locale: string;
 }) {
-  const href = `/${locale}/news/${brief.slug}`;
+  const sourceUrl = brief.sources[0]?.url || "";
 
   return (
-    <Link
-      href={href}
+    <a
+      href={sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/86 p-4 shadow-[0_14px_36px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)]"
     >
       <div className="relative aspect-[1.8/1] overflow-hidden rounded-[1.15rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)]">
@@ -215,7 +221,7 @@ function StreamCard({
           {brief.summary.split("\n\n")[0] || brief.dek}
         </p>
       </div>
-    </Link>
+    </a>
   );
 }
 

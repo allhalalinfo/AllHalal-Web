@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   formatTimeAgo,
   getBriefDisplayTimestamp,
@@ -79,12 +78,14 @@ function NewsGridCard({
   locale: string;
   priority?: boolean;
 }) {
-  const href = `/${locale}/news/${brief.slug}`;
+  const sourceUrl = brief.sources[0]?.url || "";
   const displayTimestamp = getBriefDisplayTimestamp(brief);
 
   return (
-    <Link
-      href={href}
+    <a
+      href={sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group grid grid-cols-[6.75rem_minmax(0,1fr)] items-start gap-3 rounded-[1.3rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:flex sm:h-full sm:flex-col sm:gap-0 sm:rounded-[1.55rem] sm:p-4"
     >
       <div className="relative h-[9rem] overflow-hidden rounded-[1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)] sm:h-[10.5rem] sm:rounded-[1.2rem] xl:h-[11.5rem]">
@@ -123,7 +124,7 @@ function NewsGridCard({
           </p>
         )}
       </div>
-    </Link>
+    </a>
   );
 }
 
@@ -144,6 +145,8 @@ export default function BriefsHomeSection({
     (brief, index, stories) => stories.findIndex((story) => story.id === brief.id) === index,
   );
 
+  const newsPageUrl = `/${locale}/news`;
+
   return (
     <section className="rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(249,246,241,0.94))] p-4 shadow-[0_20px_56px_rgba(43,34,24,0.06)] sm:p-5 md:rounded-[2.4rem] md:p-8 md:shadow-[0_26px_72px_rgba(43,34,24,0.06)]">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -156,12 +159,12 @@ export default function BriefsHomeSection({
           </p>
         </div>
 
-        <Link
-          href={`/${locale}/news`}
+        <a
+          href={newsPageUrl}
           className="inline-flex w-full items-center justify-center rounded-full bg-[#173640] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(23,54,64,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13303a] sm:w-auto"
         >
           Open news desk
-        </Link>
+        </a>
       </div>
 
       {gridStories.length ? (
