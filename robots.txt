@@ -9,6 +9,10 @@ Disallow:
 User-agent: Mediapartners-Google
 Disallow:
 
+# Allow Google display ads crawler
+User-agent: Google-Display-Ads-Bot
+Disallow:
+
 # Allow Googlebot crawler
 User-agent: Googlebot
 Disallow:
@@ -39,4 +43,3 @@ Disallow: /
 
 User-agent: dotbot
 Disallow: /
-
