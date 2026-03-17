@@ -1,36 +1,10 @@
+import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import {
   formatTimeAgo,
   getBriefDisplayTimestamp,
-  sanitizeBriefImageUrl,
   type HomepageBriefLayout,
 } from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
-
-function HomeNewsMedia({
-  brief,
-  priority = false,
-}: {
-  brief: Brief;
-  priority?: boolean;
-}) {
-  const imageUrl = sanitizeBriefImageUrl(brief.image_url);
-
-  if (imageUrl) {
-    return (
-      <img
-        src={imageUrl}
-        alt={brief.title}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-        fetchPriority={priority ? "high" : "auto"}
-        referrerPolicy="no-referrer"
-        className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-      />
-    );
-  }
-
-  return null;
-}
 
 function NewsGridCard({
   brief,
@@ -52,8 +26,12 @@ function NewsGridCard({
       className="group grid grid-cols-[6.75rem_minmax(0,1fr)] items-start gap-3 rounded-[1.3rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:flex sm:h-full sm:flex-col sm:gap-0 sm:rounded-[1.55rem] sm:p-4"
     >
       <div className="relative h-[9rem] overflow-hidden rounded-[1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)] sm:h-[10.5rem] sm:rounded-[1.2rem] xl:h-[11.5rem]">
-        <HomeNewsMedia brief={brief} priority={priority} />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(18,17,15,0.02),rgba(18,17,15,0.1))]" />
+        <BriefMediaClient
+          brief={brief}
+          priority={priority}
+          sizes="(min-width: 1280px) 360px, (min-width: 640px) 50vw, 100vw"
+          className="transition-transform duration-500 group-hover:scale-[1.02]"
+        />
       </div>
 
       <div className="min-w-0 sm:mt-4">
@@ -77,7 +55,7 @@ function NewsGridCard({
           {brief.title}
         </h3>
 
-        <p className="mt-2 line-clamp-4 text-[0.92rem] leading-relaxed text-text-secondary sm:text-sm">
+        <p className="mt-2 text-[0.92rem] leading-relaxed text-text-secondary sm:line-clamp-6 sm:text-sm">
           {brief.summary || brief.dek}
         </p>
       </div>
