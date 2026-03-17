@@ -16,41 +16,6 @@ const NEWS_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_TOP;
 const NEWS_INLINE_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_INLINE;
 const NEWS_BOTTOM_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_BOTTOM;
 
-function balanceNewsDeskBriefs(briefs: Brief[], limit = 30) {
-  const result: Brief[] = [];
-  const sourceCounts = new Map<string, number>();
-
-  for (const brief of briefs) {
-    if (result.length >= limit) {
-      break;
-    }
-
-    const sourceName = brief.sources[0]?.name || brief.primary_source || "Unknown source";
-    const sourceCount = sourceCounts.get(sourceName) ?? 0;
-
-    if (sourceCount >= 4) {
-      continue;
-    }
-
-    result.push(brief);
-    sourceCounts.set(sourceName, sourceCount + 1);
-  }
-
-  if (result.length < limit) {
-    for (const brief of briefs) {
-      if (result.length >= limit) {
-        break;
-      }
-
-      if (!result.some((entry) => entry.id === brief.id)) {
-        result.push(brief);
-      }
-    }
-  }
-
-  return result;
-}
-
 export const metadata: Metadata = {
   title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
   description:
@@ -239,7 +204,7 @@ export default async function NewsDeskPage(props: {
     limit: 80,
     offset: 0,
   });
-  const freshBriefs = balanceNewsDeskBriefs(filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS), 30);
+  const freshBriefs = filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS).slice(0, 30);
 
   const [lead, ...rest] = freshBriefs;
   const headlines = rest.slice(0, 4);
