@@ -23,9 +23,9 @@ function NewsGridCard({
       href={sourceUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group grid grid-cols-[6.75rem_minmax(0,1fr)] items-start gap-3 rounded-[1.3rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:flex sm:h-full sm:flex-col sm:gap-0 sm:rounded-[1.55rem] sm:p-4"
+      className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-4 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)]"
     >
-      <div className="relative h-[9rem] overflow-hidden rounded-[1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)] sm:h-[10.5rem] sm:rounded-[1.2rem] xl:h-[11.5rem]">
+      <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
         {brief.image_url && sanitizeBriefImageUrl(brief.image_url) ? (
           <img
             src={sanitizeBriefImageUrl(brief.image_url) || ""}
@@ -41,7 +41,7 @@ function NewsGridCard({
         )}
       </div>
 
-      <div className="min-w-0 sm:mt-4">
+      <div className="mt-4">
         <div className="flex flex-wrap items-center gap-2 text-[0.78rem] text-text-muted">
           <span className="font-medium text-text-secondary">{brief.sources[0]?.name}</span>
           {displayTimestamp ? (
@@ -58,13 +58,11 @@ function NewsGridCard({
           ) : null}
         </div>
 
-        <h3 className="mt-2 line-clamp-3 text-[1.02rem] font-bold leading-[1.24] text-text-primary transition-colors duration-300 group-hover:text-primary sm:text-[1.18rem] sm:leading-snug">
+        <h3 className="mt-2 line-clamp-2 text-[1.16rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
           {brief.title}
         </h3>
 
-        <p className="mt-2 text-[0.92rem] leading-relaxed text-text-secondary sm:line-clamp-6 sm:text-sm">
-          {brief.summary || brief.dek}
-        </p>
+        <p className="mt-2 line-clamp-3 text-[0.92rem] leading-relaxed text-text-secondary">{brief.summary || brief.dek}</p>
       </div>
     </a>
   );
