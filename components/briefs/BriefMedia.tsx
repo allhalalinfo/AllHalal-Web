@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import { hasValidBriefImage } from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
@@ -16,7 +13,6 @@ export default function BriefMedia({
   priority?: boolean;
   className?: string;
 }) {
-  const [hasImageError, setHasImageError] = useState(false);
   const sourceName = brief.sources[0]?.name || brief.primary_source || "Muslim Brief";
   const placeholderInitials = sourceName
     .split(/\s+/)
@@ -25,19 +21,25 @@ export default function BriefMedia({
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("") || "MB";
 
-  if (hasValidBriefImage(brief) && brief.image_url && !hasImageError) {
+  if (hasValidBriefImage(brief) && brief.image_url) {
     return (
-      <Image
-        src={brief.image_url}
-        alt={brief.title}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className={className}
-        onError={() => {
-          setHasImageError(true);
-        }}
-      />
+      <>
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at top left, rgba(244,185,66,0.14), transparent 34%), linear-gradient(145deg, rgba(241,235,226,0.86), rgba(255,255,255,0.92) 58%, rgba(228,221,211,0.84))",
+          }}
+        />
+        <Image
+          src={brief.image_url}
+          alt={brief.title}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className={className}
+        />
+      </>
     );
   }
 
