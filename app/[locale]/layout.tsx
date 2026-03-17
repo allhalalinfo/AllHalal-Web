@@ -15,6 +15,7 @@
 
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/next";
@@ -32,6 +33,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   themeColor: "#0A0A0A",
 };
+
+const ADSENSE_CLIENT_ID = "ca-pub-5317347727083675";
 
 // Generate static params for all locales
 export function generateStaticParams() {
@@ -107,6 +110,15 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <Script
+          id="adsense-script"
+          async
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+        />
+      </head>
       <body className="bg-bg-primary text-text-primary antialiased" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <Header />
