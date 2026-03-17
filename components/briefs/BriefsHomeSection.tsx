@@ -1,11 +1,74 @@
 import Link from "next/link";
-import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import {
   formatTimeAgo,
   getBriefDisplayTimestamp,
+  sanitizeBriefImageUrl,
   type HomepageBriefLayout,
 } from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
+
+function HomeNewsMedia({
+  brief,
+  priority = false,
+}: {
+  brief: Brief;
+  priority?: boolean;
+}) {
+  const imageUrl = sanitizeBriefImageUrl(brief.image_url);
+  const sourceName = brief.sources[0]?.name || brief.primary_source || "Muslim Brief";
+
+  if (imageUrl) {
+    return (
+      <>
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at top left, rgba(244,185,66,0.14), transparent 34%), linear-gradient(145deg, rgba(241,235,226,0.86), rgba(255,255,255,0.92) 58%, rgba(228,221,211,0.84))",
+          }}
+        />
+        <img
+          src={imageUrl}
+          alt={brief.title}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
+          referrerPolicy="no-referrer"
+          className="absolute inset-0 block h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </>
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at top left, rgba(244,185,66,0.22), transparent 34%), radial-gradient(circle at 85% 20%, rgba(46,75,89,0.18), transparent 28%), linear-gradient(145deg, rgba(241,235,226,0.96), rgba(255,255,255,0.98) 58%, rgba(228,221,211,0.92))",
+        }}
+      />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(36,31,27,0.18))]" />
+      <div className="absolute left-3 top-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/60 bg-white/72 text-sm font-black tracking-[0.14em] text-[#28414C] shadow-[0_10px_24px_rgba(36,31,27,0.08)]">
+        {sourceName
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 2)
+          .map((part) => part[0]?.toUpperCase() ?? "")
+          .join("") || "MB"}
+      </div>
+      <div className="absolute inset-x-3 bottom-3 rounded-2xl border border-white/55 bg-white/70 px-3 py-2 shadow-[0_10px_24px_rgba(36,31,27,0.08)]">
+        <div className="text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[#7B674F]">
+          {brief.category}
+        </div>
+        <div className="mt-1 line-clamp-1 text-[0.78rem] font-semibold text-[#28414C]">
+          {sourceName}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function NewsGridCard({
   brief,
@@ -25,12 +88,7 @@ function NewsGridCard({
       className="group grid grid-cols-[6.75rem_minmax(0,1fr)] items-start gap-3 rounded-[1.3rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:flex sm:h-full sm:flex-col sm:gap-0 sm:rounded-[1.55rem] sm:p-4"
     >
       <div className="relative h-[9rem] overflow-hidden rounded-[1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)] sm:h-[10.5rem] sm:rounded-[1.2rem] xl:h-[11.5rem]">
-        <BriefMediaClient
-          brief={brief}
-          priority={priority}
-          sizes="(min-width: 1280px) 300px, (min-width: 768px) 50vw, 108px"
-          className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-        />
+        <HomeNewsMedia brief={brief} priority={priority} />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(18,17,15,0.02),rgba(18,17,15,0.1))]" />
       </div>
 

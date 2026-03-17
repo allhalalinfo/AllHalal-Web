@@ -103,7 +103,13 @@ function generateBarcodePattern(): { width: number; isBar: boolean; density: num
   return pattern;
 }
 
-export default function ParticleBarcode({ className = "" }: { className?: string }) {
+export default function ParticleBarcode({
+  className = "",
+  showFrame = true,
+}: {
+  className?: string;
+  showFrame?: boolean;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
@@ -423,8 +429,9 @@ export default function ParticleBarcode({ className = "" }: { className?: string
       
       ctx.shadowBlur = 0;
       
-      // Draw white glowing corners
-      drawCorners(ctx, time);
+      if (showFrame) {
+        drawCorners(ctx, time);
+      }
     };
 
     animate();
@@ -434,7 +441,7 @@ export default function ParticleBarcode({ className = "" }: { className?: string
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [generateParticles]);
+  }, [generateParticles, showFrame]);
 
   return (
     <canvas
