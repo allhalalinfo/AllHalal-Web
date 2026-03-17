@@ -40,6 +40,15 @@ type CategoriesResponse = {
   }>;
 };
 
+const HOMEPAGE_CATEGORY_QUOTAS: Partial<Record<BriefCategory, number>> = {
+  "Faith & Practice": 2,
+  "Family & Education": 1,
+  "Halal Living": 1,
+  "Islamic Finance": 1,
+  "Health & Wellness": 1,
+  "Ummah & World": 1,
+};
+
 const LIVE_NEWS_CATEGORIES: NewsCategory[] = [
   "Faith & Practice",
   "Family & Education",
@@ -85,6 +94,10 @@ function getFallbackBriefCategory(item: NewsItem): BriefCategory {
 }
 
 function buildFallbackBriefSlug(item: NewsItem) {
+  return slugify(item.title).slice(0, 72) || "story";
+}
+
+function buildLegacyFallbackBriefSlug(item: NewsItem) {
   const normalizedTitle = slugify(item.title).slice(0, 72) || "story";
   return `${item.sourceId}-${normalizedTitle}`;
 }
@@ -163,8 +176,15 @@ async function getFallbackFeedBriefs({
 
 async function getFallbackBriefBySlug(slug: string) {
   const items = await getAggregatedNews({ limit: 50 });
-  const briefs = sortBriefsByDate(items.map(mapNewsItemToBrief));
-  const brief = briefs.find((entry) => entry.slug === slug);
+  const mappedItems = items.map((item) => ({
+    item,
+    brief: mapNewsItemToBrief(item),
+  }));
+  const briefs = sortBriefsByDate(mappedItems.map((entry) => entry.brief));
+  const matchedItem = mappedItems.find(({ item, brief }) =>
+    brief.slug === slug || buildLegacyFallbackBriefSlug(item) === slug
+  );
+  const brief = matchedItem?.brief;
 
   if (!brief) {
     return null;
@@ -292,13 +312,104 @@ function sortBriefsByDate(items: Brief[]) {
   );
 }
 
+function getBriefPrimarySourceName(brief: Brief) {
+  return brief.sources[0]?.name || brief.primary_source || "Unknown source";
+}
+
+function buildBalancedBriefs(items: Brief[], limit: number, maxPerSource: number) {
+  const result: Brief[] = [];
+  const sourceCounts = new Map<string, number>();
+
+  for (const brief of items) {
+    if (result.length >= limit) {
+      break;
+    }
+
+    const sourceName = getBriefPrimarySourceName(brief);
+    const sourceCount = sourceCounts.get(sourceName) ?? 0;
+
+    if (sourceCount >= maxPerSource) {
+      continue;
+    }
+
+    result.push(brief);
+    sourceCounts.set(sourceName, sourceCount + 1);
+  }
+
+  return result;
+}
+
+function buildHomepageLayoutFromBriefs(items: Brief[]): HomepageBriefLayout {
+  const freshItems = filterFreshBriefs(sortBriefsByDate(items), DEFAULT_FRESHNESS_DAYS);
+  const categoryCounts = new Map<BriefCategory, number>();
+  const sourceCounts = new Map<string, number>();
+  const curated: Brief[] = [];
+
+  for (const brief of freshItems) {
+    const sourceName = getBriefPrimarySourceName(brief);
+    const sourceCount = sourceCounts.get(sourceName) ?? 0;
+
+    if (sourceCount >= 2) {
+      continue;
+    }
+
+    const quota = HOMEPAGE_CATEGORY_QUOTAS[brief.category] ?? 1;
+    const categoryCount = categoryCounts.get(brief.category) ?? 0;
+
+    if (categoryCount >= quota) {
+      continue;
+    }
+
+    curated.push(brief);
+    sourceCounts.set(sourceName, sourceCount + 1);
+    categoryCounts.set(brief.category, categoryCount + 1);
+
+    if (curated.length >= 12) {
+      break;
+    }
+  }
+
+  if (curated.length < 8) {
+    const fallbackBalanced = buildBalancedBriefs(
+      freshItems.filter((brief) => !curated.some((item) => item.id === brief.id)),
+      12 - curated.length,
+      2,
+    );
+
+    curated.push(...fallbackBalanced);
+  }
+
+  return {
+    hero: curated[0] ?? null,
+    featured: curated.slice(1, 4),
+    compact: curated.slice(4, 12),
+  };
+}
+
+function hasHealthyHomepageDiversity(layout: HomepageBriefLayout) {
+  const items = [layout.hero, ...layout.featured, ...layout.compact].filter(Boolean) as Brief[];
+
+  if (items.length < 6) {
+    return false;
+  }
+
+  const uniqueSources = new Set(items.map(getBriefPrimarySourceName));
+  const uniqueCategories = new Set(items.map((brief) => brief.category));
+
+  return uniqueSources.size >= 3 && uniqueCategories.size >= 3;
+}
+
 export async function getHomepageBriefs(limit = 12) {
   const { items } = await getFeedBriefs({
-    limit: Math.max(limit, 18),
+    limit: Math.max(limit, 36),
     offset: 0,
   });
 
-  return filterFreshBriefs(items, DEFAULT_FRESHNESS_DAYS).slice(0, limit);
+  return buildBalancedBriefs(
+    filterFreshBriefs(items, DEFAULT_FRESHNESS_DAYS),
+    limit,
+    2,
+  );
 }
 
 export async function getHomepageBriefLayout() {
@@ -313,14 +424,23 @@ export async function getHomepageBriefLayout() {
     Boolean(data?.compact?.length);
 
   if (data?.success && hasLiveBriefs) {
-    return {
+    const layout = {
       hero: data.hero && isBriefFresh(data.hero, DEFAULT_FRESHNESS_DAYS) ? data.hero : null,
       featured: filterFreshBriefs(data.featured ?? [], DEFAULT_FRESHNESS_DAYS).slice(0, 3),
       compact: filterFreshBriefs(data.compact ?? [], DEFAULT_FRESHNESS_DAYS).slice(0, 8),
     };
+
+    if (hasHealthyHomepageDiversity(layout)) {
+      return layout;
+    }
   }
 
-  return getFallbackHomepageLayout();
+  const { items } = await getFeedBriefs({
+    limit: 50,
+    offset: 0,
+  });
+
+  return buildHomepageLayoutFromBriefs(items);
 }
 
 export async function getFeedBriefs({

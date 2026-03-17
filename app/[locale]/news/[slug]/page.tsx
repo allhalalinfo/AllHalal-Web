@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
+import AdSlot from "@/components/ads/AdSlot";
 import BriefCard, { BriefSourceLinks } from "@/components/briefs/BriefCard";
 import CategoryBadge from "@/components/briefs/CategoryBadge";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
@@ -13,6 +14,8 @@ import {
   getBriefDetail,
   hasValidBriefImage,
 } from "@/lib/briefs";
+
+const ARTICLE_INLINE_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_INLINE;
 
 function renderBlogFallback(params: { locale: string; slug: string }) {
   const post = blogPosts.find((entry) => entry.slug === params.slug);
@@ -198,6 +201,12 @@ export default async function NewsDetailPage(props: {
                     {brief.why_it_matters}
                   </p>
                 </div>
+
+                <AdSlot
+                  id="article-inline"
+                  slot={ARTICLE_INLINE_AD_SLOT}
+                  size="medium"
+                />
 
                 <AppDeepLinkCTA variant="blog" />
               </div>

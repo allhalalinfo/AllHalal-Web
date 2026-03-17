@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import AdSlot from "@/components/ads/AdSlot";
 import { type Brief } from "@/types/brief";
 import {
   filterFreshBriefs,
@@ -13,6 +14,44 @@ import {
 } from "@/lib/briefs";
 
 const NEWS_FRESHNESS_DAYS = 30;
+const NEWS_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_TOP;
+const NEWS_INLINE_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_INLINE;
+const NEWS_BOTTOM_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_BOTTOM;
+
+function balanceNewsDeskBriefs(briefs: Brief[], limit = 20) {
+  const result: Brief[] = [];
+  const sourceCounts = new Map<string, number>();
+
+  for (const brief of briefs) {
+    if (result.length >= limit) {
+      break;
+    }
+
+    const sourceName = brief.sources[0]?.name || brief.primary_source || "Unknown source";
+    const sourceCount = sourceCounts.get(sourceName) ?? 0;
+
+    if (sourceCount >= 3) {
+      continue;
+    }
+
+    result.push(brief);
+    sourceCounts.set(sourceName, sourceCount + 1);
+  }
+
+  if (result.length < limit) {
+    for (const brief of briefs) {
+      if (result.length >= limit) {
+        break;
+      }
+
+      if (!result.some((entry) => entry.id === brief.id)) {
+        result.push(brief);
+      }
+    }
+  }
+
+  return result;
+}
 
 export const metadata: Metadata = {
   title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
@@ -201,10 +240,10 @@ export default async function NewsDeskPage(props: {
   const activeCategory = categories.find((category) => category.slug === activeCategorySlug);
   const { items: briefs, total } = await getFeedBriefs({
     category: activeCategorySlug,
-    limit: 20,
+    limit: 50,
     offset: 0,
   });
-  const freshBriefs = filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS);
+  const freshBriefs = balanceNewsDeskBriefs(filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS), 20);
 
   const [lead, ...rest] = freshBriefs;
   const headlines = rest.slice(0, 4);
@@ -253,6 +292,13 @@ export default async function NewsDeskPage(props: {
             ))}
           </div>
 
+          <AdSlot
+            id="news-top-banner"
+            slot={NEWS_TOP_AD_SLOT}
+            size="banner"
+            className="mt-8"
+          />
+
           {lead ? (
             <div className="mt-8 grid gap-5 xl:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.92fr)]">
               <LeadStory brief={lead} locale={locale} />
@@ -268,8 +314,19 @@ export default async function NewsDeskPage(props: {
           {stream.length ? (
             <section className="mt-8">
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {stream.map((brief) => (
-                  <StreamCard key={brief.id} brief={brief} locale={locale} />
+                {stream.map((brief, index) => (
+                  <div key={brief.id} className="contents">
+                    <StreamCard brief={brief} locale={locale} />
+                    {index === 5 ? (
+                      <div className="md:col-span-2 xl:col-span-3">
+                        <AdSlot
+                          id="news-inline-break"
+                          slot={NEWS_INLINE_AD_SLOT}
+                          size="banner"
+                        />
+                      </div>
+                    ) : null}
+                  </div>
                 ))}
               </div>
             </section>
@@ -293,6 +350,13 @@ export default async function NewsDeskPage(props: {
               stays focused on recent reporting.
             </p>
           ) : null}
+
+          <AdSlot
+            id="news-bottom-rail"
+            slot={NEWS_BOTTOM_AD_SLOT}
+            size="medium"
+            className="mt-8"
+          />
         </section>
       </div>
     </main>
