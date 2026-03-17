@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -6,13 +5,13 @@ import { ArrowLeft } from "lucide-react";
 import AdSlot from "@/components/ads/AdSlot";
 import BriefCard, { BriefSourceLinks } from "@/components/briefs/BriefCard";
 import CategoryBadge from "@/components/briefs/CategoryBadge";
+import BriefMedia from "@/components/briefs/BriefMedia";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 import { blogPosts } from "@/data/blogPosts";
 import {
   formatTimeAgo,
   getBriefDisplayTimestamp,
   getBriefDetail,
-  hasValidBriefImage,
 } from "@/lib/briefs";
 
 const ARTICLE_INLINE_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE_INLINE;
@@ -174,18 +173,14 @@ export default async function NewsDetailPage(props: {
               {brief.dek}
             </p>
 
-            {hasValidBriefImage(brief) && brief.image_url ? (
-              <div className="relative mt-8 aspect-[1.9/1] overflow-hidden rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(246,241,233,0.72)]">
-                <Image
-                  src={brief.image_url}
-                  alt={brief.title}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 1100px, 100vw"
-                />
-              </div>
-            ) : null}
+            <div className="relative mt-8 aspect-[1.9/1] overflow-hidden rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(246,241,233,0.72)]">
+              <BriefMedia
+                brief={brief}
+                priority
+                sizes="(min-width: 1280px) 1100px, 100vw"
+                className="object-cover"
+              />
+            </div>
 
             <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.36fr)]">
               <div className="space-y-6 text-[1.04rem] leading-8 text-text-secondary">

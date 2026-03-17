@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import CategoryBadge from "@/components/briefs/CategoryBadge";
-import { formatTimeAgo, getBriefDisplayTimestamp, hasValidBriefImage } from "@/lib/briefs";
+import BriefMedia from "@/components/briefs/BriefMedia";
+import { formatTimeAgo, getBriefDisplayTimestamp } from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
 
 function BriefMeta({ brief, compact = false }: { brief: Brief; compact?: boolean }) {
@@ -32,19 +32,13 @@ function BriefMeta({ brief, compact = false }: { brief: Brief; compact?: boolean
 }
 
 function BriefImage({ brief, priority = false }: { brief: Brief; priority?: boolean }) {
-  if (!hasValidBriefImage(brief) || !brief.image_url) {
-    return null;
-  }
-
   return (
     <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.45rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(246,241,233,0.72)]">
-      <Image
-        src={brief.image_url}
-        alt={brief.title}
-        fill
+      <BriefMedia
+        brief={brief}
         priority={priority}
-        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
         sizes="(min-width: 1280px) 720px, (min-width: 768px) 100vw, 100vw"
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
       />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(18,17,15,0.02),rgba(18,17,15,0.16))]" />
     </div>

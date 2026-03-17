@@ -4,6 +4,20 @@ import { BRIEF_CATEGORIES, type Brief, type BriefCategory, type BriefsResponse }
 
 const BRIEFS_API_BASE = "https://api.allhalal.info/api/v1/briefs";
 const DEFAULT_FRESHNESS_DAYS = 30;
+const BAD_BRIEF_IMAGE_PATTERNS = [
+  /s\.w\.org\/images\/core\/emoji/i,
+  /gravatar\.com/i,
+  /\/emoji\//i,
+  /\/avatar\//i,
+  /\/icon\//i,
+  /\/logo\//i,
+  /\/logos\//i,
+  /\/plugins\//i,
+  /islamic-graphics/i,
+  /swt\.png/i,
+  /pixel\./i,
+  /placeholder/i,
+];
 
 export type HomepageBriefLayout = {
   hero: Brief | null;
@@ -106,6 +120,7 @@ function mapNewsItemToBrief(item: NewsItem): Brief {
   const category = getFallbackBriefCategory(item);
   const excerpt = item.excerpt.trim() || `Current reporting from ${item.sourceName}.`;
   const sourcePublishedAt = item.publishedAt || new Date().toISOString();
+  const sanitizedImageUrl = sanitizeBriefImageUrl(item.imageUrl);
 
   return {
     id: hashString(`${item.sourceId}:${item.url}:${item.title}`),
@@ -115,12 +130,12 @@ function mapNewsItemToBrief(item: NewsItem): Brief {
     summary: `${excerpt}\n\nRead the original article from ${item.sourceName} for the full report and any follow-up updates.`,
     why_it_matters: `This story is part of the live AllHalal news feed and reflects current reporting from ${item.sourceName}.`,
     category,
-    image_url: item.imageUrl,
+    image_url: sanitizedImageUrl,
     published_at: sourcePublishedAt,
     source_published_at: sourcePublishedAt,
     generated_at: sourcePublishedAt,
     brief_type: "news",
-    image_strategy: item.imageUrl ? "real" : "none",
+    image_strategy: sanitizedImageUrl ? "real" : "none",
     sources: [
       {
         name: item.sourceName,
@@ -131,6 +146,20 @@ function mapNewsItemToBrief(item: NewsItem): Brief {
     primary_source: item.sourceName,
     kind: "live_news_fallback",
     hero_candidate: false,
+  };
+}
+
+function sanitizeBrief(brief: Brief): Brief {
+  const sanitizedImageUrl = sanitizeBriefImageUrl(brief.image_url);
+
+  if (sanitizedImageUrl === brief.image_url) {
+    return brief;
+  }
+
+  return {
+    ...brief,
+    image_url: sanitizedImageUrl,
+    image_strategy: sanitizedImageUrl ? brief.image_strategy ?? "real" : "none",
   };
 }
 
@@ -425,9 +454,12 @@ export async function getHomepageBriefLayout() {
 
   if (data?.success && hasLiveBriefs) {
     const layout = {
-      hero: data.hero && isBriefFresh(data.hero, DEFAULT_FRESHNESS_DAYS) ? data.hero : null,
-      featured: filterFreshBriefs(data.featured ?? [], DEFAULT_FRESHNESS_DAYS).slice(0, 3),
-      compact: filterFreshBriefs(data.compact ?? [], DEFAULT_FRESHNESS_DAYS).slice(0, 8),
+      hero:
+        data.hero && isBriefFresh(sanitizeBrief(data.hero), DEFAULT_FRESHNESS_DAYS)
+          ? sanitizeBrief(data.hero)
+          : null,
+      featured: filterFreshBriefs((data.featured ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS).slice(0, 3),
+      compact: filterFreshBriefs((data.compact ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS).slice(0, 8),
     };
 
     if (hasHealthyHomepageDiversity(layout)) {
@@ -467,10 +499,12 @@ export async function getFeedBriefs({
   );
 
   if (data?.success && Array.isArray(data.items) && data.items.length > 0) {
+    const sanitizedItems = data.items.map(sanitizeBrief);
+
     return {
-      items: sortBriefsByDate(data.items),
-      count: data.count ?? data.items.length,
-      total: data.total ?? data.items.length,
+      items: sortBriefsByDate(sanitizedItems),
+      count: data.count ?? sanitizedItems.length,
+      total: data.total ?? sanitizedItems.length,
       hasMore: Boolean(data.has_more),
       offset: data.offset ?? offset,
       limit: data.limit ?? limit,
@@ -511,10 +545,10 @@ export async function getBriefDetail(slug: string) {
 
   if (data?.success && data.brief) {
     return {
-      brief: data.brief,
+      brief: sanitizeBrief(data.brief),
       related:
         Array.isArray(data.related) && data.related.length > 0
-          ? sortBriefsByDate(data.related)
+          ? sortBriefsByDate(data.related.map(sanitizeBrief))
           : [],
     };
   }
@@ -548,21 +582,36 @@ export function getBriefDisplayTimestamp(brief: Brief) {
   return getBriefSourcePublishedAt(brief);
 }
 
+export function sanitizeBriefImageUrl(imageUrl: string | null | undefined) {
+  if (!imageUrl) {
+    return null;
+  }
+
+  const normalizedImageUrl = imageUrl.trim();
+
+  if (!normalizedImageUrl) {
+    return null;
+  }
+
+  const lowercaseImageUrl = normalizedImageUrl.toLowerCase();
+
+  if (!lowercaseImageUrl.startsWith("http://") && !lowercaseImageUrl.startsWith("https://")) {
+    return null;
+  }
+
+  if (lowercaseImageUrl.includes("youtube.com/embed") || lowercaseImageUrl.includes("youtu.be/")) {
+    return null;
+  }
+
+  if (BAD_BRIEF_IMAGE_PATTERNS.some((pattern) => pattern.test(lowercaseImageUrl))) {
+    return null;
+  }
+
+  return normalizedImageUrl;
+}
+
 export function hasValidBriefImage(brief: Brief) {
-  if (!brief.image_url) {
-    return false;
-  }
-
-  const imageUrl = brief.image_url.trim().toLowerCase();
-  if (!imageUrl.startsWith("http://") && !imageUrl.startsWith("https://")) {
-    return false;
-  }
-
-  if (imageUrl.includes("youtube.com/embed") || imageUrl.includes("youtu.be/")) {
-    return false;
-  }
-
-  return true;
+  return Boolean(sanitizeBriefImageUrl(brief.image_url));
 }
 
 export function isBriefFresh(brief: Brief, maxAgeDays = 30) {

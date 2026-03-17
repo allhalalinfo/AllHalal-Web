@@ -1,8 +1,8 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import AdSlot from "@/components/ads/AdSlot";
+import BriefMedia from "@/components/briefs/BriefMedia";
 import { type Brief } from "@/types/brief";
 import {
   filterFreshBriefs,
@@ -10,7 +10,6 @@ import {
   getBriefCategories,
   getBriefDisplayTimestamp,
   getFeedBriefs,
-  hasValidBriefImage,
 } from "@/lib/briefs";
 
 const NEWS_FRESHNESS_DAYS = 30;
@@ -117,18 +116,14 @@ function LeadStory({
       href={href}
       className="group grid overflow-hidden rounded-[2rem] border border-[rgba(47,37,30,0.08)] bg-white/90 shadow-[0_20px_60px_rgba(43,34,24,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_26px_72px_rgba(43,34,24,0.08)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]"
     >
-      {hasValidBriefImage(brief) && brief.image_url ? (
-        <div className="relative aspect-[1.4/1] overflow-hidden bg-[rgba(243,238,230,0.72)] lg:aspect-auto">
-          <Image
-            src={brief.image_url}
-            alt={brief.title}
-            fill
-            priority
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 100vw"
-          />
-        </div>
-      ) : null}
+      <div className="relative aspect-[1.4/1] overflow-hidden bg-[rgba(243,238,230,0.72)] lg:aspect-auto">
+        <BriefMedia
+          brief={brief}
+          priority
+          sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 100vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
 
       <div className="flex flex-col p-6 md:p-7">
         <div>
@@ -177,17 +172,13 @@ function HeadlineCard({
         </h3>
       </div>
 
-      {hasValidBriefImage(brief) && brief.image_url ? (
-        <div className="relative hidden h-24 w-24 overflow-hidden rounded-[1.1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)] md:block">
-          <Image
-            src={brief.image_url}
-            alt={brief.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            sizes="96px"
-          />
-        </div>
-      ) : null}
+      <div className="relative hidden h-24 w-24 overflow-hidden rounded-[1.1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)] md:block">
+        <BriefMedia
+          brief={brief}
+          sizes="96px"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      </div>
     </Link>
   );
 }
@@ -206,17 +197,13 @@ function StreamCard({
       href={href}
       className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/86 p-4 shadow-[0_14px_36px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)]"
     >
-      {hasValidBriefImage(brief) && brief.image_url ? (
-        <div className="relative aspect-[1.8/1] overflow-hidden rounded-[1.15rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)]">
-          <Image
-            src={brief.image_url}
-            alt={brief.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-          />
-        </div>
-      ) : null}
+      <div className="relative aspect-[1.8/1] overflow-hidden rounded-[1.15rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)]">
+        <BriefMedia
+          brief={brief}
+          sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
 
       <div className="mt-4">
         <NewsMeta brief={brief} small />
