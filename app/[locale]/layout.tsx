@@ -111,6 +111,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <meta name="google-adsense-account" content={ADSENSE_CLIENT_ID} />
         <Script
           id="adsense-script"
           async
