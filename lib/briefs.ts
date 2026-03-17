@@ -176,12 +176,12 @@ async function getFallbackFeedBriefs({
 
 async function getFallbackBriefBySlug(slug: string) {
   const items = await getAggregatedNews({ limit: 50 });
-  const mappedItems = items.map((item) => ({
+  const mappedItems = items.map((item: NewsItem) => ({
     item,
     brief: mapNewsItemToBrief(item),
   }));
-  const briefs = sortBriefsByDate(mappedItems.map((entry) => entry.brief));
-  const matchedItem = mappedItems.find(({ item, brief }) =>
+  const briefs = sortBriefsByDate(mappedItems.map((entry: { item: NewsItem; brief: Brief }) => entry.brief));
+  const matchedItem = mappedItems.find(({ item, brief }: { item: NewsItem; brief: Brief }) =>
     brief.slug === slug || buildLegacyFallbackBriefSlug(item) === slug
   );
   const brief = matchedItem?.brief;

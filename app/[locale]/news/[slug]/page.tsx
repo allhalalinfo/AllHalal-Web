@@ -135,8 +135,8 @@ export default async function NewsDetailPage(props: {
   const displayTimestamp = getBriefDisplayTimestamp(brief);
   const summaryParagraphs = brief.summary
     .split("\n\n")
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
+    .map((paragraph: string) => paragraph.trim())
+    .filter((paragraph: string) => Boolean(paragraph));
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-bg-primary pb-24 pt-32">
@@ -189,7 +189,7 @@ export default async function NewsDetailPage(props: {
 
             <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.36fr)]">
               <div className="space-y-6 text-[1.04rem] leading-8 text-text-secondary">
-                {summaryParagraphs.map((paragraph) => (
+                {summaryParagraphs.map((paragraph: string) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
 

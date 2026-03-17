@@ -99,7 +99,7 @@ export default function AdSlot({
   placeholder = false,
   label = "Sponsored",
 }: AdSlotProps) {
-  const slotRef = useRef<HTMLElement | null>(null);
+  const slotRef = useRef<HTMLModElement | null>(null);
   const hasRequestedRef = useRef(false);
   const config = SLOT_STYLES[size];
   const canServe = ADSENSE_ENABLED && Boolean(slot);
