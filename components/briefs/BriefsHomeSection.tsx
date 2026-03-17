@@ -58,11 +58,13 @@ function NewsGridCard({
           ) : null}
         </div>
 
-        <h3 className="mt-2 line-clamp-2 text-[1.16rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
+        <h3 className="mt-2 line-clamp-3 text-[1.1rem] font-bold leading-tight text-text-primary transition-colors duration-300 group-hover:text-primary">
           {brief.title}
         </h3>
 
-        <p className="mt-2 line-clamp-3 text-[0.92rem] leading-relaxed text-text-secondary">{brief.summary || brief.dek}</p>
+        <p className="mt-2 line-clamp-4 text-[0.9rem] leading-relaxed text-text-secondary">
+          {brief.summary || brief.dek}
+        </p>
       </div>
     </a>
   );
