@@ -423,9 +423,10 @@ function hasHealthyHomepageDiversity(layout: HomepageBriefLayout) {
   }
 
   const uniqueSources = new Set(items.map(getBriefPrimarySourceName));
-  const uniqueCategories = new Set(items.map((brief) => brief.category));
 
-  return uniqueSources.size >= 3 && uniqueCategories.size >= 3;
+  // Only check sources (≥3), not categories
+  // Islamic Finance/Halal Living RSS feeds don't exist, so 3+ categories is impossible
+  return uniqueSources.size >= 3;
 }
 
 export async function getHomepageBriefs(limit = 12) {
