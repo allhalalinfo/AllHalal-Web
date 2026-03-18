@@ -90,8 +90,8 @@ export default function BriefsHomeSection({
 
   // Sort by published_at date (newest first)
   const gridStories = allStories.sort((a, b) => {
-    const dateA = new Date(a.published_at || a.updated_at || 0).getTime();
-    const dateB = new Date(b.published_at || b.updated_at || 0).getTime();
+    const dateA = new Date(a.published_at || 0).getTime();
+    const dateB = new Date(b.published_at || 0).getTime();
     return dateB - dateA; // Descending (newest first)
   });
 
