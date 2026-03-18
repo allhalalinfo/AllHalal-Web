@@ -83,9 +83,17 @@ export default function BriefsHomeSection({
     return null;
   }
 
-  const gridStories = [hero, ...featured, ...compact].filter(
+  // Combine all stories and sort by date (newest first)
+  const allStories = [hero, ...featured, ...compact].filter(
     (brief, index, stories) => stories.findIndex((story) => story.id === brief.id) === index,
   );
+
+  // Sort by published_at date (newest first)
+  const gridStories = allStories.sort((a, b) => {
+    const dateA = new Date(a.published_at || a.updated_at || 0).getTime();
+    const dateB = new Date(b.published_at || b.updated_at || 0).getTime();
+    return dateB - dateA; // Descending (newest first)
+  });
 
   const newsPageUrl = `/${locale}/news`;
 
