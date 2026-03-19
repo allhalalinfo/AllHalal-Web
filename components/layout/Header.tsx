@@ -99,7 +99,27 @@ export default function Header() {
   const toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev);
   const isActive = (href: string) => {
     const localizedHref = `/${locale}${href}`;
-    return pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
+    
+    // Exact match
+    if (pathname === localizedHref) return true;
+    
+    // For nested routes, we need to be careful.
+    // If the current pathname starts with the localizedHref + '/', it might be active.
+    // BUT we only want the MOST SPECIFIC match to be active.
+    if (pathname.startsWith(`${localizedHref}/`)) {
+      // Find all nav items that match the current pathname
+      const matchingItems = navItems.filter(item => 
+        pathname === `/${locale}${item.href}` || pathname.startsWith(`/${locale}${item.href}/`)
+      );
+      
+      // Sort by length descending to find the most specific match
+      matchingItems.sort((a, b) => b.href.length - a.href.length);
+      
+      // Only return true if THIS item is the most specific match
+      return matchingItems.length > 0 && matchingItems[0].href === href;
+    }
+    
+    return false;
   };
 
   return (

@@ -52,6 +52,11 @@ export default function BriefMediaClient({
   const [hasImageError, setHasImageError] = useState(false);
 
   if (hasValidBriefImage(brief) && brief.image_url && !hasImageError) {
+    // Use image proxy for external images to avoid CORS and hotlinking issues
+    const imageUrl = brief.image_url.startsWith("http")
+      ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
+      : brief.image_url;
+
     return (
       <>
         <div
@@ -62,14 +67,13 @@ export default function BriefMediaClient({
           }}
         />
         <img
-          src={brief.image_url}
+          src={imageUrl}
           alt={brief.title}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
           sizes={sizes}
           className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
-          referrerPolicy="no-referrer"
           onError={() => {
             setHasImageError(true);
           }}
