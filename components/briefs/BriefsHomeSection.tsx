@@ -21,15 +21,14 @@ function NewsGridCard({
   const sourceUrl = brief.sources[0]?.url || "";
   const displayTimestamp = getBriefDisplayTimestamp(brief);
   const [imageError, setImageError] = React.useState(false);
-  const [useProxy, setUseProxy] = React.useState(false);
+  const [fallbackToDirect, setFallbackToDirect] = React.useState(false);
 
   const rawUrl = brief.image_url ?? "";
   const isExternalHttp =
     rawUrl.startsWith("https://") || rawUrl.startsWith("http://");
-  const shouldUseProxy = useProxy && isExternalHttp && rawUrl;
-  const imageSrc = shouldUseProxy
-    ? `/api/image-proxy?url=${encodeURIComponent(rawUrl)}`
-    : brief.image_url;
+  const proxiedSrc = `/api/image-proxy?url=${encodeURIComponent(rawUrl)}`;
+  const imageSrc =
+    isExternalHttp && !fallbackToDirect ? proxiedSrc : brief.image_url;
 
   return (
     <a
@@ -41,16 +40,17 @@ function NewsGridCard({
       <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
         {brief.image_url && sanitizeBriefImageUrl(brief.image_url) && !imageError && imageSrc ? (
           <img
-            key={useProxy ? "proxy" : "direct"}
+            key={fallbackToDirect ? "direct" : "proxy"}
             src={imageSrc}
             alt={brief.title}
             loading={priority ? "eager" : "lazy"}
             decoding="async"
             fetchPriority={priority ? "high" : "auto"}
+            referrerPolicy="no-referrer"
             className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
             onError={() => {
-              if (!useProxy && isExternalHttp) {
-                setUseProxy(true);
+              if (isExternalHttp && !fallbackToDirect) {
+                setFallbackToDirect(true);
               } else {
                 setImageError(true);
               }

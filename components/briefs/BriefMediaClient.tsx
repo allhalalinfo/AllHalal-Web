@@ -50,17 +50,15 @@ export default function BriefMediaClient({
   className?: string;
 }) {
   const [hasImageError, setHasImageError] = useState(false);
-  const [useProxy, setUseProxy] = useState(false);
+  /** After proxy fails, try loading the original URL in the browser (last resort). */
+  const [fallbackToDirect, setFallbackToDirect] = useState(false);
 
   if (hasValidBriefImage(brief) && brief.image_url && !hasImageError) {
-    // Direct first (fast CDN hits). Many publishers block hotlinking in the browser —
-    // then retry via same-origin /api/image-proxy (server-side fetch).
+    // Proxy first: CDNs often block hotlinking in the browser but allow server-side fetch.
     const isExternalHttp =
       brief.image_url.startsWith("https://") || brief.image_url.startsWith("http://");
-    const imageUrl =
-      useProxy && isExternalHttp
-        ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
-        : brief.image_url;
+    const proxiedSrc = `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`;
+    const imageUrl = isExternalHttp && !fallbackToDirect ? proxiedSrc : brief.image_url;
 
     return (
       <>
@@ -72,17 +70,18 @@ export default function BriefMediaClient({
           }}
         />
         <img
-          key={useProxy ? "proxy" : "direct"}
+          key={fallbackToDirect ? "direct" : "proxy"}
           src={imageUrl}
           alt={brief.title}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
           sizes={sizes}
+          referrerPolicy="no-referrer"
           className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
           onError={() => {
-            if (!useProxy && isExternalHttp && brief.image_url) {
-              setUseProxy(true);
+            if (isExternalHttp && !fallbackToDirect) {
+              setFallbackToDirect(true);
             } else {
               setHasImageError(true);
             }
