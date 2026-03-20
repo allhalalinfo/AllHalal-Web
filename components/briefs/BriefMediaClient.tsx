@@ -78,7 +78,7 @@ export default function BriefMediaClient({
           sizes={sizes}
           className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
           onError={(e) => {
-            if (!useProxy && isPexels) {
+            if (!useProxy && isPexels && brief.image_url) {
               // Retry with proxy for Pexels images
               console.log("🔄 Retrying with proxy:", brief.image_url.substring(0, 60));
               setUseProxy(true);
