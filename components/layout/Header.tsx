@@ -227,7 +227,7 @@ export default function Header() {
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
-        <nav className="mx-4 mt-24 rounded-[2rem] border border-[rgba(73,58,42,0.12)] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(245,239,230,0.96))] p-5 shadow-[0_22px_60px_rgba(37,29,20,0.2)]">
+        <nav className="mx-4 mt-24 mb-4 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-[2rem] border border-[rgba(73,58,42,0.12)] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(245,239,230,0.96))] p-5 shadow-[0_22px_60px_rgba(37,29,20,0.2)]">
           <div className="mb-5 flex items-center justify-between">
             <div>
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-primary/80">Navigation</p>
