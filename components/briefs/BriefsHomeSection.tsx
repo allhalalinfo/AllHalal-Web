@@ -36,7 +36,7 @@ function NewsGridCard({
       className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:p-4"
     >
       <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
-        {brief.image_url && sanitizeBriefImageUrl(brief.image_url) && !imageError ? (
+        {brief.image_url && sanitizeBriefImageUrl(brief.image_url) && !imageError && imageSrc ? (
           <img
             src={imageSrc}
             alt={brief.title}
