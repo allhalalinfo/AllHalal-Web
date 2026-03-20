@@ -53,12 +53,14 @@ export default function BriefMediaClient({
   const [useProxy, setUseProxy] = useState(false);
 
   if (hasValidBriefImage(brief) && brief.image_url && !hasImageError) {
-    // Try direct loading first, fallback to proxy if fails
-    // Pexels sometimes blocks direct hotlinking, proxy helps bypass that
-    const isPexels = brief.image_url.includes("pexels.com");
-    const imageUrl = (useProxy && isPexels)
-      ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
-      : brief.image_url;
+    // Direct first (fast CDN hits). Many publishers block hotlinking in the browser —
+    // then retry via same-origin /api/image-proxy (server-side fetch).
+    const isExternalHttp =
+      brief.image_url.startsWith("https://") || brief.image_url.startsWith("http://");
+    const imageUrl =
+      useProxy && isExternalHttp
+        ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
+        : brief.image_url;
 
     return (
       <>
@@ -70,6 +72,7 @@ export default function BriefMediaClient({
           }}
         />
         <img
+          key={useProxy ? "proxy" : "direct"}
           src={imageUrl}
           alt={brief.title}
           loading={priority ? "eager" : "lazy"}
@@ -77,14 +80,10 @@ export default function BriefMediaClient({
           fetchPriority={priority ? "high" : "auto"}
           sizes={sizes}
           className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
-          onError={(e) => {
-            if (!useProxy && isPexels && brief.image_url) {
-              // Retry with proxy for Pexels images
-              console.log("🔄 Retrying with proxy:", brief.image_url.substring(0, 60));
+          onError={() => {
+            if (!useProxy && isExternalHttp && brief.image_url) {
               setUseProxy(true);
             } else {
-              // Give up, show placeholder
-              console.error("❌ Image failed:", brief.title.substring(0, 50));
               setHasImageError(true);
             }
           }}

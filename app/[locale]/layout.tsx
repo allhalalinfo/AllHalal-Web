@@ -15,7 +15,7 @@
 
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
+import AdSenseScript from "@/components/ads/AdSenseScript";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/next";
@@ -114,13 +114,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className="bg-bg-primary text-text-primary antialiased" suppressHydrationWarning>
-        <Script
-          id="adsense-script"
-          async
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
-        />
+        <AdSenseScript clientId={ADSENSE_CLIENT_ID} />
         <NextIntlClientProvider messages={messages}>
           <Header />
           <SmoothScrollProvider>

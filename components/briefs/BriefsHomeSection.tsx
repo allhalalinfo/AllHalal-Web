@@ -23,11 +23,12 @@ function NewsGridCard({
   const [imageError, setImageError] = React.useState(false);
   const [useProxy, setUseProxy] = React.useState(false);
 
-  // Determine image URL (direct or through proxy)
-  const isPexels = brief.image_url?.includes("pexels.com");
-  const shouldUseProxy = useProxy && isPexels && brief.image_url;
+  const rawUrl = brief.image_url ?? "";
+  const isExternalHttp =
+    rawUrl.startsWith("https://") || rawUrl.startsWith("http://");
+  const shouldUseProxy = useProxy && isExternalHttp && rawUrl;
   const imageSrc = shouldUseProxy
-    ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url!)}`
+    ? `/api/image-proxy?url=${encodeURIComponent(rawUrl)}`
     : brief.image_url;
 
   return (
@@ -40,6 +41,7 @@ function NewsGridCard({
       <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
         {brief.image_url && sanitizeBriefImageUrl(brief.image_url) && !imageError && imageSrc ? (
           <img
+            key={useProxy ? "proxy" : "direct"}
             src={imageSrc}
             alt={brief.title}
             loading={priority ? "eager" : "lazy"}
@@ -47,8 +49,7 @@ function NewsGridCard({
             fetchPriority={priority ? "high" : "auto"}
             className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
             onError={() => {
-              if (!useProxy && isPexels) {
-                // Retry with proxy for Pexels
+              if (!useProxy && isExternalHttp) {
                 setUseProxy(true);
               } else {
                 setImageError(true);
