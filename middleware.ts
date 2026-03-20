@@ -77,7 +77,7 @@ export function middleware(request: NextRequest) {
     style-src 'self' 'unsafe-inline';
     img-src 'self' https: data: blob:;
     font-src 'self' data:;
-    connect-src 'self' https://*.vercel-insights.com https://api.web3forms.com https://api.allhalal.info https://nominatim.openstreetmap.org https://api.aladhan.com https://*.google-analytics.com https://*.googletagmanager.com https://pagead2.googlesyndication.com;
+    connect-src 'self' https://*.vercel-insights.com https://api.web3forms.com https://api.allhalal.info https://nominatim.openstreetmap.org https://api.aladhan.com https://*.google-analytics.com https://*.googletagmanager.com https://pagead2.googlesyndication.com https://fundingchoicesmessages.google.com;
     media-src 'none';
     object-src 'none';
     child-src 'self' blob:;
