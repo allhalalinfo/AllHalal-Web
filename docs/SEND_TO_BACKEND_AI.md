@@ -124,3 +124,10 @@ curl -s https://api.allhalal.info/api/v1/briefs/feed?limit=50 | \
 **Контакт:** Frontend Team  
 **Файл:** `docs/BACKEND_FIX_OVERLAP.md` (16KB)  
 **Дата:** March 18, 2026
+
+---
+
+## Картинки в ленте новостей (превью)
+
+Отдельный готовый промпт для Backend AI: **`docs/BACKEND_PROMPT_NEWS_IMAGES.md`**  
+(og:image, меньше дублей Pexels, кэш скрейпа, критерии готовности).
