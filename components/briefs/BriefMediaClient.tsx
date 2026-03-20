@@ -52,10 +52,10 @@ export default function BriefMediaClient({
   const [hasImageError, setHasImageError] = useState(false);
 
   if (hasValidBriefImage(brief) && brief.image_url && !hasImageError) {
-    // Use image proxy for external images to avoid CORS and hotlinking issues
-    const imageUrl = brief.image_url.startsWith("http")
-      ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
-      : brief.image_url;
+    // Load images directly from source (no proxy)
+    // Pexels/NY Times/MEE all support CORS and hotlinking
+    // Using proxy causes Vercel serverless timeouts (30s limit)
+    const imageUrl = brief.image_url;
 
     return (
       <>
