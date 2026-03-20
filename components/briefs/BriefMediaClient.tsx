@@ -51,10 +51,15 @@ export default function BriefMediaClient({
 }) {
   const [hasImageError, setHasImageError] = useState(false);
 
+  // Debug logging
+  if (typeof window !== "undefined" && brief.image_url?.includes("pexels")) {
+    console.log("🖼️ Pexels image:", brief.image_url.substring(0, 80));
+  }
+
   if (hasValidBriefImage(brief) && brief.image_url && !hasImageError) {
-    // Load images directly from source (no proxy)
-    // Pexels/NY Times/MEE all support CORS and hotlinking
-    // Using proxy causes Vercel serverless timeouts (30s limit)
+    // Load images directly from source (no proxy needed)
+    // Pexels/NY Times/MEE/Dawn all support CORS and hotlinking
+    // Direct browser loading is faster and avoids Vercel serverless limits
     const imageUrl = brief.image_url;
 
     return (
@@ -74,7 +79,12 @@ export default function BriefMediaClient({
           fetchPriority={priority ? "high" : "auto"}
           sizes={sizes}
           className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
-          onError={() => {
+          onError={(e) => {
+            console.error("❌ Image load failed:", {
+              url: imageUrl.substring(0, 100),
+              brief: brief.title.substring(0, 50),
+              error: e.type,
+            });
             setHasImageError(true);
           }}
         />
