@@ -25,7 +25,7 @@ function NewsGridCard({
   const isPexels = brief.image_url?.includes("pexels.com");
   const shouldUseProxy = useProxy && isPexels && brief.image_url;
   const imageSrc = shouldUseProxy
-    ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
+    ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url!)}`
     : brief.image_url;
 
   return (
