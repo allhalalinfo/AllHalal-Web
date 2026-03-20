@@ -71,7 +71,23 @@
 
 ## 🤔 ДОБАВЛЯТЬ ЛИ ДО 50 ИСТОЧНИКОВ?
 
-### **PROS (преимущества):**
+### **ДА! Просить нужно 50, но реально будет 25-30**
+
+**Реальность Islamic RSS ecosystem:**
+- 📊 **~50% sources не работают** (403, 404, timeout, redirect)
+- 📊 **~20% неактивные** (не обновлялись >60 дней)
+- 📊 **~30% реально работают** (15-20 из 50)
+
+**Поэтому:**
+- ✅ Просим 50 sources у Comet/ChatGPT
+- ✅ Backend AI тестирует все 50
+- ✅ Отсеиваются 25-30 нерабочих
+- ✅ Добавляем 20-25 работающих в production
+
+**Это даст:**
+- ✅ 25-30 total sources (optimal)
+- ✅ NEWS: 15-18 sources
+- ✅ HOME: 10-12 sources
 
 1. ✅ **Больше разнообразия**
    - Разные perspectives
@@ -116,39 +132,43 @@
 
 ---
 
-## 💡 РЕКОМЕНДАЦИЯ: УМЕРЕННОЕ РАСШИРЕНИЕ
+## 💡 РЕКОМЕНДАЦИЯ: ПРОСИТЬ 50, ПОЛУЧИТЬ 25-30
 
-### **Рекомендуемое количество: 25-30 источников**
+### **Запросить: 50 источников**
+### **Реально получить: 20-25 работающих**
+### **Target в production: 25-30 total**
 
-**Почему не 50:**
-- Islamic контент слишком редко обновляется
-- Сложно найти 50 качественных sources
-- Maintenance burden слишком высокий
+**Почему просить 50:**
+- ✅ ~50% отсеются при тестировании (broken RSS, 403, timeout)
+- ✅ ~20% неактивные (не обновлялись месяцами)
+- ✅ ~30% реально работают = 15-20 качественных sources
+- ✅ Лучше иметь больший pool для отбора
 
-**Почему не 20 (текущее):**
-- Можно добавить еще хорошие sources
-- Больше diversity всегда лучше
-- Source balancing работает лучше с большим pool
+**Почему не оставлять все 50 если работают:**
+- ❌ Islamic контент слишком редко обновляется
+- ❌ Maintenance burden (мониторить, обновлять)
+- ❌ Fetch time (50 RSS feeds = 30-60 секунд)
+- ✅ 25-30 optimal для quality + diversity
 
-### **Целевое распределение:**
+### **Целевое распределение после фильтрации:**
 
-**NEWS sources: 15-18** (currently 13)
+**NEWS sources: 15-18** (запросим 30, получим 15-18)
 ```
 Регионы:
 - Middle East: 5 sources (Al Jazeera, MEE, MEMO, TRT World, Al Arabiya)
 - South Asia: 3 sources (Dawn, Hindu, BDNews24)
 - Africa: 2 sources (Premium Times, Anadolu Africa)
 - Southeast Asia: 2 sources (CNA, The Star Malaysia)
-- Europe: 1-2 sources (5Pillars UK, The Guardian)
-- Global: 2-3 sources (NY Times, BBC, Reuters)
+- Europe: 2 sources (5Pillars UK, The Guardian)
+- Global: 3 sources (NY Times, BBC, Reuters)
 ```
 
-**HOME/Lifestyle sources: 10-12** (currently 7)
+**HOME/Lifestyle sources: 10-12** (запросим 20, получим 10-12)
 ```
 Категории:
-- Faith & Practice: 3-4 (MuslimMatters, SeekersGuidance, Qalam, Yaqeen)
-- Family & Education: 2-3 (Muslim Girl, Sound Vision, Ummah Wide)
-- Halal Living: 2-3 (Halal Focus, Muslim Vibe, Honest Food Guide)
+- Faith & Practice: 4 (MuslimMatters, SeekersGuidance, Qalam, Yaqeen)
+- Family & Education: 3 (Muslim Girl, Sound Vision, Ummah Wide)
+- Halal Living: 3 (Halal Focus, Muslim Vibe, Honest Food Guide)
 - Islamic Finance: 2 (IFG, Ethis/Wahed Blog)
 ```
 
@@ -194,53 +214,60 @@
 
 ## 🎯 ACTION PLAN
 
-### **Шаг 1: Попроси Comet/ChatGPT составить список**
+### **Шаг 1: Попроси Comet/ChatGPT составить список 50 источников**
 
 **Промпт для них:**
 ```
-Create a list of 30-40 high-quality Islamic/Muslim content sources with RSS feeds.
+Create a comprehensive list of 50 high-quality Islamic/Muslim content sources with RSS feeds.
+
+IMPORTANT: We expect ~50% will not work (broken RSS, 403, timeout), so we need 50 to get 25 working sources.
 
 Requirements:
-1. Must have working RSS feed (URL included)
+1. Must have RSS feed URL (provide exact URL)
 2. English language content
-3. Regular updates (at least monthly)
-4. Professional quality (no spam/clickbait)
+3. Should be active (at least attempted updates in last 6 months)
+4. Professional quality sources (no spam/clickbait)
 5. Diverse categories: news, faith, family, halal living, finance
 
 Split into:
-- NEWS sources (regional Muslim news: Middle East, Asia, Africa, Europe)
-- LIFESTYLE sources (faith, family, halal living, Islamic finance)
+- NEWS sources (30): Regional Muslim news from Middle East, Asia, Africa, Europe, Global
+- LIFESTYLE sources (20): Faith, family, halal living, Islamic finance, wellness
 
 For each source provide:
-- Name
-- RSS URL
-- Category (News/Faith/Family/Halal/Finance)
-- Region (if news)
-- Update frequency (daily/weekly/monthly)
-- Brief description
+| Name | RSS URL | Category | Region/Focus | Description |
 
-Prioritize established, authoritative sources.
+Examples:
+- Al Jazeera | https://www.aljazeera.com/xml/rss/all.xml | News | Middle East | Major news
+- MuslimMatters | https://muslimmatters.org/feed/ | Faith | Global | Islamic education
+
+Include both well-known (Al Jazeera, Dawn, NY Times) and niche sources (Islamic Finance blogs, Halal Living sites).
+
+Priority: Cast a wide net - we will test and filter the working ones.
 ```
 
-### **Шаг 2: Backend AI протестирует список**
+### **Шаг 2: Backend AI протестирует все 50**
 
 Backend AI должен:
-1. Проверить каждый RSS URL (HTTP status, item count)
-2. Отфильтровать нерабочие (403, 404, timeout)
-3. Проверить freshness (последняя статья не старше 60 дней)
-4. Проверить качество (валидный XML, есть title/description)
+1. ✅ Проверить каждый RSS URL (HTTP status, item count)
+2. ✅ Отфильтровать нерабочие (403, 404, timeout, redirect)
+3. ✅ Проверить freshness (последняя статья не старше 90 дней)
+4. ✅ Проверить качество (валидный XML, есть title/description)
+5. ✅ Ранжировать по качеству (update frequency, content quality)
 
-**Expected result:**
-- 30-40 sources предложено
-- 20-25 sources реально работают
-- 15-18 sources добавлены в production
+**Expected pipeline:**
+- 50 sources предложено
+- ~25 sources broken/timeout (отсеиваются)
+- ~5 sources неактивные (отсеиваются)
+- **20-25 sources реально работают** ✅
+- Топ 20-25 добавляются в production
 
-### **Шаг 3: Мониторинг и cleanup**
+### **Шаг 3: Мониторинг и maintenance**
 
 После добавления:
-1. Мониторить активность каждого source
-2. Удалить неактивные через 2-3 месяца
-3. Добавить новые взамен удаленных
+1. ✅ Quarterly audit (раз в 3 месяца)
+2. ✅ Удалить неактивные sources (не обновлялись 90+ дней)
+3. ✅ Добавить новые взамен удаленных (keep 25-30 active)
+4. ✅ Мониторить RSS health (auto-detect broken feeds)
 
 ---
 
@@ -300,41 +327,69 @@ Backend AI должен:
 
 ---
 
-## 📝 PROMPT ДЛЯ COMET/CHATGPT
+## 📝 PROMPT ДЛЯ COMET/CHATGPT (50 SOURCES)
 
 ```
-Create a comprehensive list of 35 high-quality Islamic/Muslim content sources.
+Create a comprehensive list of 50 high-quality Islamic/Muslim content sources with RSS feeds.
+
+CONTEXT: We expect ~50% will have broken/non-working RSS feeds. We need 50 suggestions to get 20-25 working sources after testing.
 
 REQUIREMENTS:
-✅ Working RSS feed (provide exact URL)
+✅ RSS feed URL (provide exact URL - critical!)
 ✅ English language content
-✅ Monthly+ updates (active sources)
-✅ Professional quality (authoritative, no spam)
+✅ Should be active (attempted updates in last 6 months)
+✅ Professional quality (no spam/clickbait)
 ✅ Halal content only
+✅ Diverse sources (well-known + niche)
 
 CATEGORIES NEEDED:
-1. Regional News (15-18 sources):
-   - Middle East: 5 sources (Al Jazeera, TRT World, Al Arabiya, etc.)
-   - South Asia: 3 sources (Dawn, Hindu, BDNews24, etc.)
-   - Africa: 2 sources (Premium Times, African news, etc.)
-   - Southeast Asia: 2 sources (CNA, Star Malaysia, etc.)
-   - Europe: 2 sources (5Pillars UK, etc.)
-   - Global: 3 sources (NY Times World, BBC, Reuters)
+1. Regional News (30 sources):
+   - Middle East: 10 (Al Jazeera, MEE, MEMO, TRT World, Al Arabiya, Times of Israel, Haaretz, etc.)
+   - South Asia: 6 (Dawn, Hindu, BDNews24, Pakistan Today, Indian Express, etc.)
+   - Africa: 4 (Premium Times, Daily Nation, African news outlets, etc.)
+   - Southeast Asia: 4 (CNA, Star Malaysia, Straits Times, Jakarta Post, etc.)
+   - Europe: 3 (5Pillars UK, The Guardian World, etc.)
+   - Global: 3 (NY Times World, BBC World, Reuters, etc.)
 
-2. Islamic Lifestyle (12-15 sources):
-   - Faith & Practice: 4 (Yaqeen, MuslimMatters, SeekersGuidance, etc.)
-   - Family & Education: 3 (Muslim Girl, Sound Vision, etc.)
-   - Halal Living: 3 (Halal Focus, Muslim Vibe, etc.)
-   - Islamic Finance: 2 (IFG, Wahed/Ethis blogs, etc.)
+2. Islamic Lifestyle (20 sources):
+   - Faith & Practice: 6 (Yaqeen Institute, MuslimMatters, SeekersGuidance, Qalam Institute, Bayyinah, etc.)
+   - Family & Education: 5 (Muslim Girl, Sound Vision, Ummah Wide, Muslim Youth, etc.)
+   - Halal Living: 5 (Halal Focus, Muslim Vibe, Honest Food Guide, Haute Hijab blog, etc.)
+   - Islamic Finance: 4 (Islamic Finance Guru, Wahed blog, Ethis blog, Salaam Gateway, etc.)
 
-FORMAT:
-| Name | RSS URL | Category | Region | Frequency | Description |
+FORMAT (table):
+| Name | RSS URL | Category | Region/Focus | Description |
 
-PRIORITY: Established, authoritative sources with proven track record.
+EXAMPLES:
+| Al Jazeera | https://www.aljazeera.com/xml/rss/all.xml | News | Middle East | Major news outlet |
+| Dawn | https://www.dawn.com/feeds/home | News | Pakistan | Leading Pakistani newspaper |
+| MuslimMatters | https://muslimmatters.org/feed/ | Faith | Global | Islamic education and community |
+| Islamic Finance Guru | https://islamicfinanceguru.com/feed/ | Finance | Global | Halal investing education |
+
+IMPORTANT:
+- Include RSS URL for EVERY source (critical for testing)
+- Mix of well-known (Al Jazeera, Dawn) and niche sources
+- Cast a wide net - we will test all and keep working ones
+- Prioritize sources you've heard of or can verify exist
+- Include alternatives if main source might not work (e.g., multiple Islamic Finance blogs)
+
+GOAL: 50 suggestions → Backend tests all → Keep 20-25 working sources
 ```
 
 ---
 
 **Created:** March 20, 2026  
+**Updated:** March 20, 2026 - Changed to 50 sources (was 35)  
+**Reason:** ~50% of RSS feeds don't work, need 50 to get 20-25 working  
 **Status:** Ready for source expansion  
-**Next Step:** Get list from Comet/ChatGPT → Backend AI tests → Add best 15-18
+**Next Step:** Get list of 50 from Comet/ChatGPT → Backend AI tests all 50 → Add best 20-25
+
+---
+
+## ✅ SUMMARY
+
+**ASK FOR:** 50 sources  
+**EXPECT TO GET:** 20-25 working sources  
+**TARGET:** 25-30 total in production  
+
+**Pipeline:** 50 → test → ~25 broken → ~5 inactive → **20-25 working** ✅
