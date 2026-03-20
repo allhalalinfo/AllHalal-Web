@@ -50,17 +50,15 @@ export default function BriefMediaClient({
   className?: string;
 }) {
   const [hasImageError, setHasImageError] = useState(false);
-
-  // Debug logging
-  if (typeof window !== "undefined" && brief.image_url?.includes("pexels")) {
-    console.log("🖼️ Pexels image:", brief.image_url.substring(0, 80));
-  }
+  const [useProxy, setUseProxy] = useState(false);
 
   if (hasValidBriefImage(brief) && brief.image_url && !hasImageError) {
-    // Load images directly from source (no proxy needed)
-    // Pexels/NY Times/MEE/Dawn all support CORS and hotlinking
-    // Direct browser loading is faster and avoids Vercel serverless limits
-    const imageUrl = brief.image_url;
+    // Try direct loading first, fallback to proxy if fails
+    // Pexels sometimes blocks direct hotlinking, proxy helps bypass that
+    const isPexels = brief.image_url.includes("pexels.com");
+    const imageUrl = (useProxy && isPexels)
+      ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
+      : brief.image_url;
 
     return (
       <>
@@ -80,12 +78,15 @@ export default function BriefMediaClient({
           sizes={sizes}
           className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
           onError={(e) => {
-            console.error("❌ Image load failed:", {
-              url: imageUrl.substring(0, 100),
-              brief: brief.title.substring(0, 50),
-              error: e.type,
-            });
-            setHasImageError(true);
+            if (!useProxy && isPexels) {
+              // Retry with proxy for Pexels images
+              console.log("🔄 Retrying with proxy:", brief.image_url.substring(0, 60));
+              setUseProxy(true);
+            } else {
+              // Give up, show placeholder
+              console.error("❌ Image failed:", brief.title.substring(0, 50));
+              setHasImageError(true);
+            }
           }}
         />
       </>

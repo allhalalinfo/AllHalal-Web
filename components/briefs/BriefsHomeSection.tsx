@@ -1,3 +1,4 @@
+import React from "react";
 import {
   formatTimeAgo,
   getBriefDisplayTimestamp,
@@ -17,6 +18,15 @@ function NewsGridCard({
 }) {
   const sourceUrl = brief.sources[0]?.url || "";
   const displayTimestamp = getBriefDisplayTimestamp(brief);
+  const [imageError, setImageError] = React.useState(false);
+  const [useProxy, setUseProxy] = React.useState(false);
+
+  // Determine image URL (direct or through proxy)
+  const isPexels = brief.image_url?.includes("pexels.com");
+  const shouldUseProxy = useProxy && isPexels && brief.image_url;
+  const imageSrc = shouldUseProxy
+    ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
+    : brief.image_url;
 
   return (
     <a
@@ -26,14 +36,22 @@ function NewsGridCard({
       className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:p-4"
     >
       <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
-        {brief.image_url && sanitizeBriefImageUrl(brief.image_url) ? (
+        {brief.image_url && sanitizeBriefImageUrl(brief.image_url) && !imageError ? (
           <img
-            src={brief.image_url}
+            src={imageSrc}
             alt={brief.title}
             loading={priority ? "eager" : "lazy"}
             decoding="async"
             fetchPriority={priority ? "high" : "auto"}
             className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+            onError={() => {
+              if (!useProxy && isPexels) {
+                // Retry with proxy for Pexels
+                setUseProxy(true);
+              } else {
+                setImageError(true);
+              }
+            }}
           />
         ) : (
           <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(241,235,226,0.96),rgba(255,255,255,0.98)_58%,rgba(228,221,211,0.92))]" />
