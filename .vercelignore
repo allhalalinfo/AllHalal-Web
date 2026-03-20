@@ -4,8 +4,8 @@
 *.html
 !public/**/*.html
 
-# Legacy assets (keeping in repo for reference but not deploying)
-assets/
+# NOTE: Do not ignore `public/assets/` — Next.js serves /assets/* from there.
+# A bare `assets/` pattern was excluding public/assets on Vercel (404 for card-bg.png).
 
 # Development files
 node_modules
