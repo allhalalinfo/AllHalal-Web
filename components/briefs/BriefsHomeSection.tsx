@@ -28,12 +28,15 @@ function NewsGridCard({
       <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
         {brief.image_url && sanitizeBriefImageUrl(brief.image_url) ? (
           <img
-            src={sanitizeBriefImageUrl(brief.image_url) || ""}
+            src={
+              brief.image_url.startsWith("http")
+                ? `/api/image-proxy?url=${encodeURIComponent(brief.image_url)}`
+                : brief.image_url
+            }
             alt={brief.title}
             loading={priority ? "eager" : "lazy"}
             decoding="async"
             fetchPriority={priority ? "high" : "auto"}
-            referrerPolicy="no-referrer"
             className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
           />
         ) : (
