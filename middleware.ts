@@ -73,7 +73,7 @@ export function middleware(request: NextRequest) {
   // CSP - Allow Three.js WebGL rendering (requires unsafe-eval for shaders)
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-insights.com https://va.vercel-scripts.com https://pagead2.googlesyndication.com https://*.googletagmanager.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-insights.com https://va.vercel-scripts.com https://pagead2.googlesyndication.com https://*.googletagmanager.com https://fundingchoicesmessages.google.com;
     style-src 'self' 'unsafe-inline';
     img-src 'self' https: data: blob:;
     font-src 'self' data:;
