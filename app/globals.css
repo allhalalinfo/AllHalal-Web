@@ -742,3 +742,50 @@ body {
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MOBILE IMAGE & ORIENTATION FIX
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Ensure images never overflow on mobile */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Better aspect ratio handling for portrait/landscape */
+@media (orientation: landscape) and (max-width: 768px) {
+  /* Force recalculation on orientation change */
+  .container {
+    width: 100vw;
+    max-width: 100%;
+  }
+  
+  /* News cards in landscape */
+  [class*="grid"] {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  }
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+  /* News cards in portrait */
+  [class*="grid"] {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for iOS Safari viewport height issue */
+  .fixed {
+    position: -webkit-sticky;
+    position: fixed;
+  }
+  
+  /* Smooth scrolling for iOS */
+  [style*="overflow-y: auto"],
+  [style*="overflow-y:auto"] {
+    -webkit-overflow-scrolling: touch;
+  }
+}

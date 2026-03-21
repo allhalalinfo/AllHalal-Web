@@ -78,7 +78,11 @@ export default function BriefMediaClient({
           fetchPriority={priority ? "high" : "auto"}
           sizes={sizes}
           referrerPolicy="no-referrer"
-          className={`absolute inset-0 block h-full w-full object-cover object-center ${className ?? ""}`}
+          className={`absolute inset-0 block h-full w-full min-w-0 object-cover object-center ${className ?? ""}`}
+          style={{
+            width: "100%",
+            maxWidth: "100%",
+          }}
           onError={() => {
             if (isExternalHttp && !fallbackToDirect) {
               setFallbackToDirect(true);

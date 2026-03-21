@@ -24,6 +24,7 @@ export default function Header() {
   
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const scrollPosition = useRef(0);
 
   const updateScrollState = useCallback(() => {
     const currentScrollY = window.scrollY;
@@ -57,15 +58,29 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Body scroll lock
+  // Body scroll lock - полная блокировка с position: fixed
   useEffect(() => {
     if (isMobileMenuOpen) {
+      // Сохраняем текущую позицию скролла
+      scrollPosition.current = window.scrollY;
+      // Блокируем body
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollPosition.current}px`;
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
       setIsHidden(false);
     } else {
+      // Восстанавливаем scroll
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
+      window.scrollTo(0, scrollPosition.current);
     }
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
@@ -223,12 +238,33 @@ export default function Header() {
       </header>
 
       <div
-        className={`fixed inset-0 z-[90] bg-[rgba(24,19,14,0.34)] backdrop-blur-md md:hidden transition-opacity duration-200 ${
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed inset-0 z-[90] md:hidden ${
+          isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
+        style={{
+          height: "100dvh",
+          overflow: "hidden",
+        }}
       >
-        <nav className="mx-4 mt-24 mb-4 max-h-[calc(100vh-7rem)] overflow-y-auto rounded-[2rem] border border-[rgba(73,58,42,0.12)] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(245,239,230,0.96))] p-5 pb-6 shadow-[0_22px_60px_rgba(37,29,20,0.2)]">
-          <div className="mb-5 flex items-center justify-between">
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-[rgba(24,19,14,0.34)] backdrop-blur-md transition-opacity duration-200 ${
+            isMobileMenuOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={closeMobileMenu}
+        />
+
+        {/* Menu Content - Fixed Overlay с внутренним скроллом */}
+        <div
+          className={`absolute inset-x-4 top-24 bottom-4 flex flex-col rounded-[2rem] border border-[rgba(73,58,42,0.12)] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(245,239,230,0.96))] shadow-[0_22px_60px_rgba(37,29,20,0.2)] transition-transform duration-300 ${
+            isMobileMenuOpen ? "translate-y-0" : "translate-y-[120%]"
+          }`}
+          style={{
+            overscrollBehavior: "contain",
+          }}
+        >
+          {/* Header - фиксированная */}
+          <div className="flex-shrink-0 flex items-center justify-between p-5 pb-4 border-b border-[rgba(73,58,42,0.08)]">
             <div>
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-primary/80">Navigation</p>
               <p className="mt-2 text-xl font-display font-bold text-text-primary">Move through allhalal.info</p>
@@ -238,34 +274,43 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="grid gap-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={`/${locale}${item.href}`}
-                onClick={closeMobileMenu}
-                className={`rounded-[1.25rem] border px-4 py-4 transition-colors ${
-                  isActive(item.href)
-                    ? "border-[rgba(46,75,89,0.18)] bg-[#2E4B59] text-white shadow-[0_12px_24px_rgba(46,75,89,0.24)]"
-                    : "border-[rgba(73,58,42,0.08)] bg-white/58 text-text-primary hover:bg-white"
-                }`}
-              >
-                <div className="text-[0.68rem] font-bold uppercase tracking-[0.24em] opacity-60">Open</div>
-                <div className="mt-2 text-lg font-semibold">{item.label}</div>
-              </Link>
-            ))}
+          {/* Scrollable Content - только этот блок прокручивается */}
+          <div
+            className="flex-1 overflow-y-auto px-5 py-4"
+            style={{
+              WebkitOverflowScrolling: "touch",
+              overscrollBehavior: "contain",
+            }}
+          >
+            <div className="grid gap-3">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={`/${locale}${item.href}`}
+                  onClick={closeMobileMenu}
+                  className={`rounded-[1.25rem] border px-4 py-4 transition-colors ${
+                    isActive(item.href)
+                      ? "border-[rgba(46,75,89,0.18)] bg-[#2E4B59] text-white shadow-[0_12px_24px_rgba(46,75,89,0.24)]"
+                      : "border-[rgba(73,58,42,0.08)] bg-white/58 text-text-primary hover:bg-white"
+                  }`}
+                >
+                  <div className="text-lg font-semibold">{item.label}</div>
+                </Link>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-5 grid gap-3">
+          {/* Footer - фиксированная кнопка */}
+          <div className="flex-shrink-0 p-5 pt-4 border-t border-[rgba(73,58,42,0.08)]">
             <Link
               href={`/${locale}/app`}
               onClick={closeMobileMenu}
-              className="inline-flex items-center justify-center rounded-[1.25rem] bg-gradient-gold px-5 py-4 text-base font-bold text-[#4A3319] shadow-[0_14px_28px_rgba(176,144,98,0.24)]"
+              className="inline-flex items-center justify-center w-full rounded-[1.25rem] bg-gradient-gold px-5 py-4 text-base font-bold text-[#4A3319] shadow-[0_14px_28px_rgba(176,144,98,0.24)]"
             >
               Open app
             </Link>
           </div>
-        </nav>
+        </div>
       </div>
     </>
   );

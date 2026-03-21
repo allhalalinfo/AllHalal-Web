@@ -47,7 +47,11 @@ function NewsGridCard({
             decoding="async"
             fetchPriority={priority ? "high" : "auto"}
             referrerPolicy="no-referrer"
-            className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+            className="absolute inset-0 h-full w-full min-w-0 object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+            style={{
+              width: "100%",
+              maxWidth: "100%",
+            }}
             onError={() => {
               if (isExternalHttp && !fallbackToDirect) {
                 setFallbackToDirect(true);
