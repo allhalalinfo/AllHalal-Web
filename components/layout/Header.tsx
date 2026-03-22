@@ -14,6 +14,9 @@ import { useLocale } from "next-intl";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import { MAIN_NAV_ITEMS } from "@/config/navigation";
 
+const IOS_APP_STORE_URL =
+  "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265";
+
 export default function Header() {
   const pathname = usePathname();
   const locale = useLocale();
@@ -172,7 +175,9 @@ export default function Header() {
 
             <div className="relative z-10 hidden md:flex items-center gap-3">
               <Link
-                href={`/${locale}/app`}
+                href={IOS_APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full bg-gradient-gold px-4 py-2.5 text-sm font-bold text-[#4A3319] shadow-[0_10px_22px_rgba(176,144,98,0.24)] transition-transform hover:-translate-y-0.5"
               >
                 Open app
@@ -251,7 +256,9 @@ export default function Header() {
 
           <div className="mt-5 grid gap-3">
             <Link
-              href={`/${locale}/app`}
+              href={IOS_APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={closeMobileMenu}
               className="inline-flex items-center justify-center rounded-[1.25rem] bg-gradient-gold px-5 py-4 text-base font-bold text-[#4A3319] shadow-[0_14px_28px_rgba(176,144,98,0.24)]"
             >
