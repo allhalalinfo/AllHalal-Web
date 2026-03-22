@@ -6,7 +6,7 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -97,10 +97,23 @@ export default function Header() {
   const navItems = MAIN_NAV_ITEMS.filter((item) => item.enabled);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev);
-  const isActive = (href: string) => {
-    const localizedHref = `/${locale}${href}`;
-    return pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
-  };
+
+  /** Longest matching prefix wins so e.g. Zakat beats Finance on /finance/zakat-calculator */
+  const activeNavHref = useMemo(() => {
+    const items = MAIN_NAV_ITEMS.filter((item) => item.enabled);
+    let best: { href: string; len: number } | null = null;
+    for (const item of items) {
+      const localizedHref = `/${locale}${item.href}`;
+      const matches =
+        pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
+      if (matches && (!best || localizedHref.length > best.len)) {
+        best = { href: item.href, len: localizedHref.length };
+      }
+    }
+    return best?.href ?? null;
+  }, [pathname, locale]);
+
+  const isActive = (href: string) => activeNavHref === href;
 
   return (
     <>

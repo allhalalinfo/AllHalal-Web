@@ -76,17 +76,17 @@ export default function FeaturesSection() {
   return (
     <>
       {/* Section Header */}
-      <section id="features" className="section-lg bg-bg-primary relative overflow-hidden">
-        <div className="container relative z-10 text-center max-w-3xl mx-auto mb-16 md:mb-24">
-          <span className="inline-block text-primary text-sm font-semibold uppercase tracking-widest mb-4">
+      <section id="features" className="section-sm bg-bg-primary relative overflow-hidden">
+        <div className="container relative z-10 mx-auto mb-10 max-w-3xl text-center md:mb-14">
+          <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-primary">
             {t("subtitle")}
           </span>
-          
-          <h2 className="text-display-1 font-bold font-display text-text-primary mb-6">
+
+          <h2 className="mb-4 font-display text-display-1 font-bold text-text-primary">
             {t("title")}
           </h2>
-          
-          <p className="text-xl text-text-secondary">
+
+          <p className="text-lg text-text-secondary md:text-xl">
             {t("description")}
           </p>
         </div>
@@ -101,12 +101,12 @@ export default function FeaturesSection() {
         marginRight: '-50vw',
         width: '100vw',
         maxWidth: '100vw'
-      }} className="bg-bg-primary pb-24">
-        <div className="lg:hidden flex overflow-x-auto snap-x snap-mandatory gap-6 md:gap-10 pb-16 pt-8 px-6 md:px-12 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      }} className="bg-bg-primary pb-16 md:pb-20">
+        <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-12 pt-2 md:gap-10 md:px-12 md:pb-14 [scrollbar-width:none] [-ms-overflow-style:none] lg:hidden [&::-webkit-scrollbar]:hidden">
           {featureKeys.map((key) => renderFeatureCard(key, key))}
         </div>
 
-        <div className="hidden lg:block pb-16 pt-8">
+        <div className="hidden pb-12 pt-2 lg:block lg:pb-14">
           <div className="marquee-rail">
             <div className="marquee-track gap-10 xl:gap-12 pl-10 xl:pl-12 pr-10 xl:pr-12">
               {featureKeys.map((key, index) => renderFeatureCard(key, `primary-${key}-${index}`))}

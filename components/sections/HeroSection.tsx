@@ -32,7 +32,7 @@ export default function HeroSection() {
       </div>
 
       <div className="container relative z-10">
-        <div className="grid min-h-[100svh] items-center gap-12 pb-14 pt-32 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-10 lg:pb-18 lg:pt-36">
+        <div className="grid min-h-[100svh] items-start gap-12 pb-10 pt-28 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-10 lg:pb-14 lg:pt-32">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,7 +140,6 @@ export default function HeroSection() {
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(244,185,66,0.12),transparent_24%),radial-gradient(circle_at_84%_16%,rgba(67,118,122,0.1),transparent_22%),radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.5),transparent_68%)]" />
               <div className="pointer-events-none absolute inset-x-[10%] top-[16%] h-[44%] opacity-90">
                 <ParticleBarcode
-                  showFrame={false}
                   className="opacity-78 [mask-image:linear-gradient(180deg,transparent,black_12%,black_88%,transparent)]"
                 />
               </div>
