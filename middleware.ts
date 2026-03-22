@@ -55,6 +55,7 @@ export function middleware(request: NextRequest) {
     '/news',
     '/prayer-times',
     '/boycott-checker',
+    '/guides',
   ];
   
   // Check if current path is a localized path (e.g. /ru/is-it-halal)

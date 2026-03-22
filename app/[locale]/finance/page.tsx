@@ -97,6 +97,13 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
       accent: "from-[#2A5C58] to-[#3A7C77] text-white",
     },
     {
+      title: "Zakat Guides",
+      description: "Stocks, crypto, business, pensions, and how today’s Nisab is calculated—with links back to the calculator.",
+      href: `/${locale}/guides`,
+      tag: "Deep dives",
+      accent: "from-[#2E4B59] to-[#4A6B78] text-white",
+    },
+    {
       title: "Halal Investing",
       description: "A strong beginner path into Shariah-compliant investing, ETFs and screening logic.",
       href: `/${locale}/finance/investing`,
@@ -126,6 +133,7 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
         "Zakat should be surfaced as an action, not buried as a blog topic. This is the repeatable finance utility Muslims come back for year after year.",
       links: [
         { label: "Zakat calculator", href: `/${locale}/finance/zakat-calculator` },
+        { label: "Zakat guides", href: `/${locale}/guides` },
         { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
         { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
       ],
