@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 import { HelpTooltip } from "@/components/zakat/HelpTooltip";
@@ -111,10 +110,10 @@ export default function ZakatCalculatorClient() {
     val.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
-    <div id="zakat-calculator-root" className="mx-auto max-w-3xl space-y-8">
-      <div className="mb-10 text-center">
-        <h2 className="mb-3 text-2xl font-bold text-text-primary">Calculate your annual Zakat obligation</h2>
-        <p className="text-text-secondary">Based on your wealth and debts over one lunar year.</p>
+    <div id="zakat-calculator-root" className="mx-auto max-w-3xl space-y-6">
+      <div className="mb-4 text-center">
+        <h2 className="mb-2 text-2xl font-bold text-text-primary">Calculate your annual Zakat obligation</h2>
+        <p className="text-sm text-text-secondary md:text-base">Based on your wealth and debts over one lunar year.</p>
       </div>
 
       {/* Nisab */}
@@ -369,16 +368,7 @@ export default function ZakatCalculatorClient() {
         retirement funds, crypto), consult a qualified scholar or Islamic finance expert.
       </p>
 
-      <div className="text-center">
-        <Link
-          href="#zakat-faq"
-          className="inline-flex text-sm font-semibold text-primary underline-offset-2 hover:underline"
-        >
-          ❓ Frequently asked questions
-        </Link>
-      </div>
-
-      <div className="pt-8">
+      <div className="pt-3">
         <AppPromoMini />
       </div>
 

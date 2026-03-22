@@ -15,16 +15,16 @@ export default async function ZakatCalculatorPage(props: { params: Promise<{ loc
   return (
     <>
       <ZakatJsonLd locale={params.locale} />
-      <div className="container mx-auto min-h-screen max-w-5xl py-32">
-        <Link href={`/${params.locale}/finance`} className="mb-8 inline-block text-primary hover:underline">
+      <div className="container mx-auto min-h-screen max-w-5xl py-24 md:py-28">
+        <Link href={`/${params.locale}/finance`} className="mb-5 inline-block text-primary hover:underline">
           &larr; Back to Finance
         </Link>
 
-        <div className="mb-12">
-          <h1 className="mb-4 font-display text-4xl font-bold text-text-primary md:text-5xl">
+        <div className="mb-6 md:mb-8">
+          <h1 className="mb-3 font-display text-4xl font-bold text-text-primary md:text-5xl">
             Zakat & Nisab Calculator
           </h1>
-          <p className="max-w-2xl text-xl text-text-secondary">
+          <p className="max-w-2xl text-lg text-text-secondary md:text-xl">
             We fetch live global gold and silver prices to give you the most accurate Nisab threshold today.
           </p>
         </div>

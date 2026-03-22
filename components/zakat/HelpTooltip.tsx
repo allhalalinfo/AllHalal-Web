@@ -41,7 +41,7 @@ export function HelpTooltip({ text, label }: HelpTooltipProps) {
       {open ? (
         <div
           role="tooltip"
-          className="absolute left-1/2 top-full z-[80] mt-2 w-[min(100vw-2rem,22rem)] -translate-x-1/2 rounded-2xl border border-border bg-bg-card p-4 text-left text-xs leading-relaxed text-text-secondary shadow-[0_20px_50px_rgba(43,34,24,0.18)] sm:left-0 sm:translate-x-0 md:w-80"
+          className="absolute left-1/2 top-full z-[120] mt-2 w-[min(100vw-2rem,22rem)] -translate-x-1/2 rounded-2xl border border-[rgba(47,37,30,0.12)] bg-white p-4 text-left text-xs leading-relaxed text-text-secondary shadow-[0_20px_50px_rgba(43,34,24,0.2)] sm:left-0 sm:translate-x-0 md:w-80"
         >
           {text}
         </div>
