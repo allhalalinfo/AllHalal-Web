@@ -1,9 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
+import BriefImagePlaceholder from "@/components/briefs/BriefImagePlaceholder";
 import {
+  briefHasEditorialImage,
   formatTimeAgo,
+  getBriefCardBlurb,
+  getBriefCardBlurbClassName,
   getBriefDisplayTimestamp,
+  isStockLikeBrief,
   sanitizeBriefImageUrl,
   type HomepageBriefLayout,
 } from "@/lib/briefs";
@@ -30,6 +35,13 @@ function NewsGridCard({
   const imageSrc =
     isExternalHttp && !fallbackToDirect ? proxiedSrc : brief.image_url;
 
+  const canTryImage =
+    Boolean(brief.image_url) &&
+    Boolean(sanitizeBriefImageUrl(brief.image_url)) &&
+    !isStockLikeBrief(brief) &&
+    !imageError &&
+    Boolean(imageSrc);
+
   return (
     <a
       href={sourceUrl}
@@ -38,10 +50,10 @@ function NewsGridCard({
       className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:p-4"
     >
       <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
-        {brief.image_url && sanitizeBriefImageUrl(brief.image_url) && !imageError && imageSrc ? (
+        {canTryImage ? (
           <img
             key={fallbackToDirect ? "direct" : "proxy"}
-            src={imageSrc}
+            src={imageSrc!}
             alt={brief.title}
             loading={priority ? "eager" : "lazy"}
             decoding="async"
@@ -61,7 +73,7 @@ function NewsGridCard({
             }}
           />
         ) : (
-          <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(241,235,226,0.96),rgba(255,255,255,0.98)_58%,rgba(228,221,211,0.92))]" />
+          <BriefImagePlaceholder brief={brief} />
         )}
       </div>
 
@@ -86,9 +98,7 @@ function NewsGridCard({
           {brief.title}
         </h3>
 
-        <p className="mt-2 line-clamp-4 text-[0.9rem] leading-relaxed text-text-secondary">
-          {brief.summary || brief.dek}
-        </p>
+        <p className={getBriefCardBlurbClassName(brief)}>{getBriefCardBlurb(brief)}</p>
       </div>
     </a>
   );
@@ -103,21 +113,39 @@ export default function BriefsHomeSection({
 }) {
   const { hero, featured, compact } = layout;
 
+  const gridStories = useMemo(() => {
+    if (!hero) {
+      return [];
+    }
+    const allStories = [hero, ...featured, ...compact].filter(
+      (brief, index, stories) => stories.findIndex((story) => story.id === brief.id) === index,
+    );
+    return allStories.sort((a, b) => {
+      const imgA = briefHasEditorialImage(a) ? 1 : 0;
+      const imgB = briefHasEditorialImage(b) ? 1 : 0;
+      if (imgB !== imgA) {
+        return imgB - imgA;
+      }
+      const dateA = new Date(a.published_at || 0).getTime();
+      const dateB = new Date(b.published_at || 0).getTime();
+      return dateB - dateA;
+    });
+  }, [hero, featured, compact]);
+
+  const categoryOptions = useMemo(() => {
+    const names = new Set(gridStories.map((b) => b.category));
+    return Array.from(names).sort();
+  }, [gridStories]);
+
+  const [activeCategory, setActiveCategory] = useState<string | "all">("all");
+  const visibleStories =
+    activeCategory === "all"
+      ? gridStories
+      : gridStories.filter((b) => b.category === activeCategory);
+
   if (!hero) {
     return null;
   }
-
-  // Combine all stories and sort by date (newest first)
-  const allStories = [hero, ...featured, ...compact].filter(
-    (brief, index, stories) => stories.findIndex((story) => story.id === brief.id) === index,
-  );
-
-  // Sort by published_at date (newest first)
-  const gridStories = allStories.sort((a, b) => {
-    const dateA = new Date(a.published_at || 0).getTime();
-    const dateB = new Date(b.published_at || 0).getTime();
-    return dateB - dateA; // Descending (newest first)
-  });
 
   const newsPageUrl = `/${locale}/news`;
 
@@ -141,9 +169,45 @@ export default function BriefsHomeSection({
         </a>
       </div>
 
-      {gridStories.length ? (
+      {categoryOptions.length > 0 ? (
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setActiveCategory("all")}
+            className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
+              activeCategory === "all"
+                ? "border-[rgba(47,37,30,0.14)] bg-[#173640] text-white"
+                : "border-[rgba(47,37,30,0.1)] bg-white/80 text-text-secondary hover:bg-white"
+            }`}
+          >
+            All
+          </button>
+          {categoryOptions.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setActiveCategory(cat)}
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
+                activeCategory === cat
+                  ? "border-[rgba(47,37,30,0.14)] bg-[#173640] text-white"
+                  : "border-[rgba(47,37,30,0.1)] bg-white/80 text-text-secondary hover:bg-white"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+          <a
+            href={newsPageUrl}
+            className="ml-1 text-xs font-semibold text-primary underline-offset-2 hover:underline"
+          >
+            Full desk
+          </a>
+        </div>
+      ) : null}
+
+      {visibleStories.length ? (
         <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {gridStories.map((brief, index) => (
+          {visibleStories.map((brief, index) => (
             <NewsGridCard
               key={brief.id}
               brief={brief}

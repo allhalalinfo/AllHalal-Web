@@ -2,7 +2,14 @@ import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import CategoryBadge from "@/components/briefs/CategoryBadge";
 import BriefMediaClient from "@/components/briefs/BriefMediaClient";
-import { formatTimeAgo, getBriefDisplayTimestamp } from "@/lib/briefs";
+import {
+  cleanBriefCardExcerpt,
+  formatTimeAgo,
+  getBriefBlurbClampClasses,
+  getBriefCardBlurb,
+  getBriefCardBlurbClassName,
+  getBriefDisplayTimestamp,
+} from "@/lib/briefs";
 import type { Brief } from "@/types/brief";
 
 function BriefMeta({ brief, compact = false }: { brief: Brief; compact?: boolean }) {
@@ -75,7 +82,7 @@ export default function BriefCard({
           {brief.title}
         </h3>
 
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-text-secondary">{brief.dek}</p>
+        <p className={getBriefCardBlurbClassName(brief)}>{getBriefCardBlurb(brief)}</p>
 
         <div className="mt-auto pt-4 text-[0.8rem] font-medium text-text-muted">
           {brief.sources[0]?.name}
@@ -131,11 +138,19 @@ export default function BriefCard({
           {brief.title}
         </h2>
 
-        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-text-secondary">{brief.dek}</p>
-
-        <p className="mt-5 line-clamp-4 max-w-3xl text-base leading-relaxed text-text-secondary">
-          {brief.summary.split("\n\n")[0]}
+        <p
+          className={`mt-5 max-w-3xl text-lg font-medium leading-relaxed text-text-secondary ${getBriefBlurbClampClasses(brief, "lead")}`}
+        >
+          {getBriefCardBlurb(brief)}
         </p>
+
+        {brief.used_ai_summary &&
+        cleanBriefCardExcerpt(brief.dek) &&
+        getBriefCardBlurb(brief) !== cleanBriefCardExcerpt(brief.dek) ? (
+          <p className="mt-4 line-clamp-6 max-w-3xl text-sm leading-relaxed text-text-muted">
+            {cleanBriefCardExcerpt(brief.dek)}
+          </p>
+        ) : null}
 
         <div className="mt-auto pt-8">
           <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(47,37,30,0.05)] px-4 py-2 text-sm font-semibold text-text-primary transition-all duration-300 group-hover:bg-[rgba(47,37,30,0.08)]">

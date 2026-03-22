@@ -72,7 +72,7 @@ const LIVE_NEWS_CATEGORIES: NewsCategory[] = [
   "Ummah & World",
 ];
 
-function slugify(value: string) {
+export function slugifyBriefCategory(value: string) {
   return value
     .toLowerCase()
     .replace(/&/g, "and")
@@ -96,7 +96,7 @@ function resolveBriefCategorySlug(slug?: string): NewsCategory | undefined {
     return undefined;
   }
 
-  return LIVE_NEWS_CATEGORIES.find((category) => slugify(category) === slug);
+  return LIVE_NEWS_CATEGORIES.find((category) => slugifyBriefCategory(category) === slug);
 }
 
 function getFallbackBriefCategory(item: NewsItem): BriefCategory {
@@ -108,11 +108,11 @@ function getFallbackBriefCategory(item: NewsItem): BriefCategory {
 }
 
 function buildFallbackBriefSlug(item: NewsItem) {
-  return slugify(item.title).slice(0, 72) || "story";
+  return slugifyBriefCategory(item.title).slice(0, 72) || "story";
 }
 
 function buildLegacyFallbackBriefSlug(item: NewsItem) {
-  const normalizedTitle = slugify(item.title).slice(0, 72) || "story";
+  const normalizedTitle = slugifyBriefCategory(item.title).slice(0, 72) || "story";
   return `${item.sourceId}-${normalizedTitle}`;
 }
 
@@ -393,15 +393,15 @@ function buildHomepageLayoutFromBriefs(items: Brief[]): HomepageBriefLayout {
     sourceCounts.set(sourceName, sourceCount + 1);
     categoryCounts.set(brief.category, categoryCount + 1);
 
-    if (curated.length >= 12) {
+    if (curated.length >= 18) {
       break;
     }
   }
 
-  if (curated.length < 8) {
+  if (curated.length < 12) {
     const fallbackBalanced = buildBalancedBriefs(
       freshItems.filter((brief) => !curated.some((item) => item.id === brief.id)),
-      12 - curated.length,
+      Math.max(0, 18 - curated.length),
       2,
     );
 
@@ -411,7 +411,7 @@ function buildHomepageLayoutFromBriefs(items: Brief[]): HomepageBriefLayout {
   return {
     hero: curated[0] ?? null,
     featured: curated.slice(1, 4),
-    compact: curated.slice(4, 12),
+    compact: curated.slice(4, 18),
   };
 }
 
@@ -444,7 +444,7 @@ export async function getHomepageBriefs(limit = 12) {
 
 export async function getHomepageBriefLayout() {
   const data = await fetchBriefsJson<HomeResponse>(
-    `${BRIEFS_API_BASE}/home?limit=12`,
+    `${BRIEFS_API_BASE}/home?limit=24`,
     900
   );
 
@@ -459,8 +459,8 @@ export async function getHomepageBriefLayout() {
         data.hero && isBriefFresh(sanitizeBrief(data.hero), DEFAULT_FRESHNESS_DAYS)
           ? sanitizeBrief(data.hero)
           : null,
-      featured: filterFreshBriefs((data.featured ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS).slice(0, 3),
-      compact: filterFreshBriefs((data.compact ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS).slice(0, 8),
+      featured: filterFreshBriefs((data.featured ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
+      compact: filterFreshBriefs((data.compact ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
     };
 
     if (hasHealthyHomepageDiversity(layout)) {
@@ -536,7 +536,7 @@ export async function getBriefCategories() {
     .map((category) => ({
       name: category,
       count: counts.get(category) ?? 0,
-      slug: slugify(category),
+      slug: slugifyBriefCategory(category),
     }))
     .filter((category) => category.count > 0);
 }
@@ -583,6 +583,57 @@ export function getBriefDisplayTimestamp(brief: Brief) {
   return getBriefSourcePublishedAt(brief);
 }
 
+/**
+ * Strip WordPress / RSS footer junk so card text does not end on "The post … appeared first on".
+ */
+export function cleanBriefCardExcerpt(text: string | null | undefined): string {
+  if (!text?.trim()) {
+    return "";
+  }
+  let t = text.replace(/\s+/g, " ").trim();
+  const wpFooter = /\b(?:The|This) post\s+.+\s+appeared first on\b/i;
+  const cut = t.search(wpFooter);
+  if (cut > 0) {
+    t = t.slice(0, cut).trimEnd();
+  } else if (/^(?:The|This) post\s+.+\s+appeared first on\b/i.test(t)) {
+    t = "";
+  }
+  t = t.replace(/\bContinue reading\b[\s\S]*$/i, "").trimEnd();
+  t = t.replace(/\bRead the full (article|post)\b[\s\S]*$/i, "").trimEnd();
+  t = t.replace(/\s*\.{3,}\s*$/g, "").trim();
+  return t;
+}
+
+function firstSummaryParagraph(summary: string | null | undefined): string {
+  if (!summary?.trim()) {
+    return "";
+  }
+  return summary.split(/\n\n/)[0]?.trim() ?? "";
+}
+
+/**
+ * Copy for list/hero cards: prefer validated AI summary, then any ai_summary, else cleaned dek/summary.
+ */
+export function getBriefCardBlurb(brief: Brief): string {
+  const ai = brief.ai_summary?.trim();
+  if (brief.used_ai_summary === true && ai) {
+    return ai;
+  }
+  if (brief.used_ai_summary === false) {
+    return (
+      cleanBriefCardExcerpt(brief.dek) ||
+      cleanBriefCardExcerpt(firstSummaryParagraph(brief.summary))
+    );
+  }
+  if (ai) {
+    return ai;
+  }
+  return (
+    cleanBriefCardExcerpt(brief.dek) ||
+    cleanBriefCardExcerpt(firstSummaryParagraph(brief.summary))
+  );
+}
+
 export function sanitizeBriefImageUrl(imageUrl: string | null | undefined) {
   if (!imageUrl) {
     return null;
@@ -609,6 +660,66 @@ export function sanitizeBriefImageUrl(imageUrl: string | null | undefined) {
   }
 
   return normalizedImageUrl;
+}
+
+/** True when we should not load remote art (show branded placeholder instead). */
+export function isStockLikeBrief(brief: Brief): boolean {
+  const t = (brief.image_type || "").toLowerCase();
+  if (t === "stock" || t.includes("pexels")) {
+    return true;
+  }
+  if (brief.image_strategy === "category_fallback") {
+    return true;
+  }
+  return false;
+}
+
+/** Prefer cards that likely show a real editorial image (sort helper). */
+export function briefHasEditorialImage(brief: Brief): boolean {
+  return Boolean(sanitizeBriefImageUrl(brief.image_url)) && !isStockLikeBrief(brief);
+}
+
+/** True when the primary card blurb is the short AI line (not a long dek). */
+export function isBriefPrimaryBlurbFromAi(brief: Brief): boolean {
+  const ai = brief.ai_summary?.trim();
+  return Boolean(
+    (brief.used_ai_summary === true && ai) || (brief.used_ai_summary !== false && ai),
+  );
+}
+
+export type BriefBlurbClampVariant = "grid" | "headline" | "lead" | "stream";
+
+/**
+ * Line clamps: AI stays short; long excerpts use little or no clamp so WordPress tails are not confused with mid-word cuts.
+ */
+export function getBriefBlurbClampClasses(
+  brief: Brief,
+  variant: BriefBlurbClampVariant = "grid",
+): string {
+  if (isBriefPrimaryBlurbFromAi(brief)) {
+    if (variant === "headline") {
+      return "line-clamp-none sm:line-clamp-2";
+    }
+    if (variant === "lead") {
+      return "line-clamp-none sm:line-clamp-4";
+    }
+    return "line-clamp-none sm:line-clamp-3";
+  }
+  if (variant === "headline") {
+    return "line-clamp-none sm:line-clamp-5";
+  }
+  if (variant === "lead") {
+    return "line-clamp-none sm:line-clamp-7";
+  }
+  if (variant === "stream") {
+    return "line-clamp-none sm:line-clamp-[9]";
+  }
+  return "line-clamp-none sm:line-clamp-[8]";
+}
+
+/** Default grid card blurb (spacing + typography + clamp). */
+export function getBriefCardBlurbClassName(brief: Brief): string {
+  return `mt-2 text-[0.9rem] font-medium leading-relaxed text-text-secondary ${getBriefBlurbClampClasses(brief, "grid")}`;
 }
 
 export function hasValidBriefImage(brief: Brief) {

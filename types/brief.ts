@@ -24,6 +24,10 @@ export interface Brief {
   title: string;
   dek: string;
   summary: string;
+  /** Short Gemini (or other) summary for cards; falls back to dek when absent. */
+  ai_summary?: string | null;
+  /** True when ai_summary was model-generated; false when excerpt fallback. */
+  used_ai_summary?: boolean;
   why_it_matters: string;
   category: BriefCategory;
   image_url: string | null;
@@ -32,6 +36,9 @@ export interface Brief {
   generated_at?: string | null;
   brief_type?: "news" | "evergreen" | string;
   image_strategy?: "real" | "source_pick" | "category_fallback" | "none" | string | null;
+  /** API diagnostic: real, og_scraped, stock, jsonld_scraped, etc. */
+  image_type?: string | null;
+  is_real_image?: boolean;
   sources: BriefSource[];
   source_count: number;
   primary_source?: string;

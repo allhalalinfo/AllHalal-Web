@@ -4,8 +4,11 @@ import AdSlot from "@/components/ads/AdSlot";
 import BriefMediaClient from "@/components/briefs/BriefMediaClient";
 import { type Brief } from "@/types/brief";
 import {
+  cleanBriefCardExcerpt,
   filterFreshBriefs,
   formatTimeAgo,
+  getBriefBlurbClampClasses,
+  getBriefCardBlurb,
   getBriefCategories,
   getBriefDisplayTimestamp,
   getFeedBriefs,
@@ -100,13 +103,19 @@ function LeadStory({
           {brief.title}
         </h2>
 
-        <p className="mt-4 text-base leading-relaxed text-text-secondary md:text-lg">
-          {brief.dek}
+        <p
+          className={`mt-4 text-base font-medium leading-relaxed text-text-secondary md:text-lg ${getBriefBlurbClampClasses(brief, "lead")}`}
+        >
+          {getBriefCardBlurb(brief)}
         </p>
 
-        <p className="mt-4 line-clamp-4 text-[0.98rem] leading-7 text-text-secondary">
-          {brief.summary.split("\n\n")[0]}
-        </p>
+        {brief.used_ai_summary &&
+        cleanBriefCardExcerpt(brief.dek) &&
+        getBriefCardBlurb(brief) !== cleanBriefCardExcerpt(brief.dek) ? (
+          <p className="mt-3 line-clamp-6 text-sm leading-7 text-text-muted">
+            {cleanBriefCardExcerpt(brief.dek)}
+          </p>
+        ) : null}
 
         <div className="mt-auto pt-6 text-sm font-semibold text-primary">
           {brief.category}
@@ -137,8 +146,10 @@ function HeadlineCard({
         <h3 className="mt-2 line-clamp-3 text-[1.18rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
           {brief.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
-          {brief.dek}
+        <p
+          className={`mt-2 text-sm font-medium leading-relaxed text-text-secondary ${getBriefBlurbClampClasses(brief, "headline")}`}
+        >
+          {getBriefCardBlurb(brief)}
         </p>
       </div>
 
@@ -182,8 +193,10 @@ function StreamCard({
         <h3 className="mt-2 line-clamp-3 text-[1.16rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
           {brief.title}
         </h3>
-        <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-text-secondary">
-          {brief.summary.split("\n\n")[0] || brief.dek}
+        <p
+          className={`mt-2 text-sm font-medium leading-relaxed text-text-secondary ${getBriefBlurbClampClasses(brief, "stream")}`}
+        >
+          {getBriefCardBlurb(brief)}
         </p>
       </div>
     </a>
@@ -201,10 +214,10 @@ export default async function NewsDeskPage(props: {
   const activeCategory = categories.find((category) => category.slug === activeCategorySlug);
   const { items: briefs, total } = await getFeedBriefs({
     category: activeCategorySlug,
-    limit: 80,
+    limit: 120,
     offset: 0,
   });
-  const freshBriefs = filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS).slice(0, 30);
+  const freshBriefs = filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS).slice(0, 40);
 
   const [lead, ...rest] = freshBriefs;
   const headlines = rest.slice(0, 4);
