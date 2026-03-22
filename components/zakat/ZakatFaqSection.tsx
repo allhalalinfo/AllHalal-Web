@@ -13,11 +13,8 @@ export default function ZakatFaqSection() {
       <h2 id="zakat-faq-heading" className="font-display text-2xl font-bold text-text-primary md:text-3xl">
         ❓ Frequently asked questions
       </h2>
-      <p className="mt-3 text-text-secondary">
-        Short answers for common situations. Complex cases should be reviewed with a qualified scholar.
-      </p>
 
-      <div className="mt-10 space-y-3">
+      <div className="mt-8 space-y-3">
         {ZAKAT_FAQ_ITEMS.map((item) => (
           <details
             key={item.id}
