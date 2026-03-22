@@ -80,6 +80,83 @@ export function slugifyBriefCategory(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+/**
+ * Thematic slugs from backend `news_curation` / Redis → legacy `BriefCategory` for UI.
+ * Keep in sync with backend `THEMATIC_SLUG_TO_DISPLAY_CATEGORY` when possible.
+ */
+export const THEMATIC_SLUG_TO_BRIEF_CATEGORY: Record<string, BriefCategory> = {
+  islam: "Faith & Practice",
+  spirituality: "Faith & Practice",
+  family: "Family & Education",
+  education: "Family & Education",
+  finance: "Islamic Finance",
+  zakat: "Islamic Finance",
+  halal: "Halal Living",
+  lifestyle: "Halal Living",
+  ummah: "Ummah & World",
+  world: "Ummah & World",
+  tech: "Tech & Innovation",
+  health: "Health & Wellness",
+  travel: "Travel & Wellness",
+};
+
+function pickCategoryFromCategoriesArray(cats: string[] | undefined): BriefCategory | undefined {
+  if (!cats?.length) {
+    return undefined;
+  }
+
+  const legacyHit = cats.find((c) => BRIEF_CATEGORIES.includes(c as BriefCategory));
+  if (legacyHit) {
+    return legacyHit as BriefCategory;
+  }
+
+  const lowered = cats.map((c) => c.toLowerCase().trim());
+  // Backend balancing: when two slugs exist and no legacy strings, prefer the second for display mapping.
+  const tryOrder =
+    cats.length >= 2 ? [cats[1], cats[0], ...cats.slice(2)] : [...cats];
+
+  for (const raw of tryOrder) {
+    const k = raw.toLowerCase().trim();
+    const mapped = THEMATIC_SLUG_TO_BRIEF_CATEGORY[k];
+    if (mapped) {
+      return mapped;
+    }
+  }
+
+  for (const raw of cats) {
+    const k = raw.toLowerCase().trim();
+    const mapped = THEMATIC_SLUG_TO_BRIEF_CATEGORY[k];
+    if (mapped) {
+      return mapped;
+    }
+  }
+
+  return undefined;
+}
+
+/**
+ * Resolve stable legacy category for cards, filters, and stock placeholders.
+ * API normally sends `category` already mapped; this handles slugs + mixed `categories[]` during cache transition.
+ */
+export function normalizeBriefDisplayCategory(brief: {
+  category?: string;
+  categories?: string[];
+}): BriefCategory {
+  const c = brief.category?.trim();
+  if (c && BRIEF_CATEGORIES.includes(c as BriefCategory)) {
+    return c as BriefCategory;
+  }
+  if (c) {
+    const fromPrimarySlug = THEMATIC_SLUG_TO_BRIEF_CATEGORY[c.toLowerCase()];
+    if (fromPrimarySlug) {
+      return fromPrimarySlug;
+    }
+  }
+
+  const fromArr = pickCategoryFromCategoriesArray(brief.categories);
+  return fromArr ?? "Faith & Practice";
+}
+
 function hashString(value: string) {
   let hash = 0;
 
@@ -99,14 +176,6 @@ function resolveBriefCategorySlug(slug?: string): NewsCategory | undefined {
   return LIVE_NEWS_CATEGORIES.find((category) => slugifyBriefCategory(category) === slug);
 }
 
-function getFallbackBriefCategory(item: NewsItem): BriefCategory {
-  const matchedCategory = item.categories.find((category) =>
-    BRIEF_CATEGORIES.includes(category as BriefCategory)
-  );
-
-  return (matchedCategory as BriefCategory | undefined) ?? "Faith & Practice";
-}
-
 function buildFallbackBriefSlug(item: NewsItem) {
   return slugifyBriefCategory(item.title).slice(0, 72) || "story";
 }
@@ -117,7 +186,9 @@ function buildLegacyFallbackBriefSlug(item: NewsItem) {
 }
 
 function mapNewsItemToBrief(item: NewsItem): Brief {
-  const category = getFallbackBriefCategory(item);
+  const category = normalizeBriefDisplayCategory({
+    categories: item.categories as string[],
+  });
   const excerpt = item.excerpt.trim() || `Current reporting from ${item.sourceName}.`;
   const sourcePublishedAt = item.publishedAt || new Date().toISOString();
   const sanitizedImageUrl = sanitizeBriefImageUrl(item.imageUrl);
@@ -151,13 +222,15 @@ function mapNewsItemToBrief(item: NewsItem): Brief {
 
 function sanitizeBrief(brief: Brief): Brief {
   const sanitizedImageUrl = sanitizeBriefImageUrl(brief.image_url);
+  const category = normalizeBriefDisplayCategory(brief);
 
-  if (sanitizedImageUrl === brief.image_url) {
+  if (sanitizedImageUrl === brief.image_url && category === brief.category) {
     return brief;
   }
 
   return {
     ...brief,
+    category,
     image_url: sanitizedImageUrl,
     image_strategy: sanitizedImageUrl ? brief.image_strategy ?? "real" : "none",
   };
@@ -528,7 +601,9 @@ export async function getBriefCategories() {
   const counts = new Map<BriefCategory, number>();
 
   for (const item of fallbackItems) {
-    const category = getFallbackBriefCategory(item);
+    const category = normalizeBriefDisplayCategory({
+      categories: item.categories as string[],
+    });
     counts.set(category, (counts.get(category) ?? 0) + 1);
   }
 

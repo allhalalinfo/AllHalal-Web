@@ -29,7 +29,13 @@ export interface Brief {
   /** True when ai_summary was model-generated; false when excerpt fallback. */
   used_ai_summary?: boolean;
   why_it_matters: string;
+  /** Legacy display label from API (Faith & Practice, …). Prefer this for UI. */
   category: BriefCategory;
+  /**
+   * Raw tags from Redis/updater: often thematic slugs (`islam`, `finance`, …);
+   * may mix legacy display strings until cache fully refreshes.
+   */
+  categories?: string[];
   image_url: string | null;
   published_at: string;
   source_published_at?: string | null;

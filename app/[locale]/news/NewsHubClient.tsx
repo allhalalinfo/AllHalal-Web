@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import AdSlot from "@/components/ads/AdSlot";
+import { normalizeBriefDisplayCategory } from "@/lib/briefs";
 import type { NewsCategory } from "@/lib/newsSources";
 import type { NewsItem } from "@/lib/newsFeed";
 
@@ -86,7 +87,9 @@ const CATEGORY_META: Record<
 type FilterId = (typeof FILTERS)[number]["id"];
 
 function getPrimaryCategory(item: NewsItem): NewsCategory {
-  return (item.categories?.[0] || "Faith & Practice") as NewsCategory;
+  return normalizeBriefDisplayCategory({
+    categories: item.categories as string[],
+  }) as NewsCategory;
 }
 
 function getCategoryMeta(category: string | undefined) {
