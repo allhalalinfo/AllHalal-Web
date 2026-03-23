@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AdSlot from "@/components/ads/AdSlot";
 import NewsGridCard from "@/components/briefs/NewsGridCard";
-import { filterFreshBriefs, getBriefCategories, getFeedBriefs } from "@/lib/briefs";
+import {
+  filterBriefsByCategorySlug,
+  filterFreshBriefs,
+  flattenHomepageBriefLayout,
+  getBriefCategories,
+  getFeedBriefs,
+  getHomepageBriefLayout,
+  mergeHomepageBriefsWithFeed,
+} from "@/lib/briefs";
 
 const NEWS_FRESHNESS_DAYS = 30;
 const NEWS_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_TOP;
@@ -36,12 +44,27 @@ export default async function NewsDeskPage(props: {
   const categories = await getBriefCategories();
   const activeCategorySlug = searchParams?.category;
   const activeCategory = categories.find((category) => category.slug === activeCategorySlug);
-  const { items: briefs, total } = await getFeedBriefs({
-    category: activeCategorySlug,
-    limit: 120,
-    offset: 0,
-  });
-  const freshBriefs = filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS).slice(0, 40);
+
+  const [homepageLayout, feedResult] = await Promise.all([
+    getHomepageBriefLayout(),
+    getFeedBriefs({
+      category: activeCategorySlug,
+      limit: 120,
+      offset: 0,
+    }),
+  ]);
+
+  const homeFresh = filterFreshBriefs(
+    filterBriefsByCategorySlug(
+      flattenHomepageBriefLayout(homepageLayout),
+      activeCategorySlug,
+    ),
+    NEWS_FRESHNESS_DAYS,
+  );
+  const feedFresh = filterFreshBriefs(feedResult.items, NEWS_FRESHNESS_DAYS);
+  const mergedBriefs = mergeHomepageBriefsWithFeed(homeFresh, feedFresh);
+  const freshBriefs = mergedBriefs.slice(0, 50);
+  const { total: feedTotal } = feedResult;
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-bg-primary pb-24 pt-32">
@@ -55,8 +78,8 @@ export default async function NewsDeskPage(props: {
                 Muslim World Today
               </h1>
               <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
-                Short briefs from across faith, family and the wider Ummah — same layout as the home
-                feed, with room to scan more stories.
+                Includes the same curated mix as the portal home, then adds stories from the wider live
+                feed — duplicates removed, up to fifty cards.
               </p>
             </div>
           </div>
@@ -142,10 +165,13 @@ export default async function NewsDeskPage(props: {
             </div>
           ) : null}
 
-          {total > freshBriefs.length && freshBriefs.length > 0 ? (
+          {freshBriefs.length >= 50 ? (
             <p className="mt-6 text-sm leading-7 text-text-muted">
-              Older items from the backend feed are currently excluded here so the main news desk
-              stays focused on recent reporting.
+              Showing the 50 newest combined items. Narrow with a category chip for a shorter list.
+            </p>
+          ) : feedTotal > feedFresh.length && freshBriefs.length > 0 ? (
+            <p className="mt-6 text-sm leading-7 text-text-muted">
+              Some older feed items are outside the freshness window used on this page.
             </p>
           ) : null}
 

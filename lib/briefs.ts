@@ -461,6 +461,57 @@ export async function getHomepageBriefLayout() {
   };
 }
 
+/** Flatten `/briefs/home` layout to one list: hero → featured → compact. */
+export function flattenHomepageBriefLayout(layout: HomepageBriefLayout): Brief[] {
+  const { hero, featured, compact } = layout;
+  const out: Brief[] = [];
+  if (hero) {
+    out.push(hero);
+  }
+  out.push(...featured, ...compact);
+  return out;
+}
+
+function briefDedupeKey(brief: Brief): string {
+  const url = brief.sources[0]?.url?.trim();
+  if (url) {
+    return `u:${url}`;
+  }
+  return `i:${String(brief.id)}`;
+}
+
+/**
+ * News desk: curated `/briefs/home` items first (portal order), then `/briefs/feed` extras
+ * not already present (same story = same primary source URL or same `id`).
+ */
+export function mergeHomepageBriefsWithFeed(homeOrdered: Brief[], feedItems: Brief[]): Brief[] {
+  const seen = new Set<string>();
+  const merged: Brief[] = [];
+  for (const b of homeOrdered) {
+    const k = briefDedupeKey(b);
+    if (!seen.has(k)) {
+      seen.add(k);
+      merged.push(b);
+    }
+  }
+  const extraSorted = sortBriefsByDate(
+    feedItems.filter((b) => !seen.has(briefDedupeKey(b))),
+  );
+  merged.push(...extraSorted);
+  return merged;
+}
+
+/** Filter by category slug from chips (`slugifyBriefCategory` of `Brief.category`). */
+export function filterBriefsByCategorySlug(
+  briefs: Brief[],
+  categorySlug: string | undefined,
+): Brief[] {
+  if (!categorySlug?.trim()) {
+    return briefs;
+  }
+  return briefs.filter((b) => slugifyBriefCategory(b.category) === categorySlug);
+}
+
 export async function getFeedBriefs({
   category,
   limit = 20,
