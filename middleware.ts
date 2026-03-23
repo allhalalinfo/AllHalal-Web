@@ -53,6 +53,7 @@ export function middleware(request: NextRequest) {
     '/finance',
     '/learn',
     '/news',
+    '/read',
     '/prayer-times',
     '/boycott-checker',
     '/guides',

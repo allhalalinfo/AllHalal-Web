@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import BriefsHomeSection from "@/components/briefs/BriefsHomeSection";
+import CustomArticlesHomeSection from "@/components/articles/CustomArticlesHomeSection";
 import FinanceWidget from "@/components/portal/FinanceWidget";
 import TodayForYouServer from "@/components/portal/TodayForYouServer";
+import { fetchCustomArticlesList } from "@/lib/customArticles";
 import { getHomepageBriefLayout } from "@/lib/briefs";
 import { SITE_URL } from "@/lib/seo/metadata";
+
+/** Fresher portal home when custom articles or briefs change (reduces stale HTML vs curl). */
+export const revalidate = 120;
 
 export const metadata: Metadata = {
   title: "allhalal.info Muslim Portal | Prayer Times, Halal Guides, Finance & News",
@@ -37,7 +42,12 @@ export const metadata: Metadata = {
 
 export default async function PortalHomePage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
-  const homepageBriefLayout = await getHomepageBriefLayout();
+  const [customList, homepageBriefLayout] = await Promise.all([
+    fetchCustomArticlesList({ page: 1, limit: 24 }),
+    getHomepageBriefLayout(),
+  ]);
+  const useCustomArticles = customList.articles.length > 0;
+  const newsPageUrl = `/${locale}/news`;
 
   const homeSchema = {
     "@context": "https://schema.org",
@@ -91,7 +101,15 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
             </section>
 
             <section className="mt-8">
-              <BriefsHomeSection locale={locale} layout={homepageBriefLayout} />
+              {useCustomArticles ? (
+                <CustomArticlesHomeSection
+                  locale={locale}
+                  articles={customList.articles}
+                  newsPageUrl={newsPageUrl}
+                />
+              ) : (
+                <BriefsHomeSection locale={locale} layout={homepageBriefLayout} />
+              )}
             </section>
           </div>
         </section>
