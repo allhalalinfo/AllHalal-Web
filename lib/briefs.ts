@@ -54,15 +54,6 @@ type CategoriesResponse = {
   }>;
 };
 
-const HOMEPAGE_CATEGORY_QUOTAS: Partial<Record<BriefCategory, number>> = {
-  "Faith & Practice": 2,
-  "Family & Education": 1,
-  "Halal Living": 1,
-  "Islamic Finance": 1,
-  "Health & Wellness": 1,
-  "Ummah & World": 1,
-};
-
 const LIVE_NEWS_CATEGORIES: NewsCategory[] = [
   "Faith & Practice",
   "Family & Education",
@@ -300,23 +291,6 @@ async function getFallbackBriefBySlug(slug: string) {
   };
 }
 
-async function getFallbackHomepageLayout() {
-  const items = await getAggregatedNews({
-    safeOnly: true,
-    limit: 12,
-  });
-  const freshItems = filterFreshBriefs(
-    sortBriefsByDate(items.map(mapNewsItemToBrief)),
-    DEFAULT_FRESHNESS_DAYS,
-  );
-
-  return {
-    hero: freshItems[0] ?? null,
-    featured: freshItems.slice(1, 4),
-    compact: freshItems.slice(4, 12),
-  };
-}
-
 export const briefCategoryTheme: Record<
   BriefCategory,
   {
@@ -441,67 +415,6 @@ function buildBalancedBriefs(items: Brief[], limit: number, maxPerSource: number
   return result;
 }
 
-function buildHomepageLayoutFromBriefs(items: Brief[]): HomepageBriefLayout {
-  const freshItems = filterFreshBriefs(sortBriefsByDate(items), DEFAULT_FRESHNESS_DAYS);
-  const categoryCounts = new Map<BriefCategory, number>();
-  const sourceCounts = new Map<string, number>();
-  const curated: Brief[] = [];
-
-  for (const brief of freshItems) {
-    const sourceName = getBriefPrimarySourceName(brief);
-    const sourceCount = sourceCounts.get(sourceName) ?? 0;
-
-    if (sourceCount >= 2) {
-      continue;
-    }
-
-    const quota = HOMEPAGE_CATEGORY_QUOTAS[brief.category] ?? 1;
-    const categoryCount = categoryCounts.get(brief.category) ?? 0;
-
-    if (categoryCount >= quota) {
-      continue;
-    }
-
-    curated.push(brief);
-    sourceCounts.set(sourceName, sourceCount + 1);
-    categoryCounts.set(brief.category, categoryCount + 1);
-
-    if (curated.length >= 18) {
-      break;
-    }
-  }
-
-  if (curated.length < 12) {
-    const fallbackBalanced = buildBalancedBriefs(
-      freshItems.filter((brief) => !curated.some((item) => item.id === brief.id)),
-      Math.max(0, 18 - curated.length),
-      2,
-    );
-
-    curated.push(...fallbackBalanced);
-  }
-
-  return {
-    hero: curated[0] ?? null,
-    featured: curated.slice(1, 4),
-    compact: curated.slice(4, 18),
-  };
-}
-
-function hasHealthyHomepageDiversity(layout: HomepageBriefLayout) {
-  const items = [layout.hero, ...layout.featured, ...layout.compact].filter(Boolean) as Brief[];
-
-  if (items.length < 6) {
-    return false;
-  }
-
-  const uniqueSources = new Set(items.map(getBriefPrimarySourceName));
-
-  // Only check sources (≥3), not categories
-  // Islamic Finance/Halal Living RSS feeds don't exist, so 3+ categories is impossible
-  return uniqueSources.size >= 3;
-}
-
 export async function getHomepageBriefs(limit = 12) {
   const { items } = await getFeedBriefs({
     limit: Math.max(limit, 36),
@@ -515,6 +428,10 @@ export async function getHomepageBriefs(limit = 12) {
   );
 }
 
+/**
+ * Homepage briefs: **only** `/briefs/home` (backend curated / custom mix).
+ * Wire-style RSS (Al Jazeera, MEE, etc.) stays on `/news` via `getFeedBriefs` — never substitute feed here.
+ */
 export async function getHomepageBriefLayout() {
   const data = await fetchBriefsJson<HomeResponse>(
     `${BRIEFS_API_BASE}/home?limit=20`,
@@ -527,7 +444,7 @@ export async function getHomepageBriefLayout() {
     Boolean(data?.compact?.length);
 
   if (data?.success && hasLiveBriefs) {
-    const layout = {
+    return {
       hero:
         data.hero && isBriefFresh(sanitizeBrief(data.hero), DEFAULT_FRESHNESS_DAYS)
           ? sanitizeBrief(data.hero)
@@ -535,18 +452,13 @@ export async function getHomepageBriefLayout() {
       featured: filterFreshBriefs((data.featured ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
       compact: filterFreshBriefs((data.compact ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
     };
-
-    if (hasHealthyHomepageDiversity(layout)) {
-      return layout;
-    }
   }
 
-  const { items } = await getFeedBriefs({
-    limit: 50,
-    offset: 0,
-  });
-
-  return buildHomepageLayoutFromBriefs(items);
+  return {
+    hero: null,
+    featured: [],
+    compact: [],
+  };
 }
 
 export async function getFeedBriefs({

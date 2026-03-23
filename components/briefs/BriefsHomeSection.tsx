@@ -54,10 +54,11 @@ export default function BriefsHomeSection({
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-[clamp(2rem,8vw,4rem)] font-black font-display leading-[0.96] tracking-[-0.04em] text-text-primary">
-            Muslim World Today
+            Curated reads
           </h2>
           <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
-            Short briefs from across faith, family and the wider Ummah.
+            Stories we highlight for faith, family and community — not the live wire feed. For breaking
+            news from global desks, use the news desk.
           </p>
         </div>
 
