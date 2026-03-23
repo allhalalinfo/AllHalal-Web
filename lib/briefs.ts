@@ -4,6 +4,9 @@ import { BRIEF_CATEGORIES, type Brief, type BriefCategory, type BriefsResponse }
 
 const BRIEFS_API_BASE = "https://api.allhalal.info/api/v1/briefs";
 const DEFAULT_FRESHNESS_DAYS = 30;
+
+/** Home/feed JSON ISR — fresher `image_url` after Redis updates (was 900s). */
+export const BRIEFS_LIST_FETCH_REVALIDATE_SECONDS = 300;
 const BAD_BRIEF_IMAGE_PATTERNS = [
   /s\.w\.org\/images\/core\/emoji/i,
   /gravatar\.com/i,
@@ -212,7 +215,9 @@ function mapNewsItemToBrief(item: NewsItem): Brief {
 }
 
 function sanitizeBrief(brief: Brief): Brief {
-  const sanitizedImageUrl = sanitizeBriefImageUrl(brief.image_url);
+  const legacyCamel = (brief as Brief & { imageUrl?: string | null }).imageUrl;
+  const rawImage = brief.image_url ?? legacyCamel ?? null;
+  const sanitizedImageUrl = sanitizeBriefImageUrl(rawImage);
   const category = normalizeBriefDisplayCategory(brief);
 
   if (sanitizedImageUrl === brief.image_url && category === brief.category) {
@@ -435,7 +440,7 @@ export async function getHomepageBriefs(limit = 12) {
 export async function getHomepageBriefLayout() {
   const data = await fetchBriefsJson<HomeResponse>(
     `${BRIEFS_API_BASE}/home?limit=20`,
-    900
+    BRIEFS_LIST_FETCH_REVALIDATE_SECONDS,
   );
 
   const hasLiveBriefs =
@@ -532,7 +537,7 @@ export async function getFeedBriefs({
 
   const data = await fetchBriefsJson<FeedResponse>(
     `${BRIEFS_API_BASE}/feed?${params.toString()}`,
-    900
+    BRIEFS_LIST_FETCH_REVALIDATE_SECONDS,
   );
 
   if (data?.success && Array.isArray(data.items) && data.items.length > 0) {
@@ -707,7 +712,7 @@ export function isStockLikeBrief(brief: Brief): boolean {
     return true;
   }
   if (brief.image_strategy === "category_fallback") {
-    return true;
+    return !sanitizeBriefImageUrl(brief.image_url);
   }
   return false;
 }

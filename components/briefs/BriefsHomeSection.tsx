@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import NewsGridCard from "@/components/briefs/NewsGridCard";
+import { consecutiveBriefImageCropVariant } from "@/lib/briefCoverImage";
 import { briefHasEditorialImage, type HomepageBriefLayout } from "@/lib/briefs";
 
 export default function BriefsHomeSection({
@@ -114,6 +115,7 @@ export default function BriefsHomeSection({
               brief={brief}
               locale={locale}
               priority={index < 4}
+              visualCropVariant={consecutiveBriefImageCropVariant(visibleStories, index)}
             />
           ))}
         </div>

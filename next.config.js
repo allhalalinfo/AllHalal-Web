@@ -7,10 +7,21 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
+      // Explicit CDN hosts from typical RSS / briefs APIs (next/image + docs tooling)
+      { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'i0.wp.com' },
+      { protocol: 'https', hostname: 'static01.nyt.com' },
+      { protocol: 'https', hostname: 'ichef.bbci.co.uk' },
+      { protocol: 'https', hostname: 'www.middleeasteye.net' },
+      { protocol: 'https', hostname: 'www.aljazeera.com' },
+      { protocol: 'https', hostname: 'cdn.cnn.com' },
+      { protocol: 'https', hostname: 'media.premiumtimesng.com' },
+      { protocol: 'https', hostname: 'muslimmatters.org' },
+      { protocol: 'https', hostname: 'aboutislam.net' },
+      { protocol: 'https', hostname: 'www.islamicinformation.net' },
+      // Any other HTTPS origin (brief cards use <img> + /api/img proxy; this helps next/image where used)
+      { protocol: 'https', hostname: '**' },
     ],
   },
   // Trailing slash configuration

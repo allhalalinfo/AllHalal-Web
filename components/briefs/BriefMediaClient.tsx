@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import BriefImagePlaceholder from "@/components/briefs/BriefImagePlaceholder";
+import { useBriefCoverImage } from "@/hooks/useBriefCoverImage";
+import { briefCoverObjectPositionClass } from "@/lib/briefCoverImage";
 import { hasValidBriefImage, isStockLikeBrief } from "@/lib/briefs";
-import { proxiedImageSrc } from "@/lib/proxiedImageUrl";
 import type { Brief } from "@/types/brief";
 
 export default function BriefMediaClient({
@@ -11,27 +11,24 @@ export default function BriefMediaClient({
   sizes,
   priority = false,
   className,
+  visualCropVariant = 0,
 }: {
   brief: Brief;
   sizes: string;
   priority?: boolean;
   className?: string;
+  visualCropVariant?: number;
 }) {
-  const [hasImageError, setHasImageError] = useState(false);
-  /** After proxy fails, try loading the original URL in the browser (last resort). */
-  const [fallbackToDirect, setFallbackToDirect] = useState(false);
+  const { src, reactKey, loadFailed, onError } = useBriefCoverImage(brief.image_url);
 
   const skipRemoteImage =
-    !hasValidBriefImage(brief) || isStockLikeBrief(brief) || hasImageError;
+    !hasValidBriefImage(brief) || isStockLikeBrief(brief) || loadFailed || !src;
 
   if (skipRemoteImage) {
     return <BriefImagePlaceholder brief={brief} />;
   }
 
-  const isExternalHttp =
-    brief.image_url!.startsWith("https://") || brief.image_url!.startsWith("http://");
-  const proxiedSrc = proxiedImageSrc(brief.image_url!);
-  const imageUrl = isExternalHttp && !fallbackToDirect ? proxiedSrc : brief.image_url!;
+  const objectPositionClass = briefCoverObjectPositionClass(visualCropVariant);
 
   return (
     <>
@@ -43,26 +40,20 @@ export default function BriefMediaClient({
         }}
       />
       <img
-        key={fallbackToDirect ? "direct" : "proxy"}
-        src={imageUrl}
+        key={reactKey}
+        src={src}
         alt={brief.title}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
         fetchPriority={priority ? "high" : "auto"}
         sizes={sizes}
         referrerPolicy="no-referrer"
-        className={`absolute inset-0 block h-full w-full min-w-0 object-cover object-center ${className ?? ""}`}
+        className={`absolute inset-0 block h-full w-full min-w-0 object-cover ${objectPositionClass} ${className ?? ""}`}
         style={{
           width: "100%",
           maxWidth: "100%",
         }}
-        onError={() => {
-          if (isExternalHttp && !fallbackToDirect) {
-            setFallbackToDirect(true);
-          } else {
-            setHasImageError(true);
-          }
-        }}
+        onError={onError}
       />
     </>
   );

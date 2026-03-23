@@ -16,6 +16,8 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // Brief card crop variants from `lib/briefCoverImage.ts` (not in scanned paths)
+  safelist: ["object-center", "object-top", "object-bottom", "object-left"],
   theme: {
     extend: {
       /* ─────────────────────────────────────────────────────────────────────────
