@@ -517,7 +517,7 @@ export async function getHomepageBriefs(limit = 12) {
 
 export async function getHomepageBriefLayout() {
   const data = await fetchBriefsJson<HomeResponse>(
-    `${BRIEFS_API_BASE}/home?limit=24`,
+    `${BRIEFS_API_BASE}/home?limit=20`,
     900
   );
 

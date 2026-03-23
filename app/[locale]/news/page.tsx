@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AdSlot from "@/components/ads/AdSlot";
-import BriefMediaClient from "@/components/briefs/BriefMediaClient";
-import { type Brief } from "@/types/brief";
-import {
-  cleanBriefCardExcerpt,
-  filterFreshBriefs,
-  formatTimeAgo,
-  getBriefBlurbClampClasses,
-  getBriefCardBlurb,
-  getBriefCategories,
-  getBriefDisplayTimestamp,
-  getFeedBriefs,
-} from "@/lib/briefs";
+import NewsGridCard from "@/components/briefs/NewsGridCard";
+import { filterFreshBriefs, getBriefCategories, getFeedBriefs } from "@/lib/briefs";
 
 const NEWS_FRESHNESS_DAYS = 30;
 const NEWS_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_TOP;
@@ -37,172 +27,6 @@ export const metadata: Metadata = {
   },
 };
 
-function NewsMeta({
-  brief,
-  small = false,
-}: {
-  brief: Brief;
-  small?: boolean;
-}) {
-  const displayTimestamp = getBriefDisplayTimestamp(brief);
-
-  return (
-    <div
-      className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-text-muted ${
-        small ? "text-[0.78rem]" : "text-sm"
-      }`}
-    >
-      <span className="font-medium text-text-secondary">{brief.sources[0]?.name}</span>
-      {displayTimestamp ? (
-        <>
-          <span aria-hidden="true">•</span>
-          <time dateTime={displayTimestamp}>{formatTimeAgo(displayTimestamp)}</time>
-        </>
-      ) : null}
-      {brief.source_count > 1 ? (
-        <>
-          <span aria-hidden="true">•</span>
-          <span>{brief.source_count} sources</span>
-        </>
-      ) : null}
-    </div>
-  );
-}
-
-function LeadStory({
-  brief,
-  locale,
-}: {
-  brief: Brief;
-  locale: string;
-}) {
-  const sourceUrl = brief.sources[0]?.url || "";
-
-  return (
-    <a
-      href={sourceUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group grid overflow-hidden rounded-[2rem] border border-[rgba(47,37,30,0.08)] bg-white/90 shadow-[0_20px_60px_rgba(43,34,24,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_26px_72px_rgba(43,34,24,0.08)] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]"
-    >
-      <div className="relative aspect-[1.4/1] overflow-hidden bg-[rgba(243,238,230,0.72)] lg:aspect-auto">
-        <BriefMediaClient
-          brief={brief}
-          priority
-          sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-        />
-      </div>
-
-      <div className="flex flex-col p-6 md:p-7">
-        <div>
-          <NewsMeta brief={brief} />
-        </div>
-
-        <h2 className="mt-4 text-[clamp(2rem,3.5vw,3.6rem)] font-black font-display leading-[0.96] tracking-[-0.04em] text-text-primary transition-colors duration-300 group-hover:text-primary">
-          {brief.title}
-        </h2>
-
-        <p
-          className={`mt-4 text-base font-medium leading-relaxed text-text-secondary md:text-lg ${getBriefBlurbClampClasses(brief, "lead")}`}
-        >
-          {getBriefCardBlurb(brief)}
-        </p>
-
-        {brief.used_ai_summary &&
-        cleanBriefCardExcerpt(brief.dek) &&
-        getBriefCardBlurb(brief) !== cleanBriefCardExcerpt(brief.dek) ? (
-          <p className="mt-3 line-clamp-6 text-sm leading-7 text-text-muted">
-            {cleanBriefCardExcerpt(brief.dek)}
-          </p>
-        ) : null}
-
-        <div className="mt-auto pt-6 text-sm font-semibold text-primary">
-          {brief.category}
-        </div>
-      </div>
-    </a>
-  );
-}
-
-function HeadlineCard({
-  brief,
-  locale,
-}: {
-  brief: Brief;
-  locale: string;
-}) {
-  const sourceUrl = brief.sources[0]?.url || "";
-
-  return (
-    <a
-      href={sourceUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group grid grid-cols-[1fr_auto] items-center gap-4 rounded-[1.45rem] border border-[rgba(47,37,30,0.08)] bg-white/86 p-4 shadow-[0_14px_34px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_42px_rgba(43,34,24,0.06)]"
-    >
-      <div className="min-w-0">
-        <NewsMeta brief={brief} small />
-        <h3 className="mt-2 line-clamp-3 text-[1.18rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
-          {brief.title}
-        </h3>
-        <p
-          className={`mt-2 text-sm font-medium leading-relaxed text-text-secondary ${getBriefBlurbClampClasses(brief, "headline")}`}
-        >
-          {getBriefCardBlurb(brief)}
-        </p>
-      </div>
-
-      <div className="relative hidden h-24 w-24 overflow-hidden rounded-[1.1rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)] md:block">
-        <BriefMediaClient
-          brief={brief}
-          sizes="96px"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-      </div>
-    </a>
-  );
-}
-
-function StreamCard({
-  brief,
-  locale,
-}: {
-  brief: Brief;
-  locale: string;
-}) {
-  const sourceUrl = brief.sources[0]?.url || "";
-
-  return (
-    <a
-      href={sourceUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/86 p-4 shadow-[0_14px_36px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)]"
-    >
-      <div className="relative aspect-[1.8/1] overflow-hidden rounded-[1.15rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(243,238,230,0.68)]">
-        <BriefMediaClient
-          brief={brief}
-          sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-        />
-      </div>
-
-      <div className="mt-4">
-        <NewsMeta brief={brief} small />
-        <h3 className="mt-2 line-clamp-3 text-[1.16rem] font-bold leading-snug text-text-primary transition-colors duration-300 group-hover:text-primary">
-          {brief.title}
-        </h3>
-        <p
-          className={`mt-2 text-sm font-medium leading-relaxed text-text-secondary ${getBriefBlurbClampClasses(brief, "stream")}`}
-        >
-          {getBriefCardBlurb(brief)}
-        </p>
-      </div>
-    </a>
-  );
-}
-
 export default async function NewsDeskPage(props: {
   params: Promise<{ locale: string }>;
   searchParams?: Promise<{ category?: string }>;
@@ -219,34 +43,31 @@ export default async function NewsDeskPage(props: {
   });
   const freshBriefs = filterFreshBriefs(briefs, NEWS_FRESHNESS_DAYS).slice(0, 40);
 
-  const [lead, ...rest] = freshBriefs;
-  const headlines = rest.slice(0, 4);
-  const stream = rest.slice(4);
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-bg-primary pb-24 pt-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_14%_14%,rgba(244,185,66,0.16),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(75,110,112,0.12),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.22),transparent_82%)]" />
 
       <div className="container relative z-10">
-        <section className="rounded-[2.4rem] border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(249,246,241,0.94))] p-6 shadow-[0_26px_72px_rgba(43,34,24,0.06)] md:p-8">
-          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <section className="rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(249,246,241,0.94))] p-3 shadow-[0_20px_56px_rgba(43,34,24,0.06)] sm:p-5 md:rounded-[2.4rem] md:p-8 md:shadow-[0_26px_72px_rgba(43,34,24,0.06)]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h1 className="mt-2 text-[clamp(2.5rem,4.2vw,4.3rem)] font-black font-display leading-[0.95] tracking-[-0.04em] text-text-primary">
-                Fresh Muslim news, easier to follow
+              <h1 className="text-[clamp(2rem,8vw,4rem)] font-black font-display leading-[0.96] tracking-[-0.04em] text-text-primary">
+                Muslim World Today
               </h1>
-              <p className="mt-3 max-w-3xl text-base leading-relaxed text-text-secondary md:text-lg">
-                Current briefs from trusted Muslim sources, with clearer previews, stronger variety and more useful context directly in the feed.
+              <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
+                Short briefs from across faith, family and the wider Ummah — same layout as the home
+                feed, with room to scan more stories.
               </p>
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-5 flex flex-wrap items-center gap-2">
             <Link
               href={`/${locale}/news`}
-              className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 ${
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
                 !activeCategory
-                  ? "border-[rgba(47,37,30,0.12)] bg-[#173640] text-white"
-                  : "border-[rgba(47,37,30,0.08)] bg-white/72 text-text-secondary hover:bg-white"
+                  ? "border-[rgba(47,37,30,0.14)] bg-[#173640] text-white"
+                  : "border-[rgba(47,37,30,0.1)] bg-white/80 text-text-secondary hover:bg-white"
               }`}
             >
               All
@@ -255,15 +76,21 @@ export default async function NewsDeskPage(props: {
               <Link
                 key={category.slug}
                 href={`/${locale}/news?category=${encodeURIComponent(category.slug)}`}
-                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
                   activeCategory?.slug === category.slug
-                    ? "border-[rgba(47,37,30,0.12)] bg-white text-text-primary shadow-[0_12px_34px_rgba(43,34,24,0.05)]"
-                    : "border-[rgba(47,37,30,0.08)] bg-white/72 text-text-secondary hover:bg-white"
+                    ? "border-[rgba(47,37,30,0.14)] bg-[#173640] text-white"
+                    : "border-[rgba(47,37,30,0.1)] bg-white/80 text-text-secondary hover:bg-white"
                 }`}
               >
                 {category.name}
               </Link>
             ))}
+            <Link
+              href={`/${locale}`}
+              className="ml-1 text-xs font-semibold text-primary underline-offset-2 hover:underline"
+            >
+              Portal home
+            </Link>
           </div>
 
           <AdSlot
@@ -273,40 +100,37 @@ export default async function NewsDeskPage(props: {
             className="mt-8"
           />
 
-          {lead ? (
-            <div className="mt-8 grid gap-5 xl:grid-cols-[minmax(0,1.08fr)_minmax(20rem,0.92fr)]">
-              <LeadStory brief={lead} locale={locale} />
-
-              <div className="grid gap-4">
-                {headlines.map((brief) => (
-                  <HeadlineCard key={brief.id} brief={brief} locale={locale} />
-                ))}
-              </div>
+          {freshBriefs.length ? (
+            <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {freshBriefs.flatMap((brief, index) => {
+                const nodes = [
+                  <NewsGridCard
+                    key={brief.id}
+                    brief={brief}
+                    locale={locale}
+                    priority={index < 4}
+                  />,
+                ];
+                if (index === 7) {
+                  nodes.push(
+                    <div
+                      key="news-inline-break"
+                      className="md:col-span-2 xl:col-span-4"
+                    >
+                      <AdSlot
+                        id="news-inline-break"
+                        slot={NEWS_INLINE_AD_SLOT}
+                        size="banner"
+                      />
+                    </div>,
+                  );
+                }
+                return nodes;
+              })}
             </div>
           ) : null}
 
-          {stream.length ? (
-            <section className="mt-8">
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {stream.map((brief, index) => (
-                  <div key={brief.id} className="contents">
-                    <StreamCard brief={brief} locale={locale} />
-                    {index === 5 ? (
-                      <div className="md:col-span-2 xl:col-span-3">
-                        <AdSlot
-                          id="news-inline-break"
-                          slot={NEWS_INLINE_AD_SLOT}
-                          size="banner"
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {!lead && !headlines.length && !stream.length ? (
+          {!freshBriefs.length ? (
             <div className="mt-8 rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-white/72 p-8 text-center shadow-[0_18px_44px_rgba(43,34,24,0.04)]">
               <h2 className="mt-3 text-2xl font-bold font-display text-text-primary">
                 No recent briefs available right now

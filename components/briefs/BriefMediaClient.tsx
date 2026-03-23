@@ -3,6 +3,7 @@
 import { useState } from "react";
 import BriefImagePlaceholder from "@/components/briefs/BriefImagePlaceholder";
 import { hasValidBriefImage, isStockLikeBrief } from "@/lib/briefs";
+import { proxiedImageSrc } from "@/lib/proxiedImageUrl";
 import type { Brief } from "@/types/brief";
 
 export default function BriefMediaClient({
@@ -29,7 +30,7 @@ export default function BriefMediaClient({
 
   const isExternalHttp =
     brief.image_url!.startsWith("https://") || brief.image_url!.startsWith("http://");
-  const proxiedSrc = `/api/image-proxy?url=${encodeURIComponent(brief.image_url!)}`;
+  const proxiedSrc = proxiedImageSrc(brief.image_url!);
   const imageUrl = isExternalHttp && !fallbackToDirect ? proxiedSrc : brief.image_url!;
 
   return (

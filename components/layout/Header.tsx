@@ -11,7 +11,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale } from "next-intl";
-import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import { MAIN_NAV_ITEMS } from "@/config/navigation";
 
 const IOS_APP_STORE_URL =
@@ -182,9 +181,6 @@ export default function Header() {
               >
                 Open app
               </Link>
-              <div className="rounded-full border border-[rgba(73,58,42,0.1)] bg-white/46 px-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)]">
-                <LanguageSwitcher />
-              </div>
             </div>
 
             <button
@@ -226,14 +222,9 @@ export default function Header() {
         }`}
       >
         <nav className="mx-4 mt-24 rounded-[2rem] border border-[rgba(73,58,42,0.12)] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(245,239,230,0.96))] p-5 shadow-[0_22px_60px_rgba(37,29,20,0.2)]">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-primary/80">Navigation</p>
-              <p className="mt-2 text-xl font-display font-bold text-text-primary">Move through allhalal.info</p>
-            </div>
-            <div className="rounded-full border border-[rgba(73,58,42,0.1)] bg-white/60 px-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]">
-              <LanguageSwitcher openUpward />
-            </div>
+          <div className="mb-5">
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-primary/80">Navigation</p>
+            <p className="mt-2 text-xl font-display font-bold text-text-primary">Move through allhalal.info</p>
           </div>
 
           <div className="grid gap-3">
