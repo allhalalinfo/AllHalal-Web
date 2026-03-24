@@ -571,7 +571,10 @@ body {
 
 .prose strong {
   color: var(--color-text-primary);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-bold);
+  background: linear-gradient(180deg, transparent 60%, rgba(244, 185, 66, 0.15) 60%);
+  padding: 0 0.15em;
+  border-radius: 2px;
 }
 
 .prose blockquote {
@@ -684,10 +687,6 @@ body {
   margin-top: var(--space-2);
 }
 
-.prose li::marker {
-  color: var(--color-primary);
-}
-
 .prose-lg {
   font-size: 1.125rem;
   line-height: 1.8;
@@ -709,15 +708,72 @@ body {
   margin-bottom: var(--space-5);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CUSTOM ARTICLE PROSE ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.prose-custom h1 {
+  position: relative;
+  padding-left: 1rem;
+  border-left: 6px solid var(--color-primary);
+  color: var(--color-text-primary);
+  background: linear-gradient(90deg, rgba(151, 124, 88, 0.06), transparent);
+  padding: 1.5rem 1rem 1.5rem 1.5rem;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  margin: 3rem 0 2rem 0;
+}
+
 .prose-custom h2 {
   font-family: var(--font-display);
   font-weight: var(--font-bold);
   scroll-margin-top: 6rem;
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--color-text-primary);
+  border-left: 5px solid rgba(151, 124, 88, 0.4);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background: linear-gradient(90deg, rgba(151, 124, 88, 0.04), transparent 60%);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.prose-custom h2::before {
+  content: '◆';
+  position: absolute;
+  left: -0.15rem;
+  color: var(--color-primary);
+  font-size: 0.7em;
+  opacity: 0.8;
 }
 
 .prose-custom h3 {
   font-family: var(--font-display);
   scroll-margin-top: 6rem;
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  position: relative;
+  padding-left: 1rem;
+}
+
+.prose-custom h3::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+/* Special styled sections - detect by heading content */
+.prose-custom h2:has-text("Quick Answer"),
+.prose-custom h2:has-text("Key Takeaways"),
+.prose-custom h2:has-text("Important") {
+  background: linear-gradient(135deg, rgba(75, 110, 112, 0.08), rgba(151, 124, 88, 0.08));
+  border-left-color: var(--color-accent-navy);
+  border-left-width: 6px;
+  padding: 1rem 1.5rem;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  box-shadow: 0 4px 12px rgba(43, 34, 24, 0.04);
 }
 
 .prose-custom blockquote {
@@ -735,6 +791,98 @@ body {
   color: var(--color-primary);
   opacity: 0.3;
   font-family: Georgia, serif;
+}
+
+/* Enhanced strong text with subtle highlight */
+.prose-custom strong {
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  background: linear-gradient(180deg, transparent 60%, rgba(244, 185, 66, 0.2) 60%);
+  padding: 0 0.15em;
+  border-radius: 2px;
+}
+
+/* Enhanced lists with better spacing and markers */
+.prose-custom ul,
+.prose-custom ol {
+  margin: var(--space-6) 0;
+  padding-left: var(--space-8);
+}
+
+.prose-custom li {
+  margin-bottom: var(--space-3);
+  padding-left: var(--space-2);
+}
+
+/* Custom bullet points for unordered lists */
+.prose-custom ul {
+  list-style: none;
+}
+
+.prose-custom ul > li {
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.prose-custom ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(151, 124, 88, 0.2);
+}
+
+/* Nested list styling */
+.prose-custom ul ul > li::before {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  width: 0.4rem;
+  height: 0.4rem;
+}
+
+/* Numbered list enhancement */
+.prose-custom ol > li::marker {
+  font-weight: var(--font-bold);
+  color: var(--color-primary);
+  font-size: 1.1em;
+}
+
+/* Table enhancements */
+.prose-custom table {
+  box-shadow: 0 8px 24px rgba(43, 34, 24, 0.06);
+  border: 1px solid rgba(47, 37, 30, 0.12);
+}
+
+.prose-custom thead {
+  background: linear-gradient(180deg, rgba(75, 110, 112, 0.12), rgba(151, 124, 88, 0.08));
+}
+
+.prose-custom th {
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+
+/* Add alternating row colors */
+.prose-custom tbody tr:nth-child(even) {
+  background: rgba(242, 237, 228, 0.3);
+}
+
+/* Paragraph spacing for readability */
+.prose-custom p {
+  margin-bottom: var(--space-6);
+  line-height: 1.85;
+}
+
+/* First paragraph after heading - reduce gap */
+.prose-custom h2 + p,
+.prose-custom h3 + p {
+  margin-top: var(--space-4);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
