@@ -7,7 +7,7 @@ export default async function CustomArticlesAdminLoginPage(props: {
 }) {
   const { locale } = await props.params;
   if (await isAdminCustomAuthenticated()) {
-    redirect(`/${locale}/admin/custom-articles`);
+    redirect(`/admin/custom-articles`);
   }
 
   const configured = Boolean(

@@ -16,7 +16,7 @@ export default function PortalSearchWidget({ locale }: { locale: string }) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      router.push(`/${locale}/is-it-halal?q=${encodeURIComponent(query)}`);
+      router.push(`/is-it-halal?q=${encodeURIComponent(query)}`);
     }
   };
 
@@ -82,7 +82,7 @@ export default function PortalSearchWidget({ locale }: { locale: string }) {
                 key={tag}
                 onClick={() => {
                   setQuery(tag);
-                  router.push(`/${locale}/is-it-halal?q=${encodeURIComponent(tag)}`);
+                  router.push(`/is-it-halal?q=${encodeURIComponent(tag)}`);
                 }}
                 className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1.5 transition-colors"
               >
@@ -103,7 +103,7 @@ export default function PortalSearchWidget({ locale }: { locale: string }) {
                   key={item}
                   onClick={() => {
                     setQuery(item);
-                    router.push(`/${locale}/is-it-halal?q=${encodeURIComponent(item)}`);
+                    router.push(`/is-it-halal?q=${encodeURIComponent(item)}`);
                   }}
                   className="w-full rounded-[1.15rem] border border-white/10 bg-black/15 px-4 py-3 text-left transition-all hover:bg-white/10 hover:-translate-y-0.5"
                 >

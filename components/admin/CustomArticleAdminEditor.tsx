@@ -148,7 +148,7 @@ export default function CustomArticleAdminEditor({
         );
         return;
       }
-      router.push(`/${locale}/admin/custom-articles`);
+      router.push(`/admin/custom-articles`);
       router.refresh();
     } catch {
       setMessage("Network error while saving.");

@@ -11,7 +11,7 @@ export default function CustomArticleAdminLogoutButton({ locale }: { locale: str
     setLoading(true);
     try {
       await fetch("/api/admin/custom-auth/logout", { method: "POST" });
-      router.push(`/${locale}/admin/custom-articles/login`);
+      router.push(`/admin/custom-articles/login`);
       router.refresh();
     } finally {
       setLoading(false);

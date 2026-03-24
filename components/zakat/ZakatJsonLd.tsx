@@ -2,15 +2,15 @@ import { SITE_URL } from "@/lib/seo/metadata";
 import { ZAKAT_FAQ_ITEMS } from "@/data/zakatFaq";
 
 type Props = {
-  locale: string;
+  // No longer needed
 };
 
 /**
  * WebApplication + FAQPage + HowTo structured data for the Zakat calculator route.
  */
-export default function ZakatJsonLd({ locale }: Props) {
+export default function ZakatJsonLd() {
   const base = SITE_URL.replace(/\/$/, "");
-  const pageUrl = `${base}/${locale}/finance/zakat-calculator`;
+  const pageUrl = `${base}/finance/zakat-calculator`;
 
   const webApp = {
     "@context": "https://schema.org",

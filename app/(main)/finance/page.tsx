@@ -63,28 +63,28 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
       title: "Calculate zakat with a live Nisab reference",
       description:
         "The finance hub should start with one of the most repeated Muslim money needs: zakat calculation with current thresholds.",
-      href: `/${locale}/finance/zakat-calculator`,
+      href: `/finance/zakat-calculator`,
     },
     {
       eyebrow: "Wealth building",
       title: "Understand halal investing before you buy",
       description:
         "Guide Muslims through Shariah-compliant investing, basic screening logic and beginner-friendly entry points.",
-      href: `/${locale}/finance/investing`,
+      href: `/finance/investing`,
     },
     {
       eyebrow: "Major life decision",
       title: "Compare halal mortgage pathways",
       description:
         "Home financing is too important for vague copy. The hub should route users directly into real contract models and providers.",
-      href: `/${locale}/finance/mortgages`,
+      href: `/finance/mortgages`,
     },
     {
       eyebrow: "Everyday banking",
       title: "See Islamic banking and account options",
       description:
         "Muslims also need practical clarity around accounts, banks, credit and daily money infrastructure.",
-      href: `/${locale}/finance/banks`,
+      href: `/finance/banks`,
     },
   ];
 
@@ -92,35 +92,35 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
     {
       title: "Zakat Calculator",
       description: "Live Nisab threshold and a practical tool people return to whenever zakat becomes due.",
-      href: `/${locale}/finance/zakat-calculator`,
+      href: `/finance/zakat-calculator`,
       tag: "Practical tool",
       accent: "from-[#2A5C58] to-[#3A7C77] text-white",
     },
     {
       title: "Zakat Guides",
       description: "Stocks, crypto, business, pensions, and how today’s Nisab is calculated—with links back to the calculator.",
-      href: `/${locale}/guides`,
+      href: `/guides`,
       tag: "Deep dives",
       accent: "from-[#2E4B59] to-[#4A6B78] text-white",
     },
     {
       title: "Halal Investing",
       description: "A strong beginner path into Shariah-compliant investing, ETFs and screening logic.",
-      href: `/${locale}/finance/investing`,
+      href: `/finance/investing`,
       tag: "Start investing",
       accent: "from-[#3A526A] to-[#57738C] text-white",
     },
     {
       title: "Halal Mortgages",
       description: "One of the highest-stakes Muslim finance decisions and a core hub page for trust.",
-      href: `/${locale}/finance/mortgages`,
+      href: `/finance/mortgages`,
       tag: "Big decision",
       accent: "from-[#6B4A37] to-[#93644B] text-white",
     },
     {
       title: "Islamic Banks",
       description: "A clearer route into accounts, institutions and banking questions Muslims ask constantly.",
-      href: `/${locale}/finance/banks`,
+      href: `/finance/banks`,
       tag: "Banking clarity",
       accent: "from-[#556343] to-[#7B8B64] text-white",
     },
@@ -132,10 +132,10 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
       description:
         "Zakat should be surfaced as an action, not buried as a blog topic. This is the repeatable finance utility Muslims come back for year after year.",
       links: [
-        { label: "Zakat calculator", href: `/${locale}/finance/zakat-calculator` },
-        { label: "Zakat guides", href: `/${locale}/guides` },
-        { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
-        { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
+        { label: "Zakat calculator", href: `/finance/zakat-calculator` },
+        { label: "Zakat guides", href: `/guides` },
+        { label: "Islamic calendar", href: `/learn/islamic-calendar` },
+        { label: "Duas & Athkar", href: `/learn/duas` },
       ],
       accent: "from-[#DDEBE8] to-[#EEF6F4] text-text-primary",
     },
@@ -144,9 +144,9 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
       description:
         "Halal investing needs more than generic motivation. Users need screening logic, realistic starting points and paths that reduce confusion.",
       links: [
-        { label: "Halal investing", href: `/${locale}/finance/investing` },
-        { label: "Methodology", href: `/${locale}/methodology` },
-        { label: "Read the briefing", href: `/${locale}/news` },
+        { label: "Halal investing", href: `/finance/investing` },
+        { label: "Methodology", href: `/methodology` },
+        { label: "Read the briefing", href: `/news` },
       ],
       accent: "from-[#E8E0D5] to-[#F6F0E7] text-text-primary",
     },
@@ -155,9 +155,9 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
       description:
         "Mortgage guidance should feel like a serious product surface, because Muslims making housing decisions need structure, not just broad reassurance.",
       links: [
-        { label: "Halal mortgages", href: `/${locale}/finance/mortgages` },
-        { label: "Islamic banks", href: `/${locale}/finance/banks` },
-        { label: "Contact support", href: `/${locale}/support` },
+        { label: "Halal mortgages", href: `/finance/mortgages` },
+        { label: "Islamic banks", href: `/finance/banks` },
+        { label: "Contact support", href: `/support` },
       ],
       accent: "from-[#384D5F] to-[#577084] text-white",
     },
@@ -166,9 +166,9 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
       description:
         "The finance hub should also answer practical account and banking questions that affect Muslims month after month.",
       links: [
-        { label: "Islamic banks", href: `/${locale}/finance/banks` },
-        { label: "Halal checker", href: `/${locale}/is-it-halal` },
-        { label: "Homepage", href: `/${locale}` },
+        { label: "Islamic banks", href: `/finance/banks` },
+        { label: "Halal checker", href: `/is-it-halal` },
+        { label: "Homepage", href: `/` },
       ],
       accent: "from-[#3D2B23] to-[#624639] text-white",
     },
@@ -192,32 +192,32 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
   const quickQuestions = [
     {
       label: "How do I calculate zakat today?",
-      href: `/${locale}/finance/zakat-calculator`,
+      href: `/finance/zakat-calculator`,
       tag: "Obligation",
     },
     {
       label: "Are halal ETFs a good start?",
-      href: `/${locale}/finance/investing`,
+      href: `/finance/investing`,
       tag: "Investing",
     },
     {
       label: "What makes a mortgage halal?",
-      href: `/${locale}/finance/mortgages`,
+      href: `/finance/mortgages`,
       tag: "Home finance",
     },
     {
       label: "Can I use a normal bank account?",
-      href: `/${locale}/finance/banks`,
+      href: `/finance/banks`,
       tag: "Banking",
     },
     {
       label: "Where do Muslims start with finance?",
-      href: `/${locale}/finance`,
+      href: `/finance`,
       tag: "Overview",
     },
     {
       label: "What does riba change in daily life?",
-      href: `/${locale}/methodology`,
+      href: `/methodology`,
       tag: "Trust",
     },
   ];
@@ -227,8 +227,8 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": `${SITE_URL}/${locale}/finance#webpage`,
-        url: `${SITE_URL}/${locale}/finance`,
+        "@id": `${SITE_URL}/finance#webpage`,
+        url: `${SITE_URL}/finance`,
         name: "Halal Finance Hub",
         description:
           "Finance hub for zakat, halal investing, Islamic banking and halal mortgage guidance for Muslims.",
@@ -242,13 +242,13 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: `${SITE_URL}/${locale}`,
+            item: `${SITE_URL}`,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Finance",
-            item: `${SITE_URL}/${locale}/finance`,
+            item: `${SITE_URL}/finance`,
           },
         ],
       },
@@ -551,15 +551,15 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
               {[
                 {
                   title: "Review methodology",
-                  href: `/${locale}/methodology`,
+                  href: `/methodology`,
                 },
                 {
                   title: "Read Muslim briefing",
-                  href: `/${locale}/news`,
+                  href: `/news`,
                 },
                 {
                   title: "Open support",
-                  href: `/${locale}/support`,
+                  href: `/support`,
                 },
               ].map((item) => (
                 <Link

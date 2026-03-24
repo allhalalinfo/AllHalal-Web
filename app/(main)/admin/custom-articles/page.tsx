@@ -11,7 +11,7 @@ export default async function CustomArticlesAdminListPage(props: {
 }) {
   const { locale } = await props.params;
   if (!(await isAdminCustomAuthenticated())) {
-    redirect(`/${locale}/admin/custom-articles/login`);
+    redirect(`/admin/custom-articles/login`);
   }
 
   const { articles, total } = await fetchCustomArticlesListUncached({ limit: 60 });

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default async function Page(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
-  const calc = `/${locale}/finance/zakat-calculator#zakat-calculator-top`;
+  const calc = `/finance/zakat-calculator#zakat-calculator-top`;
 
   return (
     <article className="container mx-auto max-w-3xl py-28 md:py-32">

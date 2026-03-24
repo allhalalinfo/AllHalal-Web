@@ -61,7 +61,7 @@ export default function BriefCard({
   locale: string;
   size: "large" | "medium" | "compact";
 }) {
-  const href = `/${locale}/news/${brief.slug}`;
+  const href = `/news/${brief.slug}`;
 
   if (size === "compact") {
     const displayTimestamp = getBriefDisplayTimestamp(brief);

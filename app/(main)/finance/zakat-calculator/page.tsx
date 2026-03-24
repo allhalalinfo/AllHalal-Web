@@ -10,12 +10,10 @@ export const metadata: Metadata = {
     "Calculate your Zakat accurately using live gold and silver prices. Understand the current Nisab threshold in USD and read scholar-backed FAQs.",
 };
 
-export default async function ZakatCalculatorPage(props: { params: Promise<{ locale: string }> }) {
-  const params = await props.params;
-  const locale = params.locale;
+export default async function ZakatCalculatorPage() {
   return (
     <>
-      <ZakatJsonLd locale={locale} />
+      <ZakatJsonLd />
       <main className="relative min-h-screen overflow-hidden bg-bg-primary pb-24 pt-24 md:pt-28">
         <div className="pointer-events-none absolute inset-0 min-h-full" aria-hidden>
           <div className="absolute inset-x-0 top-0 h-[min(44rem,75vh)] bg-[radial-gradient(ellipse_95%_55%_at_50%_-8%,rgba(244,185,66,0.16),transparent_58%)]" />

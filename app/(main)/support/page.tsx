@@ -50,7 +50,7 @@ export default function SupportPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
             {quickLinkKeys.map((key) => {
               const config = quickLinkConfig[key];
-              const href = config.external ? config.link : `/${locale}${config.link}`;
+              const href = config.external ? config.link : config.link;
               
               return (
                 <Link key={key} href={href}>

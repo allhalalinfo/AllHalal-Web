@@ -47,7 +47,7 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
     getHomepageBriefLayout(),
   ]);
   const useCustomArticles = customList.articles.length > 0;
-  const newsPageUrl = `/${locale}/news`;
+  const newsPageUrl = `/news`;
 
   const homeSchema = {
     "@context": "https://schema.org",
@@ -61,14 +61,14 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
           "Muslim portal for prayer times, Islamic calendar, halal guides, finance signals and Muslim news.",
         potentialAction: {
           "@type": "SearchAction",
-          target: `${SITE_URL}/${locale}/is-it-halal?q={search_term_string}`,
+          target: `${SITE_URL}/is-it-halal?q={search_term_string}`,
           "query-input": "required name=search_term_string",
         },
       },
       {
         "@type": "WebPage",
-        "@id": `${SITE_URL}/${locale}#webpage`,
-        url: `${SITE_URL}/${locale}`,
+        "@id": `${SITE_URL}#webpage`,
+        url: `${SITE_URL}`,
         name: "allhalal.info Muslim Portal",
         description:
           "Daily Muslim portal for prayer times, Islamic calendar, live finance signals, Muslim news and Islamic learning.",

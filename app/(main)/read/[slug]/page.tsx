@@ -9,14 +9,14 @@ import { SITE_URL } from "@/lib/seo/metadata";
 export const revalidate = 120;
 
 export async function generateMetadata(props: {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { locale, slug } = await props.params;
+  const { slug } = await props.params;
   const article = await fetchCustomArticleById(decodeURIComponent(slug));
   if (!article) {
     return { title: "Article | allhalal.info" };
   }
-  const canonical = `${SITE_URL}/${locale}/read/${encodeURIComponent(article.id)}`;
+  const canonical = `${SITE_URL}/read/${encodeURIComponent(article.id)}`;
   return {
     title: `${article.title} | allhalal.info`,
     description: article.dek || article.title,
@@ -40,9 +40,9 @@ export async function generateMetadata(props: {
 }
 
 export default async function CustomArticlePage(props: {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { locale, slug } = await props.params;
+  const { slug } = await props.params;
   const id = decodeURIComponent(slug);
   const article = await fetchCustomArticleById(id);
 
@@ -51,8 +51,8 @@ export default async function CustomArticlePage(props: {
   }
 
   const safeHtml = article.content ? sanitizeArticleHtml(article.content) : "";
-  const portalHome = `/${locale}`;
-  const newsUrl = `/${locale}/news`;
+  const portalHome = "/";
+  const newsUrl = `/news`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -72,7 +72,7 @@ export default async function CustomArticlePage(props: {
     image: article.image_url ? [article.image_url] : undefined,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${SITE_URL}/${locale}/read/${encodeURIComponent(article.id)}`,
+      "@id": `${SITE_URL}/read/${encodeURIComponent(article.id)}`,
     },
   };
 

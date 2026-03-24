@@ -48,7 +48,7 @@ export default function BriefsHomeSection({
     return null;
   }
 
-  const newsPageUrl = `/${locale}/news`;
+  const newsPageUrl = `/news`;
 
   return (
     <section className="rounded-[1.8rem] border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(249,246,241,0.94))] p-3 shadow-[0_20px_56px_rgba(43,34,24,0.06)] sm:p-5 md:rounded-[2.4rem] md:p-8 md:shadow-[0_26px_72px_rgba(43,34,24,0.06)]">

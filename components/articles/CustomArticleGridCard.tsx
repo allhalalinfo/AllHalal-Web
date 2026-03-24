@@ -15,7 +15,7 @@ export default function CustomArticleGridCard({
   locale: string;
   priority?: boolean;
 }) {
-  const href = `/${locale}/read/${encodeURIComponent(article.id)}`;
+  const href = `/read/${encodeURIComponent(article.id)}`;
   const rawUrl = article.image_url ?? "";
   const isExternalHttp =
     rawUrl.startsWith("https://") || rawUrl.startsWith("http://");

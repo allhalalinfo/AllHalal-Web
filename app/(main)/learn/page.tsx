@@ -66,9 +66,9 @@ function getLearningSeason(locale: string) {
       description:
         "During Ramadan, Muslims need fasting guidance, duas, prayer rhythm and Islamic calendar context without searching through the site.",
       links: [
-        { label: "Ramadan guide", href: `/${locale}/learn/ramadan` },
-        { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
-        { label: "Prayer times", href: `/${locale}/prayer-times` },
+        { label: "Ramadan guide", href: `/learn/ramadan` },
+        { label: "Duas & Athkar", href: `/learn/duas` },
+        { label: "Prayer times", href: `/prayer-times` },
       ],
     };
   }
@@ -80,9 +80,9 @@ function getLearningSeason(locale: string) {
       description:
         "In Dhul Hijjah, the learn hub should foreground the Islamic calendar, worship reminders and the sacred places Muslims naturally look toward.",
       links: [
-        { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
-        { label: "Live Makkah", href: `/${locale}/learn/live-makkah` },
-        { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
+        { label: "Islamic calendar", href: `/learn/islamic-calendar` },
+        { label: "Live Makkah", href: `/learn/live-makkah` },
+        { label: "Duas & Athkar", href: `/learn/duas` },
       ],
     };
   }
@@ -94,9 +94,9 @@ function getLearningSeason(locale: string) {
       description:
         "Muharram is a natural time for reflection, remembrance and returning to foundational pages like duas, calendar context and the 99 Names of Allah.",
       links: [
-        { label: "99 Names", href: `/${locale}/learn/99-names` },
-        { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
-        { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
+        { label: "99 Names", href: `/learn/99-names` },
+        { label: "Islamic calendar", href: `/learn/islamic-calendar` },
+        { label: "Duas & Athkar", href: `/learn/duas` },
       ],
     };
   }
@@ -107,9 +107,9 @@ function getLearningSeason(locale: string) {
     description:
       "The learn hub should still make daily remembrance, Islamic dates and foundational study easy to revisit throughout the year.",
     links: [
-      { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
-      { label: "99 Names", href: `/${locale}/learn/99-names` },
-      { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
+      { label: "Duas & Athkar", href: `/learn/duas` },
+      { label: "99 Names", href: `/learn/99-names` },
+      { label: "Islamic calendar", href: `/learn/islamic-calendar` },
     ],
   };
 }
@@ -124,28 +124,28 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
       title: "Read duas and athkar you can return to every day",
       description:
         "The easiest win for the learn hub is helping Muslims quickly reach practical supplications for ordinary life.",
-      href: `/${locale}/learn/duas`,
+      href: `/learn/duas`,
     },
     {
       eyebrow: "Devotional study",
       title: "Explore the 99 Names of Allah",
       description:
         "A timeless study page that turns quick visits into repeat reflection and deeper understanding.",
-      href: `/${locale}/learn/99-names`,
+      href: `/learn/99-names`,
     },
     {
       eyebrow: "Seasonal worship",
       title: "Open Ramadan and fasting guidance",
       description:
         "When Muslims need fasting rules, duas and reminders, the learn hub should make that pathway obvious.",
-      href: `/${locale}/learn/ramadan`,
+      href: `/learn/ramadan`,
     },
     {
       eyebrow: "Islamic context",
       title: "Check Hijri dates and important Muslim events",
       description:
         "The Islamic calendar gives context to worship, holidays and the annual rhythm of Muslim life.",
-      href: `/${locale}/learn/islamic-calendar`,
+      href: `/learn/islamic-calendar`,
     },
   ];
 
@@ -153,35 +153,35 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
     {
       title: "Duas & Athkar",
       description: "Supplications for everyday life, remembrance and return visits.",
-      href: `/${locale}/learn/duas`,
+      href: `/learn/duas`,
       tag: "Everyday learning",
       accent: "from-[#325349] to-[#4F7367] text-white",
     },
     {
       title: "99 Names of Allah",
       description: "A devotional page that combines memorisation, meaning and reflection.",
-      href: `/${locale}/learn/99-names`,
+      href: `/learn/99-names`,
       tag: "Foundational study",
       accent: "from-[#49657A] to-[#708CA0] text-white",
     },
     {
       title: "Ramadan & Fasting Guide",
       description: "Seasonal guidance for preparation, rulings, supplications and better practice.",
-      href: `/${locale}/learn/ramadan`,
+      href: `/learn/ramadan`,
       tag: "Seasonal guidance",
       accent: "from-[#7A523B] to-[#A56D4C] text-white",
     },
     {
       title: "Islamic Calendar",
       description: "Hijri dates, Muslim events and year-round context for worship and planning.",
-      href: `/${locale}/learn/islamic-calendar`,
+      href: `/learn/islamic-calendar`,
       tag: "Context and dates",
       accent: "from-[#4E5E3E] to-[#73815D] text-white",
     },
     {
       title: "Makkah & Madinah Live",
       description: "A sacred-place entry point that adds emotional and seasonal relevance to the hub.",
-      href: `/${locale}/learn/live-makkah`,
+      href: `/learn/live-makkah`,
       tag: "Sacred places",
       accent: "from-[#30231E] to-[#594138] text-white",
     },
@@ -193,9 +193,9 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
       description:
         "Combine duas, prayer times and Islamic calendar context so the learn hub becomes part of everyday worship instead of an occasional visit.",
       links: [
-        { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
-        { label: "Prayer times", href: `/${locale}/prayer-times` },
-        { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
+        { label: "Duas & Athkar", href: `/learn/duas` },
+        { label: "Prayer times", href: `/prayer-times` },
+        { label: "Islamic calendar", href: `/learn/islamic-calendar` },
       ],
       accent: "from-[#DCE9E5] to-[#ECF4F1] text-text-primary",
     },
@@ -204,9 +204,9 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
       description:
         "Bring together the 99 Names of Allah, daily remembrance and repeatable spiritual pages that are worth bookmarking.",
       links: [
-        { label: "99 Names of Allah", href: `/${locale}/learn/99-names` },
-        { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
-        { label: "Read the briefing", href: `/${locale}/news` },
+        { label: "99 Names of Allah", href: `/learn/99-names` },
+        { label: "Duas & Athkar", href: `/learn/duas` },
+        { label: "Read the briefing", href: `/news` },
       ],
       accent: "from-[#E9E1D6] to-[#F6F0E7] text-text-primary",
     },
@@ -215,9 +215,9 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
       description:
         "Ramadan, Eid and other Islamic dates should route naturally into the right pages for fasting, worship and preparation.",
       links: [
-        { label: "Ramadan guide", href: `/${locale}/learn/ramadan` },
-        { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
-        { label: "Prayer times", href: `/${locale}/prayer-times` },
+        { label: "Ramadan guide", href: `/learn/ramadan` },
+        { label: "Islamic calendar", href: `/learn/islamic-calendar` },
+        { label: "Prayer times", href: `/prayer-times` },
       ],
       accent: "from-[#3C5366] to-[#5A7488] text-white",
     },
@@ -226,9 +226,9 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
       description:
         "Live Makkah, duas and calendar awareness help the hub feel spiritually relevant, not just informational.",
       links: [
-        { label: "Live Makkah & Madinah", href: `/${locale}/learn/live-makkah` },
-        { label: "Duas & Athkar", href: `/${locale}/learn/duas` },
-        { label: "Islamic calendar", href: `/${locale}/learn/islamic-calendar` },
+        { label: "Live Makkah & Madinah", href: `/learn/live-makkah` },
+        { label: "Duas & Athkar", href: `/learn/duas` },
+        { label: "Islamic calendar", href: `/learn/islamic-calendar` },
       ],
       accent: "from-[#4B3327] to-[#775444] text-white",
     },
@@ -254,8 +254,8 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": `${SITE_URL}/${locale}/learn#webpage`,
-        url: `${SITE_URL}/${locale}/learn`,
+        "@id": `${SITE_URL}/learn#webpage`,
+        url: `${SITE_URL}/learn`,
         name: "Learn Islam on allhalal.info",
         description:
           "Islamic learning hub for duas, 99 Names of Allah, Ramadan guides, Islamic calendar context and daily Muslim study.",
@@ -269,13 +269,13 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: `${SITE_URL}/${locale}`,
+            item: `${SITE_URL}`,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Learn",
-            item: `${SITE_URL}/${locale}/learn`,
+            item: `${SITE_URL}/learn`,
           },
         ],
       },
@@ -558,15 +558,15 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
               {[
                 {
                   title: "Open prayer times first",
-                  href: `/${locale}/prayer-times`,
+                  href: `/prayer-times`,
                 },
                 {
                   title: "See what matters today",
-                  href: `/${locale}/news`,
+                  href: `/news`,
                 },
                 {
                   title: "Return to the homepage",
-                  href: `/${locale}`,
+                  href: `/`,
                 },
               ].map((item) => (
                 <Link

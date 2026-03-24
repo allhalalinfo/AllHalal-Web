@@ -11,7 +11,7 @@ export default async function CustomArticlesAdminEditPage(props: {
 }) {
   const { locale, id } = await props.params;
   if (!(await isAdminCustomAuthenticated())) {
-    redirect(`/${locale}/admin/custom-articles/login`);
+    redirect(`/admin/custom-articles/login`);
   }
 
   const decoded = decodeURIComponent(id);

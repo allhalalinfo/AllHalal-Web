@@ -24,7 +24,7 @@ export default function CustomArticleAdminLoginForm({ locale }: { locale: string
         setError(typeof data.error === "string" ? data.error : "Login failed");
         return;
       }
-      router.push(`/${locale}/admin/custom-articles`);
+      router.push(`/admin/custom-articles`);
       router.refresh();
     } catch {
       setError("Network error");
