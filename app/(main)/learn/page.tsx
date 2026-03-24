@@ -114,9 +114,8 @@ function getLearningSeason(locale: string) {
   };
 }
 
-export default async function LearnHub(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
-  const seasonalFocus = getLearningSeason(locale);
+export default async function LearnHub(props: { params: Promise<{}> }) {
+  const seasonalFocus = getLearningSeason("en");
 
   const startCards = [
     {
@@ -260,7 +259,7 @@ export default async function LearnHub(props: { params: Promise<{ locale: string
         description:
           "Islamic learning hub for duas, 99 Names of Allah, Ramadan guides, Islamic calendar context and daily Muslim study.",
         isPartOf: { "@id": `${SITE_URL}/#website` },
-        inLanguage: locale,
+        inLanguage: "en",
       },
       {
         "@type": "BreadcrumbList",

@@ -40,8 +40,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function PortalHomePage(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function PortalHomePage(props: { params: Promise<{}> }) {
   const [customList, homepageBriefLayout] = await Promise.all([
     fetchCustomArticlesList({ page: 1, limit: 24 }),
     getHomepageBriefLayout(),
@@ -73,7 +72,7 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
         description:
           "Daily Muslim portal for prayer times, Islamic calendar, live finance signals, Muslim news and Islamic learning.",
         isPartOf: { "@id": `${SITE_URL}/#website` },
-        inLanguage: locale,
+        inLanguage: "en",
       },
     ],
   };
@@ -93,7 +92,7 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
 
           <div className="container relative z-10 mx-auto max-w-7xl">
             <section id="prayer-dashboard" className="mb-8">
-              <TodayForYouServer locale={locale} />
+              <TodayForYouServer locale="en" />
             </section>
 
             <section className="mt-8">
@@ -103,12 +102,12 @@ export default async function PortalHomePage(props: { params: Promise<{ locale: 
             <section className="mt-8">
               {useCustomArticles ? (
                 <CustomArticlesHomeSection
-                  locale={locale}
+                  locale="en"
                   articles={customList.articles}
                   newsPageUrl={newsPageUrl}
                 />
               ) : (
-                <BriefsHomeSection locale={locale} layout={homepageBriefLayout} />
+                <BriefsHomeSection locale="en" layout={homepageBriefLayout} />
               )}
             </section>
           </div>

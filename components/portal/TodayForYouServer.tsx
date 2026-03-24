@@ -97,5 +97,5 @@ async function fetchInitialTodayForYouData(locale: string): Promise<TodayForYouI
 export default async function TodayForYouServer({ locale }: { locale: string }) {
   const initialData = await fetchInitialTodayForYouData(locale);
 
-  return <TodayForYouClient locale={locale} initialData={initialData} />;
+  return <TodayForYouClient locale="en" initialData={initialData} />;
 }

@@ -8,8 +8,7 @@ export const metadata: Metadata = {
   keywords: ["zakat pension", "zakat 401k", "retirement zakat", "zakat IRA"],
 };
 
-export default async function Page(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function Page(props: { params: Promise<{}> }) {
   const calc = `/finance/zakat-calculator#zakat-calculator-top`;
 
   return (

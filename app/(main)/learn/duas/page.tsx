@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   title: 'Duas & Athkar | allhalal.info',
 };
 
-export default async function DuasPage(props: { params: Promise<{ locale: string }> }) {
+export default async function DuasPage(props: { params: Promise<{}> }) {
   const params = await props.params;
   return (
     <div className="container py-32 max-w-4xl mx-auto min-h-screen">
-      <Link href={`/${params.locale}/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn</Link>
+      <Link href={`/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn</Link>
       <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-12">Duas & Athkar</h1>
       
       <div className="space-y-16">

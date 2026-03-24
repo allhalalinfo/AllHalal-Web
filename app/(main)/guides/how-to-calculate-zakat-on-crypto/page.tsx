@@ -8,8 +8,7 @@ export const metadata: Metadata = {
   keywords: ["zakat crypto", "zakat bitcoin", "cryptocurrency zakat calculation", "nisab crypto"],
 };
 
-export default async function Page(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function Page(props: { params: Promise<{}> }) {
   const calc = `/finance/zakat-calculator#zakat-calculator-top`;
 
   return (

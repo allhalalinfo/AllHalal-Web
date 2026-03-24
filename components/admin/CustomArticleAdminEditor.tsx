@@ -24,11 +24,9 @@ const inputClass =
 const labelClass = "block text-xs font-bold uppercase tracking-wider text-text-muted";
 
 export default function CustomArticleAdminEditor({
-  locale,
   mode,
   initial,
 }: {
-  locale: string;
   mode: "create" | "edit";
   initial?: CustomArticle | null;
 }) {

@@ -35,8 +35,7 @@ const GUIDES = [
   },
 ] as const;
 
-export default async function GuidesIndexPage(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function GuidesIndexPage(props: { params: Promise<{}> }) {
   const calc = `/finance/zakat-calculator#zakat-calculator-top`;
 
   return (

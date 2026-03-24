@@ -54,8 +54,7 @@ const financeFaqs = [
   },
 ];
 
-export default async function FinanceHub(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function FinanceHub(props: { params: Promise<{}> }) {
 
   const startCards = [
     {
@@ -233,7 +232,7 @@ export default async function FinanceHub(props: { params: Promise<{ locale: stri
         description:
           "Finance hub for zakat, halal investing, Islamic banking and halal mortgage guidance for Muslims.",
         isPartOf: { "@id": `${SITE_URL}/#website` },
-        inLanguage: locale,
+        inLanguage: "en",
       },
       {
         "@type": "BreadcrumbList",

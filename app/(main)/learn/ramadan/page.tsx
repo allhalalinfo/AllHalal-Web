@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   description: 'Essential rulings, tips, and supplications for the holy month of Ramadan.',
 };
 
-export default async function RamadanGuidePage(props: { params: Promise<{ locale: string }> }) {
+export default async function RamadanGuidePage(props: { params: Promise<{}> }) {
   const params = await props.params;
   return (
     <div className="container py-32 max-w-4xl mx-auto min-h-screen">
-      <Link href={`/${params.locale}/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn</Link>
+      <Link href={`/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn</Link>
       <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-6">Ramadan & Fasting Guide</h1>
       
       <div className="prose prose-lg dark:prose-invert max-w-none text-text-secondary">
@@ -46,8 +46,8 @@ export default async function RamadanGuidePage(props: { params: Promise<{ locale
         <div className="mt-16 pt-8 border-t border-border">
           <h3 className="font-bold text-lg mb-4">Continue Learning</h3>
           <div className="flex gap-4">
-            <Link href={`/${params.locale}/learn/duas`} className="text-primary hover:underline">Daily Duas &rarr;</Link>
-            <Link href={`/${params.locale}/learn/99-names`} className="text-primary hover:underline">99 Names of Allah &rarr;</Link>
+            <Link href={`/learn/duas`} className="text-primary hover:underline">Daily Duas &rarr;</Link>
+            <Link href={`/learn/99-names`} className="text-primary hover:underline">99 Names of Allah &rarr;</Link>
           </div>
         </div>
       </div>

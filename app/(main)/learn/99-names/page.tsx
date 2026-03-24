@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   title: '99 Names of Allah | allhalal.info',
 };
 
-export default async function NamesOfAllahPage(props: { params: Promise<{ locale: string }> }) {
+export default async function NamesOfAllahPage(props: { params: Promise<{}> }) {
   const params = await props.params;
   return (
     <div className="container py-32 min-h-screen">
-      <Link href={`/${params.locale}/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn</Link>
+      <Link href={`/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn</Link>
       <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-12 text-center">99 Names of Allah</h1>
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">

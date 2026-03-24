@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Learn about our rigorous process for classifying halal, haram, and doubtful products. We rely on authentic scholarship and trusted certification bodies.',
 };
 
-export default async function MethodologyPage(props: { params: Promise<{ locale: string }> }) {
+export default async function MethodologyPage(props: { params: Promise<{}> }) {
   const filePath = path.join(process.cwd(), 'content', 'pages', 'methodology.md');
   const content = fs.readFileSync(filePath, 'utf8');
 

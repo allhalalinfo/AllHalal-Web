@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Watch the live broadcast from Masjid al-Haram in Makkah and Al-Masjid an-Nabawi in Madinah. High-quality 24/7 live stream.',
 };
 
-export default async function LiveStreamsPage(props: { params: Promise<{ locale: string }> }) {
+export default async function LiveStreamsPage(props: { params: Promise<{}> }) {
   const params = await props.params;
   let streams = [];
   
@@ -37,7 +37,7 @@ export default async function LiveStreamsPage(props: { params: Promise<{ locale:
 
   return (
     <div className="container py-32 max-w-5xl mx-auto min-h-screen">
-      <Link href={`/${params.locale}/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn Islam</Link>
+      <Link href={`/learn`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Learn Islam</Link>
       
       <div className="mb-12">
         <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-4">Makkah & Madinah Live</h1>

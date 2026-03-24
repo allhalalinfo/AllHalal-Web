@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HalalCertificationGuide(props: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
 }) {
   const params = await props.params;
 
@@ -46,7 +46,7 @@ export default async function HalalCertificationGuide(props: {
 
         <div className="container mx-auto px-6 md:px-12 max-w-4xl relative">
           <Link
-            href={`/${params.locale}/is-it-halal`}
+            href={`/is-it-halal`}
             className="inline-flex items-center gap-2 text-[#4B7A88] hover:gap-3 transition-all font-semibold mb-8"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -538,7 +538,7 @@ export default async function HalalCertificationGuide(props: {
             <h3 className="text-2xl font-black text-[#2A2419] mb-6">Related Guides</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <Link
-                href={`/${params.locale}/is-it-halal`}
+                href={`/is-it-halal`}
                 className="group bg-[#FAFAF8] border-2 border-[#E8E6E1] rounded-xl p-6 hover:border-[#4B7A88] transition-colors"
               >
                 <p className="text-xs uppercase tracking-[0.15em] font-bold text-[#4B7A88] mb-2">
@@ -553,7 +553,7 @@ export default async function HalalCertificationGuide(props: {
               </Link>
 
               <Link
-                href={`/${params.locale}/is-it-halal`}
+                href={`/is-it-halal`}
                 className="group bg-[#FAFAF8] border-2 border-[#E8E6E1] rounded-xl p-6 hover:border-[#4B7A88] transition-colors"
               >
                 <p className="text-xs uppercase tracking-[0.15em] font-bold text-[#4B7A88] mb-2">

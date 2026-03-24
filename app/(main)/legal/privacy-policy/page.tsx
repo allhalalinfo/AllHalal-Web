@@ -13,20 +13,19 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "@/lib/mockTranslations";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ReactMarkdown from 'react-markdown';
 
-export default function PrivacyPolicyPage(props: { params: Promise<{ locale: string }> }) {
+export default function PrivacyPolicyPage(props: { params: Promise<{}> }) {
   const t = useTranslations("legal");
-  const params = useParams<{ locale: string }>();
+  const locale = "en";
   const [content, setContent] = useState<string>('');
 
   useEffect(() => {
     async function loadContent() {
       const params = await props.params;
       try {
-        const res = await fetch(`/api/legal?doc=privacy&locale=${params.locale}`);
+        const res = await fetch(`/api/legal?doc=privacy&locale=${locale}`);
         if (!res.ok) throw new Error('Failed to fetch');
         const text = await res.text();
         setContent(text);
@@ -46,7 +45,7 @@ export default function PrivacyPolicyPage(props: { params: Promise<{ locale: str
     >
       {/* Back link */}
       <Link 
-        href={`/${params.locale}/legal`}
+        href={`/legal`}
         className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors mb-8 no-underline"
       >
         <ArrowLeftIcon className="w-4 h-4" />

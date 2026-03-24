@@ -3,9 +3,8 @@ import CustomArticleAdminLoginForm from "@/components/admin/CustomArticleAdminLo
 import { isAdminCustomAuthenticated } from "@/lib/adminCustomSession";
 
 export default async function CustomArticlesAdminLoginPage(props: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
 }) {
-  const { locale } = await props.params;
   if (await isAdminCustomAuthenticated()) {
     redirect(`/admin/custom-articles`);
   }
@@ -27,7 +26,7 @@ export default async function CustomArticlesAdminLoginPage(props: {
             <code className="rounded bg-white/80 px-1">.env.example</code>).
           </div>
         ) : null}
-        <CustomArticleAdminLoginForm locale={locale} />
+        <CustomArticleAdminLoginForm />
       </div>
     </main>
   );

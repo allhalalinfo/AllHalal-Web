@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Learn how to get a halal mortgage in the US. Discover how Islamic mortgages work without Riba and explore top Sharia-compliant home financing providers.',
 };
 
-export default async function MortgagesPage(props: { params: Promise<{ locale: string }> }) {
+export default async function MortgagesPage(props: { params: Promise<{}> }) {
   const params = await props.params;
   
   const faqs = [
@@ -33,7 +33,7 @@ export default async function MortgagesPage(props: { params: Promise<{ locale: s
   return (
     <div className="container py-32 max-w-4xl mx-auto min-h-screen">
       <FAQSchema faqs={faqs} />
-      <Link href={`/${params.locale}/finance`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Finance</Link>
+      <Link href={`/finance`} className="text-primary hover:underline mb-8 inline-block">&larr; Back to Finance</Link>
       <h1 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-6">Guide to Halal Mortgages</h1>
       
       <div className="prose prose-lg dark:prose-invert max-w-none text-text-secondary">
@@ -91,8 +91,8 @@ export default async function MortgagesPage(props: { params: Promise<{ locale: s
         <div className="mt-16 pt-8 border-t border-border">
           <h3 className="font-bold text-lg mb-4">Continue Learning</h3>
           <div className="flex gap-4">
-            <Link href={`/${params.locale}/finance/investing`} className="text-primary hover:underline">Halal Investing &rarr;</Link>
-            <Link href={`/${params.locale}/finance/banks`} className="text-primary hover:underline">Halal Banks &rarr;</Link>
+            <Link href={`/finance/investing`} className="text-primary hover:underline">Halal Investing &rarr;</Link>
+            <Link href={`/finance/banks`} className="text-primary hover:underline">Halal Banks &rarr;</Link>
           </div>
         </div>
       </div>

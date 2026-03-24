@@ -99,7 +99,7 @@ export default function CustomArticlesHomeSection({
           <CustomArticleGridCard
             key={article.id}
             article={article}
-            locale={locale}
+            locale="en"
             priority={index < 4}
           />
         ))}

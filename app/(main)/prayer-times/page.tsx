@@ -14,9 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PrayerTimesPage(props: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
 }) {
-  const { locale } = await props.params;
 
   return (
     <>
@@ -31,7 +30,7 @@ export default async function PrayerTimesPage(props: {
               adhan schedule.
             </p>
             <div className="mt-8">
-              <TodayForYouServer locale={locale} />
+              <TodayForYouServer locale="en" />
             </div>
           </div>
         </section>

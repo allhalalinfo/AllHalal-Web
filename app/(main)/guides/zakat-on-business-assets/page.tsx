@@ -8,8 +8,7 @@ export const metadata: Metadata = {
   keywords: ["zakat business", "zakat inventory", "company zakat", "business assets zakat"],
 };
 
-export default async function Page(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function Page(props: { params: Promise<{}> }) {
   const calc = `/finance/zakat-calculator#zakat-calculator-top`;
 
   return (

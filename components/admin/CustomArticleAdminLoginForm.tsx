@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function CustomArticleAdminLoginForm({ locale }: { locale: string }) {
+export default function CustomArticleAdminLoginForm() {
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);

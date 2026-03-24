@@ -8,8 +8,7 @@ export const metadata: Metadata = {
   keywords: ["nisab value today", "gold nisab", "silver nisab", "zakat threshold usd"],
 };
 
-export default async function Page(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function Page(props: { params: Promise<{}> }) {
   const calc = `/finance/zakat-calculator#zakat-calculator-top`;
 
   return (

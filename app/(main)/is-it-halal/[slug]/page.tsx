@@ -23,7 +23,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   };
 }
 
-export default async function HalalItemDetail(props: { params: Promise<{ locale: string, slug: string }> }) {
+export default async function HalalItemDetail(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   const item = halalItems.find(i => i.slug === params.slug);
   
@@ -35,7 +35,7 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
     <div className="container py-32 min-h-screen">
       <FAQSchema faqs={[{ question: `Is ${item.name} halal?`, answer: item.shortReason }]} />
       <div className="max-w-3xl mx-auto">
-        <Link href={`/${params.locale}/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">
+        <Link href={`/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">
           &larr; Back to all items
         </Link>
         
@@ -79,7 +79,7 @@ export default async function HalalItemDetail(props: { params: Promise<{ locale:
             <h3 className="text-2xl font-bold font-display text-text-primary mb-6">Similar Items</h3>
             <div className="grid md:grid-cols-3 gap-4">
               {similarItems.map(sim => (
-                <Link key={sim.slug} href={`/${params.locale}/is-it-halal/${sim.slug}`} className="bg-bg-card border border-border p-4 rounded-xl hover:border-primary transition-colors">
+                <Link key={sim.slug} href={`/is-it-halal/${sim.slug}`} className="bg-bg-card border border-border p-4 rounded-xl hover:border-primary transition-colors">
                   <div className="font-bold font-display text-text-primary mb-2">{sim.name}</div>
                   <div className="text-sm text-text-secondary line-clamp-2">{sim.shortReason}</div>
                 </Link>

@@ -37,10 +37,9 @@ export const metadata: Metadata = {
 };
 
 export default async function NewsDeskPage(props: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
   searchParams?: Promise<{ category?: string }>;
 }) {
-  const { locale } = await props.params;
   const searchParams = await props.searchParams;
   const categories = await getBriefCategories();
   const activeCategorySlug = searchParams?.category;
@@ -134,7 +133,7 @@ export default async function NewsDeskPage(props: {
                   <NewsGridCard
                     key={brief.id}
                     brief={brief}
-                    locale={locale}
+                    locale="en"
                     priority={index < 4}
                     visualCropVariant={consecutiveBriefImageCropVariant(freshBriefs, index)}
                   />,

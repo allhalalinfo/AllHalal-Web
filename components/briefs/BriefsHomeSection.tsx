@@ -113,7 +113,7 @@ export default function BriefsHomeSection({
             <NewsGridCard
               key={brief.id}
               brief={brief}
-              locale={locale}
+              locale="en"
               priority={index < 4}
               visualCropVariant={consecutiveBriefImageCropVariant(visibleStories, index)}
             />

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function CustomArticleAdminLogoutButton({ locale }: { locale: string }) {
+export default function CustomArticleAdminLogoutButton() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

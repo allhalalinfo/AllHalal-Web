@@ -138,7 +138,7 @@ const guides = [
 ];
 
 export default async function HalalGuidesPage(props: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
 }) {
   const params = await props.params;
   const liveGuides = guides.filter((g) => g.status === "live");
@@ -179,7 +179,7 @@ export default async function HalalGuidesPage(props: {
         <section className="py-20 bg-white">
           <div className="container mx-auto px-6 md:px-12 max-w-7xl">
             <Link
-              href={`/${params.locale}/is-it-halal/${liveGuides[0].slug}`}
+              href={`/is-it-halal/${liveGuides[0].slug}`}
               className="group block"
             >
               <article className="grid lg:grid-cols-2 gap-0 overflow-hidden rounded-3xl border-2 border-[#E8E6E1] hover:border-[#4B7A88] transition-all duration-500 bg-white hover:shadow-2xl">
@@ -271,7 +271,7 @@ export default async function HalalGuidesPage(props: {
               {liveGuides.slice(1).map((guide, idx) => (
                 <Link
                   key={guide.slug}
-                  href={`/${params.locale}/is-it-halal/${guide.slug}`}
+                  href={`/is-it-halal/${guide.slug}`}
                   className="group block"
                 >
                   <article className="bg-white border-2 border-[#E8E6E1] rounded-2xl p-8 hover:border-[#4B7A88] transition-all duration-300 hover:shadow-xl h-full flex flex-col">

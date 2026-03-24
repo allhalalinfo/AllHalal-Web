@@ -7,9 +7,8 @@ import { isAdminCustomAuthenticated } from "@/lib/adminCustomSession";
 import type { CustomArticle } from "@/types/customArticle";
 
 export default async function CustomArticlesAdminListPage(props: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
 }) {
-  const { locale } = await props.params;
   if (!(await isAdminCustomAuthenticated())) {
     redirect(`/admin/custom-articles/login`);
   }
@@ -43,7 +42,7 @@ export default async function CustomArticlesAdminListPage(props: {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <CustomArticleAdminLogoutButton locale={locale} />
+            <CustomArticleAdminLogoutButton />
             <Link
               href={`/admin/custom-articles/new`}
               className="rounded-full bg-[#173640] px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-[#13303a]"

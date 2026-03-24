@@ -7,8 +7,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function AdminImageMetricsPage(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+export default async function AdminImageMetricsPage(props: { params: Promise<{}> }) {
 
   return (
     <main className="min-h-screen bg-bg-primary pb-20 pt-28">
@@ -22,7 +21,7 @@ export default async function AdminImageMetricsPage(props: { params: Promise<{ l
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-secondary">
             Proxied from the AllHalal API (Phase 4 image metrics). Numbers update with each backend snapshot; feed
             and homepage targets are highlighted when met. Not linked from the public nav — share the URL only with
-            your team. Locale: {locale}.
+            your team.
           </p>
         </div>
         <ImageMetricsDashboard />
