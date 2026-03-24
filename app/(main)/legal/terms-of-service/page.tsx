@@ -1,23 +1,11 @@
 "use client";
 
-/**
- * ═══════════════════════════════════════════════════════════════════════════════
- * TERMS OF SERVICE PAGE
- * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Clean, readable terms of service with proper typography.
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
- */
-
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useTranslations } from "@/lib/mockTranslations";
 import { useEffect, useState } from "react";
 import ReactMarkdown from 'react-markdown';
 
 export default function TermsOfServicePage(props: { params: Promise<{}> }) {
-  const t = useTranslations("legal");
   const locale = "en";
   const [content, setContent] = useState<string>('');
 
@@ -43,32 +31,28 @@ export default function TermsOfServicePage(props: { params: Promise<{}> }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      {/* Back link */}
       <Link 
         href={`/legal`}
         className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors mb-8 no-underline"
       >
         <ArrowLeftIcon className="w-4 h-4" />
-        {t("backToLegal")}
+        Back to legal documents
       </Link>
 
-      {/* Header */}
       <div className="mb-12">
         <p className="text-sm text-primary font-medium uppercase tracking-wider mb-2">
-          {t("common.lastUpdated", { date: t("documents.termsOfService.lastUpdated") })}
+          Last updated: March 15, 2025
         </p>
-        <h1>{t("documents.termsOfService.title")}</h1>
+        <h1>Terms of Service</h1>
         <p className="text-xl text-text-secondary leading-relaxed">
-          {t("documents.termsOfService.intro")}
+          Please read these terms carefully before using our services
         </p>
       </div>
 
-      {/* Content from Markdown */}
       <div className="markdown-content">
         <ReactMarkdown>{content}</ReactMarkdown>
       </div>
 
-      {/* Footer note */}
       <div className="mt-16 pt-8 border-t border-border">
         <p className="text-sm text-text-muted">
           By using allhalal.info, you acknowledge that you have read, understood, and agree 
@@ -79,10 +63,21 @@ export default function TermsOfServicePage(props: { params: Promise<{}> }) {
   );
 }
 
-function ArrowLeftIcon({ className }: { className?: string }) {
+function ArrowLeftIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M19 12H5M12 19l-7-7 7-7" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+      />
     </svg>
   );
 }
