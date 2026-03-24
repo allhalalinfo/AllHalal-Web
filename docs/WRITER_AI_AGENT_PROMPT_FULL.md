@@ -544,89 +544,18 @@ If the insect is transformed through chemical processing (istihalah), it may bec
 
 ```yaml
 ---
-id: "e-numbers-complete-guide"  # АВТО-ГЕНЕРИРУЕТСЯ из title (см. правила ниже)
-title: "E-Numbers Explained: Complete Halal Guide for Muslims (2026)"  # ОБЯЗАТЕЛЬНО
-dek: "Learn which E-codes are halal, haram, or doubtful. Complete breakdown with examples."  # ОБЯЗАТЕЛЬНО
+id: "unique-slug-lowercase"  # ОБЯЗАТЕЛЬНО: уникальный ID для URL
+title: "Full Title Here (50-70 chars)"  # ОБЯЗАТЕЛЬНО
+dek: "Short description for card preview (150-200 chars)"  # ОБЯЗАТЕЛЬНО
 category: "halal-guides"  # ОБЯЗАТЕЛЬНО: halal-guides, finance, faith, family
-tags: ["e-numbers", "halal", "food-additives", "ingredients"]  # ОБЯЗАТЕЛЬНО: 3-5 тегов
+tags: ["tag1", "tag2", "tag3"]  # ОБЯЗАТЕЛЬНО: минимум 3-5 тегов
 author: "AllHalal Editorial Team"  # ОБЯЗАТЕЛЬНО
 published_at: "2026-03-25T10:00:00Z"  # ОБЯЗАТЕЛЬНО: ISO 8601
-image_url: "https://api.allhalal.info/custom-media/e-numbers-guide.jpg"  # ОБЯЗАТЕЛЬНО
+image_url: "https://api.allhalal.info/custom-media/filename.jpg"  # ОБЯЗАТЕЛЬНО
 content_type: "article"  # ОПЦИОНАЛЬНО: article/guide/blog-post/news-analysis
 status: "published"  # ОПЦИОНАЛЬНО: draft/published/scheduled
 featured: false  # ОПЦИОНАЛЬНО: true для hero на главной
 ---
-```
-
----
-
-## 🤖 AUTO-GENERATION: Правила для `id` (slug)
-
-**AI агент ОБЯЗАТЕЛЬНО генерирует `id` автоматически из `title`:**
-
-### Алгоритм:
-1. Возьми `title`
-2. Убери year/dates: "Guide (2026)" → "Guide"
-3. Убери special chars: ":", "-", parentheses
-4. Lowercase все
-5. Замени пробелы на hyphens
-6. Убери stop words: "the", "a", "an", "for", "and" (опционально)
-7. Ограничь длину: максимум 60 символов
-
-### Примеры:
-
-| Title | → | Generated `id` |
-|-------|---|----------------|
-| "E-Numbers Explained: Complete Halal Guide for Muslims (2026)" | → | `e-numbers-complete-guide` |
-| "Is E471 Halal? Everything You Need to Know" | → | `is-e471-halal` |
-| "Zakat on Crypto: Complete Guide (Updated 2026)" | → | `zakat-on-crypto-complete-guide` |
-| "Why McDonald's Is Halal in Malaysia But Not in US" | → | `mcdonalds-halal-malaysia-not-us` |
-| "Can You Trust the Ingredient List?" | → | `trust-ingredient-list` |
-
-### SEO Optimization:
-- ✅ **Включи primary keyword** в slug (если не в title естественно, добавь)
-- ✅ **Короче = лучше**: 3-5 слов оптимально
-- ✅ **Читаемый**: `e-numbers-guide` > `e-nmbrs-gd`
-
-### Примеры с SEO оптимизацией:
-
-| Title | Primary Keyword | → Generated `id` |
-|-------|-----------------|------------------|
-| "Understanding Food Additives" | "e-numbers halal" | → `e-numbers-halal-guide` (добавили keyword) |
-| "The Complete Gelatin Guide for Muslims" | "gelatin halal" | → `gelatin-halal-guide` |
-
----
-
-### 💡 Практический совет для AI агента:
-
-**После генерации `id`, проверь:**
-```python
-# Псевдокод для AI агента
-def generate_slug(title, primary_keyword):
-    # 1. Clean title
-    slug = title.lower()
-    slug = remove_year(slug)  # (2026) → ""
-    slug = remove_special_chars(slug)  # : → ""
-    slug = replace_spaces_with_hyphens(slug)
-    
-    # 2. Ensure keyword present
-    if primary_keyword not in slug:
-        slug = f"{primary_keyword}-{slug}"
-    
-    # 3. Trim length
-    slug = slug[:60]
-    
-    # 4. Remove trailing hyphens
-    slug = slug.rstrip('-')
-    
-    return slug
-
-# Example:
-generate_slug(
-    "E-Numbers Explained: Complete Guide (2026)", 
-    "e-numbers-halal"
-)
-# → "e-numbers-complete-guide"
 ```
 
 ### 6.2 Markdown to HTML
@@ -1064,29 +993,17 @@ Email: [ваш email]
 
 ## Итого: твой AI агент должен:
 
-1. ✅ **Автоматически генерировать `id`** (slug) из title + primary keyword
-2. ✅ Писать статьи 2500-5000 слов (не меньше!)
-3. ✅ Включать все SEO элементы (keyword in title, H1, first 50 words, etc.)
-4. ✅ Структурировать с H2/H3, списками, таблицами
-5. ✅ Цитировать Islamic scholars + food science sources
-6. ✅ Использовать Hook-Problem-Promise в intro
-7. ✅ Добавлять practical examples (бренды, продукты)
-8. ✅ Включать CTAs (app download, related content)
-9. ✅ Acknowledge разногласия между мазахибами
-10. ✅ Писать в respectful, practical tone
-11. ✅ Оптимизировать для Featured Snippets (Q&A format)
+1. ✅ Писать статьи 2500-5000 слов (не меньше!)
+2. ✅ Включать все SEO элементы (keyword in title, H1, first 50 words, etc.)
+3. ✅ Структурировать с H2/H3, списками, таблицами
+4. ✅ Цитировать Islamic scholars + food science sources
+5. ✅ Использовать Hook-Problem-Promise в intro
+6. ✅ Добавлять practical examples (бренды, продукты)
+7. ✅ Включать CTAs (app download, related content)
+8. ✅ Acknowledge разногласия между мазахибами
+9. ✅ Писать в respectful, practical tone
+10. ✅ Оптимизировать для Featured Snippets (Q&A format)
 
 **Цель:** Каждая статья = топ-3 Google + 5 мин time on page + конверсия в app downloads.
 
 Если всё это соблюдать → allhalal.info станет #1 Muslim portal. 🚀
-
----
-
-## ⚙️ Backend Note (для справки)
-
-Backend **может** генерировать slug автоматически из `title` если поле `id` пустое, НО:
-- **Лучше AI агент контролирует это** для SEO optimization
-- AI агент может включить primary keyword в slug
-- AI агент может сделать slug короче и SEO-friendly
-
-**Рекомендация:** AI агент всегда генерирует `id` сам, backend просто принимает его as-is.

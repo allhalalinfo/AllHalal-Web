@@ -101,32 +101,70 @@ export default async function CustomArticlePage(props: {
             <span className="text-text-secondary">Read</span>
           </nav>
 
-          <header className="rounded-[1.5rem] border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(249,246,241,0.92))] p-6 shadow-[0_20px_56px_rgba(43,34,24,0.06)] md:p-8">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary/90">
+          <header className="mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
               {article.category}
-            </p>
-            <h1 className="mt-3 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-black leading-tight tracking-[-0.03em] text-text-primary">
+            </div>
+            
+            <h1 className="mt-6 font-display text-[clamp(2rem,5vw,3.5rem)] font-black leading-[1.1] tracking-[-0.04em] text-text-primary">
               {article.title}
             </h1>
+            
             {article.dek ? (
-              <p className="mt-4 text-lg font-medium leading-relaxed text-text-secondary">
+              <p className="mt-6 text-xl font-medium leading-relaxed text-text-secondary">
                 {article.dek}
               </p>
             ) : null}
-            <div className="mt-5 flex flex-wrap gap-x-3 gap-y-1 text-sm text-text-muted">
-              <time dateTime={article.published_at}>{article.published_at}</time>
+            
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted">
               {article.author ? (
+                <div className="flex items-center gap-2">
+                  <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
+                    {article.author.charAt(0)}
+                  </div>
+                  <span className="font-medium text-text-secondary">{article.author}</span>
+                </div>
+              ) : null}
+              <span aria-hidden>•</span>
+              <time dateTime={article.published_at} className="font-medium">
+                {new Date(article.published_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              {article.tags && article.tags.length > 0 ? (
                 <>
                   <span aria-hidden>•</span>
-                  <span>{article.author}</span>
+                  <div className="flex flex-wrap gap-2">
+                    {article.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-bg-card px-2.5 py-0.5 text-xs font-medium text-text-secondary"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </>
               ) : null}
             </div>
           </header>
 
+          {article.image_url ? (
+            <div className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.5)] shadow-[0_20px_56px_rgba(43,34,24,0.08)]">
+              <img
+                src={article.image_url}
+                alt={article.title}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ) : null}
+
           {safeHtml ? (
             <div
-              className="prose mt-10 max-w-none pb-8 text-text-primary"
+              className="prose prose-lg prose-custom max-w-none pb-8"
               dangerouslySetInnerHTML={{ __html: safeHtml }}
             />
           ) : (
