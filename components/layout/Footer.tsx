@@ -231,7 +231,7 @@ export default function Footer() {
 
               <div className="flex flex-col gap-1.5 text-[0.72rem] text-white/48 sm:text-xs md:flex-row md:items-center md:gap-5">
                 <p>
-                  © {new Date().getFullYear()} allhalal.info. All rights reserved.
+                  © 2026 allhalal.info. All rights reserved.
                 </p>
                 <p>
                   Developed by Muslims for Muslims.{" "}
