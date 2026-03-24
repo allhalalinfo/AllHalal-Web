@@ -14,6 +14,13 @@ const intlMiddleware = createMiddleware({
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
+  // Short admin redirect: /admin → /en/admin/custom-articles/login
+  if (pathname === '/admin') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/en/admin/custom-articles/login';
+    return NextResponse.redirect(url, 307);
+  }
+  
   // Handle app-ads.txt directly in middleware to bypass Vercel domain redirects
   // This ensures both apex (allhalal.info) and www (www.allhalal.info) return 200
   if (pathname === '/app-ads.txt') {
