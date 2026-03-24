@@ -736,17 +736,17 @@ body {
   position: relative;
 }
 
-/* Elegant gradient underline */
+/* Short decorative accent line (left side only) */
 .prose-custom h2::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 85%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-primary) 0%, rgba(151, 124, 88, 0.4) 70%, transparent 100%);
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(151, 124, 88, 0.15);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent-navy));
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(151, 124, 88, 0.25);
 }
 
 .prose-custom h3 {
