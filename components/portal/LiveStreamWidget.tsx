@@ -70,7 +70,7 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
   if (streams.length === 0) {
     return (
       <Link
-        href={`/${locale}/learn/live-makkah`}
+        href={`/learn/live-makkah`}
         className="bg-[linear-gradient(180deg,#102432,#0C1A24)] text-white rounded-[1.75rem] p-5 shadow-[0_18px_40px_rgba(14,24,32,0.26)] flex flex-col relative overflow-hidden border border-[#284556] group hover:border-[#35586E] transition-colors"
       >
         <div className="flex items-center gap-2 mb-3">
@@ -170,7 +170,7 @@ export default function LiveStreamWidget({ locale }: { locale: string }) {
           <span className="text-white/60 text-xs font-medium uppercase tracking-wider">Live 24/7</span>
         </div>
         <Link
-          href={`/${locale}/learn/live-makkah`}
+          href={`/learn/live-makkah`}
           className="text-accent-yellow text-xs font-semibold hover:underline"
         >
           Full screen &rarr;

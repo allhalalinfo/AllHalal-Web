@@ -5,20 +5,11 @@
 
 import type { Metadata } from 'next';
 import type { SEOMetadata } from '@/data/types';
-import type { Locale } from '@/i18n/config';
 
 const SITE_NAME = 'AllHalal';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://allhalal.info';
 const DEFAULT_LOCALE = 'en';
-const OPEN_GRAPH_LOCALES: Record<Locale, string> = {
-  en: 'en_US',
-  fr: 'fr_FR',
-  de: 'de_DE',
-  es: 'es_ES',
-  it: 'it_IT',
-  nl: 'nl_NL',
-  ru: 'ru_RU',
-};
+const OPEN_GRAPH_LOCALE = 'en_US';
 
 interface GenerateMetadataOptions {
   title: string;
@@ -33,11 +24,10 @@ interface GenerateMetadataOptions {
   noindex?: boolean;
   nofollow?: boolean;
   canonical?: string;
-  locale?: Locale;
 }
 
-export function getOpenGraphLocale(locale: Locale = DEFAULT_LOCALE as Locale): string {
-  return OPEN_GRAPH_LOCALES[locale] || OPEN_GRAPH_LOCALES.en;
+export function getOpenGraphLocale(): string {
+  return OPEN_GRAPH_LOCALE;
 }
 
 /**
@@ -56,8 +46,7 @@ export function generateMetadata(options: GenerateMetadataOptions): Metadata {
     author,
     noindex = false,
     nofollow = false,
-    canonical,
-    locale = DEFAULT_LOCALE as Locale
+    canonical
   } = options;
 
   const url = `${SITE_URL}${path}`;
@@ -95,7 +84,7 @@ export function generateMetadata(options: GenerateMetadataOptions): Metadata {
     // OpenGraph
     openGraph: {
       type,
-      locale: getOpenGraphLocale(locale),
+      locale: getOpenGraphLocale(),
       url,
       title: fullTitle,
       description,

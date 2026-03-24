@@ -1,28 +1,24 @@
-import createMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { locales, defaultLocale } from './i18n/config';
-
-// Create next-intl middleware with locale detection
-const intlMiddleware = createMiddleware({
-  locales,
-  defaultLocale,
-  localePrefix: 'always', // Always add locale prefix (including /en for English)
-  localeDetection: true // Auto-detect user's preferred language
-});
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  // Short admin redirect: /admin → /en/admin/custom-articles/login
+  // Redirect old /en/* paths to new /* (301 permanent)
+  if (pathname.startsWith('/en/') || pathname === '/en') {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === '/en' ? '/' : pathname.replace(/^\/en\//, '/');
+    return NextResponse.redirect(url, 301);
+  }
+  
+  // Short admin redirect: /admin → /admin/custom-articles/login
   if (pathname === '/admin') {
     const url = request.nextUrl.clone();
-    url.pathname = '/en/admin/custom-articles/login';
+    url.pathname = '/admin/custom-articles/login';
     return NextResponse.redirect(url, 307);
   }
   
   // Handle app-ads.txt directly in middleware to bypass Vercel domain redirects
-  // This ensures both apex (allhalal.info) and www (www.allhalal.info) return 200
   if (pathname === '/app-ads.txt') {
     const content = 'google.com, pub-5317347727083675, DIRECT, f08c47fec0942fa0\n';
     return new NextResponse(content, {
@@ -34,7 +30,7 @@ export function middleware(request: NextRequest) {
     });
   }
   
-  // Skip middleware for other static files that should be served directly
+  // Skip middleware for other static files
   if (
     pathname === '/sitemap.xml' ||
     pathname.startsWith('/_next/') ||
@@ -45,48 +41,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   
-  // robots.txt is handled by route handler, skip middleware
   if (pathname === '/robots.txt') {
     return NextResponse.next();
   }
-  
-  // Handle internationalization first
-  let response = intlMiddleware(request);
-  
-  // 301 Redirect for non-English content paths
-  // Force content-heavy paths to English to avoid SEO duplication
-  const contentPaths = [
-    '/is-it-halal',
-    '/finance',
-    '/learn',
-    '/news',
-    '/read',
-    '/prayer-times',
-    '/boycott-checker',
-    '/guides',
-  ];
-  
-  // Check if current path is a localized path (e.g. /ru/is-it-halal)
-  const segments = pathname.split('/').filter(Boolean);
-  const currentLocale = segments[0];
-  
-  // If it's a known locale, not English, and starts with one of our content paths
-  if (currentLocale && currentLocale !== 'en' && locales.includes(currentLocale as any)) {
-    const pathAfterLocale = '/' + segments.slice(1).join('/');
-    
-    // Check if the path belongs to one of the content areas
-    const isContentPath = contentPaths.some(cp => 
-      pathAfterLocale === cp || pathAfterLocale.startsWith(cp + '/')
-    );
 
-    if (isContentPath) {
-      const url = request.nextUrl.clone();
-      url.pathname = `/en${pathAfterLocale}`;
-      return NextResponse.redirect(url, 301);
-    }
-  }
+  const response = NextResponse.next();
 
-  // CSP - Allow Three.js WebGL rendering (requires unsafe-eval for shaders)
+  // CSP - Allow Three.js WebGL rendering
   const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-insights.com https://va.vercel-scripts.com https://pagead2.googlesyndication.com https://*.googletagmanager.com https://fundingchoicesmessages.google.com;
@@ -106,30 +67,24 @@ export function middleware(request: NextRequest) {
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
 
-  // Security Headers - A+ Configuration
+  // Security Headers
   response.headers.set('Content-Security-Policy', cspHeader);
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  response.headers.set('X-XSS-Protection', '0'); // Disabled as CSP is stronger
-  
-  // HSTS - 2 years with preload
+  response.headers.set('X-XSS-Protection', '0');
   response.headers.set(
     'Strict-Transport-Security',
     'max-age=63072000; includeSubDomains; preload'
   );
-  
-    // Permissions Policy - Block all unnecessary features (allow geolocation, picture-in-picture for youtube)
-    response.headers.set(
-      'Permissions-Policy',
-      'accelerometer=(), autoplay=(), camera=(), ' +
-      'display-capture=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com"), ' +
-      'geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), midi=(), ' +
-      'payment=(), picture-in-picture=(self "https://www.youtube.com"), publickey-credentials-get=(), ' +
-      'screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()'
-    );
-
-  // Additional security headers
+  response.headers.set(
+    'Permissions-Policy',
+    'accelerometer=(), autoplay=(), camera=(), ' +
+    'display-capture=(), encrypted-media=(), fullscreen=(self "https://www.youtube.com"), ' +
+    'geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), midi=(), ' +
+    'payment=(), picture-in-picture=(self "https://www.youtube.com"), publickey-credentials-get=(), ' +
+    'screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()'
+  );
   response.headers.set('X-DNS-Prefetch-Control', 'off');
   response.headers.set('X-Download-Options', 'noopen');
   response.headers.set('X-Permitted-Cross-Domain-Policies', 'none');
@@ -141,19 +96,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - assets (static assets)
-     * - app-screens (app screenshots)
-     * 
-     * Note: app-ads.txt is explicitly included to handle it directly in middleware
-     * to bypass Vercel domain redirects and return 200 on both apex and www domains
-     */
-    '/app-ads.txt', // Handle app-ads.txt directly in middleware (before regex exclusion)
+    '/app-ads.txt',
     '/((?!api|_next/static|_next/image|favicon.ico|assets|app-screens|robots.txt|sitemap.xml|.*\\..*).*)',
   ],
 };

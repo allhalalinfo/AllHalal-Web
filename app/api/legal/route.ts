@@ -1,36 +1,26 @@
 import { NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import { defaultLocale, locales, type Locale } from '@/i18n/config';
 
 const LEGAL_DOCS = new Set(['privacy', 'terms', 'disclaimer']);
 const LEGAL_DIR = path.join(process.cwd(), 'content', 'legal');
+const DEFAULT_LOCALE = 'en';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const doc = searchParams.get('doc');
-  const locale = searchParams.get('locale');
+  const locale = searchParams.get('locale') || DEFAULT_LOCALE;
 
-  if (!doc || !locale) {
-    return new NextResponse('Missing doc or locale', { status: 400 });
+  if (!doc) {
+    return new NextResponse('Missing doc', { status: 400 });
   }
 
   if (!LEGAL_DOCS.has(doc)) {
     return new NextResponse('Document not found', { status: 404 });
   }
 
-  const normalizedLocale: Locale = locales.includes(locale as Locale)
-    ? (locale as Locale)
-    : defaultLocale;
-
   try {
-    let content: string;
-
-    try {
-      content = await readFile(path.join(LEGAL_DIR, normalizedLocale, `${doc}.md`), 'utf8');
-    } catch {
-      content = await readFile(path.join(LEGAL_DIR, defaultLocale, `${doc}.md`), 'utf8');
-    }
+    const content = await readFile(path.join(LEGAL_DIR, DEFAULT_LOCALE, `${doc}.md`), 'utf8');
 
     return new NextResponse(content, {
       headers: {

@@ -452,7 +452,7 @@ export default function NewsFeedWidget({
           </div>
 
           <Link
-            href={`/${locale}/news`}
+            href={`/news`}
             className="inline-flex items-center justify-center rounded-full bg-[#17323E] px-5 py-3 text-sm font-bold text-white shadow-[0_14px_30px_rgba(23,50,62,0.24)] transition-transform hover:-translate-y-0.5 shrink-0"
           >
             Open news desk &rarr;
@@ -500,7 +500,7 @@ export default function NewsFeedWidget({
             <div className="text-text-secondary mb-5">
               No trusted-source updates are available right now.
             </div>
-            <Link href={`/${locale}/news`} className="text-sm font-bold text-primary">
+            <Link href={`/news`} className="text-sm font-bold text-primary">
               Open news desk &rarr;
             </Link>
           </div>

@@ -161,14 +161,14 @@ export default function CustomArticleAdminEditor({
     <form onSubmit={onSubmit} className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
-          href={`/${locale}/admin/custom-articles`}
+          href={`/admin/custom-articles`}
           className="text-sm font-semibold text-primary hover:underline"
         >
           ← Back to list
         </Link>
         {mode === "edit" && initial ? (
           <Link
-            href={`/${locale}/read/${encodeURIComponent(initial.id)}`}
+            href={`/read/${encodeURIComponent(initial.id)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-semibold text-text-secondary hover:text-text-primary"

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/mockTranslations";
 import { ArrowRight, Sparkles } from "lucide-react";
 import ParticleBarcode from "@/components/three/ParticleBarcode";
 

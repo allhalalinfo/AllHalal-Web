@@ -10,7 +10,6 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLocale } from "next-intl";
 import { MAIN_NAV_ITEMS } from "@/config/navigation";
 
 const IOS_APP_STORE_URL =
@@ -18,7 +17,6 @@ const IOS_APP_STORE_URL =
 
 export default function Header() {
   const pathname = usePathname();
-  const locale = useLocale();
   
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
@@ -105,15 +103,15 @@ export default function Header() {
     const items = MAIN_NAV_ITEMS.filter((item) => item.enabled);
     let best: { href: string; len: number } | null = null;
     for (const item of items) {
-      const localizedHref = `/${locale}${item.href}`;
+      const itemHref = item.href;
       const matches =
-        pathname === localizedHref || pathname.startsWith(`${localizedHref}/`);
-      if (matches && (!best || localizedHref.length > best.len)) {
-        best = { href: item.href, len: localizedHref.length };
+        pathname === itemHref || pathname.startsWith(`${itemHref}/`);
+      if (matches && (!best || itemHref.length > best.len)) {
+        best = { href: item.href, len: itemHref.length };
       }
     }
     return best?.href ?? null;
-  }, [pathname, locale]);
+  }, [pathname]);
 
   const isActive = (href: string) => activeNavHref === href;
 
@@ -134,7 +132,7 @@ export default function Header() {
             <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] bg-[linear-gradient(120deg,rgba(255,255,255,0.32),transparent_32%,transparent_68%,rgba(255,255,255,0.12))]" />
 
             <Link 
-              href={`/${locale}`}
+              href="/"
               onClick={closeMobileMenu}
               className="relative z-10 flex items-center gap-3 rounded-full px-1 py-1 text-text-primary transition-colors hover:text-primary"
             >
@@ -160,7 +158,7 @@ export default function Header() {
               {navItems.map((item) => (
                 <Link
                   key={item.href}
-                  href={`/${locale}${item.href}`}
+                  href={item.href}
                   className={`relative rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
                     isActive(item.href)
                       ? "bg-[#2E4B59] text-white shadow-[0_10px_20px_rgba(46,75,89,0.26)]"
@@ -231,7 +229,7 @@ export default function Header() {
             {navItems.map((item) => (
               <Link
                 key={item.href}
-                href={`/${locale}${item.href}`}
+                href={item.href}
                 onClick={closeMobileMenu}
                 className={`rounded-[1.25rem] border px-4 py-4 transition-colors ${
                   isActive(item.href)

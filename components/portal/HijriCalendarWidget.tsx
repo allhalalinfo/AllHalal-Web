@@ -8,7 +8,7 @@ export default function HijriCalendarWidget({ locale }: { locale: string }) {
   const gregorianDate = "Wednesday, March 4, 2026";
   
   return (
-    <Link href={`/${locale}/learn/islamic-calendar`} className="block h-full group">
+    <Link href={`/learn/islamic-calendar`} className="block h-full group">
       <div className="bg-bg-dark text-text-inverse rounded-[2rem] p-8 h-full relative overflow-hidden shadow-card hover:shadow-card-hover transition-all border border-transparent hover:border-white/20">
         
         {/* Layer 1: Ambient Radial Glows (Spotlight effect) */}

@@ -6,7 +6,7 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/mockTranslations";
 import Image from "next/image";
 
 const featureKeys = [

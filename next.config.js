@@ -1,7 +1,3 @@
-const createNextIntlPlugin = require('next-intl/plugin');
-
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -33,21 +29,21 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  // Redirects for URL changes
+  // Redirects for URL changes (old blog → news)
   async redirects() {
     return [
       {
-        source: '/:locale/blog',
-        destination: '/:locale/news',
+        source: '/blog',
+        destination: '/news',
         permanent: true,
       },
       {
-        source: '/:locale/blog/:slug',
-        destination: '/:locale/news/:slug',
+        source: '/blog/:slug',
+        destination: '/news/:slug',
         permanent: true,
       },
     ];
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+module.exports = nextConfig;

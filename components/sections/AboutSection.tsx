@@ -11,7 +11,7 @@
  */
 
 import { useRef, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/mockTranslations";
 
 // Animated counter component
 function AnimatedCounter({ value, suffix, duration = 2 }: { value: number; suffix: string; duration?: number }) {

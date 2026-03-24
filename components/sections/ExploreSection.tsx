@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale } from "@/lib/mockTranslations";
 import Link from "next/link";
 import SpotlightCard from "../ui/SpotlightCard";
 

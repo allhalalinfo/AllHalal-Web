@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
 
 const socialLinks = [
   {
@@ -36,17 +35,14 @@ function isExternalLink(href: string) {
   return href.startsWith("http");
 }
 
-function localizeHref(locale: string, href: string) {
+function localizeHref(href: string) {
   if (isExternalLink(href) || href.startsWith("/#")) {
     return href;
   }
-
-  return `/${locale}${href}`;
+  return href;
 }
 
 export default function Footer() {
-  const t = useTranslations("footer");
-  const locale = useLocale();
 
   const primaryLinks = [
     { label: "Open halal checker", href: "/is-it-halal" },
@@ -74,20 +70,20 @@ export default function Footer() {
       ],
     },
     {
-      title: t("company"),
+      title: "Company",
       links: [
-        { label: t("links.aboutUs"), href: "/#about" },
-        { label: t("links.contact"), href: "/contact" },
-        { label: t("links.support"), href: "/support" },
-        { label: t("links.downloadApp"), href: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" },
+        { label: "About Us", href: "/#about" },
+        { label: "Contact", href: "/contact" },
+        { label: "Support", href: "/support" },
+        { label: "Download App", href: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" },
       ],
     },
   ];
 
   const legalLinks = [
-    { label: t("links.privacyPolicy"), href: "/legal/privacy-policy" },
-    { label: t("links.termsOfService"), href: "/legal/terms-of-service" },
-    { label: t("links.disclaimer"), href: "/legal/disclaimer" },
+    { label: "Privacy Policy", href: "/legal/privacy-policy" },
+    { label: "Terms of Service", href: "/legal/terms-of-service" },
+    { label: "Disclaimer", href: "/legal/disclaimer" },
   ];
 
   return (
@@ -100,7 +96,7 @@ export default function Footer() {
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
               <div>
                 <Link
-                  href={`/${locale}`}
+                  href="/"
                   className="inline-flex items-center gap-3 rounded-full bg-white/5 px-3 py-2 ring-1 ring-white/10 backdrop-blur-sm"
                 >
                   <span className="relative h-10 w-10 overflow-hidden rounded-full sm:h-11 sm:w-11">
@@ -126,7 +122,7 @@ export default function Footer() {
                   Halal clarity, prayer rhythm, finance tools and Muslim life in one place.
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-text-inverse-secondary sm:text-[0.95rem] md:mt-4 md:text-lg">
-                  {t("description")}
+                  Halal verification, prayer times, Islamic finance tools, and daily spiritual content designed for Muslims worldwide.
                 </p>
               </div>
 
@@ -141,7 +137,7 @@ export default function Footer() {
                   {primaryLinks.map((link) => (
                     <Link
                       key={link.label}
-                      href={localizeHref(locale, link.href)}
+                      href={localizeHref(link.href)}
                       className="rounded-full border border-white/12 bg-white/6 px-3 py-2 text-[0.82rem] font-semibold text-white/86 transition-colors hover:border-white/18 hover:bg-white/10 sm:px-4 sm:py-2.5 sm:text-sm"
                     >
                       {link.label}
@@ -150,13 +146,13 @@ export default function Footer() {
                 </div>
                 <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:gap-3">
                   <Link
-                    href={`/${locale}/app`}
+                    href="/app"
                     className="inline-flex items-center justify-center rounded-full bg-gradient-gold px-4 py-2.5 text-sm font-bold text-[#4A3319] shadow-[0_12px_28px_rgba(176,144,98,0.24)] transition-transform hover:-translate-y-0.5 sm:px-5 sm:py-3"
                   >
                     Open app
                   </Link>
                   <Link
-                    href={`/${locale}/methodology`}
+                    href="/methodology"
                     className="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-4 py-2.5 text-sm font-bold text-white/86 transition-colors hover:bg-white/10 sm:px-5 sm:py-3"
                   >
                     Review methodology
@@ -205,7 +201,7 @@ export default function Footer() {
                       {group.links.map((link) => (
                         <li key={link.label}>
                           <Link
-                            href={localizeHref(locale, link.href)}
+                            href={localizeHref(link.href)}
                             className="text-[0.95rem] text-white/72 transition-colors hover:text-white sm:text-sm"
                           >
                             {link.label}
@@ -225,7 +221,7 @@ export default function Footer() {
                 {legalLinks.map((link) => (
                   <Link
                     key={link.label}
-                    href={localizeHref(locale, link.href)}
+                    href={localizeHref(link.href)}
                     className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.72rem] font-medium text-white/66 transition-colors hover:bg-white/9 hover:text-white sm:text-xs"
                   >
                     {link.label}
@@ -235,10 +231,10 @@ export default function Footer() {
 
               <div className="flex flex-col gap-1.5 text-[0.72rem] text-white/48 sm:text-xs md:flex-row md:items-center md:gap-5">
                 <p>
-                  © {new Date().getFullYear()} allhalal.info. {t("copyright")}
+                  © {new Date().getFullYear()} allhalal.info. All rights reserved.
                 </p>
                 <p>
-                  {t("developedBy")}{" "}
+                  Developed by Muslims for Muslims.{" "}
                   <a
                     href="https://gezellix.com"
                     target="_blank"

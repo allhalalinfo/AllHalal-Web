@@ -19,7 +19,7 @@ export default function PrayerTimesWidget({ locale }: { locale: string }) {
   }, []);
 
   return (
-    <Link href={`/${locale}/prayer-times`} className="block h-full group">
+    <Link href={`/prayer-times`} className="block h-full group">
       <div className="bg-accent-teal text-text-inverse rounded-[2rem] p-8 h-full relative overflow-hidden shadow-card hover:shadow-card-hover transition-all border border-transparent hover:border-white/20">
         {/* Background */}
         <div 

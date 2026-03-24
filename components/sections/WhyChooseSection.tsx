@@ -6,7 +6,7 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/mockTranslations";
 import SpotlightCard from "../ui/SpotlightCard";
 
 export default function WhyChooseSection() {

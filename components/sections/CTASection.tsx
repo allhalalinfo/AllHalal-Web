@@ -6,7 +6,7 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/mockTranslations";
 
 export default function CTASection() {
   const t = useTranslations("cta");
