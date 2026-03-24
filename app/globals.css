@@ -724,29 +724,27 @@ body {
 
 .prose-custom h2 {
   font-family: var(--font-display);
-  font-weight: var(--font-bold);
-  font-size: 2rem;
-  line-height: 1.25;
+  font-weight: var(--font-black);
+  font-size: 2.25rem;
+  line-height: 1.2;
   color: var(--color-text-primary);
-  margin-top: 3.5rem;
-  margin-bottom: 1.25rem;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
   scroll-margin-top: 6rem;
-  letter-spacing: -0.02em;
-  padding-bottom: 1rem;
+  letter-spacing: -0.03em;
   position: relative;
 }
 
-/* Short decorative accent line (left side only) */
-.prose-custom h2::after {
+/* Optional: subtle top border for section separation */
+.prose-custom h2::before {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: -2rem;
   left: 0;
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent-navy));
-  border-radius: 3px;
-  box-shadow: 0 2px 8px rgba(151, 124, 88, 0.25);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  border-radius: 2px;
 }
 
 .prose-custom h3 {
