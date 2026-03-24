@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import {
+  CUSTOM_ARTICLE_CATEGORIES,
+  CUSTOM_ARTICLE_CONTENT_TYPES,
+  CUSTOM_ARTICLE_STATUSES,
+} from "@/data/customArticleConstants";
 import type { CustomArticle } from "@/types/customArticle";
 
 function toDatetimeLocalValue(iso: string): string {
@@ -34,6 +39,9 @@ export default function CustomArticleAdminEditor({
   const [content, setContent] = useState(initial?.content ?? "");
   const [imageUrl, setImageUrl] = useState(initial?.image_url ?? "");
   const [category, setCategory] = useState(initial?.category ?? "general");
+  const [contentType, setContentType] = useState(initial?.content_type ?? "article");
+  const [status, setStatus] = useState(initial?.status ?? "published");
+  const [featured, setFeatured] = useState(initial?.featured ?? false);
   const [tags, setTags] = useState((initial?.tags ?? []).join(", "));
   const [author, setAuthor] = useState(initial?.author ?? "");
   const [publishedLocal, setPublishedLocal] = useState(
@@ -60,6 +68,9 @@ export default function CustomArticleAdminEditor({
       content: content.trim() || undefined,
       image_url: imageUrl.trim() || null,
       category: category.trim() || "general",
+      content_type: contentType.trim() || "article",
+      status: status.trim() || "published",
+      featured: featured || undefined,
       tags: tagList.length ? tagList : undefined,
       author: author.trim() || null,
       published_at,
@@ -181,7 +192,45 @@ export default function CustomArticleAdminEditor({
         </label>
         <label className={labelClass}>
           category
-          <input className={inputClass} value={category} onChange={(e) => setCategory(e.target.value)} />
+          <select className={inputClass} value={category} onChange={(e) => setCategory(e.target.value)}>
+            {CUSTOM_ARTICLE_CATEGORIES.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-3">
+        <label className={labelClass}>
+          content type
+          <select className={inputClass} value={contentType} onChange={(e) => setContentType(e.target.value)}>
+            {CUSTOM_ARTICLE_CONTENT_TYPES.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className={labelClass}>
+          status
+          <select className={inputClass} value={status} onChange={(e) => setStatus(e.target.value)}>
+            {CUSTOM_ARTICLE_STATUSES.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="flex items-end pb-2">
+          <input
+            type="checkbox"
+            checked={featured}
+            onChange={(e) => setFeatured(e.target.checked)}
+            className="mr-2 h-5 w-5 rounded border-border"
+          />
+          <span className="text-sm font-bold text-text-primary">Featured on home</span>
         </label>
       </div>
 
@@ -246,6 +295,10 @@ export default function CustomArticleAdminEditor({
           onChange={(e) => setContent(e.target.value)}
           spellCheck={false}
         />
+        <p className="mt-2 text-xs text-text-muted">
+          Safe HTML tags allowed: p, h2, h3, ul, ol, li, a, strong, em, img, blockquote, code, pre, table, tr, td,
+          th. For galleries: wrap multiple &lt;img&gt; in a &lt;div class="gallery"&gt;.
+        </p>
       </label>
 
       {message ? (

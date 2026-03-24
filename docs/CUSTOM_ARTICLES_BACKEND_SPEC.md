@@ -35,13 +35,21 @@
   "tags": ["zakat", "crypto"],
   "author": "Имя",
   "published_at": "2026-03-23T10:00:00Z",
-  "updated_at": "2026-03-23T12:00:00Z"
+  "updated_at": "2026-03-23T12:00:00Z",
+  "content_type": "article",
+  "status": "published",
+  "featured": false
 }
 ```
 
 - `id` — стабильный slug (URL `/en/read/{id}`).
 - `content` — доверенный HTML от редакции; фронт прогоняет через `sanitize-html`.
 - `image_url` — абсолютный HTTPS для карточки и OG.
+- `content_type` (опционально): `article` / `guide` / `blog-post` / `news-analysis`.
+- `status` (опционально): `draft` / `published` / `scheduled` — фронт может фильтровать при рендере.
+- `featured` (опционально): `true` → показать на главной как выделенное.
+
+Подробно про контент (галереи, таблицы, кастомные блоки): **`docs/CUSTOM_ARTICLES_CONTENT_GUIDE.md`**.
 
 ## FastAPI роутер (префикс `/api/v1/custom`)
 

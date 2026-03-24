@@ -11,6 +11,12 @@ export interface CustomArticle {
   author?: string | null;
   published_at: string;
   updated_at?: string | null;
+  /** Optional: article / guide / blog-post / news-analysis */
+  content_type?: string | null;
+  /** Optional: draft / published / scheduled */
+  status?: string | null;
+  /** Optional: show on homepage featured section */
+  featured?: boolean;
 }
 
 export interface CustomArticlesListResponse {
