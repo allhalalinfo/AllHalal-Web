@@ -1,17 +1,11 @@
 "use client";
 
+import { ImageIcon } from "lucide-react";
 import type { Brief } from "@/types/brief";
 
-/** Unified visual when there is no photo or we intentionally hide stock imagery. */
+/** Cover slot when there is no photo, stock is hidden, or remote image failed — neutral mark (no source initials). */
 export default function BriefImagePlaceholder({ brief }: { brief: Brief }) {
   const sourceName = brief.sources[0]?.name || brief.primary_source || "Muslim Brief";
-  const placeholderInitials =
-    sourceName
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? "")
-      .join("") || "MB";
 
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -23,8 +17,8 @@ export default function BriefImagePlaceholder({ brief }: { brief: Brief }) {
         }}
       />
       <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(36,31,27,0.18))]" />
-      <div className="absolute left-3 top-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/60 bg-white/72 text-sm font-black tracking-[0.14em] text-[#28414C] shadow-[0_10px_24px_rgba(36,31,27,0.08)]">
-        {placeholderInitials}
+      <div className="absolute left-3 top-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/60 bg-white/72 text-[#28414C] shadow-[0_10px_24px_rgba(36,31,27,0.08)]">
+        <ImageIcon className="h-5 w-5 opacity-[0.88]" strokeWidth={2} aria-hidden />
       </div>
       <div className="absolute inset-x-3 bottom-3 rounded-2xl border border-white/55 bg-white/70 px-3 py-2 shadow-[0_10px_24px_rgba(36,31,27,0.08)]">
         <div className="text-[0.62rem] font-bold uppercase tracking-[0.22em] text-[#7B674F]">

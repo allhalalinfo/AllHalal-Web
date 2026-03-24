@@ -5,6 +5,10 @@
 **To:** Backend AI  
 **Priority:** P0 CRITICAL
 
+**Картинки в карточках (брифы / news, `image_url` / `imageUrl`, OG, валидация):** полный текст промпта для backend — **[`docs/BACKEND_PROMPT_IMAGES_FULL_RU.md`](./BACKEND_PROMPT_IMAGES_FULL_RU.md)** (тот же каталог `docs/`, что и этот файл).
+
+**ИИ-агенты (редакция, backend, обложки):** копируемые промпты и схема потока — **[`docs/AI_AGENTS_PLAYBOOK_RU.md`](./AI_AGENTS_PLAYBOOK_RU.md)**.
+
 ---
 
 ## Контракт фронт ↔ бэкенд (март 2026)

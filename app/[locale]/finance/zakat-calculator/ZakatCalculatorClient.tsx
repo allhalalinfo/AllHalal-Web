@@ -110,7 +110,7 @@ export default function ZakatCalculatorClient() {
     val.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
-    <div id="zakat-calculator-root" className="mx-auto max-w-3xl space-y-6">
+    <div id="zakat-calculator-root" className="mx-auto w-full max-w-4xl space-y-6">
       <div className="mb-4 text-center">
         <h2 className="mb-2 text-2xl font-bold text-text-primary">Calculate your annual Zakat obligation</h2>
         <p className="text-sm text-text-secondary md:text-base">Based on your wealth and debts over one lunar year.</p>
@@ -346,7 +346,7 @@ export default function ZakatCalculatorClient() {
           {ZAKAT_CHARITY_FUNDS.map((fund) => (
             <article
               key={fund.id}
-              className="w-[min(100%,280px)] shrink-0 snap-center rounded-2xl border border-border bg-bg-primary/90 p-4 shadow-sm md:w-[calc(50%-0.5rem)] md:max-w-none lg:w-[calc(33.333%-0.67rem)]"
+              className="w-[min(100%,280px)] shrink-0 snap-center rounded-2xl border border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(249,246,241,0.88))] p-4 shadow-[0_8px_26px_rgba(43,34,24,0.05)] transition-shadow hover:shadow-[0_14px_36px_rgba(43,34,24,0.08)] md:w-[calc(50%-0.5rem)] md:max-w-none lg:w-[calc(33.333%-0.67rem)]"
             >
               <h4 className="font-bold text-text-primary">{fund.name}</h4>
               <p className="mt-2 text-sm leading-relaxed text-text-secondary">{fund.description}</p>

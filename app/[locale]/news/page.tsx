@@ -79,8 +79,11 @@ export default async function NewsDeskPage(props: {
                 Muslim World Today
               </h1>
               <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
-                Includes the same curated mix as the portal home, then adds stories from the wider live
-                feed — duplicates removed, up to fifty cards.
+                Starts with the same curated stories as on the{" "}
+                <Link href={`/${locale}`} className="font-medium text-primary underline-offset-2 hover:underline">
+                  home page
+                </Link>
+                , then adds more from the full live feed — duplicates hidden, up to fifty cards.
               </p>
             </div>
           </div>
@@ -113,7 +116,7 @@ export default async function NewsDeskPage(props: {
               href={`/${locale}`}
               className="ml-1 text-xs font-semibold text-primary underline-offset-2 hover:underline"
             >
-              Portal home
+              Home
             </Link>
           </div>
 

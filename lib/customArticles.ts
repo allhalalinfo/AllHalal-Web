@@ -4,7 +4,7 @@ import type {
   CustomCategoriesResponse,
 } from "@/types/customArticle";
 
-function getCustomArticlesApiBase(): string {
+export function getCustomArticlesApiBase(): string {
   const fromEnv =
     process.env.CUSTOM_ARTICLES_API_BASE?.trim() ||
     process.env.NEXT_PUBLIC_CUSTOM_ARTICLES_API_BASE?.trim();
@@ -104,6 +104,60 @@ export async function fetchCustomArticlesList(options: {
   return { articles, total, page, limit };
 }
 
+/** Admin list: bypass Next fetch cache for fresh data. */
+export async function fetchCustomArticlesListUncached(options: {
+  page?: number;
+  limit?: number;
+  category?: string;
+}): Promise<CustomArticlesListResponse> {
+  const page = Math.max(1, options.page ?? 1);
+  const limit = Math.min(60, Math.max(1, options.limit ?? 60));
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  });
+  if (options.category) {
+    params.set("category", options.category);
+  }
+
+  const base = getCustomArticlesApiBase();
+  try {
+    const res = await fetch(`${base}/articles?${params.toString()}`, {
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) {
+      return { articles: [], total: 0, page, limit };
+    }
+    const data = (await res.json()) as Record<string, unknown>;
+    const rawList =
+      (Array.isArray(data.articles) && data.articles) ||
+      (Array.isArray(data.items) && data.items) ||
+      [];
+
+    const articles: CustomArticle[] = [];
+    for (const item of rawList) {
+      if (item && typeof item === "object") {
+        const a = normalizeArticle(item as Record<string, unknown>);
+        if (a) {
+          articles.push(a);
+        }
+      }
+    }
+
+    const total =
+      typeof data.total === "number"
+        ? data.total
+        : typeof data.count === "number"
+          ? data.count
+          : articles.length;
+
+    return { articles, total, page, limit };
+  } catch {
+    return { articles: [], total: 0, page, limit };
+  }
+}
+
 export async function fetchCustomArticleById(id: string): Promise<CustomArticle | null> {
   const trimmed = id.trim();
   if (!trimmed) {
@@ -127,6 +181,34 @@ export async function fetchCustomArticleById(id: string): Promise<CustomArticle 
   }
 
   return null;
+}
+
+export async function fetchCustomArticleByIdUncached(id: string): Promise<CustomArticle | null> {
+  const trimmed = id.trim();
+  if (!trimmed) {
+    return null;
+  }
+  const base = getCustomArticlesApiBase();
+  try {
+    const res = await fetch(`${base}/articles/${encodeURIComponent(trimmed)}`, {
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) {
+      return null;
+    }
+    const data = (await res.json()) as Record<string, unknown>;
+    const wrapped = data.article;
+    if (wrapped && typeof wrapped === "object") {
+      return normalizeArticle(wrapped as Record<string, unknown>);
+    }
+    if (typeof data.id === "string" && typeof data.title === "string") {
+      return normalizeArticle(data);
+    }
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 export async function fetchCustomCategories(): Promise<string[]> {

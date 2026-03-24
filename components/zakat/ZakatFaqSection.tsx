@@ -7,7 +7,7 @@ export default function ZakatFaqSection() {
   return (
     <section
       id="zakat-faq"
-      className="mx-auto mt-8 max-w-3xl scroll-mt-28 border-t border-border pt-8"
+      className="mx-auto mt-10 w-full max-w-4xl scroll-mt-28 border-t border-[rgba(47,37,30,0.1)] pt-10"
       aria-labelledby="zakat-faq-heading"
     >
       <h2 id="zakat-faq-heading" className="font-display text-2xl font-bold text-text-primary md:text-3xl">

@@ -87,7 +87,7 @@ export default async function CustomArticlePage(props: {
         <article className="container relative z-10 mx-auto max-w-3xl px-4">
           <nav className="mb-8 text-sm text-text-muted">
             <Link href={portalHome} className="font-medium text-primary hover:underline">
-              Portal home
+              Home
             </Link>
             <span className="mx-2" aria-hidden>
               /

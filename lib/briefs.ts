@@ -2,8 +2,24 @@ import type { NewsCategory } from "@/lib/newsSources";
 import { getAggregatedNews, type NewsItem } from "@/lib/newsFeed";
 import { BRIEF_CATEGORIES, type Brief, type BriefCategory, type BriefsResponse } from "@/types/brief";
 
-const BRIEFS_API_BASE = "https://api.allhalal.info/api/v1/briefs";
 const DEFAULT_FRESHNESS_DAYS = 30;
+
+/**
+ * Briefs JSON base — must match the API instance whose Redis you maintain.
+ * Override in Vercel if prod ever pointed at a stale/stage host:
+ * - `NEXT_PUBLIC_BRIEFS_API_BASE` = full prefix e.g. `https://api.allhalal.info/api/v1/briefs`
+ * - or `NEXT_PUBLIC_API_URL` = origin only; paths become `{origin}/api/v1/briefs/...`
+ */
+export function getBriefsApiBase(): string {
+  const explicit =
+    process.env.NEXT_PUBLIC_BRIEFS_API_BASE?.trim() ||
+    process.env.BRIEFS_API_BASE?.trim();
+  if (explicit) {
+    return explicit.replace(/\/$/, "");
+  }
+  const origin = (process.env.NEXT_PUBLIC_API_URL || "https://api.allhalal.info").replace(/\/$/, "");
+  return `${origin}/api/v1/briefs`;
+}
 
 /** Home/feed JSON ISR — fresher `image_url` after Redis updates (was 900s). */
 export const BRIEFS_LIST_FETCH_REVALIDATE_SECONDS = 300;
@@ -259,7 +275,7 @@ async function getFallbackFeedBriefs({
     category: resolvedCategory,
     limit: requestedLimit,
   });
-  const briefs = sortBriefsByDate(items.map(mapNewsItemToBrief));
+  const briefs = filterBlockedSourceBriefs(sortBriefsByDate(items.map(mapNewsItemToBrief)));
   const paginatedItems = briefs.slice(offset, offset + limit);
 
   return {
@@ -284,15 +300,17 @@ async function getFallbackBriefBySlug(slug: string) {
   );
   const brief = matchedItem?.brief;
 
-  if (!brief) {
+  if (!brief || isBlockedBriefSource(brief)) {
     return null;
   }
 
+  const related = filterBlockedSourceBriefs(
+    briefs.filter((entry) => entry.slug !== slug && entry.category === brief.category),
+  ).slice(0, 3);
+
   return {
     brief,
-    related: briefs
-      .filter((entry) => entry.slug !== slug && entry.category === brief.category)
-      .slice(0, 3),
+    related,
   };
 }
 
@@ -397,6 +415,21 @@ function getBriefPrimarySourceName(brief: Brief) {
   return brief.sources[0]?.name || brief.primary_source || "Unknown source";
 }
 
+/**
+ * Wire sources we never surface in UI (policy / no usable art in RSS). Backend may still
+ * send them until Redis is aligned — this keeps prod consistent with editorial intent.
+ */
+const BRIEF_SOURCE_BLOCKLIST_SUBSTRINGS = ["al jazeera", "aljazeera"];
+
+export function isBlockedBriefSource(brief: Brief): boolean {
+  const name = getBriefPrimarySourceName(brief).toLowerCase();
+  return BRIEF_SOURCE_BLOCKLIST_SUBSTRINGS.some((frag) => name.includes(frag));
+}
+
+export function filterBlockedSourceBriefs(briefs: Brief[]): Brief[] {
+  return briefs.filter((b) => !isBlockedBriefSource(b));
+}
+
 function buildBalancedBriefs(items: Brief[], limit: number, maxPerSource: number) {
   const result: Brief[] = [];
   const sourceCounts = new Map<string, number>();
@@ -439,7 +472,7 @@ export async function getHomepageBriefs(limit = 12) {
  */
 export async function getHomepageBriefLayout() {
   const data = await fetchBriefsJson<HomeResponse>(
-    `${BRIEFS_API_BASE}/home?limit=20`,
+    `${getBriefsApiBase()}/home?limit=20`,
     BRIEFS_LIST_FETCH_REVALIDATE_SECONDS,
   );
 
@@ -449,13 +482,23 @@ export async function getHomepageBriefLayout() {
     Boolean(data?.compact?.length);
 
   if (data?.success && hasLiveBriefs) {
+    const heroCandidate =
+      data.hero && isBriefFresh(sanitizeBrief(data.hero), DEFAULT_FRESHNESS_DAYS)
+        ? sanitizeBrief(data.hero)
+        : null;
+    const featured = filterBlockedSourceBriefs(
+      filterFreshBriefs((data.featured ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
+    );
+    const compact = filterBlockedSourceBriefs(
+      filterFreshBriefs((data.compact ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
+    );
+    const hero =
+      heroCandidate && !isBlockedBriefSource(heroCandidate) ? heroCandidate : null;
+
     return {
-      hero:
-        data.hero && isBriefFresh(sanitizeBrief(data.hero), DEFAULT_FRESHNESS_DAYS)
-          ? sanitizeBrief(data.hero)
-          : null,
-      featured: filterFreshBriefs((data.featured ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
-      compact: filterFreshBriefs((data.compact ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
+      hero,
+      featured,
+      compact,
     };
   }
 
@@ -536,12 +579,12 @@ export async function getFeedBriefs({
   }
 
   const data = await fetchBriefsJson<FeedResponse>(
-    `${BRIEFS_API_BASE}/feed?${params.toString()}`,
+    `${getBriefsApiBase()}/feed?${params.toString()}`,
     BRIEFS_LIST_FETCH_REVALIDATE_SECONDS,
   );
 
   if (data?.success && Array.isArray(data.items) && data.items.length > 0) {
-    const sanitizedItems = data.items.map(sanitizeBrief);
+    const sanitizedItems = filterBlockedSourceBriefs(data.items.map(sanitizeBrief));
 
     return {
       items: sortBriefsByDate(sanitizedItems),
@@ -557,7 +600,7 @@ export async function getFeedBriefs({
 }
 
 export async function getBriefCategories() {
-  const data = await fetchBriefsJson<CategoriesResponse>(`${BRIEFS_API_BASE}/categories`, 1800);
+  const data = await fetchBriefsJson<CategoriesResponse>(`${getBriefsApiBase()}/categories`, 1800);
 
   if (data?.success && Array.isArray(data.categories) && data.categories.length > 0) {
     return data.categories.filter((category) =>
@@ -585,15 +628,20 @@ export async function getBriefCategories() {
 }
 
 export async function getBriefDetail(slug: string) {
-  const data = await fetchBriefsJson<DetailResponse>(`${BRIEFS_API_BASE}/${slug}`, 3600);
+  const data = await fetchBriefsJson<DetailResponse>(`${getBriefsApiBase()}/${slug}`, 3600);
 
   if (data?.success && data.brief) {
+    const brief = sanitizeBrief(data.brief);
+    if (isBlockedBriefSource(brief)) {
+      return null;
+    }
+    const relatedRaw =
+      Array.isArray(data.related) && data.related.length > 0
+        ? sortBriefsByDate(data.related.map(sanitizeBrief))
+        : [];
     return {
-      brief: sanitizeBrief(data.brief),
-      related:
-        Array.isArray(data.related) && data.related.length > 0
-          ? sortBriefsByDate(data.related.map(sanitizeBrief))
-          : [],
+      brief,
+      related: filterBlockedSourceBriefs(relatedRaw),
     };
   }
 

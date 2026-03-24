@@ -4,6 +4,8 @@
 `https://api.allhalal.info/api/v1/custom`  
 (переопределение: `CUSTOM_ARTICLES_API_BASE` в Vercel / `.env.local`.)
 
+**Админ-панель на фронте** (`/en/admin/custom-articles`) проксирует **POST/PUT/DELETE** (и опционально **upload**) на этот же хост с Bearer-токеном — см. **`docs/CUSTOM_ARTICLES_WRITE_API.md`**.
+
 ## Цели
 
 1. **Главная** — при наличии хотя бы одной статьи показывается сетка **только кастомных** материалов (`GET /custom/articles`). Иначе остаётся блок **curated briefs** с `GET /briefs/home` (как сейчас).
