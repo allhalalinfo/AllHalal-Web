@@ -732,15 +732,21 @@ body {
   margin-bottom: 1.25rem;
   scroll-margin-top: 6rem;
   letter-spacing: -0.02em;
-  padding-bottom: 0.75rem;
-  border-bottom: 3px solid var(--color-primary);
-  background: linear-gradient(90deg, rgba(151, 124, 88, 0.04) 0%, transparent 50%);
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  border-radius: var(--radius-md);
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+/* Elegant gradient underline */
+.prose-custom h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 85%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, rgba(151, 124, 88, 0.4) 70%, transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(151, 124, 88, 0.15);
 }
 
 .prose-custom h3 {
@@ -757,27 +763,30 @@ body {
   padding-left: 1.25rem;
 }
 
+/* Elegant vertical accent bar */
 .prose-custom h3::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.35em;
-  width: 4px;
-  height: 1.2em;
+  top: 0.25em;
+  width: 3px;
+  height: 1.3em;
   background: linear-gradient(180deg, var(--color-primary), var(--color-accent-navy));
-  border-radius: 2px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(151, 124, 88, 0.2);
 }
 
 .prose-custom blockquote {
   position: relative;
-  padding: 1.75rem 2rem 1.75rem 2.5rem;
+  padding: 1.75rem 2rem 1.75rem 2rem;
   margin: 2.5rem 0;
-  background: linear-gradient(135deg, rgba(244, 185, 66, 0.08), rgba(75, 110, 112, 0.08));
-  border-left: 4px solid var(--color-primary);
-  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.06), rgba(75, 110, 112, 0.06));
+  border-left: 4px solid;
+  border-image: linear-gradient(180deg, var(--color-primary), var(--color-accent-navy)) 1;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
   font-style: normal;
   color: var(--color-text-primary);
-  box-shadow: 0 4px 20px rgba(43, 34, 24, 0.06);
+  box-shadow: 0 4px 20px rgba(43, 34, 24, 0.05), inset 0 0 0 1px rgba(151, 124, 88, 0.08);
 }
 
 .prose-custom blockquote::before {
@@ -787,6 +796,12 @@ body {
 .prose-custom blockquote p {
   font-size: 1.05em;
   line-height: 1.7;
+}
+
+.prose-custom blockquote p:first-child::before {
+  content: '💡';
+  margin-right: 0.5rem;
+  font-size: 1.1em;
 }
 
 /* Enhanced strong text - modern highlight */
