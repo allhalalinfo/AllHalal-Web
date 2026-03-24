@@ -3,11 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/layout/Footer";
 import { fetchCustomArticleById } from "@/lib/customArticles";
-import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
 import { SITE_URL } from "@/lib/seo/metadata";
-import ReactMarkdown from "react-markdown";
+import { remark } from "remark";
+import remarkHtml from "remark-html";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
+import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
 
 export const revalidate = 120;
 
@@ -58,7 +58,20 @@ export default async function CustomArticlePage(props: {
 
   // Detect if content is Markdown or HTML
   const isMarkdown = article.content?.includes("##") || article.content?.startsWith("#");
-  const safeHtml = !isMarkdown && article.content ? sanitizeArticleHtml(article.content) : "";
+  
+  let htmlContent = "";
+  if (article.content) {
+    if (isMarkdown) {
+      // Server-side: convert Markdown to HTML
+      const result = await remark()
+        .use(remarkGfm)
+        .use(remarkHtml, { sanitize: false })
+        .process(article.content);
+      htmlContent = sanitizeArticleHtml(result.toString());
+    } else {
+      htmlContent = sanitizeArticleHtml(article.content);
+    }
+  }
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -168,125 +181,11 @@ export default async function CustomArticlePage(props: {
             </div>
           ) : null}
 
-          {article.content ? (
-            isMarkdown ? (
-              <div className="prose prose-lg prose-custom max-w-none pb-8">
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
-                  components={{
-                    h1: ({ children }) => (
-                      <h2 className="text-3xl font-bold font-display text-text-primary mt-12 mb-6 scroll-mt-24">
-                        {children}
-                      </h2>
-                    ),
-                    h2: ({ children }) => (
-                      <h2 className="text-2xl font-bold font-display text-text-primary mt-10 mb-5 scroll-mt-24">
-                        {children}
-                      </h2>
-                    ),
-                    h3: ({ children }) => (
-                      <h3 className="text-xl font-semibold font-display text-text-primary mt-8 mb-4 scroll-mt-24">
-                        {children}
-                      </h3>
-                    ),
-                    p: ({ children }) => (
-                      <p className="mb-5 leading-relaxed text-text-secondary">
-                        {children}
-                      </p>
-                    ),
-                    a: ({ href, children }) => (
-                      <a
-                        href={href}
-                        className="text-primary font-medium underline decoration-primary/30 underline-offset-2 hover:decoration-primary transition-colors"
-                        target={href?.startsWith("http") ? "_blank" : undefined}
-                        rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
-                      >
-                        {children}
-                      </a>
-                    ),
-                    strong: ({ children }) => (
-                      <strong className="font-semibold text-text-primary">{children}</strong>
-                    ),
-                    ul: ({ children }) => (
-                      <ul className="mb-5 space-y-2 list-disc pl-6 text-text-secondary">
-                        {children}
-                      </ul>
-                    ),
-                    ol: ({ children }) => (
-                      <ol className="mb-5 space-y-2 list-decimal pl-6 text-text-secondary">
-                        {children}
-                      </ol>
-                    ),
-                    li: ({ children }) => (
-                      <li className="leading-relaxed">
-                        {children}
-                      </li>
-                    ),
-                    blockquote: ({ children }) => (
-                      <blockquote className="relative border-l-4 border-primary pl-6 py-4 my-8 bg-primary/5 rounded-r-lg italic text-text-secondary">
-                        <div className="absolute left-4 top-0 text-5xl text-primary/20 leading-none font-serif">
-                          "
-                        </div>
-                        {children}
-                      </blockquote>
-                    ),
-                    code: ({ className, children }) => {
-                      const isInline = !className;
-                      if (isInline) {
-                        return (
-                          <code className="bg-[rgba(44,31,28,0.06)] text-accent-navy px-1.5 py-0.5 rounded text-[0.9em] font-semibold">
-                            {children}
-                          </code>
-                        );
-                      }
-                      return (
-                        <code className={className}>
-                          {children}
-                        </code>
-                      );
-                    },
-                    pre: ({ children }) => (
-                      <pre className="bg-[rgba(44,31,28,0.04)] border border-[rgba(44,31,28,0.1)] rounded-xl p-4 my-6 overflow-x-auto">
-                        {children}
-                      </pre>
-                    ),
-                    table: ({ children }) => (
-                      <div className="my-8 overflow-x-auto">
-                        <table className="w-full border-collapse rounded-lg overflow-hidden border border-[rgba(47,37,30,0.1)]">
-                          {children}
-                        </table>
-                      </div>
-                    ),
-                    thead: ({ children }) => (
-                      <thead className="bg-gradient-to-b from-[rgba(151,124,88,0.08)] to-[rgba(151,124,88,0.04)]">
-                        {children}
-                      </thead>
-                    ),
-                    th: ({ children }) => (
-                      <th className="px-4 py-3 text-left font-semibold text-text-primary text-sm border-b-2 border-[rgba(47,37,30,0.12)]">
-                        {children}
-                      </th>
-                    ),
-                    td: ({ children }) => (
-                      <td className="px-4 py-3 text-text-secondary text-sm border-b border-[rgba(47,37,30,0.06)]">
-                        {children}
-                      </td>
-                    ),
-                    hr: () => (
-                      <hr className="my-12 border-t border-[rgba(47,37,30,0.1)]" />
-                    ),
-                  }}
-                >
-                  {article.content}
-                </ReactMarkdown>
-              </div>
-            ) : (
-              <div
-                className="prose prose-lg prose-custom max-w-none pb-8"
-                dangerouslySetInnerHTML={{ __html: safeHtml }}
-              />
-            )
+          {htmlContent ? (
+            <div
+              className="prose prose-lg prose-custom max-w-none pb-8"
+              dangerouslySetInnerHTML={{ __html: htmlContent }}
+            />
           ) : (
             <p className="mt-10 text-text-secondary">
               Full text is not available yet. Try again later or open another article.
