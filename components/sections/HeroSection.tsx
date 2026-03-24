@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "@/lib/mockTranslations";
 import { ArrowRight, Sparkles } from "lucide-react";
 import ParticleBarcode from "@/components/three/ParticleBarcode";
 
@@ -12,8 +11,6 @@ const quickStats = [
 ];
 
 export default function HeroSection() {
-  const t = useTranslations("hero");
-
   return (
     <section className="relative overflow-hidden border-b border-[rgba(47,37,30,0.08)] bg-[linear-gradient(180deg,#f7f2e7_0%,#f5f1e8_18%,#eef1ec_52%,#f2f1e8_100%)]">
       <div className="pointer-events-none absolute inset-0">
@@ -41,7 +38,7 @@ export default function HeroSection() {
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.08)] bg-white/70 px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-text-secondary shadow-[0_12px_28px_rgba(43,34,24,0.08)] backdrop-blur-xl">
               <Sparkles className="h-3.5 w-3.5 text-primary" />
-              {t("subtitle")}
+              Muslim portal & halal scanner
             </div>
 
             <h1 className="mt-6 max-w-5xl text-[clamp(3.6rem,11vw,8rem)] font-black font-display leading-[0.9] tracking-[-0.05em] text-text-primary">
@@ -51,7 +48,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.65, delay: 0.05, ease: "easeOut" }}
                 className="block"
               >
-                {t("title1")}
+                scan.
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
@@ -59,7 +56,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.65, delay: 0.12, ease: "easeOut" }}
                 className="block"
               >
-                {t("title2")}
+                ingredients.
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
@@ -67,7 +64,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.65, delay: 0.2, ease: "easeOut" }}
                 className="block bg-[linear-gradient(135deg,#9b7747_0%,#2f5458_38%,#59714d_72%,#b6925b_100%)] bg-clip-text text-transparent"
               >
-                {t("title3")}
+                live halal.
               </motion.span>
             </h1>
 
@@ -77,7 +74,7 @@ export default function HeroSection() {
               transition={{ duration: 0.7, delay: 0.18, ease: "easeOut" }}
               className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl"
             >
-              {t("description")}
+              Verify halal status instantly with the world's most advanced scanner. Scan barcodes, check ingredients, and discover alternatives—all powered by AI and trusted Islamic rulings.
             </motion.p>
 
             <motion.div
@@ -94,7 +91,7 @@ export default function HeroSection() {
                 whileTap={{ scale: 0.985 }}
                 className="group inline-flex items-center justify-center gap-2 rounded-[1.35rem] bg-[linear-gradient(135deg,#b89665,#e5d0a6_60%,#a9824f)] px-6 py-4 text-base font-bold text-[#4a3319] shadow-[0_20px_55px_rgba(176,144,98,0.32)]"
               >
-                {t("ctaAppStore")}
+                Download for iPhone
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </motion.a>
 
@@ -104,7 +101,7 @@ export default function HeroSection() {
                 whileTap={{ scale: 0.99 }}
                 className="inline-flex items-center justify-center gap-2 rounded-[1.35rem] border border-[rgba(47,37,30,0.1)] bg-white/72 px-6 py-4 text-base font-semibold text-text-primary shadow-[0_16px_40px_rgba(43,34,24,0.08)] backdrop-blur-xl"
               >
-                {t("ctaExplore")}
+                Explore portal
               </motion.a>
             </motion.div>
 

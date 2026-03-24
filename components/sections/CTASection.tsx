@@ -1,19 +1,8 @@
 "use client";
 
-/**
- * ═══════════════════════════════════════════════════════════════════════════════
- * CTA SECTION - NO FLICKERING
- * ═══════════════════════════════════════════════════════════════════════════════
- */
-
-import { useTranslations } from "@/lib/mockTranslations";
-
 export default function CTASection() {
-  const t = useTranslations("cta");
-
   return (
     <section className="section-lg bg-bg-dark text-text-inverse relative overflow-hidden">
-      {/* Static background glow */}
       <div className="absolute inset-0 overflow-hidden">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-30"
@@ -25,23 +14,19 @@ export default function CTASection() {
 
       <div className="container relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
             <span className="w-2 h-2 rounded-full bg-accent-yellow shadow-[0_0_10px_rgba(244,185,66,0.5)]" />
-            <span className="text-sm text-accent-yellow font-medium">{t("badge")}</span>
+            <span className="text-sm text-accent-yellow font-medium">Available now</span>
           </div>
 
-          {/* Headline */}
           <h2 className="text-display-1 font-bold font-display text-text-inverse mb-6">
-            {t("title")}
+            Start your halal journey today
           </h2>
 
-          {/* Description */}
           <p className="text-xl text-text-inverse-secondary mb-10 max-w-2xl mx-auto">
-            {t("description")}
+            Join millions of Muslims worldwide who trust allhalal.info for instant halal verification, prayer times, and Islamic lifestyle guidance.
           </p>
 
-          {/* Download Button */}
           <div>
             <a
               href="https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265"
@@ -50,24 +35,23 @@ export default function CTASection() {
               className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-gold text-[#4A3319] font-bold text-lg rounded-full shadow-[0_4px_25px_rgba(176,144,98,0.4)] transition-all duration-300 hover:bg-gradient-gold-hover hover:-translate-y-1"
             >
               <AppleIcon className="w-6 h-6" />
-              {t("button")}
+              Download for iPhone
               <span className="inline-block">→</span>
             </a>
           </div>
 
-          {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-8 mt-12">
             <div className="flex items-center gap-2 text-text-inverse-secondary">
               <ShieldIcon className="w-5 h-5 text-accent-yellow" />
-              <span className="text-sm">{t("trust.secure")}</span>
+              <span className="text-sm">100% secure & private</span>
             </div>
             <div className="flex items-center gap-2 text-text-inverse-secondary">
               <GlobeIcon className="w-5 h-5 text-accent-yellow" />
-              <span className="text-sm">{t("trust.worldwide")}</span>
+              <span className="text-sm">Used worldwide</span>
             </div>
             <div className="flex items-center gap-2 text-text-inverse-secondary">
               <StarIcon className="w-5 h-5 text-accent-yellow" />
-              <span className="text-sm">{t("trust.rating")}</span>
+              <span className="text-sm">Top rated app</span>
             </div>
           </div>
         </div>
