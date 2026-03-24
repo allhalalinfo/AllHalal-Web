@@ -709,180 +709,254 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   CUSTOM ARTICLE PROSE ENHANCEMENTS
+   CUSTOM ARTICLE PROSE ENHANCEMENTS - MODERN DESIGN
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 .prose-custom h1 {
-  position: relative;
-  padding-left: 1rem;
-  border-left: 6px solid var(--color-primary);
+  font-family: var(--font-display);
+  font-weight: var(--font-black);
+  font-size: 2.5rem;
+  line-height: 1.2;
   color: var(--color-text-primary);
-  background: linear-gradient(90deg, rgba(151, 124, 88, 0.06), transparent);
-  padding: 1.5rem 1rem 1.5rem 1.5rem;
-  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-  margin: 3rem 0 2rem 0;
+  margin: 3.5rem 0 1.5rem 0;
+  letter-spacing: -0.03em;
 }
 
 .prose-custom h2 {
   font-family: var(--font-display);
   font-weight: var(--font-bold);
-  scroll-margin-top: 6rem;
-  position: relative;
-  padding-left: 1.25rem;
+  font-size: 2rem;
+  line-height: 1.25;
   color: var(--color-text-primary);
-  border-left: 5px solid rgba(151, 124, 88, 0.4);
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  scroll-margin-top: 6rem;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--color-primary);
+  background: linear-gradient(90deg, rgba(151, 124, 88, 0.04) 0%, transparent 50%);
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  background: linear-gradient(90deg, rgba(151, 124, 88, 0.04), transparent 60%);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-
-.prose-custom h2::before {
-  content: '◆';
-  position: absolute;
-  left: -0.15rem;
-  color: var(--color-primary);
-  font-size: 0.7em;
-  opacity: 0.8;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  border-radius: var(--radius-md);
 }
 
 .prose-custom h3 {
   font-family: var(--font-display);
-  scroll-margin-top: 6rem;
   font-weight: var(--font-semibold);
+  font-size: 1.5rem;
+  line-height: 1.35;
   color: var(--color-text-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 6rem;
+  letter-spacing: -0.01em;
   position: relative;
-  padding-left: 1rem;
+  padding-left: 1.25rem;
 }
 
 .prose-custom h3::before {
-  content: '▸';
+  content: '';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
-  font-size: 0.9em;
-  opacity: 0.7;
-}
-
-/* Special styled sections - detect by heading content */
-.prose-custom h2:has-text("Quick Answer"),
-.prose-custom h2:has-text("Key Takeaways"),
-.prose-custom h2:has-text("Important") {
-  background: linear-gradient(135deg, rgba(75, 110, 112, 0.08), rgba(151, 124, 88, 0.08));
-  border-left-color: var(--color-accent-navy);
-  border-left-width: 6px;
-  padding: 1rem 1.5rem;
-  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-  box-shadow: 0 4px 12px rgba(43, 34, 24, 0.04);
+  top: 0.35em;
+  width: 4px;
+  height: 1.2em;
+  background: linear-gradient(180deg, var(--color-primary), var(--color-accent-navy));
+  border-radius: 2px;
 }
 
 .prose-custom blockquote {
   position: relative;
-  padding-left: var(--space-6);
+  padding: 1.75rem 2rem 1.75rem 2.5rem;
+  margin: 2.5rem 0;
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.08), rgba(75, 110, 112, 0.08));
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  font-style: normal;
+  color: var(--color-text-primary);
+  box-shadow: 0 4px 20px rgba(43, 34, 24, 0.06);
 }
 
 .prose-custom blockquote::before {
-  content: '"';
-  position: absolute;
-  left: var(--space-4);
-  top: 0;
-  font-size: 3rem;
-  line-height: 1;
-  color: var(--color-primary);
-  opacity: 0.3;
-  font-family: Georgia, serif;
+  display: none;
 }
 
-/* Enhanced strong text with subtle highlight */
+.prose-custom blockquote p {
+  font-size: 1.05em;
+  line-height: 1.7;
+}
+
+/* Enhanced strong text - modern highlight */
 .prose-custom strong {
   font-weight: var(--font-bold);
   color: var(--color-text-primary);
-  background: linear-gradient(180deg, transparent 60%, rgba(244, 185, 66, 0.2) 60%);
-  padding: 0 0.15em;
-  border-radius: 2px;
+  background: linear-gradient(180deg, transparent 65%, rgba(244, 185, 66, 0.3) 65%);
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
-/* Enhanced lists with better spacing and markers */
+/* Modern list styling */
 .prose-custom ul,
 .prose-custom ol {
-  margin: var(--space-6) 0;
-  padding-left: var(--space-8);
-}
-
-.prose-custom li {
-  margin-bottom: var(--space-3);
-  padding-left: var(--space-2);
-}
-
-/* Custom bullet points for unordered lists */
-.prose-custom ul {
+  margin: 2rem 0;
+  padding-left: 0;
   list-style: none;
 }
 
-.prose-custom ul > li {
+.prose-custom ul > li,
+.prose-custom ol > li {
   position: relative;
-  padding-left: var(--space-4);
+  padding-left: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.75;
 }
 
+/* Custom checkmark-style bullets */
 .prose-custom ul > li::before {
-  content: '';
+  content: '✓';
   position: absolute;
   left: 0;
-  top: 0.65em;
-  width: 0.45rem;
-  height: 0.45rem;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--color-primary);
+  color: white;
   border-radius: 50%;
-  box-shadow: 0 0 0 2px rgba(151, 124, 88, 0.2);
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(151, 124, 88, 0.25);
 }
 
-/* Nested list styling */
-.prose-custom ul ul > li::before {
-  background: transparent;
-  border: 2px solid var(--color-primary);
-  width: 0.4rem;
-  height: 0.4rem;
+/* Numbered list with modern badges */
+.prose-custom ol {
+  counter-reset: custom-counter;
 }
 
-/* Numbered list enhancement */
-.prose-custom ol > li::marker {
+.prose-custom ol > li {
+  counter-increment: custom-counter;
+}
+
+.prose-custom ol > li::before {
+  content: counter(custom-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent-navy));
+  color: white;
+  border-radius: 6px;
+  font-size: 0.85rem;
   font-weight: var(--font-bold);
-  color: var(--color-primary);
-  font-size: 1.1em;
+  box-shadow: 0 3px 12px rgba(43, 34, 24, 0.15);
 }
 
-/* Table enhancements */
+/* Nested lists */
+.prose-custom ul ul > li::before,
+.prose-custom ol ul > li::before {
+  content: '→';
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  box-shadow: none;
+  font-size: 0.9rem;
+}
+
+/* Modern table styling */
 .prose-custom table {
-  box-shadow: 0 8px 24px rgba(43, 34, 24, 0.06);
-  border: 1px solid rgba(47, 37, 30, 0.12);
+  margin: 2.5rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(43, 34, 24, 0.08);
+  border: 1px solid rgba(47, 37, 30, 0.1);
 }
 
 .prose-custom thead {
-  background: linear-gradient(180deg, rgba(75, 110, 112, 0.12), rgba(151, 124, 88, 0.08));
+  background: linear-gradient(135deg, rgba(75, 110, 112, 0.15), rgba(151, 124, 88, 0.12));
 }
 
 .prose-custom th {
+  padding: 1rem 1.25rem;
+  text-align: left;
   font-weight: var(--font-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.8rem;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  text-transform: none;
+  letter-spacing: 0;
+  border-bottom: 2px solid var(--color-primary);
 }
 
-/* Add alternating row colors */
-.prose-custom tbody tr:nth-child(even) {
-  background: rgba(242, 237, 228, 0.3);
+.prose-custom td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(47, 37, 30, 0.08);
+  color: var(--color-text-secondary);
+}
+
+.prose-custom tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.prose-custom tbody tr:hover {
+  background: rgba(244, 185, 66, 0.04);
+}
+
+.prose-custom tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* Paragraph spacing for readability */
 .prose-custom p {
-  margin-bottom: var(--space-6);
+  margin-bottom: 1.75rem;
   line-height: 1.85;
+  color: var(--color-text-secondary);
 }
 
-/* First paragraph after heading - reduce gap */
+/* First paragraph after heading - special treatment */
 .prose-custom h2 + p,
 .prose-custom h3 + p {
-  margin-top: var(--space-4);
+  margin-top: 1rem;
+  font-size: 1.05em;
+}
+
+/* Code blocks - modern design */
+.prose-custom code {
+  background: rgba(75, 110, 112, 0.08);
+  color: var(--color-accent-navy);
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: 500;
+  border: 1px solid rgba(75, 110, 112, 0.15);
+}
+
+.prose-custom pre {
+  background: linear-gradient(135deg, rgba(44, 31, 28, 0.03), rgba(75, 110, 112, 0.03));
+  border: 1px solid rgba(47, 37, 30, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+  box-shadow: 0 4px 16px rgba(43, 34, 24, 0.04);
+}
+
+.prose-custom pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-text-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
