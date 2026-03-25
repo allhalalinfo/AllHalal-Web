@@ -881,7 +881,21 @@ These are the most common misunderstandings:
 
 ### 6.4 Цитирование источников в тексте
 
-**КРИТИЧНО: Используй ТОЛЬКО числовой формат `[N]` для ссылок на источники!**
+**🚨 КРИТИЧНО: Используй ТОЛЬКО числовой формат `[N]` для ссылок на источники!**
+
+**❌ НЕ ИСПОЛЬЗУЙ:**
+- `(ecfr.gov)` — НЕПРАВИЛЬНО
+- `(fda.gov)` — НЕПРАВИЛЬНО  
+- `(ifanca.org)` — НЕПРАВИЛЬНО
+- `(Source Name)` — НЕПРАВИЛЬНО
+- Любые скобки с доменами или названиями — НЕПРАВИЛЬНО
+
+**✅ ИСПОЛЬЗУЙ ТОЛЬКО:**
+- `[1]` — ПРАВИЛЬНО
+- `[2]` — ПРАВИЛЬНО
+- `[3]` — ПРАВИЛЬНО
+
+---
 
 **Правильный формат:**
 
@@ -895,6 +909,8 @@ IFANCA's shopper guidance specifically lists gelatin among ingredients that may 
 - ✅ Используй `[1]`, `[2]`, `[3]` и т.д. — простые квадратные скобки с номером
 - ✅ Ставь ссылку СРАЗУ после утверждения (до точки или запятой)
 - ✅ Номера должны соответствовать списку References внизу
+- ❌ **КРИТИЧНО: НЕ используй формат `(domain.com)`, `(ecfr.gov)`, `(fda.gov)` в тексте!**
+- ❌ **НЕ используй формат `(Source Name)` в тексте!**
 - ❌ НЕ используй формат `oai_citation:N†Source` — он НЕ поддерживается!
 - ❌ НЕ используй `[^1]` (footnote format)
 - ❌ НЕ пиши полное название источника в скобках
@@ -906,10 +922,16 @@ IFANCA's shopper guidance specifically lists gelatin among ingredients that may 
 ✅ **ПРАВИЛЬНО:**
 ```
 The FDA classifies E471 as "generally recognized as safe" [3].
+
+Natural flavors can include animal-derived sources [1].
 ```
 
 ❌ **НЕПРАВИЛЬНО:**
 ```
+The FDA classifies E471 as "generally recognized as safe" (ecfr.gov).
+
+Natural flavors can include animal-derived sources (fda.gov).
+
 The FDA classifies E471 as "generally recognized as safe" [3] Food and Drug Administration.
 ```
 ```
@@ -942,16 +964,71 @@ IFANCA — Halal Certification Standards for Emulsifiers
 ```
 
 **ВАЖНО про формат References секции:**
-- ❌ НЕ ставь `[1]`, `[2]`, `[3]` перед референсами в списке — фронтенд добавит номера автоматически!
+- ❌ **КРИТИЧНО: НЕ ставь** `[1]`, `[2]`, `[3]` **перед референсами в списке** — фронтенд добавит номера автоматически!
+- ❌ **НЕ используй** формат `(domain.com)` или `(source)` **в тексте статьи** — используй **ТОЛЬКО** `[N]`!
 - ✅ Просто перечисляй источники по порядку через `<br>` или в списке
 - ✅ Каждый референс на новой строке
 - ✅ Порядок должен соответствовать цитатам в тексте (`[1]` → первый референс, `[2]` → второй и т.д.)
+- ✅ Формат каждого референса: `[Название организации] — [Название документа]` (без номера в начале!)
+
+**Примеры ПРАВИЛЬНОГО формата References:**
+
+```markdown
+## References {#references}
+
+FDA / eCFR — 21 CFR 101.22 natural flavor definition  
+FDA — Food Allergen Labeling Guidance on collective terms like "natural flavor"  
+FDA — Food Labeling Guide on generic declaration of flavors  
+IFANCA — Halal Shopper's Quick Reference Guide  
+Vegetarian Society — Vegan trademark criteria  
+FDA — Types of Food Ingredients
+```
+
+**Примеры НЕПРАВИЛЬНОГО формата (НЕ ДЕЛАЙ ТАК):**
+
+❌ **НЕПРАВИЛЬНО** (с номерами):
+```markdown
+## References {#references}
+
+[1] FDA / eCFR — 21 CFR 101.22 natural flavor definition  
+[2] FDA — Food Allergen Labeling Guidance  
+[3] IFANCA — Halal Shopper's Quick Reference Guide
+```
+
+❌ **НЕПРАВИЛЬНО** (только домены в тексте):
+```markdown
+Natural flavors can include animal sources (ecfr.gov).
+```
+
+✅ **ПРАВИЛЬНО** (номера в тексте):
+```markdown
+Natural flavors can include animal sources [1].
+```
 
 **Технические требования:**
 - Ссылки автоматически станут кликабельными на фронтенде
 - При клике откроется References секция и подсветится нужный источник
 - Используй минимум 5-10 источников на статью (2500+ слов)
 - Ссылки должны быть на авторитетные источники (FDA, IFANCA, JAKIM, scholarly journals)
+
+---
+
+**📋 ФИНАЛЬНЫЙ ЧЕКЛИСТ ПО ЦИТИРОВАНИЮ:**
+
+Перед отправкой статьи ПРОВЕРЬ:
+
+- [ ] ✅ В тексте статьи используются **ТОЛЬКО** `[1]`, `[2]`, `[3]` (не `(domain)`, не `(source)`)
+- [ ] ✅ В секции References **НЕТ** номеров `[1]`, `[2]` перед названиями источников
+- [ ] ✅ Каждый референс — читаемое название: `[Organization] — [Document Title]`
+- [ ] ✅ Порядок References соответствует порядку цитат в тексте
+- [ ] ✅ Все цитаты имеют соответствующий референс внизу
+- [ ] ❌ В тексте **НЕТ** формата `(ecfr.gov)`, `(fda.gov)`, `(ifanca.org)`
+- [ ] ❌ В тексте **НЕТ** названий источников после `[N]`
+- [ ] ❌ В References **НЕТ** дублирующих номеров типа `[1] FDA...`
+
+**Если хотя бы один пункт не выполнен — исправь перед публикацией!**
+
+---
 
 ### 6.5 Images в контенте
 
