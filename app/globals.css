@@ -1323,7 +1323,7 @@ body {
   border: 2px solid rgba(244, 185, 66, 0.2);
 }
 
-/* Pattern 10: Final CTA - Action-oriented box */
+/* Pattern 10: Final CTA - Action-oriented section */
 .prose-custom h2[id*="final"],
 .prose-custom h2[id*="conclusion"],
 .prose-custom h2[id*="next-step"],
@@ -1340,23 +1340,18 @@ body {
   border-width: 0;
 }
 
-/* Style the content after final CTA heading as prominent call-to-action */
+/* Style the content after final CTA heading - subtle background only */
 .prose-custom h2[id*="final"] + *,
 .prose-custom h2[id*="conclusion"] + *,
 .prose-custom h2[id*="next-step"] + *,
 .prose-custom h2.pattern-final-heading + * {
   position: relative;
-  background: linear-gradient(135deg, var(--color-accent-navy), #4B6E70);
-  color: white;
-  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
-  margin: 4rem 0 2.5rem 0;
-  border-radius: var(--radius-xl);
+  margin: 4rem 0 2rem 0;
+  padding: 2rem;
   text-align: center;
-  box-shadow: 0 12px 40px rgba(23, 54, 64, 0.25);
-  font-size: 1.125em;
-  font-weight: 500;
-  line-height: 1.7;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.04), rgba(75, 110, 112, 0.04));
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(47, 37, 30, 0.08);
 }
 
 /* Add decorative icon at top */
@@ -1368,60 +1363,36 @@ body {
   display: block;
   font-size: 2rem;
   margin-bottom: 1rem;
-  opacity: 0.9;
+  opacity: 0.6;
 }
 
-/* Style links within Final CTA as buttons */
-.prose-custom h2[id*="final"] + * a,
-.prose-custom h2[id*="conclusion"] + * a,
-.prose-custom h2[id*="next-step"] + * a,
-.prose-custom h2.pattern-final-heading + * a {
-  display: inline-block;
+/* Style links within Final CTA as "Open app" buttons */
+.prose-custom h2[id*="final"] ~ * a,
+.prose-custom h2[id*="conclusion"] ~ * a,
+.prose-custom h2[id*="next-step"] ~ * a,
+.prose-custom h2.pattern-final-heading ~ * a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 1.5rem;
   padding: 0.875rem 2rem;
   background: linear-gradient(135deg, #B09062 0%, #E2CFB0 50%, #B09062 100%);
-  color: #2F251E;
+  color: #4A3319;
   font-weight: 700;
   font-size: 1rem;
   text-decoration: none;
-  border-radius: var(--radius-full);
-  box-shadow: 0 4px 16px rgba(176, 144, 98, 0.4);
+  border-radius: 9999px;
+  box-shadow: 0 10px 22px rgba(176, 144, 98, 0.24);
   transition: all 0.3s ease;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.prose-custom h2[id*="final"] + * a:hover,
-.prose-custom h2[id*="conclusion"] + * a:hover,
-.prose-custom h2[id*="next-step"] + * a:hover,
-.prose-custom h2.pattern-final-heading + * a:hover {
+.prose-custom h2[id*="final"] ~ * a:hover,
+.prose-custom h2[id*="conclusion"] ~ * a:hover,
+.prose-custom h2[id*="next-step"] ~ * a:hover,
+.prose-custom h2.pattern-final-heading ~ * a:hover {
   background: linear-gradient(135deg, #C2A77A 0%, #F0E3CB 50%, #C2A77A 100%);
-  box-shadow: 0 6px 24px rgba(176, 144, 98, 0.6);
+  box-shadow: 0 12px 28px rgba(176, 144, 98, 0.32);
   transform: translateY(-2px);
-}
-
-/* If there are multiple paragraphs after heading, style them all */
-.prose-custom h2[id*="final"] ~ p,
-.prose-custom h2[id*="conclusion"] ~ p,
-.prose-custom h2[id*="next-step"] ~ p,
-.prose-custom h2.pattern-final-heading ~ p {
-  color: rgba(255, 255, 255, 0.95);
-}
-
-/* But only the first element gets the full CTA styling */
-.prose-custom h2[id*="final"] + p + *,
-.prose-custom h2[id*="conclusion"] + p + *,
-.prose-custom h2[id*="next-step"] + p + *,
-.prose-custom h2.pattern-final-heading + p + * {
-  background: transparent;
-  padding: 0;
-  margin: 1.5rem 0;
-  box-shadow: none;
-  border: none;
-  font-size: inherit;
-  font-weight: inherit;
-  text-align: left;
-  color: var(--color-text-secondary);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
