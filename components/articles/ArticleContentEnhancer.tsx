@@ -155,24 +155,6 @@ export default function ArticleContentEnhancer() {
         h2.classList.add("pattern-examples-heading");
       }
     });
-    
-    // Handle FAQ H3 alternating backgrounds
-    const faqH2 = article.querySelector("h2#faq, h2.pattern-faq-heading");
-    if (faqH2) {
-      let el = faqH2.nextElementSibling;
-      let h3Index = 0;
-      while (el) {
-        if (el.tagName === "H3") {
-          if (h3Index % 2 === 0) {
-            el.classList.add("pattern-faq-question-alt");
-          }
-          h3Index++;
-        } else if (el.tagName === "H2") {
-          break; // Stop at next H2
-        }
-        el = el.nextElementSibling;
-      }
-    }
   }, []);
 
   return null;
