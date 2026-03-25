@@ -1288,6 +1288,125 @@ body {
   font-weight: 500;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+   PRACTICAL EXAMPLES CARDS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.prose-custom h2#practical-examples,
+.prose-custom h2.pattern-examples-heading {
+  margin-bottom: 2.5rem;
+}
+
+.prose-custom .example-card {
+  position: relative;
+  margin: 0 0 2rem 0;
+  padding: 2rem 2rem 2rem 2.5rem;
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(47, 37, 30, 0.12);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 12px rgba(43, 34, 24, 0.04);
+  transition: all 0.3s ease;
+}
+
+.prose-custom .example-card:hover {
+  box-shadow: 0 8px 24px rgba(43, 34, 24, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Example number badge */
+.prose-custom .example-card::before {
+  content: attr(data-example-index);
+  position: absolute;
+  top: 2rem;
+  left: -0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+/* Different colors for different examples */
+.prose-custom .example-card[data-example-index="1"]::before {
+  background: linear-gradient(135deg, #4B6E70, #3a5557);
+}
+
+.prose-custom .example-card[data-example-index="2"]::before {
+  background: linear-gradient(135deg, #F4B942, #d9a235);
+}
+
+.prose-custom .example-card[data-example-index="3"]::before {
+  background: linear-gradient(135deg, #977C58, #7a6446);
+}
+
+.prose-custom .example-card[data-example-index="4"]::before {
+  background: linear-gradient(135deg, #4B6E70, #3a5557);
+}
+
+.prose-custom .example-card[data-example-index="5"]::before {
+  background: linear-gradient(135deg, #F4B942, #d9a235);
+}
+
+/* Left accent bar matching the badge color */
+.prose-custom .example-card[data-example-index="1"] {
+  border-left: 3px solid #4B6E70;
+}
+
+.prose-custom .example-card[data-example-index="2"] {
+  border-left: 3px solid #F4B942;
+}
+
+.prose-custom .example-card[data-example-index="3"] {
+  border-left: 3px solid #977C58;
+}
+
+.prose-custom .example-card[data-example-index="4"] {
+  border-left: 3px solid #4B6E70;
+}
+
+.prose-custom .example-card[data-example-index="5"] {
+  border-left: 3px solid #F4B942;
+}
+
+/* Example title (H3) styling within card */
+.prose-custom .example-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+/* Content within cards */
+.prose-custom .example-card > p:first-of-type {
+  margin-top: 0;
+}
+
+.prose-custom .example-card > *:last-child {
+  margin-bottom: 0;
+}
+
+.prose-custom .example-card p {
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.prose-custom .example-card strong,
+.prose-custom .example-card b {
+  color: var(--color-text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MANUAL CLASS OVERRIDES
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
 /* Manual class overrides for writer control */
 .prose-custom .section-highlight {
   padding: 2rem;

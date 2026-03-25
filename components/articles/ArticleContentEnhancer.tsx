@@ -155,6 +155,50 @@ export default function ArticleContentEnhancer() {
         h2.classList.add("pattern-examples-heading");
       }
     });
+    
+    // Handle Practical Examples - wrap H3s in cards
+    const examplesH2 = article.querySelector("h2#practical-examples, h2.pattern-examples-heading");
+    if (examplesH2) {
+      let currentElement = examplesH2.nextElementSibling;
+      let exampleIndex = 1;
+      
+      while (currentElement && currentElement.tagName !== "H2") {
+        if (currentElement.tagName === "H3") {
+          // Create card wrapper
+          const card = document.createElement("div");
+          card.className = "example-card";
+          card.setAttribute("data-example-index", exampleIndex.toString());
+          
+          // Collect this example's content
+          const h3 = currentElement;
+          const contentElements: Element[] = [];
+          let nextEl = h3.nextElementSibling;
+          
+          while (nextEl && nextEl.tagName !== "H3" && nextEl.tagName !== "H2") {
+            contentElements.push(nextEl);
+            nextEl = nextEl.nextElementSibling;
+          }
+          
+          // Insert card before H3
+          h3.parentElement?.insertBefore(card, h3);
+          
+          // Move H3 and content into card
+          card.appendChild(h3.cloneNode(true));
+          contentElements.forEach(el => {
+            card.appendChild(el.cloneNode(true));
+          });
+          
+          // Remove original elements
+          h3.remove();
+          contentElements.forEach(el => el.remove());
+          
+          currentElement = nextEl || examplesH2.nextElementSibling;
+          exampleIndex++;
+        } else {
+          currentElement = currentElement.nextElementSibling;
+        }
+      }
+    }
   }, []);
 
   return null;
