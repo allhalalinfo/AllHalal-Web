@@ -724,6 +724,7 @@ IFANCA's shopper guidance specifically lists gelatin among ingredients that may 
 - ❌ НЕ используй `[^1]` (footnote format)
 - ❌ НЕ пиши полное название источника в скобках
 - ❌ **НЕ пиши название источника ПОСЛЕ цитаты!** Просто `[N]` и точка.
+- ❌ **НЕ добавляй точку или пробел между `[N]` и названием источника!**
 
 **Примеры:**
 
@@ -737,8 +738,16 @@ The FDA classifies E471 as "generally recognized as safe" [3].
 The FDA classifies E471 as "generally recognized as safe" [3] Food and Drug Administration.
 ```
 ```
+The FDA classifies E471 as "generally recognized as safe" [3]. Food and Drug Administration.
+```
+```
 The FDA classifies E471 as "generally recognized as safe" oai_citation:3†FDA.
 ```
+```
+The FDA classifies E471 as "generally recognized as safe" [12]. Food and Drug Administration.
+```
+
+**ПРАВИЛО:** После `[N]` должна идти ТОЛЬКО точка (или запятая/точка с запятой), и ничего больше! Название источника должно быть ТОЛЬКО в секции References внизу.
 
 **Пример статьи:**
 
