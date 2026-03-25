@@ -138,12 +138,7 @@ export default async function CustomArticlePage(props: {
             </nav>
 
             <header className="mb-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
-                {article.category}
-              </div>
-              
-              <h1 className="mt-6 font-display text-[clamp(2rem,5vw,3.5rem)] font-black leading-[1.1] tracking-[-0.04em] text-text-primary">
+              <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-black leading-[1.1] tracking-[-0.04em] text-text-primary">
                 {article.title}
               </h1>
               
@@ -152,25 +147,6 @@ export default async function CustomArticlePage(props: {
                   {article.dek}
                 </p>
               ) : null}
-              
-              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted">
-                {article.author ? (
-                  <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary">
-                      {article.author.charAt(0)}
-                    </div>
-                    <span className="font-medium text-text-secondary">{article.author}</span>
-                  </div>
-                ) : null}
-                <span aria-hidden>•</span>
-                <time dateTime={article.published_at} className="font-medium">
-                  {new Date(article.published_at).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-              </div>
             </header>
 
             {/* Hero image - breakout to wider than text for visual interest */}
