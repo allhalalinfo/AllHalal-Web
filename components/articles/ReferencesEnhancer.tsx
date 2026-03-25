@@ -73,6 +73,8 @@ export default function ReferencesEnhancer() {
 
       if (items.length === 0) return;
 
+      console.log("ReferencesEnhancer: Parsed items:", items);
+
       // Create collapsible container
       const container = document.createElement("div");
       container.className = "references-collapsible";
@@ -111,6 +113,8 @@ export default function ReferencesEnhancer() {
               // (the badge already shows the number)
               let cleanedHtml = item.html.trim();
               cleanedHtml = cleanedHtml.replace(/^\[\d+\]\s*/, ""); // Remove [1], [2], etc. from start
+              
+              console.log(`ReferencesEnhancer: Item ${index + 1} - Original:`, item.html, "Cleaned:", cleanedHtml);
               
               content.innerHTML = cleanedHtml;
 
