@@ -8,20 +8,31 @@ import { useEffect } from "react";
 export default function ReferencesEnhancer() {
   useEffect(() => {
     const article = document.querySelector(".prose-custom");
-    if (!article) return;
+    if (!article) {
+      console.log("ReferencesEnhancer: .prose-custom not found");
+      return;
+    }
 
     // Find References heading
-    const referencesH2 = article.querySelector(
+    let referencesH2 = article.querySelector(
       "h2#references, h2.pattern-learning-heading, h2[id*='reference']"
     );
+    
     if (!referencesH2) {
       // Try by text content
       const allH2 = article.querySelectorAll("h2");
       for (const h2 of allH2) {
-        if (h2.textContent?.toLowerCase().includes("reference")) {
-          return processReferences(h2);
+        const text = h2.textContent?.toLowerCase() || "";
+        if (text.includes("reference")) {
+          referencesH2 = h2;
+          console.log("ReferencesEnhancer: Found References heading by text");
+          break;
         }
       }
+    }
+
+    if (!referencesH2) {
+      console.log("ReferencesEnhancer: References heading not found");
       return;
     }
 

@@ -1048,6 +1048,18 @@ body {
   border-top: 1px solid rgba(47, 37, 30, 0.12);
 }
 
+/* Style References paragraph content (fallback before JS) */
+.prose-custom h2[id*="reference"] + p,
+.prose-custom h2[id*="reference"] ~ p {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  padding: 1rem 1.5rem;
+  background: rgba(244, 185, 66, 0.02);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(47, 37, 30, 0.08);
+}
+
 /* Keep Learning uses arrows */
 .prose-custom h2[id*="learning"] ~ ul > li::before,
 .prose-custom ul.pattern-learning-list > li::before {
