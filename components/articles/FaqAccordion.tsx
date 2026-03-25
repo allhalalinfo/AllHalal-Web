@@ -9,13 +9,36 @@ import { useEffect } from "react";
 export default function FaqAccordion() {
   useEffect(() => {
     const article = document.querySelector(".prose-custom");
-    if (!article) return;
+    if (!article) {
+      console.log("FaqAccordion: .prose-custom not found");
+      return;
+    }
 
-    // Find FAQ heading
-    const faqHeading = article.querySelector(
-      "h2#faq, h2.pattern-faq-heading, h2[id*='faq'], h2[id*='question']"
-    );
-    if (!faqHeading) return;
+    // Find FAQ heading - try multiple strategies
+    let faqHeading: Element | null = null;
+    
+    // Strategy 1: By ID
+    faqHeading = article.querySelector("h2#faq, h2.pattern-faq-heading, h2[id*='faq'], h2[id*='question']");
+    
+    // Strategy 2: By text content if ID not found
+    if (!faqHeading) {
+      const allH2 = article.querySelectorAll("h2");
+      for (const h2 of allH2) {
+        const text = h2.textContent?.toLowerCase().trim() || "";
+        if (text.includes("faq") || text.includes("frequently asked") || text.includes("questions")) {
+          faqHeading = h2;
+          console.log("FaqAccordion: Found FAQ heading by text:", h2.textContent);
+          break;
+        }
+      }
+    }
+    
+    if (!faqHeading) {
+      console.log("FaqAccordion: FAQ heading not found");
+      return;
+    }
+    
+    console.log("FaqAccordion: Found FAQ heading:", faqHeading.textContent);
 
     // Collect all H3 questions and their answers until next H2
     const faqItems: Array<{ question: HTMLElement; answer: HTMLElement[] }> = [];
@@ -47,7 +70,12 @@ export default function FaqAccordion() {
       faqItems.push({ question: currentQuestion, answer: currentAnswers });
     }
 
-    if (faqItems.length === 0) return;
+    if (faqItems.length === 0) {
+      console.log("FaqAccordion: No FAQ items found (no H3 questions under FAQ heading)");
+      return;
+    }
+    
+    console.log(`FaqAccordion: Found ${faqItems.length} FAQ items`);
 
     // Create accordion structure
     const accordionContainer = document.createElement("div");

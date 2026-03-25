@@ -72,12 +72,19 @@ export default function ArticleDomainCitationConverter() {
     // Extract domains from reference texts (look for links or domain names)
     const domainMap = new Map<string, number>();
     
+    console.log("ArticleDomainCitationConverter: Reference texts:", referenceTexts);
+    
     referenceTexts.forEach((refText, index) => {
       const refNumber = index + 1;
       
+      // Remove [N] prefix if present (from bad format)
+      let cleanRefText = refText.replace(/^\[\d+\]\s*/, "");
+      
+      console.log(`ArticleDomainCitationConverter: Processing ref ${refNumber}: "${cleanRefText}"`);
+      
       // Try to extract domain from various formats:
       // 1. Look for common patterns like "ecfr.gov", "fda.gov", "ifanca.org"
-      const domainMatches = refText.match(/([a-z0-9-]+\.[a-z]{2,}(?:\.[a-z]{2,})?)/gi);
+      const domainMatches = cleanRefText.match(/([a-z0-9-]+\.[a-z]{2,}(?:\.[a-z]{2,})?)/gi);
       
       if (domainMatches) {
         domainMatches.forEach(domain => {
@@ -87,6 +94,8 @@ export default function ArticleDomainCitationConverter() {
             console.log(`ArticleDomainCitationConverter: Mapped domain "${cleanDomain}" → [${refNumber}]`);
           }
         });
+      } else {
+        console.warn(`ArticleDomainCitationConverter: No domain found in ref ${refNumber}: "${cleanRefText}"`);
       }
     });
 
