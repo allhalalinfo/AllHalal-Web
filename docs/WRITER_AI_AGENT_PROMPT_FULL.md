@@ -735,11 +735,17 @@ The FDA classifies E471 as "generally recognized as safe" [3]. However, for Musl
 
 ## References {#references}
 
-[1] FDA — Food Additives Status List  
-[2] European Food Safety Authority — E471 Assessment  
-[3] U.S. Food and Drug Administration — GRAS Substances Database  
-[4] IFANCA — Halal Certification Standards for Emulsifiers  
+FDA — Food Additives Status List  
+European Food Safety Authority — E471 Assessment  
+U.S. Food and Drug Administration — GRAS Substances Database  
+IFANCA — Halal Certification Standards for Emulsifiers  
 ```
+
+**ВАЖНО про формат References секции:**
+- ❌ НЕ ставь `[1]`, `[2]`, `[3]` перед референсами в списке — фронтенд добавит номера автоматически!
+- ✅ Просто перечисляй источники по порядку через `<br>` или в списке
+- ✅ Каждый референс на новой строке
+- ✅ Порядок должен соответствовать цитатам в тексте (`[1]` → первый референс, `[2]` → второй и т.д.)
 
 **Технические требования:**
 - Ссылки автоматически станут кликабельными на фронтенде

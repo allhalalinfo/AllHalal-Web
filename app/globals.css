@@ -1300,7 +1300,7 @@ body {
 
 /* Reference number badge */
 .reference-card::before {
-  content: "[" attr(data-index) "]";
+  content: attr(data-index);
   position: absolute;
   left: 1.25rem;
   top: 50%;

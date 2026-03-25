@@ -106,7 +106,13 @@ export default function ReferencesEnhancer() {
 
               const content = document.createElement("div");
               content.className = "reference-content";
-              content.innerHTML = item.html;
+              
+              // Remove [N] from the beginning of the text to avoid duplication
+              // (the badge already shows the number)
+              let cleanedHtml = item.html.trim();
+              cleanedHtml = cleanedHtml.replace(/^\[\d+\]\s*/, ""); // Remove [1], [2], etc. from start
+              
+              content.innerHTML = cleanedHtml;
 
               card.appendChild(content);
               styledList.appendChild(card);
