@@ -41,10 +41,11 @@ export default function ArticleCitationCleaner() {
     // Captures everything until period, comma, or end of sentence
     const oaiCitationRegex = /oai_citation:(\d+)[†‡][^.,:;!\n?]*/g;
     
-    // Pattern to match: [N] SourceName OR [N].domain.com (both formats)
-    // Handles both: "[5] halal.gov.my" and "[11].halal.gov.my"
-    // After bracket, can be space(s) OR dot, then captures full domain/word
-    const bracketCitationRegex = /\[(\d+)\](?:\s+|\.)[^\s,:;!\n?]+(?:\.[^\s,:;!\n?]+)*/g;
+    // Pattern to match: [N] Multi-word source names and domains
+    // Handles: "[8] Food and Drug Administration" and "[5].halal.gov.my"
+    // Uses lazy match (.*?) to capture everything until sentence-ending punctuation
+    // Stops at: period+space, comma, semicolon, exclamation, question, or newline
+    const bracketCitationRegex = /\[(\d+)\](?:\s+|\.).*?(?=\.\s|,|;|!|\?|\n|$)/g;
 
     let replacementsMade = false;
 
