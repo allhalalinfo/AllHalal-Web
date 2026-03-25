@@ -973,12 +973,8 @@ body {
 .prose-custom h2[id*="quick"] + p::before,
 .prose-custom h2[id*="tldr"] + p::before,
 .prose-custom p.pattern-quick-answer::before {
-  content: '⚡';
-  position: absolute;
-  top: 1.75rem;
-  left: -3rem;
-  font-size: 2rem;
-  opacity: 0.4;
+  content: '';
+  display: none;
 }
 
 /* Pattern 2: Key Takeaways - Accent border card */
@@ -1389,18 +1385,6 @@ body {
   position: relative;
 }
 
-.prose-custom h2[id*="practical"]::after,
-.prose-custom h2[id*="tip"]::after,
-.prose-custom h2.pattern-tips-heading::after {
-  content: '💡';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.5rem;
-  opacity: 0.5;
-}
-
 /* Pattern 9: Comparison tables - Enhanced styling */
 .prose-custom h2[id*="comparison"],
 .prose-custom h2[id*="versus"],
@@ -1449,18 +1433,6 @@ body {
   background: linear-gradient(135deg, rgba(244, 185, 66, 0.04), rgba(75, 110, 112, 0.04));
   border-radius: var(--radius-lg);
   border: 1px solid rgba(47, 37, 30, 0.08);
-}
-
-/* Add decorative icon at top */
-.prose-custom h2[id*="final"] + *::before,
-.prose-custom h2[id*="conclusion"] + *::before,
-.prose-custom h2[id*="next-step"] + *::before,
-.prose-custom h2.pattern-final-heading + *::before {
-  content: '✨';
-  display: block;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  opacity: 0.6;
 }
 
 /* Style links within Final CTA as "Open app" buttons */
