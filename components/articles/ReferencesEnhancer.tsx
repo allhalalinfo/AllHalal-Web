@@ -130,8 +130,8 @@ export default function ReferencesEnhancer() {
               
               if (cleanedHtml.length === 0) {
                 console.warn(`ReferencesEnhancer: Item ${index + 1} has EMPTY content after cleaning!`);
-                // If cleaning resulted in empty string, use original
-                cleanedHtml = originalHtml;
+                // If cleaning resulted in empty string, show a placeholder
+                cleanedHtml = `<em style="color: #DC2626;">Reference ${index + 1} — Missing source information</em>`;
               }
               
               content.innerHTML = cleanedHtml;
