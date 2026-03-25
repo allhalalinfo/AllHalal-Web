@@ -1102,6 +1102,7 @@ body {
   border-left: 3px solid rgba(220, 38, 38, 0.5);
   border-radius: 6px;
   transition: all 0.2s ease;
+  list-style-type: none;
 }
 
 .prose-custom h2[id*="mistake"] ~ ol > li:last-child,
@@ -1124,7 +1125,7 @@ body {
   border-left-color: rgba(220, 38, 38, 0.7);
 }
 
-/* Small "✗" mark */
+/* Small "✗" mark (override default bullet) */
 .prose-custom h2[id*="mistake"] ~ ol > li::before,
 .prose-custom h2[id*="error"] ~ ol > li::before,
 .prose-custom h2[id*="mistake"] ~ ul > li::before,
@@ -1138,6 +1139,11 @@ body {
   font-size: 0.9rem;
   color: #DC2626;
   opacity: 0.7;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Pattern 5: Keep Learning / References - Compact link list */
