@@ -831,20 +831,14 @@ body {
 }
 
 .prose-custom ul > li::before {
-  content: '✓';
+  content: '';
   position: absolute;
   left: 0;
-  top: 0.15rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
   background: var(--color-primary);
-  color: white;
   border-radius: 50%;
-  font-size: 0.7rem;
-  font-weight: bold;
   box-shadow: 0 2px 6px rgba(151, 124, 88, 0.2);
 }
 
@@ -874,15 +868,18 @@ body {
   box-shadow: 0 2px 8px rgba(43, 34, 24, 0.15);
 }
 
-/* Nested lists */
+/* Nested lists - smaller dots */
 .prose-custom ul ul > li::before,
 .prose-custom ol ul > li::before {
-  content: '→';
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 50%;
   box-shadow: none;
-  top: 0.15rem;
+  opacity: 0.7;
+  top: 0.55rem;
 }
 
 /* Tables - clean modern design */
@@ -1149,14 +1146,17 @@ body {
   border: 1px solid rgba(47, 37, 30, 0.08);
 }
 
-/* Keep Learning uses arrows */
+/* Keep Learning uses small dots instead of arrows */
 .prose-custom h2[id*="learning"] ~ ul > li::before,
 .prose-custom ul.pattern-learning-list > li::before {
-  content: '→';
-  background: transparent;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  box-shadow: none;
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(151, 124, 88, 0.15);
+  top: 0.5rem;
 }
 
 .prose-custom h2[id*="learning"] ~ ul > li,
