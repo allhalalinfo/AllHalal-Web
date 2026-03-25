@@ -101,7 +101,15 @@ export default async function CustomArticlePage(props: {
 
   return (
     <>
-      <main className="relative min-h-screen overflow-hidden bg-bg-primary pb-24 pt-32">
+      <main className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7f2e7_0%,#f5f1e8_18%,#eef1ec_52%,#f2f1e8_100%)] pb-24 pt-32">
+        {/* Ambient background effects */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(244,185,66,0.18),transparent_24%),radial-gradient(circle_at_78%_12%,rgba(73,110,112,0.16),transparent_26%),radial-gradient(circle_at_55%_78%,rgba(104,134,93,0.10),transparent_24%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.35),transparent_26%,transparent_72%,rgba(255,255,255,0.15))]" />
+          <div className="absolute left-[-10rem] top-[8rem] h-[24rem] w-[24rem] rounded-full bg-[rgba(244,185,66,0.14)] blur-3xl" />
+          <div className="absolute right-[-10rem] top-[6rem] h-[24rem] w-[24rem] rounded-full bg-[rgba(75,110,112,0.12)] blur-3xl" />
+        </div>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
