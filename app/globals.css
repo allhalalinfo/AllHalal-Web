@@ -711,126 +711,105 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   CUSTOM ARTICLE PROSE ENHANCEMENTS - MODERN DESIGN
+   CUSTOM ARTICLE PROSE ENHANCEMENTS - PREMIUM EDITORIAL
    ═══════════════════════════════════════════════════════════════════════════════ */
 
+/* Typography hierarchy - clean and professional */
 .prose-custom h1 {
   font-family: var(--font-display);
   font-weight: var(--font-black);
   font-size: 2.5rem;
-  line-height: 1.2;
+  line-height: 1.25;
   color: var(--color-text-primary);
-  margin: 3.5rem 0 1.5rem 0;
+  margin: 3rem 0 1.5rem 0;
   letter-spacing: -0.03em;
 }
 
 .prose-custom h2 {
   font-family: var(--font-display);
   font-weight: var(--font-black);
-  font-size: 2.25rem;
-  line-height: 1.2;
+  font-size: 2rem;
+  line-height: 1.3;
   color: var(--color-text-primary);
-  margin-top: 4rem;
-  margin-bottom: 1.5rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
   scroll-margin-top: 6rem;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 
 .prose-custom h3 {
   font-family: var(--font-display);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-bold);
   font-size: 1.5rem;
-  line-height: 1.35;
+  line-height: 1.4;
   color: var(--color-text-primary);
   margin-top: 2.5rem;
   margin-bottom: 1rem;
   scroll-margin-top: 6rem;
   letter-spacing: -0.01em;
-  position: relative;
-  padding-left: 1.25rem;
 }
 
-/* Elegant vertical accent bar */
-.prose-custom h3::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.25em;
-  width: 3px;
-  height: 1.3em;
-  background: linear-gradient(180deg, var(--color-primary), var(--color-accent-navy));
-  border-radius: 3px;
-  box-shadow: 0 2px 6px rgba(151, 124, 88, 0.2);
+/* Paragraph styling - optimized for readability */
+.prose-custom p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  font-size: 1.0625rem;
 }
 
+.prose-custom h2 + p,
+.prose-custom h3 + p {
+  margin-top: 0.75rem;
+}
+
+/* Unified underline style - gold brand color */
+.prose-custom a,
+.prose-custom u {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #F4B942;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: auto;
+  font-weight: var(--font-medium);
+  transition: text-decoration-color 0.2s ease;
+}
+
+.prose-custom a:hover {
+  text-decoration-color: var(--color-accent-navy);
+}
+
+/* Strong text - subtle yellow highlight */
+.prose-custom strong {
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  background: linear-gradient(180deg, transparent 65%, rgba(244, 185, 66, 0.25) 65%);
+  padding: 0.1em 0.15em;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Blockquotes - modern card style */
 .prose-custom blockquote {
   position: relative;
-  padding: 1.75rem 2rem 1.75rem 2rem;
+  padding: 1.5rem 2rem;
   margin: 2.5rem 0;
-  background: linear-gradient(135deg, rgba(244, 185, 66, 0.06), rgba(75, 110, 112, 0.06));
-  border-left: 4px solid;
-  border-image: linear-gradient(180deg, var(--color-primary), var(--color-accent-navy)) 1;
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.05), rgba(75, 110, 112, 0.05));
+  border-left: 4px solid var(--color-primary);
   border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
   font-style: normal;
   color: var(--color-text-primary);
-  box-shadow: 0 4px 20px rgba(43, 34, 24, 0.05), inset 0 0 0 1px rgba(151, 124, 88, 0.08);
-}
-
-.prose-custom blockquote::before {
-  display: none;
+  box-shadow: 0 4px 16px rgba(43, 34, 24, 0.04);
 }
 
 .prose-custom blockquote p {
   font-size: 1.05em;
   line-height: 1.7;
+  margin-bottom: 0;
 }
 
-.prose-custom blockquote p:first-child::before {
-  content: '💡';
-  margin-right: 0.5rem;
-  font-size: 1.1em;
-}
-
-/* Enhanced strong text - modern highlight */
-.prose-custom strong {
-  font-weight: var(--font-bold);
-  color: var(--color-text-primary);
-  background: linear-gradient(180deg, transparent 65%, rgba(244, 185, 66, 0.3) 65%);
-  padding: 0.1em 0.2em;
-  border-radius: 3px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-/* Underlined text for emphasis */
-.prose-custom u {
-  text-decoration: underline;
-  text-decoration-color: var(--color-primary);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  text-decoration-skip-ink: none;
-  color: var(--color-text-primary);
-  font-weight: var(--font-medium);
-}
-
-/* Links - same style as underlined text */
-.prose-custom a {
-  color: var(--color-text-primary);
-  text-decoration: underline;
-  text-decoration-color: var(--color-primary);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-  text-decoration-skip-ink: none;
-  font-weight: var(--font-medium);
-  transition: color var(--transition-fast);
-}
-
-.prose-custom a:hover {
-  color: var(--color-primary);
-  text-decoration-color: var(--color-accent-navy);
-}
-
-/* Modern list styling */
+/* Lists - modern badges and checkmarks */
 .prose-custom ul,
 .prose-custom ol {
   margin: 2rem 0;
@@ -842,11 +821,10 @@ body {
 .prose-custom ol > li {
   position: relative;
   padding-left: 2.5rem;
-  margin-bottom: 1rem;
-  line-height: 1.75;
+  margin-bottom: 0.875rem;
+  line-height: 1.7;
 }
 
-/* Custom checkmark-style bullets */
 .prose-custom ul > li::before {
   content: '✓';
   position: absolute;
@@ -860,36 +838,35 @@ body {
   background: var(--color-primary);
   color: white;
   border-radius: 50%;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: bold;
-  box-shadow: 0 2px 8px rgba(151, 124, 88, 0.25);
+  box-shadow: 0 2px 6px rgba(151, 124, 88, 0.2);
 }
 
-/* Numbered list with modern badges */
 .prose-custom ol {
-  counter-reset: custom-counter;
+  counter-reset: item;
 }
 
 .prose-custom ol > li {
-  counter-increment: custom-counter;
+  counter-increment: item;
 }
 
 .prose-custom ol > li::before {
-  content: counter(custom-counter);
+  content: counter(item);
   position: absolute;
   left: 0;
   top: 0;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.65rem;
+  height: 1.65rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--color-primary), var(--color-accent-navy));
   color: white;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: var(--font-bold);
-  box-shadow: 0 3px 12px rgba(43, 34, 24, 0.15);
+  box-shadow: 0 2px 8px rgba(43, 34, 24, 0.15);
 }
 
 /* Nested lists */
@@ -900,87 +877,69 @@ body {
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
   box-shadow: none;
-  font-size: 0.9rem;
 }
 
-/* Modern table styling */
+/* Tables - clean modern design */
 .prose-custom table {
+  width: 100%;
   margin: 2.5rem 0;
   border-collapse: separate;
   border-spacing: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(43, 34, 24, 0.08);
+  box-shadow: 0 6px 24px rgba(43, 34, 24, 0.06);
   border: 1px solid rgba(47, 37, 30, 0.1);
 }
 
 .prose-custom thead {
-  background: linear-gradient(135deg, rgba(75, 110, 112, 0.15), rgba(151, 124, 88, 0.12));
+  background: linear-gradient(135deg, rgba(151, 124, 88, 0.1), rgba(75, 110, 112, 0.08));
 }
 
 .prose-custom th {
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1.125rem;
   text-align: left;
   font-weight: var(--font-bold);
   color: var(--color-text-primary);
   font-size: 0.875rem;
-  text-transform: none;
-  letter-spacing: 0;
-  border-bottom: 2px solid var(--color-primary);
+  border-bottom: 2px solid rgba(151, 124, 88, 0.3);
 }
 
 .prose-custom td {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid rgba(47, 37, 30, 0.08);
+  padding: 0.875rem 1.125rem;
+  border-bottom: 1px solid rgba(47, 37, 30, 0.06);
   color: var(--color-text-secondary);
-  text-align: left;
 }
 
 .prose-custom tbody tr {
-  transition: background-color 0.2s ease;
+  transition: background-color 0.15s ease;
 }
 
 .prose-custom tbody tr:hover {
-  background: rgba(244, 185, 66, 0.04);
+  background: rgba(244, 185, 66, 0.03);
 }
 
 .prose-custom tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Paragraph spacing for readability */
-.prose-custom p {
-  margin-bottom: 1.75rem;
-  line-height: 1.85;
-  color: var(--color-text-secondary);
-}
-
-/* First paragraph after heading - special treatment */
-.prose-custom h2 + p,
-.prose-custom h3 + p {
-  margin-top: 1rem;
-  font-size: 1.05em;
-}
-
-/* Code blocks - modern design */
+/* Code styling */
 .prose-custom code {
   background: rgba(75, 110, 112, 0.08);
   color: var(--color-accent-navy);
-  padding: 0.2em 0.5em;
-  border-radius: 6px;
+  padding: 0.2em 0.45em;
+  border-radius: 4px;
   font-size: 0.9em;
   font-weight: 500;
-  border: 1px solid rgba(75, 110, 112, 0.15);
+  border: 1px solid rgba(75, 110, 112, 0.12);
 }
 
 .prose-custom pre {
-  background: linear-gradient(135deg, rgba(44, 31, 28, 0.03), rgba(75, 110, 112, 0.03));
-  border: 1px solid rgba(47, 37, 30, 0.12);
+  background: linear-gradient(135deg, rgba(44, 31, 28, 0.02), rgba(75, 110, 112, 0.02));
+  border: 1px solid rgba(47, 37, 30, 0.1);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: 1.25rem;
   margin: 2rem 0;
   overflow-x: auto;
-  box-shadow: 0 4px 16px rgba(43, 34, 24, 0.04);
 }
 
 .prose-custom pre code {
