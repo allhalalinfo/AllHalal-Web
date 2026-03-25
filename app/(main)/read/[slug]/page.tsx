@@ -103,7 +103,7 @@ export default async function CustomArticlePage(props: {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        <article className="container relative z-10 mx-auto max-w-4xl px-4">
+        <article className="container relative z-10 mx-auto max-w-5xl px-4 lg:px-8">
           <nav className="mb-8 text-sm text-text-muted">
             <Link href={portalHome} className="font-medium text-primary hover:underline">
               Home
