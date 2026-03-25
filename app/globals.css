@@ -812,7 +812,7 @@ body {
 /* Lists - modern badges and checkmarks */
 .prose-custom ul,
 .prose-custom ol {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   padding-left: 0;
   list-style: none;
 }
@@ -820,16 +820,21 @@ body {
 .prose-custom ul > li,
 .prose-custom ol > li {
   position: relative;
-  padding-left: 2.5rem;
-  margin-bottom: 0.875rem;
+  padding-left: 2.25rem;
+  margin-bottom: 0.65rem;
   line-height: 1.7;
+}
+
+.prose-custom ul > li:last-child,
+.prose-custom ol > li:last-child {
+  margin-bottom: 0;
 }
 
 .prose-custom ul > li::before {
   content: '✓';
   position: absolute;
   left: 0;
-  top: 0;
+  top: 0.15rem;
   width: 1.5rem;
   height: 1.5rem;
   display: flex;
@@ -855,7 +860,7 @@ body {
   content: counter(item);
   position: absolute;
   left: 0;
-  top: 0;
+  top: 0.15rem;
   width: 1.65rem;
   height: 1.65rem;
   display: flex;
@@ -877,6 +882,7 @@ body {
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
   box-shadow: none;
+  top: 0.15rem;
 }
 
 /* Tables - clean modern design */
@@ -1017,12 +1023,22 @@ body {
 
 .prose-custom h2[id*="takeaway"] ~ ul,
 .prose-custom ul.pattern-takeaway-list {
-  padding: 2rem 2rem 2rem 2.5rem;
-  margin: 1.5rem 0 2.5rem 0;
+  padding: 1.25rem;
+  margin: 1.5rem 0 2rem 0;
   background: linear-gradient(to right, rgba(75, 110, 112, 0.08), rgba(75, 110, 112, 0.02));
   border-left: 6px solid var(--color-accent-navy);
   border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
   box-shadow: 0 4px 20px rgba(43, 34, 24, 0.06);
+}
+
+.prose-custom h2[id*="takeaway"] ~ ul > li,
+.prose-custom ul.pattern-takeaway-list > li {
+  margin-bottom: 0.7rem;
+}
+
+.prose-custom h2[id*="takeaway"] ~ ul > li:last-child,
+.prose-custom ul.pattern-takeaway-list > li:last-child {
+  margin-bottom: 0;
 }
 
 /* Pattern 3: Why This Matters - Side accent bar */
@@ -1145,8 +1161,14 @@ body {
 
 .prose-custom h2[id*="learning"] ~ ul > li,
 .prose-custom ul.pattern-learning-list > li {
-  padding: 0.75rem 0 0.75rem 2.5rem;
+  padding: 0.65rem 0 0.65rem 2.25rem;
+  margin-bottom: 0;
   border-bottom: 1px solid rgba(47, 37, 30, 0.06);
+}
+
+.prose-custom h2[id*="learning"] ~ ul > li:last-child,
+.prose-custom ul.pattern-learning-list > li:last-child {
+  border-bottom: none;
 }
 
 /* Pattern 6: Step-by-step / How-to - Numbered with color progression */
@@ -1154,6 +1176,16 @@ body {
 .prose-custom h2[id*="how-to"],
 .prose-custom h2.pattern-steps-heading {
   color: var(--color-accent-navy);
+}
+
+.prose-custom h2[id*="step"] ~ ol > li,
+.prose-custom ol.pattern-steps-list > li {
+  margin-bottom: 1rem;
+}
+
+.prose-custom h2[id*="step"] ~ ol > li:last-child,
+.prose-custom ol.pattern-steps-list > li:last-child {
+  margin-bottom: 0;
 }
 
 .prose-custom h2[id*="step"] ~ ol > li:nth-child(1)::before,
