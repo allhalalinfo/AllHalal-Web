@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import React from "react";
-import { formatTimeAgo } from "@/lib/briefs";
 import { proxiedImageSrc } from "@/lib/proxiedImageUrl";
 import type { CustomArticle } from "@/types/customArticle";
 
@@ -61,21 +60,7 @@ export default function CustomArticleGridCard({
       </div>
 
       <div className="mt-4">
-        <div className="flex flex-wrap items-center gap-2 text-[0.78rem] text-text-muted">
-          <span className="font-medium text-text-secondary">{article.category}</span>
-          <span aria-hidden="true">•</span>
-          <time dateTime={article.published_at}>
-            {formatTimeAgo(article.published_at)}
-          </time>
-          {article.author ? (
-            <>
-              <span aria-hidden="true">•</span>
-              <span>{article.author}</span>
-            </>
-          ) : null}
-        </div>
-
-        <h3 className="mt-2 line-clamp-3 text-[1.1rem] font-bold leading-tight text-text-primary transition-colors duration-300 group-hover:text-primary">
+        <h3 className="line-clamp-3 text-[1.1rem] font-bold leading-tight text-text-primary transition-colors duration-300 group-hover:text-primary">
           {article.title}
         </h3>
 
