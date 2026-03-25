@@ -12,9 +12,7 @@ import { useEffect } from "react";
  * - "[2] FDA" → "[2]"
  * - Any similar patterns → "[N]"
  * 
- * Two regex patterns:
- * 1. oai_citation format: captures everything including spaces until punctuation
- * 2. [N] SourceName format: captures citation number + space + word/domain
+ * Also cleans link text content: if a link starts with [N], removes everything after.
  * 
  * This ensures full source names are removed, leaving only clean [N] citations.
  * This runs before ArticleReferencesLinker, which then makes [N] clickable.
@@ -24,7 +22,7 @@ export default function ArticleCitationCleaner() {
     const article = document.querySelector(".prose-custom");
     if (!article) return;
 
-    // Find all text nodes in the article
+    // STEP 1: Clean text nodes
     const walker = document.createTreeWalker(
       article,
       NodeFilter.SHOW_TEXT,
@@ -74,6 +72,24 @@ export default function ArticleCitationCleaner() {
       if (modified) {
         textNode.textContent = text;
         replacementsMade = true;
+      }
+    });
+
+    // STEP 2: Clean link text content
+    // If link text starts with [N], keep ONLY [N] and mark as citation
+    const links = article.querySelectorAll("a");
+    links.forEach((link) => {
+      const text = link.textContent || "";
+      const match = text.match(/^\[(\d+)\]/);
+      if (match) {
+        // Link starts with [N]
+        if (text.length > match[0].length) {
+          // Has extra text after [N] - clean it
+          link.textContent = match[0]; // Keep only [N]
+          replacementsMade = true;
+        }
+        // Mark as citation link to prevent button styling
+        link.classList.add("citation-link");
       }
     });
 
