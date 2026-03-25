@@ -1285,13 +1285,6 @@ body {
    REFERENCES ENHANCED CARDS
    ═══════════════════════════════════════════════════════════════════════════════ */
 
-.references-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-  margin: 2rem 0 3rem 0;
-}
-
 .reference-card {
   position: relative;
   display: flex;
@@ -1372,6 +1365,73 @@ body {
 
 .reference-content a[href^="http"]:hover::after {
   opacity: 1;
+}
+
+/* Collapsible References Container */
+.references-collapsible {
+  margin: 2rem 0 3rem 0;
+}
+
+/* References Toggle Button */
+.references-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.06), rgba(75, 110, 112, 0.06));
+  border: 1px solid rgba(47, 37, 30, 0.12);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: all 0.3s ease;
+}
+
+.references-toggle:hover {
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.1), rgba(75, 110, 112, 0.1));
+  border-color: rgba(244, 185, 66, 0.3);
+  box-shadow: 0 2px 8px rgba(244, 185, 66, 0.12);
+}
+
+.references-toggle[aria-expanded="true"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: transparent;
+}
+
+.references-toggle-text {
+  flex: 1;
+  text-align: left;
+}
+
+.references-toggle-icon {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  transition: transform 0.3s ease;
+}
+
+.references-toggle[aria-expanded="true"] .references-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* References Content Panel */
+.references-content {
+  transition: max-height 0.4s ease;
+  border: 1px solid rgba(47, 37, 30, 0.12);
+  border-top: none;
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+  background: var(--color-bg-primary);
+}
+
+.references-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1.5rem;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
