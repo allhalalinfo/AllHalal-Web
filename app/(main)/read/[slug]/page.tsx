@@ -170,21 +170,6 @@ export default async function CustomArticlePage(props: {
                     day: "numeric",
                   })}
                 </time>
-                {article.tags && article.tags.length > 0 ? (
-                  <>
-                    <span aria-hidden>•</span>
-                    <div className="flex flex-wrap gap-2">
-                      {article.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-bg-card px-2.5 py-0.5 text-xs font-medium text-text-secondary"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </>
-                ) : null}
               </div>
             </header>
 
