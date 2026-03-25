@@ -56,7 +56,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.65, delay: 0.12, ease: "easeOut" }}
                 className="block"
               >
-                ingredients.
+                check.
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
@@ -64,7 +64,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.65, delay: 0.2, ease: "easeOut" }}
                 className="block bg-[linear-gradient(135deg,#9b7747_0%,#2f5458_38%,#59714d_72%,#b6925b_100%)] bg-clip-text text-transparent"
               >
-                live halal.
+                trust.
               </motion.span>
             </h1>
 
