@@ -13,21 +13,17 @@ export default function ReferencesEnhancer() {
       return;
     }
 
-    // Find References heading
-    let referencesH2 = article.querySelector(
-      "h2#references, h2.pattern-learning-heading, h2[id*='reference']"
-    );
+    // Find References heading - ONLY "References", not "Keep Learning"
+    let referencesH2: Element | null = null;
     
-    if (!referencesH2) {
-      // Try by text content
-      const allH2 = article.querySelectorAll("h2");
-      for (const h2 of allH2) {
-        const text = h2.textContent?.toLowerCase() || "";
-        if (text.includes("reference")) {
-          referencesH2 = h2;
-          console.log("ReferencesEnhancer: Found References heading by text");
-          break;
-        }
+    const allH2 = article.querySelectorAll("h2");
+    for (const h2 of allH2) {
+      const text = h2.textContent?.toLowerCase().trim() || "";
+      // Match ONLY "References" (not "Keep Learning" or other sections)
+      if (text === "references" || text === "reference") {
+        referencesH2 = h2;
+        console.log("ReferencesEnhancer: Found References heading by exact text match");
+        break;
       }
     }
 

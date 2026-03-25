@@ -1039,8 +1039,6 @@ body {
 
 /* Pattern 5: Keep Learning / References - Compact link list */
 .prose-custom h2[id*="learning"],
-.prose-custom h2[id*="reference"],
-.prose-custom h2[id*="resource"],
 .prose-custom h2.pattern-learning-heading {
   font-size: 1.75rem;
   margin-top: 4rem;
@@ -1048,7 +1046,18 @@ body {
   border-top: 1px solid rgba(47, 37, 30, 0.12);
 }
 
-/* Style References paragraph content (fallback before JS) */
+/* References heading styling */
+.prose-custom h2[id*="reference"],
+.prose-custom h2[id*="resource"] {
+  font-size: 1.5rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(47, 37, 30, 0.12);
+  color: var(--color-text-secondary);
+}
+
+/* Style References paragraph content (fallback before JS transforms it) */
+.prose-custom h2:not([id*="learning"]) + p:has(br),
 .prose-custom h2[id*="reference"] + p,
 .prose-custom h2[id*="reference"] ~ p {
   font-size: 0.875rem;
@@ -1074,66 +1083,6 @@ body {
 .prose-custom ul.pattern-learning-list > li {
   padding: 0.75rem 0 0.75rem 2.5rem;
   border-bottom: 1px solid rgba(47, 37, 30, 0.06);
-}
-
-/* References uses numbers in colored badges */
-.prose-custom h2[id*="reference"] ~ ol,
-.prose-custom h2[id*="resource"] ~ ol {
-  list-style: none;
-  counter-reset: reference-counter;
-  margin: 2rem 0;
-  padding: 0;
-  background: linear-gradient(to bottom, rgba(244, 185, 66, 0.02), transparent);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-}
-
-.prose-custom h2[id*="reference"] ~ ol > li,
-.prose-custom h2[id*="resource"] ~ ol > li {
-  counter-increment: reference-counter;
-  position: relative;
-  padding: 1rem 1rem 1rem 3.5rem;
-  margin: 0 0 0.75rem 0;
-  background: var(--color-bg-primary);
-  border: 1px solid rgba(47, 37, 30, 0.1);
-  border-radius: var(--radius-md);
-  transition: all 0.2s ease;
-}
-
-.prose-custom h2[id*="reference"] ~ ol > li:hover,
-.prose-custom h2[id*="resource"] ~ ol > li:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 2px 8px rgba(244, 185, 66, 0.12);
-  transform: translateX(4px);
-}
-
-.prose-custom h2[id*="reference"] ~ ol > li::before,
-.prose-custom h2[id*="resource"] ~ ol > li::before {
-  content: "[" counter(reference-counter) "]";
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  background: rgba(244, 185, 66, 0.1);
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(244, 185, 66, 0.3);
-}
-
-.prose-custom h2[id*="reference"] ~ ol > li a,
-.prose-custom h2[id*="resource"] ~ ol > li a {
-  color: var(--color-text-primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.prose-custom h2[id*="reference"] ~ ol > li:hover a,
-.prose-custom h2[id*="resource"] ~ ol > li:hover a {
-  color: var(--color-primary);
 }
 
 /* Pattern 6: Step-by-step / How-to - Numbered with color progression */
