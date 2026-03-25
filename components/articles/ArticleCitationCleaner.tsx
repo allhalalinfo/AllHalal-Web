@@ -8,11 +8,15 @@ import { useEffect } from "react";
  * - "oai_citation:1†Source" → "[1]"
  * - "oai_citation:2†IFANCA" → "[2]"
  * - "oai_citation:3† Food and Drug Administration" → "[3]"
+ * - "[5] halal.gov.my" → "[5]"
+ * - "[2] FDA" → "[2]"
  * - Any similar patterns → "[N]"
  * 
- * Regex captures everything including spaces until punctuation (. , : ; ! ?)
- * This ensures full source names are removed, not just the first word.
+ * Two regex patterns:
+ * 1. oai_citation format: captures everything including spaces until punctuation
+ * 2. [N] SourceName format: captures citation number + space + word/domain
  * 
+ * This ensures full source names are removed, leaving only clean [N] citations.
  * This runs before ArticleReferencesLinker, which then makes [N] clickable.
  */
 export default function ArticleCitationCleaner() {
@@ -35,30 +39,45 @@ export default function ArticleCitationCleaner() {
 
     // Pattern to match: oai_citation:N†Source or oai_citation:N‡Source (various symbols)
     // Captures everything until period, comma, or end of sentence
-    const citationRegex = /oai_citation:(\d+)[†‡][^.,:;!\n?]*/g;
+    const oaiCitationRegex = /oai_citation:(\d+)[†‡][^.,:;!\n?]*/g;
+    
+    // Pattern to match: [N] SourceName (regular format with source name after bracket)
+    // Matches [1] FDA, [2] halal.gov.my, [5] halal.gov.my etc.
+    // Captures citation number followed by space and any word/domain
+    const bracketCitationRegex = /\[(\d+)\]\s+[A-Za-z0-9.\-_]+(?:\.[a-z]{2,})?/g;
 
     let replacementsMade = false;
 
     textNodes.forEach((textNode) => {
-      const text = textNode.textContent || "";
-      if (!citationRegex.test(text)) return;
+      let text = textNode.textContent || "";
+      let modified = false;
+      
+      // Clean oai_citation format
+      if (oaiCitationRegex.test(text)) {
+        oaiCitationRegex.lastIndex = 0;
+        text = text.replace(oaiCitationRegex, (match, number) => {
+          modified = true;
+          return `[${number}]`;
+        });
+      }
+      
+      // Clean [N] SourceName format
+      if (bracketCitationRegex.test(text)) {
+        bracketCitationRegex.lastIndex = 0;
+        text = text.replace(bracketCitationRegex, (match, number) => {
+          modified = true;
+          return `[${number}]`;
+        });
+      }
 
-      // Reset regex
-      citationRegex.lastIndex = 0;
-
-      // Replace all occurrences
-      const cleanedText = text.replace(citationRegex, (match, number) => {
+      if (modified) {
+        textNode.textContent = text;
         replacementsMade = true;
-        return `[${number}]`;
-      });
-
-      if (cleanedText !== text) {
-        textNode.textContent = cleanedText;
       }
     });
 
     if (replacementsMade) {
-      console.log("ArticleCitationCleaner: Cleaned up oai_citation formats");
+      console.log("ArticleCitationCleaner: Cleaned up citation formats");
     }
   }, []);
 
