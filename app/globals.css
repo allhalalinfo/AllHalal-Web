@@ -1067,12 +1067,7 @@ body {
 }
 
 /* Pattern 4: Common Mistakes - Subtle red warning style */
-.prose-custom h2[id*="mistake"],
-.prose-custom h2[id*="error"],
-.prose-custom h2[id*="avoid"],
-.prose-custom h2.pattern-mistakes-heading {
-  color: #DC2626;
-}
+/* Heading uses default H2 color, only list items have red accent */
 
 /* Both OL and UL lists - compact */
 .prose-custom h2[id*="mistake"] ~ ol,
