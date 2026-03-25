@@ -704,7 +704,50 @@ The most practical approach is to prefer halal-certified products...
 - ✅ Если ID не подходит ни под один паттерн, будет обычный стиль
 - ❌ Не ставь ID на каждый заголовок - только на специальные секции
 
-### 6.4 Images в контенте
+### 6.4 Цитирование источников в тексте
+
+**КРИТИЧНО: Используй ТОЛЬКО числовой формат `[N]` для ссылок на источники!**
+
+**Правильный формат:**
+
+```markdown
+E471 is generally recognized as safe by the FDA [1]. However, its halal status depends entirely on the source of the fats used [2].
+
+IFANCA's shopper guidance specifically lists gelatin among ingredients that may be doubtful [3].
+```
+
+**ВАЖНО:**
+- ✅ Используй `[1]`, `[2]`, `[3]` и т.д. — простые квадратные скобки с номером
+- ✅ Ставь ссылку СРАЗУ после утверждения (до точки или запятой)
+- ✅ Номера должны соответствовать списку References внизу
+- ❌ НЕ используй формат `oai_citation:N†Source` — он НЕ поддерживается!
+- ❌ НЕ используй `[^1]` (footnote format)
+- ❌ НЕ пиши полное название источника в скобках
+
+**Пример статьи:**
+
+```markdown
+## What Is E471?
+
+E471 is an emulsifier made from mono- and diglycerides of fatty acids [1]. It's one of the most common food additives worldwide [2].
+
+The FDA classifies E471 as "generally recognized as safe" [3]. However, for Muslim consumers, the key issue is the source of the fats used to produce it [4].
+
+## References {#references}
+
+[1] FDA — Food Additives Status List  
+[2] European Food Safety Authority — E471 Assessment  
+[3] U.S. Food and Drug Administration — GRAS Substances Database  
+[4] IFANCA — Halal Certification Standards for Emulsifiers  
+```
+
+**Технические требования:**
+- Ссылки автоматически станут кликабельными на фронтенде
+- При клике откроется References секция и подсветится нужный источник
+- Используй минимум 5-10 источников на статью (2500+ слов)
+- Ссылки должны быть на авторитетные источники (FDA, IFANCA, JAKIM, scholarly journals)
+
+### 6.5 Images в контенте
 
 **Для изображений внутри статьи:**
 
@@ -725,7 +768,7 @@ The most practical approach is to prefer halal-certified products...
 "halal E-numbers chart - visual guide showing categories"
 ```
 
-### 6.5 Ручные классы для продвинутого стилизования
+### 6.6 Ручные классы для продвинутого стилизования
 
 **Если автоматические паттерны (по ID) не подходят**, можешь обернуть контент в `<div>` с классом:
 
