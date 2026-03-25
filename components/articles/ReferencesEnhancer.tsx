@@ -51,9 +51,12 @@ export default function ReferencesEnhancer() {
       let items: Array<{ text: string; html: string }> = [];
       
       const firstEl = contentElements[0];
+      console.log("ReferencesEnhancer: First element after heading:", firstEl.tagName, firstEl.outerHTML);
+      
       if (firstEl.tagName === "OL" || firstEl.tagName === "UL") {
         // List format
         const liElements = firstEl.querySelectorAll("li");
+        console.log("ReferencesEnhancer: Found list with", liElements.length, "items");
         items = Array.from(liElements).map((li, i) => ({
           text: li.textContent || "",
           html: li.innerHTML,
@@ -61,7 +64,9 @@ export default function ReferencesEnhancer() {
       } else if (firstEl.tagName === "P") {
         // Paragraph with line breaks - split by [N]
         const html = firstEl.innerHTML;
+        console.log("ReferencesEnhancer: Found paragraph, innerHTML:", html);
         const parts = html.split(/<br\s*\/?>/gi);
+        console.log("ReferencesEnhancer: Split into", parts.length, "parts");
         items = parts
           .map(part => part.trim())
           .filter(part => part.length > 0)
@@ -71,7 +76,10 @@ export default function ReferencesEnhancer() {
           }));
       }
 
-      if (items.length === 0) return;
+      if (items.length === 0) {
+        console.log("ReferencesEnhancer: No items parsed, stopping");
+        return;
+      }
 
       console.log("ReferencesEnhancer: Parsed items:", items);
 
@@ -112,9 +120,19 @@ export default function ReferencesEnhancer() {
               // Remove [N] from the beginning of the text to avoid duplication
               // (the badge already shows the number)
               let cleanedHtml = item.html.trim();
+              const originalHtml = cleanedHtml;
               cleanedHtml = cleanedHtml.replace(/^\[\d+\]\s*/, ""); // Remove [1], [2], etc. from start
               
-              console.log(`ReferencesEnhancer: Item ${index + 1} - Original:`, item.html, "Cleaned:", cleanedHtml);
+              console.log(`ReferencesEnhancer: Item ${index + 1}:`);
+              console.log(`  - Original HTML: "${originalHtml}"`);
+              console.log(`  - Cleaned HTML: "${cleanedHtml}"`);
+              console.log(`  - Text length: ${cleanedHtml.length}`);
+              
+              if (cleanedHtml.length === 0) {
+                console.warn(`ReferencesEnhancer: Item ${index + 1} has EMPTY content after cleaning!`);
+                // If cleaning resulted in empty string, use original
+                cleanedHtml = originalHtml;
+              }
               
               content.innerHTML = cleanedHtml;
 
