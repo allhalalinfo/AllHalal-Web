@@ -585,16 +585,81 @@ featured: false  # ОПЦИОНАЛЬНО: true для hero на главной
 
 **Фронт автоматически стилизует секции** по ключевым словам в заголовках H2. Используй правильные ID для применения специальных дизайнов:
 
-#### Pattern 1: Quick Answer / TL;DR - Яркая карточка (Glassmorphism)
+---
 
-**Для одного параграфа:**
-```markdown
-## Quick Answer {#quick-answer}
+#### 🎯 УНИВЕРСАЛЬНЫЙ ПОДХОД: Оборачивай контент в `<div>`
 
-E471 is not automatically halal. Its status depends on the source...
+**РЕКОМЕНДУЕТСЯ:** Для гарантированного применения стилей оборачивай весь контент секции в `<div class="pattern-*">`.
+
+**Формат:**
+
+```html
+## [Название Секции] {#id}
+
+<div class="pattern-[ключевое-слово]">
+
+[Весь контент секции: параграфы, списки, таблицы...]
+
+</div>
 ```
 
-**Для нескольких параграфов или списка (оберни в `<div>`):**
+**Правила:**
+- ✅ Пустая строка после открывающего `<div>`
+- ✅ Markdown внутри `<div>` работает нормально
+- ✅ Закрывающий `</div>` обязателен
+- ✅ Можно использовать параграфы, списки (ul/ol), таблицы, подзаголовки (H3)
+- ❌ НЕ вкладывай `<div>` друг в друга для визуальных паттернов
+
+**Пример (полный):**
+
+```html
+## Quick Answer {#quick-answer}
+
+<div class="pattern-quick-answer">
+
+The fastest way to read ingredient labels for halal is this:
+
+1. Check for halal certification first
+2. Scan for clearly non-halal ingredients  
+3. Watch for doubtful ingredients like gelatin, glycerin, enzymes
+4. Use allergen and source clues where available
+
+Food labels legally require ingredient lists, and those ingredients are typically listed in descending order by weight.
+
+</div>
+
+## Why This Matters {#why-this-matters}
+
+<div class="pattern-why-matters">
+
+E471 appears in thousands of processed foods on store shelves worldwide. One study found it in over 60% of packaged bakery products [1].
+
+This single ingredient can determine whether a product is halal-compliant or not, yet most consumers don't know how to verify its source.
+
+</div>
+```
+
+---
+
+#### Список всех доступных классов wrapper'ов:
+
+| Класс | Описание | Основной стиль |
+|-------|----------|----------------|
+| `pattern-quick-answer` | Quick Answer / TL;DR | Glassmorphism карточка (золотая с blur) |
+| `pattern-takeaway-list` | Key Takeaways | Navy боковая граница, градиент |
+| `pattern-why-matters` | Why This Matters | Золотая вертикальная полоса у заголовка |
+| `pattern-mistakes-list` | Common Mistakes | Красные карточки с крестиком ✗ |
+| `pattern-learning-list` | Keep Learning | Золотые точки, border-bottom |
+| `pattern-steps-list` | Step-by-Step / How-to | Цветные номера (navy→gold→yellow) |
+| `pattern-faq-heading` | FAQ | Interactive accordion |
+| `pattern-examples-heading` | Practical Examples | Numbered cards с прогрессией цвета |
+| `pattern-comparison-table` | Comparison Table | Zebra striping, header gradient |
+| `pattern-final-cta` | Final CTA | Prominent gold gradient button |
+
+---
+
+#### Pattern 1: Quick Answer / TL;DR - Яркая карточка (Glassmorphism)
+
 ```html
 ## Quick Answer {#quick-answer}
 
@@ -612,114 +677,207 @@ The fastest way to read ingredient labels for halal is this:
 
 **Стиль:** Glassmorphism карточка с градиентом, радужная верхняя граница, лампочка 💡 watermark, backdrop blur.
 
+---
+
 #### Pattern 2: Key Takeaways - Акцентная боковая граница
 
-```markdown
+```html
 ## Key Takeaways {#key-takeaways}
 
-- E471 means mono- and diglycerides of fatty acids.
-- It is commonly used as an emulsifier.
+<div class="pattern-takeaway-list">
+
+- E471 means mono- and diglycerides of fatty acids
+- It is commonly used as an emulsifier in processed foods
+- The halal status depends entirely on the source of the fats
+- Always check for halal certification when available
+
+</div>
 ```
 
 **Стиль:** Navy боковая граница (6px), градиентный фон, карточка с тенью.
 
+---
+
 #### Pattern 3: Why This Matters - Боковая полоска
 
-```markdown
+```html
 ## Why This Matters {#why-this-matters}
 
-E471 is common in processed foods...
+<div class="pattern-why-matters">
+
+E471 appears in thousands of processed foods on store shelves worldwide. One study found it in over 60% of packaged bakery products.
+
+This single ingredient can determine whether a product is halal-compliant or not, yet most consumers don't know how to verify its source.
+
+</div>
 ```
 
 **Стиль:** Вертикальная золотая полоса слева у заголовка (5px gradient).
 
+---
+
 #### Pattern 4: Common Mistakes - Warning стиль
 
-```markdown
+```html
 ## Common Mistakes Muslims Make About E471 {#common-mistakes}
 
-1. Assuming every E-number is suspicious
-2. Assuming "chemical-sounding" means haram
+<div class="pattern-mistakes-list">
+
+These are the most common misunderstandings:
+
+- Assuming every E-number is suspicious
+- Assuming "chemical-sounding" means haram
+- Checking only food and forgetting gum, mouthwash, vitamins
+- Ignoring halal certification when it's available
+
+</div>
 ```
 
-**Стиль:** Оранжевый пунктирный border, светлый фон, оранжевые badges для цифр.
+**Стиль:** Красные компактные карточки с крестиком ✗, левый бордер.
+
+---
 
 #### Pattern 5: Keep Learning / References - Компактные ссылки
 
-```markdown
+```html
 ## Keep Learning {#keep-learning}
+
+<div class="pattern-learning-list">
+
+If this guide helped, you may also want to read:
 
 - [Halal Gelatin Guide](/halal-guides/halal-gelatin)
 - [E Numbers Explained for Muslims](/halal-guides/e-numbers-explained)
+- [What Makes an Ingredient Mashbooh](/halal-guides/mashbooh-ingredients)
+
+</div>
 ```
 
-**Стиль:** Стрелки вместо галочек, border-bottom между элементами, top разделитель.
+**Стиль:** Золотые точки, border-bottom между элементами, top разделитель.
+
+---
 
 #### Pattern 6: Step-by-Step / How-to - Цветная прогрессия
 
-```markdown
+```html
 ## How to Check If E471 Is Halal {#how-to-check}
 
-1. Look for halal certification logo
-2. Check ingredient source declaration
-3. Contact the manufacturer if unclear
+<div class="pattern-steps-list">
+
+1. Look for halal certification logo on the package
+2. Check ingredient source declaration if available
+3. Contact the manufacturer if the label is unclear
+4. Prefer halal-certified products when available
+5. Verify unclear products with local halal authority
+
+</div>
 ```
 
 **Стиль:** Badges меняют цвет по порядку (navy → gold → yellow → navy...).
 
-#### Pattern 7: FAQ - Alternating фон
+---
+
+#### Pattern 7: FAQ - Interactive Accordion
 
 ```markdown
 ## Frequently Asked Questions {#faq}
 
 ### Is E471 always haram?
+
 No, it depends on the source...
 
 ### Can vegetarians eat E471?
+
 If it's plant-derived, yes...
 ```
 
-**Стиль:** Каждый второй вопрос (H3) с лёгким золотым фоном для чередования.
-
-#### Pattern 8: Practical Tips - Emoji accent
-
-```markdown
-## Practical Tips {#practical-tips}
-
-Content here...
-```
-
-**Стиль:** Лампочка (💡) справа от заголовка.
-
-#### Pattern 9: Comparison Tables - Центрированный заголовок
-
-```markdown
-## E471 vs E472: What's the Difference? {#comparison-e471-vs-e472}
-
-| Additive | Source | Halal Status |
-|----------|--------|--------------|
-```
-
-**Стиль:** Центрированный H2 с градиентным фоном, таблица с усиленной тенью.
-
-#### Pattern 10: Final CTA / Conclusion - Action box
-
-```markdown
-## Final Thoughts {#final-thoughts}
-
-The most practical approach is to prefer halal-certified products...
-```
-
-**Стиль:** Тёмно-синяя карточка с белым текстом, центрированная, крупный текст.
+**Стиль:** Interactive accordion (H3 вопросы сворачиваются/разворачиваются). НЕ используй `<div>` для FAQ — фронт автоматически конвертирует H3 в accordion.
 
 ---
 
-**ВАЖНО:**
-- ✅ Используй `{#id-with-keywords}` в заголовках для автоматического применения стилей
+#### Pattern 8: Practical Examples - Numbered cards
+
+```html
+## Practical Examples {#practical-examples}
+
+<div class="pattern-examples">
+
+### Scenario 1: Halal-certified yogurt
+
+The product says "plant-based" in large text but has no vegan mark and no halal mark. This shows clearly that halal and vegan are not the same thing.
+
+### Scenario 2: Vegan cookie next to halal-certified cookie
+
+The vegan cookie may be a strong practical choice...
+
+</div>
+```
+
+**Стиль:** Numbered cards с цветовой прогрессией (badges 1, 2, 3...), hover эффект.
+
+---
+
+#### Pattern 9: Comparison Tables
+
+```markdown
+## Halal vs Vegan Labeling {#comparison}
+
+| Aspect | Halal | Vegan |
+|--------|-------|-------|
+| Animals | Allowed (if zabihah) | Not allowed |
+| Alcohol | Prohibited | Usually allowed |
+```
+
+**Стиль:** Zebra striping, header gradient, hover effects. Таблицы автоматически стилизуются.
+
+---
+
+#### Pattern 10: Final CTA - Call to Action
+
+```html
+## Final CTA {#final-cta}
+
+<div class="pattern-final-cta">
+
+Want a faster way to review ingredients while shopping? The **AllHalal app** helps you check products and halal-related details more easily.
+
+[Download the app](https://app.allhalal.info)
+
+</div>
+```
+
+**Стиль:** Prominent gradient block, кнопка превращается в gold gradient button.
+
+---
+
+**ВАЖНО: Правила использования визуальных паттернов**
+
+- ✅ **Всегда оборачивай контент в `<div class="pattern-*">`** для гарантированного применения стилей
+- ✅ Используй `{#id-with-keywords}` в заголовках H2 для автоматического распознавания
 - ✅ ID должен содержать ключевое слово: `quick`, `takeaway`, `why`, `mistake`, `learning`, `step`, `faq`, `practical`, `comparison`, `final`
 - ✅ Можешь комбинировать: `#common-mistakes`, `#key-takeaways-for-beginners`
-- ✅ Если ID не подходит ни под один паттерн, будет обычный стиль
-- ❌ Не ставь ID на каждый заголовок - только на специальные секции
+- ✅ Пустая строка после открывающего `<div>` обязательна
+- ✅ Markdown внутри `<div>` работает нормально
+- ❌ НЕ ставь ID на каждый заголовок - только на специальные секции
+- ❌ НЕ забывай закрывающий `</div>`
+
+**Пример полной секции:**
+
+```html
+## Common Mistakes {#common-mistakes}
+
+<div class="pattern-mistakes-list">
+
+These are the most common misunderstandings:
+
+- assuming every E-number is suspicious
+- assuming "chemical-sounding" means haram
+- checking only food and forgetting cosmetics
+
+</div>
+```
+
+---
 
 ### 6.4 Цитирование источников в тексте
 
