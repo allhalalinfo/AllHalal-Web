@@ -1549,6 +1549,37 @@ body {
   transform: translateY(-2px);
 }
 
+/* Style ALL "Download" links as buttons throughout article */
+.prose-custom a[href*="download"],
+.prose-custom a[href*="app.allhalal"],
+.prose-custom a[href*="apps.apple"],
+.prose-custom a[href*="play.google"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #B09062 0%, #E2CFB0 50%, #B09062 100%);
+  color: #4A3319 !important;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none !important;
+  border-radius: 9999px;
+  box-shadow: 0 10px 22px rgba(176, 144, 98, 0.24);
+  transition: all 0.3s ease;
+  text-underline-offset: 0 !important;
+  border-bottom: none !important;
+}
+
+.prose-custom a[href*="download"]:hover,
+.prose-custom a[href*="app.allhalal"]:hover,
+.prose-custom a[href*="apps.apple"]:hover,
+.prose-custom a[href*="play.google"]:hover {
+  background: linear-gradient(135deg, #C2A77A 0%, #F0E3CB 50%, #C2A77A 100%);
+  box-shadow: 0 12px 28px rgba(176, 144, 98, 0.32);
+  transform: translateY(-2px);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════════
    PRACTICAL EXAMPLES CARDS
    ═══════════════════════════════════════════════════════════════════════════════ */
