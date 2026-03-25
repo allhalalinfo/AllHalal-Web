@@ -43,8 +43,8 @@ export default function ArticleCitationCleaner() {
     
     // Pattern to match: [N] SourceName (regular format with source name after bracket)
     // Matches [1] FDA, [2] halal.gov.my, [5] halal.gov.my etc.
-    // Captures citation number followed by space and any word/domain
-    const bracketCitationRegex = /\[(\d+)\]\s+[A-Za-z0-9.\-_]+(?:\.[a-z]{2,})?/g;
+    // Captures citation number followed by space and everything until punctuation or newline
+    const bracketCitationRegex = /\[(\d+)\]\s+[^\s.,:;!\n?]+(?:\.[^\s.,:;!\n?]+)*/g;
 
     let replacementsMade = false;
 
