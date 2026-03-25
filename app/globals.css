@@ -755,6 +755,8 @@ body {
   line-height: 1.8;
   color: var(--color-text-secondary);
   font-size: 1.0625rem;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .prose-custom h2 + p,
@@ -807,6 +809,8 @@ body {
   font-size: 1.05em;
   line-height: 1.7;
   margin-bottom: 0;
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* Lists - modern badges and checkmarks */
@@ -823,6 +827,8 @@ body {
   padding-left: 2rem;
   margin-bottom: 0.65rem;
   line-height: 1.5;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .prose-custom ul > li:last-child,
