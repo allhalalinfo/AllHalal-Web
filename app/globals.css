@@ -1285,6 +1285,103 @@ body {
   text-decoration-color: var(--color-primary);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+   REFERENCES ENHANCED CARDS
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+.references-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin: 2rem 0 3rem 0;
+}
+
+.reference-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem 1.25rem 4rem;
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(47, 37, 30, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 8px rgba(43, 34, 24, 0.04);
+  transition: all 0.3s ease;
+}
+
+.reference-card:hover {
+  border-color: rgba(244, 185, 66, 0.4);
+  box-shadow: 0 4px 16px rgba(244, 185, 66, 0.12);
+  transform: translateX(4px);
+  background: linear-gradient(to right, rgba(244, 185, 66, 0.02), var(--color-bg-primary));
+}
+
+/* Reference number badge */
+.reference-card::before {
+  content: "[" attr(data-index) "]";
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 1.75rem;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.12), rgba(244, 185, 66, 0.06));
+  border: 1px solid rgba(244, 185, 66, 0.3);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+}
+
+.reference-card:hover::before {
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.2), rgba(244, 185, 66, 0.1));
+  border-color: var(--color-primary);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.reference-content {
+  flex: 1;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.reference-content a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.reference-content a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 2px;
+}
+
+/* External link icon */
+.reference-content a[href^="http"]::after {
+  content: "↗";
+  margin-left: 0.25rem;
+  font-size: 0.875em;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.reference-content a[href^="http"]:hover::after {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   PATTERN STYLES CONTINUED
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
 /* Pattern 8: Practical tips / Pro tips - Highlighted boxes */
 .prose-custom h2[id*="practical"],
 .prose-custom h2[id*="tip"],

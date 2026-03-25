@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/layout/Footer";
 import ArticleContentEnhancer from "@/components/articles/ArticleContentEnhancer";
 import FaqAccordion from "@/components/articles/FaqAccordion";
+import ReferencesEnhancer from "@/components/articles/ReferencesEnhancer";
 import { fetchCustomArticleById } from "@/lib/customArticles";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { remark } from "remark";
@@ -222,6 +223,7 @@ export default async function CustomArticlePage(props: {
           {/* Client-side content enhancers */}
           <ArticleContentEnhancer />
           <FaqAccordion />
+          <ReferencesEnhancer />
         </div>
       </main>
       <Footer />
