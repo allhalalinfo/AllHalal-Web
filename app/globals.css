@@ -813,6 +813,23 @@ body {
   font-weight: var(--font-medium);
 }
 
+/* Links - same style as underlined text */
+.prose-custom a {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: none;
+  font-weight: var(--font-medium);
+  transition: color var(--transition-fast);
+}
+
+.prose-custom a:hover {
+  color: var(--color-primary);
+  text-decoration-color: var(--color-accent-navy);
+}
+
 /* Modern list styling */
 .prose-custom ul,
 .prose-custom ol {
