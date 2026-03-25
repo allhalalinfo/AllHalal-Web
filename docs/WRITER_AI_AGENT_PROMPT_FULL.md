@@ -723,6 +723,22 @@ IFANCA's shopper guidance specifically lists gelatin among ingredients that may 
 - ❌ НЕ используй формат `oai_citation:N†Source` — он НЕ поддерживается!
 - ❌ НЕ используй `[^1]` (footnote format)
 - ❌ НЕ пиши полное название источника в скобках
+- ❌ **НЕ пиши название источника ПОСЛЕ цитаты!** Просто `[N]` и точка.
+
+**Примеры:**
+
+✅ **ПРАВИЛЬНО:**
+```
+The FDA classifies E471 as "generally recognized as safe" [3].
+```
+
+❌ **НЕПРАВИЛЬНО:**
+```
+The FDA classifies E471 as "generally recognized as safe" [3] Food and Drug Administration.
+```
+```
+The FDA classifies E471 as "generally recognized as safe" oai_citation:3†FDA.
+```
 
 **Пример статьи:**
 

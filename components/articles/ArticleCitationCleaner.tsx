@@ -7,7 +7,11 @@ import { useEffect } from "react";
  * Converts:
  * - "oai_citation:1†Source" → "[1]"
  * - "oai_citation:2†IFANCA" → "[2]"
+ * - "oai_citation:3† Food and Drug Administration" → "[3]"
  * - Any similar patterns → "[N]"
+ * 
+ * Regex captures everything including spaces until punctuation (. , : ; ! ?)
+ * This ensures full source names are removed, not just the first word.
  * 
  * This runs before ArticleReferencesLinker, which then makes [N] clickable.
  */
@@ -30,7 +34,8 @@ export default function ArticleCitationCleaner() {
     }
 
     // Pattern to match: oai_citation:N†Source or oai_citation:N‡Source (various symbols)
-    const citationRegex = /oai_citation:(\d+)[†‡][^\s\n]*/g;
+    // Captures everything until period, comma, or end of sentence
+    const citationRegex = /oai_citation:(\d+)[†‡][^.,:;!\n?]*/g;
 
     let replacementsMade = false;
 
