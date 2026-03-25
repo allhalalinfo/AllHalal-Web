@@ -585,15 +585,32 @@ featured: false  # ОПЦИОНАЛЬНО: true для hero на главной
 
 **Фронт автоматически стилизует секции** по ключевым словам в заголовках H2. Используй правильные ID для применения специальных дизайнов:
 
-#### Pattern 1: Quick Answer / TL;DR - Яркая карточка
+#### Pattern 1: Quick Answer / TL;DR - Яркая карточка (Glassmorphism)
 
+**Для одного параграфа:**
 ```markdown
 ## Quick Answer {#quick-answer}
 
 E471 is not automatically halal. Its status depends on the source...
 ```
 
-**Стиль:** Золотая карточка с рамкой, молния (⚡) слева, увеличенный шрифт.
+**Для нескольких параграфов или списка (оберни в `<div>`):**
+```html
+## Quick Answer {#quick-answer}
+
+<div class="pattern-quick-answer">
+
+The fastest way to read ingredient labels for halal is this:
+
+- Check for halal certification first
+- Scan for clearly non-halal ingredients
+- Watch for doubtful ingredients like gelatin, glycerin, enzymes
+- Use allergen and source clues where available
+
+</div>
+```
+
+**Стиль:** Glassmorphism карточка с градиентом, радужная верхняя граница, лампочка 💡 watermark, backdrop blur.
 
 #### Pattern 2: Key Takeaways - Акцентная боковая граница
 

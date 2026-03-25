@@ -964,10 +964,12 @@ body {
    ═══════════════════════════════════════════════════════════════════════════════ */
 
 /* Pattern 1: Quick Answer / TL;DR - Glassmorphism style */
+/* Can be applied to: paragraph after h2, or entire <div> wrapper */
 .prose-custom h2[id*="quick"] + p,
 .prose-custom h2[id*="tldr"] + p,
 .prose-custom h2[id*="summary"] + p,
-.prose-custom p.pattern-quick-answer {
+.prose-custom p.pattern-quick-answer,
+.prose-custom div.pattern-quick-answer {
   padding: 2.5rem;
   margin: -0.5rem 0 2.5rem 0;
   background: linear-gradient(
@@ -994,7 +996,8 @@ body {
 .prose-custom h2[id*="quick"] + p::before,
 .prose-custom h2[id*="tldr"] + p::before,
 .prose-custom h2[id*="summary"] + p::before,
-.prose-custom p.pattern-quick-answer::before {
+.prose-custom p.pattern-quick-answer::before,
+.prose-custom div.pattern-quick-answer::before {
   content: '';
   position: absolute;
   top: 0;
@@ -1009,7 +1012,8 @@ body {
 .prose-custom h2[id*="quick"] + p::after,
 .prose-custom h2[id*="tldr"] + p::after,
 .prose-custom h2[id*="summary"] + p::after,
-.prose-custom p.pattern-quick-answer::after {
+.prose-custom p.pattern-quick-answer::after,
+.prose-custom div.pattern-quick-answer::after {
   content: '💡';
   position: absolute;
   right: 2rem;
@@ -1017,6 +1021,31 @@ body {
   font-size: 2.5rem;
   opacity: 0.15;
   pointer-events: none;
+}
+
+/* Styling for elements inside Quick Answer div */
+.prose-custom div.pattern-quick-answer > * {
+  position: relative;
+  z-index: 1;
+}
+
+.prose-custom div.pattern-quick-answer > p {
+  margin-bottom: 1rem;
+}
+
+.prose-custom div.pattern-quick-answer > p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-custom div.pattern-quick-answer > ul,
+.prose-custom div.pattern-quick-answer > ol {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.prose-custom div.pattern-quick-answer > ul > li,
+.prose-custom div.pattern-quick-answer > ol > li {
+  margin-bottom: 0.5rem;
 }
 
 /* Pattern 2: Key Takeaways - Accent border card */
