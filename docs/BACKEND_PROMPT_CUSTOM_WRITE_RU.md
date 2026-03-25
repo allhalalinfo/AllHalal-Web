@@ -54,6 +54,15 @@
 - После POST/PUT ответы **`GET /articles`** и **`GET /articles/{id}`** должны отдавать те же данные (формат как сейчас на проде).  
 - Поля **`id`/`title`** обязательны для отображения на главной; см. нормализацию на фронте в типе `CustomArticle`.
 
+### Обработка Markdown (если используется)
+
+- Если принимаешь Markdown в `content` (вместо готового HTML), конвертируй через **`python-markdown`** с расширениями:
+  - `extra` — таблицы, сноски, определения
+  - `attr_list` — ID в заголовках: `## Title {#custom-id}` → `<h2 id="custom-id">Title</h2>`
+  - `codehilite` — подсветка синтаксиса кода
+- Пример: `markdown.markdown(text, extensions=['extra', 'attr_list', 'codehilite'])`
+- **Зачем ID:** фронт автоматически стилизует секции по ID (напр. `#quick-answer`, `#key-takeaways`), см. `docs/AI_AGENTS_PLAYBOOK_RU.md`.
+
 ### Проверка после деплоя
 
 ```bash

@@ -581,7 +581,130 @@ featured: false  # ОПЦИОНАЛЬНО: true для hero на главной
 - ❌ НЕ используй для целых предложений
 - ❌ НЕ дублируй с **bold** на одном слове
 
-### 6.3 Images в контенте
+### 6.3 Visual Section Patterns - АВТОМАТИЧЕСКОЕ ОФОРМЛЕНИЕ
+
+**Фронт автоматически стилизует секции** по ключевым словам в заголовках H2. Используй правильные ID для применения специальных дизайнов:
+
+#### Pattern 1: Quick Answer / TL;DR - Яркая карточка
+
+```markdown
+## Quick Answer {#quick-answer}
+
+E471 is not automatically halal. Its status depends on the source...
+```
+
+**Стиль:** Золотая карточка с рамкой, молния (⚡) слева, увеличенный шрифт.
+
+#### Pattern 2: Key Takeaways - Акцентная боковая граница
+
+```markdown
+## Key Takeaways {#key-takeaways}
+
+- E471 means mono- and diglycerides of fatty acids.
+- It is commonly used as an emulsifier.
+```
+
+**Стиль:** Navy боковая граница (6px), градиентный фон, карточка с тенью.
+
+#### Pattern 3: Why This Matters - Боковая полоска
+
+```markdown
+## Why This Matters {#why-this-matters}
+
+E471 is common in processed foods...
+```
+
+**Стиль:** Вертикальная золотая полоса слева у заголовка (5px gradient).
+
+#### Pattern 4: Common Mistakes - Warning стиль
+
+```markdown
+## Common Mistakes Muslims Make About E471 {#common-mistakes}
+
+1. Assuming every E-number is suspicious
+2. Assuming "chemical-sounding" means haram
+```
+
+**Стиль:** Оранжевый пунктирный border, светлый фон, оранжевые badges для цифр.
+
+#### Pattern 5: Keep Learning / References - Компактные ссылки
+
+```markdown
+## Keep Learning {#keep-learning}
+
+- [Halal Gelatin Guide](/halal-guides/halal-gelatin)
+- [E Numbers Explained for Muslims](/halal-guides/e-numbers-explained)
+```
+
+**Стиль:** Стрелки вместо галочек, border-bottom между элементами, top разделитель.
+
+#### Pattern 6: Step-by-Step / How-to - Цветная прогрессия
+
+```markdown
+## How to Check If E471 Is Halal {#how-to-check}
+
+1. Look for halal certification logo
+2. Check ingredient source declaration
+3. Contact the manufacturer if unclear
+```
+
+**Стиль:** Badges меняют цвет по порядку (navy → gold → yellow → navy...).
+
+#### Pattern 7: FAQ - Alternating фон
+
+```markdown
+## Frequently Asked Questions {#faq}
+
+### Is E471 always haram?
+No, it depends on the source...
+
+### Can vegetarians eat E471?
+If it's plant-derived, yes...
+```
+
+**Стиль:** Каждый второй вопрос (H3) с лёгким золотым фоном для чередования.
+
+#### Pattern 8: Practical Tips - Emoji accent
+
+```markdown
+## Practical Tips {#practical-tips}
+
+Content here...
+```
+
+**Стиль:** Лампочка (💡) справа от заголовка.
+
+#### Pattern 9: Comparison Tables - Центрированный заголовок
+
+```markdown
+## E471 vs E472: What's the Difference? {#comparison-e471-vs-e472}
+
+| Additive | Source | Halal Status |
+|----------|--------|--------------|
+```
+
+**Стиль:** Центрированный H2 с градиентным фоном, таблица с усиленной тенью.
+
+#### Pattern 10: Final CTA / Conclusion - Action box
+
+```markdown
+## Final Thoughts {#final-thoughts}
+
+The most practical approach is to prefer halal-certified products...
+```
+
+**Стиль:** Тёмно-синяя карточка с белым текстом, центрированная, крупный текст.
+
+---
+
+**ВАЖНО:**
+- ✅ Используй `{#id-with-keywords}` в заголовках для автоматического применения стилей
+- ✅ ID должен содержать ключевое слово: `quick`, `takeaway`, `why`, `mistake`, `learning`, `step`, `faq`, `practical`, `comparison`, `final`
+- ✅ Можешь комбинировать: `#common-mistakes`, `#key-takeaways-for-beginners`
+- ✅ Если ID не подходит ни под один паттерн, будет обычный стиль
+- ❌ Не ставь ID на каждый заголовок - только на специальные секции
+
+### 6.4 Images в контенте
 
 **Для изображений внутри статьи:**
 
@@ -601,6 +724,69 @@ featured: false  # ОПЦИОНАЛЬНО: true для hero на главной
 ```
 "halal E-numbers chart - visual guide showing categories"
 ```
+
+### 6.5 Ручные классы для продвинутого стилизования
+
+**Если автоматические паттерны (по ID) не подходят**, можешь обернуть контент в `<div>` с классом:
+
+#### `.section-highlight` — Акцентная карточка с золотой рамкой
+
+```html
+<div class="section-highlight">
+
+## Important Context
+
+This additive requires special attention because...
+
+</div>
+```
+
+**Стиль:** Градиентный фон, золотая левая граница, закруглённые углы.
+
+#### `.section-warning` — Предупреждение (оранжевый)
+
+```html
+<div class="section-warning">
+
+**Warning:** Do not rely solely on E-numbers. Always check certification.
+
+</div>
+```
+
+**Стиль:** Оранжевый пунктирный border, светлый фон, отлично для важных предостережений.
+
+#### `.section-info` — Информационный блок (navy)
+
+```html
+<div class="section-info">
+
+**Did you know?** E471 was first approved for food use in the 1970s.
+
+</div>
+```
+
+**Стиль:** Navy боковая граница, градиент справа налево.
+
+#### `.section-cta` — Финальный призыв к действию
+
+```html
+<div class="section-cta">
+
+## Ready to Make Halal Choices Easier?
+
+Download the AllHalal app for instant product scanning and halal verification.
+
+[Get Started Now](https://apps.apple.com/app/allhalal)
+
+</div>
+```
+
+**Стиль:** Тёмно-синяя карточка, белый текст, центрирование, эффектная тень.
+
+**ВАЖНО:**
+- ✅ Используй HTML `<div>` с классом, **затем пиши Markdown внутри** (добавь пустую строку после открывающего тега)
+- ✅ Эти классы полезны, когда нужен особый стиль **вне** стандартных секций
+- ❌ Не злоупотребляй — приоритет ID-паттернам (они проще и чище)
 
 ---
 

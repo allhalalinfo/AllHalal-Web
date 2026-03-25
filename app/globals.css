@@ -950,6 +950,261 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
+   ARTICLE SECTION PATTERNS - VISUAL DIVERSITY
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Pattern 1: Quick Answer / TL;DR - Highlighted card */
+.prose-custom h2:is([id*="quick"], [id*="tldr"], [id*="summary"]),
+.prose-custom h2:has(+ p:first-of-type) {
+  /* Apply to first major section only */
+}
+
+.prose-custom h2[id*="quick"] + p,
+.prose-custom h2[id*="tldr"] + p,
+.prose-custom h2[id*="summary"] + p {
+  padding: 1.75rem 2rem;
+  margin: -0.5rem 0 2.5rem 0;
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.12), rgba(75, 110, 112, 0.08));
+  border: 2px solid rgba(244, 185, 66, 0.3);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 6px 24px rgba(244, 185, 66, 0.12);
+  font-size: 1.075em;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  position: relative;
+}
+
+.prose-custom h2[id*="quick"] + p::before,
+.prose-custom h2[id*="tldr"] + p::before {
+  content: '⚡';
+  position: absolute;
+  top: 1.75rem;
+  left: -3rem;
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+/* Pattern 2: Key Takeaways - Accent border card */
+.prose-custom h2[id*="takeaway"] {
+  color: var(--color-accent-navy);
+}
+
+.prose-custom h2[id*="takeaway"] ~ ul:first-of-type {
+  padding: 2rem 2rem 2rem 2.5rem;
+  margin: 1.5rem 0 2.5rem 0;
+  background: linear-gradient(to right, rgba(75, 110, 112, 0.08), rgba(75, 110, 112, 0.02));
+  border-left: 6px solid var(--color-accent-navy);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  box-shadow: 0 4px 20px rgba(43, 34, 24, 0.06);
+}
+
+/* Pattern 3: Why This Matters - Side accent bar */
+.prose-custom h2[id*="why"],
+.prose-custom h2[id*="matter"] {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.prose-custom h2[id*="why"]::before,
+.prose-custom h2[id*="matter"]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(180deg, rgba(244, 185, 66, 0.8), rgba(244, 185, 66, 0.3));
+  border-radius: 3px;
+}
+
+/* Pattern 4: Common Mistakes - Warning style */
+.prose-custom h2[id*="mistake"],
+.prose-custom h2[id*="error"],
+.prose-custom h2[id*="avoid"] {
+  color: #D97706;
+}
+
+.prose-custom h2[id*="mistake"] ~ ol:first-of-type,
+.prose-custom h2[id*="error"] ~ ol:first-of-type {
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.05), rgba(217, 119, 6, 0.02));
+  padding: 1.5rem 1.5rem 1.5rem 3rem;
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(217, 119, 6, 0.3);
+}
+
+.prose-custom h2[id*="mistake"] ~ ol:first-of-type > li::before,
+.prose-custom h2[id*="error"] ~ ol:first-of-type > li::before {
+  background: linear-gradient(135deg, #D97706, #B45309);
+}
+
+/* Pattern 5: Keep Learning / References - Compact link list */
+.prose-custom h2[id*="learning"],
+.prose-custom h2[id*="reference"],
+.prose-custom h2[id*="resource"] {
+  font-size: 1.75rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(47, 37, 30, 0.12);
+}
+
+.prose-custom h2[id*="learning"] ~ ul:first-of-type > li::before,
+.prose-custom h2[id*="reference"] ~ ul:first-of-type > li::before,
+.prose-custom h2[id*="resource"] ~ ul:first-of-type > li::before {
+  content: '→';
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: none;
+}
+
+.prose-custom h2[id*="learning"] ~ ul:first-of-type > li,
+.prose-custom h2[id*="reference"] ~ ul:first-of-type > li,
+.prose-custom h2[id*="resource"] ~ ul:first-of-type > li {
+  padding: 0.75rem 0 0.75rem 2.5rem;
+  border-bottom: 1px solid rgba(47, 37, 30, 0.06);
+}
+
+/* Pattern 6: Step-by-step / How-to - Numbered with color progression */
+.prose-custom h2[id*="step"],
+.prose-custom h2[id*="how-to"] {
+  color: var(--color-accent-navy);
+}
+
+.prose-custom h2[id*="step"] ~ ol:first-of-type > li:nth-child(1)::before {
+  background: linear-gradient(135deg, #4B6E70, #3a5557);
+}
+
+.prose-custom h2[id*="step"] ~ ol:first-of-type > li:nth-child(2)::before {
+  background: linear-gradient(135deg, #977C58, #7a6446);
+}
+
+.prose-custom h2[id*="step"] ~ ol:first-of-type > li:nth-child(3)::before {
+  background: linear-gradient(135deg, #F4B942, #d9a235);
+}
+
+.prose-custom h2[id*="step"] ~ ol:first-of-type > li:nth-child(4)::before {
+  background: linear-gradient(135deg, #4B6E70, #3a5557);
+}
+
+.prose-custom h2[id*="step"] ~ ol:first-of-type > li:nth-child(5)::before {
+  background: linear-gradient(135deg, #977C58, #7a6446);
+}
+
+/* Pattern 7: FAQ - Alternating background */
+.prose-custom h2[id*="faq"],
+.prose-custom h2[id*="question"] {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-navy);
+}
+
+.prose-custom h2[id*="faq"] ~ h3:nth-of-type(odd),
+.prose-custom h2[id*="question"] ~ h3:nth-of-type(odd) {
+  background: rgba(244, 185, 66, 0.04);
+  padding: 1rem 1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  border-radius: var(--radius-md);
+}
+
+/* Pattern 8: Practical tips / Pro tips - Highlighted boxes */
+.prose-custom h2[id*="practical"],
+.prose-custom h2[id*="tip"] {
+  position: relative;
+}
+
+.prose-custom h2[id*="practical"]::after,
+.prose-custom h2[id*="tip"]::after {
+  content: '💡';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+/* Pattern 9: Comparison tables - Enhanced styling */
+.prose-custom h2[id*="comparison"],
+.prose-custom h2[id*="versus"],
+.prose-custom h2[id*="vs"] {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.08), rgba(75, 110, 112, 0.08));
+  padding: 1rem 2rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  border-radius: var(--radius-lg);
+}
+
+.prose-custom h2[id*="comparison"] ~ table:first-of-type,
+.prose-custom h2[id*="versus"] ~ table:first-of-type {
+  box-shadow: 0 12px 40px rgba(43, 34, 24, 0.12);
+  border: 2px solid rgba(244, 185, 66, 0.2);
+}
+
+/* Pattern 10: Final CTA - Action-oriented box */
+.prose-custom h2[id*="final"],
+.prose-custom h2[id*="conclusion"],
+.prose-custom h2[id*="next-step"] {
+  background: linear-gradient(135deg, var(--color-accent-navy), #4B6E70);
+  color: white;
+  padding: 1.5rem 2rem;
+  margin: 4rem -2rem 2rem -2rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(23, 54, 64, 0.2);
+}
+
+.prose-custom h2[id*="final"] + p,
+.prose-custom h2[id*="conclusion"] + p {
+  font-size: 1.15em;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Manual class overrides for writer control */
+.prose-custom .section-highlight {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(244, 185, 66, 0.08), rgba(75, 110, 112, 0.06));
+  border-left: 4px solid var(--color-primary);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  margin: 2rem 0;
+}
+
+.prose-custom .section-warning {
+  padding: 1.5rem 2rem;
+  background: rgba(217, 119, 6, 0.06);
+  border: 2px dashed rgba(217, 119, 6, 0.3);
+  border-radius: var(--radius-lg);
+  margin: 2rem 0;
+}
+
+.prose-custom .section-info {
+  padding: 1.5rem 2rem;
+  background: linear-gradient(to right, rgba(75, 110, 112, 0.08), transparent);
+  border-left: 5px solid var(--color-accent-navy);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 2rem 0;
+}
+
+.prose-custom .section-cta {
+  padding: 2.5rem 2rem;
+  background: linear-gradient(135deg, rgba(23, 54, 64, 0.95), rgba(75, 110, 112, 0.95));
+  color: white;
+  border-radius: var(--radius-xl);
+  text-align: center;
+  margin: 3rem 0;
+  box-shadow: 0 12px 48px rgba(23, 54, 64, 0.25);
+}
+
+.prose-custom .section-cta h2,
+.prose-custom .section-cta h3,
+.prose-custom .section-cta p {
+  color: white;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
    FORM STYLES
    ═══════════════════════════════════════════════════════════════════════════════ */
 

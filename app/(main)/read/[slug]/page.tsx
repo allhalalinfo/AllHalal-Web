@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/layout/Footer";
+import ArticleContentEnhancer from "@/components/articles/ArticleContentEnhancer";
 import { fetchCustomArticleById } from "@/lib/customArticles";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 import remarkGfm from "remark-gfm";
+import remarkHeadingId from "remark-heading-id";
 import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
 
 export const revalidate = 120;
@@ -62,9 +64,10 @@ export default async function CustomArticlePage(props: {
   let htmlContent = "";
   if (article.content) {
     if (isMarkdown) {
-      // Server-side: convert Markdown to HTML
+      // Server-side: convert Markdown to HTML with heading ID support
       const result = await remark()
         .use(remarkGfm)
+        .use(remarkHeadingId)
         .use(remarkHtml, { sanitize: false })
         .process(article.content);
       htmlContent = sanitizeArticleHtml(result.toString());
@@ -206,6 +209,9 @@ export default async function CustomArticlePage(props: {
               </Link>
             </div>
           </article>
+          
+          {/* Client-side content enhancer */}
+          <ArticleContentEnhancer />
         </div>
       </main>
       <Footer />

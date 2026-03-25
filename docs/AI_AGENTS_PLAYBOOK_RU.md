@@ -95,6 +95,52 @@
 
 ---
 
+## Визуальные паттерны статей (автоматическое оформление)
+
+**Фронт автоматически применяет специальные стили** к секциям статей, если в ID заголовка H2 есть ключевые слова:
+
+| Паттерн | Ключевые слова в ID | Описание стиля |
+|---------|---------------------|----------------|
+| **Quick Answer** | `quick`, `tldr`, `summary` | Золотая карточка с рамкой, молния (⚡), увеличенный шрифт |
+| **Key Takeaways** | `takeaway` | Navy боковая граница (6px), градиент, тень |
+| **Why This Matters** | `why`, `matter` | Вертикальная золотая полоса слева (5px gradient) |
+| **Common Mistakes** | `mistake`, `error`, `avoid` | Оранжевый пунктирный border, warning-стиль |
+| **Keep Learning** | `learning`, `reference`, `resource` | Стрелки вместо галочек, разделители, top border |
+| **Step-by-Step** | `step`, `how-to` | Цветная прогрессия badges (navy→gold→yellow) |
+| **FAQ** | `faq`, `question` | Alternating фон для вопросов (H3) |
+| **Practical Tips** | `practical`, `tip` | Лампочка (💡) справа от заголовка |
+| **Comparison** | `comparison`, `versus`, `vs` | Центрированный H2, градиент, усиленная тень таблицы |
+| **Final CTA** | `final`, `conclusion`, `next-step` | Тёмно-синяя карточка, белый текст, центрирование |
+
+**Пример использования в Markdown:**
+
+```markdown
+## Quick Answer {#quick-answer}
+
+The short answer is...
+
+## Key Takeaways {#key-takeaways}
+
+- First important point
+- Second important point
+
+## How to Check If Product is Halal {#how-to-check}
+
+1. Look for certification
+2. Read ingredients
+3. Contact manufacturer
+```
+
+**Важно:**
+- ✅ ID нужен только для специальных секций (Quick Answer, FAQ, Takeaways, etc.)
+- ✅ Комбинируй: `#common-mistakes-about-halal`, `#key-takeaways-for-beginners`
+- ❌ Не ставь ID на каждый заголовок — только на те, что хочешь выделить
+- ❌ Если ID не содержит ключевые слова, будет обычный стиль
+
+**Детальное руководство:** **`docs/WRITER_AI_AGENT_PROMPT_FULL.md`**, раздел 6.3.
+
+---
+
 ## Чеклист «всё опубликовано»
 
 - [ ] `curl …/custom/articles?page=1&limit=5` возвращает статьи с `id`, `title`.  

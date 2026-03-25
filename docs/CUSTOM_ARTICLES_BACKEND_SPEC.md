@@ -100,11 +100,17 @@ Path: `article_id` — без дополнительного encode на сер�
 
 1. Читать Markdown с YAML frontmatter (`title`, `category`, `image_url`, `author`, …).
 2. Тело после `---` → HTML через `markdown` (или `markdown-it`).
+   - **ВАЖНО:** Используй `python-markdown` с расширениями `extra`, `attr_list`, `codehilite` для поддержки:
+     - Заголовков с ID: `## Title {#custom-id}` → `<h2 id="custom-id">Title</h2>`
+     - Таблиц, списков определений, сносок
+   - Пример: `markdown.markdown(text, extensions=['extra', 'attr_list', 'codehilite'])`
 3. `slug = slugify(title)` или явный `id` из frontmatter.
 4. `HSET` / `JSON.SET` + `ZADD custom:articles:ids score id`.
 5. Запуск только по SSH / CI (без публичного write API).
 
 Зависимости: `markdown`, `python-slugify`, клиент Redis.
+
+**Зачем ID в заголовках:** фронт автоматически применяет специальные визуальные стили к секциям типа `#quick-answer`, `#key-takeaways`, `#faq` и т.д. (см. `docs/AI_AGENTS_PLAYBOOK_RU.md`).
 
 ## Wire feed «всё в новости + картинки»
 
