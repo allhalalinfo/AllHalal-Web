@@ -1328,6 +1328,38 @@ body {
   opacity: 1;
 }
 
+/* Inline citation links [1], [2], etc. in article text */
+.article-citation-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  background: rgba(244, 185, 66, 0.1);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(244, 185, 66, 0.3);
+  transition: all 0.2s ease;
+  margin: 0 0.1em;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.article-citation-link:hover {
+  background: rgba(244, 185, 66, 0.2);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(244, 185, 66, 0.2);
+  cursor: pointer;
+}
+
+.article-citation-link:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(244, 185, 66, 0.2);
+}
+
 /* Collapsible References Container */
 .references-collapsible {
   margin: 2rem 0 3rem 0;

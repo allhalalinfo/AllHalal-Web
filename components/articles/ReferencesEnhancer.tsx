@@ -98,18 +98,19 @@ export default function ReferencesEnhancer() {
       const styledList = document.createElement("div");
       styledList.className = "references-list";
 
-      items.forEach((item, index) => {
-        const card = document.createElement("div");
-        card.className = "reference-card";
-        card.setAttribute("data-index", (index + 1).toString());
+            items.forEach((item, index) => {
+              const card = document.createElement("div");
+              card.className = "reference-card";
+              card.setAttribute("data-index", (index + 1).toString());
+              card.id = `ref-${index + 1}`; // Add ID for linking
 
-        const content = document.createElement("div");
-        content.className = "reference-content";
-        content.innerHTML = item.html;
+              const content = document.createElement("div");
+              content.className = "reference-content";
+              content.innerHTML = item.html;
 
-        card.appendChild(content);
-        styledList.appendChild(card);
-      });
+              card.appendChild(content);
+              styledList.appendChild(card);
+            });
 
       contentPanel.appendChild(styledList);
 
