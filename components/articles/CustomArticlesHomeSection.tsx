@@ -36,8 +36,8 @@ export default function CustomArticlesHomeSection({
             Curated reads
           </h2>
           <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
-            Original articles and guides from the allhalal.info team. For live wire headlines from
-            many desks, open the news desk.
+            In-depth guides and editorial content from our team. For breaking news and daily updates,
+            visit the news desk.
           </p>
         </div>
 
