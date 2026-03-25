@@ -1069,11 +1069,15 @@ body {
 /* Pattern 4: Common Mistakes - Subtle red warning style */
 /* Heading uses default H2 color, only list items have red accent */
 
-/* Both OL and UL lists - compact */
-.prose-custom h2[id*="mistake"] ~ ol,
-.prose-custom h2[id*="error"] ~ ol,
-.prose-custom h2[id*="mistake"] ~ ul,
-.prose-custom h2[id*="error"] ~ ul,
+/* Both OL and UL lists - compact (ONLY directly after mistake heading or paragraph) */
+.prose-custom h2[id*="mistake"] + ol,
+.prose-custom h2[id*="mistake"] + p + ol,
+.prose-custom h2[id*="mistake"] + ul,
+.prose-custom h2[id*="mistake"] + p + ul,
+.prose-custom h2[id*="error"] + ol,
+.prose-custom h2[id*="error"] + p + ol,
+.prose-custom h2[id*="error"] + ul,
+.prose-custom h2[id*="error"] + p + ul,
 .prose-custom ol.pattern-mistakes-list,
 .prose-custom ul.pattern-mistakes-list {
   list-style: none !important;
@@ -1082,11 +1086,15 @@ body {
   padding: 0;
 }
 
-/* Each mistake - compact card */
-.prose-custom h2[id*="mistake"] ~ ol > li,
-.prose-custom h2[id*="error"] ~ ol > li,
-.prose-custom h2[id*="mistake"] ~ ul > li,
-.prose-custom h2[id*="error"] ~ ul > li,
+/* Each mistake - compact card (ONLY for mistake lists) */
+.prose-custom h2[id*="mistake"] + ol > li,
+.prose-custom h2[id*="mistake"] + p + ol > li,
+.prose-custom h2[id*="mistake"] + ul > li,
+.prose-custom h2[id*="mistake"] + p + ul > li,
+.prose-custom h2[id*="error"] + ol > li,
+.prose-custom h2[id*="error"] + p + ol > li,
+.prose-custom h2[id*="error"] + ul > li,
+.prose-custom h2[id*="error"] + p + ul > li,
 .prose-custom ol.pattern-mistakes-list > li,
 .prose-custom ul.pattern-mistakes-list > li {
   position: relative;
@@ -1100,31 +1108,43 @@ body {
   list-style-type: none !important;
 }
 
-.prose-custom h2[id*="mistake"] ~ ol > li:last-child,
-.prose-custom h2[id*="error"] ~ ol > li:last-child,
-.prose-custom h2[id*="mistake"] ~ ul > li:last-child,
-.prose-custom h2[id*="error"] ~ ul > li:last-child,
+.prose-custom h2[id*="mistake"] + ol > li:last-child,
+.prose-custom h2[id*="mistake"] + p + ol > li:last-child,
+.prose-custom h2[id*="mistake"] + ul > li:last-child,
+.prose-custom h2[id*="mistake"] + p + ul > li:last-child,
+.prose-custom h2[id*="error"] + ol > li:last-child,
+.prose-custom h2[id*="error"] + p + ol > li:last-child,
+.prose-custom h2[id*="error"] + ul > li:last-child,
+.prose-custom h2[id*="error"] + p + ul > li:last-child,
 .prose-custom ol.pattern-mistakes-list > li:last-child,
 .prose-custom ul.pattern-mistakes-list > li:last-child {
   margin-bottom: 0;
 }
 
 /* Subtle hover */
-.prose-custom h2[id*="mistake"] ~ ol > li:hover,
-.prose-custom h2[id*="error"] ~ ol > li:hover,
-.prose-custom h2[id*="mistake"] ~ ul > li:hover,
-.prose-custom h2[id*="error"] ~ ul > li:hover,
+.prose-custom h2[id*="mistake"] + ol > li:hover,
+.prose-custom h2[id*="mistake"] + p + ol > li:hover,
+.prose-custom h2[id*="mistake"] + ul > li:hover,
+.prose-custom h2[id*="mistake"] + p + ul > li:hover,
+.prose-custom h2[id*="error"] + ol > li:hover,
+.prose-custom h2[id*="error"] + p + ol > li:hover,
+.prose-custom h2[id*="error"] + ul > li:hover,
+.prose-custom h2[id*="error"] + p + ul > li:hover,
 .prose-custom ol.pattern-mistakes-list > li:hover,
 .prose-custom ul.pattern-mistakes-list > li:hover {
   background: rgba(220, 38, 38, 0.05);
   border-left-color: rgba(220, 38, 38, 0.7);
 }
 
-/* Small "✗" mark (override default bullet) */
-.prose-custom h2[id*="mistake"] ~ ol > li::before,
-.prose-custom h2[id*="error"] ~ ol > li::before,
-.prose-custom h2[id*="mistake"] ~ ul > li::before,
-.prose-custom h2[id*="error"] ~ ul > li::before,
+/* Small "✗" mark (override default bullet) - ONLY for mistake lists */
+.prose-custom h2[id*="mistake"] + ol > li::before,
+.prose-custom h2[id*="mistake"] + p + ol > li::before,
+.prose-custom h2[id*="mistake"] + ul > li::before,
+.prose-custom h2[id*="mistake"] + p + ul > li::before,
+.prose-custom h2[id*="error"] + ol > li::before,
+.prose-custom h2[id*="error"] + p + ol > li::before,
+.prose-custom h2[id*="error"] + ul > li::before,
+.prose-custom h2[id*="error"] + p + ul > li::before,
 .prose-custom ol.pattern-mistakes-list > li::before,
 .prose-custom ul.pattern-mistakes-list > li::before {
   content: '✗' !important;
