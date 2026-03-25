@@ -172,7 +172,7 @@ export default async function CustomArticlePage(props: {
           </header>
 
           {article.image_url ? (
-            <div className="relative mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.5)] shadow-[0_20px_56px_rgba(43,34,24,0.08)]">
+            <div className="relative -mx-4 mb-12 aspect-[16/9] overflow-hidden rounded-2xl border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.5)] shadow-[0_20px_56px_rgba(43,34,24,0.08)] sm:-mx-8 lg:-mx-16">
               <img
                 src={article.image_url}
                 alt={article.title}
