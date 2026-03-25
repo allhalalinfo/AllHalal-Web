@@ -1066,30 +1066,15 @@ body {
   border-radius: 3px;
 }
 
-/* Pattern 4: Common Mistakes - Warning style with cards */
+/* Pattern 4: Common Mistakes - Subtle red warning style */
 .prose-custom h2[id*="mistake"],
 .prose-custom h2[id*="error"],
 .prose-custom h2[id*="avoid"],
 .prose-custom h2.pattern-mistakes-heading {
-  color: #D97706;
-  position: relative;
-  padding-left: 2.5rem;
+  color: #DC2626;
 }
 
-/* Warning icon before heading */
-.prose-custom h2[id*="mistake"]::before,
-.prose-custom h2[id*="error"]::before,
-.prose-custom h2[id*="avoid"]::before {
-  content: '⚠';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.5rem;
-  opacity: 0.8;
-}
-
-/* Both OL and UL lists */
+/* Both OL and UL lists - compact */
 .prose-custom h2[id*="mistake"] ~ ol,
 .prose-custom h2[id*="error"] ~ ol,
 .prose-custom h2[id*="mistake"] ~ ul,
@@ -1098,11 +1083,11 @@ body {
 .prose-custom ul.pattern-mistakes-list {
   list-style: none;
   counter-reset: mistake-counter;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   padding: 0;
 }
 
-/* Each mistake as a card */
+/* Each mistake - compact card */
 .prose-custom h2[id*="mistake"] ~ ol > li,
 .prose-custom h2[id*="error"] ~ ol > li,
 .prose-custom h2[id*="mistake"] ~ ul > li,
@@ -1110,14 +1095,13 @@ body {
 .prose-custom ol.pattern-mistakes-list > li,
 .prose-custom ul.pattern-mistakes-list > li {
   position: relative;
-  padding: 1.25rem 1.5rem 1.25rem 3.5rem;
-  margin-bottom: 1rem;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  margin-bottom: 0.5rem;
   counter-increment: mistake-counter;
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.05), rgba(217, 119, 6, 0.02));
-  border-left: 4px solid #D97706;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.08);
-  transition: all 0.3s ease;
+  background: rgba(220, 38, 38, 0.03);
+  border-left: 3px solid rgba(220, 38, 38, 0.5);
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 .prose-custom h2[id*="mistake"] ~ ol > li:last-child,
@@ -1129,19 +1113,18 @@ body {
   margin-bottom: 0;
 }
 
-/* Hover effect */
+/* Subtle hover */
 .prose-custom h2[id*="mistake"] ~ ol > li:hover,
 .prose-custom h2[id*="error"] ~ ol > li:hover,
 .prose-custom h2[id*="mistake"] ~ ul > li:hover,
 .prose-custom h2[id*="error"] ~ ul > li:hover,
 .prose-custom ol.pattern-mistakes-list > li:hover,
 .prose-custom ul.pattern-mistakes-list > li:hover {
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.08), rgba(217, 119, 6, 0.04));
-  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.12);
-  transform: translateX(4px);
+  background: rgba(220, 38, 38, 0.05);
+  border-left-color: rgba(220, 38, 38, 0.7);
 }
 
-/* "X" mark before each mistake */
+/* Small "✗" mark */
 .prose-custom h2[id*="mistake"] ~ ol > li::before,
 .prose-custom h2[id*="error"] ~ ol > li::before,
 .prose-custom h2[id*="mistake"] ~ ul > li::before,
@@ -1150,19 +1133,11 @@ body {
 .prose-custom ul.pattern-mistakes-list > li::before {
   content: '✗';
   position: absolute;
-  left: 1.25rem;
-  top: 1.25rem;
-  width: 1.75rem;
-  height: 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #D97706;
-  background: rgba(217, 119, 6, 0.1);
-  border-radius: 50%;
-  border: 2px solid rgba(217, 119, 6, 0.3);
+  left: 0.75rem;
+  top: 0.75rem;
+  font-size: 0.9rem;
+  color: #DC2626;
+  opacity: 0.7;
 }
 
 /* Pattern 5: Keep Learning / References - Compact link list */
