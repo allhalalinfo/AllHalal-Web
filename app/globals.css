@@ -1690,11 +1690,15 @@ body {
   transform: translateY(-2px);
 }
 
-/* Style ALL "Download" links as buttons throughout article (exclude citations) */
-.prose-custom a[href*="download"]:not(.citation-link),
-.prose-custom a[href*="app.allhalal"]:not(.citation-link),
-.prose-custom a[href*="apps.apple"]:not(.citation-link),
-.prose-custom a[href*="play.google"]:not(.citation-link) {
+/* Style Download links as buttons ONLY in Final CTA section */
+.prose-custom .pattern-final-cta a[href*="download"],
+.prose-custom .pattern-final-cta a[href*="app.allhalal"],
+.prose-custom .pattern-final-cta a[href*="apps.apple"],
+.prose-custom .pattern-final-cta a[href*="play.google"],
+.prose-custom h2[id*="final"] ~ * a[href*="download"]:not(.citation-link),
+.prose-custom h2[id*="final"] ~ * a[href*="app.allhalal"]:not(.citation-link),
+.prose-custom h2[id*="final"] ~ * a[href*="apps.apple"]:not(.citation-link),
+.prose-custom h2[id*="final"] ~ * a[href*="play.google"]:not(.citation-link) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1712,10 +1716,14 @@ body {
   border-bottom: none !important;
 }
 
-.prose-custom a[href*="download"]:not(.citation-link):hover,
-.prose-custom a[href*="app.allhalal"]:not(.citation-link):hover,
-.prose-custom a[href*="apps.apple"]:not(.citation-link):hover,
-.prose-custom a[href*="play.google"]:not(.citation-link):hover {
+.prose-custom .pattern-final-cta a[href*="download"]:hover,
+.prose-custom .pattern-final-cta a[href*="app.allhalal"]:hover,
+.prose-custom .pattern-final-cta a[href*="apps.apple"]:hover,
+.prose-custom .pattern-final-cta a[href*="play.google"]:hover,
+.prose-custom h2[id*="final"] ~ * a[href*="download"]:not(.citation-link):hover,
+.prose-custom h2[id*="final"] ~ * a[href*="app.allhalal"]:not(.citation-link):hover,
+.prose-custom h2[id*="final"] ~ * a[href*="apps.apple"]:not(.citation-link):hover,
+.prose-custom h2[id*="final"] ~ * a[href*="play.google"]:not(.citation-link):hover {
   background: linear-gradient(135deg, #C2A77A 0%, #F0E3CB 50%, #C2A77A 100%);
   box-shadow: 0 12px 28px rgba(176, 144, 98, 0.32);
   transform: translateY(-2px);
