@@ -7,6 +7,7 @@ import FaqAccordion from "@/components/articles/FaqAccordion";
 import ReferencesEnhancer from "@/components/articles/ReferencesEnhancer";
 import ArticleReferencesLinker from "@/components/articles/ArticleReferencesLinker";
 import ArticleCitationCleaner from "@/components/articles/ArticleCitationCleaner";
+import ArticleDomainCitationConverter from "@/components/articles/ArticleDomainCitationConverter";
 import { fetchCustomArticleById } from "@/lib/customArticles";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { remark } from "remark";
@@ -184,6 +185,7 @@ export default async function CustomArticlePage(props: {
           </article>
           
           {/* Client-side content enhancers */}
+          <ArticleDomainCitationConverter />
           <ArticleCitationCleaner />
           <ArticleContentEnhancer />
           <FaqAccordion />
