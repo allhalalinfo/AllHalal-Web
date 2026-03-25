@@ -4,8 +4,6 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/layout/Footer";
 import ArticleContentEnhancer from "@/components/articles/ArticleContentEnhancer";
 import FaqAccordion from "@/components/articles/FaqAccordion";
-import ReferencesEnhancer from "@/components/articles/ReferencesEnhancer";
-import ArticleReferencesLinker from "@/components/articles/ArticleReferencesLinker";
 import ArticleCitationCleaner from "@/components/articles/ArticleCitationCleaner";
 import ArticleDomainCitationConverter from "@/components/articles/ArticleDomainCitationConverter";
 import { fetchCustomArticleById } from "@/lib/customArticles";
@@ -189,8 +187,6 @@ export default async function CustomArticlePage(props: {
           <ArticleCitationCleaner />
           <ArticleContentEnhancer />
           <FaqAccordion />
-          <ReferencesEnhancer />
-          <ArticleReferencesLinker />
         </div>
       </main>
       <Footer />

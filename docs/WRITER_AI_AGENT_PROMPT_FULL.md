@@ -737,7 +737,7 @@ These are the most common misunderstandings:
 
 ---
 
-#### Pattern 5: Keep Learning / References - Компактные ссылки
+#### Pattern 5: Keep Learning - Компактные ссылки
 
 ```html
 ## Keep Learning {#keep-learning}
@@ -908,7 +908,6 @@ IFANCA's shopper guidance specifically lists gelatin among ingredients that may 
 **ВАЖНО:**
 - ✅ Используй `[1]`, `[2]`, `[3]` и т.д. — простые квадратные скобки с номером
 - ✅ Ставь ссылку СРАЗУ после утверждения (до точки или запятой)
-- ✅ Номера должны соответствовать списку References внизу
 - ❌ **КРИТИЧНО: НЕ используй формат `(domain.com)`, `(ecfr.gov)`, `(fda.gov)` в тексте!**
 - ❌ **НЕ используй формат `(Source Name)` в тексте!**
 - ❌ НЕ используй формат `oai_citation:N†Source` — он НЕ поддерживается!
@@ -944,7 +943,7 @@ The FDA classifies E471 as "generally recognized as safe" oai_citation:3†FDA.
 The FDA classifies E471 as "generally recognized as safe" [12]. Food and Drug Administration.
 ```
 
-**ПРАВИЛО:** После `[N]` должна идти ТОЛЬКО точка (или запятая/точка с запятой), и ничего больше! Название источника должно быть ТОЛЬКО в секции References внизу.
+**ПРАВИЛО:** После `[N]` должна идти ТОЛЬКО точка (или запятая/точка с запятой), и ничего больше!
 
 **Пример статьи:**
 
@@ -954,61 +953,10 @@ The FDA classifies E471 as "generally recognized as safe" [12]. Food and Drug Ad
 E471 is an emulsifier made from mono- and diglycerides of fatty acids [1]. It's one of the most common food additives worldwide [2].
 
 The FDA classifies E471 as "generally recognized as safe" [3]. However, for Muslim consumers, the key issue is the source of the fats used to produce it [4].
-
-## References {#references}
-
-FDA — Food Additives Status List  
-European Food Safety Authority — E471 Assessment  
-U.S. Food and Drug Administration — GRAS Substances Database  
-IFANCA — Halal Certification Standards for Emulsifiers  
-```
-
-**ВАЖНО про формат References секции:**
-- ❌ **КРИТИЧНО: НЕ ставь** `[1]`, `[2]`, `[3]` **перед референсами в списке** — фронтенд добавит номера автоматически!
-- ❌ **НЕ используй** формат `(domain.com)` или `(source)` **в тексте статьи** — используй **ТОЛЬКО** `[N]`!
-- ✅ Просто перечисляй источники по порядку через `<br>` или в списке
-- ✅ Каждый референс на новой строке
-- ✅ Порядок должен соответствовать цитатам в тексте (`[1]` → первый референс, `[2]` → второй и т.д.)
-- ✅ Формат каждого референса: `[Название организации] — [Название документа]` (без номера в начале!)
-
-**Примеры ПРАВИЛЬНОГО формата References:**
-
-```markdown
-## References {#references}
-
-FDA / eCFR — 21 CFR 101.22 natural flavor definition  
-FDA — Food Allergen Labeling Guidance on collective terms like "natural flavor"  
-FDA — Food Labeling Guide on generic declaration of flavors  
-IFANCA — Halal Shopper's Quick Reference Guide  
-Vegetarian Society — Vegan trademark criteria  
-FDA — Types of Food Ingredients
-```
-
-**Примеры НЕПРАВИЛЬНОГО формата (НЕ ДЕЛАЙ ТАК):**
-
-❌ **НЕПРАВИЛЬНО** (с номерами):
-```markdown
-## References {#references}
-
-[1] FDA / eCFR — 21 CFR 101.22 natural flavor definition  
-[2] FDA — Food Allergen Labeling Guidance  
-[3] IFANCA — Halal Shopper's Quick Reference Guide
-```
-
-❌ **НЕПРАВИЛЬНО** (только домены в тексте):
-```markdown
-Natural flavors can include animal sources (ecfr.gov).
-```
-
-✅ **ПРАВИЛЬНО** (номера в тексте):
-```markdown
-Natural flavors can include animal sources [1].
 ```
 
 **Технические требования:**
-- Ссылки автоматически станут кликабельными на фронтенде
-- При клике откроется References секция и подсветится нужный источник
-- Используй минимум 5-10 источников на статью (2500+ слов)
+- Используй минимум 5-10 цитат на статью (2500+ слов)
 - Ссылки должны быть на авторитетные источники (FDA, IFANCA, JAKIM, scholarly journals)
 
 ---
@@ -1018,13 +966,10 @@ Natural flavors can include animal sources [1].
 Перед отправкой статьи ПРОВЕРЬ:
 
 - [ ] ✅ В тексте статьи используются **ТОЛЬКО** `[1]`, `[2]`, `[3]` (не `(domain)`, не `(source)`)
-- [ ] ✅ В секции References **НЕТ** номеров `[1]`, `[2]` перед названиями источников
-- [ ] ✅ Каждый референс — читаемое название: `[Organization] — [Document Title]`
-- [ ] ✅ Порядок References соответствует порядку цитат в тексте
-- [ ] ✅ Все цитаты имеют соответствующий референс внизу
+- [ ] ✅ Порядок цитат последователен и логичен
+- [ ] ✅ Все важные утверждения подкреплены цитатами
 - [ ] ❌ В тексте **НЕТ** формата `(ecfr.gov)`, `(fda.gov)`, `(ifanca.org)`
-- [ ] ❌ В тексте **НЕТ** названий источников после `[N]`
-- [ ] ❌ В References **НЕТ** дублирующих номеров типа `[1] FDA...`
+- [ ] ❌ В тексте **НЕТ** названий источников после `[N]` (например, `[1] FDA`)
 
 **Если хотя бы один пункт не выполнен — исправь перед публикацией!**
 
