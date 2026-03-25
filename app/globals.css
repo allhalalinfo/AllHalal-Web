@@ -1057,16 +1057,48 @@ body {
 .prose-custom h2[id*="mistake"] ~ ol,
 .prose-custom h2[id*="error"] ~ ol,
 .prose-custom ol.pattern-mistakes-list {
+  list-style: none;
+  counter-reset: mistake-counter;
   background: linear-gradient(135deg, rgba(217, 119, 6, 0.05), rgba(217, 119, 6, 0.02));
-  padding: 1.5rem 1.5rem 1.5rem 3rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
   border-radius: var(--radius-lg);
   border: 1px dashed rgba(217, 119, 6, 0.3);
+}
+
+.prose-custom h2[id*="mistake"] ~ ol > li,
+.prose-custom h2[id*="error"] ~ ol > li,
+.prose-custom ol.pattern-mistakes-list > li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 0.75rem;
+  counter-increment: mistake-counter;
+}
+
+.prose-custom h2[id*="mistake"] ~ ol > li:last-child,
+.prose-custom h2[id*="error"] ~ ol > li:last-child,
+.prose-custom ol.pattern-mistakes-list > li:last-child {
+  margin-bottom: 0;
 }
 
 .prose-custom h2[id*="mistake"] ~ ol > li::before,
 .prose-custom h2[id*="error"] ~ ol > li::before,
 .prose-custom ol.pattern-mistakes-list > li::before {
+  content: counter(mistake-counter);
+  position: absolute;
+  left: 0;
+  top: 0.125rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
   background: linear-gradient(135deg, #D97706, #B45309);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.2);
 }
 
 /* Pattern 5: Keep Learning / References - Compact link list */
