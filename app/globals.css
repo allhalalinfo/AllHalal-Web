@@ -1076,7 +1076,7 @@ body {
 .prose-custom h2[id*="error"] ~ ul,
 .prose-custom ol.pattern-mistakes-list,
 .prose-custom ul.pattern-mistakes-list {
-  list-style: none;
+  list-style: none !important;
   counter-reset: mistake-counter;
   margin: 1.5rem 0;
   padding: 0;
@@ -1097,7 +1097,7 @@ body {
   border-left: 3px solid rgba(220, 38, 38, 0.5);
   border-radius: 6px;
   transition: all 0.2s ease;
-  list-style-type: none;
+  list-style-type: none !important;
 }
 
 .prose-custom h2[id*="mistake"] ~ ol > li:last-child,
@@ -1127,18 +1127,18 @@ body {
 .prose-custom h2[id*="error"] ~ ul > li::before,
 .prose-custom ol.pattern-mistakes-list > li::before,
 .prose-custom ul.pattern-mistakes-list > li::before {
-  content: '✗';
+  content: '✗' !important;
   position: absolute;
-  left: 0.75rem;
-  top: 0.75rem;
+  left: 0.75rem !important;
+  top: 0.75rem !important;
   font-size: 0.9rem;
-  color: #DC2626;
+  color: #DC2626 !important;
   opacity: 0.7;
-  width: auto;
-  height: auto;
-  background: none;
-  border-radius: 0;
-  box-shadow: none;
+  width: auto !important;
+  height: auto !important;
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 /* Pattern 5: Keep Learning / References - Compact link list */
