@@ -38,12 +38,14 @@ export default function ArticleContentEnhancer() {
       else if (text.includes("takeaway") || text.includes("key points")) {
         if (!h2.id) h2.id = "key-takeaways";
         h2.classList.add("pattern-takeaway-heading");
+        console.log("✅ ArticleContentEnhancer: Found Key Takeaways section");
         // Find next ul
         while (nextEl && nextEl.tagName !== "UL") {
           nextEl = nextEl.nextElementSibling;
         }
         if (nextEl && nextEl.tagName === "UL") {
           nextEl.classList.add("pattern-takeaway-list");
+          console.log("  → Applied pattern-takeaway-list to UL");
         }
       }
       
@@ -150,20 +152,27 @@ export default function ArticleContentEnhancer() {
       }
       
       // Pattern: Practical Examples
-      else if (text.includes("example") && (text.includes("practical") || text.includes("real"))) {
+      else if (
+        text.includes("example") || 
+        text.includes("scenario") || 
+        text.includes("case stud")
+      ) {
         if (!h2.id) h2.id = "practical-examples";
         h2.classList.add("pattern-examples-heading");
+        console.log("✅ ArticleContentEnhancer: Found Practical Examples section");
       }
     });
     
     // Handle Practical Examples - wrap H3s in cards
     const examplesH2 = article.querySelector("h2#practical-examples, h2.pattern-examples-heading");
     if (examplesH2) {
+      console.log("✅ ArticleContentEnhancer: Processing Practical Examples cards...");
       let currentElement = examplesH2.nextElementSibling;
       let exampleIndex = 1;
       
       while (currentElement && currentElement.tagName !== "H2") {
         if (currentElement.tagName === "H3") {
+          console.log(`  → Wrapping H3 example #${exampleIndex}: "${currentElement.textContent}"`);
           // Create card wrapper
           const card = document.createElement("div");
           card.className = "example-card";
@@ -198,6 +207,7 @@ export default function ArticleContentEnhancer() {
           currentElement = currentElement.nextElementSibling;
         }
       }
+      console.log(`✅ ArticleContentEnhancer: Created ${exampleIndex - 1} example cards`);
     }
   }, []);
 
