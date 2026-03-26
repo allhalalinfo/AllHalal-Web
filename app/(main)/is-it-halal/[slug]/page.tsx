@@ -17,9 +17,47 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const item = halalItems.find(i => i.slug === params.slug);
   if (!item) return { title: 'Not Found' };
   
+  const title = `Is ${item.name} halal? | allhalal.info`;
+  const description = item.shortReason;
+  const url = `https://allhalal.info/is-it-halal/${item.slug}`;
+  
   return {
-    title: `Is ${item.name} halal? | allhalal.info`,
-    description: item.shortReason,
+    title,
+    description,
+    keywords: [
+      'halal',
+      'halal food',
+      'halal verification',
+      'muslim food',
+      item.name.toLowerCase(),
+      ...(item.aliases || []),
+      item.category,
+    ].join(', '),
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'allhalal.info',
+      locale: 'en_US',
+      type: 'article',
+      images: [
+        {
+          url: 'https://allhalal.info/branding/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: `Is ${item.name} halal?`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://allhalal.info/branding/og-image.png'],
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 
@@ -33,6 +71,35 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
 
   return (
     <div className="container py-32 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: `Is ${item.name} halal?`,
+            description: item.shortReason,
+            author: {
+              '@type': 'Organization',
+              name: 'allhalal.info',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'allhalal.info',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://allhalal.info/branding/logo.png',
+              },
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': `https://allhalal.info/is-it-halal/${item.slug}`,
+            },
+            articleSection: item.category,
+            keywords: [item.name, ...(item.aliases || [])].join(', '),
+          }),
+        }}
+      />
       <FAQSchema faqs={[{ question: `Is ${item.name} halal?`, answer: item.shortReason }]} />
       <div className="max-w-3xl mx-auto">
         <Link href={`/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">
