@@ -14,38 +14,51 @@ export default function FaqAccordion() {
       return;
     }
 
-    // Find FAQ heading - try multiple strategies
+    // Find FAQ heading - VERY aggressive search
     let faqHeading: Element | null = null;
     
     // Strategy 1: By ID (most reliable)
     faqHeading = article.querySelector("h2#faq, h2[id*='faq'], h2[id*='question']");
     
     if (faqHeading) {
-      console.log("FaqAccordion: Found FAQ heading by ID:", faqHeading.textContent);
+      console.log("✅ FaqAccordion: Found FAQ heading by ID:", faqHeading.textContent);
     }
     
     // Strategy 2: By text content if ID not found
     if (!faqHeading) {
       const allH2 = article.querySelectorAll("h2");
+      console.log(`FaqAccordion: Searching through ${allH2.length} H2 elements...`);
+      
       for (const h2 of allH2) {
         const text = h2.textContent?.toLowerCase().trim() || "";
-        // More aggressive matching
+        console.log(`  - Checking H2: "${text}"`);
+        
+        // VERY aggressive matching - even partial match
         if (
           text === "faq" ||
           text === "faqs" ||
+          text === "faq " ||
+          text.startsWith("faq") ||
           text.includes("frequently asked") ||
           text.includes("common questions") ||
-          text.startsWith("faq")
+          text.includes("questions and answers") ||
+          text.includes("q&a") ||
+          text.includes("q & a")
         ) {
           faqHeading = h2;
-          console.log("FaqAccordion: Found FAQ heading by text:", h2.textContent);
+          // Add ID if missing
+          if (!h2.id) {
+            h2.id = "faq";
+            console.log("  ➜ Added id='faq' to heading");
+          }
+          console.log("✅ FaqAccordion: Found FAQ heading by text:", h2.textContent);
           break;
         }
       }
     }
     
     if (!faqHeading) {
-      console.log("FaqAccordion: FAQ heading not found");
+      console.warn("❌ FaqAccordion: FAQ heading NOT found. Make sure you have H2 with 'FAQ' text.");
       return;
     }
 
@@ -54,8 +67,12 @@ export default function FaqAccordion() {
     let currentElement = faqHeading.nextElementSibling;
     let currentQuestion: HTMLElement | null = null;
     let currentAnswers: HTMLElement[] = [];
+    
+    console.log("FaqAccordion: Looking for H3 questions after FAQ heading...");
 
     while (currentElement && currentElement.tagName !== "H2") {
+      console.log(`  - Found element: ${currentElement.tagName}`);
+      
       if (currentElement.tagName === "H3") {
         // Save previous Q&A if exists
         if (currentQuestion && currentAnswers.length > 0) {
@@ -63,13 +80,16 @@ export default function FaqAccordion() {
             question: currentQuestion,
             answer: currentAnswers,
           });
+          console.log(`    ✅ Saved Q&A pair (${currentAnswers.length} answer elements)`);
         }
         // Start new Q&A
         currentQuestion = currentElement as HTMLElement;
         currentAnswers = [];
+        console.log(`    ➜ New question: "${currentQuestion.textContent}"`);
       } else if (currentQuestion) {
         // Collect answer elements (p, ul, ol, etc.)
         currentAnswers.push(currentElement as HTMLElement);
+        console.log(`      + Added answer element: ${currentElement.tagName}`);
       }
       currentElement = currentElement.nextElementSibling;
     }
@@ -77,14 +97,21 @@ export default function FaqAccordion() {
     // Don't forget the last one
     if (currentQuestion && currentAnswers.length > 0) {
       faqItems.push({ question: currentQuestion, answer: currentAnswers });
+      console.log(`    ✅ Saved last Q&A pair (${currentAnswers.length} answer elements)`);
     }
 
     if (faqItems.length === 0) {
-      console.warn("FaqAccordion: No FAQ items found! Make sure you have H3 questions under the FAQ heading.");
+      console.error("❌ FaqAccordion: No FAQ items found! Make sure you have H3 questions under the FAQ heading.");
+      console.error("   Expected structure:");
+      console.error("   ## FAQ {#faq}");
+      console.error("   ### Question 1?");
+      console.error("   Answer paragraph...");
+      console.error("   ### Question 2?");
+      console.error("   Answer paragraph...");
       return;
     }
     
-    console.log(`FaqAccordion: Found ${faqItems.length} FAQ items - converting to accordion`);
+    console.log(`✅ FaqAccordion: Found ${faqItems.length} FAQ items - converting to accordion`);
 
     // Create accordion structure
     const accordionContainer = document.createElement("div");
@@ -147,7 +174,9 @@ export default function FaqAccordion() {
     // Insert accordion after FAQ heading
     faqHeading.insertAdjacentElement("afterend", accordionContainer);
     
-    console.log("FaqAccordion: Accordion created successfully - all answers are CLOSED by default");
+    console.log("✅ FaqAccordion: Accordion created successfully!");
+    console.log("   ➜ All answers are CLOSED by default");
+    console.log("   ➜ Click questions to expand/collapse");
   }, []);
 
   return null;
