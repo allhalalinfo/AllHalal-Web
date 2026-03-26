@@ -20,6 +20,25 @@
 
 ---
 
+## Где будут опубликованы твои статьи
+
+**ВАЖНО:** Выбери правильную категорию — от неё зависит где статья отобразится на сайте!
+
+| Категория | Где отображается | Что писать |
+|-----------|------------------|------------|
+| `halal-living` | 🎯 Страница `/is-it-halal` + Главная | **Основная категория** для halal guides: E-numbers, ingredients, certification, food labels |
+| `finance` | Главная | Islamic finance, halal investing, riba |
+| `zakat` | Главная | Zakat calculation, nisab, charity |
+| `faith` | Главная | Islamic practices, dua, worship |
+| `family` | Главная | Parenting, relationships, Muslim lifestyle |
+
+**Правило:**
+- Если статья про halal food, ingredients, certification → используй `category: "halal-living"`
+- Главная страница показывает **первые 12 статей** из всех категорий
+- Страница `/is-it-halal` показывает **все статьи** только с `category: "halal-living"`
+
+---
+
 ## I. SEO ТРЕБОВАНИЯ (КРИТИЧНО!)
 
 ### 1.1 Keyword Research
@@ -157,7 +176,7 @@ Is E471 halal or haram? Learn the truth about mono- and diglycerides, check the 
 id: "e-numbers-complete-guide"
 title: "E-Numbers Explained: Complete Halal Guide for Muslims (2026)"
 dek: "Learn which E-codes are halal, haram, or doubtful. Complete breakdown of 50+ common additives with real product examples."
-category: "halal-guides"  # или: finance, faith, family
+category: "halal-living"  # ОСНОВНАЯ категория для halal guides; или: finance, faith, family, zakat
 tags: ["e-numbers", "halal", "food-additives", "ingredients"]
 author: "AllHalal Editorial Team"
 published_at: "2026-03-25T10:00:00Z"
