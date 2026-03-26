@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import Link from "next/link";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 import type { CustomArticle } from "@/types/customArticle";
 
@@ -33,20 +34,19 @@ export default function CustomArticlesHomeSection({
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-[clamp(2rem,8vw,4rem)] font-black font-display leading-[0.96] tracking-[-0.04em] text-text-primary">
-            Curated reads
+            Editorial guides
           </h2>
           <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
-            In-depth guides and editorial content from our team. For breaking news and daily updates,
-            visit the news desk.
+            Expert halal guides and in-depth analysis from our editorial team. For daily news updates, check the news desk.
           </p>
         </div>
 
-        <a
+        <Link
           href={newsPageUrl}
           className="inline-flex w-full items-center justify-center rounded-full bg-[#173640] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(23,54,64,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#13303a] sm:w-auto"
         >
-          Open news desk
-        </a>
+          News desk
+        </Link>
       </div>
 
       {categoryOptions.length > 1 ? (
@@ -80,7 +80,7 @@ export default function CustomArticlesHomeSection({
             href={newsPageUrl}
             className="ml-1 text-xs font-semibold text-primary underline-offset-2 hover:underline"
           >
-            Full desk
+            News desk
           </a>
         </div>
       ) : (
@@ -89,7 +89,7 @@ export default function CustomArticlesHomeSection({
             href={newsPageUrl}
             className="text-xs font-semibold text-primary underline-offset-2 hover:underline"
           >
-            Full news desk
+            News desk
           </a>
         </div>
       )}
