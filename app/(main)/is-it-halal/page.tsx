@@ -103,17 +103,16 @@ export default async function HalalLivingPage(props: {
               </div>
               
               <p className="text-lg text-[#5A5449] leading-relaxed">
-                The internet is full of lists: <span className="italic">"Is Nutella halal? Is Red Bull halal?"</span> But these answers change by region, by recipe, by year.{" "}
-                <span className="font-bold text-[#2A2419]">Principles don't.</span>
+                There is a lot of halal information online, but it is not always clear, complete, or consistent. A product can vary by country, recipe, supplier, or certification standard, so quick answers are not always enough.
               </p>
               
               <p className="text-lg text-[#5A5449] leading-relaxed">
-                Our guides teach you <span className="font-semibold">how to think</span> about halal food—not just what to think. Understand E-codes. Read certification logos. Trace ingredient sources.
+                These guides are designed to make halal choices easier to understand. They explain ingredients, E numbers, certification, and sourcing in a clearer way, so readers can assess products with more confidence.
               </p>
               
               <div className="bg-white border-l-4 border-[#F0C65F] p-6 rounded-r-xl">
                 <p className="text-[#2A2419] font-semibold">
-                  When you understand the fundamentals, you don't need to Google every snack brand. You can make confident decisions on your own.
+                  A better understanding of the basics makes everyday halal decisions simpler and more reliable.
                 </p>
               </div>
             </div>
