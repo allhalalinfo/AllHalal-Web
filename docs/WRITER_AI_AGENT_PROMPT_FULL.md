@@ -780,7 +780,7 @@ If this guide helped, you may also want to read:
 #### Pattern 7: FAQ - Interactive Accordion
 
 ```markdown
-## Frequently Asked Questions {#faq}
+## FAQ {#faq}
 
 ### Is E471 always haram?
 
@@ -791,7 +791,14 @@ No, it depends on the source...
 If it's plant-derived, yes...
 ```
 
-**Стиль:** Interactive accordion (H3 вопросы сворачиваются/разворачиваются). НЕ используй `<div>` для FAQ — фронт автоматически конвертирует H3 в accordion.
+**КРИТИЧНО:**
+- ✅ Заголовок **ДОЛЖЕН** быть `## FAQ {#faq}` (короткое название)
+- ✅ Вопросы **СТРОГО** как `### Question?` (H3, не H4, не параграф)
+- ✅ Ответы сразу после H3 (параграфы, списки)
+- ❌ НЕ используй `<div>` для FAQ
+- ❌ НЕ используй другие заголовки типа "Frequently Asked Questions" или "Common Questions"
+
+**Стиль:** Interactive accordion (H3 вопросы сворачиваются/разворачиваются автоматически).
 
 ---
 
