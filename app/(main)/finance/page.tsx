@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AppPromoMini from "@/components/ui/AppPromoMini";
 import FAQSchema from "@/components/seo/FAQSchema";
 import { SITE_URL } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = {
   title: "Halal Finance Hub | Zakat, Investing, Mortgages & Islamic Banking",
   description:
-    "Explore halal finance on allhalal.info with zakat tools, halal investing guides, Islamic banking pages and halal mortgage resources for Muslims making real money decisions.",
+    "Muslim finance guidance for zakat calculation, halal investing, Islamic banking and home financing. Clear routes for real financial decisions.",
   keywords: [
     "halal finance",
     "Islamic finance",
@@ -15,7 +14,6 @@ export const metadata: Metadata = {
     "halal investing",
     "Islamic banking",
     "halal mortgage",
-    "Muslim finance hub",
   ],
   openGraph: {
     title: "Halal Finance Hub | Zakat, Investing, Mortgages & Islamic Banking",
@@ -23,617 +21,540 @@ export const metadata: Metadata = {
       "Muslim finance hub for zakat, halal investing, Islamic banking and halal mortgage guidance.",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Halal Finance Hub | Zakat, Investing, Mortgages & Islamic Banking",
-    description:
-      "Muslim finance hub for zakat, halal investing, Islamic banking and halal mortgage guidance.",
-  },
 };
 
 const financeFaqs = [
   {
-    question: "What can I do in the allhalal.info finance hub?",
+    question: "Where should I start?",
     answer:
-      "You can calculate zakat, explore halal investing, understand Islamic banking options and learn how halal mortgages work without relying on generic conventional-finance advice.",
+      "If you need to calculate an obligation, start with the zakat calculator. For growing wealth, start with halal investing. For major decisions like home financing, go to mortgages. For everyday account questions, go to Islamic banking.",
   },
   {
-    question: "Is this finance section only for advanced investors?",
+    question: "Is this section only for advanced investors?",
     answer:
-      "No. The hub is structured for ordinary Muslim decisions such as zakat, saving, home financing and getting started with halal investing.",
+      "No. This section covers everyday needs like zakat and banking questions, alongside investing and home financing for those making larger decisions.",
   },
   {
-    question: "Why should a Muslim portal include finance at all?",
+    question: "What can I calculate or compare here?",
     answer:
-      "Finance is one of the areas where Muslims need clear practical guidance to avoid riba, understand halal structures and make major life decisions with confidence.",
+      "You can calculate zakat with live Nisab thresholds, learn screening logic for halal investing, compare Islamic mortgage structures and understand Islamic banking options.",
   },
   {
-    question: "Where should a new visitor start in finance?",
+    question: "What is the difference between these pages?",
     answer:
-      "Most visitors start with zakat or the halal investing guide because those are high-frequency decisions. For larger life decisions, the mortgage and banking pages are the strongest next entry points.",
+      "Zakat is an annual obligation. Investing is about growing wealth carefully. Banking covers everyday money infrastructure. Mortgages are for major home financing decisions. Each has different use cases.",
+  },
+  {
+    question: "Is this financial advice?",
+    answer:
+      "No. This is educational content to help you understand concepts, options and tradeoffs. For personal financial advice, consult a qualified professional.",
   },
 ];
 
-export default async function FinanceHub(props: { params: Promise<{}> }) {
+const financeSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/finance#webpage`,
+      url: `${SITE_URL}/finance`,
+      name: "Halal Finance Hub",
+      description:
+        "Finance hub for zakat, halal investing, Islamic banking and halal mortgage guidance.",
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      inLanguage: "en",
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: `${SITE_URL}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Finance",
+          item: `${SITE_URL}/finance`,
+        },
+      ],
+    },
+  ],
+};
 
-  const startCards = [
-    {
-      eyebrow: "Recurring duty",
-      title: "Calculate zakat with a live Nisab reference",
-      description:
-        "The finance hub should start with one of the most repeated Muslim money needs: zakat calculation with current thresholds.",
-      href: `/finance/zakat-calculator`,
-    },
-    {
-      eyebrow: "Wealth building",
-      title: "Understand halal investing before you buy",
-      description:
-        "Guide Muslims through Shariah-compliant investing, basic screening logic and beginner-friendly entry points.",
-      href: `/finance/investing`,
-    },
-    {
-      eyebrow: "Major life decision",
-      title: "Compare halal mortgage pathways",
-      description:
-        "Home financing is too important for vague copy. The hub should route users directly into real contract models and providers.",
-      href: `/finance/mortgages`,
-    },
-    {
-      eyebrow: "Everyday banking",
-      title: "See Islamic banking and account options",
-      description:
-        "Muslims also need practical clarity around accounts, banks, credit and daily money infrastructure.",
-      href: `/finance/banks`,
-    },
-  ];
-
-  const featuredPages = [
+export default async function FinanceHub() {
+  const corePages = [
     {
       title: "Zakat Calculator",
-      description: "Live Nisab threshold and a practical tool people return to whenever zakat becomes due.",
-      href: `/finance/zakat-calculator`,
-      tag: "Practical tool",
-      accent: "from-[#2A5C58] to-[#3A7C77] text-white",
-    },
-    {
-      title: "Zakat Guides",
-      description: "Stocks, crypto, business, pensions, and how today’s Nisab is calculated—with links back to the calculator.",
-      href: `/guides`,
-      tag: "Deep dives",
-      accent: "from-[#2E4B59] to-[#4A6B78] text-white",
+      description: "Calculate zakat with live Nisab reference",
+      useCase: "Annual obligation",
+      practical: "Tool with current gold and silver thresholds",
+      href: "/finance/zakat-calculator",
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+          />
+        </svg>
+      ),
+      gradient: "from-[#2A5C58] to-[#3A7C77]",
     },
     {
       title: "Halal Investing",
-      description: "A strong beginner path into Shariah-compliant investing, ETFs and screening logic.",
-      href: `/finance/investing`,
-      tag: "Start investing",
-      accent: "from-[#3A526A] to-[#57738C] text-white",
+      description: "Understand Shariah-compliant investing before you buy",
+      useCase: "Wealth building",
+      practical: "Screening logic, ETFs and beginner entry points",
+      href: "/finance/investing",
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+          />
+        </svg>
+      ),
+      gradient: "from-[#3A526A] to-[#57738C]",
     },
     {
       title: "Halal Mortgages",
-      description: "One of the highest-stakes Muslim finance decisions and a core hub page for trust.",
-      href: `/finance/mortgages`,
-      tag: "Big decision",
-      accent: "from-[#6B4A37] to-[#93644B] text-white",
+      description: "Compare Islamic home financing structures",
+      useCase: "Major life decision",
+      practical: "Contract models, providers and realistic context",
+      href: "/finance/mortgages",
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+      ),
+      gradient: "from-[#6B4A37] to-[#93644B]",
     },
     {
-      title: "Islamic Banks",
-      description: "A clearer route into accounts, institutions and banking questions Muslims ask constantly.",
-      href: `/finance/banks`,
-      tag: "Banking clarity",
-      accent: "from-[#556343] to-[#7B8B64] text-white",
+      title: "Islamic Banking",
+      description: "See Islamic banking and account options",
+      useCase: "Everyday money",
+      practical: "Accounts, institutions and practical clarity",
+      href: "/finance/banks",
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+          />
+        </svg>
+      ),
+      gradient: "from-[#556343] to-[#7B8B64]",
     },
   ];
-
-  const decisionTracks = [
-    {
-      title: "For annual obligations",
-      description:
-        "Zakat should be surfaced as an action, not buried as a blog topic. This is the repeatable finance utility Muslims come back for year after year.",
-      links: [
-        { label: "Zakat calculator", href: `/finance/zakat-calculator` },
-        { label: "Zakat guides", href: `/guides` },
-        { label: "Islamic calendar", href: `/learn/islamic-calendar` },
-        { label: "Duas & Athkar", href: `/learn/duas` },
-      ],
-      accent: "from-[#DDEBE8] to-[#EEF6F4] text-text-primary",
-    },
-    {
-      title: "For building wealth carefully",
-      description:
-        "Halal investing needs more than generic motivation. Users need screening logic, realistic starting points and paths that reduce confusion.",
-      links: [
-        { label: "Halal investing", href: `/finance/investing` },
-        { label: "Methodology", href: `/methodology` },
-        { label: "Read the briefing", href: `/news` },
-      ],
-      accent: "from-[#E8E0D5] to-[#F6F0E7] text-text-primary",
-    },
-    {
-      title: "For major family decisions",
-      description:
-        "Mortgage guidance should feel like a serious product surface, because Muslims making housing decisions need structure, not just broad reassurance.",
-      links: [
-        { label: "Halal mortgages", href: `/finance/mortgages` },
-        { label: "Islamic banks", href: `/finance/banks` },
-        { label: "Contact support", href: `/support` },
-      ],
-      accent: "from-[#384D5F] to-[#577084] text-white",
-    },
-    {
-      title: "For everyday money hygiene",
-      description:
-        "The finance hub should also answer practical account and banking questions that affect Muslims month after month.",
-      links: [
-        { label: "Islamic banks", href: `/finance/banks` },
-        { label: "Halal checker", href: `/is-it-halal` },
-        { label: "Homepage", href: `/` },
-      ],
-      accent: "from-[#3D2B23] to-[#624639] text-white",
-    },
-  ];
-
-  const proofPoints = [
-    {
-      title: "High-stakes guidance belongs in the portal",
-      text: "A Muslim portal should not stop at food or prayer. Finance is where values meet long-term consequences.",
-    },
-    {
-      title: "Practical decisions beat generic inspiration",
-      text: "Users need routes into zakat, investing, banking and home financing with pages they can actually use.",
-    },
-    {
-      title: "Trust matters more in finance",
-      text: "Methodology, clearer structures and realistic framing are especially important when the user is making money decisions.",
-    },
-  ];
-
-  const quickQuestions = [
-    {
-      label: "How do I calculate zakat today?",
-      href: `/finance/zakat-calculator`,
-      tag: "Obligation",
-    },
-    {
-      label: "Are halal ETFs a good start?",
-      href: `/finance/investing`,
-      tag: "Investing",
-    },
-    {
-      label: "What makes a mortgage halal?",
-      href: `/finance/mortgages`,
-      tag: "Home finance",
-    },
-    {
-      label: "Can I use a normal bank account?",
-      href: `/finance/banks`,
-      tag: "Banking",
-    },
-    {
-      label: "Where do Muslims start with finance?",
-      href: `/finance`,
-      tag: "Overview",
-    },
-    {
-      label: "What does riba change in daily life?",
-      href: `/methodology`,
-      tag: "Trust",
-    },
-  ];
-
-  const financeSchema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": `${SITE_URL}/finance#webpage`,
-        url: `${SITE_URL}/finance`,
-        name: "Halal Finance Hub",
-        description:
-          "Finance hub for zakat, halal investing, Islamic banking and halal mortgage guidance for Muslims.",
-        isPartOf: { "@id": `${SITE_URL}/#website` },
-        inLanguage: "en",
-      },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: `${SITE_URL}`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Finance",
-            item: `${SITE_URL}/finance`,
-          },
-        ],
-      },
-    ],
-  };
 
   return (
-    <main className="pt-32 pb-20 bg-bg-primary min-h-screen">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#f7f2e7] via-[#f9f6f1] to-[#f2f1e8]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financeSchema) }}
       />
       <FAQSchema faqs={financeFaqs} />
 
-      <div className="container max-w-7xl mx-auto">
-        <section className="relative overflow-hidden rounded-[2.5rem] border border-border bg-white/70 backdrop-blur-sm shadow-[0_18px_50px_rgba(48,40,29,0.08)]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(75,122,136,0.16),transparent_28%),radial-gradient(circle_at_top_right,rgba(240,198,95,0.16),transparent_24%),linear-gradient(180deg,#f6f2ea_0%,#ece7dc_100%)]" />
-          <div className="relative grid lg:grid-cols-[1.08fr_0.92fr] gap-8 p-8 md:p-10 lg:p-12">
-            <div className="flex flex-col justify-center">
-              <div className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-full bg-white/75 border border-black/5 shadow-sm mb-5">
-                <span className="w-2.5 h-2.5 rounded-full bg-accent-teal" />
-                <span className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-text-primary">
-                  Halal Finance Hub
-                </span>
-              </div>
+      {/* Ambient background */}
+      <div className="pointer-events-none fixed inset-0">
+        <div className="absolute right-[-8rem] top-[8rem] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(42,92,88,0.06),transparent_65%)] blur-3xl" />
+        <div className="absolute left-[-12rem] top-[28rem] h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(75,122,136,0.08),transparent_68%)] blur-3xl" />
+        <div className="absolute right-[-10rem] bottom-[8rem] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(107,74,55,0.07),transparent_62%)] blur-3xl" />
+      </div>
 
-              <h1 className="text-[2.9rem] sm:text-[4rem] md:text-[4.8rem] lg:text-[5.2rem] font-black font-display text-text-primary tracking-tight leading-[0.98] max-w-5xl">
-                Muslim money decisions need more than generic finance advice.
-              </h1>
-
-              <p className="text-text-secondary text-lg md:text-xl max-w-3xl mt-6 font-medium leading-relaxed">
-                Zakat, halal investing, Islamic banking and halal mortgage guidance should be easy to reach, clearly explained and serious enough for real-life financial decisions.
-              </p>
-
-              <div className="flex flex-wrap gap-3 mt-8">
-                <Link
-                  href={`/finance/zakat-calculator`}
-                  className="px-5 py-3 rounded-full bg-gradient-gold text-[#4A3319] font-bold shadow-[0_8px_24px_rgba(176,144,98,0.25)] hover:-translate-y-0.5 transition-transform"
-                >
-                  Calculate zakat
-                </Link>
-                <Link
-                  href={`/finance/investing`}
-                  className="px-5 py-3 rounded-full bg-white/85 border border-border text-text-primary font-semibold hover:bg-white transition-colors"
-                >
-                  Start halal investing
-                </Link>
-                <Link
-                  href={`/finance/mortgages`}
-                  className="px-5 py-3 rounded-full bg-white/85 border border-border text-text-primary font-semibold hover:bg-white transition-colors"
-                >
-                  Compare mortgage paths
-                </Link>
-              </div>
-
-              <div className="grid sm:grid-cols-3 gap-3 mt-8 max-w-4xl">
-                {[
-                  {
-                    title: "Repeatable utility",
-                    text: "Zakat and banking questions that come up again and again.",
-                  },
-                  {
-                    title: "Long-term decisions",
-                    text: "Investing and home financing with clearer Islamic framing.",
-                  },
-                  {
-                    title: "Trust and structure",
-                    text: "Less vague reassurance, more practical routes and decision support.",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-[1.35rem] border border-black/5 bg-white/60 p-4 shadow-[0_10px_28px_rgba(54,44,34,0.06)]"
-                  >
-                    <p className="text-sm font-bold text-text-primary mb-1">{item.title}</p>
-                    <p className="text-sm text-text-secondary leading-relaxed">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] border border-white/20 bg-[#173341] text-white p-6 md:p-7 shadow-[0_18px_50px_rgba(17,36,47,0.28)]">
-              <div className="flex items-start justify-between gap-4 mb-6">
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-white/55 mb-2">
-                    Start Here
-                  </p>
-                  <h2 className="text-2xl md:text-3xl font-bold font-display leading-tight">
-                    The finance hub should match the exact kind of decision the Muslim user is trying to make.
-                  </h2>
-                </div>
-                <Link
-                  href={`/methodology`}
-                  className="hidden md:inline-flex px-3 py-2 rounded-full bg-white/10 border border-white/10 text-xs font-bold uppercase tracking-[0.16em] text-white/80"
-                >
-                  Trust
-                </Link>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                {startCards.map((card) => (
-                  <Link
-                    key={card.title}
-                    href={card.href}
-                    className="rounded-[1.5rem] border border-white/10 bg-white/6 p-5 hover:bg-white/10 transition-colors"
-                  >
-                    <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 mb-3">
-                      {card.eyebrow}
-                    </div>
-                    <h3 className="text-xl font-bold font-display leading-tight mb-2">
-                      {card.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-white/75">{card.description}</p>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mt-8 grid grid-cols-1 xl:grid-cols-[0.8fr_1.2fr] gap-6">
-          <div className="rounded-[2rem] bg-gradient-to-br from-[#3A291F] via-[#5A3D2D] to-[#87614C] text-white p-8 border border-white/10 shadow-[0_20px_60px_rgba(56,34,24,0.22)] relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(244,185,66,0.24),transparent_28%)]" />
-            <div className="relative">
-              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#F6D48B] mb-3">
-                Most Common Questions
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold font-display leading-tight mb-4">
-                The finance hub should surface the questions Muslims ask before money decisions get expensive.
-              </h2>
-              <p className="text-sm md:text-base text-white/78 leading-relaxed">
-                Start with repeated needs like zakat and banking, then route into bigger decisions like investing and home financing with better clarity.
-              </p>
-            </div>
+      <div className="container relative z-10 mx-auto max-w-6xl px-6 py-32">
+        {/* Hero Section */}
+        <div className="mb-16">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[rgba(42,92,88,0.08)] px-4 py-1.5">
+            <svg
+              className="h-4 w-4 text-[#2A5C58]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#2A5C58]">
+              Halal Finance
+            </span>
           </div>
 
-          <div className="rounded-[2rem] border border-border bg-white/80 backdrop-blur-sm p-8 shadow-card">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-                  Quick Questions
-                </p>
-                <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary">
-                  High-intent routes the homepage and finance hub should keep visible.
-                </h2>
+          <h1 className="mb-6 text-[clamp(2.5rem,7vw,4.5rem)] font-black font-display leading-[0.95] tracking-tight text-text-primary">
+            Muslim money decisions, structured around real choices
+          </h1>
+
+          <p className="mb-8 max-w-3xl text-lg leading-relaxed text-text-secondary">
+            Zakat, halal investing, Islamic banking and home finance in one clear place.
+            Calculate obligations, understand options and compare paths.
+          </p>
+
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/finance/zakat-calculator"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-6 py-3 font-bold text-[#4A3319] shadow-[0_8px_24px_rgba(176,144,98,0.25)] transition-transform hover:-translate-y-0.5"
+            >
+              Calculate zakat
+            </Link>
+            <Link
+              href="/finance/investing"
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-6 py-3 font-semibold text-text-primary backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              Start halal investing
+            </Link>
+            <Link
+              href="/finance/mortgages"
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-6 py-3 font-semibold text-text-primary backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              Compare mortgage paths
+            </Link>
+          </div>
+        </div>
+
+        {/* Start Here - Decision Routes */}
+        <section className="mb-12 rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-8 shadow-[0_8px_32px_rgba(43,34,24,0.04)] backdrop-blur-sm md:p-10">
+          <div className="mb-6">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
+              Start Here
+            </p>
+            <h2 className="text-2xl font-bold font-display text-text-primary md:text-3xl">
+              Where to begin depends on what you need
+            </h2>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-[rgba(42,92,88,0.12)] bg-gradient-to-br from-[rgba(42,92,88,0.04)] to-transparent p-6">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(42,92,88,0.12)] text-[#2A5C58]">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                  />
+                </svg>
               </div>
-              <Link href={`/methodology`} className="text-sm font-bold text-primary hover:underline shrink-0">
-                Review our methodology →
+              <h3 className="mb-2 font-bold text-text-primary">
+                If you need to calculate an obligation
+              </h3>
+              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
+                Start with the zakat calculator
+              </p>
+              <Link
+                href="/finance/zakat-calculator"
+                className="text-sm font-semibold text-[#2A5C58] hover:underline"
+              >
+                Open calculator →
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-              {quickQuestions.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="rounded-[1.35rem] border border-border bg-bg-secondary/55 p-5 hover:bg-white hover:border-primary/25 transition-colors"
-                >
-                  <span className="inline-flex px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-[0.18em] mb-3">
-                    {item.tag}
-                  </span>
-                  <h3 className="text-lg font-bold font-display text-text-primary leading-tight">
-                    {item.label}
-                  </h3>
-                </Link>
-              ))}
+            <div className="rounded-2xl border border-[rgba(58,82,106,0.12)] bg-gradient-to-br from-[rgba(58,82,106,0.04)] to-transparent p-6">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(58,82,106,0.12)] text-[#3A526A]">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 font-bold text-text-primary">
+                If you want to grow wealth carefully
+              </h3>
+              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
+                Start with halal investing guides
+              </p>
+              <Link
+                href="/finance/investing"
+                className="text-sm font-semibold text-[#3A526A] hover:underline"
+              >
+                Learn screening logic →
+              </Link>
+            </div>
+
+            <div className="rounded-2xl border border-[rgba(107,74,55,0.12)] bg-gradient-to-br from-[rgba(107,74,55,0.04)] to-transparent p-6">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(107,74,55,0.12)] text-[#6B4A37]">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 font-bold text-text-primary">
+                If you are comparing home financing
+              </h3>
+              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
+                Go to halal mortgages for structure and providers
+              </p>
+              <Link
+                href="/finance/mortgages"
+                className="text-sm font-semibold text-[#6B4A37] hover:underline"
+              >
+                Compare paths →
+              </Link>
+            </div>
+
+            <div className="rounded-2xl border border-[rgba(85,99,67,0.12)] bg-gradient-to-br from-[rgba(85,99,67,0.04)] to-transparent p-6">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(85,99,67,0.12)] text-[#556343]">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 font-bold text-text-primary">
+                If your questions are everyday and practical
+              </h3>
+              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
+                Go to Islamic banking for accounts and institutions
+              </p>
+              <Link
+                href="/finance/banks"
+                className="text-sm font-semibold text-[#556343] hover:underline"
+              >
+                See options →
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className="mt-16">
-          <div className="max-w-3xl mb-8">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-              Core Paths
+        {/* Core Finance Sections */}
+        <section className="mb-12">
+          <div className="mb-8">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
+              Four Main Areas
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-4">
-              A stronger finance page should group Muslim money decisions by the kind of action people need to take.
+            <h2 className="text-3xl font-black font-display text-text-primary">
+              Zakat, Investing, Mortgages, Banking
             </h2>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              The goal is not a generic Islamic finance article list. It is a usable decision hub that supports obligations, wealth-building and high-stakes family choices.
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
-            {featuredPages.map((page) => (
+          <div className="grid gap-6 md:grid-cols-2">
+            {corePages.map((page) => (
               <Link
-                key={page.title}
+                key={page.href}
                 href={page.href}
-                className={`rounded-[1.6rem] p-6 border border-border bg-gradient-to-br ${page.accent} shadow-sm hover:-translate-y-1 transition-transform`}
+                className="group block overflow-hidden rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/80 shadow-[0_4px_24px_rgba(43,34,24,0.04)] backdrop-blur-sm transition-all hover:border-[rgba(47,37,30,0.15)] hover:shadow-[0_8px_32px_rgba(43,34,24,0.08)]"
               >
-                <span className="inline-flex px-2.5 py-1 rounded-full bg-white/15 text-[10px] font-bold uppercase tracking-[0.18em] mb-3">
-                  {page.tag}
-                </span>
-                <h3 className="text-2xl font-bold font-display mb-2">{page.title}</h3>
-                <p className="text-sm leading-relaxed opacity-90">{page.description}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-16">
-          <div className="max-w-3xl mb-8">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-              Decision Tracks
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-text-primary mb-4">
-              Muslim finance is easier to understand when the page follows real decisions instead of generic categories.
-            </h2>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              This is where a finance hub becomes useful: it helps users move from a concrete question into the right combination of tool, guide and next step.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {decisionTracks.map((track) => (
-              <div
-                key={track.title}
-                className={`rounded-[2rem] border border-border bg-gradient-to-br ${track.accent} p-8 shadow-card`}
-              >
-                <h3 className="text-3xl font-bold font-display mb-4">{track.title}</h3>
-                <p className="text-sm md:text-base leading-relaxed opacity-90 max-w-xl">
-                  {track.description}
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {track.links.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="px-4 py-2 rounded-full border border-current/15 bg-white/10 hover:bg-white/15 transition-colors text-sm font-semibold"
+                <div className={`bg-gradient-to-br ${page.gradient} p-6 text-white`}>
+                  <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/20">
+                    {page.icon}
+                  </div>
+                  <div className="mb-2 text-xs font-bold uppercase tracking-wider text-white/70">
+                    {page.useCase}
+                  </div>
+                  <h3 className="mb-2 text-2xl font-black font-display">{page.title}</h3>
+                  <p className="text-sm leading-relaxed text-white/90">{page.description}</p>
+                </div>
+                <div className="p-6">
+                  <p className="text-sm text-text-secondary">
+                    <span className="font-semibold text-text-primary">Includes:</span>{" "}
+                    {page.practical}
+                  </p>
+                  <div className="mt-4 flex items-center gap-2 font-semibold text-primary group-hover:gap-3 transition-all">
+                    Open page
+                    <svg
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      {link.label}
-                    </Link>
-                  ))}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
 
-        <section className="mt-16 grid grid-cols-1 xl:grid-cols-[1.15fr_0.85fr] gap-6">
-          <div className="bg-white rounded-[2rem] p-8 border border-border shadow-card">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-              Why This Hub Matters
+        {/* Trust & Methodology Section */}
+        <section className="mb-12 rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-8 shadow-[0_8px_32px_rgba(43,34,24,0.04)] backdrop-blur-sm md:p-10">
+          <div className="mb-6">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-[#6B4A37]">
+              Important Context
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary mb-6">
-              Finance is one of the clearest ways a Muslim portal proves it is useful beyond headlines and tools.
+            <h2 className="mb-4 text-2xl font-bold font-display text-text-primary md:text-3xl">
+              How this section works
             </h2>
+          </div>
 
-            <div className="grid gap-4">
-              {proofPoints.map((point) => (
-                <div key={point.title} className="rounded-[1.5rem] border border-border bg-bg-secondary/50 p-5">
-                  <h3 className="text-xl font-bold font-display text-text-primary mb-2">
-                    {point.title}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">{point.text}</p>
-                </div>
-              ))}
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="rounded-2xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-5">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(244,185,66,0.12)] text-primary">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 font-bold text-text-primary">Educational content</h3>
+              <p className="text-sm leading-relaxed text-text-secondary">
+                Pages help you understand concepts, options and tradeoffs. Not personal
+                financial advice.
+              </p>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href={`/finance/zakat-calculator`}
-                className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold"
-              >
-                Zakat
-              </Link>
-              <Link
-                href={`/finance/investing`}
-                className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold"
-              >
-                Investing
-              </Link>
-              <Link
-                href={`/finance/mortgages`}
-                className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold"
-              >
-                Mortgages
-              </Link>
-              <Link
-                href={`/finance/banks`}
-                className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold"
-              >
-                Banking
-              </Link>
+            <div className="rounded-2xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-5">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(42,92,88,0.12)] text-[#2A5C58]">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 font-bold text-text-primary">Structured for clarity</h3>
+              <p className="text-sm leading-relaxed text-text-secondary">
+                Pages group information by decision type so you can find what matters without
+                searching.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-5">
+              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(58,82,106,0.12)] text-[#3A526A]">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 font-bold text-text-primary">Transparency matters</h3>
+              <p className="text-sm leading-relaxed text-text-secondary">
+                Methodology, realistic framing and clear sourcing are especially important for
+                finance.
+              </p>
             </div>
           </div>
 
-          <div className="bg-bg-dark rounded-[2rem] p-8 border border-white/10 shadow-2xl text-text-inverse flex flex-col">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent-yellow mb-3">
-              Trust Layer
-            </p>
-            <h2 className="text-3xl font-bold font-display mb-4">
-              Money guidance should feel deliberate, not improvised.
-            </h2>
-            <p className="text-text-inverse-secondary leading-relaxed mb-6">
-              The finance hub should visibly route people into methodology, support and related portal surfaces so they can move with more confidence, not less.
-            </p>
-
-            <div className="space-y-4 mb-6">
-              {[
-                {
-                  title: "Review methodology",
-                  href: `/methodology`,
-                },
-                {
-                  title: "Read Muslim briefing",
-                  href: `/news`,
-                },
-                {
-                  title: "Open support",
-                  href: `/support`,
-                },
-              ].map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block rounded-2xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition-colors"
-                >
-                  <span className="text-sm font-bold text-white">{item.title}</span>
-                </Link>
-              ))}
-            </div>
-
-            <AppPromoMini />
+          <div className="mt-6">
+            <Link
+              href="/methodology"
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.12)] bg-white px-5 py-2.5 text-sm font-semibold text-text-primary transition-all hover:border-primary hover:bg-[rgba(244,185,66,0.04)]"
+            >
+              Read methodology
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </Link>
           </div>
         </section>
 
-        <section className="mt-16 grid grid-cols-1 xl:grid-cols-[0.95fr_1.05fr] gap-6">
-          <div className="rounded-[2rem] border border-border bg-white p-8 shadow-card">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-              Finance FAQ
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary mb-6">
-              Common questions a halal finance hub should answer quickly.
-            </h2>
+        {/* FAQ Section */}
+        <section className="mb-12 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-8 shadow-[0_4px_24px_rgba(43,34,24,0.04)] backdrop-blur-sm">
+            <div className="mb-6">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
+                Questions
+              </p>
+              <h2 className="text-3xl font-black font-display text-text-primary">
+                Common questions
+              </h2>
+            </div>
 
             <div className="space-y-4">
               {financeFaqs.map((faq) => (
                 <details
                   key={faq.question}
-                  className="rounded-2xl border border-border bg-bg-secondary/50 p-5 group"
+                  className="group rounded-2xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-5"
                 >
-                  <summary className="list-none cursor-pointer flex items-center justify-between gap-4">
-                    <span className="font-bold text-text-primary">{faq.question}</span>
-                    <span className="text-primary font-bold transition-transform group-open:rotate-45">+</span>
+                  <summary className="flex cursor-pointer items-center justify-between gap-4 font-bold text-text-primary">
+                    <span>{faq.question}</span>
+                    <svg
+                      className="h-5 w-5 flex-shrink-0 text-primary transition-transform group-open:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
                   </summary>
-                  <p className="mt-4 text-sm text-text-secondary leading-relaxed">{faq.answer}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-text-secondary">
+                    {faq.answer}
+                  </p>
                 </details>
               ))}
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-border bg-white p-8 shadow-card">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-primary mb-3">
-              Finance Perspective
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-text-primary mb-4">
-              A better Muslim finance page connects obligation, restraint and long-term planning.
-            </h2>
-            <p className="text-text-secondary leading-relaxed mb-6">
-              This is where allhalal.info becomes more than a utility site: a place that helps Muslims think clearly about money without separating finance from values.
-            </p>
+          <div className="flex flex-col justify-between rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-8 shadow-[0_4px_24px_rgba(43,34,24,0.04)] backdrop-blur-sm">
+            <div>
+              <div className="mb-6">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
+                  Connected Pages
+                </p>
+                <h3 className="text-2xl font-bold font-display text-text-primary">
+                  Finance stays connected to the rest
+                </h3>
+              </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
+              <p className="mb-6 text-sm leading-relaxed text-text-secondary">
+                Money decisions do not happen in isolation. Prayer times, halal guides and
+                Muslim news are all part of the same rhythm.
+              </p>
+            </div>
+
+            <div className="space-y-3">
               {[
-                {
-                  title: "Zakat as practice",
-                  text: "Not just a calculator, but a recurring obligation that should stay visible and current.",
-                },
-                {
-                  title: "Investing with screens",
-                  text: "The value is in reducing confusion around what compliant investing actually requires.",
-                },
-                {
-                  title: "Mortgages with structure",
-                  text: "Users need models, tradeoffs and provider context, not vague halal branding.",
-                },
-                {
-                  title: "Banking with boundaries",
-                  text: "Everyday account questions matter because they shape ordinary Muslim money life.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-[1.4rem] border border-border bg-bg-secondary/45 p-5">
-                  <h3 className="text-lg font-bold font-display text-text-primary mb-2">{item.title}</h3>
-                  <p className="text-sm text-text-secondary leading-relaxed">{item.text}</p>
-                </div>
+                { label: "Halal guides", href: "/is-it-halal" },
+                { label: "Zakat guides", href: "/guides" },
+                { label: "Muslim news", href: "/news" },
+                { label: "Homepage", href: "/" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block rounded-2xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-4 font-semibold text-text-primary transition-colors hover:border-primary hover:bg-[rgba(244,185,66,0.04)]"
+                >
+                  {link.label}
+                </Link>
               ))}
             </div>
           </div>
