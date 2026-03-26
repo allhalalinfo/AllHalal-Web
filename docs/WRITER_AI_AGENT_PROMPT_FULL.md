@@ -855,6 +855,31 @@ Want a faster way to review ingredients while shopping? The **AllHalal app** hel
 
 **Стиль:** Prominent gradient block, кнопка превращается в gold gradient button.
 
+**ВАЖНО про ссылки Download:**
+- ✅ Используй текст: "Download the app" или "Download AllHalal app"
+- ✅ Используй URL: `https://app.allhalal.info` (главная ссылка)
+- ✅ Или прямые ссылки: `https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265`
+- ✅ **ВСЕ** ссылки с "download", "app.allhalal", "apps.apple", "play.google" автоматически становятся кнопками
+- ✅ Можешь использовать download ссылки **везде в статье**, не только в Final CTA
+- ❌ НЕ пиши просто "download app" как обычный текст - всегда делай ссылку!
+
+**Примеры правильного использования:**
+
+В тексте Quick Answer:
+```markdown
+The fastest way to check? [Download the AllHalal app](https://app.allhalal.info) and scan the barcode.
+```
+
+В середине статьи:
+```markdown
+Want instant verification? The [AllHalal app](https://app.allhalal.info) provides real-time halal status for thousands of products.
+```
+
+В Final CTA:
+```markdown
+[Download the app](https://app.allhalal.info)
+```
+
 ---
 
 **ВАЖНО: Правила использования визуальных паттернов**
