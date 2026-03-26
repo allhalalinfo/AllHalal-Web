@@ -16,6 +16,8 @@ const ADSENSE_CLIENT_ID = "ca-pub-5317347727083675";
 export const metadata: Metadata = {
   other: {
     "google-adsense-account": ADSENSE_CLIENT_ID,
+    // Google Search Console verification
+    "google-site-verification": "u3wfpoLQU",
   },
 };
 
