@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
 export default async function PortalHomePage(props: { params: Promise<{}> }) {
   const [customList, homepageBriefLayout] = await Promise.all([
-    fetchCustomArticlesList({ page: 1, limit: 24 }),
+    fetchCustomArticlesList({ page: 1, limit: 12 }),
     getHomepageBriefLayout(),
   ]);
   const useCustomArticles = customList.articles.length > 0;
