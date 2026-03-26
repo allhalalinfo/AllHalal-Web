@@ -1,79 +1,71 @@
-/**
- * Utility for submitting URLs to IndexNow (Bing, Yandex, etc.)
- * Server-side only.
- */
+// lib/indexnow.ts
+// IndexNow API for instant search engine indexing
 
-const INDEXNOW_KEY = "4526bc4b52e74039bf5adc89763d577c";
-const HOST = "allhalal.info";
-const KEY_LOCATION = `https://${HOST}/${INDEXNOW_KEY}.txt`;
-const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY || 'your-key-here';
+const SITE_URL = 'https://allhalal.info';
 
 /**
- * Submits an array of URLs to IndexNow.
- * Does not throw errors to prevent app crashes, but logs failures.
- * 
- * @param urls Array of absolute URLs to submit (e.g., ["https://allhalal.info/en/blog/post-slug"])
- * @returns Boolean indicating whether the submission was apparently successful
+ * Submit URLs to IndexNow for instant indexing
+ * Supported by Google, Bing, Yandex, and others
  */
-export async function submitToIndexNow(urls: string[]): Promise<boolean> {
-  if (!urls || urls.length === 0) {
-    console.warn("[IndexNow] No URLs provided for submission.");
-    return false;
-  }
-
-  // Ensure URLs are absolute and belong to our host
-  const validUrls = urls.filter(url => {
-    try {
-      const parsedUrl = new URL(url);
-      return parsedUrl.hostname === HOST || parsedUrl.hostname === `www.${HOST}`;
-    } catch {
-      console.warn(`[IndexNow] Invalid URL skipped: ${url}`);
-      return false;
-    }
-  });
-
-  if (validUrls.length === 0) {
-    console.warn("[IndexNow] No valid URLs to submit after filtering.");
-    return false;
-  }
-
-  const payload = {
-    host: HOST,
-    key: INDEXNOW_KEY,
-    keyLocation: KEY_LOCATION,
-    urlList: validUrls
-  };
-
+export async function submitToIndexNow(urls: string | string[]) {
+  const urlList = Array.isArray(urls) ? urls : [urls];
+  
   try {
-    console.log(`[IndexNow] Submitting ${validUrls.length} URL(s)...`);
-    
-    const response = await fetch(INDEXNOW_ENDPOINT, {
-      method: "POST",
+    const response = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload),
-      // Keep timeout reasonable so we don't hang server processes
-      signal: AbortSignal.timeout(10000) 
+      body: JSON.stringify({
+        host: 'allhalal.info',
+        key: INDEXNOW_KEY,
+        keyLocation: `${SITE_URL}/${INDEXNOW_KEY}.txt`,
+        urlList: urlList.map(url => url.startsWith('http') ? url : `${SITE_URL}${url}`),
+      }),
     });
 
     if (response.ok) {
-      console.log(`[IndexNow] Successfully submitted ${validUrls.length} URL(s). Response status: ${response.status}`);
-      return true;
+      console.log(`✅ Successfully submitted ${urlList.length} URLs to IndexNow`);
+      return { success: true, count: urlList.length };
     } else {
-      let errorBody = "";
-      try {
-        errorBody = await response.text();
-      } catch (e) {
-        // Ignore parsing errors
-      }
-      
-      console.error(`[IndexNow] Submission failed with status: ${response.status}. ${errorBody}`);
-      return false;
+      console.error(`❌ IndexNow submission failed: ${response.status}`);
+      return { success: false, error: response.statusText };
     }
   } catch (error) {
-    console.error("[IndexNow] Network or unexpected error during submission:", error);
-    // Explicitly return false instead of throwing to prevent crashing the caller
-    return false;
+    console.error('❌ IndexNow error:', error);
+    return { success: false, error };
   }
+}
+
+/**
+ * Submit a single URL immediately
+ */
+export async function submitUrlToIndexNow(url: string) {
+  return submitToIndexNow([url]);
+}
+
+/**
+ * Submit all halal items to IndexNow
+ */
+export async function submitAllHalalItemsToIndexNow() {
+  const { halalItems } = await import('@/data/halalItems');
+  const urls = halalItems.map(item => `/is-it-halal/${item.slug}`);
+  
+  // Submit in batches of 100 (IndexNow limit is 10,000 per request)
+  const batchSize = 100;
+  const results = [];
+  
+  for (let i = 0; i < urls.length; i += batchSize) {
+    const batch = urls.slice(i, i + batchSize);
+    const result = await submitToIndexNow(batch);
+    results.push(result);
+    
+    // Small delay between batches to be polite
+    if (i + batchSize < urls.length) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  }
+  
+  return results;
 }
