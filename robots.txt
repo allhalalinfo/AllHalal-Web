@@ -20,6 +20,12 @@ Disallow:
 # Allow all search engines to crawl the entire site
 User-agent: *
 Allow: /
+# Block old /en/ paths (redirected to /)
+Disallow: /en/
+Disallow: /en
+# Block old /blog paths (redirected to /news)
+Disallow: /blog/
+Disallow: /blog
 
 # Sitemap location
 Sitemap: https://allhalal.info/sitemap.xml

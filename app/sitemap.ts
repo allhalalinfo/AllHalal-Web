@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   const staticRoutes = [
     '',
+    '/app',
     '/contact',
     '/support',
     '/legal',
@@ -27,11 +28,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/guides/zakat-on-business-assets',
     '/guides/zakat-on-pension-and-retirement-funds',
     '/is-it-halal',
+    '/is-it-halal/halal-certification-standards',
+    '/is-it-halal/regional-halal-differences',
+    '/is-it-halal/e-numbers-complete-guide',
+    '/is-it-halal/reading-ingredient-labels',
+    '/is-it-halal/alcohol-in-food',
+    '/is-it-halal/animal-derived-ingredients',
     '/learn',
     '/learn/99-names',
     '/learn/duas',
     '/learn/live-makkah',
     '/learn/ramadan',
+    '/learn/islamic-calendar',
+    '/prayer-times',
     '/methodology',
   ];
   
