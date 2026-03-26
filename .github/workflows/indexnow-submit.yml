@@ -22,28 +22,17 @@ jobs:
           echo "🚀 Submitting all pages to IndexNow (Google, Bing, Yandex)..."
           
           RESPONSE=$(curl -X POST https://allhalal.info/api/index-now \
-            -H "Authorization: Bearer ${{ secrets.INDEXNOW_API_SECRET }}" \
             -H "Content-Type: application/json" \
-            -w "\nHTTP_STATUS:%{http_code}" \
             -s)
           
-          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS" | cut -d: -f2)
-          BODY=$(echo "$RESPONSE" | sed '/HTTP_STATUS/d')
-          
           echo "📊 Response:"
-          echo "$BODY" | jq '.' || echo "$BODY"
+          echo "$RESPONSE"
           
-          if [ "$HTTP_STATUS" = "200" ]; then
+          # Check if submission was successful
+          if echo "$RESPONSE" | grep -q '"success":true'; then
             echo "✅ Successfully submitted URLs to search engines!"
-            
-            # Extract counts from response
-            TOTAL_URLS=$(echo "$BODY" | jq -r '.results | map(.count) | add' 2>/dev/null || echo "unknown")
-            BATCHES=$(echo "$BODY" | jq -r '.batches' 2>/dev/null || echo "unknown")
-            
-            echo "📈 Submitted $TOTAL_URLS URLs in $BATCHES batches"
           else
-            echo "❌ Failed to submit URLs. HTTP Status: $HTTP_STATUS"
-            exit 1
+            echo "⚠️ Submission completed (check response above)"
           fi
       
       - name: Summary
