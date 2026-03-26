@@ -34,10 +34,10 @@ export default function CustomArticlesHomeSection({
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 className="text-[clamp(2rem,8vw,4rem)] font-black font-display leading-[0.96] tracking-[-0.04em] text-text-primary">
-            Editorial guides
+            Halal Guides
           </h2>
           <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
-            Expert halal guides and in-depth analysis from our editorial team. For daily news updates, check the news desk.
+            In-depth guides and articles from our team.
           </p>
         </div>
 
@@ -76,23 +76,8 @@ export default function CustomArticlesHomeSection({
               {cat}
             </button>
           ))}
-          <a
-            href={newsPageUrl}
-            className="ml-1 text-xs font-semibold text-primary underline-offset-2 hover:underline"
-          >
-            News desk
-          </a>
         </div>
-      ) : (
-        <div className="mt-5">
-          <a
-            href={newsPageUrl}
-            className="text-xs font-semibold text-primary underline-offset-2 hover:underline"
-          >
-            News desk
-          </a>
-        </div>
-      )}
+      ) : null}
 
       <div className="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
         {visible.map((article, index) => (
