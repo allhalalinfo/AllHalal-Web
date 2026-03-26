@@ -12,17 +12,21 @@ import { submitAllHalalItemsToIndexNow } from '@/lib/indexnow';
  */
 export async function POST(request: Request) {
   try {
-    // Optional: Check authentication
+    // Optional: Check authentication (skip if not set for easier setup)
     const authHeader = request.headers.get('authorization');
     const expectedAuth = process.env.INDEXNOW_API_SECRET;
     
-    if (expectedAuth && authHeader !== `Bearer ${expectedAuth}`) {
+    // Only check auth if secret is configured
+    if (expectedAuth && expectedAuth.length > 0 && authHeader !== `Bearer ${expectedAuth}`) {
+      console.log('⚠️ Auth check failed');
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
+    console.log('✅ Starting IndexNow submission...');
+    
     // Submit all halal items to IndexNow
     const results = await submitAllHalalItemsToIndexNow();
     
