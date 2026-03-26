@@ -64,40 +64,58 @@ export default function FaqAccordion() {
 
     // Collect all H3 questions and their answers until next H2
     const faqItems: Array<{ question: HTMLElement; answer: HTMLElement[] }> = [];
-    let currentElement = faqHeading.nextElementSibling;
     let currentQuestion: HTMLElement | null = null;
     let currentAnswers: HTMLElement[] = [];
     
     console.log("FaqAccordion: Looking for H3 questions after FAQ heading...");
 
-    while (currentElement && currentElement.tagName !== "H2") {
-      console.log(`  - Found element: ${currentElement.tagName}`);
+    let elementsToProcess: Element[] = [];
+    
+    // Check if first element after FAQ heading is a DIV wrapper
+    const firstSibling = faqHeading.nextElementSibling;
+    if (firstSibling && firstSibling.tagName === "DIV") {
+      console.log("  ⚠️ Found DIV wrapper after FAQ heading - looking inside for H3 questions");
+      elementsToProcess = Array.from(firstSibling.children);
+      console.log(`  → DIV has ${elementsToProcess.length} child elements`);
+    } else {
+      // No DIV wrapper - collect siblings until next H2
+      console.log("  ✓ No DIV wrapper - collecting sibling elements");
+      let currentElement = firstSibling;
+      while (currentElement && currentElement.tagName !== "H2") {
+        elementsToProcess.push(currentElement);
+        currentElement = currentElement.nextElementSibling;
+      }
+      console.log(`  → Found ${elementsToProcess.length} sibling elements`);
+    }
+
+    // Process all collected elements
+    for (const element of elementsToProcess) {
+      console.log(`    - Processing: ${element.tagName}`);
       
-      if (currentElement.tagName === "H3") {
+      if (element.tagName === "H3") {
         // Save previous Q&A if exists
         if (currentQuestion && currentAnswers.length > 0) {
           faqItems.push({
             question: currentQuestion,
             answer: currentAnswers,
           });
-          console.log(`    ✅ Saved Q&A pair (${currentAnswers.length} answer elements)`);
+          console.log(`      ✅ Saved Q&A pair (${currentAnswers.length} answer elements)`);
         }
         // Start new Q&A
-        currentQuestion = currentElement as HTMLElement;
+        currentQuestion = element as HTMLElement;
         currentAnswers = [];
-        console.log(`    ➜ New question: "${currentQuestion.textContent}"`);
+        console.log(`      ➜ New question: "${currentQuestion.textContent}"`);
       } else if (currentQuestion) {
         // Collect answer elements (p, ul, ol, etc.)
-        currentAnswers.push(currentElement as HTMLElement);
-        console.log(`      + Added answer element: ${currentElement.tagName}`);
+        currentAnswers.push(element as HTMLElement);
+        console.log(`        + Added answer element: ${element.tagName}`);
       }
-      currentElement = currentElement.nextElementSibling;
     }
 
     // Don't forget the last one
     if (currentQuestion && currentAnswers.length > 0) {
       faqItems.push({ question: currentQuestion, answer: currentAnswers });
-      console.log(`    ✅ Saved last Q&A pair (${currentAnswers.length} answer elements)`);
+      console.log(`      ✅ Saved last Q&A pair (${currentAnswers.length} answer elements)`);
     }
 
     if (faqItems.length === 0) {
