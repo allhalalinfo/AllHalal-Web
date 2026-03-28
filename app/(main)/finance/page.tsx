@@ -228,117 +228,79 @@ export default async function FinanceHub() {
           </div>
         </div>
 
-        {/* Start Here - Decision Routes */}
+        {/* Which Finance Area Matches Your Situation */}
         <section className="mb-12 rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-8 shadow-[0_8px_32px_rgba(43,34,24,0.04)] backdrop-blur-sm md:p-10">
           <div className="mb-6">
             <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
               Start Here
             </p>
             <h2 className="text-2xl font-bold font-display text-text-primary md:text-3xl">
-              Where to begin depends on what you need
+              Which finance area matches your situation
             </h2>
           </div>
+          <p className="mb-8 text-text-secondary leading-relaxed">
+            Each finance area serves a different purpose. Use this table to find the right starting point based on your current situation.
+          </p>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-[rgba(42,92,88,0.12)] bg-gradient-to-br from-[rgba(42,92,88,0.04)] to-transparent p-6">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(42,92,88,0.12)] text-[#2A5C58]">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-2 font-bold text-text-primary">
-                If you need to calculate an obligation
-              </h3>
-              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
-                Start with the zakat calculator
-              </p>
-              <Link
-                href="/finance/zakat-calculator"
-                className="text-sm font-semibold text-[#2A5C58] hover:underline"
-              >
-                Open calculator →
-              </Link>
-            </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b-2 border-border bg-white/60">
+                  <th className="py-4 pr-4 font-bold text-text-primary">Your situation</th>
+                  <th className="py-4 px-4 font-bold text-text-primary">Start here</th>
+                  <th className="py-4 px-4 font-bold text-text-primary">Why</th>
+                  <th className="py-4 pl-4 font-bold text-text-primary">What you'll find</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                <tr className="border-b border-border bg-white/40">
+                  <td className="py-5 pr-4 text-text-secondary">Need to calculate annual religious obligation</td>
+                  <td className="py-5 px-4">
+                    <Link href="/finance/zakat-calculator" className="font-bold text-[#2A5C58] hover:underline">
+                      Zakat
+                    </Link>
+                  </td>
+                  <td className="py-5 px-4 text-text-secondary">Islamic pillar with fixed rules</td>
+                  <td className="py-5 pl-4 text-text-secondary">Calculator with live Nisab + guides for stocks, crypto, business assets</td>
+                </tr>
+                <tr className="border-b border-border bg-white/40">
+                  <td className="py-5 pr-4 text-text-secondary">Want to grow wealth carefully</td>
+                  <td className="py-5 px-4">
+                    <Link href="/finance/investing" className="font-bold text-[#3A526A] hover:underline">
+                      Investing
+                    </Link>
+                  </td>
+                  <td className="py-5 px-4 text-text-secondary">Long-term planning and growth</td>
+                  <td className="py-5 pl-4 text-text-secondary">Screening logic, halal ETFs, robo-advisors, dividend purification</td>
+                </tr>
+                <tr className="border-b border-border bg-white/40">
+                  <td className="py-5 pr-4 text-text-secondary">Looking for Islamic bank account or everyday services</td>
+                  <td className="py-5 px-4">
+                    <Link href="/finance/banks" className="font-bold text-[#556343] hover:underline">
+                      Banking
+                    </Link>
+                  </td>
+                  <td className="py-5 px-4 text-text-secondary">Everyday money management</td>
+                  <td className="py-5 pl-4 text-text-secondary">Islamic institutions, account types, credit cards, comparisons</td>
+                </tr>
+                <tr className="bg-white/40">
+                  <td className="py-5 pr-4 text-text-secondary">Buying a home or comparing financing options</td>
+                  <td className="py-5 px-4">
+                    <Link href="/finance/mortgages" className="font-bold text-[#6B4A37] hover:underline">
+                      Mortgages
+                    </Link>
+                  </td>
+                  <td className="py-5 px-4 text-text-secondary">Major life decision</td>
+                  <td className="py-5 pl-4 text-text-secondary">Murabaha, Musharaka, Ijara contract types, providers, tradeoffs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-            <div className="rounded-2xl border border-[rgba(58,82,106,0.12)] bg-gradient-to-br from-[rgba(58,82,106,0.04)] to-transparent p-6">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(58,82,106,0.12)] text-[#3A526A]">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-2 font-bold text-text-primary">
-                If you want to grow wealth carefully
-              </h3>
-              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
-                Start with halal investing guides
-              </p>
-              <Link
-                href="/finance/investing"
-                className="text-sm font-semibold text-[#3A526A] hover:underline"
-              >
-                Learn screening logic →
-              </Link>
-            </div>
-
-            <div className="rounded-2xl border border-[rgba(107,74,55,0.12)] bg-gradient-to-br from-[rgba(107,74,55,0.04)] to-transparent p-6">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(107,74,55,0.12)] text-[#6B4A37]">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-2 font-bold text-text-primary">
-                If you are comparing home financing
-              </h3>
-              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
-                Go to halal mortgages for structure and providers
-              </p>
-              <Link
-                href="/finance/mortgages"
-                className="text-sm font-semibold text-[#6B4A37] hover:underline"
-              >
-                Compare paths →
-              </Link>
-            </div>
-
-            <div className="rounded-2xl border border-[rgba(85,99,67,0.12)] bg-gradient-to-br from-[rgba(85,99,67,0.04)] to-transparent p-6">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(85,99,67,0.12)] text-[#556343]">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                  />
-                </svg>
-              </div>
-              <h3 className="mb-2 font-bold text-text-primary">
-                If your questions are everyday and practical
-              </h3>
-              <p className="mb-3 text-sm leading-relaxed text-text-secondary">
-                Go to Islamic banking for accounts and institutions
-              </p>
-              <Link
-                href="/finance/banks"
-                className="text-sm font-semibold text-[#556343] hover:underline"
-              >
-                See options →
-              </Link>
-            </div>
+          <div className="mt-6 rounded-xl border-l-4 border-[#F0C65F] bg-white/80 p-5">
+            <p className="text-sm font-semibold text-text-primary">
+              Not sure where to start? If you have a specific obligation (Zakat), begin there. For everything else, start with the topic that matches your timeline: investing and mortgages are long-term, banking is immediate.
+            </p>
           </div>
         </section>
 

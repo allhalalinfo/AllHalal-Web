@@ -57,6 +57,69 @@ export default async function GuidesIndexPage(props: { params: Promise<{}> }) {
         with live Nisab on allhalal.info.
       </p>
 
+      {/* Zakat Asset Type Overview */}
+      <div className="mt-12 rounded-2xl border border-border bg-bg-card p-6 md:p-8">
+        <h2 className="mb-6 font-display text-2xl font-bold text-text-primary">
+          Zakat calculation: Asset type overview
+        </h2>
+        <p className="mb-6 text-text-secondary">
+          Zakat is due at 2.5% on most forms of wealth after one lunar year, but different asset types have specific considerations. This table shows the standard rate, timing, and common mistakes for each category.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b-2 border-border">
+                <th className="py-3 pr-4 font-bold text-text-primary">Asset type</th>
+                <th className="py-3 px-4 font-bold text-text-primary">Rate</th>
+                <th className="py-3 px-4 font-bold text-text-primary">When calculated</th>
+                <th className="py-3 pl-4 font-bold text-text-primary">Common mistakes</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm">
+              <tr className="border-b border-border">
+                <td className="py-4 pr-4 font-semibold text-text-primary">Cash & savings</td>
+                <td className="py-4 px-4 text-text-secondary">2.5%</td>
+                <td className="py-4 px-4 text-text-secondary">Lunar year anniversary</td>
+                <td className="py-4 pl-4 text-text-secondary">Not tracking the full lunar year</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-4 pr-4 font-semibold text-text-primary">Stocks & shares</td>
+                <td className="py-4 px-4 text-text-secondary">2.5% on market value</td>
+                <td className="py-4 px-4 text-text-secondary">Lunar year anniversary</td>
+                <td className="py-4 pl-4 text-text-secondary">Not purifying dividends first, using wrong valuation date</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-4 pr-4 font-semibold text-text-primary">Cryptocurrency</td>
+                <td className="py-4 px-4 text-text-secondary">2.5% (scholar dependent)</td>
+                <td className="py-4 px-4 text-text-secondary">Lunar year anniversary</td>
+                <td className="py-4 pl-4 text-text-secondary">Using wrong valuation date, not consulting scholar</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-4 pr-4 font-semibold text-text-primary">Business inventory</td>
+                <td className="py-4 px-4 text-text-secondary">2.5%</td>
+                <td className="py-4 px-4 text-text-secondary">Lunar year anniversary</td>
+                <td className="py-4 pl-4 text-text-secondary">Including fixed assets (not zakatable)</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="py-4 pr-4 font-semibold text-text-primary">Gold & silver</td>
+                <td className="py-4 px-4 text-text-secondary">2.5% above Nisab</td>
+                <td className="py-4 px-4 text-text-secondary">Lunar year anniversary</td>
+                <td className="py-4 pl-4 text-text-secondary">Using stale Nisab value, not updating spot prices</td>
+              </tr>
+              <tr>
+                <td className="py-4 pr-4 font-semibold text-text-primary">Pension funds</td>
+                <td className="py-4 px-4 text-text-secondary">2.5% (if accessible)</td>
+                <td className="py-4 px-4 text-text-secondary">When funds become available</td>
+                <td className="py-4 pl-4 text-text-secondary">Paying on locked funds (scholarly debate)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-6 text-sm text-text-secondary">
+          Note: This is general educational guidance. For specific situations (especially complex business assets, mixed portfolios, or pension funds), consult a qualified Islamic scholar.
+        </p>
+      </div>
+
       <ul className="mt-12 space-y-6">
         {GUIDES.map((g) => (
           <li key={g.href}>
