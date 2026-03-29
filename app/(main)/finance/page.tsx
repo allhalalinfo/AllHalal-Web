@@ -84,6 +84,8 @@ const financeSchema = {
   ],
 };
 
+export const revalidate = 3600; // Cache for 1 hour (static hub)
+
 export default async function FinanceHub() {
   const corePages = [
     {

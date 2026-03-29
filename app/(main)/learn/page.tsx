@@ -85,6 +85,8 @@ const learnSchema = {
   ],
 };
 
+export const revalidate = 3600; // Cache for 1 hour (content is evergreen)
+
 export default async function LearnHub() {
   const corePages = [
     {

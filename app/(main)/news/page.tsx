@@ -18,6 +18,8 @@ const NEWS_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_TOP;
 const NEWS_INLINE_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_INLINE;
 const NEWS_BOTTOM_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_BOTTOM;
 
+export const revalidate = 300; // Cache for 5 minutes, regenerate in background
+
 export const metadata: Metadata = {
   title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
   description:

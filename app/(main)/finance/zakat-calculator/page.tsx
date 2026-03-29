@@ -19,6 +19,8 @@ export const metadata: Metadata = {
     "Calculate your Zakat accurately using live gold and silver prices. Understand the current Nisab threshold in USD and read scholar-backed FAQs.",
 };
 
+export const revalidate = 3600; // Cache for 1 hour, Nisab updates periodically
+
 export default async function ZakatCalculatorPage() {
   return (
     <>
