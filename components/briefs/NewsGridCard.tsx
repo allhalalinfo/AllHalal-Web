@@ -37,7 +37,7 @@ export default function NewsGridCard({
       href={sourceUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:p-4"
+      className="group flex h-full flex-col rounded-[1.55rem] border border-[rgba(47,37,30,0.08)] bg-white/88 p-3 shadow-[0_12px_30px_rgba(43,34,24,0.04)] transition-shadow hover:bg-white hover:shadow-[0_18px_46px_rgba(43,34,24,0.06)] sm:p-4"
     >
       <div className="relative aspect-[1.7/1] overflow-hidden rounded-[1.2rem] border border-[rgba(47,37,30,0.08)] bg-[rgba(242,237,228,0.65)]">
         {!showPlaceholder ? (
@@ -49,7 +49,7 @@ export default function NewsGridCard({
             decoding="async"
             fetchPriority={priority ? "high" : "auto"}
             referrerPolicy="no-referrer"
-            className={`absolute inset-0 h-full w-full min-w-0 object-cover ${objectPositionClass} transition-transform duration-500 group-hover:scale-[1.02]`}
+            className={`absolute inset-0 h-full w-full min-w-0 object-cover ${objectPositionClass}`}
             style={{
               width: "100%",
               maxWidth: "100%",
@@ -78,7 +78,7 @@ export default function NewsGridCard({
           ) : null}
         </div>
 
-        <h3 className="mt-2 line-clamp-3 text-[1.1rem] font-bold leading-tight text-text-primary transition-colors duration-300 group-hover:text-primary">
+        <h3 className="mt-2 line-clamp-3 text-[1.1rem] font-bold leading-tight text-text-primary group-hover:text-primary">
           {brief.title}
         </h3>
 
