@@ -418,9 +418,25 @@ export default function TodayForYou({
 
         {locationError && (
           <div className="mb-3 rounded-xl border border-red-300/20 bg-red-300/10 px-4 py-3 text-sm text-red-200">
-            {locationError === "User denied Geolocation"
-              ? "Location access denied. You can still search your city manually."
-              : "Could not fetch location. Try searching your city manually."}
+            <div className="font-semibold mb-1">{locationError}</div>
+            {locationError.includes("denied") && (
+              <div className="text-xs text-red-200/80 mt-2">
+                On iPhone: Settings → Safari → Location → Allow for this site
+              </div>
+            )}
+            {locationError.includes("unavailable") && (
+              <div className="text-xs text-red-200/80 mt-2">
+                Check if Location Services are enabled in device Settings
+              </div>
+            )}
+            {locationError.includes("timed out") && (
+              <div className="text-xs text-red-200/80 mt-2">
+                GPS took too long to respond. Try searching your city manually.
+              </div>
+            )}
+            <div className="text-xs text-red-200/70 mt-2">
+              You can still search your city manually below.
+            </div>
           </div>
         )}
 

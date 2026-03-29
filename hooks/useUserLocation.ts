@@ -44,15 +44,31 @@ export function useUserLocation() {
       return;
     }
 
+    // Check if we have permission already
+    if ("permissions" in navigator) {
+      try {
+        const permissionStatus = await navigator.permissions.query({ name: 'geolocation' as PermissionName });
+        console.log("Geolocation permission status:", permissionStatus.state);
+      } catch (e) {
+        console.log("Cannot query permission status (iOS limitation)");
+      }
+    }
+
     navigator.geolocation.getCurrentPosition(
       async (position) => {
+        console.log("✅ Got coordinates:", position.coords.latitude, position.coords.longitude);
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         
         try {
           // Reverse geocode to get city name
-          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&accept-language=en`);
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&accept-language=en`, {
+            headers: {
+              'User-Agent': 'allhalal.info'
+            }
+          });
           const data = await res.json();
+          console.log("✅ Reverse geocoding result:", data);
           
           const city = data.address?.city || data.address?.town || data.address?.state || "Your Location";
           const country = data.address?.country || "";
@@ -65,7 +81,7 @@ export function useUserLocation() {
             isAuto: true,
           });
         } catch (err) {
-          console.error("Reverse geocoding failed", err);
+          console.error("❌ Reverse geocoding failed", err);
           // Fallback just coordinates if reverse geocoding fails
           setLocation({
             city: "Current Location",
@@ -79,10 +95,28 @@ export function useUserLocation() {
         }
       },
       (err) => {
-        setError(err.message || "Failed to get location");
+        console.error("❌ Geolocation error:", err.code, err.message);
+        console.error("Error code meanings: 1=PERMISSION_DENIED, 2=POSITION_UNAVAILABLE, 3=TIMEOUT");
+        
+        let errorMessage = "Failed to get location";
+        if (err.code === 1) {
+          errorMessage = "Location access denied";
+        } else if (err.code === 2) {
+          errorMessage = "Location unavailable (check device GPS)";
+        } else if (err.code === 3) {
+          errorMessage = "Location request timed out";
+        } else {
+          errorMessage = err.message || "Failed to get location";
+        }
+        
+        setError(errorMessage);
         setIsLoading(false);
       },
-      { timeout: 10000 }
+      { 
+        timeout: 30000, // Increased timeout to 30 seconds for mobile
+        enableHighAccuracy: false, // Use network location instead of GPS for faster response
+        maximumAge: 300000 // Accept cached position up to 5 minutes old
+      }
     );
   }, [setLocation]);
 
