@@ -63,7 +63,7 @@ export default async function NewsDeskPage(props: {
   );
   const feedFresh = filterFreshBriefs(feedResult.items, NEWS_FRESHNESS_DAYS);
   const mergedBriefs = mergeHomepageBriefsWithFeed(homeFresh, feedFresh);
-  const freshBriefs = mergedBriefs.slice(0, 50);
+  const freshBriefs = mergedBriefs.slice(0, 30); // Reduced from 50 to 30 for better performance
   const { total: feedTotal } = feedResult;
 
   return (
@@ -134,7 +134,7 @@ export default async function NewsDeskPage(props: {
                     key={brief.id}
                     brief={brief}
                     locale="en"
-                    priority={index < 4}
+                    priority={index < 8}
                     visualCropVariant={consecutiveBriefImageCropVariant(freshBriefs, index)}
                   />,
                 ];
@@ -169,9 +169,9 @@ export default async function NewsDeskPage(props: {
             </div>
           ) : null}
 
-          {freshBriefs.length >= 50 ? (
+          {freshBriefs.length >= 30 ? (
             <p className="mt-6 text-sm leading-7 text-text-muted">
-              Showing the 50 newest combined items. Narrow with a category chip for a shorter list.
+              Showing the 30 newest combined items. Narrow with a category chip for a shorter list.
             </p>
           ) : feedTotal > feedFresh.length && freshBriefs.length > 0 ? (
             <p className="mt-6 text-sm leading-7 text-text-muted">

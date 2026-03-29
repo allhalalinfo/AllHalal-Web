@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import ZakatFaqSection from "@/components/zakat/ZakatFaqSection";
 import ZakatJsonLd from "@/components/zakat/ZakatJsonLd";
-import ZakatCalculatorClient from "./ZakatCalculatorClient";
+
+const ZakatCalculatorClient = dynamic(() => import("./ZakatCalculatorClient"), {
+  loading: () => (
+    <div className="rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-8 text-center">
+      <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      <p className="mt-4 text-text-secondary">Loading calculator...</p>
+    </div>
+  ),
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Zakat Calculator & Live Nisab 2026 | allhalal.info",
