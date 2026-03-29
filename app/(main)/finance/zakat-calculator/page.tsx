@@ -11,7 +11,6 @@ const ZakatCalculatorClient = dynamic(() => import("./ZakatCalculatorClient"), {
       <p className="mt-4 text-text-secondary">Loading calculator...</p>
     </div>
   ),
-  ssr: false,
 });
 
 export const metadata: Metadata = {
