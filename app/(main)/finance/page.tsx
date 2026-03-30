@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import FAQSchema from "@/components/seo/FAQSchema";
 import { SITE_URL } from "@/lib/seo/metadata";
+import { fetchCustomArticlesList } from "@/lib/customArticles";
+import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 
 export const metadata: Metadata = {
   title: "Halal Finance Hub | Zakat, Investing, Mortgages & Islamic Banking",
@@ -87,6 +89,12 @@ const financeSchema = {
 export const revalidate = 3600; // Cache for 1 hour (static hub)
 
 export default async function FinanceHub() {
+  // Fetch articles with category "finance"
+  const articlesList = await fetchCustomArticlesList({ page: 1, limit: 50 });
+  const financeArticles = articlesList.articles.filter(
+    (article) => article.category === "finance"
+  );
+
   const corePages = [
     {
       title: "Zakat Calculator",
@@ -360,6 +368,34 @@ export default async function FinanceHub() {
             ))}
           </div>
         </section>
+
+        {/* Finance Articles Section */}
+        {financeArticles.length > 0 && (
+          <section className="mb-12">
+            <div className="mb-8">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
+                In-depth guides
+              </p>
+              <h2 className="text-3xl font-black font-display text-text-primary">
+                Finance articles
+              </h2>
+              <p className="mt-2 text-text-secondary">
+                Deep dives into Islamic finance topics, halal investing strategies and financial planning.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {financeArticles.map((article, index) => (
+                <CustomArticleGridCard
+                  key={article.id}
+                  article={article}
+                  locale="en"
+                  priority={index < 3}
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* FAQ Section */}
         <section className="mb-12 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
