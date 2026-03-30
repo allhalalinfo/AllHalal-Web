@@ -3,42 +3,46 @@ import Link from "next/link";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 import FAQSchema from "@/components/seo/FAQSchema";
 import { SITE_URL } from "@/lib/seo/metadata";
+import { fetchCustomArticlesList } from "@/lib/customArticles";
+import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 
 export const metadata: Metadata = {
-  title: "Learn Islam | Duas, 99 Names, Ramadan Guides & Islamic Calendar",
+  title: "Blog | Islamic Articles, Faith Guides & Muslim Lifestyle",
   description:
-    "Islamic learning hub with duas, 99 Names of Allah, Ramadan guidance, Islamic calendar and live Makkah resources.",
+    "Read in-depth articles on Islamic topics, faith guidance, Muslim lifestyle and spiritual reflection.",
   keywords: [
-    "learn islam",
+    "islamic blog",
+    "muslim articles",
+    "faith guides",
+    "islamic lifestyle",
     "duas and athkar",
     "99 names of Allah",
     "Ramadan guide",
     "Islamic calendar",
-    "Islamic learning",
   ],
   openGraph: {
-    title: "Learn Islam | Duas, 99 Names, Ramadan Guides & Islamic Calendar",
+    title: "Blog | Islamic Articles, Faith Guides & Muslim Lifestyle",
     description:
-      "Islamic learning hub for duas, 99 Names of Allah, Ramadan guidance and Islamic calendar.",
+      "In-depth articles on Islamic topics, faith guidance and Muslim lifestyle.",
     type: "website",
   },
 };
 
 const learnFaqs = [
   {
-    question: "What can I learn here?",
+    question: "What's in the blog section?",
     answer:
-      "You can read duas for everyday life, explore the 99 Names of Allah, follow Ramadan guidance and check Islamic calendar dates.",
+      "In-depth articles on Islamic topics, faith reflections, lifestyle guidance, and Muslim living. Plus quick access to duas, 99 Names, Ramadan guides and Islamic calendar.",
   },
   {
     question: "Where should I start?",
     answer:
-      "Most people start with Duas if they need something practical right away, or 99 Names for reflection. Ramadan and calendar pages are useful when timing matters.",
+      "If you're looking for articles, scroll down to see the latest posts. For practical daily tools, start with Duas or check the Islamic calendar for upcoming events.",
   },
   {
-    question: "Is this only for Ramadan?",
+    question: "What about duas and 99 Names?",
     answer:
-      "No. Ramadan is one important section, but this hub works year round for daily remembrance and Islamic context.",
+      "They're still here. Blog articles complement the core learning pages (duas, 99 Names, Ramadan, calendar). Everything in one section.",
   },
   {
     question: "What is better in the app?",
@@ -46,9 +50,9 @@ const learnFaqs = [
       "The app is faster for repeated use. If you need duas every day, barcode scanning or prayer times with Islamic calendar context, the app brings it all together in one place.",
   },
   {
-    question: "Can I use this for daily remembrance?",
+    question: "How often do new articles appear?",
     answer:
-      "Yes. Duas and 99 Names pages are designed to be useful more than once. You can bookmark them and come back when needed.",
+      "New blog articles are published regularly as part of our editorial content. Core pages like Duas and 99 Names are evergreen resources.",
   },
 ];
 
@@ -59,9 +63,9 @@ const learnSchema = {
       "@type": "WebPage",
       "@id": `${SITE_URL}/learn#webpage`,
       url: `${SITE_URL}/learn`,
-      name: "Learn Islam on allhalal.info",
+      name: "Blog - allhalal.info",
       description:
-        "Islamic learning hub for duas, 99 Names of Allah, Ramadan guidance and Islamic calendar.",
+        "Islamic blog with articles on faith, lifestyle guidance and Muslim topics.",
       isPartOf: { "@id": `${SITE_URL}/#website` },
       inLanguage: "en",
     },
@@ -77,7 +81,7 @@ const learnSchema = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Learn",
+          name: "Blog",
           item: `${SITE_URL}/learn`,
         },
       ],
@@ -88,6 +92,12 @@ const learnSchema = {
 export const revalidate = 3600; // Cache for 1 hour (content is evergreen)
 
 export default async function LearnHub() {
+  // Fetch articles with category "blog"
+  const articlesList = await fetchCustomArticlesList({ page: 1, limit: 50 });
+  const blogArticles = articlesList.articles.filter(
+    (article) => article.category === "blog"
+  );
+
   const corePages = [
     {
       title: "Duas & Athkar",
@@ -192,17 +202,16 @@ export default async function LearnHub() {
               />
             </svg>
             <span className="text-xs font-bold uppercase tracking-wider text-[#4B6E70]">
-              Islamic Learning
+              Blog & Learning
             </span>
           </div>
 
           <h1 className="mb-6 text-[clamp(2.5rem,7vw,4.5rem)] font-black font-display leading-[0.95] tracking-tight text-text-primary">
-            Learn Islam through pages worth keeping close
+            Islamic blog and learning resources
           </h1>
 
           <p className="mb-8 max-w-3xl text-lg leading-relaxed text-text-secondary">
-            Duas, 99 Names, Ramadan guidance and the Islamic calendar in one place. Read
-            here, return when needed, or use the app for daily access.
+            Articles, duas, 99 Names, Ramadan guidance and the Islamic calendar. Read here or use the app for daily access.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -227,61 +236,46 @@ export default async function LearnHub() {
           </div>
         </div>
 
-        {/* Start Here - New Users Guide */}
-        <section className="mb-12 rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-8 shadow-[0_8px_32px_rgba(43,34,24,0.04)] backdrop-blur-sm md:p-10">
-          <div className="mb-6 flex items-start justify-between gap-4">
-            <div>
+        {/* Blog Articles Section */}
+        {blogArticles.length > 0 && (
+          <section className="mb-12">
+            <div className="mb-8">
               <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
-                Start Here
+                Latest articles
               </p>
-              <h2 className="text-2xl font-bold font-display text-text-primary md:text-3xl">
-                New to this section?
+              <h2 className="text-3xl font-black font-display text-text-primary">
+                Blog posts
               </h2>
-            </div>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border border-[rgba(47,37,30,0.08)] bg-gradient-to-br from-white to-[rgba(244,185,66,0.04)] p-5">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(244,185,66,0.12)] text-primary">
-                <span className="text-lg font-black">1</span>
-              </div>
-              <h3 className="mb-2 font-bold text-text-primary">Start with Duas</h3>
-              <p className="text-sm leading-relaxed text-text-secondary">
-                If you need something practical for everyday life
+              <p className="mt-2 text-text-secondary">
+                In-depth articles on Islamic topics, lifestyle guidance and faith reflections.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-[rgba(47,37,30,0.08)] bg-gradient-to-br from-white to-[rgba(75,110,112,0.04)] p-5">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(75,110,112,0.12)] text-[#4B6E70]">
-                <span className="text-lg font-black">2</span>
-              </div>
-              <h3 className="mb-2 font-bold text-text-primary">Then explore 99 Names</h3>
-              <p className="text-sm leading-relaxed text-text-secondary">
-                For reflection and deeper study at your own pace
-              </p>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {blogArticles.map((article, index) => (
+                <CustomArticleGridCard
+                  key={article.id}
+                  article={article}
+                  locale="en"
+                  priority={index < 3}
+                />
+              ))}
             </div>
-
-            <div className="rounded-2xl border border-[rgba(47,37,30,0.08)] bg-gradient-to-br from-white to-[rgba(122,82,59,0.04)] p-5">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(122,82,59,0.12)] text-[#7A523B]">
-                <span className="text-lg font-black">3</span>
-              </div>
-              <h3 className="mb-2 font-bold text-text-primary">Use Ramadan & Calendar</h3>
-              <p className="text-sm leading-relaxed text-text-secondary">
-                When timing matters or a sacred season arrives
-              </p>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Core Learning Sections */}
         <section className="mb-12">
           <div className="mb-8">
             <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
-              Core Pages
+              Core Resources
             </p>
             <h2 className="text-3xl font-black font-display text-text-primary">
-              Four main sections
+              Learning pages
             </h2>
+            <p className="mt-2 text-text-secondary">
+              Duas, 99 Names, Ramadan guidance and Islamic calendar for reference and reflection.
+            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
