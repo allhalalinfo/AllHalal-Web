@@ -17,6 +17,6 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
   { label: 'Halal Guides', href: '/is-it-halal', enabled: true },
   { label: 'Finance', href: '/finance', enabled: true },
   { label: 'Zakat', href: '/finance/zakat-calculator', enabled: true },
-  { label: 'Learn', href: '/learn', enabled: true },
-  { label: 'News', href: '/news', enabled: true }
+  { label: 'News', href: '/news', enabled: true },
+  { label: 'Blog', href: '/learn', enabled: true }
 ];
