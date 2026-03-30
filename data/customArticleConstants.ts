@@ -7,6 +7,7 @@ export const CUSTOM_ARTICLE_CATEGORIES = [
   "faith",
   "guides",
   "blog",
+  "travel",
   "news-analysis",
   "general",
 ] as const;

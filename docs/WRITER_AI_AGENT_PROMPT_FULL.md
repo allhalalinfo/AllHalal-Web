@@ -176,7 +176,7 @@ Is E471 halal or haram? Learn the truth about mono- and diglycerides, check the 
 id: "e-numbers-complete-guide"
 title: "E-Numbers Explained: Complete Halal Guide for Muslims (2026)"
 dek: "Learn which E-codes are halal, haram, or doubtful. Complete breakdown of 50+ common additives with real product examples."
-category: "halal-living"  # ОСНОВНАЯ категория для halal guides; или: finance, faith, family, zakat
+category: "halal-living"  # ОСНОВНАЯ категория для halal guides; или: finance, faith, family, zakat, blog, travel
 tags: ["e-numbers", "halal", "food-additives", "ingredients"]
 author: "AllHalal Editorial Team"
 published_at: "2026-03-25T10:00:00Z"
