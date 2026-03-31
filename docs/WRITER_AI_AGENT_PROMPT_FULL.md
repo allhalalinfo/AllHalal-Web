@@ -668,7 +668,7 @@ This single ingredient can determine whether a product is halal-compliant or not
 | `pattern-takeaway-list` | Key Takeaways | Navy боковая граница, градиент |
 | `pattern-why-matters` | Why This Matters | Золотая вертикальная полоса у заголовка |
 | `pattern-mistakes-list` | Common Mistakes | Красные карточки с крестиком ✗ |
-| `pattern-learning-list` | Keep Learning | Золотые точки, border-bottom |
+| ~~`pattern-learning-list`~~ | ~~Keep Learning~~ | ⚠️ **УДАЛЕНО** - генерируется автоматически сервером |
 | `pattern-steps-list` | Step-by-Step / How-to | Цветные номера (navy→gold→yellow) |
 | `pattern-faq-heading` | FAQ | Interactive accordion |
 | `pattern-examples-heading` | Practical Examples | Numbered cards с прогрессией цвета |
@@ -756,23 +756,24 @@ These are the most common misunderstandings:
 
 ---
 
-#### Pattern 5: Keep Learning - Компактные ссылки
+#### Pattern 5: Keep Learning - ⚠️ НЕ ДОБАВЛЯЙ ВРУЧНУЮ!
 
-```html
-## Keep Learning {#keep-learning}
+**ВАЖНО:** Эта секция теперь **генерируется автоматически** сервером!
 
-<div class="pattern-learning-list">
+❌ **НЕ ДОБАВЛЯЙ** в HTML контент статьи:
+- Заголовок "Keep Learning"
+- Список статей с выдуманными ссылками
+- Любые `<div class="pattern-learning-list">` блоки
 
-If this guide helped, you may also want to read:
+✅ **Что происходит автоматически:**
+- Сервер подбирает реальные статьи из той же категории
+- Исключает текущую статью
+- Рандомизирует порядок для разнообразия
+- Показывает 4-5 релевантных статей с рабочими ссылками
 
-- [Halal Gelatin Guide](/halal-guides/halal-gelatin)
-- [E Numbers Explained for Muslims](/halal-guides/e-numbers-explained)
-- [What Makes an Ingredient Mashbooh](/halal-guides/mashbooh-ingredients)
-
-</div>
-```
-
-**Стиль:** Золотые точки, border-bottom между элементами, top разделитель.
+**Если старая статья содержит "Keep Learning":**
+- Client-side скрипт автоматически удалит старую секцию
+- На её месте появится новая с реальными статьями из БД
 
 ---
 
@@ -1211,15 +1212,22 @@ Download the AllHalal app for instant product scanning and halal verification.
 
 ### 8.2 CTA #2: Related Content
 
-**Placement:** В конце, перед conclusion
+**⚠️ АВТОМАТИЧЕСКИ ГЕНЕРИРУЕТСЯ! НЕ ДОБАВЛЯЙ!**
 
-```markdown
-## Keep Learning
+**Старая инструкция (НЕ ИСПОЛЬЗУЙ):**
 
-- 📖 [Gelatin Explained: Halal Sources & How to Check](/is-it-halal/animal-derived-ingredients)
-- 🔬 [Complete Halal Certification Guide 2026](/is-it-halal/halal-certification-standards)
-- 💰 [Is Your Cheese Halal? The Rennet Problem](/is-it-halal/cheese-rennet-halal)
-```
+~~## Keep Learning~~
+
+~~- 📖 [Gelatin Explained...]~~
+~~- 🔬 [Complete Halal Certification Guide...]~~
+
+**Новое поведение:**
+- Сервер автоматически добавляет секцию "Keep Learning" с реальными статьями
+- Статьи подбираются из той же категории (finance, halal-living, zakat, etc.)
+- Ссылки всегда рабочие, никаких выдуманных URL
+- Порядок рандомизирован для разнообразия
+
+**Твоя задача:** Ничего не делать! Просто пиши контент до "Final CTA / Conclusion".
 
 ### 8.3 CTA #3: Email / Contact
 

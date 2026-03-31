@@ -6,6 +6,8 @@ import ArticleContentEnhancer from "@/components/articles/ArticleContentEnhancer
 import FaqAccordion from "@/components/articles/FaqAccordion";
 import ArticleCitationCleaner from "@/components/articles/ArticleCitationCleaner";
 import ArticleDomainCitationConverter from "@/components/articles/ArticleDomainCitationConverter";
+import RelatedArticles from "@/components/articles/RelatedArticles";
+import KeepLearningCleaner from "@/components/articles/KeepLearningCleaner";
 import { fetchCustomArticleById } from "@/lib/customArticles";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { remark } from "remark";
@@ -180,9 +182,16 @@ export default async function CustomArticlePage(props: {
                 ← Back to News
               </Link>
             </div>
+
+            {/* Related Articles - Server-side rendered with real articles from DB */}
+            <RelatedArticles
+              currentArticleId={article.id}
+              currentCategory={article.category}
+            />
           </article>
           
           {/* Client-side content enhancers */}
+          <KeepLearningCleaner />
           <ArticleDomainCitationConverter />
           <ArticleCitationCleaner />
           <ArticleContentEnhancer />
