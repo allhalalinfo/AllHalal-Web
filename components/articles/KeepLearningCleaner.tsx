@@ -5,11 +5,18 @@ import { useEffect } from "react";
 /**
  * Client Component: removes old "Keep Learning" section from article HTML
  * This prevents duplication with the new server-side RelatedArticles component
+ * 
+ * IMPORTANT: Only removes old sections from article content (inside .prose div),
+ * NOT the new server-side RelatedArticles section (which is outside .prose)
  */
 export default function KeepLearningCleaner() {
   useEffect(() => {
-    // Find all h2 headings with "Keep Learning" text
-    const headings = Array.from(document.querySelectorAll("h2, h3"));
+    // Only search within the article prose content, not the entire page
+    const proseContainer = document.querySelector(".prose");
+    if (!proseContainer) return;
+
+    // Find all h2/h3 headings with "Keep Learning" text inside the prose container
+    const headings = Array.from(proseContainer.querySelectorAll("h2, h3"));
     
     headings.forEach((heading) => {
       const text = heading.textContent?.trim().toLowerCase();
@@ -48,8 +55,10 @@ export default function KeepLearningCleaner() {
             });
           }
         } else {
-          // Remove the entire section
-          sectionToRemove.remove();
+          // Remove the entire section (only if it's inside prose container)
+          if (proseContainer.contains(sectionToRemove)) {
+            sectionToRemove.remove();
+          }
         }
       }
     });
