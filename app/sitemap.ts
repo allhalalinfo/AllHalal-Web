@@ -1,10 +1,18 @@
 import { MetadataRoute } from 'next';
 import { blogPosts } from '@/data/blogPosts';
 import { halalItems } from '@/data/halalItems';
+import { fetchCustomArticlesList } from '@/lib/customArticles';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';
   const now = new Date();
+  
+  // Fetch all custom articles from the database
+  const customArticlesResponse = await fetchCustomArticlesList({ 
+    page: 1, 
+    limit: 100 
+  });
+  const customArticles = customArticlesResponse.articles;
   
   const staticRoutes = [
     '',
@@ -40,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/learn/live-makkah',
     '/learn/ramadan',
     '/learn/islamic-calendar',
+    '/travel',
     '/prayer-times',
     '/methodology',
   ];
@@ -75,6 +84,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: item.priority === 'high' ? 0.7 : 0.6,
+    })),
+    // Custom articles from database
+    ...customArticles.map((article) => ({
+      url: `${baseUrl}/read/${encodeURIComponent(article.id)}`,
+      lastModified: article.updated_at ? new Date(article.updated_at) : new Date(article.published_at),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
     })),
   ];
 }
