@@ -22,8 +22,8 @@ export default function KeepLearningCleaner() {
           // If not in a section, remove heading and following content until next heading
           const parent = heading.parentElement;
           if (parent) {
-            let currentNode = heading.nextSibling;
-            const nodesToRemove = [heading];
+            let currentNode: ChildNode | null = heading.nextSibling;
+            const nodesToRemove: ChildNode[] = [heading];
             
             while (currentNode) {
               const nextSibling = currentNode.nextSibling;
