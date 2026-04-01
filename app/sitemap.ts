@@ -3,23 +3,28 @@ import { blogPosts } from '@/data/blogPosts';
 import { halalItems } from '@/data/halalItems';
 import { fetchCustomArticlesList } from '@/lib/customArticles';
 
+// Revalidate sitemap every hour to avoid cold starts during Google crawls
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';
   const now = new Date();
   
-  // Fetch all custom articles from the database with timeout protection
+  // Fetch all custom articles from the database with aggressive timeout protection
+  // Google crawler has ~5s timeout, so we need to respond faster
   let customArticles: any[] = [];
   try {
     const customArticlesResponse = await Promise.race([
       fetchCustomArticlesList({ page: 1, limit: 100 }),
       new Promise<{ articles: [] }>((_, reject) => 
-        setTimeout(() => reject(new Error('API timeout')), 8000)
+        setTimeout(() => reject(new Error('API timeout - responding with static sitemap')), 3500)
       )
     ]);
     customArticles = customArticlesResponse.articles;
   } catch (error) {
-    console.error('Failed to fetch custom articles for sitemap:', error);
+    console.warn('Sitemap: Backend API slow/unavailable, serving static routes only', error instanceof Error ? error.message : error);
     // Fallback: sitemap will work without custom articles
+    // Static routes are still indexed, custom articles will be added once API responds
     customArticles = [];
   }
   
