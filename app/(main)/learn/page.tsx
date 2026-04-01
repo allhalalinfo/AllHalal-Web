@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AppPromoMini from "@/components/ui/AppPromoMini";
-import FAQSchema from "@/components/seo/FAQSchema";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
@@ -27,34 +26,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-const learnFaqs = [
-  {
-    question: "What's in the blog section?",
-    answer:
-      "In-depth articles on Islamic topics, faith reflections, lifestyle guidance, and Muslim living. Plus quick access to duas, 99 Names, Ramadan guides and Islamic calendar.",
-  },
-  {
-    question: "Where should I start?",
-    answer:
-      "If you're looking for articles, scroll down to see the latest posts. For practical daily tools, start with Duas or check the Islamic calendar for upcoming events.",
-  },
-  {
-    question: "What about duas and 99 Names?",
-    answer:
-      "They're still here. Blog articles complement the core learning pages (duas, 99 Names, Ramadan, calendar). Everything in one section.",
-  },
-  {
-    question: "What is better in the app?",
-    answer:
-      "The app is faster for repeated use. If you need duas every day, barcode scanning or prayer times with Islamic calendar context, the app brings it all together in one place.",
-  },
-  {
-    question: "How often do new articles appear?",
-    answer:
-      "New blog articles are published regularly as part of our editorial content. Core pages like Duas and 99 Names are evergreen resources.",
-  },
-];
 
 const learnSchema = {
   "@context": "https://schema.org",
@@ -175,7 +146,6 @@ export default async function LearnHub() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(learnSchema) }}
       />
-      <FAQSchema faqs={learnFaqs} />
 
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0">
@@ -449,84 +419,6 @@ export default async function LearnHub() {
                 />
               </svg>
             </Link>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="mb-12 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-8 shadow-[0_4px_24px_rgba(43,34,24,0.04)] backdrop-blur-sm">
-            <div className="mb-6">
-              <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
-                Questions
-              </p>
-              <h2 className="text-3xl font-black font-display text-text-primary">
-                Common questions
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {learnFaqs.map((faq) => (
-                <details
-                  key={faq.question}
-                  className="group rounded-2xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-5"
-                >
-                  <summary className="flex cursor-pointer items-center justify-between gap-4 font-bold text-text-primary">
-                    <span>{faq.question}</span>
-                    <svg
-                      className="h-5 w-5 flex-shrink-0 text-primary transition-transform group-open:rotate-180"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </summary>
-                  <p className="mt-4 text-sm leading-relaxed text-text-secondary">
-                    {faq.answer}
-                  </p>
-                </details>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-between rounded-3xl border border-[rgba(47,37,30,0.08)] bg-white/80 p-8 shadow-[0_4px_24px_rgba(43,34,24,0.04)] backdrop-blur-sm">
-            <div>
-              <div className="mb-6">
-                <p className="mb-2 text-xs font-bold uppercase tracking-wider text-primary">
-                  Connected Pages
-                </p>
-                <h3 className="text-2xl font-bold font-display text-text-primary">
-                  Learning works better when connected to the rest
-                </h3>
-              </div>
-
-              <p className="mb-6 text-sm leading-relaxed text-text-secondary">
-                Islamic learning should stay close to prayer times, halal guides and Muslim
-                news. It is all part of the same rhythm.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {[
-                { label: "Prayer times", href: "/prayer-times" },
-                { label: "Halal guides", href: "/is-it-halal" },
-                { label: "Muslim news", href: "/news" },
-                { label: "Homepage", href: "/" },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block rounded-2xl border border-[rgba(47,37,30,0.08)] bg-white/60 p-4 font-semibold text-text-primary transition-colors hover:border-primary hover:bg-[rgba(244,185,66,0.04)]"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
           </div>
         </section>
       </div>
