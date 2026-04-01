@@ -94,6 +94,11 @@ export default async function PortalHomePage(props: { params: Promise<{}> }) {
           <div className="pointer-events-none absolute right-[-12rem] top-[66rem] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(78,109,120,0.16),transparent_70%)] blur-3xl" />
 
           <div className="container relative z-10 mx-auto max-w-7xl">
+            {/* Visually hidden H1 for SEO (main page already has visual hierarchy) */}
+            <h1 className="sr-only">
+              allhalal.info - Muslim Portal for Prayer Times, Halal Guides, Finance and News
+            </h1>
+
             <section id="prayer-dashboard" className="mb-8">
               <TodayForYouServer locale="en" />
             </section>
