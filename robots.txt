@@ -1,51 +1,15 @@
-# robots.txt for AllHalal / HalalScan
-# https://allhalal.info/robots.txt
-
-# Allow Google app-ads.txt crawler to access app-ads.txt file
-User-agent: Google-adstxt
-Disallow:
-
-# Allow Mediapartners-Google crawler
-User-agent: Mediapartners-Google
-Disallow:
-
-# Allow Google display ads crawler
-User-agent: Google-Display-Ads-Bot
-Disallow:
-
-# Allow Googlebot crawler
-User-agent: Googlebot
-Disallow:
+# robots.txt for allhalal.info
+# Updated: April 2026
 
 # Allow all search engines to crawl the entire site
 User-agent: *
 Allow: /
-# Block old /en/ paths (redirected to /)
+
+# Block old redirected paths
 Disallow: /en/
 Disallow: /en
-# Block old /blog paths (redirected to /news)
 Disallow: /blog/
 Disallow: /blog
 
 # Sitemap location
 Sitemap: https://allhalal.info/sitemap.xml
-
-# Crawl-delay (optional, adjust if needed)
-# Crawl-delay: 1
-
-# Disallow specific paths (none for this site, but keeping for reference)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Block specific bad bots (optional)
-User-agent: AhrefsBot
-Crawl-delay: 10
-
-User-agent: SemrushBot
-Crawl-delay: 10
-
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: dotbot
-Disallow: /

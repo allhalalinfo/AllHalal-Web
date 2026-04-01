@@ -7,12 +7,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';
   const now = new Date();
   
-  // Fetch all custom articles from the database
-  const customArticlesResponse = await fetchCustomArticlesList({ 
-    page: 1, 
-    limit: 100 
-  });
-  const customArticles = customArticlesResponse.articles;
+  // Fetch all custom articles from the database with timeout protection
+  let customArticles: any[] = [];
+  try {
+    const customArticlesResponse = await Promise.race([
+      fetchCustomArticlesList({ page: 1, limit: 100 }),
+      new Promise<{ articles: [] }>((_, reject) => 
+        setTimeout(() => reject(new Error('API timeout')), 8000)
+      )
+    ]);
+    customArticles = customArticlesResponse.articles;
+  } catch (error) {
+    console.error('Failed to fetch custom articles for sitemap:', error);
+    // Fallback: sitemap will work without custom articles
+    customArticles = [];
+  }
   
   const staticRoutes = [
     '',
