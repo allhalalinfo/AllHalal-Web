@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     "duas",
     "99 names of Allah",
   ],
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     title: "allhalal.info Muslim Portal | Prayer Times, Finance Signals, Muslim News & Islamic Learning",
     description:

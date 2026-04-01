@@ -51,9 +51,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: "./",
-  },
   other: {
     "google-adsense-account": ADSENSE_CLIENT_ID,
   },
