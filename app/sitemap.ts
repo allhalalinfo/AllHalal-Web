@@ -3,8 +3,8 @@ import { blogPosts } from '@/data/blogPosts';
 import { halalItems } from '@/data/halalItems';
 import { fetchCustomArticlesList } from '@/lib/customArticles';
 
-// Revalidate sitemap every hour to avoid cold starts during Google crawls
-export const revalidate = 3600;
+// Revalidate sitemap every 6 hours (reduced from 1 hour to save origin transfer bandwidth)
+export const revalidate = 21600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';

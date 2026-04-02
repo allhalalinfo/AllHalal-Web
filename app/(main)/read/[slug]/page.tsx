@@ -17,7 +17,9 @@ import remarkGfm from "remark-gfm";
 import remarkHeadingId from "remark-heading-id";
 import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
 
-export const revalidate = 120;
+// Revalidate article pages every hour (increased from 2 minutes to reduce origin transfer bandwidth)
+// Auto-revalidation still triggers when article is created/updated via admin panel
+export const revalidate = 3600;
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
