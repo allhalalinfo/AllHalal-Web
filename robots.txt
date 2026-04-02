@@ -11,5 +11,8 @@ Disallow: /en
 Disallow: /blog/
 Disallow: /blog
 
+# Block technical files from indexing (fonts, JS chunks, CSS)
+Disallow: /_next/static/
+
 # Sitemap location
 Sitemap: https://allhalal.info/sitemap.xml
