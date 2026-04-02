@@ -30,6 +30,18 @@ export function middleware(request: NextRequest) {
     });
   }
   
+  // Handle IndexNow key file for search engine verification
+  if (pathname === '/indexnow-key.txt') {
+    const indexNowKey = process.env.INDEXNOW_KEY || '';
+    return new NextResponse(indexNowKey, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'public, max-age=86400', // Cache for 24 hours
+      },
+    });
+  }
+  
   // Skip middleware for other static files
   if (
     pathname === '/sitemap.xml' ||
