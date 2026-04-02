@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { ADMIN_CUSTOM_COOKIE, verifyAdminCustomToken } from "@/lib/adminCustomSession";
 import { proxyDeleteArticle, proxyUpdateArticle } from "@/lib/customArticlesWriteProxy";
+import { revalidateAfterArticleChange } from "@/lib/revalidation";
+import { notifyArticleChange } from "@/lib/indexnow";
 
 async function requireAuth(): Promise<boolean> {
   const jar = await cookies();
@@ -27,7 +29,8 @@ export async function PUT(request: Request, context: RouteContext) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const upstream = await proxyUpdateArticle(decodeURIComponent(id), body);
+  const articleId = decodeURIComponent(id);
+  const upstream = await proxyUpdateArticle(articleId, body);
   const text = await upstream.text();
   if (!upstream.ok) {
     return NextResponse.json(
@@ -40,11 +43,22 @@ export async function PUT(request: Request, context: RouteContext) {
     );
   }
 
+  let responseData: any;
   try {
-    return NextResponse.json(text ? JSON.parse(text) : { ok: true });
+    responseData = text ? JSON.parse(text) : { ok: true };
   } catch {
-    return NextResponse.json({ ok: true, raw: text });
+    responseData = { ok: true, raw: text };
   }
+
+  // Trigger automatic revalidation and indexing in background
+  Promise.all([
+    revalidateAfterArticleChange(articleId),
+    notifyArticleChange(articleId, 'updated'),
+  ]).catch(error => {
+    console.error('Background indexing tasks failed:', error);
+  });
+
+  return NextResponse.json(responseData);
 }
 
 export async function DELETE(_request: Request, context: RouteContext) {
@@ -56,7 +70,8 @@ export async function DELETE(_request: Request, context: RouteContext) {
     return NextResponse.json({ error: "Missing id" }, { status: 400 });
   }
 
-  const upstream = await proxyDeleteArticle(decodeURIComponent(id));
+  const articleId = decodeURIComponent(id);
+  const upstream = await proxyDeleteArticle(articleId);
   const text = await upstream.text();
   if (!upstream.ok) {
     return NextResponse.json(
@@ -69,9 +84,20 @@ export async function DELETE(_request: Request, context: RouteContext) {
     );
   }
 
+  let responseData: any;
   try {
-    return NextResponse.json(text ? JSON.parse(text) : { ok: true });
+    responseData = text ? JSON.parse(text) : { ok: true };
   } catch {
-    return NextResponse.json({ ok: true, raw: text });
+    responseData = { ok: true, raw: text };
   }
+
+  // Trigger automatic revalidation and indexing in background
+  Promise.all([
+    revalidateAfterArticleChange(articleId),
+    notifyArticleChange(articleId, 'deleted'),
+  ]).catch(error => {
+    console.error('Background indexing tasks failed:', error);
+  });
+
+  return NextResponse.json(responseData);
 }
