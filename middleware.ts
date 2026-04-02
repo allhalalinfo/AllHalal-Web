@@ -109,6 +109,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/app-ads.txt',
+    '/indexnow-key.txt',
     '/((?!api|_next/static|_next/image|favicon.ico|assets|app-screens|robots.txt|sitemap.xml|.*\\..*).*)',
   ],
 };
