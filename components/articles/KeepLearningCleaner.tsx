@@ -22,43 +22,48 @@ export default function KeepLearningCleaner() {
       const text = heading.textContent?.trim().toLowerCase();
       
       if (text === "keep learning") {
-        // Find the parent section or container
+        // Strategy 1: Check if heading is inside a wrapper div (common pattern)
+        const wrapperDiv = heading.closest("div.pattern-learning-list, div[class*='learning'], div[class*='keep-learning']");
+        if (wrapperDiv && proseContainer.contains(wrapperDiv)) {
+          wrapperDiv.remove();
+          return;
+        }
+        
+        // Strategy 2: Find the parent section
         let sectionToRemove = heading.closest("section");
         
-        if (!sectionToRemove) {
-          // If not in a section, remove heading and following content until next heading
-          const parent = heading.parentElement;
-          if (parent) {
-            let currentNode: ChildNode | null = heading.nextSibling;
-            const nodesToRemove: ChildNode[] = [heading];
+        if (sectionToRemove && proseContainer.contains(sectionToRemove)) {
+          sectionToRemove.remove();
+          return;
+        }
+        
+        // Strategy 3: Remove heading and following content until next heading
+        const parent = heading.parentElement;
+        if (parent) {
+          let currentNode: ChildNode | null = heading.nextSibling;
+          const nodesToRemove: ChildNode[] = [heading];
+          
+          while (currentNode) {
+            const nextSibling = currentNode.nextSibling;
             
-            while (currentNode) {
-              const nextSibling = currentNode.nextSibling;
-              
-              // Stop if we hit another heading or major section
-              if (
-                currentNode.nodeType === Node.ELEMENT_NODE &&
-                (currentNode as Element).matches("h1, h2, h3, section, footer")
-              ) {
-                break;
-              }
-              
-              nodesToRemove.push(currentNode);
-              currentNode = nextSibling;
+            // Stop if we hit another heading or major section
+            if (
+              currentNode.nodeType === Node.ELEMENT_NODE &&
+              (currentNode as Element).matches("h1, h2, h3, section, footer")
+            ) {
+              break;
             }
             
-            // Remove all collected nodes
-            nodesToRemove.forEach((node) => {
-              if (node.parentNode) {
-                node.parentNode.removeChild(node);
-              }
-            });
+            nodesToRemove.push(currentNode);
+            currentNode = nextSibling;
           }
-        } else {
-          // Remove the entire section (only if it's inside prose container)
-          if (proseContainer.contains(sectionToRemove)) {
-            sectionToRemove.remove();
-          }
+          
+          // Remove all collected nodes
+          nodesToRemove.forEach((node) => {
+            if (node.parentNode) {
+              node.parentNode.removeChild(node);
+            }
+          });
         }
       }
     });
