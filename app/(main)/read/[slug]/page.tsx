@@ -54,8 +54,26 @@ export async function generateMetadata(props: {
 
 export default async function CustomArticlePage(props: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await props.params;
+  const searchParams = await props.searchParams;
+  
+  // Convert searchParams to URLSearchParams for utility functions
+  const urlParams = new URLSearchParams();
+  Object.entries(searchParams).forEach(([key, value]) => {
+    if (value) {
+      const stringValue = Array.isArray(value) ? value[0] : value;
+      urlParams.set(key, stringValue);
+    }
+  });
+  
+  // Check if we're in app mode (WebView)
+  const isAppMode = urlParams.get('app') === 'true';
+  const hideRelated = urlParams.get('hide_related') === 'true';
+  const hideBackButton = urlParams.get('hide_back_btn') === 'true';
+  const theme = urlParams.get('theme') || 'auto'; // light, dark, auto
+  
   const id = decodeURIComponent(slug);
   const article = await fetchCustomArticleById(id);
 
@@ -108,7 +126,12 @@ export default async function CustomArticlePage(props: {
 
   return (
     <>
-      <main className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7f2e7_0%,#f5f1e8_18%,#eef1ec_52%,#f2f1e8_100%)] pb-24 pt-32">
+      <main 
+        className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7f2e7_0%,#f5f1e8_18%,#eef1ec_52%,#f2f1e8_100%)] pb-24"
+        style={{ paddingTop: isAppMode ? '2rem' : '8rem' }}
+        data-theme={theme}
+        data-app-mode={isAppMode ? 'true' : 'false'}
+      >
         {/* Ambient background effects - fresh purple, blue, green tones (no gold) */}
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(140,110,180,0.12),transparent_24%),radial-gradient(circle_at_78%_12%,rgba(73,110,112,0.14),transparent_26%),radial-gradient(circle_at_55%_78%,rgba(104,134,93,0.10),transparent_24%)]" />
@@ -126,21 +149,24 @@ export default async function CustomArticlePage(props: {
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
           {/* Editorial content wrapper - optimal reading width */}
           <article className="mx-auto max-w-[72ch]">
-            <nav className="mb-8 text-sm text-text-muted">
-              <Link href={portalHome} className="font-medium text-primary hover:underline">
-                Home
-              </Link>
-              <span className="mx-2" aria-hidden>
-                /
-              </span>
-              <Link href={newsUrl} className="hover:text-text-primary hover:underline">
-                News desk
-              </Link>
-              <span className="mx-2" aria-hidden>
-                /
-              </span>
-              <span className="text-text-secondary">Read</span>
-            </nav>
+            {/* Breadcrumbs - hidden in app mode */}
+            {!isAppMode && (
+              <nav className="mb-8 text-sm text-text-muted">
+                <Link href={portalHome} className="font-medium text-primary hover:underline">
+                  Home
+                </Link>
+                <span className="mx-2" aria-hidden>
+                  /
+                </span>
+                <Link href={newsUrl} className="hover:text-text-primary hover:underline">
+                  News desk
+                </Link>
+                <span className="mx-2" aria-hidden>
+                  /
+                </span>
+                <span className="text-text-secondary">Read</span>
+              </nav>
+            )}
 
             <header className="mb-10">
               <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-black leading-[1.1] tracking-[-0.04em] text-text-primary">
@@ -177,20 +203,25 @@ export default async function CustomArticlePage(props: {
               </p>
             )}
 
-            <div className="mt-12 border-t border-[rgba(47,37,30,0.08)] pt-8">
-              <Link
-                href={newsUrl}
-                className="inline-flex rounded-full bg-[#173640] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(23,54,64,0.18)] transition-transform hover:-translate-y-0.5"
-              >
-                ← Back to News
-              </Link>
-            </div>
+            {/* Back button - hidden in app mode or if hide_back_btn=true */}
+            {!isAppMode && !hideBackButton && (
+              <div className="mt-12 border-t border-[rgba(47,37,30,0.08)] pt-8">
+                <Link
+                  href={newsUrl}
+                  className="inline-flex rounded-full bg-[#173640] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_44px_rgba(23,54,64,0.18)] transition-transform hover:-translate-y-0.5"
+                >
+                  ← Back to News
+                </Link>
+              </div>
+            )}
 
             {/* Related Articles - Server-side rendered with real articles from DB */}
-            <RelatedArticles
-              currentArticleId={article.id}
-              currentCategory={article.category}
-            />
+            {!hideRelated && (
+              <RelatedArticles
+                currentArticleId={article.id}
+                currentCategory={article.category}
+              />
+            )}
           </article>
           
           {/* Client-side content enhancers */}
@@ -202,7 +233,8 @@ export default async function CustomArticlePage(props: {
           <FaqAccordion />
         </div>
       </main>
-      <Footer />
+      {/* Footer - hidden in app mode */}
+      {!isAppMode && <Footer />}
     </>
   );
 }

@@ -7,6 +7,7 @@ import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvide
 import { SpeedInsightsProvider } from "@/components/providers/SpeedInsightsProvider";
 import Header from "@/components/layout/Header";
 import StickyAppBanner from "@/components/ui/StickyAppBanner";
+import ThemeManager from "@/components/providers/ThemeManager";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -61,14 +62,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className="bg-bg-primary text-text-primary antialiased" suppressHydrationWarning>
         <AdSenseScript clientId={ADSENSE_CLIENT_ID} />
-        <Header />
+        <ThemeManager />
+        <HeaderWrapper />
         <SmoothScrollProvider>
           {children}
-          <StickyAppBanner />
+          <StickyAppBannerWrapper />
         </SmoothScrollProvider>
         <SpeedInsightsProvider />
         <Analytics />
       </body>
     </html>
   );
+}
+
+// Client component to conditionally render Header based on ?app=true
+function HeaderWrapper() {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('app') === 'true') {
+      return null; // Hide header in app mode
+    }
+  }
+  return <Header />;
+}
+
+// Client component to conditionally render Sticky Banner
+function StickyAppBannerWrapper() {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('app') === 'true') {
+      return null; // Hide banner in app mode
+    }
+  }
+  return <StickyAppBanner />;
 }

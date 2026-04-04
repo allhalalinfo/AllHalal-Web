@@ -1902,3 +1902,151 @@ img {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   DARK MODE SUPPORT (iOS/Android WebView)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Automatic dark mode via CSS media query */
+@media (prefers-color-scheme: dark) {
+  /* Only apply dark mode when explicitly requested via data-theme or system preference */
+  :root:not([data-theme="light"]),
+  [data-theme="dark"],
+  [data-theme="auto"] {
+    /* Background Colors (Dark Theme) */
+    --color-bg-primary: #1a1a1a;
+    --color-bg-secondary: #242424;
+    --color-bg-tertiary: #2e2e2e;
+    --color-bg-elevated: #333333;
+    --color-bg-card: rgba(42, 42, 42, 0.9);
+    --color-bg-dark: #0a0a0a;
+
+    /* Text Colors (Dark Theme) */
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: rgba(224, 224, 224, 0.75);
+    --color-text-tertiary: rgba(224, 224, 224, 0.5);
+    --color-text-muted: rgba(224, 224, 224, 0.35);
+    --color-text-inverse: #1a1a1a;
+    --color-text-inverse-secondary: rgba(26, 26, 26, 0.7);
+
+    /* Primary colors adjusted for dark mode */
+    --color-primary: #C2A77A;
+    --color-primary-light: #D4BE9A;
+    --color-primary-dark: #977C58;
+
+    /* Border Colors (Dark Theme) */
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-border-light: rgba(255, 255, 255, 0.05);
+    --color-border-hover: rgba(255, 255, 255, 0.2);
+
+    /* Surface Colors (Dark Theme) */
+    --color-surface: rgba(42, 42, 42, 0.4);
+    --color-surface-hover: rgba(42, 42, 42, 0.7);
+    --color-surface-active: #2a2a2a;
+  }
+}
+
+/* Manual dark mode override via data-theme="dark" */
+[data-theme="dark"] {
+  --color-bg-primary: #1a1a1a;
+  --color-bg-secondary: #242424;
+  --color-bg-tertiary: #2e2e2e;
+  --color-bg-elevated: #333333;
+  --color-bg-card: rgba(42, 42, 42, 0.9);
+  --color-bg-dark: #0a0a0a;
+
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: rgba(224, 224, 224, 0.75);
+  --color-text-tertiary: rgba(224, 224, 224, 0.5);
+  --color-text-muted: rgba(224, 224, 224, 0.35);
+  --color-text-inverse: #1a1a1a;
+  --color-text-inverse-secondary: rgba(26, 26, 26, 0.7);
+
+  --color-primary: #C2A77A;
+  --color-primary-light: #D4BE9A;
+  --color-primary-dark: #977C58;
+
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-light: rgba(255, 255, 255, 0.05);
+  --color-border-hover: rgba(255, 255, 255, 0.2);
+
+  --color-surface: rgba(42, 42, 42, 0.4);
+  --color-surface-hover: rgba(42, 42, 42, 0.7);
+  --color-surface-active: #2a2a2a;
+}
+
+/* Dark mode specific adjustments for article pages */
+@media (prefers-color-scheme: dark) {
+  [data-app-mode="true"]:not([data-theme="light"]) main,
+  [data-theme="dark"] main {
+    background: linear-gradient(180deg, #1a1a1a 0%, #242424 18%, #2e2e2e 52%, #242424 100%) !important;
+  }
+
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom,
+  [data-theme="dark"] .prose-custom {
+    color: var(--color-text-primary);
+  }
+
+  /* Dark mode blockquotes */
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom blockquote,
+  [data-theme="dark"] .prose-custom blockquote {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: var(--color-primary);
+  }
+
+  /* Dark mode tables */
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom table,
+  [data-theme="dark"] .prose-custom table {
+    background: rgba(42, 42, 42, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom thead,
+  [data-theme="dark"] .prose-custom thead {
+    background: rgba(151, 124, 88, 0.15);
+  }
+
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom tbody tr:hover,
+  [data-theme="dark"] .prose-custom tbody tr:hover {
+    background: rgba(244, 185, 66, 0.08);
+  }
+
+  /* Dark mode code blocks */
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom code,
+  [data-theme="dark"] .prose-custom code {
+    background: rgba(75, 110, 112, 0.15);
+    border-color: rgba(75, 110, 112, 0.2);
+    color: var(--color-accent-teal);
+  }
+
+  /* Dark mode Quick Answer */
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom .pattern-quick-answer,
+  [data-theme="dark"] .prose-custom .pattern-quick-answer {
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.15), rgba(27, 94, 32, 0.12));
+    border-color: rgba(129, 199, 132, 0.25);
+  }
+
+  /* Dark mode FAQ accordion */
+  [data-app-mode="true"]:not([data-theme="light"]) .faq-accordion-question,
+  [data-theme="dark"] .faq-accordion-question {
+    background: rgba(42, 42, 42, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  [data-app-mode="true"]:not([data-theme="light"]) .faq-accordion-question:hover,
+  [data-theme="dark"] .faq-accordion-question:hover {
+    background: rgba(42, 42, 42, 0.8);
+  }
+
+  /* Dark mode example cards */
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom .example-card,
+  [data-theme="dark"] .prose-custom .example-card {
+    background: rgba(42, 42, 42, 0.6);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  [data-app-mode="true"]:not([data-theme="light"]) .prose-custom .example-card:hover,
+  [data-theme="dark"] .prose-custom .example-card:hover {
+    background: rgba(42, 42, 42, 0.8);
+  }
+}
