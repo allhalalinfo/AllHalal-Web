@@ -1505,8 +1505,8 @@ body {
   transform: translateY(-2px);
 }
 
-/* Style Download app links as buttons EVERYWHERE in article */
-.prose-custom a[href*="download"]:not(.citation-link),
+/* Style app download links as buttons in article content */
+/* Only targets Apple App Store, Google Play, and our app links */
 .prose-custom a[href*="app.allhalal"]:not(.citation-link),
 .prose-custom a[href*="apps.apple"]:not(.citation-link),
 .prose-custom a[href*="play.google"]:not(.citation-link) {
@@ -1527,7 +1527,6 @@ body {
   border-bottom: none !important;
 }
 
-.prose-custom a[href*="download"]:not(.citation-link):hover,
 .prose-custom a[href*="app.allhalal"]:not(.citation-link):hover,
 .prose-custom a[href*="apps.apple"]:not(.citation-link):hover,
 .prose-custom a[href*="play.google"]:not(.citation-link):hover {
