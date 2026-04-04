@@ -128,18 +128,25 @@ export default async function CustomArticlePage(props: {
   return (
     <>
       <main 
-        className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7f2e7_0%,#f5f1e8_18%,#eef1ec_52%,#f2f1e8_100%)] pb-24"
-        style={{ paddingTop: isAppMode ? '2rem' : '8rem' }}
+        className="relative min-h-screen overflow-hidden pb-24"
+        style={{ 
+          paddingTop: isAppMode ? '2rem' : '8rem',
+          background: isAppMode 
+            ? '#ffffff' // Clean white for app mode
+            : 'linear-gradient(180deg,#f7f2e7 0%,#f5f1e8 18%,#eef1ec 52%,#f2f1e8 100%)'
+        }}
         data-theme={theme}
         data-app-mode={isAppMode ? 'true' : 'false'}
       >
-        {/* Ambient background effects - fresh purple, blue, green tones (no gold) */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(140,110,180,0.12),transparent_24%),radial-gradient(circle_at_78%_12%,rgba(73,110,112,0.14),transparent_26%),radial-gradient(circle_at_55%_78%,rgba(104,134,93,0.10),transparent_24%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.35),transparent_26%,transparent_72%,rgba(255,255,255,0.15))]" />
-          <div className="absolute left-[-10rem] top-[8rem] h-[24rem] w-[24rem] rounded-full bg-[rgba(100,160,180,0.10)] blur-3xl" />
-          <div className="absolute right-[-10rem] top-[6rem] h-[24rem] w-[24rem] rounded-full bg-[rgba(130,100,170,0.09)] blur-3xl" />
-        </div>
+        {/* Ambient background effects - only show in web mode */}
+        {!isAppMode && (
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(140,110,180,0.12),transparent_24%),radial-gradient(circle_at_78%_12%,rgba(73,110,112,0.14),transparent_26%),radial-gradient(circle_at_55%_78%,rgba(104,134,93,0.10),transparent_24%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.35),transparent_26%,transparent_72%,rgba(255,255,255,0.15))]" />
+            <div className="absolute left-[-10rem] top-[8rem] h-[24rem] w-[24rem] rounded-full bg-[rgba(100,160,180,0.10)] blur-3xl" />
+            <div className="absolute right-[-10rem] top-[6rem] h-[24rem] w-[24rem] rounded-full bg-[rgba(130,100,170,0.09)] blur-3xl" />
+          </div>
+        )}
 
         <script
           type="application/ld+json"
