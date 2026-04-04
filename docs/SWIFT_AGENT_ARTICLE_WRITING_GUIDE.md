@@ -9,6 +9,7 @@
 - **Секцию "Keep Learning"** с ссылками на статьи - она генерируется автоматически!
 - **Секцию "Questions"** или "Common Questions" в конце статьи
 - **Секцию "Connected Pages"** или аналогичные
+- **Секцию "Final thought"** или "Final note"** - это дублирует Quick Answer!
 
 ### ✅ ОБЯЗАТЕЛЬНО СОЗДАВАЙТЕ:
 - **References** в самом конце статьи (подробности ниже)
@@ -431,9 +432,15 @@
   <li><a href="/article1">Similar Article 1</a></li>
   <li><a href="/article2">Similar Article 2</a></li>
 </ul>
+
+<!-- НЕПРАВИЛЬНО - дублирует Quick Answer -->
+<h2>Final thought</h2>
+<p>Ashwagandha is usually not difficult...</p>
 ```
 
-**Причина:** Секция "Keep Learning" генерируется автоматически на основе связанных статей из базы данных.
+**Причина:** 
+- Секция "Keep Learning" генерируется автоматически на основе связанных статей из базы данных.
+- Секция "Final thought" дублирует Quick Answer из начала статьи и выглядит странно в конце.
 
 ### ❌ Не используйте названия источников в тексте:
 

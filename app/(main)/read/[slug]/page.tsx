@@ -8,6 +8,7 @@ import ArticleCitationCleaner from "@/components/articles/ArticleCitationCleaner
 import ArticleDomainCitationConverter from "@/components/articles/ArticleDomainCitationConverter";
 import RelatedArticles from "@/components/articles/RelatedArticles";
 import KeepLearningCleaner from "@/components/articles/KeepLearningCleaner";
+import FinalThoughtCleaner from "@/components/articles/FinalThoughtCleaner";
 import ArticleH1Converter from "@/components/articles/ArticleH1Converter";
 import { fetchCustomArticleById } from "@/lib/customArticles";
 import { SITE_URL } from "@/lib/seo/metadata";
@@ -227,6 +228,7 @@ export default async function CustomArticlePage(props: {
           {/* Client-side content enhancers */}
           <ArticleH1Converter />
           <KeepLearningCleaner />
+          <FinalThoughtCleaner />
           <ArticleDomainCitationConverter />
           <ArticleCitationCleaner />
           <ArticleContentEnhancer />
