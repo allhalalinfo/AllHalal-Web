@@ -171,16 +171,6 @@ export default async function NewsDeskPage(props: {
             </div>
           ) : null}
 
-          {freshBriefs.length >= 20 ? (
-            <p className="mt-6 text-sm leading-7 text-text-muted">
-              Showing the 20 newest combined items. Narrow with a category chip for a shorter list.
-            </p>
-          ) : feedTotal > feedFresh.length && freshBriefs.length > 0 ? (
-            <p className="mt-6 text-sm leading-7 text-text-muted">
-              Some older feed items are outside the freshness window used on this page.
-            </p>
-          ) : null}
-
           <AdSlot
             id="news-bottom-rail"
             slot={NEWS_BOTTOM_AD_SLOT}
