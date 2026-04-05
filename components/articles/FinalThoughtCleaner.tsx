@@ -32,7 +32,7 @@ export default function FinalThoughtCleaner() {
 
         // Collect all elements until next H2 or end
         while (currentElement && currentElement.nextElementSibling) {
-          const nextEl = currentElement.nextElementSibling;
+          const nextEl: Element = currentElement.nextElementSibling;
           
           // Stop if we hit another H2
           if (nextEl.tagName === "H2") {
