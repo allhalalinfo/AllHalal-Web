@@ -79,13 +79,6 @@ export default async function NewsDeskPage(props: {
               <h1 className="text-[clamp(2rem,8vw,4rem)] font-black font-display leading-[0.96] tracking-[-0.04em] text-text-primary">
                 Muslim World Today
               </h1>
-              <p className="mt-2 max-w-3xl text-[0.98rem] leading-relaxed text-text-secondary md:mt-3 md:text-lg">
-                Starts with the same curated stories as on the{" "}
-                <Link href={``} className="font-medium text-primary underline-offset-2 hover:underline">
-                  home page
-                </Link>
-                , then adds more from the full live feed — duplicates hidden, up to fifty cards.
-              </p>
             </div>
           </div>
 
