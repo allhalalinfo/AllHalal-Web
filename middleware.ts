@@ -4,10 +4,20 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  // Redirect old /en/* paths to new /* (301 permanent)
-  if (pathname.startsWith('/en/') || pathname === '/en') {
+  // Redirect old locale paths to new /* (301 permanent)
+  // /en/* and /ru/* were removed when i18n was simplified
+  if (pathname.startsWith('/en/') || pathname === '/en' || 
+      pathname.startsWith('/ru/') || pathname === '/ru') {
     const url = request.nextUrl.clone();
-    url.pathname = pathname === '/en' ? '/' : pathname.replace(/^\/en\//, '/');
+    
+    if (pathname === '/en' || pathname === '/ru') {
+      url.pathname = '/';
+    } else if (pathname.startsWith('/en/')) {
+      url.pathname = pathname.replace(/^\/en\//, '/');
+    } else if (pathname.startsWith('/ru/')) {
+      url.pathname = pathname.replace(/^\/ru\//, '/');
+    }
+    
     return NextResponse.redirect(url, 301);
   }
   
