@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage(props: { params: Promise<{}> }) {
         </p>
         <p className="text-sm text-text-muted mt-4">
           <strong>Contact:</strong> <a href="mailto:app@allhalal.info">app@allhalal.info</a> | 
-          <strong> Website:</strong> <a href="https://www.allhalal.info">allhalal.info</a>
+          <strong> Website:</strong> <a href="https://allhalal.info">allhalal.info</a>
         </p>
       </div>
 

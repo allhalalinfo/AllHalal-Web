@@ -1,23 +1,37 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+/** Locales removed when site switched to English-only URLs */
+const OLD_LOCALE_SEGMENTS = new Set([
+  'en',
+  'ru',
+  'nl',
+  'de',
+  'fr',
+  'es',
+  'it',
+  'ar',
+]);
+
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  
-  // Redirect old locale paths to new /* (301 permanent)
-  // /en/* and /ru/* were removed when i18n was simplified
-  if (pathname.startsWith('/en/') || pathname === '/en' || 
-      pathname.startsWith('/ru/') || pathname === '/ru') {
+
+  // Canonical home: /index and legacy static names → /
+  if (pathname === '/index' || pathname === '/index.html') {
     const url = request.nextUrl.clone();
-    
-    if (pathname === '/en' || pathname === '/ru') {
+    url.pathname = '/';
+    return NextResponse.redirect(url, 301);
+  }
+
+  // Redirect old locale paths to new /* (301 permanent)
+  const firstSeg = pathname.split('/').filter(Boolean)[0];
+  if (firstSeg && OLD_LOCALE_SEGMENTS.has(firstSeg)) {
+    const url = request.nextUrl.clone();
+    if (pathname === `/${firstSeg}`) {
       url.pathname = '/';
-    } else if (pathname.startsWith('/en/')) {
-      url.pathname = pathname.replace(/^\/en\//, '/');
-    } else if (pathname.startsWith('/ru/')) {
-      url.pathname = pathname.replace(/^\/ru\//, '/');
+    } else {
+      url.pathname = pathname.replace(new RegExp(`^/${firstSeg}/`), '/');
     }
-    
     return NextResponse.redirect(url, 301);
   }
   

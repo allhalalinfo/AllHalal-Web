@@ -314,7 +314,7 @@ We may update this privacy policy from time to time to reflect changes in our pr
 ## 11. Contact Us
 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 - **Email:** app@allhalal.info
-- **Website:** https://www.allhalal.info
+- **Website:** https://allhalal.info
 
 **For GDPR Requests:** Please email us at app@allhalal.info with the subject line:
 - "GDPR Request - Data Access" (to view your data)
