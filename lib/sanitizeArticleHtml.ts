@@ -39,5 +39,17 @@ export function sanitizeArticleHtml(html: string): string {
   if (!html?.trim()) {
     return "";
   }
-  return sanitizeHtml(html, OPTIONS);
+  
+  let cleaned = sanitizeHtml(html, OPTIONS);
+  
+  // CRITICAL SEO FIX: Remove H1 tags from article content on the server
+  // Problem: Google bot sees server-side HTML with duplicate H1 tags:
+  //   1. Page title H1 in <header>
+  //   2. Article content H1 from Swift AI agent
+  // This violates HTML semantics and hurts SEO.
+  // Client-side cleaners (DuplicateTitleCleaner, ArticleH1Converter) run too late.
+  // Solution: Convert all H1 to H2 in article content on the server.
+  cleaned = cleaned.replace(/<h1(\s[^>]*)?>/gi, '<h2$1>').replace(/<\/h1>/gi, '</h2>');
+  
+  return cleaned;
 }

@@ -12,10 +12,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   // Fetch all custom articles from the database with aggressive timeout protection
   // Google crawler has ~5s timeout, so we need to respond faster
+  // SEO FIX: Increased limit to 200 to include all articles in sitemap
   let customArticles: any[] = [];
   try {
     const customArticlesResponse = await Promise.race([
-      fetchCustomArticlesList({ page: 1, limit: 100 }),
+      fetchCustomArticlesList({ page: 1, limit: 200 }),
       new Promise<{ articles: [] }>((_, reject) => 
         setTimeout(() => reject(new Error('API timeout - responding with static sitemap')), 3500)
       )
