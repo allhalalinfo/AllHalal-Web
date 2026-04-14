@@ -18,7 +18,9 @@ const NEWS_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_TOP;
 const NEWS_INLINE_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_INLINE;
 const NEWS_BOTTOM_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_BOTTOM;
 
-export const revalidate = 300; // Cache for 5 minutes, regenerate in background
+// 🔧 OPTIMIZATION (Phase 1): Increased from 300s (5min) to 600s (10min)
+// Reduces origin transfer by 50% on news page regenerations
+export const revalidate = 600; // Cache for 10 minutes, regenerate in background
 
 export const metadata: Metadata = {
   title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
@@ -47,11 +49,14 @@ export default async function NewsDeskPage(props: {
   const activeCategorySlug = searchParams?.category;
   const activeCategory = categories.find((category) => category.slug === activeCategorySlug);
 
+  // 🔧 OPTIMIZATION (Phase 1): Reduced limit from 120 to 30
+  // We only display 20 items, need ~10 buffer for freshness filtering
+  // Saves 75% of API bandwidth on news page
   const [homepageLayout, feedResult] = await Promise.all([
     getHomepageBriefLayout(),
     getFeedBriefs({
       category: activeCategorySlug,
-      limit: 120,
+      limit: 30,
       offset: 0,
     }),
   ]);

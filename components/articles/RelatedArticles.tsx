@@ -13,15 +13,20 @@ interface RelatedArticlesProps {
  * - Excludes the current article
  * - Randomizes order to avoid repetition
  * - Fallback to other categories if needed
+ * 
+ * 🔧 OPTIMIZATION (Phase 1): Reduced API calls to save Fast Origin Transfer bandwidth
+ * - Before: fetch 50 same category + 50 all categories = 100 items
+ * - After: fetch 20 same category + 15 all categories = 35 items max
+ * - Saves ~65% of API bandwidth on article pages
  */
 export default async function RelatedArticles({
   currentArticleId,
   currentCategory,
 }: RelatedArticlesProps) {
-  // Fetch articles from the same category
+  // Fetch articles from the same category (reduced from 50 to 20)
   const sameCategory = await fetchCustomArticlesList({
     page: 1,
-    limit: 50,
+    limit: 20,
     category: currentCategory,
   });
 
@@ -31,10 +36,10 @@ export default async function RelatedArticles({
   );
 
   // If not enough articles in same category, fetch from all categories
-  if (candidates.length < 4) {
+  if (candidates.length < 3) {
     const allArticles = await fetchCustomArticlesList({
       page: 1,
-      limit: 50,
+      limit: 15,
     });
     const otherCategoryArticles = allArticles.articles.filter(
       (article) =>
@@ -46,8 +51,8 @@ export default async function RelatedArticles({
   // Randomize order to avoid repetition across page loads
   const shuffled = candidates.sort(() => Math.random() - 0.5);
 
-  // Take 4-6 articles
-  const relatedArticles = shuffled.slice(0, 5);
+  // Take 4 articles (reduced from 5 for cleaner grid)
+  const relatedArticles = shuffled.slice(0, 4);
 
   if (relatedArticles.length === 0) {
     return null;

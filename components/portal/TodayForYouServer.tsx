@@ -23,18 +23,20 @@ async function fetchInitialTodayForYouData(locale: string): Promise<TodayForYouI
     calendarUrl.searchParams.set("lat", String(DEFAULT_LOCATION.latitude));
     calendarUrl.searchParams.set("lon", String(DEFAULT_LOCATION.longitude));
 
+    // 🔧 OPTIMIZATION (Phase 1): Increased revalidate from 1800s (30min) to 3600s (1 hour)
+    // Prayer times don't change frequently, reduces origin transfer by 50%
     const [prayerResponse, tomorrowPrayerResponse, calendarResponse] = await Promise.allSettled([
       fetch(prayerUrl.toString(), {
         headers: { Accept: "application/json", "X-Source": "web" },
-        next: { revalidate: 1800 },
+        next: { revalidate: 3600 },
       }).then((response) => response.json()),
       fetch(tomorrowPrayerUrl.toString(), {
         headers: { Accept: "application/json", "X-Source": "web" },
-        next: { revalidate: 1800 },
+        next: { revalidate: 3600 },
       }).then((response) => response.json()),
       fetch(calendarUrl.toString(), {
         headers: { Accept: "application/json", "X-Source": "web" },
-        next: { revalidate: 1800 },
+        next: { revalidate: 3600 },
       }).then((response) => response.json()),
     ]);
 

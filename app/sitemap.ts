@@ -3,10 +3,11 @@ import { blogPosts } from '@/data/blogPosts';
 import { halalItems } from '@/data/halalItems';
 import { fetchCustomArticlesList } from '@/lib/customArticles';
 
-// Sitemap revalidation strategy:
-// Changed from 6 hours to ON-DEMAND to ensure articles are always fresh
-// Note: Backend API has 3.5s timeout protection, so response time is fast enough
-export const revalidate = 0; // Always generate fresh sitemap
+// 🔧 OPTIMIZATION (Phase 1): Changed from on-demand (revalidate=0) to ISR with 24h cache
+// Previous: revalidate=0 caused EVERY sitemap request to hit origin (worst case!)
+// New: revalidate=86400 (24h) enables CDN caching, reduces origin transfer by 95%+
+// Sitemap rarely changes - new articles publish ~1-2 times per week
+export const revalidate = 86400; // 24 hours
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';

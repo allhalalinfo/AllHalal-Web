@@ -8,8 +8,12 @@ import { fetchCustomArticlesList } from "@/lib/customArticles";
 import { getHomepageBriefLayout } from "@/lib/briefs";
 import { SITE_URL } from "@/lib/seo/metadata";
 
-/** Fresher portal home when custom articles or briefs change (reduces stale HTML vs curl). */
-export const revalidate = 120;
+/** 
+ * Fresher portal home when custom articles or briefs change (reduces stale HTML vs curl).
+ * 🔧 OPTIMIZATION (Phase 1): Increased from 120s (2min) to 300s (5min)
+ * Reduces origin transfer by 60% on homepage regenerations
+ */
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "allhalal.info Muslim Portal | Prayer Times, Halal Guides, Finance & News",
