@@ -17,6 +17,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Google crawler has ~5s timeout, so we need to respond faster
   // SEO FIX: Increased limit to 200 to include all articles in sitemap
   let customArticles: any[] = [];
+  const apiStartTime = Date.now();
+  console.log('[Sitemap] Fetching custom articles from API...');
+  
   try {
     const customArticlesResponse = await Promise.race([
       fetchCustomArticlesList({ page: 1, limit: 200 }),
@@ -24,13 +27,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         setTimeout(() => reject(new Error('API timeout - responding with static sitemap')), 3500)
       )
     ]);
+    const apiDuration = Date.now() - apiStartTime;
+    console.log(`[Sitemap] API responded in ${apiDuration}ms with ${customArticlesResponse.articles.length} articles`);
     customArticles = customArticlesResponse.articles;
   } catch (error) {
-    console.warn('Sitemap: Backend API slow/unavailable, serving static routes only', error instanceof Error ? error.message : error);
+    const apiDuration = Date.now() - apiStartTime;
+    console.error(`[Sitemap] API failed after ${apiDuration}ms:`, error instanceof Error ? error.message : error);
     // Fallback: sitemap will work without custom articles
     // Static routes are still indexed, custom articles will be added once API responds
     customArticles = [];
   }
+  
+  console.log(`[Sitemap] Final customArticles count: ${customArticles.length}`);
   
   const staticRoutes = [
     '',
