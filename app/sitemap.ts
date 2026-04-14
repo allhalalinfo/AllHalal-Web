@@ -3,11 +3,11 @@ import { blogPosts } from '@/data/blogPosts';
 import { halalItems } from '@/data/halalItems';
 import { fetchCustomArticlesList } from '@/lib/customArticles';
 
-// 🔧 OPTIMIZATION (Phase 1): Changed from on-demand (revalidate=0) to ISR with 24h cache
-// Previous: revalidate=0 caused EVERY sitemap request to hit origin (worst case!)
-// New: revalidate=86400 (24h) enables CDN caching, reduces origin transfer by 95%+
-// Sitemap rarely changes - new articles publish ~1-2 times per week
-export const revalidate = 86400; // 24 hours
+// SITEMAP REVALIDATION STRATEGY:
+// revalidate=0 ensures Google ALWAYS sees fresh articles list
+// Trade-off: Increases origin requests, but critical for SEO indexing
+// Alternative: Manual revalidation via Vercel API when new article published
+export const revalidate = 0; // Always fresh for SEO
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';
