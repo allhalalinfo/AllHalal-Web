@@ -23,14 +23,19 @@ async function fetchCustomJson<T>(path: string, revalidateSeconds: number): Prom
       headers: { Accept: "application/json" },
     });
     if (!res.ok) {
+      console.warn(`[fetchCustomJson] HTTP ${res.status} for ${url}`);
       return null;
     }
     const text = await res.text();
     if (!text) {
+      console.warn(`[fetchCustomJson] Empty response for ${url}`);
       return null;
     }
-    return JSON.parse(text) as T;
-  } catch {
+    const parsed = JSON.parse(text) as T;
+    console.log(`[fetchCustomJson] Success for ${url}:`, typeof parsed, Array.isArray(parsed) ? `array[${parsed.length}]` : Object.keys(parsed as any));
+    return parsed;
+  } catch (err) {
+    console.error(`[fetchCustomJson] Error for ${url}:`, err instanceof Error ? err.message : err);
     return null;
   }
 }
@@ -85,6 +90,11 @@ export async function fetchCustomArticlesList(options: {
     (Array.isArray(data.articles) && data.articles) ||
     (Array.isArray(data.items) && data.items) ||
     [];
+
+  console.log(`[fetchCustomArticlesList] data keys:`, Object.keys(data));
+  console.log(`[fetchCustomArticlesList] data.articles:`, Array.isArray(data.articles) ? data.articles.length : 'not array');
+  console.log(`[fetchCustomArticlesList] data.items:`, Array.isArray(data.items) ? data.items.length : 'not array');
+  console.log(`[fetchCustomArticlesList] rawList length:`, rawList.length);
 
   const articles: CustomArticle[] = [];
   for (const item of rawList) {
