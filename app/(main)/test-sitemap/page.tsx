@@ -1,45 +1,58 @@
-import { fetchCustomArticlesList } from '@/lib/customArticles';
+import { getCustomArticlesApiBase } from '@/lib/customArticles';
 
 export const dynamic = 'force-dynamic';
 
 export default async function TestSitemapPage() {
-  const startTime = Date.now();
+  const apiBase = getCustomArticlesApiBase();
+  const fullUrl = `${apiBase}/articles?page=1&limit=5`;
+  
+  let responseText = '';
+  let error = '';
   
   try {
-    const result = await fetchCustomArticlesList({ page: 1, limit: 200 });
-    const duration = Date.now() - startTime;
+    const res = await fetch(fullUrl, {
+      next: { revalidate: 0 },
+      headers: { Accept: 'application/json' },
+    });
     
-    return (
-      <div style={{ padding: '2rem', fontFamily: 'monospace' }}>
-        <h1>Sitemap Debug Test</h1>
-        
-        <div style={{ marginTop: '1rem', padding: '1rem', background: '#f0f0f0' }}>
-          <h2>API Response:</h2>
-          <p><strong>Duration:</strong> {duration}ms</p>
-          <p><strong>Total articles:</strong> {result.total}</p>
-          <p><strong>Returned articles:</strong> {result.articles.length}</p>
-          <p><strong>Page:</strong> {result.page}</p>
-          <p><strong>Limit:</strong> {result.limit}</p>
-        </div>
-        
-        <div style={{ marginTop: '1rem', padding: '1rem', background: '#e8f5e9' }}>
-          <h2>First 10 Article IDs:</h2>
-          <ul>
-            {result.articles.slice(0, 10).map(a => (
-              <li key={a.id}>
-                {a.id} - {a.title}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  } catch (error) {
-    return (
-      <div style={{ padding: '2rem', fontFamily: 'monospace', color: 'red' }}>
-        <h1>ERROR</h1>
-        <pre>{error instanceof Error ? error.message : String(error)}</pre>
-      </div>
-    );
+    responseText = `HTTP ${res.status}`;
+    
+    if (res.ok) {
+      const text = await res.text();
+      const data = JSON.parse(text);
+      responseText += `\n\nKeys: ${JSON.stringify(Object.keys(data))}\n`;
+      responseText += `\nhas items: ${Array.isArray(data.items)}\n`;
+      responseText += `items length: ${data.items?.length || 0}\n`;
+      responseText += `\nFirst item ID: ${data.items?.[0]?.id || 'none'}\n`;
+      responseText += `\n\nFull response:\n${text.substring(0, 1000)}`;
+    } else {
+      error = await res.text();
+    }
+  } catch (err) {
+    error = err instanceof Error ? err.message : String(err);
   }
+  
+  return (
+    <div style={{ padding: '2rem', fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
+      <h1>API Debug Test</h1>
+      
+      <div style={{ marginTop: '1rem', padding: '1rem', background: '#f0f0f0' }}>
+        <h2>API Base:</h2>
+        <p>{apiBase}</p>
+        
+        <h2>Full URL:</h2>
+        <p>{fullUrl}</p>
+        
+        <h2>Response:</h2>
+        <p>{responseText}</p>
+        
+        {error && (
+          <>
+            <h2 style={{ color: 'red' }}>Error:</h2>
+            <p style={{ color: 'red' }}>{error}</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
 }
