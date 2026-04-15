@@ -72,9 +72,11 @@ export async function fetchCustomArticlesList(options: {
     params.set("category", options.category);
   }
 
+  // 🔧 OPTIMIZATION: Increased from 120s (2min) to 3600s (1 hour)
+  // Articles update rarely, 1-hour cache reduces origin API calls by 95%+
   const data = await fetchCustomJson<Record<string, unknown>>(
     `/articles?${params.toString()}`,
-    120,
+    3600,
   );
 
   if (!data) {

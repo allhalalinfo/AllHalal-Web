@@ -3,7 +3,10 @@ import type { NextRequest } from "next/server";
 import { respondWithProxiedImage } from "@/lib/server/proxyRemoteImage";
 
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+// 🔧 OPTIMIZATION: Enable CDN caching for proxied images
+// Removed force-dynamic to allow Vercel CDN to cache responses
+// Matches Cache-Control header (7 days) set in respondWithProxiedImage
+export const revalidate = 604800; // 7 days
 export const maxDuration = 25;
 
 function decodeProxiedImageToken(token: string): string | null {
