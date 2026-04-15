@@ -1,11 +1,14 @@
 import { NextRequest } from "next/server";
 import { respondWithProxiedImage } from "@/lib/server/proxyRemoteImage";
 
-export const runtime = "nodejs";
-/** Do not cache this route at the framework level; we set Cache-Control on the response body. */
-export const dynamic = "force-dynamic";
-/** Vercel / Node serverless budget (seconds); requires plan that allows >10s if >10. */
-export const maxDuration = 25;
+// 🔧 OPTIMIZATION (Phase 2): Use Edge Runtime for maximum CDN distribution
+// Legacy endpoint (/api/image-proxy?url=...) - prefer /api/img/[token] for better caching
+export const runtime = "edge";
+
+// 🔧 OPTIMIZATION (Phase 2): Enable ISR caching (7 days)
+// Previously had force-dynamic (WORST for CDN caching!)
+// Now with Edge Runtime + ISR, CDN caches responses globally
+export const revalidate = 604800; // 7 days
 
 export async function GET(request: NextRequest) {
   const imageUrl = request.nextUrl.searchParams.get("url");

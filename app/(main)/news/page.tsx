@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AdSlot from "@/components/ads/AdSlot";
 import NewsGridCard from "@/components/briefs/NewsGridCard";
-import { consecutiveBriefImageCropVariant } from "@/lib/briefCoverImage";
 import {
   filterBriefsByCategorySlug,
   filterFreshBriefs,
@@ -135,7 +134,6 @@ export default async function NewsDeskPage(props: {
                     brief={brief}
                     locale="en"
                     priority={index < 8}
-                    visualCropVariant={consecutiveBriefImageCropVariant(freshBriefs, index)}
                   />,
                 ];
                 if (index === 7) {
