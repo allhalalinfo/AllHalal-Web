@@ -114,8 +114,8 @@ export async function fetchCustomArticlesListUncached(options: {
   category?: string;
 }): Promise<CustomArticlesListResponse> {
   const page = Math.max(1, options.page ?? 1);
-  // SEO FIX: Increased limit from 60 to 200 for sitemap generation
-  const limit = Math.min(200, Math.max(1, options.limit ?? 60));
+  // Backend API max limit is 100, enforce it here
+  const limit = Math.min(100, Math.max(1, options.limit ?? 60));
   const params = new URLSearchParams({
     page: String(page),
     limit: String(limit),
