@@ -13,16 +13,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';
   const now = new Date();
   
-  // Fetch all custom articles from the database with timeout protection
-  // 🔧 OPTIMIZATION: Increased timeout from 3.5s to 10s for build-time
-  // Build environment has no strict time limits, can wait for full API response
+  // Fetch custom articles - backend API max limit is 100
+  // SEO FIX: Request limit=100 to get all 96 published articles
   let customArticles: any[] = [];
   const apiStartTime = Date.now();
   console.log('[Sitemap] Fetching custom articles from API...');
   
   try {
     const customArticlesResponse = await Promise.race([
-      fetchCustomArticlesList({ page: 1, limit: 200 }),
+      fetchCustomArticlesList({ page: 1, limit: 100 }),
       new Promise<{ articles: [] }>((_, reject) => 
         setTimeout(() => reject(new Error('API timeout after 10s')), 10000)
       )
