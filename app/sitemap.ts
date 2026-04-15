@@ -13,9 +13,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://allhalal.info';
   const now = new Date();
   
-  // Fetch all custom articles from the database with aggressive timeout protection
-  // Google crawler has ~5s timeout, so we need to respond faster
-  // SEO FIX: Increased limit to 200 to include all articles in sitemap
+  // Fetch all custom articles from the database with timeout protection
+  // 🔧 OPTIMIZATION: Increased timeout from 3.5s to 10s for build-time
+  // Build environment has no strict time limits, can wait for full API response
   let customArticles: any[] = [];
   const apiStartTime = Date.now();
   console.log('[Sitemap] Fetching custom articles from API...');
@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const customArticlesResponse = await Promise.race([
       fetchCustomArticlesList({ page: 1, limit: 200 }),
       new Promise<{ articles: [] }>((_, reject) => 
-        setTimeout(() => reject(new Error('API timeout - responding with static sitemap')), 3500)
+        setTimeout(() => reject(new Error('API timeout after 10s')), 10000)
       )
     ]);
     const apiDuration = Date.now() - apiStartTime;
@@ -33,8 +33,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch (error) {
     const apiDuration = Date.now() - apiStartTime;
     console.error(`[Sitemap] API failed after ${apiDuration}ms:`, error instanceof Error ? error.message : error);
-    // Fallback: sitemap will work without custom articles
-    // Static routes are still indexed, custom articles will be added once API responds
     customArticles = [];
   }
   
