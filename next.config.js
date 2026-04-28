@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Standalone output для Docker (минимальный размер образа)
-  output: 'standalone',
   images: {
     remotePatterns: [
       // Explicit CDN hosts from typical RSS / briefs APIs (next/image + docs tooling)

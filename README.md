@@ -58,9 +58,7 @@ cp .env.example .env.local
 - `npm start` - Запуск production сервера
 - `npm run lint` - Проверка кода
 
-## 🚀 Деплой
-
-### Production (Hetzner + PM2)
+## 🚀 Деплой (Hetzner + PM2 + Caddy)
 
 Автоматический деплой через GitHub Actions при push в `main`:
 
@@ -68,44 +66,25 @@ cp .env.example .env.local
 git push origin main
 ```
 
-**Быстрый старт:** См. [docs/QUICK_START_PM2.md](./docs/QUICK_START_PM2.md)
+### Архитектура сервера
 
-**Полная документация:** См. [docs/PM2_DEPLOYMENT.md](./docs/PM2_DEPLOYMENT.md)
-
-### Альтернативный вариант (Docker)
-
-Для деплоя через Docker:
-
-```bash
-docker compose up -d
+```
+allhalal.info     → Caddy (443) → Next.js PM2 (3000)
+api.allhalal.info → Caddy (443) → FastAPI Docker (8000)
 ```
 
-См. [DOCKER_DEPLOYMENT.md](./DOCKER_DEPLOYMENT.md) для деталей.
+### Управление на сервере
+
+```bash
+pm2 status                    # Статус
+pm2 logs allhalal-web         # Логи
+pm2 reload allhalal-web       # Перезапуск
+pm2 monit                     # Мониторинг
+```
 
 ## 📚 Документация
 
-- [PM2 Deployment Guide](./docs/PM2_DEPLOYMENT.md) - Деплой с PM2
-- [Quick Start PM2](./docs/QUICK_START_PM2.md) - Быстрая настройка
-- [Hetzner Migration](./docs/HETZNER_MIGRATION.md) - Миграция с Vercel
-- [Docker Deployment](./DOCKER_DEPLOYMENT.md) - Альтернатива с Docker
-- [Cloudflare Setup](./docs/CLOUDFLARE_SETUP.md) - CDN настройка
 - [iOS WebView Integration](./docs/IOS_WEBVIEW_INTEGRATION.md) - Интеграция iOS
-
-## 🖥️ Сервер
-
-**Производство:**
-- Host: Hetzner
-- IP: `49.12.186.18`
-- PM2: `allhalal-web`
-- Порт: `3000`
-
-**Управление на сервере:**
-```bash
-pm2 status                    # Статус
-pm2 logs allhalal-web        # Логи
-pm2 reload allhalal-web      # Перезапуск
-pm2 monit                    # Мониторинг
-```
 
 ## 🔒 Лицензия
 
