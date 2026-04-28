@@ -1,0 +1,173 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                  🚀 ИНСТРУКЦИЯ ПО ДЕПЛОЮ НА HETZNER                  ║
+║                         AllHalal Web - PM2 Setup                     ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📋 БЫСТРЫЙ СТАРТ (5 минут)
+═══════════════════════════════════════════════════════════════════════
+
+ШАГИ НА ВАШЕМ КОМПЬЮТЕРЕ:
+──────────────────────────────────────────────────────────────────────
+
+1️⃣  Push изменений в GitHub:
+
+    git push origin main
+
+
+ШАГИ НА СЕРВЕРЕ HETZNER (49.12.186.18):
+──────────────────────────────────────────────────────────────────────
+
+2️⃣  Подключитесь к серверу:
+
+    ssh allhalal@49.12.186.18
+
+
+3️⃣  Создайте SSH ключ для GitHub:
+
+    ssh-keygen -t ed25519 -C "github-deploy" -f ~/.ssh/github_allhalal
+    cat ~/.ssh/github_allhalal.pub
+
+    ⚠️  СКОПИРУЙТЕ ВЕСЬ ВЫВОД (начинается с "ssh-ed25519...")
+
+
+4️⃣  Настройте SSH config:
+
+    nano ~/.ssh/config
+
+    Вставьте:
+    ┌─────────────────────────────────────────┐
+    │ Host github.com                         │
+    │   HostName github.com                   │
+    │   User git                              │
+    │   IdentityFile ~/.ssh/github_allhalal   │
+    │   IdentitiesOnly yes                    │
+    └─────────────────────────────────────────┘
+
+    Сохраните: Ctrl+O, Enter, Ctrl+X
+
+    Установите права:
+    chmod 600 ~/.ssh/config
+    chmod 600 ~/.ssh/github_allhalal
+
+
+5️⃣  Первый деплой:
+
+    cd /home/allhalal/Allhalal-Web
+    git clone git@github.com:allhalalinfo/AllHalal-Web.git .
+    cp .env.example .env
+    nano .env  # Настройте NEXT_PUBLIC_API_URL=https://api.allhalal.info
+    npm ci --only=production
+    npm run build
+    pm2 start ecosystem.config.js
+    pm2 save
+
+
+ШАГИ В GITHUB:
+──────────────────────────────────────────────────────────────────────
+
+6️⃣  Добавьте SSH ключ в GitHub:
+
+    Откройте: https://github.com/allhalalinfo/AllHalal-Web/settings/keys
+    
+    Нажмите "Add deploy key"
+    
+    Title: Hetzner Production Server
+    Key: <вставьте скопированный ключ из шага 3>
+    ✅ Allow write access
+    
+    Нажмите "Add key"
+
+
+ПРОВЕРКА:
+──────────────────────────────────────────────────────────────────────
+
+7️⃣  Тест на сервере:
+
+    ssh -T git@github.com
+    # Должно вывести: "Hi allhalalinfo! You've successfully authenticated..."
+
+    curl http://localhost:3000/api/health
+    # Должно вывести: {"status":"healthy",...}
+
+    pm2 status
+    # Должно показать: allhalal-web | online
+
+
+8️⃣  Тест автодеплоя:
+
+    # На вашем компьютере:
+    git push origin main
+    
+    # Проверьте GitHub Actions:
+    https://github.com/allhalalinfo/AllHalal-Web/actions
+
+
+═══════════════════════════════════════════════════════════════════════
+📚 ДОКУМЕНТАЦИЯ
+═══════════════════════════════════════════════════════════════════════
+
+🚀 Быстрый старт:     docs/QUICK_START_PM2.md
+📖 Полная инструкция: docs/PM2_DEPLOYMENT.md
+🐳 Docker вариант:    DOCKER_DEPLOYMENT.md
+☁️  Cloudflare CDN:   docs/CLOUDFLARE_SETUP.md
+🔄 Миграция:          docs/HETZNER_MIGRATION.md
+
+
+═══════════════════════════════════════════════════════════════════════
+🛠️  ПОЛЕЗНЫЕ КОМАНДЫ
+═══════════════════════════════════════════════════════════════════════
+
+На сервере:
+
+  pm2 status                  # Статус приложения
+  pm2 logs allhalal-web       # Логи в реальном времени
+  pm2 monit                   # Мониторинг ресурсов
+  pm2 reload allhalal-web     # Перезапуск без даунтайма
+  pm2 restart allhalal-web    # Жесткий перезапуск
+  
+  curl localhost:3000/api/health  # Проверка здоровья
+
+
+═══════════════════════════════════════════════════════════════════════
+❓ TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════
+
+Проблема: SSH ключ не работает
+Решение:
+  ssh -T git@github.com
+  cat ~/.ssh/config
+  ls -la ~/.ssh/
+
+Проблема: PM2 не запускается
+Решение:
+  pm2 logs allhalal-web --err
+  cd /home/allhalal/Allhalal-Web
+  npm start  # Запуск вручную для диагностики
+
+Проблема: GitHub Actions failed
+Решение:
+  Проверьте: https://github.com/allhalalinfo/AllHalal-Web/actions
+  Проверьте логи в Actions
+
+
+═══════════════════════════════════════════════════════════════════════
+🎉 ГОТОВО!
+═══════════════════════════════════════════════════════════════════════
+
+После настройки просто делайте:
+
+  git push origin main
+
+И все автоматически обновится на сервере! 🚀
+
+
+═══════════════════════════════════════════════════════════════════════
+💡 ДОПОЛНИТЕЛЬНО (ОПЦИОНАЛЬНО)
+═══════════════════════════════════════════════════════════════════════
+
+Nginx + SSL (для домена):   docs/PM2_DEPLOYMENT.md#настройка-nginx
+Cloudflare CDN (бесплатно): docs/CLOUDFLARE_SETUP.md
+Мониторинг PM2 Plus:        pm2 plus
+
+
+═══════════════════════════════════════════════════════════════════════
