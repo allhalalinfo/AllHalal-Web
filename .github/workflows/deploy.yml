@@ -37,17 +37,24 @@ jobs:
             echo "🚀 Starting deployment..."
             
             # Переходим в директорию проекта
-            cd $DEPLOY_PATH
+            cd $DEPLOY_PATH || { echo "❌ DEPLOY_PATH not found: $DEPLOY_PATH"; exit 1; }
             
             # Проверяем, что мы в git репозитории (первый деплой)
             if [ ! -d .git ]; then
               echo "📦 First deployment - cloning repository..."
-              git clone git@github.com:allhalalinfo/AllHalal-Web.git .
+              git clone https://github.com/allhalalinfo/AllHalal-Web.git .
             fi
             
             # Сохраняем текущий коммит (для rollback)
             CURRENT_COMMIT=$(git rev-parse HEAD)
             echo "📌 Current commit: $CURRENT_COMMIT"
+            
+            # Убеждаемся что remote использует HTTPS, не SSH
+            CURRENT_REMOTE=$(git config --get remote.origin.url)
+            if [[ $CURRENT_REMOTE == git@github.com:* ]]; then
+              echo "🔧 Converting SSH remote to HTTPS..."
+              git remote set-url origin https://github.com/allhalalinfo/AllHalal-Web.git
+            fi
             
             # Обновляем код
             echo "📥 Pulling latest changes..."
