@@ -325,6 +325,9 @@ API_KEY=...       # Server-only, safe
 - ✅ Edge Network (global CDN)
 - ✅ Bot protection available (consider Vercel Firewall)
 
+**4. Platform security bulletins (ongoing):**  
+Follow Vercel’s [Security](https://vercel.com/docs/security) documentation and [Knowledge Base / Security](https://vercel.com/kb) updates, and rotate credentials if advised. After the [April 2026 security incident](https://vercel.com/kb/bulletin/vercel-april-2026-security-incident), maintain **multi-factor authentication** on the Vercel account, use **Sensitive Environment Variables** for secrets, **review activity logs** and **rotate** any non-sensitive env values that could still grant access to third-party systems, and keep **Deployment Protection** at least at Standard (rotate protection tokens if applicable).
+
 ### Protection Against:
 - ❌ Man-in-the-middle attacks (HTTPS)
 - ❌ Secret exposure

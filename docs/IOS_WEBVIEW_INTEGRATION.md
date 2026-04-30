@@ -103,8 +103,8 @@ https://allhalal.info/read/{slug}?app=true
 - ✅ Описание статьи (dek)
 - ✅ Главное изображение
 - ✅ Полный контент статьи
-- ✅ Related Articles (похожие статьи)
-- ⚠️ Кнопка "Back to News" (можно скрыть дополнительно, см. раздел "Дополнительные параметры")
+- ✅ Related Articles (похожие статьи) — скрываются только с `?hide_related=true`
+- ⛔ Кнопка **«Back to News»** в **app mode** **не показывается** (как и остальная оболочка). Параметр `hide_back_btn` используется **без** `app=true`, чтобы скрыть кнопку в обычном веб-просмотре.
 
 ### Swift пример:
 
@@ -118,44 +118,23 @@ let fullUrl = "https://allhalal.info/read/\(articleId)?app=true&hide_related=tru
 
 ---
 
-## 3️⃣ Dark Mode (Темная тема)
+## 3️⃣ Тема оформления (светлая / тёмная / авто)
 
-### ❌ Текущий статус:
+### ✅ Текущий статус (сайт)
 
-**Темная тема НЕ поддерживается** на уровне CSS (`@media (prefers-color-scheme: dark)`).
+На странице статьи (`/read/{slug}`) реализовано:
 
-### ✅ Решение:
+- Атрибут **`data-theme`** на `<main>`: `light` | `dark` | `auto` (см. `app/(main)/read/[slug]/page.tsx`).
+- Стили в **`app/globals.css`**: при `theme=auto` тёмная палитра включается через **`prefers-color-scheme: dark`**; при `theme=dark` / `theme=light` — принудительно.
+- В **app mode** (`?app=true`) без явного `theme=light` страница следует тёмной/светлой схеме так же, как при `auto` (см. селекторы `[data-app-mode="true"]` в `globals.css`).
 
-Мы реализуем две опции:
+Логика query-параметров на сервере и клиенте: **`lib/appMode.ts`**.
 
-#### Опция A: Автоматическая темная тема (рекомендуется)
+#### Опция A: `theme=auto` (рекомендуется)
 
-Добавим CSS media query для автоматической поддержки темной темы iOS:
+Параметр по умолчанию, если не передавать `theme` — сайт ориентируется на системные настройки (в т.ч. тёмный режим iOS).
 
-```css
-@media (prefers-color-scheme: dark) {
-  /* Темные цвета фона */
-  body {
-    background: #1a1a1a;
-    color: #e0e0e0;
-  }
-  
-  /* Инвертированные градиенты */
-  .article-background {
-    background: linear-gradient(180deg, #2a2a2a 0%, #1f1f1f 100%);
-  }
-  
-  /* Темные карточки */
-  .prose-custom blockquote {
-    background: rgba(255, 255, 255, 0.05);
-    border-left-color: #f4b942;
-  }
-  
-  /* И т.д. */
-}
-```
-
-#### Опция B: URL-параметр для темной темы
+#### Опция B: URL-параметр `theme=dark` | `theme=light`
 
 ```
 ?app=true&theme=dark
@@ -166,7 +145,7 @@ let fullUrl = "https://allhalal.info/read/\(articleId)?app=true&hide_related=tru
 https://allhalal.info/read/{slug}?app=true&theme=dark
 ```
 
-Swift код для определения темы:
+Swift: привязка темы к устройству (внутри `UIViewController`, где доступен `traitCollection`):
 
 ```swift
 import UIKit
@@ -194,36 +173,23 @@ override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollect
 }
 ```
 
-### 🎨 Рекомендуемая реализация:
+### 🎨 Рекомендация для iOS
 
-**Опция A (автоматическая)** - лучший UX, не требует перезагрузки WebView.
-
-**Опция B (параметр)** - запасной вариант, если нужен более жесткий контроль.
+- Для **автосинхронизации с тёмной темой устройства** передавайте `theme=light` или `theme=dark` из `UITraitCollection` и при смене темы **перезагружайте** URL (как в примере ниже) **или** используйте `theme=auto` и один раз загрузите страницу — тогда **перезагрузка при смене темы не обязательна** (сайт реагирует на `prefers-color-scheme`).
+- Если нужен **жёстко тёмный** или **жёстко светлый** вид независимо от системы — используйте `theme=dark` / `theme=light`.
 
 ---
 
-## 4️⃣ Отключение всплывающих окон
+## 4️⃣ Всплывающие окна и лишние баннеры
 
-### ✅ Что отключается при `?app=true`:
+### ✅ Гарантированно скрыто при `?app=true` (см. код)
 
-1. **Cookie Consent Banner**
-   - Баннер "We use cookies..."
-   - Кнопки "Accept" / "Decline"
+- **Header** и **плавающий баннер «Open app»** — `app/(main)/layout.tsx` (не рендерятся при `app=true`).
+- На **странице статьи** — **footer**, **breadcrumbs** и (по умолчанию) **«Back to News»** — `app/(main)/read/[slug]/page.tsx`.
 
-2. **Newsletter Popup**
-   - Модальное окно подписки на рассылку
-   - Email input форма
+### Параметр `?no_popups=true`
 
-3. **Push Notifications Request**
-   - Запрос разрешения на уведомления браузера
-
-### Дополнительный параметр (опционально):
-
-```
-?app=true&no_popups=true
-```
-
-Этот параметр гарантирует отключение ВСЕХ модальных окон, даже если они будут добавлены в будущем.
+В **`lib/appMode.ts`** функция **`shouldDisablePopups`** возвращает `true`, если в URL есть `no_popups=true` **или** `app=true`. Новые клиентские модули (баннеры, модалки) должны опираться на эту логику, чтобы не дублировать интерфейс приложения.
 
 ### Swift настройка WKWebView для блокировки нежелательных popups:
 
@@ -505,51 +471,29 @@ https://allhalal.info/read/{articleId}?app=true&theme=auto&no_popups=true
 
 ---
 
-## 🔧 Статус реализации
+## 🔧 Статус реализации (фронтенд allhalal.info)
 
-### ✅ Уже реализовано:
+### ✅ Реализовано:
 
-- [x] URL-шаблон `/read/{slug}` для статей
-- [x] Базовая структура страницы статьи
-
-### 🚧 Требует реализации (будет сделано сейчас):
-
-- [ ] Параметр `?app=true` для скрытия Header/Footer
-- [ ] Параметр `?theme=dark` для темной темы
-- [ ] CSS `@media (prefers-color-scheme: dark)` для автоматической темной темы
-- [ ] Параметр `?no_popups=true` для отключения модальных окон
-- [ ] Дополнительные параметры (`hide_related`, `hide_back_btn`)
-
-### ⏱ Время реализации:
-
-Все функции будут реализованы в течение **1-2 часов** (зависит от сложности темной темы).
+- [x] URL `/read/{slug}` и загрузка кастомных статей
+- [x] `?app=true` — скрытие оболочки сайта (header/footer в корневом layout, breadcrumbs на странице статьи, баннер приложения)
+- [x] `?theme=light|dark|auto` + стили в `app/globals.css` (в т.ч. `prefers-color-scheme` для `auto`)
+- [x] `?no_popups=true` и `shouldDisablePopups` в `lib/appMode.ts` (для новых модалок — подключать эту проверку на клиенте)
+- [x] `?hide_related=true`, `?hide_back_btn=true`
 
 ---
 
-## 📞 Следующие шаги
+## 📞 Следующие шаги (клиент iOS)
 
-1. **Согласование функционала:**
-   - Какие параметры нужны в первую очередь?
-   - Нужна ли поддержка `theme=auto` (CSS media query) или достаточно `theme=dark`?
-   - Нужно ли скрывать "Related Articles" и "Back to News"?
-
-2. **Реализация на фронтенде:**
-   - Добавить обработку URL-параметров в `page.tsx`
-   - Реализовать условный рендеринг Header/Footer
-   - Добавить CSS для темной темы
-   - Отключить модальные окна для app mode
-
-3. **Тестирование:**
-   - Проверить в Safari (iOS simulator)
-   - Проверить в WKWebView
-   - Проверить переключение темы
-   - Проверить отсутствие popups
+1. **Сборка URL** по таблице параметров выше; для продакшена зафиксировать минимальный набор (часто: `app=true&no_popups=true` и при необходимости `hide_related` / `hide_back_btn`).
+2. **Политика внешних ссылок** — как в примере с `decidePolicyFor` (только `allhalal.info` в WebView, остальное в Safari / `SFSafariViewController`).
+3. **Проверки:** Safari, WKWebView, смена светлой/тёмной темы, отсутствие лишних модалок в app mode.
 
 ---
 
 **Автор:** AllHalal Web Team  
-**Дата:** 2026-04-04  
-**Версия:** 1.0
+**Дата:** 2026-04-24  
+**Версия:** 1.1
 
 ---
 
@@ -611,5 +555,5 @@ webView.evaluateJavaScript(js, completionHandler: nil)
 ## 🔗 Полезные ссылки
 
 - [WKWebView Documentation](https://developer.apple.com/documentation/webkit/wkwebview)
-- [AllHalal API Docs](https://github.com/allhalalinfo/AllHalal-Web/docs)
+- [AllHalal Web (репозиторий)](https://github.com/allhalalinfo/AllHalal-Web)
 - [CSS prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
