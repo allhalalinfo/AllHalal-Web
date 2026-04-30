@@ -29,15 +29,15 @@ jobs:
         env:
           HETZNER_HOST: ${{ secrets.HETZNER_HOST }}
           HETZNER_USER: ${{ secrets.HETZNER_USER }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
-          ssh $HETZNER_USER@$HETZNER_HOST << 'EOF'
+          ssh $HETZNER_USER@$HETZNER_HOST "export DEPLOY_PATH='${{ secrets.DEPLOY_PATH }}' && bash -s" << 'ENDSSH'
             set -e
             
             echo "🚀 Starting deployment..."
+            echo "📁 Deploy path: $DEPLOY_PATH"
             
             # Переходим в директорию проекта
-            cd $DEPLOY_PATH || { echo "❌ DEPLOY_PATH not found: $DEPLOY_PATH"; exit 1; }
+            cd "$DEPLOY_PATH" || { echo "❌ DEPLOY_PATH not found: $DEPLOY_PATH"; exit 1; }
             
             # Проверяем, что мы в git репозитории (первый деплой)
             if [ ! -d .git ]; then
@@ -106,7 +106,7 @@ jobs:
             fi
             
             echo "🎉 Deployment completed!"
-          EOF
+          ENDSSH
 
       - name: Notify on success
         if: success()
