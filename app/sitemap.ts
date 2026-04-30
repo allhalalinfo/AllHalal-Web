@@ -88,7 +88,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   // ===== FETCH BRIEFS =====
   try {
-    const briefsUrl = `${API_URL}/api/v1/briefs/feed?limit=1000`;
+    const briefsUrl = `${API_URL}/api/v1/briefs/feed?limit=50`;
     console.log('[SITEMAP] Fetching briefs from:', briefsUrl);
     
     const briefsStartTime = Date.now();
@@ -139,7 +139,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ===== FETCH CUSTOM ARTICLES =====
   try {
-    const articlesUrl = `${API_URL}/api/v1/custom/articles?limit=1000`;
+    const articlesUrl = `${API_URL}/api/v1/custom/articles?limit=100`;
     console.log('[SITEMAP] Fetching custom articles from:', articlesUrl);
     
     const articlesStartTime = Date.now();
