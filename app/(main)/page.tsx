@@ -6,7 +6,7 @@ import FinanceWidget from "@/components/portal/FinanceWidget";
 import TodayForYouServer from "@/components/portal/TodayForYouServer";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import { getHomepageBriefLayout } from "@/lib/briefs";
-import { SITE_URL } from "@/lib/seo/metadata";
+import { generateMetadata as genMeta, SITE_URL } from "@/lib/seo/metadata";
 
 /** 
  * Fresher portal home when custom articles or briefs change (reduces stale HTML vs curl).
@@ -15,10 +15,10 @@ import { SITE_URL } from "@/lib/seo/metadata";
  */
 export const revalidate = 300;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = genMeta({
   title: "allhalal.info Muslim Portal | Prayer Times, Halal Guides, Finance & News",
-  description:
-    "allhalal.info is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
+  description: "allhalal.info is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
+  path: "/",
   keywords: [
     "muslim portal",
     "prayer times",
@@ -29,23 +29,8 @@ export const metadata: Metadata = {
     "zakat calculator",
     "duas",
     "99 names of Allah",
-  ],
-  alternates: {
-    canonical: SITE_URL,
-  },
-  openGraph: {
-    title: "allhalal.info Muslim Portal | Prayer Times, Finance Signals, Muslim News & Islamic Learning",
-    description:
-      "allhalal.info is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "allhalal.info Muslim Portal | Prayer Times, Finance Signals, Muslim News & Islamic Learning",
-    description:
-      "allhalal.info is a Muslim portal built around prayer times, Islamic calendar, live finance signals, Muslim news, halal guides and daily Islamic utilities.",
-  },
-};
+  ]
+});
 
 export default async function PortalHomePage(props: { params: Promise<{}> }) {
   const [customList, homepageBriefLayout] = await Promise.all([

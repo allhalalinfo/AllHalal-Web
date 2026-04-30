@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/seo/metadata";
+import { generateMetadata as genMeta, generateItemListJSONLD, SITE_URL } from "@/lib/seo/metadata";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 
 export const revalidate = 120;
 
-export const metadata: Metadata = {
-  title: "Halal Living Guides | allhalal.info",
-  description:
-    "Expert guides on halal food, ingredients, and certification. Learn the principles that matter.",
+export const metadata: Metadata = genMeta({
+  title: "Halal Living Guides",
+  description: "Expert guides on halal food, ingredients, and certification. Learn the principles that matter.",
+  path: "/is-it-halal",
   keywords: [
     "halal certification",
     "halal ingredients",
     "halal food guide",
     "halal living",
-  ],
-  openGraph: {
-    title: "Halal Living Guides | allhalal.info",
-    description:
-      "Expert guides on halal food, ingredients, and certification.",
-    type: "website",
-  },
-};
+    "is it halal",
+    "halal checker"
+  ]
+});
 
 export default async function HalalLivingPage(props: {
   params: Promise<{}>;
@@ -34,8 +30,27 @@ export default async function HalalLivingPage(props: {
     (article) => article.category === "halal-living"
   );
 
+  // Generate JSON-LD schema for the collection
+  const itemListSchema = generateItemListJSONLD({
+    name: "Halal Living Guides",
+    description: "Expert guides on halal food, ingredients, and certification",
+    url: `${SITE_URL}/is-it-halal`,
+    items: halalLivingArticles.slice(0, 20).map(article => ({
+      name: article.title,
+      url: `${SITE_URL}/read/${article.id}`,
+      description: article.dek || article.title,
+      image: article.image_url || undefined
+    }))
+  });
+
   return (
     <main className="min-h-screen bg-[#FAFAF8]">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: itemListSchema }}
+      />
+
       {/* Hero Section */}
       <section className="relative pt-40 pb-20 overflow-hidden bg-gradient-to-b from-white to-[#FAFAF8]">
         <div className="absolute inset-0 opacity-[0.03]">

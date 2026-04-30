@@ -6,10 +6,11 @@
 import type { Metadata } from 'next';
 import type { SEOMetadata } from '@/data/types';
 
-const SITE_NAME = 'AllHalal';
+const SITE_NAME = 'allhalal.info';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://allhalal.info';
 const DEFAULT_LOCALE = 'en';
 const OPEN_GRAPH_LOCALE = 'en_US';
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 interface GenerateMetadataOptions {
   title: string;
@@ -49,11 +50,13 @@ export function generateMetadata(options: GenerateMetadataOptions): Metadata {
     canonical
   } = options;
 
-  const url = `${SITE_URL}${path}`;
+  // Ensure path starts with /
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const url = `${SITE_URL}${cleanPath}`;
   const canonicalUrl = canonical || url;
-  const ogImage = image || `${SITE_URL}/og-image.png`;
+  const ogImage = image || DEFAULT_OG_IMAGE;
 
-  // Title templates
+  // Title templates - use consistent format
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 
   const metadata: Metadata = {
@@ -62,7 +65,7 @@ export function generateMetadata(options: GenerateMetadataOptions): Metadata {
     description,
     keywords: keywords?.join(', '),
     
-    // Canonical & alternates
+    // Canonical & alternates - ALWAYS include canonical
     alternates: {
       canonical: canonicalUrl,
       // Future: Add hreflang for multi-language
@@ -81,11 +84,11 @@ export function generateMetadata(options: GenerateMetadataOptions): Metadata {
       'max-video-preview': -1
     },
 
-    // OpenGraph
+    // OpenGraph - use page-specific title/description, NOT generic
     openGraph: {
       type,
       locale: getOpenGraphLocale(),
-      url,
+      url: canonicalUrl,
       title: fullTitle,
       description,
       siteName: SITE_NAME,
@@ -104,13 +107,13 @@ export function generateMetadata(options: GenerateMetadataOptions): Metadata {
       })
     },
 
-    // Twitter Card
+    // Twitter Card - MUST match OpenGraph, NOT use generic fallback
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,
       description,
       images: [ogImage],
-      creator: '@allhalalinfo' // Update with actual Twitter handle
+      creator: '@allhalalinfo'
     },
 
     // Other
@@ -358,5 +361,56 @@ export function generateJSONLD(data: Record<string, any>): string {
   return JSON.stringify({
     '@context': 'https://schema.org',
     ...data
+  });
+}
+
+/**
+ * Generate ItemList JSON-LD for collection pages
+ */
+export function generateItemListJSONLD(options: {
+  name: string;
+  description: string;
+  url: string;
+  items: Array<{
+    name: string;
+    url: string;
+    description?: string;
+    image?: string;
+  }>;
+}): string {
+  const { name, description, url, items } = options;
+
+  return generateJSONLD({
+    '@type': 'ItemList',
+    name,
+    description,
+    url,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Article',
+        name: item.name,
+        url: item.url,
+        description: item.description,
+        ...(item.image && { image: item.image })
+      }
+    }))
+  });
+}
+
+/**
+ * Generate BreadcrumbList JSON-LD
+ */
+export function generateBreadcrumbJSONLD(items: Array<{ name: string; url: string }>): string {
+  return generateJSONLD({
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url
+    }))
   });
 }

@@ -15,6 +15,14 @@ const OLD_LOCALE_SEGMENTS = new Set([
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const hostname = request.nextUrl.hostname;
+
+  // Canonical domain: www.allhalal.info → allhalal.info (301 permanent)
+  if (hostname === 'www.allhalal.info') {
+    const url = request.nextUrl.clone();
+    url.hostname = 'allhalal.info';
+    return NextResponse.redirect(url, 301);
+  }
 
   // Canonical home: /index and legacy static names → /
   if (pathname === '/index' || pathname === '/index.html') {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AdSlot from "@/components/ads/AdSlot";
 import NewsGridCard from "@/components/briefs/NewsGridCard";
+import { generateMetadata as genMeta, generateItemListJSONLD, SITE_URL } from "@/lib/seo/metadata";
 import {
   filterBriefsByCategorySlug,
   filterFreshBriefs,
@@ -21,23 +22,19 @@ const NEWS_BOTTOM_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_NEWS_BOTTOM;
 // Reduces origin transfer by 50% on news page regenerations
 export const revalidate = 600; // Cache for 10 minutes, regenerate in background
 
-export const metadata: Metadata = {
+export const metadata: Metadata = genMeta({
   title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
-  description:
-    "Read allhalal.info briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
-  openGraph: {
-    title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
-    description:
-      "Read allhalal.info briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "allhalal.info News | Original Muslim Briefs, Finance, Faith and Family",
-    description:
-      "Read allhalal.info briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
-  },
-};
+  description: "Read allhalal.info briefs across faith, Islamic finance, family, halal living, wellness and Ummah coverage, built from trusted sources with clear attribution.",
+  path: "/news",
+  keywords: [
+    "Muslim news",
+    "Islamic news",
+    "Muslim world news",
+    "Islamic finance news",
+    "halal living news",
+    "Muslim family news"
+  ]
+});
 
 export default async function NewsDeskPage(props: {
   params: Promise<{}>;
@@ -72,8 +69,27 @@ export default async function NewsDeskPage(props: {
   const freshBriefs = mergedBriefs.slice(0, 20); // Reduced to 20 for optimal performance
   const { total: feedTotal } = feedResult;
 
+  // Generate JSON-LD schema for news collection
+  const itemListSchema = generateItemListJSONLD({
+    name: activeCategory ? `${activeCategory.name} News` : "Muslim World News",
+    description: "Original Muslim briefs, finance, faith and family news",
+    url: `${SITE_URL}/news${activeCategorySlug ? `?category=${activeCategorySlug}` : ''}`,
+    items: freshBriefs.slice(0, 15).map(brief => ({
+      name: brief.title,
+      url: `${SITE_URL}/read/${brief.slug}`,
+      description: brief.summary || brief.dek || brief.title,
+      image: brief.image_url || undefined
+    }))
+  });
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-bg-primary pb-24 pt-32">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: itemListSchema }}
+      />
+
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_14%_14%,rgba(244,185,66,0.16),transparent_24%),radial-gradient(circle_at_82%_18%,rgba(75,110,112,0.12),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.22),transparent_82%)]" />
 
       <div className="container relative z-10">

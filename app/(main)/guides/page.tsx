@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { generateMetadata as genMeta, generateItemListJSONLD, SITE_URL } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Zakat & Finance Guides | allhalal.info",
-  description:
-    "Practical guides on Zakat for stocks, crypto, business, pensions, and today’s Nisab values—with links to our free calculator.",
-};
+export const metadata: Metadata = genMeta({
+  title: "Zakat & Finance Guides",
+  description: "Practical guides on Zakat for stocks, crypto, business, pensions, and today's Nisab values—with links to our free calculator.",
+  path: "/guides",
+  keywords: [
+    "zakat guide",
+    "zakat calculator",
+    "zakat on stocks",
+    "zakat on crypto",
+    "nisab value",
+    "Islamic finance",
+    "zakat on business",
+    "zakat on pension"
+  ]
+});
 
 const GUIDES = [
   {
@@ -38,8 +49,26 @@ const GUIDES = [
 export default async function GuidesIndexPage(props: { params: Promise<{}> }) {
   const calc = `/finance/zakat-calculator#zakat-calculator-top`;
 
+  // Generate JSON-LD schema for guides collection
+  const itemListSchema = generateItemListJSONLD({
+    name: "Zakat & Finance Guides",
+    description: "Practical guides on Zakat calculation for different asset types",
+    url: `${SITE_URL}/guides`,
+    items: GUIDES.map(guide => ({
+      name: guide.title,
+      url: `${SITE_URL}${guide.href}`,
+      description: guide.desc
+    }))
+  });
+
   return (
     <div className="container mx-auto max-w-3xl py-28 md:py-32">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: itemListSchema }}
+      />
+
       <nav className="mb-10 text-sm text-text-secondary">
         <Link href={`/finance`} className="text-primary hover:underline">
           Finance

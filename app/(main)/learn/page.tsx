@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AppPromoMini from "@/components/ui/AppPromoMini";
-import { SITE_URL } from "@/lib/seo/metadata";
+import { generateMetadata as genMeta, SITE_URL } from "@/lib/seo/metadata";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = genMeta({
   title: "Blog | Islamic Articles, Faith Guides & Muslim Lifestyle",
-  description:
-    "Read in-depth articles on Islamic topics, faith guidance, Muslim lifestyle and spiritual reflection.",
+  description: "Read in-depth articles on Islamic topics, faith guidance, Muslim lifestyle and spiritual reflection.",
+  path: "/learn",
   keywords: [
     "islamic blog",
     "muslim articles",
@@ -18,14 +18,8 @@ export const metadata: Metadata = {
     "99 names of Allah",
     "Ramadan guide",
     "Islamic calendar",
-  ],
-  openGraph: {
-    title: "Blog | Islamic Articles, Faith Guides & Muslim Lifestyle",
-    description:
-      "In-depth articles on Islamic topics, faith guidance and Muslim lifestyle.",
-    type: "website",
-  },
-};
+  ]
+});
 
 const learnSchema = {
   "@context": "https://schema.org",

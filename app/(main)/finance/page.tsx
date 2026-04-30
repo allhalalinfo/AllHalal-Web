@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE_URL } from "@/lib/seo/metadata";
+import { generateMetadata as genMeta, SITE_URL } from "@/lib/seo/metadata";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = genMeta({
   title: "Halal Finance Hub | Zakat, Investing, Mortgages & Islamic Banking",
-  description:
-    "Muslim finance guidance for zakat calculation, halal investing, Islamic banking and home financing. Clear routes for real financial decisions.",
+  description: "Muslim finance guidance for zakat calculation, halal investing, Islamic banking and home financing. Clear routes for real financial decisions.",
+  path: "/finance",
   keywords: [
     "halal finance",
     "Islamic finance",
@@ -15,14 +15,8 @@ export const metadata: Metadata = {
     "halal investing",
     "Islamic banking",
     "halal mortgage",
-  ],
-  openGraph: {
-    title: "Halal Finance Hub | Zakat, Investing, Mortgages & Islamic Banking",
-    description:
-      "Muslim finance hub for zakat, halal investing, Islamic banking and halal mortgage guidance.",
-    type: "website",
-  },
-};
+  ]
+});
 
 const financeSchema = {
   "@context": "https://schema.org",
