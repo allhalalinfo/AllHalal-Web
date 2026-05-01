@@ -18,8 +18,21 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const item = halalItems.find(i => i.slug === params.slug);
   if (!item) return { title: 'Not Found' };
   
-  const title = `Is ${item.name} halal? | allhalal.info`;
-  const description = item.shortReason;
+  // Generate verdict text for title
+  const verdictText = 
+    item.verdict === 'halal' ? 'Yes ✓' : 
+    item.verdict === 'haram' ? 'No ✗' : 
+    'It Depends';
+  
+  const title = `Is ${item.name} Halal? ${verdictText} | AllHalal`;
+  
+  // Enhanced description with direct answer + CTA
+  const answerPrefix = 
+    item.verdict === 'halal' ? `Yes, ${item.name} is halal.` :
+    item.verdict === 'haram' ? `No, ${item.name} is not halal.` :
+    `${item.name} halal status depends on several factors.`;
+  
+  const description = `${answerPrefix} ${item.shortReason} Find detailed ingredient analysis now →`;
   const url = `https://allhalal.info/is-it-halal/${item.slug}`;
   
   return {
@@ -30,7 +43,9 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       'halal food',
       'halal verification',
       'muslim food',
+      'is halal',
       item.name.toLowerCase(),
+      `${item.name.toLowerCase()} halal`,
       ...(item.aliases || []),
       item.category,
     ].join(', '),
@@ -38,7 +53,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       title,
       description,
       url,
-      siteName: 'allhalal.info',
+      siteName: 'AllHalal',
       locale: 'en_US',
       type: 'article',
       images: [
@@ -46,7 +61,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
           url: 'https://allhalal.info/branding/og-image.png',
           width: 1200,
           height: 630,
-          alt: `Is ${item.name} halal?`,
+          alt: `Is ${item.name} halal? ${verdictText}`,
         },
       ],
     },

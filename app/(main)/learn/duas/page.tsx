@@ -1,16 +1,62 @@
 import { duas, duaCategories } from "@/data/duas";
 import Link from "next/link";
 import { Metadata } from "next";
+import FAQSchema from "@/components/seo/FAQSchema";
+import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
 
 export const metadata: Metadata = {
-  title: "Duas & Athkar | Islamic Supplications for Everyday Life",
+  title: "Duas & Athkar | Islamic Supplications for Everyday Life | AllHalal",
   description:
-    "Read duas and athkar for everyday moments. Morning and evening remembrance, travel, sleep, food and specific situations.",
+    "Read duas and athkar for everyday moments. Morning and evening remembrance, travel, sleep, food and specific situations. Find the right dua now →",
+  keywords: ["duas", "athkar", "islamic supplications", "morning duas", "evening athkar", "muslim prayers", "dhikr"],
+  openGraph: {
+    title: "Duas & Athkar | Islamic Supplications for Everyday Life",
+    description: "Read duas and athkar for everyday moments. Morning and evening remembrance, travel, sleep, food and more.",
+    url: "https://allhalal.info/learn/duas",
+    siteName: "AllHalal",
+    type: "website",
+    images: [{
+      url: "https://allhalal.info/branding/og-image.png",
+      width: 1200,
+      height: 630,
+      alt: "Duas & Athkar - AllHalal",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Duas & Athkar | Islamic Supplications",
+    description: "Read duas and athkar for everyday moments.",
+    images: ["https://allhalal.info/branding/og-image.png"],
+  },
 };
 
 export default async function DuasPage() {
+  // FAQ Schema for common questions about duas
+  const faqs = [
+    {
+      question: "What are duas in Islam?",
+      answer: "Duas are supplications or prayers in Islam - personal communications with Allah. They can be made in any language at any time, though specific duas from Quran and Sunnah are particularly recommended."
+    },
+    {
+      question: "When should I recite morning and evening athkar?",
+      answer: "Morning athkar should be recited after Fajr prayer until sunrise. Evening athkar should be recited after Asr prayer until Maghrib. These daily remembrances protect and strengthen your faith."
+    },
+    {
+      question: "Can I make dua in my own language?",
+      answer: "Yes, you can make dua in any language. While learning Arabic duas from the Prophet ﷺ is recommended, Allah understands all languages and accepts sincere supplications in your mother tongue."
+    }
+  ];
+
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Learn", url: "/learn" },
+    { name: "Duas & Athkar", url: "/learn/duas" }
+  ];
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#f7f2e7] via-[#f9f6f1] to-[#f2f1e8]">
+      <FAQSchema faqs={faqs} />
+      <BreadcrumbsSchema items={breadcrumbs} />
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute right-[-8rem] top-[8rem] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(139,123,186,0.06),transparent_65%)] blur-3xl" />
