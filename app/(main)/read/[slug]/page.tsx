@@ -7,6 +7,7 @@ import FaqAccordion from "@/components/articles/FaqAccordion";
 import ArticleCitationCleaner from "@/components/articles/ArticleCitationCleaner";
 import ArticleDomainCitationConverter from "@/components/articles/ArticleDomainCitationConverter";
 import RelatedArticles from "@/components/articles/RelatedArticles";
+import RelatedHalalChecks from "@/components/articles/RelatedHalalChecks";
 import KeepLearningCleaner from "@/components/articles/KeepLearningCleaner";
 import FinalThoughtCleaner from "@/components/articles/FinalThoughtCleaner";
 import DuplicateTitleCleaner from "@/components/articles/DuplicateTitleCleaner";
@@ -239,6 +240,15 @@ export default async function CustomArticlePage(props: {
                   ← Back to News
                 </Link>
               </div>
+            )}
+
+            {/* Related Halal Checks - Internal linking for SEO */}
+            {!hideRelated && (
+              <RelatedHalalChecks
+                articleTitle={article.title}
+                articleContent={article.content}
+                maxItems={3}
+              />
             )}
 
             {/* Related Articles - Server-side rendered with real articles from DB */}

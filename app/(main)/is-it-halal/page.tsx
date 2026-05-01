@@ -137,6 +137,40 @@ export default async function HalalLivingPage(props: {
                   A better understanding of the basics makes everyday halal decisions simpler and more reliable.
                 </p>
               </div>
+
+              {/* Featured Articles - Internal Linking */}
+              {halalLivingArticles.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="text-xl font-bold text-[#2A2419] mb-4">
+                    Latest Articles
+                  </h3>
+                  <div className="space-y-3">
+                    {halalLivingArticles.slice(0, 3).map(article => (
+                      <a
+                        key={article.id}
+                        href={`/read/${encodeURIComponent(article.id)}`}
+                        className="block rounded-xl border border-[rgba(73,58,42,0.08)] bg-white p-4 transition-all hover:border-[#4B7A88] hover:shadow-md"
+                      >
+                        <div className="text-sm font-bold text-[#4B7A88] mb-1">
+                          {article.category || "Halal Living"}
+                        </div>
+                        <div className="font-semibold text-[#2A2419] line-clamp-2">
+                          {article.title}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                  <a
+                    href="/news"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#4B7A88] hover:underline"
+                  >
+                    Read all articles
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              )}
             </div>
             
             {/* App CTA */}
