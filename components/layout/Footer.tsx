@@ -72,7 +72,7 @@ export default function Footer() {
     {
       title: "Company",
       links: [
-        { label: "About Us", href: "/#about" },
+        { label: "About Us", href: "/#about-us" },
         { label: "Contact", href: "/contact" },
         { label: "Support", href: "/support" },
         { label: "Download App", href: "https://apps.apple.com/us/app/allhalal-info-food-scanner/id6756242265" },

@@ -11,6 +11,7 @@ import KeepLearningCleaner from "@/components/articles/KeepLearningCleaner";
 import FinalThoughtCleaner from "@/components/articles/FinalThoughtCleaner";
 import DuplicateTitleCleaner from "@/components/articles/DuplicateTitleCleaner";
 import ArticleH1Converter from "@/components/articles/ArticleH1Converter";
+import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
 import { fetchCustomArticleById, fetchCustomArticlesList } from "@/lib/customArticles";
 import { SITE_URL } from "@/lib/seo/metadata";
 import { remark } from "remark";
@@ -114,9 +115,10 @@ export default async function CustomArticlePage(props: {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: article.title,
     description: article.dek || undefined,
+    image: article.image_url ? [article.image_url] : undefined,
     datePublished: article.published_at,
     dateModified: article.updated_at ?? article.published_at,
     author: article.author
@@ -126,13 +128,26 @@ export default async function CustomArticlePage(props: {
       "@type": "Organization",
       name: "allhalal.info",
       url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/branding/logo.png`
+      }
     },
-    image: article.image_url ? [article.image_url] : undefined,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${SITE_URL}/read/${encodeURIComponent(article.id)}`,
     },
+    articleSection: article.category || "Muslim Lifestyle",
+    wordCount: article.content ? article.content.split(/\s+/).length : undefined,
+    inLanguage: "en"
   };
+
+  // Breadcrumbs for article pages
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Articles", url: "/news" },
+    { name: article.title, url: `/read/${encodeURIComponent(article.id)}` }
+  ];
 
   return (
     <>
@@ -154,6 +169,7 @@ export default async function CustomArticlePage(props: {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <BreadcrumbsSchema items={breadcrumbs} />
 
         {/* Full-width container */}
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
@@ -161,7 +177,7 @@ export default async function CustomArticlePage(props: {
           <article className="mx-auto max-w-[72ch]">
             {/* Breadcrumbs - hidden in app mode */}
             {!isAppMode && (
-              <nav className="mb-8 text-sm text-text-muted">
+              <nav className="mb-8 text-sm text-text-muted" aria-label="Breadcrumb">
                 <Link href={portalHome} className="font-medium text-primary hover:underline">
                   Home
                 </Link>
@@ -169,12 +185,12 @@ export default async function CustomArticlePage(props: {
                   /
                 </span>
                 <Link href={newsUrl} className="hover:text-text-primary hover:underline">
-                  News desk
+                  Articles
                 </Link>
                 <span className="mx-2" aria-hidden>
                   /
                 </span>
-                <span className="text-text-secondary">Read</span>
+                <span className="text-text-secondary">{article.title.substring(0, 50)}{article.title.length > 50 ? '...' : ''}</span>
               </nav>
             )}
 

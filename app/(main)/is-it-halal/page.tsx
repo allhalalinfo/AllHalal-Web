@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { generateMetadata as genMeta, generateItemListJSONLD, SITE_URL } from "@/lib/seo/metadata";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
+import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
 
 export const revalidate = 120;
 
@@ -43,6 +44,11 @@ export default async function HalalLivingPage(props: {
     }))
   });
 
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Halal Living", url: "/is-it-halal" }
+  ];
+
   return (
     <main className="min-h-screen bg-[#FAFAF8]">
       {/* JSON-LD Schema */}
@@ -50,6 +56,7 @@ export default async function HalalLivingPage(props: {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: itemListSchema }}
       />
+      <BreadcrumbsSchema items={breadcrumbs} />
 
       {/* Hero Section */}
       <section className="relative pt-40 pb-20 overflow-hidden bg-gradient-to-b from-white to-[#FAFAF8]">

@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 import FAQSchema from "@/components/seo/FAQSchema";
+import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
 
 export async function generateStaticParams() {
   return halalItems.map((item) => ({
@@ -69,6 +70,33 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
 
   const similarItems = halalItems.filter(i => i.category === item.category && i.slug !== item.slug).slice(0, 3);
 
+  // Enhanced FAQ with multiple relevant questions
+  const faqs = [
+    {
+      question: `Is ${item.name} halal?`,
+      answer: item.shortReason
+    },
+    {
+      question: `What makes ${item.name} ${item.verdict}?`,
+      answer: item.detailedReason.split('\n\n')[0] || item.shortReason
+    },
+    {
+      question: `Can Muslims eat ${item.name}?`,
+      answer: item.verdict === 'halal' 
+        ? `Yes, ${item.name} is considered halal and permissible for Muslims to consume. ${item.shortReason}`
+        : item.verdict === 'haram'
+        ? `No, ${item.name} is not permissible for Muslims. ${item.shortReason}`
+        : `${item.name} status is uncertain or depends on specific circumstances. ${item.shortReason}`
+    }
+  ];
+
+  // Breadcrumbs structure
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Is It Halal?", url: "/is-it-halal" },
+    { name: `Is ${item.name} Halal?`, url: `/is-it-halal/${item.slug}` }
+  ];
+
   return (
     <div className="container py-32 min-h-screen">
       <script
@@ -100,11 +128,21 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
           }),
         }}
       />
-      <FAQSchema faqs={[{ question: `Is ${item.name} halal?`, answer: item.shortReason }]} />
+      <FAQSchema faqs={faqs} />
+      <BreadcrumbsSchema items={breadcrumbs} />
       <div className="max-w-3xl mx-auto">
-        <Link href={`/is-it-halal`} className="text-primary hover:underline mb-8 inline-block">
-          &larr; Back to all items
-        </Link>
+        {/* Visual breadcrumbs matching schema */}
+        <nav className="mb-8 text-sm text-text-muted" aria-label="Breadcrumb">
+          <Link href="/" className="text-primary hover:underline">
+            Home
+          </Link>
+          <span className="mx-2">/</span>
+          <Link href="/is-it-halal" className="text-primary hover:underline">
+            Is It Halal?
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-text-secondary">Is {item.name} Halal?</span>
+        </nav>
         
         <div className="bg-bg-card border border-border rounded-3xl p-8 md:p-12 mb-12 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-border pb-8">
