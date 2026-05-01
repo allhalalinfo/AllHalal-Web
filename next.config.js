@@ -29,9 +29,10 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  // Redirects for URL changes (old blog → news)
+  // Redirects for URL changes (old blog → news, old locales → root)
   async redirects() {
     return [
+      // Old blog → news
       {
         source: '/blog',
         destination: '/news',
@@ -40,6 +41,61 @@ const nextConfig = {
       {
         source: '/blog/:slug',
         destination: '/news/:slug',
+        permanent: true,
+      },
+      // Old locale paths → root (site is now English-only)
+      // /en/* → /*
+      {
+        source: '/en/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // /ru/* → /*
+      {
+        source: '/ru/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // /nl/* → /*
+      {
+        source: '/nl/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // /de/* → /*
+      {
+        source: '/de/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // /fr/* → /*
+      {
+        source: '/fr/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // /es/* → /*
+      {
+        source: '/es/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // /it/* → /*
+      {
+        source: '/it/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // /ar/* → /*
+      {
+        source: '/ar/:path*',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // Special case: /index → /
+      {
+        source: '/index',
+        destination: '/',
         permanent: true,
       },
     ];

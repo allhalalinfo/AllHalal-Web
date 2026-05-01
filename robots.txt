@@ -5,25 +5,7 @@
 User-agent: *
 Allow: /
 
-# Block old redirected locale paths (site is now English-only)
-Disallow: /en/
-Disallow: /en
-Disallow: /ru/
-Disallow: /ru
-Disallow: /nl/
-Disallow: /nl
-Disallow: /de/
-Disallow: /de
-Disallow: /fr/
-Disallow: /fr
-Disallow: /es/
-Disallow: /es
-Disallow: /it/
-Disallow: /it
-Disallow: /ar/
-Disallow: /ar
-
-# Block old blog path (now /news)
+# Block old blog path (now /news) - handled by 301 redirect in next.config.js
 Disallow: /blog/
 Disallow: /blog
 
