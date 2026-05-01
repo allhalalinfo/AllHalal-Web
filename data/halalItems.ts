@@ -11,6 +11,21 @@ export type HalalItem = {
 
 export const halalItems: HalalItem[] = [
   {
+    "slug": "is-ice-cream-halal",
+    "name": "Ice Cream",
+    "aliases": [
+      "ice-cream",
+      "icecream",
+      "gelato",
+      "frozen dessert"
+    ],
+    "verdict": "doubtful",
+    "shortReason": "Ice cream may contain gelatin, emulsifiers (E471), and other questionable ingredients depending on the brand and flavor.",
+    "detailedReason": "### What is it?\nIce cream is a popular frozen dessert made from dairy products, sugar, and flavorings.\n\n### Why it may be doubtful\nThe halal status of ice cream depends heavily on the ingredients:\n\n**Problematic ingredients:**\n- **Gelatin** - Often pork-derived, used as stabilizer. Haram unless from halal source.\n- **E471 (Mono and diglycerides)** - Can be from animal fat. Halal only if plant-based.\n- **E120 (Carmine)** - Red color from insects. Disputed by scholars.\n- **Vanilla extract** - Contains alcohol (35%). Many scholars consider haram.\n- **Whey/Milk powder** - Halal only if rennet is microbial or from halal animals.\n- **Natural flavors** - May contain alcohol or animal derivatives.\n\n**Safe options:**\n- Ice creams with halal certification marks\n- Certified vegan ice creams (no animal products)\n- Brands explicitly stating \"gelatin-free\" and \"suitable for vegetarians\"\n- Homemade ice cream with known ingredients\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol. When in doubt, seek halal-certified products.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible. Popular halal-certified brands include Ben & Jerry's (some flavors), Häagen-Dazs (in Muslim countries), and local halal ice cream shops.",
+    "category": "snack",
+    "priority": "high"
+  },
+  {
     "slug": "is-doritos-halal",
     "name": "Doritos (Nacho Cheese)",
     "aliases": [
