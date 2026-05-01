@@ -31,27 +31,67 @@ export async function generateMetadata(props: {
   const { slug } = await props.params;
   const article = await fetchCustomArticleById(decodeURIComponent(slug));
   if (!article) {
-    return { title: "Article | allhalal.info" };
+    return { title: "Article | AllHalal" };
   }
+  
   const canonical = `${SITE_URL}/read/${encodeURIComponent(article.id)}`;
+  
+  // Optimize title: 50-60 chars with keyword + brand
+  const title = article.title.length > 50 
+    ? `${article.title.substring(0, 50)}... | AllHalal`
+    : `${article.title} | AllHalal`;
+  
+  // Optimize description: 150-160 chars with CTA
+  let description = article.dek || article.title;
+  if (description.length < 140) {
+    description = `${description} Read our comprehensive guide with expert analysis and Islamic perspective.`;
+  }
+  if (description.length > 160) {
+    description = description.substring(0, 157) + "...";
+  }
+  
+  // Enhanced keywords from article content
+  const keywords = [
+    'halal',
+    'islamic',
+    'muslim',
+    article.category || 'lifestyle',
+    ...article.title.toLowerCase().split(' ').filter(w => w.length > 4).slice(0, 3)
+  ];
+  
   return {
-    title: `${article.title} | allhalal.info`,
-    description: article.dek || article.title,
+    title,
+    description,
+    keywords: keywords.join(', '),
     alternates: { canonical },
     openGraph: {
       title: article.title,
-      description: article.dek || undefined,
+      description: article.dek || description,
       type: "article",
       url: canonical,
+      siteName: "AllHalal",
+      locale: "en_US",
       publishedTime: article.published_at,
       modifiedTime: article.updated_at ?? undefined,
-      images: article.image_url ? [{ url: article.image_url }] : undefined,
+      images: article.image_url ? [{
+        url: article.image_url,
+        width: 1200,
+        height: 630,
+        alt: article.title
+      }] : [{
+        url: `${SITE_URL}/branding/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "AllHalal - Muslim Lifestyle Platform"
+      }],
     },
     twitter: {
-      card: article.image_url ? "summary_large_image" : "summary",
+      card: "summary_large_image",
+      site: "@allhalalinfo",
+      creator: "@allhalalinfo",
       title: article.title,
-      description: article.dek || undefined,
-      images: article.image_url ? [article.image_url] : undefined,
+      description: article.dek || description,
+      images: article.image_url ? [article.image_url] : [`${SITE_URL}/branding/og-image.png`],
     },
   };
 }
