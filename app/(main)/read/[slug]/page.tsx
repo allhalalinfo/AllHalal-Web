@@ -20,6 +20,7 @@ import remarkHtml from "remark-html";
 import remarkGfm from "remark-gfm";
 import remarkHeadingId from "remark-heading-id";
 import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
+import { enhanceArticleHTML, wrapExampleCards } from "@/lib/articleEnhancer";
 
 // Revalidate article pages every hour (increased from 2 minutes to reduce origin transfer bandwidth)
 // Auto-revalidation still triggers when article is created/updated via admin panel
@@ -152,6 +153,12 @@ export default async function CustomArticlePage(props: {
     } else {
       htmlContent = sanitizeArticleHtml(article.content);
     }
+    
+    // 🔧 OPTIMIZATION (Phase 3): Server-side HTML enhancement
+    // Moved from client-side ArticleContentEnhancer for better performance
+    // Adds semantic classes and IDs based on heading patterns
+    htmlContent = enhanceArticleHTML(htmlContent);
+    htmlContent = wrapExampleCards(htmlContent);
   }
 
   const jsonLd = {
@@ -308,7 +315,7 @@ export default async function CustomArticlePage(props: {
           <FinalThoughtCleaner />
           <ArticleDomainCitationConverter />
           <ArticleCitationCleaner />
-          <ArticleContentEnhancer />
+          {/* ArticleContentEnhancer moved to server-side for better performance */}
           <FaqAccordion />
         </div>
       </main>

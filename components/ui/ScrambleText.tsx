@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
 
 const CHARS = "-_~=+*!@#%&^?|/\\0101";
 
@@ -20,9 +19,28 @@ export default function ScrambleText({
 }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text);
   const containerRef = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.5 });
+  const [isInView, setIsInView] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Native Intersection Observer (replaces framer-motion useInView)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect(); // once: true
+        }
+      },
+      { threshold: 0.5 } // amount: 0.5
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const scramble = useCallback(() => {
     let pos = 0;
@@ -72,13 +90,13 @@ export default function ScrambleText({
   }, []);
 
   return (
-    <motion.span
+    <span
       ref={containerRef}
-      className={`inline-block font-mono ${className}`} // font-mono for tech feel
+      className={`inline-block font-mono ${className}`}
       onMouseEnter={() => hover && setIsHovered(true)}
       onMouseLeave={() => hover && setIsHovered(false)}
     >
       {displayText}
-    </motion.span>
+    </span>
   );
 }

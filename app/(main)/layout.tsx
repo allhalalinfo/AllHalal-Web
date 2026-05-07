@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import AdSenseScript from "@/components/ads/AdSenseScript";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE_URL } from "@/lib/seo/metadata";
-import "../globals.css";
+import "../css/critical.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { SpeedInsightsProvider } from "@/components/providers/SpeedInsightsProvider";
 import Header from "@/components/layout/Header";
@@ -75,24 +75,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
-// Client component to conditionally render Header based on ?app=true
-function HeaderWrapper() {
-  if (typeof window !== 'undefined') {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('app') === 'true') {
-      return null; // Hide header in app mode
-    }
-  }
-  return <Header />;
-}
+// Hydration-safe client components (lazy loaded)
+import dynamic from "next/dynamic";
 
-// Client component to conditionally render Sticky Banner
-function StickyAppBannerWrapper() {
-  if (typeof window !== 'undefined') {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('app') === 'true') {
-      return null; // Hide banner in app mode
-    }
-  }
-  return <StickyAppBanner />;
-}
+const HeaderWrapper = dynamic(() => import("@/components/layout/HeaderWrapper"));
+
+const StickyAppBannerWrapper = dynamic(() => import("@/components/layout/StickyAppBannerWrapper"));

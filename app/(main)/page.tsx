@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Footer from "@/components/layout/Footer";
 import BriefsHomeSection from "@/components/briefs/BriefsHomeSection";
 import CustomArticlesHomeSection from "@/components/articles/CustomArticlesHomeSection";
 import FinanceWidget from "@/components/portal/FinanceWidget";
 import TodayForYouServer from "@/components/portal/TodayForYouServer";
+import TodayForYouSkeleton from "@/components/portal/TodayForYouSkeleton";
+import FinanceWidgetSkeleton from "@/components/portal/FinanceWidgetSkeleton";
+import ArticlesSkeleton from "@/components/articles/ArticlesSkeleton";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import { getHomepageBriefLayout } from "@/lib/briefs";
 import { generateMetadata as genMeta, SITE_URL } from "@/lib/seo/metadata";
@@ -89,23 +93,29 @@ export default async function PortalHomePage(props: { params: Promise<{}> }) {
             </h1>
 
             <section id="prayer-dashboard" className="mb-8">
-              <TodayForYouServer locale="en" />
+              <Suspense fallback={<TodayForYouSkeleton />}>
+                <TodayForYouServer locale="en" />
+              </Suspense>
             </section>
 
             <section className="mt-8">
-              <FinanceWidget />
+              <Suspense fallback={<FinanceWidgetSkeleton />}>
+                <FinanceWidget />
+              </Suspense>
             </section>
 
             <section className="mt-8">
-              {useCustomArticles ? (
-                <CustomArticlesHomeSection
-                  locale="en"
-                  articles={customList.articles}
-                  newsPageUrl={newsPageUrl}
-                />
-              ) : (
-                <BriefsHomeSection locale="en" layout={homepageBriefLayout} />
-              )}
+              <Suspense fallback={<ArticlesSkeleton />}>
+                {useCustomArticles ? (
+                  <CustomArticlesHomeSection
+                    locale="en"
+                    articles={customList.articles}
+                    newsPageUrl={newsPageUrl}
+                  />
+                ) : (
+                  <BriefsHomeSection locale="en" layout={homepageBriefLayout} />
+                )}
+              </Suspense>
             </section>
           </div>
         </section>
