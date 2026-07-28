@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/zakat-on-business-assets" },
   title: "Zakat for Business Owners: Inventory & Cash | allhalal.info",
   description:
     "How sole traders and companies estimate Zakat on inventory, receivables, and business cash—plus what usually stays outside the base.",

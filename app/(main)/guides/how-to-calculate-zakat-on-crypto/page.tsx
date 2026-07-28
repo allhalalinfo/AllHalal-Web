@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/how-to-calculate-zakat-on-crypto" },
   title: "Zakat on Cryptocurrency: Complete Guide | allhalal.info",
   description:
     "How to value Bitcoin and altcoins for Zakat, when to use spot USD prices, and why staking or DeFi needs a scholar.",

@@ -5,6 +5,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import HeroSection from "@/components/sections/HeroSection";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/app" },
   title: "allhalal.info App | Halal Scanner, Ingredient Verification & Muslim Utilities",
   description:
     "Explore the dedicated allhalal.info app experience with halal scanning, ingredient verification, prayer tools and app-first Muslim utilities.",

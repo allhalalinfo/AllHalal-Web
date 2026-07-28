@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/is-it-halal/regional-halal-differences" },
   title: "Why McDonald's Is Halal in Malaysia But Not in the US - Regional Guide",
   description:
     "Same brand, different recipes, different suppliers. Learn why global brands have different halal status by region and what this means for Muslim consumers.",

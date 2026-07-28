@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/zakat-on-pension-and-retirement-funds" },
   title: "Is Zakat Due on Pension & Retirement Funds? | allhalal.info",
   description:
     "Accessible vs locked retirement savings, defined contribution plans, and how scholars treat wealth you cannot withdraw yet.",

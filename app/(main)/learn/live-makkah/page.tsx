@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/learn/live-makkah" },
   title: 'Watch Makkah & Madinah Live Stream 24/7 | allhalal.info',
   description: 'Watch the live broadcast from Masjid al-Haram in Makkah and Al-Masjid an-Nabawi in Madinah. High-quality 24/7 live stream.',
 };

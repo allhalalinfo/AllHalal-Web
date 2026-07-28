@@ -13,7 +13,17 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  */
 
+import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
+import { generateMetadata as genMeta } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = genMeta({
+  title: "Legal Centre",
+  description:
+    "Privacy policy, terms of service and disclaimer for allhalal.info — how we handle your data and the limits of our halal guidance.",
+  path: "/legal",
+  keywords: ["allhalal legal", "privacy policy", "terms of service", "disclaimer"],
+});
 
 export default function LegalLayout({
   children,

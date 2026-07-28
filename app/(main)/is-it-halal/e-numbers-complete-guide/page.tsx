@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/is-it-halal/e-numbers-complete-guide" },
   title: "E-Codes Explained for Muslims: Which E-Numbers Are Halal?",
   description:
     "Complete guide to food additives (E-numbers) for Muslims. Learn which E-codes are always halal, always haram, or depend on source. E120, E471, E441, E904 explained.",

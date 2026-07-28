@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer";
 import TodayForYouServer from "@/components/portal/TodayForYouServer";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/prayer-times" },
   title: "Prayer times | allhalal.info",
   description:
     "Salah times for your location on allhalal.info — Fajr, Dhuhr, Asr, Maghrib and Isha with calculation method.",

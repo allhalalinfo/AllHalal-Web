@@ -14,6 +14,7 @@ const ZakatCalculatorClient = dynamic(() => import("./ZakatCalculatorClient"), {
 });
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/finance/zakat-calculator" },
   title: "Zakat Calculator & Live Nisab 2026 | allhalal.info",
   description:
     "Calculate your Zakat accurately using live gold and silver prices. Understand the current Nisab threshold in USD and read scholar-backed FAQs.",

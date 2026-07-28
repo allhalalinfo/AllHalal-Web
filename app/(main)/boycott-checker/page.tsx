@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import BoycottCheckerClient from "./BoycottCheckerClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/boycott-checker" },
   title: "Boycott checker | allhalal.info",
   description:
     "Look up boycott-related guidance for brands and companies using the allhalal.info API.",

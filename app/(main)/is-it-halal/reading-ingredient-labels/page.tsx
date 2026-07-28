@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/is-it-halal/reading-ingredient-labels" },
   title: "Can You Trust Food Labels? Hidden Ingredients Guide for Muslims",
   description:
     "What food labels don't tell you: processing aids, 'natural flavors,' shared equipment. Learn how to read ingredient lists and when to contact manufacturers.",

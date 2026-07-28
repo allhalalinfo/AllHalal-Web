@@ -3,20 +3,23 @@ import { generateMetadata as genMeta, generateItemListJSONLD, SITE_URL } from "@
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
+import HalalChecksDirectory from "@/components/halal/HalalChecksDirectory";
+import { halalItems } from "@/data/halalItems";
 
 export const revalidate = 120;
 
 export const metadata: Metadata = genMeta({
-  title: "Halal Living Guides",
-  description: "Expert guides on halal food, ingredients, and certification. Learn the principles that matter.",
+  title: `Is It Halal? Check ${halalItems.length}+ Products & Ingredients`,
+  description: `Check whether a product is halal in seconds. ${halalItems.length}+ verdicts on snacks, drinks, fast food, E numbers and cosmetics, with the reasoning behind each one.`,
   path: "/is-it-halal",
   keywords: [
+    "is it halal",
+    "halal checker",
+    "halal food list",
     "halal certification",
     "halal ingredients",
-    "halal food guide",
-    "halal living",
-    "is it halal",
-    "halal checker"
+    "e numbers halal",
+    "halal living"
   ]
 });
 
@@ -31,16 +34,15 @@ export default async function HalalLivingPage(props: {
     (article) => article.category === "halal-living"
   );
 
-  // Generate JSON-LD schema for the collection
+  // Generate JSON-LD schema for the collection of halal verdicts
   const itemListSchema = generateItemListJSONLD({
-    name: "Halal Living Guides",
-    description: "Expert guides on halal food, ingredients, and certification",
+    name: "Halal Checks",
+    description: "Halal verdicts for products, ingredients, E numbers and fast food",
     url: `${SITE_URL}/is-it-halal`,
-    items: halalLivingArticles.slice(0, 20).map(article => ({
-      name: article.title,
-      url: `${SITE_URL}/read/${article.id}`,
-      description: article.dek || article.title,
-      image: article.image_url || undefined
+    items: halalItems.slice(0, 50).map(item => ({
+      name: `Is ${item.name} halal?`,
+      url: `${SITE_URL}/is-it-halal/${item.slug}`,
+      description: item.shortReason
     }))
   });
 
@@ -75,12 +77,83 @@ export default async function HalalLivingPage(props: {
               </span>
             </div>
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-[#2A2419] tracking-tight leading-[0.95]">
-              Your guide to<br />
-              <span className="italic text-[#4B7A88]">halal</span> living
+              Is it <span className="italic text-[#4B7A88]">halal</span>?
             </h1>
             <p className="text-xl md:text-2xl text-[#5A5449] max-w-2xl leading-relaxed">
-              Expert guides on halal food, ingredients, and certification.
+              Clear verdicts on {halalItems.length}+ products, ingredients and E numbers —
+              plus the guides that explain how those verdicts are reached.
             </p>
+            <a
+              href="#all-checks"
+              className="inline-flex items-center gap-2 rounded-2xl bg-[#2A2419] px-7 py-4 font-bold text-white transition-all hover:bg-[#4B7A88]"
+            >
+              Browse all checks
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Full directory of halal checks — primary internal-link surface */}
+      <HalalChecksDirectory />
+
+      {/* Deep-dive guides */}
+      <section className="py-20 bg-[#FAFAF8] border-t border-[#E8E6E1]">
+        <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-1 h-12 bg-[#4B7A88]" />
+            <h2 className="text-4xl font-black text-[#2A2419]">Deep-dive guides</h2>
+          </div>
+          <p className="text-lg text-[#5A5449] max-w-3xl mb-10">
+            The rules behind the verdicts: how certification works, how to read a label,
+            and which ingredients need a second look.
+          </p>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                href: "/is-it-halal/halal-certification-standards",
+                title: "Halal certification standards",
+                text: "What the major certifiers check and how their standards differ.",
+              },
+              {
+                href: "/is-it-halal/reading-ingredient-labels",
+                title: "Reading ingredient labels",
+                text: "A practical method for scanning a label in under a minute.",
+              },
+              {
+                href: "/is-it-halal/e-numbers-complete-guide",
+                title: "E numbers: complete guide",
+                text: "Which additives are plant-based, which are animal-derived.",
+              },
+              {
+                href: "/is-it-halal/animal-derived-ingredients",
+                title: "Animal-derived ingredients",
+                text: "Gelatin, rennet, carmine, shellac and where they hide.",
+              },
+              {
+                href: "/is-it-halal/alcohol-in-food",
+                title: "Alcohol in food",
+                text: "Flavourings, vinegar and residual alcohol explained.",
+              },
+              {
+                href: "/is-it-halal/regional-halal-differences",
+                title: "Regional halal differences",
+                text: "Why the same brand can be halal in one country and not another.",
+              },
+            ].map((guide) => (
+              <a
+                key={guide.href}
+                href={guide.href}
+                className="group rounded-2xl border border-[#E8E6E1] bg-white p-6 transition-all hover:border-[#4B7A88] hover:shadow-md"
+              >
+                <h3 className="text-lg font-bold text-[#2A2419] group-hover:text-[#4B7A88]">
+                  {guide.title}
+                </h3>
+                <p className="mt-2 text-[#5A5449] leading-relaxed">{guide.text}</p>
+              </a>
+            ))}
           </div>
         </div>
       </section>

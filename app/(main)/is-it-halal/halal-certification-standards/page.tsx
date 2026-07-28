@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/is-it-halal/halal-certification-standards" },
   title: "What Your Halal Logo Actually Means: Certification Standards Explained",
   description:
     "JAKIM vs IFANCA vs HMC—why certification bodies differ by country. Learn when stunning matters, what 'halal-friendly' really means, and how to verify authenticity.",

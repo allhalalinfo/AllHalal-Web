@@ -300,7 +300,7 @@ async function getFallbackBriefBySlug(slug: string) {
   );
   const brief = matchedItem?.brief;
 
-  if (!brief || isBlockedBriefSource(brief)) {
+  if (!brief || isBlockedBrief(brief)) {
     return null;
   }
 
@@ -421,13 +421,33 @@ function getBriefPrimarySourceName(brief: Brief) {
  */
 const BRIEF_SOURCE_BLOCKLIST_SUBSTRINGS = ["al jazeera", "aljazeera"];
 
-export function isBlockedBriefSource(brief: Brief): boolean {
+/**
+ * Aggregated feeds periodically carry injected spam from compromised WordPress sources
+ * (gambling, pharma, adult). Publishing it on a halal site is both an editorial failure
+ * and a hard quality signal to Google, so it is dropped before it ever renders.
+ */
+const BRIEF_SPAM_PATTERNS = [
+  /casino|kasino|spelautomat|insattningsbonus|freispiele|bonusar/i,
+  /\bbets?\b|\bbetting\b|wetten|gambl|poker|roulette|blackjack|jackpot|spillemaskin/i,
+  /free ?spins|no ?deposit|welcome bonus|odds\b/i,
+  /viagra|cialis|escort|\bporn\b|\bxxx\b/i,
+];
+
+function isSpamBrief(brief: Brief): boolean {
+  const haystack = [brief.slug, brief.title, brief.dek].filter(Boolean).join(" ");
+  return BRIEF_SPAM_PATTERNS.some((pattern) => pattern.test(haystack));
+}
+
+export function isBlockedBrief(brief: Brief): boolean {
   const name = getBriefPrimarySourceName(brief).toLowerCase();
-  return BRIEF_SOURCE_BLOCKLIST_SUBSTRINGS.some((frag) => name.includes(frag));
+  if (BRIEF_SOURCE_BLOCKLIST_SUBSTRINGS.some((frag) => name.includes(frag))) {
+    return true;
+  }
+  return isSpamBrief(brief);
 }
 
 export function filterBlockedSourceBriefs(briefs: Brief[]): Brief[] {
-  return briefs.filter((b) => !isBlockedBriefSource(b));
+  return briefs.filter((b) => !isBlockedBrief(b));
 }
 
 function buildBalancedBriefs(items: Brief[], limit: number, maxPerSource: number) {
@@ -493,7 +513,7 @@ export async function getHomepageBriefLayout() {
       filterFreshBriefs((data.compact ?? []).map(sanitizeBrief), DEFAULT_FRESHNESS_DAYS),
     );
     const hero =
-      heroCandidate && !isBlockedBriefSource(heroCandidate) ? heroCandidate : null;
+      heroCandidate && !isBlockedBrief(heroCandidate) ? heroCandidate : null;
 
     return {
       hero,
@@ -632,7 +652,7 @@ export async function getBriefDetail(slug: string) {
 
   if (data?.success && data.brief) {
     const brief = sanitizeBrief(data.brief);
-    if (isBlockedBriefSource(brief)) {
+    if (isBlockedBrief(brief)) {
       return null;
     }
     const relatedRaw =

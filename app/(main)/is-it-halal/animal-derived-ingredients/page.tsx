@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/is-it-halal/animal-derived-ingredients" },
   title: "Gelatin, Rennet & Hidden Animal Sources in Food - Halal Guide",
   description:
     "Fish gelatin is halal. Pork gelatin isn't. Beef gelatin depends on slaughter. Learn about animal-derived ingredients: gelatin, rennet, enzymes, L-cysteine.",

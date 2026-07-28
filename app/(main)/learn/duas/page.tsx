@@ -5,6 +5,7 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/learn/duas" },
   title: "Duas & Athkar | Islamic Supplications for Everyday Life | AllHalal",
   description:
     "Read duas and athkar for everyday moments. Morning and evening remembrance, travel, sleep, food and specific situations. Find the right dua now →",

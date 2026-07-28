@@ -6,6 +6,7 @@ import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 export const revalidate = 120;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/travel" },
   title: "Muslim Travel Guides | allhalal.info",
   description:
     "Travel guides for Muslims: halal food abroad, prayer facilities, modest travel tips, and destination insights.",

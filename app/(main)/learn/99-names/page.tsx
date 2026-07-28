@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/learn/99-names" },
   title: "99 Names of Allah | Learn and Reflect on Allah's Beautiful Names",
   description:
     "Explore the 99 Names of Allah with Arabic, transliteration, meanings and explanations. A devotional page for study and reflection.",

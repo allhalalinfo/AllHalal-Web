@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/zakat-on-stocks" },
   title: "How to Calculate Zakat on Stocks & Shares | allhalal.info",
   description:
     "Step-by-step Zakat on shares: use market value on your Zakat date, handle halal portfolios, and understand tazkiyah when companies earn impermissible income.",

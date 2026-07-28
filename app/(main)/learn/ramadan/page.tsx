@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/learn/ramadan" },
   title: "Ramadan & Fasting Guide | Rules, Tips and Duas for the Holy Month",
   description:
     "Essential guidance for Ramadan including fasting rules, intentions, important duas and common questions answered.",

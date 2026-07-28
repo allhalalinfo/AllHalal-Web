@@ -4,6 +4,7 @@ import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/guides/nisab-value-today" },
   title: "Current Nisab Value for Gold and Silver (USD) | Zakat Threshold | AllHalal",
   description:
     "Today's Nisab: 85g gold or 595g silver threshold for Zakat. Live USD values updated daily. Calculate if you owe Zakat now →",

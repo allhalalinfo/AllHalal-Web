@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/is-it-halal/alcohol-in-food" },
   title: "Alcohol in Food: What Actually Matters - Islamic Ruling on Trace Alcohol",
   description:
     "Vanilla extract has alcohol. Soy sauce ferments. Vinegar was wine. Learn the difference between khamr and trace alcohol, and scholarly positions on alcohol in food.",
