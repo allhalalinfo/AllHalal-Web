@@ -20,27 +20,71 @@ function nameTokens(item: HalalItem): string[] {
     .filter((token) => token.length > 3);
 }
 
+/** Terms that pull in the right corner of the archive when the name matches nothing. */
+const CATEGORY_TERMS: Record<HalalItem["category"], string[]> = {
+  snack: ["candy", "sweets", "chocolate", "gummies", "gelatin", "ingredient", "label"],
+  drink: ["drink", "energy", "alcohol", "kombucha", "vinegar", "caffeine"],
+  "fast-food": ["restaurant", "eat", "eating out", "travel", "chicken", "meat"],
+  ingredient: ["ingredient", "label", "e number", "additive", "gelatin", "enzyme"],
+  additive: ["e number", "additive", "e4", "e1", "colour", "color", "emulsifier"],
+  cosmetics: ["skincare", "cosmetic", "perfume", "toothpaste", "collagen"],
+  other: ["halal", "label", "ingredient"],
+};
+
+/** Stable per-slug offset so neighbouring checks do not all surface the same posts. */
+function slugOffset(slug: string, length: number): number {
+  if (length === 0) return 0;
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) {
+    hash = (hash * 31 + slug.charCodeAt(i)) % 100000;
+  }
+  return hash % length;
+}
+
 export function findRelatedReading(item: HalalItem, articles: CustomArticle[]) {
   const key = topicKey(item.slug);
   const tokens = nameTokens(item);
 
   const deepDive = articles.find((article) => topicKey(article.id) === key) || null;
+  const pool = articles.filter((article) => article.id !== deepDive?.id);
 
-  const scored = articles
-    .filter((article) => article.id !== deepDive?.id)
-    .map((article) => {
-      const haystack = `${article.title} ${article.dek || ""}`.toLowerCase();
-      const score = tokens.reduce(
-        (total, token) => total + (haystack.includes(token) ? 2 : 0),
-        0,
-      );
-      return { article, score };
-    })
+  const haystackOf = (article: CustomArticle) =>
+    `${article.title} ${article.dek || ""}`.toLowerCase();
+
+  const byName = pool
+    .map((article) => ({
+      article,
+      score: tokens.filter((token) => haystackOf(article).includes(token)).length,
+    }))
     .filter((entry) => entry.score > 0)
     .sort((a, b) => b.score - a.score)
     .map((entry) => entry.article);
 
-  return { deepDive, related: scored.slice(0, 3) };
+  const related = [...byName];
+
+  if (related.length < 3) {
+    const terms = CATEGORY_TERMS[item.category];
+    const byCategory = pool.filter(
+      (article) =>
+        !related.includes(article) && terms.some((term) => haystackOf(article).includes(term)),
+    );
+    const start = slugOffset(item.slug, byCategory.length);
+    for (let i = 0; i < byCategory.length && related.length < 3; i++) {
+      related.push(byCategory[(start + i) % byCategory.length]);
+    }
+  }
+
+  if (related.length < 3) {
+    const evergreen = pool.filter(
+      (article) => !related.includes(article) && article.category === "halal-living",
+    );
+    const start = slugOffset(item.slug, evergreen.length);
+    for (let i = 0; i < evergreen.length && related.length < 3; i++) {
+      related.push(evergreen[(start + i) % evergreen.length]);
+    }
+  }
+
+  return { deepDive, related: related.slice(0, 3) };
 }
 
 export default function RelatedReading({
