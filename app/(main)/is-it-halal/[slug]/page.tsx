@@ -2,6 +2,10 @@ import { halalItems } from "@/data/halalItems";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import remarkHtml from "remark-html";
+import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 import FAQSchema from "@/components/seo/FAQSchema";
@@ -11,6 +15,23 @@ export async function generateStaticParams() {
   return halalItems.map((item) => ({
     slug: item.slug,
   }));
+}
+
+/** First real sentence of the explanation, stripped of markdown, for FAQ answers. */
+function firstProseParagraph(markdown: string): string {
+  const block = markdown
+    .split('\n\n')
+    .map((part) => part.trim())
+    .find((part) => part && !part.startsWith('#') && !part.startsWith('|') && !part.startsWith('-'));
+
+  if (!block) return '';
+
+  return block
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/\[(.+?)\]\(.+?\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -83,6 +104,15 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
   
   if (!item) notFound();
 
+  const detailedHtml = sanitizeArticleHtml(
+    String(
+      await remark()
+        .use(remarkGfm)
+        .use(remarkHtml, { sanitize: false })
+        .process(item.detailedReason),
+    ),
+  );
+
   const similarItems = halalItems.filter(i => i.category === item.category && i.slug !== item.slug).slice(0, 3);
 
   // Enhanced FAQ with multiple relevant questions
@@ -93,7 +123,7 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
     },
     {
       question: `What makes ${item.name} ${item.verdict}?`,
-      answer: item.detailedReason.split('\n\n')[0] || item.shortReason
+      answer: firstProseParagraph(item.detailedReason) || item.shortReason
     },
     {
       question: `Can Muslims eat ${item.name}?`,
@@ -179,15 +209,12 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
               <p className="text-lg text-text-secondary">{item.shortReason}</p>
             </div>
             
-            <div className="prose prose-lg dark:prose-invert max-w-none text-text-secondary">
+            <div>
               <h2 className="text-xl font-semibold text-text-primary mb-3">Detailed Explanation</h2>
-              {/* Splitting by double newline to handle basic markdown-like paragraphs generated earlier */}
-              {item.detailedReason.split('\n\n').map((paragraph, idx) => {
-                if (paragraph.startsWith('### ')) {
-                  return <h3 key={idx} className="text-lg font-bold font-display text-text-primary mt-6 mb-2">{paragraph.replace('### ', '')}</h3>;
-                }
-                return <p key={idx} className="text-lg leading-relaxed">{paragraph}</p>;
-              })}
+              <div
+                className="halal-content"
+                dangerouslySetInnerHTML={{ __html: detailedHtml }}
+              />
             </div>
             
             <AppDeepLinkCTA itemName={item.name} />

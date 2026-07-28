@@ -83,6 +83,22 @@ const nextConfig = {
         destination: '/news/:slug',
         permanent: true,
       },
+      // Merged duplicate halal checks — each pair targeted the same query with
+      // near-identical (sometimes contradicting) content.
+      ...[
+        ['is-carmine-e120-halal', 'is-carmine-halal'],
+        ['is-takis-fuego-halal', 'is-takis-halal'],
+        ['is-celsius-energy-halal', 'is-celsius-energy-drink-halal'],
+        ['is-e471-mono-and-diglycerides-halal', 'is-e471-halal'],
+        ['is-msg-e621-halal', 'is-e621-halal'],
+        ['is-skittles-halal-us', 'is-skittles-halal'],
+        ['is-mcdonalds-fries-halal-us', 'is-mcdonalds-fries-halal'],
+        ['is-haribo-gummy-bears-halal', 'is-haribo-halal'],
+      ].map(([from, to]) => ({
+        source: `/is-it-halal/${from}`,
+        destination: `/is-it-halal/${to}`,
+        permanent: true,
+      })),
     ];
   },
 };
