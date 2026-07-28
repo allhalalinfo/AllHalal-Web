@@ -1,4 +1,5 @@
 import "../../css/prose.css";
+import "../../css/app-mode.css";
 
 /**
  * Article pages layout

@@ -26,6 +26,26 @@ import { enhanceArticleHTML, wrapExampleCards } from "@/lib/articleEnhancer";
 // Auto-revalidation still triggers when article is created/updated via admin panel
 export const revalidate = 3600;
 
+export async function generateStaticParams() {
+  const { articles } = await fetchCustomArticlesList({ page: 1, limit: 100 });
+  return articles.map((article) => ({ slug: article.id }));
+}
+
+/**
+ * WebView chrome toggles (?app, ?theme, ?hide_related, ?hide_back_btn).
+ *
+ * These run as an inline script rather than through `searchParams`, because
+ * reading search params in the page would opt the whole route out of ISR and
+ * force a fresh render — plus two API calls — on every request, including every
+ * crawl. The app never needs different content, only less chrome, so the markup
+ * stays identical and CSS hides what the WebView does not want.
+ */
+const APP_MODE_SCRIPT = `(function(){try{var p=new URLSearchParams(location.search),d=document.documentElement;
+if(p.get('app')==='true')d.setAttribute('data-app-mode','true');
+var t=p.get('theme');if(t==='light'||t==='dark')d.setAttribute('data-app-theme',t);
+if(p.get('hide_related')==='true')d.setAttribute('data-app-hide-related','true');
+if(p.get('hide_back_btn')==='true')d.setAttribute('data-app-hide-back','true');}catch(e){}})();`;
+
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
@@ -99,26 +119,8 @@ export async function generateMetadata(props: {
 
 export default async function CustomArticlePage(props: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await props.params;
-  const searchParams = await props.searchParams;
-  
-  // Convert searchParams to URLSearchParams for utility functions
-  const urlParams = new URLSearchParams();
-  Object.entries(searchParams).forEach(([key, value]) => {
-    if (value) {
-      const stringValue = Array.isArray(value) ? value[0] : value;
-      urlParams.set(key, stringValue);
-    }
-  });
-  
-  // Check if we're in app mode (WebView)
-  const isAppMode = urlParams.get('app') === 'true';
-  const hideRelated = urlParams.get('hide_related') === 'true';
-  const hideBackButton = urlParams.get('hide_back_btn') === 'true';
-  const theme = urlParams.get('theme') || 'auto'; // light, dark, auto
-  
   const id = decodeURIComponent(slug);
   
   // 🔧 OPTIMIZATION (Phase 2): Fetch article + all articles in parallel
@@ -199,11 +201,9 @@ export default async function CustomArticlePage(props: {
 
   return (
     <>
-      <main 
-        className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7f2e7_0%,#f5f1e8_18%,#eef1ec_52%,#f2f1e8_100%)] pb-24"
-        style={{ paddingTop: isAppMode ? '2rem' : '8rem' }}
-        data-theme={theme}
-        data-app-mode={isAppMode ? 'true' : 'false'}
+      <script dangerouslySetInnerHTML={{ __html: APP_MODE_SCRIPT }} />
+      <main
+        className="article-shell relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f7f2e7_0%,#f5f1e8_18%,#eef1ec_52%,#f2f1e8_100%)] pb-24"
       >
         {/* Ambient background effects - fresh purple, blue, green tones (no gold) */}
         <div className="pointer-events-none absolute inset-0">
@@ -224,7 +224,7 @@ export default async function CustomArticlePage(props: {
           {/* Editorial content wrapper - optimal reading width */}
           <article className="mx-auto max-w-[72ch]">
             {/* Breadcrumbs - hidden in app mode */}
-            {!isAppMode && (
+            <div data-app-chrome>
               <nav className="mb-8 text-sm text-text-muted" aria-label="Breadcrumb">
                 <Link href={portalHome} className="font-medium text-primary hover:underline">
                   Home
@@ -240,7 +240,7 @@ export default async function CustomArticlePage(props: {
                 </span>
                 <span className="text-text-secondary">{article.title.substring(0, 50)}{article.title.length > 50 ? '...' : ''}</span>
               </nav>
-            )}
+            </div>
 
             <header className="mb-10">
               <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-black leading-[1.1] tracking-[-0.04em] text-text-primary">
@@ -278,7 +278,7 @@ export default async function CustomArticlePage(props: {
             )}
 
             {/* Back button - hidden in app mode or if hide_back_btn=true */}
-            {!isAppMode && !hideBackButton && (
+            <div data-app-back>
               <div className="mt-12 border-t border-[rgba(47,37,30,0.08)] pt-8">
                 <Link
                   href={newsUrl}
@@ -287,25 +287,23 @@ export default async function CustomArticlePage(props: {
                   ← Back to News
                 </Link>
               </div>
-            )}
+            </div>
 
-            {/* Related Halal Checks - Internal linking for SEO */}
-            {!hideRelated && (
+            <div data-app-related>
+              {/* Related Halal Checks - Internal linking for SEO */}
               <RelatedHalalChecks
                 articleTitle={article.title}
                 articleContent={article.content}
                 maxItems={3}
               />
-            )}
 
-            {/* Related Articles - Server-side rendered with real articles from DB */}
-            {!hideRelated && (
+              {/* Related Articles - Server-side rendered with real articles from DB */}
               <RelatedArticles
                 currentArticleId={article.id}
                 currentCategory={article.category}
                 allArticles={allArticlesList.articles}
               />
-            )}
+            </div>
           </article>
           
           {/* Client-side content enhancers */}
@@ -320,7 +318,9 @@ export default async function CustomArticlePage(props: {
         </div>
       </main>
       {/* Footer - hidden in app mode */}
-      {!isAppMode && <Footer />}
+      <div data-app-chrome>
+        <Footer />
+      </div>
     </>
   );
 }

@@ -6,6 +6,8 @@ import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
+import { fetchCustomArticlesList } from "@/lib/customArticles";
+import RelatedReading from "@/components/halal/RelatedReading";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 import FAQSchema from "@/components/seo/FAQSchema";
@@ -104,14 +106,14 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
   
   if (!item) notFound();
 
-  const detailedHtml = sanitizeArticleHtml(
-    String(
-      await remark()
-        .use(remarkGfm)
-        .use(remarkHtml, { sanitize: false })
-        .process(item.detailedReason),
-    ),
-  );
+  const [detailedHtml, articlesList] = await Promise.all([
+    remark()
+      .use(remarkGfm)
+      .use(remarkHtml, { sanitize: false })
+      .process(item.detailedReason)
+      .then((file) => sanitizeArticleHtml(String(file))),
+    fetchCustomArticlesList({ page: 1, limit: 100 }),
+  ]);
 
   const similarItems = halalItems.filter(i => i.category === item.category && i.slug !== item.slug).slice(0, 3);
 
@@ -220,6 +222,8 @@ export default async function HalalItemDetail(props: { params: Promise<{ slug: s
             <AppDeepLinkCTA itemName={item.name} />
           </div>
         </div>
+
+        <RelatedReading item={item} articles={articlesList.articles} />
 
         {similarItems.length > 0 && (
           <div className="mb-16">

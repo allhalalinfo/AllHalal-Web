@@ -1,0 +1,19 @@
+/* WebView chrome toggles for /read/[slug].
+   The markup is identical for every visitor so the route stays statically
+   cached; the inline script on the page sets these attributes from the query
+   string and CSS removes whatever the app does not want to show. */
+
+.article-shell {
+  padding-top: 8rem;
+}
+
+html[data-app-mode="true"] .article-shell {
+  padding-top: 2rem;
+}
+
+html[data-app-mode="true"] [data-app-chrome],
+html[data-app-mode="true"] [data-app-back],
+html[data-app-hide-back="true"] [data-app-back],
+html[data-app-hide-related="true"] [data-app-related] {
+  display: none;
+}

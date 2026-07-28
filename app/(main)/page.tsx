@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import BriefsHomeSection from "@/components/briefs/BriefsHomeSection";
 import CustomArticlesHomeSection from "@/components/articles/CustomArticlesHomeSection";
 import FinanceWidget from "@/components/portal/FinanceWidget";
+import PopularHalalChecks from "@/components/halal/PopularHalalChecks";
 import TodayForYouServer from "@/components/portal/TodayForYouServer";
 import TodayForYouSkeleton from "@/components/portal/TodayForYouSkeleton";
 import FinanceWidgetSkeleton from "@/components/portal/FinanceWidgetSkeleton";
@@ -102,6 +103,10 @@ export default async function PortalHomePage(props: { params: Promise<{}> }) {
               <Suspense fallback={<FinanceWidgetSkeleton />}>
                 <FinanceWidget />
               </Suspense>
+            </section>
+
+            <section className="mt-8">
+              <PopularHalalChecks />
             </section>
 
             <section className="mt-8">
