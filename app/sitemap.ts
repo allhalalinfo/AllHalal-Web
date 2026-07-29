@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { halalItems } from '@/data/halalItems';
+import { findDeepDiveArticleId } from '@/lib/halalTopicMatch';
 
 // Site configuration
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://allhalal.info';
@@ -96,19 +97,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   console.log('[SITEMAP] Static pages count:', staticPages.length);
 
-  // ===== HALAL CHECK PAGES (/is-it-halal/[slug]) =====
-  // Statically generated from data/halalItems.ts — the site's highest-intent
-  // pages ("is X halal"). They have no crawlable entry point without this.
-  const halalCheckPages: MetadataRoute.Sitemap = halalItems.map((item) => ({
-    url: `${SITE_URL}/is-it-halal/${item.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: item.priority === 'high' ? 0.9 : 0.85,
-  }));
-
-  console.log('[SITEMAP] Halal check pages count:', halalCheckPages.length);
-
+  // Fetch custom articles early — needed both for /read URLs and to exclude
+  // /is-it-halal checks that duplicate an article topic (canonical lives on /read).
   let customArticlePages: MetadataRoute.Sitemap = [];
+  let articleIds: string[] = [];
 
   // NOTE: wire/RSS briefs are intentionally excluded — there is no detail route
   // for them (`/read/[slug]` resolves custom articles only), so every brief URL
@@ -152,18 +144,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         );
       }
 
-      customArticlePages = articles
+      articleIds = articles
         .map((article) => article.slug || article.id)
-        .filter((slug): slug is string => Boolean(slug) && !isSpamSlug(slug))
-        .map((slug) => {
-          const article = articles.find((a) => (a.slug || a.id) === slug)!;
-          return {
-            url: `${SITE_URL}/read/${encodeURIComponent(slug)}`,
-            lastModified: new Date(article.updated_at || article.published_at || now),
-            changeFrequency: 'weekly' as const,
-            priority: 0.8,
-          };
-        });
+        .filter((slug): slug is string => Boolean(slug) && !isSpamSlug(slug));
+
+      customArticlePages = articleIds.map((slug) => {
+        const article = articles.find((a) => (a.slug || a.id) === slug)!;
+        return {
+          url: `${SITE_URL}/read/${encodeURIComponent(slug)}`,
+          lastModified: new Date(article.updated_at || article.published_at || now),
+          changeFrequency: 'weekly' as const,
+          priority: 0.8,
+        };
+      });
       
       console.log('[SITEMAP] Custom article pages created:', customArticlePages.length);
     } else {
@@ -178,6 +171,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       console.error('[SITEMAP] Error message:', error.message);
     }
   }
+
+  // ===== HALAL CHECK PAGES (/is-it-halal/[slug]) =====
+  // Skip checks that share a topic with a /read article — those checks keep
+  // a live URL for the catalog but canonicalize to the article.
+  const cannibalizedChecks = new Set(
+    halalItems
+      .map((item) => {
+        const deepDive = findDeepDiveArticleId(item, articleIds);
+        return deepDive ? item.slug : null;
+      })
+      .filter((slug): slug is string => Boolean(slug)),
+  );
+
+  const halalCheckPages: MetadataRoute.Sitemap = halalItems
+    .filter((item) => !cannibalizedChecks.has(item.slug))
+    .map((item) => ({
+      url: `${SITE_URL}/is-it-halal/${item.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: item.priority === 'high' ? 0.9 : 0.85,
+    }));
+
+  console.log('[SITEMAP] Halal check pages count:', halalCheckPages.length);
+  console.log('[SITEMAP] Cannibalized checks excluded:', cannibalizedChecks.size);
 
   // Deduplicate — a custom article slug can collide with a static route
   const seen = new Set<string>();

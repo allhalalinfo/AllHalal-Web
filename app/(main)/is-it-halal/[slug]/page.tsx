@@ -7,11 +7,15 @@ import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import { sanitizeArticleHtml } from "@/lib/sanitizeArticleHtml";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
+import { findDeepDiveArticleId } from "@/lib/halalTopicMatch";
 import RelatedReading from "@/components/halal/RelatedReading";
 import AppPromoMini from "@/components/ui/AppPromoMini";
 import AppDeepLinkCTA from "@/components/ui/AppDeepLinkCTA";
 import FAQSchema from "@/components/seo/FAQSchema";
 import BreadcrumbsSchema from "@/components/seo/BreadcrumbsSchema";
+import { SITE_URL } from "@/lib/seo/metadata";
+
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   return halalItems.map((item) => ({
@@ -56,7 +60,18 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     `${item.name} halal status depends on several factors.`;
   
   const description = `${answerPrefix} ${item.shortReason} Find detailed ingredient analysis now →`;
-  const url = `https://allhalal.info/is-it-halal/${item.slug}`;
+  const checkUrl = `${SITE_URL}/is-it-halal/${item.slug}`;
+
+  // Prefer the long-form /read article as canonical when it covers the same topic,
+  // so Google does not split ranking signals across near-duplicate URLs.
+  const articlesList = await fetchCustomArticlesList({ page: 1, limit: 100 });
+  const deepDiveId = findDeepDiveArticleId(
+    item,
+    articlesList.articles.map((a) => a.id),
+  );
+  const canonicalUrl = deepDiveId
+    ? `${SITE_URL}/read/${encodeURIComponent(deepDiveId)}`
+    : checkUrl;
   
   return {
     title,
@@ -75,7 +90,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     openGraph: {
       title,
       description,
-      url,
+      url: canonicalUrl,
       siteName: 'AllHalal',
       locale: 'en_US',
       type: 'article',
@@ -95,7 +110,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       images: ['https://allhalal.info/branding/og-image.png'],
     },
     alternates: {
-      canonical: url,
+      canonical: canonicalUrl,
     },
   };
 }

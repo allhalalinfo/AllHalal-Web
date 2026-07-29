@@ -1,15 +1,7 @@
 import Link from "next/link";
 import type { CustomArticle } from "@/types/customArticle";
 import type { HalalItem } from "@/data/halalItems";
-
-/** "is-gelatin-halal" and "are-marshmallows-halal" collapse to the same key. */
-function topicKey(slug: string): string {
-  return slug
-    .toLowerCase()
-    .replace(/^(is|are|does|do|can|what)-/, "")
-    .replace(/-halal.*$/, "")
-    .replace(/[^a-z0-9]/g, "");
-}
+import { topicKey } from "@/lib/halalTopicMatch";
 
 function nameTokens(item: HalalItem): string[] {
   return [item.name, ...(item.aliases || [])]
