@@ -64,6 +64,8 @@ export default function Footer() {
       title: "Read & Learn",
       links: [
         { label: "Learn", href: "/learn" },
+        { label: "Islamic Calendar", href: "/learn/islamic-calendar" },
+        { label: "Duas & Athkar", href: "/learn/duas" },
         { label: "News", href: "/news" },
         { label: "Ramadan", href: "/learn/ramadan" },
         { label: "Our Methodology", href: "/methodology" },
