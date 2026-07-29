@@ -76,12 +76,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/learn/duas',
     '/learn/live-makkah',
     '/learn/ramadan',
+    '/learn/islamic-calendar',
     '/travel',
     '/prayer-times',
+    '/boycott-checker',
     '/methodology',
   ];
-  // NOTE: /boycott-checker is intentionally omitted — it is a client-side tool with
-  // ~145 words of server-rendered copy. Add it back once it has real indexable content.
 
   const staticPages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${SITE_URL}${route}`,

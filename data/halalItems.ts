@@ -201,8 +201,8 @@ export const halalItems: HalalItem[] = [
       "pepsi cola"
     ],
     "verdict": "halal",
-    "shortReason": "Pepsi is free of animal products and haram ingredients.",
-    "detailedReason": "### What is it?\nPepsi is a popular drink.\n\n### Why it may be halal\nLike Coca-Cola, Pepsis ingredients are entirely synthetic or plant-derived. It does not contain any animal products or intoxicating levels of alcohol.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Pepsi contains no animal ingredients and no added alcohol. It is halal-certified in several Muslim-majority markets.",
+    "detailedReason": "### What is in the can\n\nCarbonated water, high-fructose corn syrup or sugar (depending on the market), caramel colour, phosphoric acid, caffeine, citric acid and natural flavour. Diet and zero variants swap sugar for aspartame, acesulfame K or similar sweeteners.\n\nNothing on that list is animal-derived. Soft drinks of this type do not use gelatin, rennet or animal emulsifiers.\n\n### The flavour and alcohol question\n\nFlavour compounds across the soft-drink industry are sometimes dissolved in ethanol as a processing carrier. Any residue in the finished beverage is at trace level, far below intoxicating quantity. Mainstream scholarly opinion and halal certification standards treat that differently from alcohol as a drink. PepsiCo states that Pepsi does not contain alcohol as an ingredient, and local bottling in Muslim-majority markets is routinely certified.\n\n### Certification by market\n\n| Market | Typical situation |\n|---|---|\n| Malaysia, Indonesia, Gulf, Pakistan, Turkey | Locally bottled and certified |\n| UK, EU, US | No local certification requirement; ingredient list is the reference |\n\nBecause Pepsi is bottled locally almost everywhere, the certificate that matters is the one for your market.\n\n### Colours and rumours\n\nCaramel colour (E150d) is produced from carbohydrates; there is no animal input. Persistent online claims about pork enzymes in cola have no basis in how carbonated soft drinks are made.\n\n### Related checks\n\nFlavoured and limited Pepsi variants can add colours or flavour systems the classic recipe does not have. Check the label on those separately. For a similar profile, see Coca-Cola and other clear sodas.",
     "category": "drink",
     "priority": "high"
   },
@@ -239,8 +239,8 @@ export const halalItems: HalalItem[] = [
       "flamin hot cheetos"
     ],
     "verdict": "doubtful",
-    "shortReason": "Often contain animal enzymes in the US.",
-    "detailedReason": "### What is it?\nCheetos is a popular snack.\n\n### Why it may be doubtful\nFrito-Lay has stated that many Cheetos flavors in the US contain enzymes from porcine (pork) or bovine (beef) sources to develop the cheese flavor. In the UK (suitable for vegetarians) and Muslim countries, they are generally halal.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "The corn puff is plant-based; cheese seasonings may contain animal enzymes depending on country and flavour.",
+    "detailedReason": "### Base\n\nCornmeal, vegetable oil and salt. That part is not controversial.\n\n### Seasoning is everything\n\nCrunchy Cheese, Flamin' Hot and similar coats use cheese powder, whey, maltodextrin, MSG-style enhancers and colours. Cheese powder carries the rennet question.\n\n| Market | Cheese flavours |\n|---|---|\n| United States | Enzymes often unspecified → doubtful |\n| UK / EU | Often vegetarian-suitable — look for the claim |\n| Muslim-majority | Local bags may be certified |\n\n### Flamin' Hot colours\n\nIntense reds are usually synthetic today. Confirm on the bag. US \"natural flavors\" remain non-transparent.\n\n### Shop rule\n\nCertified bag first; otherwise vegetarian claim on cheese; otherwise treat US cheese Cheetos as doubtful and prefer locally certified alternatives.",
     "category": "snack",
     "priority": "high"
   },
@@ -251,8 +251,8 @@ export const halalItems: HalalItem[] = [
       "pringles sour cream"
     ],
     "verdict": "doubtful",
-    "shortReason": "Original is halal, but cheese/sour cream flavors may contain animal rennet.",
-    "detailedReason": "### What is it?\nPringles is a popular snack.\n\n### Why it may be doubtful\nPringles Original is vegan and halal. However, flavors containing whey, cheese, or sour cream might use animal-derived rennet in the cheese-making process depending on the country of manufacture.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "The potato base is fine, but cheese and flavour seasonings can contain animal-derived enzymes or dairy whose rennet source is undeclared.",
+    "detailedReason": "### What Pringles are\n\nReconstituted potato crisps made by Kellogg's (formerly Procter & Gamble): dehydrated potato, vegetable oil, rice flour, wheat starch, maltodextrin, emulsifier (typically E471), salt and a flavour seasoning that changes by variety.\n\nThe stackable shape is not the issue. The seasoning is.\n\n### Original / Ready Salted\n\nIn many markets the plainer salt flavours carry a vegetarian claim and use plant oil plus salt. Where that claim is present, animal rennet and gelatin are out. E471 still needs a plant origin confirmation if you are strict, but vegetarian labelling usually covers it.\n\n### Cheese and other flavoured varieties\n\nCheese, Sour Cream & Onion, and similar seasonings include dairy powders. Those powders inherit the rennet used in the original cheese. US packs often list enzymes without naming the source; UK and EU packs more often use microbial rennet and may carry a vegetarian flash.\n\n| Flavour type | Typical risk |\n|---|---|\n| Ready Salted / Original | Lowest — check vegetarian claim |\n| Cheese / sour cream | Dairy + enzymes |\n| Meat or bacon flavours | Often non-halal flavourings |\n| Sweet or exotic limited editions | Check colours and \"natural flavours\" |\n\n### Regional differences\n\nKellogg's formulates by market. A tube made for Malaysia or the Gulf may be certified; a US cheese flavour is frequently not. Always read the country of manufacture and any certification mark on the tube you are holding.\n\n### How to decide in the shop\n\n1. Look for a halal mark first\n2. Look for a vegetarian claim on cheese flavours\n3. Avoid bacon and meat-named variants in Western markets unless certified\n4. When in doubt, Ready Salted is the simplest option in the range",
     "category": "snack",
     "priority": "high"
   },
@@ -262,11 +262,11 @@ export const halalItems: HalalItem[] = [
     "aliases": [
       "snickers bar"
     ],
-    "verdict": "halal",
-    "shortReason": "Contains whey, but Mars has confirmed their whey is halal-suitable in many regions.",
-    "detailedReason": "### What is it?\nSnickers is a popular snack.\n\n### Why it may be halal\nSnickers contains milk, egg, and whey. Mars Wrigley has confirmed that the whey used in Snickers in the UK, Europe, and many other regions is from vegetarian sources. It is certified halal in many countries.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "verdict": "doubtful",
+    "shortReason": "Classic Snickers has no gelatin; dairy and market recipes still deserve a check. Certified packs settle it.",
+    "detailedReason": "### What builds the bar\n\nPeanuts, glucose syrup, sugar, nougat (egg white in many recipes), milk chocolate, butter or milkfat, salt and emulsifiers (usually soy lecithin). The chew comes from nougat and caramel — **not gelatin**, which is why Snickers is often easier than gummy candy.\n\n### Open points\n\n**Egg white** in nougat is halal. **Milk chocolate and butter** are dairy; any whey fraction follows rennet rules of the dairy supply. **Peanuts** are plant. Mars publishes different specifications by country, and several Muslim-majority markets sell certified Snickers.\n\n### Common confusion\n\nPeople sometimes assume all chewy chocolate bars contain gelatin. For classic Snickers that is usually false. Ice-cream Snickers, bakery bars and novelty fillings are different SKUs and can add gelatin or alcohol flavourings.\n\n### How to buy\n\nPrefer a halal mark when you see one. Otherwise confirm gelatin is absent, use a vegetarian claim where available, and treat ice-cream or dessert variants as separate products.",
     "category": "snack",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-mms-halal",
@@ -276,8 +276,8 @@ export const halalItems: HalalItem[] = [
       "m&ms"
     ],
     "verdict": "doubtful",
-    "shortReason": "Colors and additives vary by region (some contain carmine).",
-    "detailedReason": "### What is it?\nM&M's is a popular snack.\n\n### Why it may be doubtful\nIn the UK and Europe, M&Ms are not halal certified and may contain additives derived from animal sources (like carmine/E120 for coloring, though this is rare now). In Muslim countries, they are strictly halal. Check the label for carmine or non-vegetarian whey.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Many chocolate M&M’s are gelatin-free; colours (especially red) and dairy still need a quick label read.",
+    "detailedReason": "### Shell and centre\n\nSugar, cocoa, milk powders, lactose, emulsifiers, colours, dextrin and a glaze such as carnauba wax. Mars removed gelatin from many chocolate M&M’s formulas; the shell does not need it.\n\n### Carmine history\n\nRed and pink shades historically used **carmine (E120)**. Many markets switched to synthetic or plant colours, but packs are not global. If you avoid insect dye, look specifically for E120 / carmine / cochineal.\n\n### Variety matrix\n\n| Type | Watch |\n|---|---|\n| Milk chocolate | Dairy / whey |\n| Peanut / almond | Same + nuts |\n| Crispy | Usually fine |\n| Sour / specialty | Separate formula |\n| Baking chips | Confirm colours |\n\n### Signals that help\n\nA halal logo ends the debate. A UK/EU vegetarian claim usually means no gelatin and no carmine. Without either, compare the colour list to your own standard on E120.",
     "category": "snack",
     "priority": "high"
   },
@@ -323,11 +323,11 @@ export const halalItems: HalalItem[] = [
     "aliases": [
       "kit kat"
     ],
-    "verdict": "halal",
-    "shortReason": "Ingredients are permissible; halal-certified in many regions.",
-    "detailedReason": "### What is it?\nKitKat is a popular snack.\n\n### Why it may be halal\nNestle has confirmed that KitKat is suitable for a halal diet. The ingredients do not contain any animal products other than milk. It holds official halal certification in many global markets.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "verdict": "doubtful",
+    "shortReason": "Classic KitKat is often vegetarian and gelatin-free, but whey and emulsifiers need checking, and recipes differ by country.",
+    "detailedReason": "### The classic bar\n\nWheat flour, sugar, cocoa, vegetable fat, milk powders, whey, emulsifiers (soy lecithin and sometimes E476), raising agents and flavouring. Nestlé makes KitKat in many countries, and the recipe is not identical everywhere.\n\n### Why it is usually close to fine — but not automatic\n\nThere is typically **no gelatin** in the standard four-finger bar. Soy lecithin and E476 (castor-oil based) are plant-derived. The open questions are:\n\n- **Whey / milk powders** — inherit rennet from cheesemaking. In Europe microbial rennet is common; older or some regional recipes may differ.\n- **Vegetable fat** — plant oils are fine; confirm it is not a mixed animal fat in unusual markets (rare for KitKat, but label-reading still wins).\n- **Flavour variants** — matcha, ruby, sake, dessert editions can add colours, alcohol flavourings or gelatin inclusions.\n\n### Certification\n\nKitKat produced for Muslim-majority markets often carries a local halal logo. Packs in Japan, the UK and the US may be vegetarian-labelled without a halal mark. Vegetarian usually rules out gelatin and animal rennet, which is why UK packs are widely accepted by many Muslims who rely on that claim.\n\n### Limited editions\n\nTreat every novelty KitKat as a new product. The brand is famous for experimental flavours, and those are exactly where gelatin, carmine and alcohol-based extracts appear.",
     "category": "snack",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-starburst-halal",
@@ -384,20 +384,20 @@ export const halalItems: HalalItem[] = [
       "gatorade thirst quencher"
     ],
     "verdict": "halal",
-    "shortReason": "Contains no animal ingredients.",
-    "detailedReason": "### What is it?\nGatorade is a popular drink.\n\n### Why it may be halal\nGatorade is a sports drink made primarily of water, sugar, electrolytes, and synthetic flavorings/colorings. It is considered halal.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Classic Gatorade is water, sugars, electrolytes and flavourings — no gelatin. Protein lines are a different product.",
+    "detailedReason": "### Classic thirst-quencher\n\nWater, sugar or glucose-fructose syrup, citric acid, sodium and potassium salts, flavouring and colours. The original sports drink formula does not use gelatin, collagen or meat extracts.\n\n### Colours and \"natural flavor\"\n\nBright reds and blues are usually synthetic. Carmine is uncommon in the main line but worth a glance on pink variants. On US labels, \"natural flavor\" need not disclose carriers; residual ethanol as a flavour solvent at soft-drink levels is accepted by standard halal certifiers.\n\n### Do not confuse SKUs\n\n**Gatorade Protein** shakes and some recovery bottles contain dairy proteins. Those are not the same as the translucent electrolyte drink. Apply this verdict only to the classic sports drink unless you have checked the protein product's label.\n\n### Certification and markets\n\nPepsiCo bottles Gatorade locally in many countries. Certified SKUs appear where retail rules require a mark. Elsewhere the short, non-animal ingredient list is why athletes in Muslim communities commonly use it during training outside Ramadan fasting hours.\n\n### Practical note\n\nHigh sugar and sodium are health considerations, not fiqh barriers. During Ramadan, sports drinks do not replace the ruling on fasting — they are for non-fasting use.",
     "category": "drink",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-sprite-halal",
     "name": "Sprite",
     "aliases": [],
     "verdict": "halal",
-    "shortReason": "Plant-based and synthetic ingredients only.",
-    "detailedReason": "### What is it?\nSprite is a popular drink.\n\n### Why it may be halal\nSprite is manufactured by Coca-Cola and contains carbonated water, high fructose corn syrup, citric acid, natural flavors, and sodium citrate. It is halal.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Sprite is a clear lemon-lime soda with no animal ingredients — one of the simpler soft drinks to evaluate.",
+    "detailedReason": "### Ingredients\n\nCarbonated water, sugar or high-fructose corn syrup, citric acid, natural flavours, sodium citrate and a preservative such as sodium benzoate in many markets. There is no caramel colour, no dairy and no gelatin.\n\n### Why it is straightforward\n\nUnlike cream sodas or dessert drinks, classic Sprite does not rely on emulsifiers from fat or on dairy powders. The flavour system is citrus. Soft-drink flavour compounds may use ethanol as a processing carrier at trace level; that is not treated as an intoxicating drink under mainstream halal standards, and Coca-Cola Company products are certified in markets that require certification for retail.\n\n### Zero and remix variants\n\nSprite Zero / Light replace sugar with aspartame or similar sweeteners — still plant/synthetic, not animal. Tropical or coloured remix flavours add dye systems; if you avoid specific colours, read those packs separately.\n\n### Regional certification\n\n| Market | Situation |\n|---|---|\n| Gulf, Malaysia, Indonesia, Pakistan | Locally bottled Sprite usually certified |\n| UK, EU, US | Ingredient list is the reference |\n\n### Related\n\nSame evaluation pattern as Coca-Cola and Pepsi: short label, no meat derivatives, check novelty flavours on their own.",
     "category": "drink",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-dr-pepper-halal",
@@ -440,8 +440,8 @@ export const halalItems: HalalItem[] = [
       "starbucks coffee"
     ],
     "verdict": "doubtful",
-    "shortReason": "May contain carmine (in Strawberry flavors) or doubtful emulsifiers.",
-    "detailedReason": "### What is it?\nStarbucks Bottled Frappuccino is a popular drink.\n\n### Why it may be doubtful\nThe standard coffee and mocha bottled Frappuccinos are generally halal (coffee, milk, sugar). However, strawberry-flavored drinks have historically used carmine (E120) for color. Always check the label.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "The coffee and milk base can be fine, but syrups, whipped cream and flavourings may include gelatin, carmine or alcohol-based extracts depending on the drink and market.",
+    "detailedReason": "### Break the drink into parts\n\nA Frappuccino is not one ingredient. It is espresso or coffee base, milk or plant milk, ice, a flavoured syrup or sauce, and often whipped cream and a topping. Each layer has its own risks.\n\n### Usually straightforward\n\nBrewed coffee and espresso are plant products. Plain dairy milk is halal. Many plant milks (oat, almond, soy) are also fine if their emulsifiers are plant-based — which they usually are in major chains.\n\n### Where doubt comes in\n\n**Syrups and sauces.** Some contain vanilla extract (alcohol carrier), cream liqueur-style flavours, or colours such as carmine in pink/red drinks. Starbucks publishes ingredient lists by market; they differ between the US and Europe.\n\n**Whipped cream.** Often dairy-based and gelatin-free, but check — formulations change and some aerosol creams use gelatin.\n\n**Cookie, brownie and marshmallow toppings.** Bring gelatin, emulsifiers and possible alcohol flavourings from the bakery side.\n\n**Bottled Frappuccino** sold in shops is a different product from the barista-made drink and has its own label.\n\n### Regional practice\n\nIn Muslim-majority markets many Starbucks locations are certified or use certified dairy and syrups. In the US and UK the chain is generally not treated as fully halal; customers who drink there often stick to plain coffee and plant milk and skip novelty toppings.\n\n### Practical approach\n\nAsk for the ingredient card for your specific drink. Choose plain espresso drinks or simple iced coffee when you want fewer variables. Treat seasonal pink and dessert Frappuccinos as higher-risk until you have checked the syrup and topping list.",
     "category": "drink",
     "priority": "high"
   },
@@ -503,10 +503,10 @@ export const halalItems: HalalItem[] = [
       "e406"
     ],
     "verdict": "halal",
-    "shortReason": "A plant-based alternative to gelatin.",
-    "detailedReason": "### What is it?\nAgar-Agar is a popular ingredient.\n\n### Why it may be halal\nAgar-agar is a jelly-like substance obtained from red algae (seaweed). It is 100% plant-based, vegan, and halal.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Agar-agar is a gelling agent extracted from red seaweed. It is plant-based and a common halal alternative to gelatin.",
+    "detailedReason": "### What it is\n\nAgar (E406) is a polysaccharide from red algae. It dissolves in boiling water and sets as it cools, firmer than gelatin and stable at warmer temperatures.\n\n### Why it is used as a gelatin replacement\n\nIt contains no animal tissue. Halal and vegetarian confectionery, desserts and microbiology labs use it for that reason. If a sweet is gelled with agar instead of gelatin, the gelatin ruling disappears.\n\n### Processing aids\n\nCommercial agar is washed and dried seaweed extract. No alcohol or animal enzyme step is required. Occasional blends sold as \"agar powder\" may mix in other gums — read the pack if you need pure agar.\n\n### Cooking tip\n\nAgar sets more firmly and at higher temperature than gelatin; recipes do not substitute 1:1 by weight without adjustment. For halal marshmallows and jellies, pectin and carrageenan are the other common plant options.",
     "category": "ingredient",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-pectin-halal",
@@ -515,10 +515,10 @@ export const halalItems: HalalItem[] = [
       "e440"
     ],
     "verdict": "halal",
-    "shortReason": "A plant-based gelling agent.",
-    "detailedReason": "### What is it?\nPectin (E440) is a popular ingredient.\n\n### Why it may be halal\nPectin is a carbohydrate extracted from fruits (like apples or citrus peels) used to set jams and jellies. It is entirely plant-based and halal.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Pectin is fruit fibre used to gel jams and gummies. It is plant-based and a standard halal alternative to gelatin.",
+    "detailedReason": "### Source\n\nPectin (E440) is extracted mainly from citrus peel or apple pomace after juicing. It is a soluble fibre that gels in sugar-acid systems — the reason homemade jam sets.\n\n### Why confectioners switched to it\n\nGelatin is animal. Pectin is not. Halal-certified and vegan gummies almost always list pectin (sometimes with agar or starch) instead of gelatin. Seeing \"pectin\" on a sweet is a positive signal, but still confirm gelatin is not also listed.\n\n### What comes in the sachet\n\nRetail pectin often includes dextrose as a filler and citrate to control pH. Those carriers are plant or mineral. \"Jam sugar\" is sugar pre-blended with pectin — still plant-based.\n\n### Remaining checks on pectin sweets\n\nColours (including carmine), glazing agents and flavourings are independent of the gel. A pectin gummy can still be doubtful for colour reasons even when the gel itself is fine.\n\n### Cooking\n\nPectin sets differently from gelatin (needs sugar and acid; does not melt the same way in the mouth). For halal dessert work it is one of the three main plant gels alongside agar and carrageenan.",
     "category": "ingredient",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-civet-halal",
@@ -564,8 +564,8 @@ export const halalItems: HalalItem[] = [
       "subway veggie patty"
     ],
     "verdict": "doubtful",
-    "shortReason": "Patty is halal, but cross-contamination risk is high.",
-    "detailedReason": "### What is it?\nSubway Veggie/Beyond Meat is a popular fast-food.\n\n### Why it may be doubtful\nWhile plant-based patties are inherently halal, Subway workers often handle meat (including pork) and cheese with the same gloves, and use the same knives to cut sandwiches. Ask them to change gloves and use a clean knife.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "The Impossible patty is plant-based, but in most Western Subways it is prepared on shared equipment with non-halal meat.",
+    "detailedReason": "### The patty\n\nImpossible Foods' burger patty is plant-based (soy protein, coconut/sunflower oil, heme from fermentation, binders). It contains no meat and no pork. From an ingredients view the patty itself is widely accepted as halal-suitable, and Impossible has pursued halal certification for the product in some channels.\n\n### The restaurant problem\n\nAt a standard Western Subway the patty is heated on the same grill or in the same microwave workflow used for meatballs, chicken and bacon-containing items, depending on the store. Shared utensils and prep surfaces are the rule, not the exception.\n\nSo the question \"Is Impossible Halal at Subway?\" is really two questions:\n\n1. Is the patty free of haram ingredients? Usually yes.\n2. Is the sandwich prepared without cross-contact with non-zabiha meat and pork? Only if the store separates equipment — which most Western stores do not advertise.\n\n### Certified Subway markets\n\nIn some Muslim-majority countries Subway operates fully certified restaurants with no pork and halal meat. There the Impossible question rarely arises because the whole kitchen is already under certification.\n\n### What to do\n\nAsk whether the Impossible patty is heated separately. If not, and you avoid shared grills with pork or non-zabiha meat, treat the sandwich as doubtful regardless of the plant patty. A certified Subway location removes the ambiguity.",
     "category": "fast-food",
     "priority": "high"
   },
@@ -574,8 +574,8 @@ export const halalItems: HalalItem[] = [
     "name": "Taco Bell",
     "aliases": [],
     "verdict": "doubtful",
-    "shortReason": "Meat is not halal in Western countries.",
-    "detailedReason": "### What is it?\nTaco Bell is a popular fast-food.\n\n### Why it may be doubtful\nIn the US and Europe, Taco Bell meat is not halal. You can substitute beans or potatoes for meat, but be aware of cross-contamination in the kitchen.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Halal-certified in some Muslim-majority markets. In the US, UK and most of Europe the meat is not zabiha and kitchens handle pork.",
+    "detailedReason": "### It depends on the country and the branch\n\nTaco Bell is a franchise system. Halal status is decided market by market, not by the global brand name on the sign.\n\n| Market | Typical status |\n|---|---|\n| UAE, Saudi Arabia, Malaysia, Pakistan | Many or all restaurants certified |\n| United Kingdom | Not chain-wide certified |\n| United States, Canada, Australia | Not certified; pork on the menu |\n\n### Western restaurants\n\nIn standard Western Taco Bell kitchens the beef and chicken are not slaughtered to Islamic requirements. The menu also includes pork products (bacon, some fillings). Shared grills, prep surfaces and fryers mean cross-contact is a practical issue even if you order a bean burrito.\n\nVegetarian items avoid the meat question but do not automatically solve shared-equipment contact with pork and non-zabiha meat. Ask how the kitchen separates items if that matters to your standard.\n\n### Certified markets\n\nWhere Taco Bell is fully certified, the supply chain and kitchen are audited: halal-slaughtered meat, no pork on the menu, and a visible certificate. That is the situation in several Gulf and Southeast Asian cities — not a licence to assume the same in London or Los Angeles.\n\n### How to verify\n\nLook for a named certifier's certificate in the restaurant. Staff saying \"the meat is fine\" without documentation is not verification. National Taco Bell sites sometimes list halal locations; use those lists rather than social-media screenshots.",
     "category": "fast-food",
     "priority": "high"
   },
@@ -664,8 +664,8 @@ export const halalItems: HalalItem[] = [
       "logan paul prime"
     ],
     "verdict": "halal",
-    "shortReason": "Contains no animal products or alcohol.",
-    "detailedReason": "### What is it?\nPrime Hydration & Energy is a popular drink.\n\n### Why it may be halal\nPrime Hydration and Prime Energy drinks use synthetic vitamins, electrolytes, and flavorings. They do not contain any animal-derived ingredients or alcohol, making them halal to consume.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Prime Energy uses synthetic ingredients with no animal products in the standard formula. Check flavours for colours if you avoid carmine.",
+    "detailedReason": "### What is in the can\n\nCarbonated water, citric acid, caffeine, electrolytes (sodium, potassium, magnesium), vitamins, artificial sweeteners (typically sucralose and acesulfame K), flavourings and colours. There is no taurine in some Prime Energy formulas — check your can — and no gelatin.\n\nThe core recipe is plant, mineral and synthetic. That makes the standard product straightforward from a halal ingredients view.\n\n### What people ask about\n\n**Caffeine.** Permissible; the health debate about high doses is separate from the fiqh of the ingredient itself. A can is high in caffeine relative to tea — that is a moderation question, not a haram ruling.\n\n**Artificial colours.** Red and pink flavours may use synthetic dyes or, less often, carmine. Read the colour line. Synthetic Red 40 / Allura Red is not animal-derived; E120 is.\n\n**Flavourings.** \"Natural flavors\" on US labels need not list carriers. Trace ethanol as a flavour solvent is treated as excused by mainstream certifiers when present only as a processing aid.\n\n### Hydration Prime vs Energy Prime\n\nPRIME Hydration (the drink bottle) and PRIME Energy (the can) are different products with different formulas. Do not transfer a verdict from one to the other without reading the label.\n\n### Certification\n\nAvailability of a local halal mark depends on the market. Where there is no mark, the ingredient list above is the reference for the standard Energy range.",
     "category": "drink",
     "priority": "high"
   },
@@ -925,10 +925,10 @@ export const halalItems: HalalItem[] = [
       "lays chips"
     ],
     "verdict": "doubtful",
-    "shortReason": "Classic is halal. Cheese/BBQ flavors often contain animal enzymes.",
-    "detailedReason": "### What is it?\nLays Potato Chips is a popular snack.\n\n### Why it may be doubtful\nLays Classic (just potatoes, oil, and salt) are universally halal. Flavors like Sour Cream & Onion or BBQ in the US often use animal enzymes (rennet or pork-derived flavorings) in their seasoning powder. Always check the label or use the allhalal.info app to scan the specific flavor.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Plain salted Lay’s are usually fine; cheese and novelty flavours depend on enzymes and seasonings that change by country.",
+    "detailedReason": "### Classic / salted\n\nPotatoes, vegetable oil and salt. In most markets this flavour is vegetarian and free of gelatin. When you cannot find a halal logo, Classic is the lowest-complexity option in the Lay’s range.\n\n### Cheese and seasoning flavours\n\nCheese, sour cream, barbecue, French onion and regional specials add powders and flavour bases. Dairy powders inherit the rennet used upstream. Meat-named seasonings may use non-halal flavour chemistry. PepsiCo formulates by market — Egyptian, Indonesian and American bags are not interchangeable.\n\n### Decision table\n\n| Signal on the bag | Meaning |\n|---|---|\n| Halal mark | Accept for that market’s recipe |\n| Vegetarian claim on cheese flavour | Non-animal enzymes |\n| Cheese + undeclared enzymes, no claim | Doubtful |\n| Classic salted | Usually acceptable on ingredients |\n\n### Same family\n\nDoritos and Cheetos follow the same rule of thumb: plain bases are simple; cheese seasonings need a market-specific read.",
     "category": "snack",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-marshmallow-fluff-halal",
@@ -1103,10 +1103,10 @@ export const halalItems: HalalItem[] = [
       "irish moss extract"
     ],
     "verdict": "halal",
-    "shortReason": "Extracted from red edible seaweeds.",
-    "detailedReason": "### What is it?\nCarrageenan is a popular ingredient.\n\n### Why it may be halal\nCarrageenan is used as a thickening and gelling agent (often in dairy and alternative milks). Because it is extracted entirely from seaweed, it is a plant-based, halal ingredient.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Carrageenan is a seaweed thickener. It is plant-based and common in plant milks and desserts.",
+    "detailedReason": "### What it is\n\nCarrageenan (E407, E407a) is extracted from red seaweed. Food makers use it to thicken chocolate milk, plant milks, ice cream, desserts and some processed meats.\n\n### Origin ruling\n\nSeaweed is not a land animal and does not require slaughter. Halal certification bodies treat carrageenan as permissible. Online health debates about degraded carrageenan in large doses are a nutrition/science discussion, not a change to the ingredient’s religious origin status.\n\n### Names on packs\n\nCarrageenan, Irish moss extract, E407, E407a (processed eucheuma seaweed). All are seaweed gums.\n\n### In plant milks\n\nOat, almond and soy milks may use carrageenan, gellan gum or locust bean gum. None of those plant gums introduce a meat problem. If a milk is doubtful, the reason is usually elsewhere (flavourings, vitamin carriers), not the seaweed thickener.\n\n### Related plant gels\n\nTogether with agar-agar and pectin, carrageenan is part of the standard toolkit for avoiding gelatin in industrial and home recipes.",
     "category": "ingredient",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-guar-gum-halal",
@@ -1165,10 +1165,10 @@ export const halalItems: HalalItem[] = [
       "fanta orange"
     ],
     "verdict": "halal",
-    "shortReason": "A fruit-flavored carbonated soft drink.",
-    "detailedReason": "### What is it?\nFanta is a popular drink.\n\n### Why it may be halal\nFanta, produced by Coca-Cola, contains carbonated water, sugar, citric acid, and natural/synthetic flavorings and colorings. It does not contain animal products or alcohol, making it halal.\n\n### Fiqh considerations\nGeneral Islamic dietary principles require that ingredients be free from non-Zabiha meat, insects, and intoxicating alcohol.\n\n### Practical advice\nAlways read the latest ingredient label or use the allhalal.info scanner app, as manufacturers frequently change their recipes. Look for certified vegan or halal symbols where possible.",
+    "shortReason": "Fanta is fruit-flavoured soda without animal ingredients. Confirm colours on red or pink variants if you avoid carmine.",
+    "detailedReason": "### Base recipe\n\nCarbonated water, sugar, fruit juice or flavour concentrates, citric acid, preservatives, colours and antioxidants depending on the flavour. Standard Fanta does not contain gelatin, meat fat or dairy.\n\n### Colours are the main variable\n\nOrange Fanta typically uses carotenoids or synthetic orange dyes — plant or petrochemical, not animal. Red and berry Fantas are where **carmine (E120)** could appear in some markets. If insect-derived dye matters to you, read the colour line before buying a red variant.\n\n### Heavily localised recipes\n\nFanta has dozens of country-specific flavours. A can from South Africa, Japan or Germany can differ in juice content, sweeteners and colours. Always read the pack in your hand; do not rely on a global assumption.\n\n### Certification\n\nIn Muslim-majority markets Fanta is commonly bottled under national halal schemes. Elsewhere the ingredient list above is why the drink is widely treated as halal, with the carmine caveat on certain colours.\n\n### Bottom line\n\nClassic orange Fanta is plant-based. Treat unusual colours and limited editions as separate products.",
     "category": "drink",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-lipton-ice-tea-halal",
@@ -1339,10 +1339,10 @@ export const halalItems: HalalItem[] = [
       "ghost"
     ],
     "verdict": "halal",
-    "shortReason": "Vegan-friendly and free from animal products.",
-    "detailedReason": "### What is it?\nA popular energy drink brand known for its collaborations with candy brands like Sour Patch Kids and Warheads.\n\n### Why it may be halal\nGhost Energy drinks are formulated to be vegan. The amino acids (like Taurine and L-Carnitine) used are typically synthesized rather than extracted from animals. They contain no animal byproducts or alcohol.\n\n### Fiqh considerations\nBeverages that do not contain alcohol, blood, or haram animal derivatives are permissible.\n\n### Practical advice\nWhile the energy drink itself is halal, be mindful of the high caffeine content.",
+    "shortReason": "Ghost Energy is a synthetic-caffeine energy drink without gelatin. Check individual flavours for colours if you avoid carmine.",
+    "detailedReason": "### Typical formula\n\nCarbonated water, citric acid, artificial sweeteners, caffeine, vitamins, amino acids (often citrulline, carnitine, beta-alanine), flavourings and colours. No taurine in some Ghost formulas — read the can.\n\n### Carnitine and amino acids\n\nL-carnitine in beverages is produced by synthesis or fermentation for commercial use, not extracted from meat for soft-drink supply. Amino acids in pre-workout-style energy drinks are likewise industrial/fermentation products in mainstream brands.\n\n### Colours\n\nBright red/pink flavours: confirm whether colour is synthetic or carmine. Most US energy drinks use synthetic dyes.\n\n### Bottom line\n\nStandard Ghost cans are free of gelatin and meat tissue. The open checks are flavour-specific colours and your own limits on high caffeine intake — a health and moderation issue, not an ingredient-origin issue.",
     "category": "drink",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-chick-fil-a-chicken-halal",
@@ -1352,8 +1352,8 @@ export const halalItems: HalalItem[] = [
       "chickfila"
     ],
     "verdict": "haram",
-    "shortReason": "The chicken is machine-slaughtered and not certified Zabiha Halal.",
-    "detailedReason": "### What is it?\nA major American fast-food chain specializing in chicken sandwiches.\n\n### Why it may be haram\nChick-fil-A sources its chicken from massive commercial poultry suppliers in the US. These chickens are machine-slaughtered, often stunned using water baths, and the name of Allah is not pronounced over each bird. Therefore, it does not meet the requirements for Zabiha Halal meat.\n\n### Fiqh considerations\nWhile a minority of scholars allow meat from \"People of the Book\" (Ahl al-Kitab) regardless of slaughter method, the vast majority of scholars in the US agree that modern commercial machine-slaughtered poultry without the Tasmiyah is not halal.\n\n### Practical advice\nAvoid the chicken. You can opt for their fries (cooked in canola oil) or a fruit cup, but be aware of cross-contamination risks in the kitchen.",
+    "shortReason": "Chick-fil-A chicken in the US is not slaughtered to Islamic requirements. There is no chain-wide halal certification.",
+    "detailedReason": "### The meat\n\nChick-fil-A's chicken sandwich and related chicken items use poultry from conventional US processing. That means the birds are not slaughtered according to zabiha requirements recognised by mainstream Muslim standards. Without Islamic slaughter, the meat is not halal.\n\n### Certification\n\nChick-fil-A does not operate a US-wide halal programme. Individual claims on social media about \"halal Chick-fil-A\" are almost always incorrect for standard locations. If a specific franchise ever carried a certificate, it would need to be verified on-site with a named certifier — it is not the default.\n\n### Fries and non-meat sides\n\nEven sides are cooked in a kitchen that handles non-halal chicken, with shared fryers and prep. People who only avoid eating the meat itself still face cross-contact questions; those who require zabiha meat will not eat here.\n\n### Alternatives\n\nIf you want a similar fast-food chicken sandwich, look for chains or local restaurants with visible halal certification rather than assuming a Christian-owned brand is religiously acceptable for meat — ownership ethics and slaughter method are different issues.",
     "category": "fast-food",
     "priority": "high"
   },
@@ -1378,10 +1378,10 @@ export const halalItems: HalalItem[] = [
       "ketchup"
     ],
     "verdict": "halal",
-    "shortReason": "Contains only plant-based ingredients and vinegar.",
-    "detailedReason": "### What is it?\nThe world's most popular tomato ketchup.\n\n### Why it may be halal\nThe ingredients are tomato concentrate, distilled vinegar, high fructose corn syrup, corn syrup, salt, spice, onion powder, and natural flavoring. The vinegar is distilled from grain or corn and is perfectly halal. The natural flavorings do not contain animal products.\n\n### Fiqh considerations\nVinegar is halal in Islam, even if it was originally alcohol, because the transformation (Istihalah) into acetic acid makes it pure.\n\n### Practical advice\nStandard Heinz Ketchup is fully permissible and widely considered halal.",
+    "shortReason": "Heinz tomato ketchup is plant-based: tomatoes, vinegar, sugar, salt and spices — no gelatin or animal fat.",
+    "detailedReason": "### Standard recipe\n\nTomato concentrate, vinegar, sugar (or sweetener), salt and spice extracts. Classic Heinz Tomato Ketchup contains no meat, gelatin or dairy.\n\n### Vinegar\n\nThe vinegar is food-grade acetic acid from fermentation. It is not intoxicating wine. Mainstream rulings accept it in condiments without treating ketchup as an alcoholic product.\n\n### Why the question appears\n\nPeople confuse ketchup with Worcestershire sauce or steak sauces that historically included anchovy or barley ingredients. Tomato ketchup is a different condiment with a short plant list.\n\n### Flavoured lines\n\nChipotle, organic and reduced-sugar ketchups change spices or sweeteners. They remain plant-based in normal formulations, but a 10-second ingredient read is still worth it.\n\n### Certification\n\nCommon in Muslim retail markets. Elsewhere the transparent plant recipe is why ketchup is rarely a genuine fiqh obstacle.",
     "category": "other",
-    "priority": "normal"
+    "priority": "high"
   },
   {
     "slug": "is-soy-sauce-halal",
