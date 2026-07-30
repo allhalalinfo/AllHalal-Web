@@ -239,8 +239,8 @@ export const halalItems: HalalItem[] = [
       "flamin hot cheetos"
     ],
     "verdict": "doubtful",
-    "shortReason": "Cheetos cheese seasoning can involve animal enzymes in some markets (notably the US). UK/EU/vegetarian packs differ.",
-    "detailedReason": "### Same brand, different recipes\n\nCornmeal crunch is fine. The cheese powder decides the ruling. US Cheetos have used animal enzymes in cheese seasoning; UK and many EU packs use microbial enzymes and often carry vegetarian suitability.\n\n### What to look for\n\nCountry of manufacture; “suitable for vegetarians”; halal mark in Muslim markets; flavour name (Flamin’ Hot vs plain cheese vs limited editions).\n\n### Practical rule\n\nNever apply a US forum answer to a UK bag or a Malaysian certified bag. Check the pack in your hand — same logic as Doritos.",
+    "shortReason": "Cheetos cheese seasoning can involve animal enzymes in some markets (notably the US). UK/EU and vegetarian packs differ.",
+    "detailedReason": "### Same brand, different recipes\n\nThe cornmeal crunch is fine. The cheese powder decides the ruling. US Cheetos have used animal enzymes in cheese seasoning; UK and many EU packs use microbial enzymes and often carry vegetarian suitability claims.\n\n### What to look for\n\nCountry of manufacture, a “suitable for vegetarians” flash, a local halal mark in Muslim markets, and the exact flavour name — Flamin’ Hot, plain cheese and limited editions are not identical formulas.\n\n### Practical rule\n\nNever apply a US forum answer to a UK bag or a Malaysian certified bag. Check the pack in your hand — the same market-split logic as Doritos.",
     "category": "snack",
     "priority": "high"
   },
@@ -690,8 +690,8 @@ export const halalItems: HalalItem[] = [
       "schweppes"
     ],
     "verdict": "halal",
-    "shortReason": "Ginger ale is carbonated water, sweetener and ginger flavour — no animal ingredients in standard formulas.",
-    "detailedReason": "### Typical can\n\nCarbonated water, sugar or HFCS, citric acid, natural flavours (ginger), preservatives, sometimes caramel colour. No gelatin, dairy or meat.\n\n### Alcohol confusion\n\nDespite “ale,” commercial ginger ale is a soft drink, not fermented beer. Craft ginger beers that declare ABV above 0.5% are alcoholic — different product.\n\n### Brands\n\nCanada Dry, Schweppes, Seagram’s and own-brands follow the soft-drink pattern. Diet versions swap sweeteners without adding animal ingredients.\n\n### Practical take\n\nSupermarket ginger ale soda is fine. Read craft fermented ginger beer for alcohol.",
+    "shortReason": "Ginger ale is carbonated water, sweetener and ginger flavour — no animal ingredients in standard commercial formulas.",
+    "detailedReason": "### Typical can\n\nCarbonated water, sugar or HFCS, citric acid, ginger-style natural flavours, preservatives and sometimes caramel colour. No gelatin, dairy or meat derivatives in mainstream supermarket ginger ale.\n\n### Alcohol confusion\n\nDespite the word “ale,” commercial ginger ale is a soft drink, not fermented beer. A few craft ginger beers declare ABV above 0.5% — those are alcoholic drinks and a different product category.\n\n### Brands\n\nCanada Dry, Schweppes, Seagram’s and store brands follow the soft-drink pattern. Diet versions swap sweeteners without introducing animal ingredients.\n\n### Practical take\n\nSupermarket ginger ale soda is fine. Read craft fermented ginger beer labels for alcohol before assuming the same ruling.",
     "category": "drink",
     "priority": "high"
   },
@@ -717,7 +717,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "halal",
     "shortReason": "E150 is caramel colour from heating carbohydrates — not an animal colour.",
-    "detailedReason": "### Classes\n\nE150a–d are caramel colours made by controlled heating of sugars, sometimes with acids, alkalis or sulphite compounds. Used in colas, soy sauce, vinegar, baked goods and sweets.\n\n### Origin\n\nCarbohydrate — plant sugars. No insect or meat pigment. Major halal bodies accept caramel colour.\n\n### Process vs fiqh\n\nAmmonia and sulphite process debates are manufacturing/toxicity discussions. They do not turn E150 into an animal-derived additive.\n\n### Bottom line\n\nSeeing E150 on a soft drink does not create a gelatin-style problem.",
+    "detailedReason": "### Classes\n\nE150a–d are caramel colours made by controlled heating of sugars, sometimes with acids, alkalis or sulphite compounds. Used in colas, soy sauce, vinegar, baked goods and sweets for brown tint.\n\n### Origin\n\nThe feedstock is carbohydrate — plant sugars. No insect pigment and no meat extract. Major halal certification bodies accept caramel colour as halal.\n\n### Process debates ≠ fiqh origin\n\nAmmonia-process or sulphite-process discussions are manufacturing and toxicology topics. They do not turn E150 into an animal-derived additive.\n\n### Bottom line\n\nSeeing E150 on a soft drink or sauce does not create a gelatin-style problem. Keep reading for other additives if the product still feels unclear.",
     "category": "additive",
     "priority": "high"
   },
@@ -810,7 +810,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "haram",
     "shortReason": "E428 is gelatin. Unless the pack states halal bovine or fish gelatin, treat it as non-halal (often porcine).",
-    "detailedReason": "### Identity\n\nE428 is the European code for gelatin — the same gelling protein in gummies, marshmallows, capsules and some desserts.\n\n### Default ruling\n\nUnqualified gelatin in mainstream Western confectionery is typically porcine or mixed non-zabiha bovine. That is not halal.\n\n### Exceptions that change the answer\n\nHalal-certified bovine gelatin from zabiha animals; fish gelatin accepted by your certifier; a clear “halal gelatin” claim on the label.\n\n### Alternatives\n\nPectin, agar-agar and starch gummies avoid the issue entirely. Always read “gummies” and “marshmallow” lines for the word gelatin or E428.",
+    "detailedReason": "### Identity\n\nE428 is the European code for gelatin — the same gelling protein used in gummies, marshmallows, soft capsules and some desserts.\n\n### Default ruling\n\nUnqualified gelatin in mainstream Western confectionery is typically porcine or mixed non-zabiha bovine. That is not halal for food use.\n\n### Exceptions that change the answer\n\nHalal-certified bovine gelatin from zabiha animals, fish gelatin accepted by your certifier, or a clear “halal gelatin” claim on the label.\n\n### Alternatives\n\nPectin, agar-agar and starch gummies avoid the issue. Always read “gummies” and “marshmallow” lines for gelatin or E428 before buying.",
     "category": "additive",
     "priority": "high"
   },
@@ -913,7 +913,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "doubtful",
     "shortReason": "Many syrups are sugar-based without gelatin, but sauces and seasonal pumps vary — stores are not universally halal-certified.",
-    "detailedReason": "### Syrups vs the whole drink\n\nPlain espresso is fine. Vanilla/caramel/hazelnut syrups are mostly sugar, water and flavour. Opacity remains: not every market publishes a full halal dossier, and sauces (mocha, pumpkin) can include dairy emulsifiers.\n\n### Alcohol in flavour\n\nSome natural flavours use ethanol carriers. Ask for the ingredient book locally or stick to espresso + milk.\n\n### Kitchen context\n\nWestern Starbucks are not generally full-halal kitchens. Cross-contact matters to some customers more than syrup chemistry.\n\n### Safer orders\n\nBlack coffee, americano, espresso, plain milk drinks without seasonal sauce.",
+    "detailedReason": "### Syrups vs the whole drink\n\nPlain espresso is ingredients-halal. Vanilla, caramel and hazelnut syrups are mostly sugar, water and flavour. Doubt remains because not every market publishes a full halal dossier, and thicker sauces (mocha, pumpkin, cookie) can include dairy emulsifiers or opaque “natural flavours.”\n\n### Alcohol in flavour systems\n\nSome natural flavours use ethanol as a carrier. Ask for the local ingredient book or stick to espresso with plain milk if you want fewer variables.\n\n### Kitchen context\n\nWestern Starbucks are not generally full-halal kitchens. Cross-contact with non-halal food matters to some customers more than syrup chemistry itself.\n\n### Safer orders\n\nBlack coffee, americano, espresso and plain milk drinks without seasonal sauce or candy toppings.",
     "category": "fast-food",
     "priority": "high"
   },
@@ -949,8 +949,8 @@ export const halalItems: HalalItem[] = [
       "twix bar"
     ],
     "verdict": "halal",
-    "shortReason": "Twix is biscuit, caramel and milk chocolate — no gelatin in the standard bar.",
-    "detailedReason": "### Layers\n\nCookie biscuit, soft caramel, milk chocolate coating. Mars does not use gelatin to set classic Twix caramel; the chew is sugar syrup and dairy proteins.\n\n### Dairy\n\nMilk chocolate and caramel contain milk — halal milk with ordinary industrial dairy notes. Certified Twix appears in several Muslim markets.\n\n### Variants\n\nSalted Caramel, white chocolate, ice-cream bars and bakery pieces can differ. Ice-cream and seasonal filled products need their own labels.\n\n### Compared with gelatin candy\n\nTwix is a chocolate biscuit bar, not a gummy. Soft texture does not mean gelatin.",
+    "shortReason": "Twix is biscuit, caramel and milk chocolate — no gelatin in the standard bar. Dairy is the only animal input.",
+    "detailedReason": "### Layers\n\nCookie biscuit, soft caramel and milk chocolate coating. Mars does not use gelatin to set classic Twix caramel; the chew comes from sugar syrup and dairy proteins.\n\n### Dairy\n\nMilk chocolate and caramel contain milk — halal as milk products under ordinary industrial dairy notes. Certified Twix appears in several Muslim-majority markets.\n\n### Variants\n\nSalted Caramel, white chocolate, ice-cream bars and bakery pieces can differ. Ice-cream and seasonal filled products need their own labels.\n\n### Compared with gelatin candy\n\nTwix is a chocolate biscuit bar, not a gummy. Soft texture does not mean gelatin is present.",
     "category": "snack",
     "priority": "high"
   },
@@ -999,8 +999,8 @@ export const halalItems: HalalItem[] = [
       "cerave cream"
     ],
     "verdict": "halal",
-    "shortReason": "CeraVe is for external use with plant/synthetic bases; widely treated as fine for skin. Strict users may check cholesterol/lanolin paths per SKU.",
-    "detailedReason": "### Cosmetics vs food\n\nExternal cream rulings differ from food: many scholars are more lenient on non-ingested products.\n\n### Typical CeraVe base\n\nCeramides (often synthetic/plant), hyaluronic acid (commonly fermentation), glycerin, fatty alcohols, emulsifiers. Some SKUs list cholesterol (possible wool pathway) — check if you are strict.\n\n### Practical stance\n\nFor most users following mainstream cosmetic guidance, CeraVe cleansers and moisturisers are accepted for external use. Vegans and full ingredient-tracers should still read each tube.",
+    "shortReason": "CeraVe moisturisers are for external use and use mostly plant/synthetic bases; widely treated as fine for skin. Strict users may check cholesterol or lanolin paths per SKU.",
+    "detailedReason": "### Cosmetics vs food\n\nIslamic rulings on cream differ from food: external use of pure substances is broadly permitted, and many scholars are more lenient on products that are not swallowed. Hand and face moisturiser is not evaluated like a gummy candy.\n\n### Typical CeraVe base\n\nCeramides (often synthetic or plant-derived in modern formulas), hyaluronic acid (commonly biofermentation), glycerin, fatty alcohols and emulsifiers. Some SKUs list cholesterol, which can follow a wool/lanolin pathway or a synthetic one — read that line if you are strict.\n\n### What does not apply\n\nThere is no gelatin-gummy logic here. Petrolatum and mineral oils in related healing ointments are separate products from CeraVe’s ceramide creams.\n\n### Practical stance\n\nFor most users following mainstream cosmetic guidance, CeraVe cleansers and moisturisers are accepted for external use. Vegans and full ingredient-tracers should still read each tube, especially richer “cream” SKUs versus light lotions.",
     "category": "cosmetics",
     "priority": "high"
   },
@@ -1025,7 +1025,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "doubtful",
     "shortReason": "Carmine blush uses cochineal insect pigment. External makeup rulings differ; many who avoid food carmine also skip it on cheeks.",
-    "detailedReason": "### Ingredient\n\nCI 75470 / carmine / cochineal in powder or cream blush for blue-red undertones.\n\n### Scholarly split\n\nSome allow insect colours externally; others avoid any insect-derived cosmetic. Blush is less likely to be ingested than lipstick, so some people accept blush carmine while refusing lip carmine.\n\n### How to avoid\n\nVegan blush, “carmine-free” claims, mineral makeup using iron oxides instead.\n\n### Practical rule\n\nMatch your food standard if you want one consistent personal rule; otherwise follow the scholar you trust on cosmetics.",
+    "detailedReason": "### Ingredient\n\nCI 75470, carmine or cochineal gives blue-red undertones in powder and cream blush. It is the same insect-derived colour used in some foods and lipsticks.\n\n### Scholarly split\n\nSome allow insect colours for external makeup; others avoid any insect-derived cosmetic. Blush is less likely to be ingested than lipstick, so some people accept blush carmine while refusing lip carmine — that is a personal consistency choice, not a single universal fatwa line.\n\n### How to avoid\n\nVegan blush, explicit “carmine-free” claims, or mineral makeup built on iron oxides instead of cochineal.\n\n### Practical rule\n\nIf you avoid carmine in food and want one rule for the bathroom shelf, skip carmine blush too.",
     "category": "cosmetics",
     "priority": "high"
   },
@@ -1051,7 +1051,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "halal",
     "shortReason": "E211 is sodium benzoate, a synthetic soft-drink preservative — not animal-derived.",
-    "detailedReason": "### Function\n\nSodium benzoate prevents microbial growth in acidic drinks, sauces and condiments.\n\n### Production\n\nFrom benzoic acid and sodium hydroxide. Food-grade benzoates are industrial chemicals, not meat, dairy or insect extracts.\n\n### Soft drinks\n\nAppears alongside citric or phosphoric acid. No link to gelatin, rennet or glycerin questions. E211 on a can does not make the drink doubtful for origin reasons.\n\n### Health debates ≠ fiqh\n\nBenzoate intake discussions are toxicology/nutrition. They do not change the origin ruling: E211 is halal as an ingredient source.",
+    "detailedReason": "### Function\n\nSodium benzoate slows microbial growth in acidic drinks, sauces and some condiments. It is one of the most common preservatives in sodas and fruit drinks.\n\n### Production\n\nMade from benzoic acid and sodium hydroxide. Food-grade benzoates are industrial chemicals, not meat, dairy or insect extracts.\n\n### Soft drinks\n\nOften paired with citric or phosphoric acid. E211 has no link to gelatin, rennet or glycerin questions, so its presence alone does not make a drink doubtful for origin reasons.\n\n### Health debates ≠ fiqh\n\nDiscussions about benzoate intake are toxicology and nutrition topics. They do not change the origin ruling: E211 is halal as an ingredient source.",
     "category": "additive",
     "priority": "high"
   },
@@ -1064,7 +1064,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "halal",
     "shortReason": "E202 is potassium sorbate, a synthetic preservative — not animal-derived.",
-    "detailedReason": "### What it does\n\nPotassium sorbate (E202) inhibits moulds and yeasts in cheese, drinks, baked goods and dried fruit.\n\n### Origin\n\nMade by neutralising sorbic acid with potassium hydroxide. Food-grade sorbic acid for this use is manufactured synthetically. It is not a meat or dairy extract.\n\n### Halal status\n\nTreated as halal by certifiers. Presence of E202 does not make a product doubtful.\n\n### Related preservatives\n\nE200 (sorbic acid), E201 (sodium sorbate) and E211 (sodium benzoate) follow the same synthetic logic — none are gelatin-like problems.",
+    "detailedReason": "### What it does\n\nPotassium sorbate (E202) inhibits moulds and yeasts in cheese, drinks, baked goods and dried fruit so products last longer on the shelf.\n\n### Origin\n\nProduced by neutralising sorbic acid with potassium hydroxide. Food-grade sorbic acid for this use is manufactured synthetically; it is not a meat or dairy extract despite occasional confusion with “sorbate” sounding biological.\n\n### Halal status\n\nCertification bodies treat E202 as halal. Its presence does not make a product doubtful.\n\n### Related preservatives\n\nE200 (sorbic acid), E201 (sodium sorbate) and E211 (sodium benzoate) follow the same synthetic logic — none are gelatin-like problems.",
     "category": "additive",
     "priority": "high"
   },
@@ -1077,7 +1077,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "halal",
     "shortReason": "E903 is carnauba wax from palm leaves — a plant glaze for sweets and fruit.",
-    "detailedReason": "### Source\n\nCarnauba wax is exuded by leaves of the Brazilian palm *Copernicia prunifera*. Harvested from plant surfaces, not animals.\n\n### Uses\n\nCandy coatings, fruit wax, chocolate polish, some cosmetics. Adds shine and a moisture barrier.\n\n### Compared with other glazes\n\nCarnauba E903 is plant and clear. Beeswax E901 is generally accepted as a bee product. Shellac E904 (lac insect) attracts more disagreement — do not lump them together.\n\n### Bottom line\n\nE903 is a plant wax and is not a reason to avoid confectionery for halal purposes.",
+    "detailedReason": "### Source\n\nCarnauba wax is exuded by the leaves of the Brazilian palm *Copernicia prunifera* and harvested from plant surfaces, not from animals.\n\n### Uses\n\nCandy coatings, fruit wax, chocolate polish and some cosmetics. It adds shine and a light moisture barrier so pieces do not stick in the bag.\n\n### Compared with other glazes\n\nCarnauba (E903) is plant and clear for halal purposes. Beeswax (E901) is generally accepted as a bee product. Shellac (E904) from the lac insect attracts more disagreement — do not lump all “glazes” together.\n\n### Bottom line\n\nE903 is a plant wax and is not a reason to avoid confectionery for halal purposes.",
     "category": "additive",
     "priority": "high"
   },
@@ -1153,8 +1153,8 @@ export const halalItems: HalalItem[] = [
       "caprisun"
     ],
     "verdict": "halal",
-    "shortReason": "Capri Sun pouches are juice drinks — water, concentrates, sugar and flavour; no gelatin in standard pouches.",
-    "detailedReason": "### Pouch contents\n\nWater, fruit juice concentrates, sugar or sweetener, acids, natural flavours, sometimes vitamin C. Liquid pouch, not a gelled dessert — no gelatin in classic Capri Sun.\n\n### Why parents ask\n\nPouches sit next to gummies in baskets, so gelatin anxiety spills over. Capri Sun’s list is closer to soft drinks than candy.\n\n### Watch-outs\n\nNovelty or yoghurt-style kids drinks from other brands are not Capri Sun. Read those separately.\n\n### Certification\n\nAvailable in some markets. Standard pouches remain plant-based beverages.",
+    "shortReason": "Capri Sun pouches are juice drinks with water, concentrates, sugar and flavour — no gelatin in standard pouches.",
+    "detailedReason": "### Pouch contents\n\nWater, fruit juice concentrates, sugar or sweetener, fruit acids, natural flavours and sometimes vitamin C. The drink is a liquid pouch, not a gelled dessert, so classic Capri Sun does not use gelatin.\n\n### Why parents ask\n\nJuice pouches sit next to gummy snacks in shopping baskets, so gelatin anxiety spills over. Capri Sun’s ingredient list is closer to soft drinks than to candy.\n\n### Watch-outs\n\nYoghurt-style, jelly-hybrid or novelty kids drinks from other brands are not Capri Sun. Read those pouches separately. Creamy-sounding flavour names do not automatically mean dairy — check the list.\n\n### Certification\n\nCertified packs appear in some markets. Standard pouches remain plant-based beverages with sugar and juice concentrates.",
     "category": "drink",
     "priority": "high"
   },
@@ -1215,7 +1215,7 @@ export const halalItems: HalalItem[] = [
     ],
     "verdict": "doubtful",
     "shortReason": "Sour Punch straws are often starch-based and gelatin-free — confirm pack, colours and glycerin.",
-    "detailedReason": "### Typical build\n\nCorn syrup, sugar, modified starch, fruit acids, colours and flavours — sour starch candy closer to Sour Patch than gelatin gummies. The straw is extruded starch, not a gelatin tube.\n\n### Verify anyway\n\nNo gelatin; vegetarian claim if present; carmine vs synthetic reds; glycerin origin when listed.\n\n### Brand lines\n\nStraws, bites, raisers and filled mixes can differ. Apply the verdict only to your bag.\n\n### Practical rule\n\nVegetarian + no gelatin = working green light without a halal logo. Otherwise doubtful until confirmed.",
+    "detailedReason": "### Typical build\n\nCorn syrup, sugar, modified food starch, citric / tartaric / malic acids, colours and flavours. The straw is extruded starch candy closer to Sour Patch Kids than to gelatin gummy bears.\n\n### Verify on your bag\n\nConfirm gelatin is absent. Prefer a vegetarian claim when present. Check whether red colours are carmine or synthetic. If glycerin is listed, a vegetable / vegetarian note helps.\n\n### Brand lines\n\nStraws, bites, raisers and filled mixes can differ. Apply this verdict only to the bag in your hand.\n\n### Practical rule\n\nVegetarian labelling plus no gelatin is the working green light when a halal logo is missing. Otherwise keep the product doubtful until the full list is clear.",
     "category": "snack",
     "priority": "high"
   },
@@ -1250,8 +1250,8 @@ export const halalItems: HalalItem[] = [
       "airheads candy"
     ],
     "verdict": "doubtful",
-    "shortReason": "Airheads taffy is typically gelatin-free, but glycerin origin and colours need a label check.",
-    "detailedReason": "### Classic taffy bar\n\nSugar, corn syrup, maltodextrin, dextrose, modified starch, oils, citric acid, glycerin, flavours and colours. Main Airheads line is generally gelatin-free — chew from sugar syrup and starch.\n\n### Open points\n\nGlycerin — plant vs animal; vegetarian claim helps. Colours — possible carmine on some reds. Filled bites, gum and Xtremes — different SKUs.\n\n### Practical rule\n\nVegetarian-labelled Airheads without gelatin are widely used when glycerin is marked vegetable. Without claims, treat as doubtful until confirmed.",
+    "shortReason": "Airheads taffy is typically gelatin-free, but glycerin origin and colours need a label check; bites and gum lines differ.",
+    "detailedReason": "### Classic taffy bar\n\nSugar, corn syrup, maltodextrin, dextrose, modified food starch, oil, citric acid, glycerin, artificial flavours and colours. Perfetti Van Melle’s main Airheads line generally builds chew from sugar syrup and starch — not a gelatin network.\n\n### Open points on the wrapper\n\nGlycerin may be plant or animal unless a vegetarian claim appears. Colours on red pieces occasionally raise carmine questions in some markets. Filled bites, gum and Xtremes are different SKUs with their own lists.\n\n### Practical rule\n\nVegetarian-labelled Airheads without gelatin are widely used by shoppers who accept glycerin only when marked vegetable. When neither claim appears, treat the bar as doubtful until you confirm the full ingredient panel.",
     "category": "snack",
     "priority": "high"
   },
@@ -1286,8 +1286,8 @@ export const halalItems: HalalItem[] = [
       "triscuit crackers"
     ],
     "verdict": "halal",
-    "shortReason": "Plain Triscuits are whole wheat, oil and salt. Seasoned boxes need a short flavour check.",
-    "detailedReason": "### Base cracker\n\nOriginal Triscuits: whole grain wheat, canola oil, sea salt — baked. No gelatin, cheese enzyme or meat flavour in the plain product.\n\n### Seasoned boxes\n\nRosemary and herb boxes stay simple. Cheese-named seasonings add dairy powders worth a glance. Meat-flavoured limited editions need care.\n\n### Cross-contact\n\nLarge snack plants; allergy statements are separate from mainstream ingredient-halal status for plain Triscuits.\n\n### Practical pick\n\nOriginal or simple herb varieties are easiest. Cheese-named flavours: short label read, not automatic haram.",
+    "shortReason": "Plain Triscuits are whole wheat, oil and salt — plant-based. Cheese-named seasonings need a short flavour check.",
+    "detailedReason": "### Base cracker\n\nOriginal Triscuits are whole grain wheat, canola oil and sea salt, baked rather than fried in animal fat. There is no gelatin, meat flavour or cheese enzyme in the plain product.\n\n### Seasoned boxes\n\nHerb and cracked-pepper styles usually stay plant-based. Cheese-named seasonings add dairy powders; those are often microbial-rennet dairy in modern snack plants but still deserve a glance if you avoid all cheese powders. Meat-flavoured limited editions are the ones to treat carefully.\n\n### Practical pick\n\nOriginal or simple herb varieties are the easiest everyday choice. Treat cheese-named flavours as a ten-second label read, not as automatically haram.",
     "category": "snack",
     "priority": "high"
   },

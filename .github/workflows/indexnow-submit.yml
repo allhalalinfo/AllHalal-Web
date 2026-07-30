@@ -10,34 +10,53 @@ jobs:
   submit-to-indexnow:
     name: Submit URLs to IndexNow
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Wait for Vercel deployment
+      - name: Wait for Hetzner deployment
         run: |
-          echo "⏳ Waiting 90 seconds for Vercel deployment to complete..."
-          sleep 90
-      
+          echo "Waiting 110s for Deploy to Hetzner (build + PM2 restart)..."
+          sleep 110
+
       - name: Submit to IndexNow
+        env:
+          INDEXNOW_API_SECRET: ${{ secrets.INDEXNOW_API_SECRET }}
         run: |
-          echo "🚀 Submitting all pages to IndexNow (Google, Bing, Yandex)..."
-          
-          RESPONSE=$(curl -X POST https://allhalal.info/api/index-now \
-            -H "Content-Type: application/json" \
-            -s)
-          
-          echo "📊 Response:"
-          echo "$RESPONSE"
-          
-          # Check if submission was successful
-          if echo "$RESPONSE" | grep -q '"success":true'; then
-            echo "✅ Successfully submitted URLs to search engines!"
-          else
-            echo "⚠️ Submission completed (check response above)"
+          set -e
+          echo "Submitting sitemap URLs via /api/index-now..."
+
+          AUTH_HEADER=()
+          if [ -n "$INDEXNOW_API_SECRET" ]; then
+            AUTH_HEADER=(-H "Authorization: Bearer ${INDEXNOW_API_SECRET}")
           fi
-      
+
+          # Health check first — endpoint must exist after deploy
+          GET_CODE=$(curl -s -o /tmp/indexnow-get.json -w "%{http_code}" \
+            https://allhalal.info/api/index-now || true)
+          echo "GET /api/index-now -> HTTP ${GET_CODE}"
+          cat /tmp/indexnow-get.json || true
+          echo
+
+          if [ "$GET_CODE" != "200" ]; then
+            echo "Endpoint not ready yet; waiting 45s more..."
+            sleep 45
+          fi
+
+          RESPONSE=$(curl -s -X POST https://allhalal.info/api/index-now \
+            -H "Content-Type: application/json" \
+            "${AUTH_HEADER[@]}")
+
+          echo "Response:"
+          echo "$RESPONSE"
+
+          if echo "$RESPONSE" | grep -q '"success":true'; then
+            echo "Successfully submitted URLs to search engines"
+          else
+            echo "Submission did not report success — check INDEXNOW_KEY on the server"
+            exit 1
+          fi
+
       - name: Summary
         if: success()
         run: |
-          echo "🎉 Deployment complete and URLs submitted to IndexNow!"
-          echo "⏰ Search engines will crawl within 1-3 days"
-          echo "🔍 Check Google Search Console: https://search.google.com/search-console"
+          echo "IndexNow notified after deploy"
+          echo "Monitor: https://search.google.com/search-console"

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "curl -s \"https://api.indexnow.org/indexnow?url=https://allhalal.info/sitemap.xml&key=4526bc4b52e74039bf5adc89763d577c\" > /dev/null || true && curl -s \"https://www.google.com/ping?sitemap=https://allhalal.info/sitemap.xml\" > /dev/null || true",
+    "postbuild": "if [ -n \"$INDEXNOW_KEY\" ]; then curl -s \"https://api.indexnow.org/indexnow?url=https://allhalal.info/sitemap.xml&key=$INDEXNOW_KEY\" > /dev/null || true; fi; curl -s \"https://www.google.com/ping?sitemap=https://allhalal.info/sitemap.xml\" > /dev/null || true",
     "start": "next start",
     "lint": "eslint ."
   },
