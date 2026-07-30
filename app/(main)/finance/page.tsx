@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PortalRelatedLinks from "@/components/seo/PortalRelatedLinks";
 import { generateMetadata as genMeta, SITE_URL } from "@/lib/seo/metadata";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
@@ -124,6 +125,12 @@ export default async function FinanceHub() {
             >
               Compare mortgage paths
             </Link>
+            <Link
+              href="/guides"
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-6 py-3 font-semibold text-text-primary backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              Zakat guides
+            </Link>
           </div>
         </div>
 
@@ -154,6 +161,10 @@ export default async function FinanceHub() {
             </div>
           </section>
         )}
+
+        <section className="mb-8 mt-12">
+          <PortalRelatedLinks title="Related tools" />
+        </section>
       </div>
     </main>
   );

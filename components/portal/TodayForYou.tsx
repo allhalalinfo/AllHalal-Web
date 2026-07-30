@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useUserLocation } from "@/hooks/useUserLocation";
 import LocationSelector from "@/components/ui/LocationSelector";
 import {
@@ -386,6 +387,12 @@ export default function TodayForYou({
               <div className="mt-2 text-xs text-white/65">
                 {gregorianDate || "Today"}
               </div>
+              <Link
+                href="/learn/islamic-calendar"
+                className="mt-2 inline-flex text-xs font-bold text-accent-yellow transition-colors hover:text-white"
+              >
+                Full Hijri calendar →
+              </Link>
             </div>
 
             {location && location.city === "Makkah" && !location.isAuto ? (
@@ -475,6 +482,15 @@ export default function TodayForYou({
               </div>
             </div>
 
+            <div className="mt-3 mb-1">
+              <Link
+                href="/prayer-times"
+                className="inline-flex text-xs font-bold text-accent-yellow transition-colors hover:text-white"
+              >
+                Open full prayer times →
+              </Link>
+            </div>
+
             <div className="mt-4 flex flex-col gap-1.5">
               {hasPrayerData && (
                 <div className="flex items-center px-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 sm:px-4">
@@ -545,8 +561,16 @@ export default function TodayForYou({
           </div>
 
           <div className="rounded-[1.35rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 md:p-5">
-            <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45 mb-3">
-              Islamic Calendar
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45">
+                Islamic Calendar
+              </div>
+              <Link
+                href="/learn/islamic-calendar"
+                className="text-[10px] font-bold uppercase tracking-[0.14em] text-accent-yellow hover:text-white"
+              >
+                Details →
+              </Link>
             </div>
 
             {nextEvent ? (

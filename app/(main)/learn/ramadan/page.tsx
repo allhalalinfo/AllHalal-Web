@@ -374,6 +374,16 @@ export default async function RamadanGuidePage() {
                 href: "/prayer-times",
                 description: "Accurate prayer and iftar times",
               },
+              {
+                label: "Is it Halal?",
+                href: "/is-it-halal",
+                description: "Food checks while fasting prep",
+              },
+              {
+                label: "Boycott Checker",
+                href: "/boycott-checker",
+                description: "Brand awareness tool",
+              },
             ].map((link) => (
               <Link
                 key={link.href}

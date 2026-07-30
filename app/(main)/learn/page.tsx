@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AppPromoMini from "@/components/ui/AppPromoMini";
+import PortalRelatedLinks from "@/components/seo/PortalRelatedLinks";
 import { generateMetadata as genMeta, SITE_URL } from "@/lib/seo/metadata";
 import { fetchCustomArticlesList } from "@/lib/customArticles";
 import CustomArticleGridCard from "@/components/articles/CustomArticleGridCard";
 
 export const metadata: Metadata = genMeta({
-  title: "Blog | Islamic Articles, Faith Guides & Muslim Lifestyle",
-  description: "Read in-depth articles on Islamic topics, faith guidance, Muslim lifestyle and spiritual reflection.",
+  title: "Learn Islam | Duas, 99 Names, Ramadan & Islamic Calendar",
+  description:
+    "Islamic learning hub: duas and athkar, 99 Names of Allah, Ramadan guidance, Hijri calendar, and in-depth articles for Muslim daily life.",
   path: "/learn",
   keywords: [
     "islamic blog",
@@ -18,7 +20,7 @@ export const metadata: Metadata = genMeta({
     "99 names of Allah",
     "Ramadan guide",
     "Islamic calendar",
-  ]
+  ],
 });
 
 const learnSchema = {
@@ -28,9 +30,9 @@ const learnSchema = {
       "@type": "WebPage",
       "@id": `${SITE_URL}/learn#webpage`,
       url: `${SITE_URL}/learn`,
-      name: "Blog - allhalal.info",
+      name: "Learn - allhalal.info",
       description:
-        "Islamic blog with articles on faith, lifestyle guidance and Muslim topics.",
+        "Islamic learning hub with duas, 99 Names, Ramadan guidance, calendar and articles.",
       isPartOf: { "@id": `${SITE_URL}/#website` },
       inLanguage: "en",
     },
@@ -46,7 +48,7 @@ const learnSchema = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Blog",
+          name: "Learn",
           item: `${SITE_URL}/learn`,
         },
       ],
@@ -196,6 +198,18 @@ export default async function LearnHub() {
               className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-6 py-3 font-semibold text-text-primary backdrop-blur-sm transition-colors hover:bg-white"
             >
               Open Calendar
+            </Link>
+            <Link
+              href="/prayer-times"
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-6 py-3 font-semibold text-text-primary backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              Prayer times
+            </Link>
+            <Link
+              href="/is-it-halal"
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-6 py-3 font-semibold text-text-primary backdrop-blur-sm transition-colors hover:bg-white"
+            >
+              Halal checker
             </Link>
           </div>
         </div>
@@ -414,6 +428,10 @@ export default async function LearnHub() {
               </svg>
             </Link>
           </div>
+        </section>
+
+        <section className="mb-8">
+          <PortalRelatedLinks title="Daily tools" />
         </section>
       </div>
     </main>

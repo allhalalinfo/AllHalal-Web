@@ -5,6 +5,7 @@ import BriefsHomeSection from "@/components/briefs/BriefsHomeSection";
 import CustomArticlesHomeSection from "@/components/articles/CustomArticlesHomeSection";
 import FinanceWidget from "@/components/portal/FinanceWidget";
 import PopularHalalChecks from "@/components/halal/PopularHalalChecks";
+import QuickLinksWidget from "@/components/portal/QuickLinksWidget";
 import TodayForYouServer from "@/components/portal/TodayForYouServer";
 import TodayForYouSkeleton from "@/components/portal/TodayForYouSkeleton";
 import FinanceWidgetSkeleton from "@/components/portal/FinanceWidgetSkeleton";
@@ -63,7 +64,7 @@ export default async function PortalHomePage(props: { params: Promise<{}> }) {
       },
       {
         "@type": "WebPage",
-        "@id": `${SITE_URL}#webpage`,
+        "@id": `${SITE_URL}/#webpage`,
         url: `${SITE_URL}`,
         name: "allhalal.info Muslim Portal",
         description:
@@ -103,6 +104,10 @@ export default async function PortalHomePage(props: { params: Promise<{}> }) {
               <Suspense fallback={<FinanceWidgetSkeleton />}>
                 <FinanceWidget />
               </Suspense>
+            </section>
+
+            <section className="mt-8">
+              <QuickLinksWidget locale="en" />
             </section>
 
             <section className="mt-8">

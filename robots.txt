@@ -9,6 +9,10 @@ Allow: /
 Disallow: /blog/
 Disallow: /blog
 
+# Admin tools are noindex via meta; also block in robots as defense-in-depth
+Disallow: /admin/
+Disallow: /admin
+
 # Block technical files from indexing (fonts, JS chunks, CSS)
 Disallow: /_next/static/
 

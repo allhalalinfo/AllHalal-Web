@@ -237,6 +237,16 @@ export default async function DuasPage() {
                 href: "/prayer-times",
                 description: "Find accurate prayer times",
               },
+              {
+                label: "Is it Halal?",
+                href: "/is-it-halal",
+                description: "Check ingredients and brands",
+              },
+              {
+                label: "Boycott Checker",
+                href: "/boycott-checker",
+                description: "Brand awareness tool",
+              },
             ].map((link) => (
               <Link
                 key={link.href}

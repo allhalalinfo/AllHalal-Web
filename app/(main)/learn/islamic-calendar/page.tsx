@@ -316,6 +316,18 @@ export default function IslamicCalendarPage() {
           >
             Duas & Athkar
           </Link>
+          <Link
+            href="/is-it-halal"
+            className="rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-5 py-3 text-sm font-semibold text-text-primary"
+          >
+            Halal checker
+          </Link>
+          <Link
+            href="/boycott-checker"
+            className="rounded-full border border-[rgba(47,37,30,0.15)] bg-white/80 px-5 py-3 text-sm font-semibold text-text-primary"
+          >
+            Boycott checker
+          </Link>
         </section>
       </div>
     </main>

@@ -205,6 +205,16 @@ export default async function NamesOfAllahPage() {
                 href: "/learn/ramadan",
                 description: "Fasting guidance and supplications",
               },
+              {
+                label: "Is it Halal?",
+                href: "/is-it-halal",
+                description: "Ingredient and brand checks",
+              },
+              {
+                label: "Prayer Times",
+                href: "/prayer-times",
+                description: "Daily salah schedule",
+              },
             ].map((link) => (
               <Link
                 key={link.href}
